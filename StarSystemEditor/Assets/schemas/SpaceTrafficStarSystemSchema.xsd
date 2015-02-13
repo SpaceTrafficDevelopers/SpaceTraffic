@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio 6.1.17.0 - FREE Community Edition (http://www.liquid-technologies.com)-->
+<xs:schema xmlns="SpaceTrafficData" targetNamespace="SpaceTrafficData"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd" attributeFormDefault="unqualified"
+  elementFormDefault="unqualified">
+  <xs:element name="stdata">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="starsystem" type="StarSystem">
+          <xs:annotation>
+            <xs:documentation>
+    			Solarni system, ma jednoznacny a jediencny nazev, ktery
+    			se vklada do atributu name
+    		</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:all>
+      <xs:attribute default="1.1" name="version" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="nameString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="30"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LanguageSpecificData" mixed="true">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="lang" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="OrbitDefinition">
+    <xs:attribute name="period" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation>Period in seconds</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute default="clockwise" name="direction">
+      <xs:annotation>
+        <xs:documentation>Direction of movement, clockwise or counterclockwise</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="clockwise"/>
+          <xs:enumeration value="counterclockwise"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="VisibleObject" abstract="true">
+    <xs:sequence>
+      <xs:element name="trajectory">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="circularOrbit">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="OrbitDefinition">
+                    <xs:attribute name="radius" type="xs:int" use="required">
+                      <xs:annotation>
+                        <xs:documentation>Circle radius.</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="initialAngle" type="xs:double" default="0">
+                      <xs:annotation>
+                        <xs:documentation>Angle defining starting point on circle for object in t0</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ellipticOrbit">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="OrbitDefinition">
+                    <xs:attribute name="a" type="xs:double" use="required">
+                      <xs:annotation>
+                        <xs:documentation>Semimajor axis</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="b" type="xs:double" use="required">
+                      <xs:annotation>
+                        <xs:documentation>Semiminor axis</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="angle" type="xs:double" use="optional" default="0">
+                      <xs:annotation>
+                        <xs:documentation>Angle of the ellipse (in degrees)</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="initialAngle" type="xs:double" default="0">
+                      <xs:annotation>
+                        <xs:documentation>Angle defining starting point on elliptic orbit for object in t0. True anomaly in t0.</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="stacionary">
+              <xs:complexType>
+                <xs:attribute default="0" name="x" type="xs:int"/>
+                <xs:attribute default="0" name="y" type="xs:int"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="graphics" minOccurs="0">
+        <xs:complexType>
+          <xs:all>
+            <xs:element minOccurs="0" name="resources">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:group maxOccurs="unbounded" ref="ResourceDefinition"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="properties">
+              <xs:complexType mixed="true">
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="1" name="property">
+                    <xs:complexType>
+                      <xs:attribute name="name" type="xs:NCName"/>
+                      <xs:attribute name="value" type="xs:string"/>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+                <xs:attribute default="text/xml" name="contentType">
+                  <xs:annotation>
+                    <xs:documentation>Content type of property list. Can be appliaction/json or text/xml (default).</xs:documentation>
+                  </xs:annotation>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:enumeration value="application/json"/>
+                      <xs:enumeration value="text/xml"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+              </xs:complexType>
+              <xs:unique name="uniquePropertyName">
+                <xs:selector xpath="property"/>
+                <xs:field xpath="name"/>
+              </xs:unique>
+            </xs:element>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CelestialObjectInfo">
+    <xs:sequence>
+      <xs:element name="gravity" type="xs:double" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Gravitational force of the object on its surface.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="mass" type="xs:double" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Mass of the object in kilograms</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="description" maxOccurs="unbounded" type="LanguageSpecificData">
+        <xs:annotation>
+          <xs:documentation>Additional descrtiption of the object</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="CelestialObject">
+    <xs:complexContent>
+      <xs:extension base="VisibleObject">
+        <xs:sequence>
+          <xs:element name="details" type="CelestialObjectInfo"/>
+        </xs:sequence>
+        <xs:attribute name="altName" use="optional" type="nameString">
+          <xs:annotation>
+            <xs:documentation>Alternative (Local) name of the object</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="name" use="required" type="nameString">
+          <xs:annotation>
+            <xs:documentation>Name of the object</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="WormholeEndpoint">
+    <xs:complexContent mixed="false">
+      <xs:extension base="VisibleObject">
+        <xs:attribute name="id" use="required">
+          <xs:annotation>
+            <xs:documentation>Zero-based index of the endpoint. Maximum index is 6.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:int">
+              <xs:minInclusive value="0"/>
+              <xs:maxInclusive value="6"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Planet">
+    <xs:complexContent mixed="false">
+      <xs:extension base="CelestialObject"> </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Star">
+    <xs:complexContent>
+      <xs:extension base="CelestialObject"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="StarSystem">
+    <xs:all>
+      <xs:element name="star" type="Star">
+        <xs:annotation>
+          <xs:documentation>nevi jestli je vhodne definivat hvezdu jako planetu, ma celkem podobny popis</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="planets">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="10" name="planet" type="Planet"/>
+          </xs:sequence>
+        </xs:complexType>
+        <xs:unique name="uniquePlanetName">
+          <xs:selector xpath="planet"/>
+          <xs:field xpath="name"/>
+        </xs:unique>
+        <xs:unique name="uniquePlanetAltName">
+          <xs:selector xpath="planet"/>
+          <xs:field xpath="altName"/>
+        </xs:unique>
+      </xs:element>
+      <xs:element minOccurs="0" name="wormholeEndpoints">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="6" name="wormholeEndpoint" type="WormholeEndpoint"/>
+          </xs:sequence>
+        </xs:complexType>
+        <xs:unique name="uniqueWormholeEndpointId">
+          <xs:selector xpath="wormholeEndpoint"/>
+          <xs:field xpath="id"/>
+        </xs:unique>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:group name="ResourceDefinition">
+    <xs:choice>
+      <xs:element name="resource" type="ResourceReference"/>
+      <xs:element name="resourceRef" type="LocalResourceReference"/>
+      <xs:element name="embeddedResource" type="EmbeddedResource"/>
+    </xs:choice>
+  </xs:group>
+  <xs:group name="Resources">
+    <xs:choice>
+      <xs:element name="resourceList"> </xs:element>
+      <xs:group ref="ResourceDefinition"/>
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="Resource" mixed="true">
+    <xs:sequence>
+      <xs:any namespace="##any" processContents="lax" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:NCName"/>
+    <xs:attribute name="href" type="xs:anyURI"/>
+    <xs:attribute name="contentType" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>MIME content type
+</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ref-id" type="xs:NCName"/>
+    <xs:attribute name="class" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>CSS class for resource</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ResourceReference" mixed="false">
+    <xs:complexContent>
+      <xs:restriction base="Resource">
+        <xs:attribute name="id" type="xs:NCName" use="required"/>
+        <xs:attribute name="href" type="xs:anyURI" use="required"/>
+        <xs:attribute name="contentType" type="xs:string" use="required"/>
+        <xs:attribute name="class" type="xs:string" use="required"/>
+        <xs:attribute name="ref-id" type="xs:NCName" use="prohibited"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EmbeddedResource">
+    <xs:complexContent>
+      <xs:restriction base="Resource">
+        <xs:sequence>
+          <xs:any namespace="##any" processContents="lax" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:NCName" use="required"/>
+        <xs:attribute name="href" use="prohibited"/>
+        <xs:attribute name="contentType" type="xs:string" use="required"/>
+        <xs:attribute name="class" type="xs:string" use="required"/>
+        <xs:attribute name="ref-id" type="xs:NCName" use="prohibited"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LocalResourceReference" mixed="false">
+    <xs:complexContent>
+      <xs:restriction base="Resource">
+        <xs:attribute name="id" use="prohibited"/>
+        <xs:attribute name="href" use="prohibited"/>
+        <xs:attribute name="contentType" use="prohibited"/>
+        <xs:attribute name="class" type="xs:string" use="optional"/>
+        <xs:attribute name="ref-id" type="xs:NCName" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

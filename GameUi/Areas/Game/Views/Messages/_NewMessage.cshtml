@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "New";
+}
+
+
+<style type="text/css">
+.fieldset label {
+	width: 50px;
+}
+.fieldset .gap {
+	width: 50px;
+}
+		
+.fieldset textarea {
+	width: 100%;
+	height: 150px;
+}
+</style>
+<hr />
+<h2>New</h2>
+<form class="newMessageForm" action="{link MessagesView:sent}">
+	<div class="fieldset"><label>To:</label> <input type="text" /> <button>Find</button></div>
+	<div class="fieldset"><label>Subject:</label> <input type="text" /></div>
+	<div class="fieldset"><textarea></textarea></div>
+	<div class="fieldset"><button  type="button">Send</button><button type="submit">Cancel</button></div>
+</form>

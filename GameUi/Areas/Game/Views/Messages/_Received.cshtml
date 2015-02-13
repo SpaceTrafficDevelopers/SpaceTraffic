@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Received";
+}
+
+<h2>ReceivedMessages (2/0)</h2>
+<ul class="listbar">
+	<li><input type="checkbox" /> <label>New</label></li>
+	<li>|</li>
+	<li><input type="checkbox" /> <label>JobOffers</label></li>
+	<li>|</li>
+	<li><input type="checkbox" /> <label>ShipMessages</label></li>
+	<li>|</li>
+	<li><input type="checkbox" /> <label>Diplomatic</label></li>
+	<li>|</li>
+	<li><label>Search:</label> <input type="text" value="Search" /> <button>Search</button></li>
+</ul>
+<div style="max-height: 300px; overflow: auto;">
+<table class="itemtable" >
+	<thead>
+		<tr><th class="chk">&nbsp;</th><th class="icon">Icon</th><th class="date">DateTime</th><th>From</th><th>Subject</th><th>Actions</th></tr>
+	</thead>
+		
+	<tr>
+		<td><input type="checkbox" /></td>
+		<td><img src="@Url.Content("~/Content/images/placeholder.png")" width="32" height="32" /></td>
+		<td>2000-10-10T00:00:00</td>
+		<td>Starfleet</td>
+		<td><a href="#" @*onmouseover="contextinfo.load(this, {!="'".$presenter->link('detailtext')."'"})"*@>Job offer: Fuel from PlanetA to PlanetB</a></td>
+		<td>RFX</td>
+	</tr>
+	<tr class="messagedemo"><td colspan="6">
+		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+		Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+		nascetur ridiculus mus.
+		<a href="#" @*onmouseover="contextinfo.load(this, {!="'".$presenter->link('detailtext')."'"})"*@>[more...]</a>
+		</p></td></tr>
+		<tr>
+		<td><input type="checkbox" /></td>
+		<td><img src="@Url.Content("~/Content/images/placeholder.png")" width="32" height="32" /></td>
+		<td>2000-10-10T10:00:00</td>
+		<td>Player1</td>
+		<td>Greetings</td>
+		<td>RFX</td>
+	</tr>
+	<tr class="messagedemo"><td colspan="6">
+		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
+
+		<p>In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.</p>
+
+		<p>Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna.</p>
+		<a href="#">[less...]</a>
+	</td></tr>
+</table>
+</div>
+<ul class="listbar">
+	<li><button>Select all</button></li>
+	<li><button>Inver selection</button></li>
+	<li><button>Clear selection</button></li>
+</ul>
+<ul class="listbar">
+	<li><button>Open</button></li>
+	<li><button>Reply</button></li>
+	<li><button>Delete</button></li>
+	<li><button>Mark as read</button></li>
+</ul>

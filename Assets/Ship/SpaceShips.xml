@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<st:stdata xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
+    xmlns:st="SpaceTrafficData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+    <ships>
+        <!-- Prikladovy model lodi -->
+        <ship ID="ship1" altName="Voyager">
+            <maxLoad>1000</maxLoad>
+            <slots>
+                <!-- Slot pro motor -->
+                <slot slotName="engineSlot" required="true" copmonentID="Engine" exchangeable="true">
+                    <whitelist>
+                        <component>Engine</component>
+                    </whitelist>
+                </slot>
+                <!-- Slot pro palivovou nadrz (nakladovy prostor pro palivo) -->
+                <slot slotName="tankSlot" required="true" copmonentID="FuelCargo"
+                    exchangeable="false">
+                    <whitelist>
+                        <component>FuelCargo</component>
+                    </whitelist>
+                </slot>
+                <!-- Slot pro povinny nakladovy prostor -->
+                <slot slotName="cargoSlot" required="true" copmonentID="BasicCargohold"
+                    exchangeable="true">
+                    <whitelist>
+                        <component>BasicCargohold</component>
+                        <component>ExtraCargohold</component>
+                    </whitelist>
+                </slot>
+                <!-- Muzou nasledovat az 3 (podle wiki) dalsi sloty pro nakladovy prostor -->
+                <!-- Muzou nasledovat dalsi sloty pro ostatni komponenty -->
+            </slots>
+        </ship>
+    </ships>
+</st:stdata>

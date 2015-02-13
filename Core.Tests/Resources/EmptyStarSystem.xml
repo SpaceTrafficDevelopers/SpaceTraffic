@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<st:stdata
+    xmlns:st="SpaceTrafficData"
+    xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    version="1.0">
+  <starsystem name="Proxima Centauri">
+    
+  </starsystem>
+</st:stdata>

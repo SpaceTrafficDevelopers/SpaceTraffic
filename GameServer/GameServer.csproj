@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1CB78E97-E74C-447F-9118-588713E6D295}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SpaceTraffic</RootNamespace>
+    <AssemblyName>SpaceTraffic.GameServer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\GameServerConfiguration.cs" />
+    <Compile Include="Configuration\GameServerConfigurationSection.cs" />
+    <Compile Include="Dao\AbstractDAO.cs" />
+    <Compile Include="Dao\BaseDAO.cs" />
+    <Compile Include="Dao\CargoDAO.cs" />
+    <Compile Include="Dao\ICargoDAO.cs" />
+    <Compile Include="Dao\IFactoryDAO.cs" />
+    <Compile Include="Dao\FactoryDAO.cs" />
+    <Compile Include="Dao\IBaseDAO.cs" />
+    <Compile Include="Dao\ISpaceShipCargoDAO.cs" />
+    <Compile Include="Dao\ISpaceShipDAO.cs" />
+    <Compile Include="Dao\MessageDAO.cs" />
+    <Compile Include="Dao\IMessageDAO.cs" />
+    <Compile Include="Dao\IPlayerDAO.cs" />
+    <Compile Include="Dao\PlayerDAO.cs" />
+    <Compile Include="Dao\SpaceShipCargoDAO.cs" />
+    <Compile Include="Dao\SpaceShipDAO.cs" />
+    <Compile Include="Engine\GameTime.cs" />
+    <Compile Include="Engine\IGameEvent.cs" />
+    <Compile Include="Engine\IGameSimulation.cs" />
+    <Compile Include="Engine\IRunnableScript.cs" />
+    <Compile Include="Engine\IScriptManager.cs" />
+    <Compile Include="Engine\IGameManager.cs" />
+    <Compile Include="Engine\IServiceManager.cs" />
+    <Compile Include="Engine\IWorldManager.cs" />
+    <Compile Include="GameServer\EventQueue.cs" />
+    <Compile Include="GameServer\GameManager.cs" />
+    <Compile Include="GameServer\ScriptManager.cs" />
+    <Compile Include="GameServer\WorldManager.cs" />
+    <Compile Include="Game\Actions\ShipFlyTo.cs" />
+    <Compile Include="Game\Actions\ShipLoadCargo.cs" />
+    <Compile Include="Game\Actions\ShipRepair.cs" />
+    <Compile Include="Game\Actions\ShipUnloadCargo.cs" />
+    <Compile Include="Game\GamePlayer.cs" />
+    <Compile Include="GameServer\AssetManager.cs" />
+    <Compile Include="GameServer\GameServer.cs" />
+    <Compile Include="Engine\IAssetManager.cs" />
+    <Compile Include="Engine\IGameServer.cs" />
+    <Compile Include="Engine\IPersistenceManager.cs" />
+    <Compile Include="GameServer\ServiceManager.cs" />
+    <Compile Include="Engine\IGameAction.cs" />
+    <Compile Include="GameServer\PersistenceManager.cs" />
+    <Compile Include="Persistence\SpaceTrafficCreateDatabaseIfNotExists.cs" />
+    <Compile Include="Persistence\SpaceTrafficCustomInitializer.cs" />
+    <Compile Include="Persistence\SpaceTrafficContext.cs" />
+    <Compile Include="Persistence\SpaceTrafficDropCreateDatabaseAlways.cs" />
+    <Compile Include="Persistence\SpaceTrafficDropCreateDatabaseIfModelChanges.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceImpl\AccountService.cs" />
+    <Compile Include="ServiceImpl\GameService.cs" />
+    <Compile Include="ServiceImpl\HelloWorldService.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConnectionStrings.config.default" />
+    <None Include="EngineInterfaceOverviewCassDiagram.cd" />
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{9A3A1688-A41C-4F56-8450-43FB64F60C1F}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)scripts\copyconfig" ConnectionStrings "$(ProjectDir)" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

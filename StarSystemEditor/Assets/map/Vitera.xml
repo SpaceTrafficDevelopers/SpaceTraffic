@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<st:stdata
+    xmlns:st="SpaceTrafficData"
+    xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    version="1.2">
+    <starsystem name="Vitera">
+        <star name="Vitera">
+            <trajectory>
+                <stacionary x="0" y="0" />
+            </trajectory>
+            <details>
+            	<gravity>0.0</gravity>
+            	<mass>0.0</mass>
+            	<description>
+            		Star of Vitera system.
+            	</description>
+            </details>
+        </star>
+        <planets>
+            <planet altName="Uno" name="Vitera 1">
+                <trajectory>
+                    <ellipticOrbit direction="clockwise" period="65" a="52" b="50" angle="5" initialAngle="15.0" />
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>7.67248287280187e+023</mass>
+                    <description>
+                        Description of Uno placeholder.
+                    </description>
+                </details>
+            </planet>
+            <planet altName="Geolf" name="Vitera 2">
+                <trajectory>
+                    <circularOrbit direction="clockwise" period="110" initialAngle="17.0" radius="54"/>
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>2.38071882809634e+023</mass>
+                    <description>
+                        Description of Geolf placeholder.
+                    </description>
+                </details>
+            </planet>
+            <planet altName="Burta" name="Vitera 3">
+                <trajectory>
+                  <ellipticOrbit direction="clockwise" period="280" a="57" b="55" angle="0" initialAngle="95.0" />
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>2.85251209920981e+024</mass>
+                    <description>
+                        Description of Burta placeholder.
+                    </description>
+                </details>
+            </planet>
+            <planet altName="Altia" name="Vitera 4">
+                <trajectory>
+                    <circularOrbit direction="counterclockwise" period="430" initialAngle="50.0" radius="60"/>
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>3.45081458420969e+023</mass>
+                    <description>
+                        Description of Altia placeholder.
+                    </description>
+                </details>
+            </planet>
+            <planet altName="Ritho" name="Vitera 5">
+                <trajectory>
+                  <ellipticOrbit direction="clockwise" period="686" a="67" b="66" angle="355" initialAngle="175.0" />
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>8.56675399361434e+024</mass>
+                    <description>
+                        Description of Ritho placeholder.
+                    </description>
+                </details>
+            </planet>
+            <planet altName="Litera" name="Vitera 6">
+                <trajectory>
+                  <ellipticOrbit direction="clockwise" period="1640" a="79" b="77" angle="275" initialAngle="13.0" />
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>3.60960213718003e+024</mass>
+                    <description>
+                        Description of Litera placeholder.
+                    </description>
+                </details>
+            </planet>
+            <planet altName="Corita" name="Vitera 7">
+                <trajectory>
+                    <circularOrbit direction="clockwise" period="12345" initialAngle="10.0" radius="115"/>
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>1.01728340114874e+025</mass>
+                    <description>
+                        Description of Corita placeholder.
+                    </description>
+                </details>
+            </planet>
+            <planet altName="Paskal" name="Vitera 8">
+                <trajectory>
+                  <ellipticOrbit direction="clockwise" period="26917" a="124" b="123" angle="0" initialAngle="0.0" />
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>2.10472427823908e+024</mass>
+                    <description>
+                        Description of Paskal placeholder.
+                    </description>
+                </details>
+            </planet>
+            <planet altName="Bratnos" name="Vitera 9">
+                <trajectory>
+                  <ellipticOrbit direction="counterclockwise" period="65023" a="149" b="147" angle="7" initialAngle="68.0" />
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>4.91321573681607e+025</mass>
+                    <description>
+                        Description of Bratnos placeholder.
+                    </description>
+                </details>
+            </planet>
+            <planet altName="Metras" name="Vitera 10">
+                <trajectory>
+                  <ellipticOrbit direction="clockwise" period="78130" a="193" b="190" angle="314" initialAngle="346.0" />
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>4.02528517997163e+022</mass>
+                    <description>
+                        Description of Metras placeholder.
+                    </description>
+                </details>
+            </planet>
+        </planets>
+        
+        <wormholeEndpoints>
+           <wormholeEndpoint id="0">
+            <trajectory>
+              <circularOrbit direction="clockwise" period="97000" initialAngle="10.0" radius="208"/>
+            </trajectory>
+          </wormholeEndpoint>
+          <wormholeEndpoint  id="1">
+            <trajectory>
+              <circularOrbit direction="clockwise" period="112000" initialAngle="10.0" radius="216"/>
+            </trajectory>
+          </wormholeEndpoint>
+          <wormholeEndpoint  id="2">
+            <trajectory>
+              <circularOrbit direction="counterclockwise" period="128000" initialAngle="10.0" radius="242"/>
+            </trajectory>
+          </wormholeEndpoint>
+        </wormholeEndpoints>
+    </starsystem>
+</st:stdata>

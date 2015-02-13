@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<!-- Default configurace, pro použití na lokálu by mělo fungovat Data Source=.\SQLEXPRESS -->
+<connectionStrings>
+	<add name="SpaceTrafficContext" connectionString="Data Source=(local);Initial Catalog=SpaceTraffic;Integrated Security=True;MultipleActiveResultSets=True;" providerName="System.Data.SqlClient" />
+</connectionStrings>

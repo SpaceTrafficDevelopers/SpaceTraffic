@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="SpaceTrafficData" targetNamespace="SpaceTrafficData"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd" attributeFormDefault="unqualified"
+    elementFormDefault="unqualified">
+    
+    <xs:element name="stdata">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="components" type="componentsType">                   
+                    <xs:unique name="componentID">
+                        <xs:annotation>
+                            <xs:documentation>ID komponent musi byt unikatni v dokumentu.</xs:documentation>
+                        </xs:annotation>
+                        <xs:selector xpath="./component"/>
+                        <xs:field xpath="@ID"/>
+                    </xs:unique>
+                </xs:element>
+            </xs:all>
+            <xs:attribute default="1.0" name="version" type="xs:string" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    
+
+    <xs:complexType name="componentsType">
+        <xs:sequence>
+            <xs:element name="component" type="componentType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="componentType">
+        <xs:annotation>
+            <xs:documentation>Komponenta.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="price" type="priceType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="prerequisites" type="prerequisitesType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="params" type="paramsType" minOccurs="1" maxOccurs="1">
+                <!--   Nazvy parametru (param) musi byt unikatni v ramci rodice (params)-->
+                <xs:unique name="paramName">
+                    <xs:selector xpath="./param"/>
+                    <xs:field xpath="@name"/>
+                </xs:unique>
+            </xs:element>
+            <xs:element name="tags" type="tagsType" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Nepovinny seznam popisku, slouzi k lepsimu
+                        filtrovani.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="ID" type="IDType" use="required">
+            <xs:annotation>
+                <xs:documentation>Identifikator komponenty, je povinny, musi byt unikatni v ramci
+                    dokumentu.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="type" type="typeType" use="required">
+            <xs:annotation>
+                <xs:documentation>Nazev tridy, se kterou je komponenta svazana (vcetne
+                    namespace).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="prerequisitesType">
+        <xs:sequence>
+            <xs:sequence>
+                <xs:element name="prerequisite" type="nameType" minOccurs="0" maxOccurs="unbounded"
+                />
+            </xs:sequence>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="IDType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="typeType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="tagsType">
+        <xs:sequence>
+            <xs:element name="tag" minOccurs="0" maxOccurs="unbounded">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string"/>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="paramsType">
+        <xs:annotation>
+            <xs:documentation>Seznam parametru.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="param" type="paramType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="paramType">
+        <xs:attribute name="name" type="nonEmptyString" use="required">
+            <xs:annotation>
+                <xs:documentation>Nazev parametru, musi byt unikatni v ramci jedne komponenty.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="type" type="nonEmptyString" use="required">
+            <xs:annotation>
+                <xs:documentation>Datovy typ parametru (int, string...).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="value" type="nonEmptyString">
+            <xs:annotation>
+                <xs:documentation>Hodnota parametru (ocekava neprazdny retezec).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="defaultValue" type="nonEmptyString">
+            <xs:annotation>
+                <xs:documentation>Defaultni hodnota parametru (ocekava neprazdny retezec).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="minValue" type="xs:nonNegativeInteger">
+            <xs:annotation>
+                <xs:documentation>Minimalni hodnota parametru (ocekava cislo).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="maxValue" type="xs:nonNegativeInteger">
+            <xs:annotation>
+                <xs:documentation>Maximalni hodnota parametru (ocekava cislo).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:simpleType name="nonEmptyString">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:complexType name="priceType">
+        <xs:attribute name="value" use="required">
+            <xs:annotation>
+                <xs:documentation>Cena za kterou lze komponentu poridit.</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:nonNegativeInteger"/>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:simpleType name="nameType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+   
+</xs:schema>

@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Program">
+    <Position X="0.5" Y="0.5" Height="0.344" Width="1.513" />
+  </Comment>
+  <Comment CommentText="Service Layer">
+    <Position X="2.49" Y="0.5" Height="0.344" Width="1.513" />
+  </Comment>
+  <Comment CommentText="Game Logic">
+    <Position X="4.51" Y="0.5" Height="0.344" Width="1.513" />
+  </Comment>
+  <Comment CommentText="Persistence Layer">
+    <Position X="6.51" Y="0.5" Height="0.344" Width="1.513" />
+  </Comment>
+  <Class Name="SpaceTraffic.Engine.GameTime" Collapsed="true">
+    <Position X="4.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIAAAAAQQIgAAAAAgAAwAAAIAAAAAgAACAAAA=</HashCode>
+      <FileName>Engine\GameTime.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.24" Collapsed="true" />
+  </Class>
+  <Class Name="SpaceTraffic.GameServer.Configuration.GameServerConfiguration" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAA=</HashCode>
+      <FileName>Configuration\GameServerConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="SpaceTraffic.Engine.IGameServer">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAgAAAAABAAgBAAAAAA=</HashCode>
+      <FileName>Engine\IGameServer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SpaceTraffic.Engine.IWorldManager" Collapsed="true">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAABAAgAAAABEAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Engine\IWorldManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SpaceTraffic.Engine.IScriptManager" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\IScriptManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SpaceTraffic.Engine.IPersistenceManager" Collapsed="true">
+    <Position X="6.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIBQAAABAAAAAAAACAABAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Engine\IPersistenceManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SpaceTraffic.Engine.IAssetManager" Collapsed="true">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAQAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Engine\IAssetManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SpaceTraffic.Engine.IGameManager" Collapsed="true">
+    <Position X="4.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Engine\IGameManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SpaceTraffic.Engine.IGameAction" Collapsed="true">
+    <Position X="4.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAQAAAAAAAAAAAAIBAAAgAA=</HashCode>
+      <FileName>Engine\IGameAction.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SpaceTraffic.Engine.IGameEvent" Collapsed="true">
+    <Position X="4.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\IGameEvent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SpaceTraffic.Services.Contracts.IGameService" Collapsed="true">
+    <Position X="2.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SpaceTraffic.Services.Contracts.IAccountService" Collapsed="true">
+    <Position X="2.5" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SpaceTraffic.Engine.IServiceManager" Collapsed="true">
+    <Position X="2.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\IServiceManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SpaceTraffic.Engine.IGameSimulation" Collapsed="true">
+    <Position X="4.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\IGameSimulation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

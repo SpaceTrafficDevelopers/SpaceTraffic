@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="SpaceTrafficData" targetNamespace="SpaceTrafficData"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd" attributeFormDefault="unqualified"
+    elementFormDefault="unqualified">
+    <xs:element name="stdata">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="ships" type="shipsType">                   
+                    <xs:unique name="shipID">
+                        <xs:annotation>
+                            <xs:documentation>ID lodi musi byt unikatni v dokumentu.</xs:documentation>
+                        </xs:annotation>
+                        <xs:selector xpath="./ship"/>
+                        <xs:field xpath="@ID"/>
+                    </xs:unique>
+                </xs:element>
+            </xs:all>
+            <xs:attribute default="1.0" name="version" type="xs:string" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    
+
+    <xs:complexType name="shipsType">
+        <xs:sequence>
+            <xs:element name="ship" type="shipType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="shipType">
+        <xs:all>
+            <xs:element name="maxLoad" type="maxLoadType"/>
+            <xs:element name="slots" type="slotsType">
+                <!-- Nazvy slotu (slot@slotName) musi byt unikatni v ramci rodice (slots) -->
+                <xs:unique name="slotName">
+                    <xs:selector xpath="./slot"/>
+                    <xs:field xpath="@slotName"/>
+                </xs:unique>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="ID" type="IDType" use="required">
+            <xs:annotation>
+                <xs:documentation>Identifikator modelu lodi, je povinny, musi byt unikatni v ramci
+                    dokumentu.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="altName" type="nameType" use="optional">
+            <xs:annotation>
+                <xs:documentation>Alternativni jmeno modelu lodi, nepovinny, neni vyzadovana
+                    unikatnost.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:simpleType name="maxLoadType">
+        <xs:restriction base="xs:nonNegativeInteger"/>
+    </xs:simpleType>
+
+    <xs:complexType name="slotsType">
+        <xs:sequence>
+            <xs:element name="slot" type="slotType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="slotType">
+        <xs:all>
+            <xs:element name="whitelist" type="whitelistType">
+                <xs:annotation>
+                    <xs:documentation>Seznam komponent (hodnot atributu copmonentID) ktere lze
+                        umistit do tohoto slotu. Vyzaduje nejmene 1 polozku.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="slotName" type="nameType" use="required">
+            <xs:annotation>
+                <xs:documentation>Nazev slotu kosmicke lodi, nazvy slotu musi byt unikatni v ramci
+                    jedne lodi.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="required" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>Hodnota required=true znaci ze slot musi byt obsazen, tzn. hodnota
+                    atributu copmonentID nesmi byt prazdny retezec, pokud required=false slot muze
+                    zustat volny.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="copmonentID" type="nameTypeAllowEmpty" use="required">
+            <xs:annotation>
+                <xs:documentation>Identifikator komponety, ktera je umistena do tohoto slotu
+                    (atribut @ID komponenty). Pokud je tento slot volny, hodnotou je prazdny
+                    retezec.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="exchangeable" type="xs:boolean" use="required">
+            <xs:annotation>
+                <xs:documentation>Hodnota exchangeable=true znaci ze komponenta umistena v tomto
+                    slotu, muze byt vymenena, pokud required=false ve slotu musi zustat kompomenta,
+                    ktera je zde defaultne umistena.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="whitelistType">
+        <xs:sequence>
+            <xs:element name="component" type="nameType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="IDType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="nameType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="nameTypeAllowEmpty">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

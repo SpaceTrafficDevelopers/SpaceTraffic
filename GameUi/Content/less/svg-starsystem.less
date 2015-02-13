@@ -1,0 +1,191 @@
+/* 
+    Document   : StarSystemMap
+    Created on : 3.2.2012, 14:22:00
+    Author     : Martin Štěpánek <azaroth at students.zcu.cz>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+@hover-fill-color: cyan;
+@hover-stroke-color: cyan;
+
+#viewport {
+    background-color: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:-100;
+    //visibility: hidden;
+}
+
+#viewport svg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+	height: 100%;
+    overflow: visible;
+    /*z-index: -100;*/
+}
+
+.orbit{
+    fill:none;
+    fill-opacity:0;
+    fill-rule:evenodd;
+    stroke:#C0C0C0;
+    stroke-width:1.25;
+    stroke-miterlimit:4;
+    stroke-opacity:1;
+}
+
+circle.star{
+    fill:yellow;
+    stroke:#ffffff;
+    stroke-width:12;
+    stroke-opacity:0.6;
+}
+    
+circle.starHover {
+    fill: cyan !important;
+    stroke: cyan !important;
+}
+
+text.starHover {
+    font-weight:bold;
+    fill: cyan !important;
+}
+
+line.tagLine{
+    fill:none;
+    fill-opacity:1;
+    fill-rule:evenodd;
+    stroke:#FFFFFF;
+    stroke-width:2.0;
+    stroke-miterlimit:4;
+    stroke-opacity:1;
+}
+
+.hover {
+    /*  */
+    cursor: pointer;
+}
+
+.hover-default {
+    fill: @hover-fill-color !important;
+	stroke: @hover-fill-color !important;
+	
+}
+
+.planet {
+    fill:#515a73;
+    stroke:#ffffff;
+    stroke-width:1.25;
+    stroke-opacity:0.5;
+    z-index: 0;    
+}
+
+@fade-delay: 5s;
+.fade {
+    /*  */
+   opacity: 0.8;
+   
+   -webkit-transition: opacity @fade-delay linear;
+   -moz-transition: opacity @fade-delay linear;
+   -o-transition: opacity @fade-delay linear;
+   -ms-transition: opacity @fade-delay linear; 
+   transition: opacity @fade-delay linear;
+}
+
+.planet.hover {
+    .hover-default;
+}
+
+.orbit.hover {
+	.hover-default;
+}
+
+.wormholeEndpoint {
+	
+    .center {
+    	fill:white;
+    	stroke-width:0px;
+    }
+    
+    .outer-rings {
+		// Neviditelná výplň; pro události myší 
+		// v prostoru mezi kružnicemi
+		fill: rgba(0,0,0,1); 
+    	stroke-width:2px;
+    	stroke:white;
+    }
+    
+    .curves {
+    	fill:none;
+    	stroke:white;
+    	stroke-width:3px;
+    }
+}
+
+.nameplate {
+    /*  */
+    rect {
+        /*  */
+        fill: #222222;
+        fill-opacity:1;
+      }
+
+	text {
+        fill: #ffffff;
+        font-family: Arial;
+        font-size: 15px;
+        text-anchor: middle;
+    }
+}
+
+.nameplate.hover {
+	rect {
+		stroke: @hover-fill-color !important;
+	}
+	text {
+		fill: @hover-fill-color !important;
+	}
+}
+
+.wormholeEndpoint.hover {
+	cursor: pointer;
+	
+	.center {
+    	fill: @hover-fill-color !important;
+    	stroke-width:0px;
+    }
+    
+    .outer-rings {
+    	stroke: @hover-fill-color !important;
+    	webkit-transition:opacity 0.5s linear;
+		-moz-transition:opacity 0.5s linear;
+		-o-transition:opacity 0.5s linear;
+		-ms-transition:opacity 0.5s linear; 
+		transition:opacity 0.5s linear;
+    }
+    
+    .curves {
+    	stroke: @hover-fill-color !important;
+    }
+}
+
+
+
+/*.middle_circle{ }
+   .outer_circles{fill:none; stroke-width:2px; stroke:white;}
+   .curves{fill:none; stroke:white; stroke-width:3px; }
+*/
+ /*
+ <div style="width: 28px; height: 28px; -moz-transform: matrix(0.677338, 0.735672, -0.735672, 0.677338, 287.601px, 296.351px);" id="planet3" class="planet"></div>
+ */

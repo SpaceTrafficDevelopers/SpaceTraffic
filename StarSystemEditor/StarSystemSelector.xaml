@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="SpaceTraffic.Tools.StarSystemEditor.StarSystemSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <StackPanel>
+        <GroupBox Header="StarSystem selector">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ComboBox Height="24" Name="starSystemSingleSelector" MinWidth="175" HorizontalAlignment="Stretch" Loaded="starSystemSingleSelector_Loaded">
+                </ComboBox>
+                <Button Name="starSystemListExpander" Height="24" Content="-" Width="16" Click="Button_Click"></Button>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Name="starSystemListBox" Visibility="Visible" Header="StarSystem list" Margin="2" Loaded="starSystemListBox_Loaded">
+            
+        </GroupBox>
+        <GroupBox Name="starSystemObjectTreeBox" Header="StarSystem content tree" Margin="2">
+            
+        </GroupBox>
+        
+    </StackPanel>
+</UserControl>
