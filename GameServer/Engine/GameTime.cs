@@ -24,7 +24,7 @@ namespace SpaceTraffic.Engine
             }
         }
 
-        protected DateTime Value
+        public DateTime Value
         {
             get { return this._currentTime; }
             set

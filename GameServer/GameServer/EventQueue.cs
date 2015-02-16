@@ -29,11 +29,16 @@ namespace SpaceTraffic.GameServer
             //TODO: optimalizace přidávání do fronty
         }
 
-        public IGameEvent Dequeue()
+        public IGameEvent Dequeue(GameTime time)
         {
             IGameEvent gameEvent = this.queue[0];
-            this.queue.RemoveAt(0);
-            return gameEvent;
+            if (gameEvent.PlannedTime.Value.CompareTo(time.Value) <= 0)
+            {
+                this.queue.RemoveAt(0);
+                return gameEvent;
+            }else{
+                return null;
+            }
             //TODO: optimalizace přidávání do fronty
         }
     }

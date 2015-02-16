@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SpaceTraffic.Engine
 {
-    public interface IGameEvent
+    public interface IGameEvent : IComparable<IGameEvent>
     {
         GameTime PlannedTime { get; }
 

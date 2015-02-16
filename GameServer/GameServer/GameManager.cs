@@ -53,9 +53,12 @@ namespace SpaceTraffic.GameServer
             IGameEvent gameEvent;
             for (int i = 0; this.gameEventQueue.HasMore && (i < MAX_EVENTS_PER_UPDATE); i++)
             {
-                gameEvent = this.gameEventQueue.Dequeue();
-
-                gameEvent.BoundAction.Perform(this.gameServer);
+                //events are sorted in queue by time - but if the first one's time haven't come, it returns null 
+                gameEvent = this.gameEventQueue.Dequeue(currentGameTime);
+                if (gameEvent != null)
+                {
+                    gameEvent.BoundAction.Perform(this.gameServer);
+                }
             }
         }
 
