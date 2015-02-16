@@ -25,15 +25,20 @@ namespace SpaceTraffic.GameServer
         public void Enqueue(IGameEvent gameEvent)
         {
             this.queue.Add(gameEvent);
-            this.queue.Sort();
+            this.queue.Sort((a, b) => a.PlannedTime.CompareTo(b.PlannedTime));
             //TODO: optimalizace přidávání do fronty
         }
 
-        public IGameEvent Dequeue()
+        public IGameEvent Dequeue(GameTime time)
         {
             IGameEvent gameEvent = this.queue[0];
-            this.queue.RemoveAt(0);
-            return gameEvent;
+            if (gameEvent.PlannedTime.Value.CompareTo(time.Value) <= 0)
+            {
+                this.queue.RemoveAt(0);
+                return gameEvent;
+            }else{
+                return null;
+            }
             //TODO: optimalizace přidávání do fronty
         }
     }
