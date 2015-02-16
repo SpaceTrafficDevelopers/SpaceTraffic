@@ -58,6 +58,8 @@ namespace SpaceTraffic.GameServer
                 if (gameEvent != null)
                 {
                     gameEvent.BoundAction.Perform(this.gameServer);
+                } else {//events are sorted, so there is not any older event in queue
+                    break;
                 }
             }
         }
