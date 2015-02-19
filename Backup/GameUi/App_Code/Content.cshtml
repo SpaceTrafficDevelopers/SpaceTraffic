@@ -1,0 +1,31 @@
+﻿@using System.Web.Mvc;
+@using SpaceTraffic.GameUi.Utils;
+
+@**
+/// Helper for adding scripts to the page.
+/// Usage: @Content.Script("script.js", Url)
+**@
+@helper Script(string scriptName, UrlHelper url) {
+    <script src="@url.Content("~/Scripts/"+scriptName)" type="text/javascript"></script>
+}
+
+@**
+/// Helper for adding scripts to the page.
+/// Usage: @Content.STJS("script.js", Url)
+**@
+@helper STJS(string scriptName, UrlHelper url) {
+    <script src="@url.Content("~/JS/"+scriptName)" type="text/javascript"></script>
+}
+
+
+@**
+/// Helper for adding scripts to the page.
+/// Usage: @Content.JSImportScript("jsimport", Url)
+**@
+@helper JSImport(string jsimportFile, UrlHelper url) {
+    
+    foreach (string file in JSImportReader.LoadJSImports(jsimportFile, Context))
+    {    
+        <script src="@url.Content(file)" type="text/javascript"></script>
+    }
+}

@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Sent";
+}
+
+<h2>Sent Messages (2)</h2>
+<ul class="listbar">
+	<li><input type="checkbox" /> <label>JobOffers</label></li>
+	<li>|</li>
+	<li><input type="checkbox" /> <label>GM</label></li>
+	<li>|</li>
+	<li><label>For: </label><select><option>Player1</option><option>Player2</option></select></li>
+	<li>|</li>
+	<li><label>Search:</label> <input type="text" value="Search" /> <button>Search</button></li>
+</ul>
+<table class="itemtable">
+	<thead>
+		<tr><th class="chk">&nbsp;</th><th class="icon">Icon</th><th class="date">DateTime</th><th>From</th><th>Subject</th><th>Actions</th></tr>
+	</thead>
+		
+	<tr>
+		<td><input type="checkbox" /></td>
+		<td><img src="@Url.Content("~/Content/images/placeholder.png")" width="32" height="32" /></td>
+		<td>2000-10-10T00:00:00</td>
+		<td>Player2</td>
+		<td>Job offer: Fuel from PlanetA to PlanetB</td>
+		<td>RFX</td>
+	</tr>
+	<tr class="messagedemo"><td colspan="6">
+		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+		Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+		nascetur ridiculus mus.
+		<a href="#" @*onmouseover="contextinfo.load(this, {!="'".$presenter->link('detailtext')."'"})"*@>[more...]</a>
+		</p></td></tr>
+		<tr>
+		<td><input type="checkbox" /></td>
+		<td><img src="@Url.Content("~/Content/images/placeholder.png") width="32" height="32" /></td>
+		<td>2000-10-10T10:00:00</td>
+		<td>Player1</td>
+		<td>Reply: Greetings</td>
+		<td>RFX</td>
+	</tr>
+	<tr class="messagedemo"><td colspan="6">
+		<p>Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
+		Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. <a href="#">[more...]</a>
+		</p>
+	</td></tr>
+</table>
+<ul class="listbar">
+	<li><button>Select all</button></li>
+	<li><button>Inver selection</button></li>
+	<li><button>Clear selection</button></li>
+</ul>
+<ul class="listbar">
+	<li><button>Open</button></li>
+	<li><button>Delete</button></li>
+</ul>
