@@ -38,3 +38,8 @@
 *.build.csdef
 *.licx*.docstates
 *.vs10x
+!/packages/*
+!/packages/*/*
+!/packages/*/*/*
+!/packages/*/*/*/*
+!/packages/*/*/*/*/*
