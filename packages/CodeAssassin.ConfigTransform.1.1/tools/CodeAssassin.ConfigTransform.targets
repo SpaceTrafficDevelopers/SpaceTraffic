@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <UsingTask TaskName="TransformXml"
+             AssemblyFile="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\Web\Microsoft.Web.Publishing.Tasks.dll" />
+
+  <Target Name="TransformAllWebConfigTransformFiles"
+          Condition="'$(WebProjectOutputDir)'!=''"
+          BeforeTargets="Compile">
+
+    <ItemGroup>
+      <WebConfigTransformFile Include="@(None)" Condition="'$([System.Text.RegularExpressions.Regex]::IsMatch(%(Filename),&quot;(?i)^web\.&quot;))' == true and '%(Extension)'=='.config'" />
+      <WebConfigTransformFile Include="@(Content)" Condition="'$([System.Text.RegularExpressions.Regex]::IsMatch(%(Filename),&quot;(?i)^web\.&quot;))' == true and '%(Extension)'=='.config'" />
+    </ItemGroup>
+
+    <TransformXml Source="web.config" Destination="%(WebConfigTransformFile.Identity).transformed" Transform="@(WebConfigTransformFile)"
+                  Condition="'@(WebConfigTransformFile)'!=''" />
+
+    <CreateItem Include="%(WebConfigTransformFile.Identity).transformed">
+      <Output TaskParameter="Include" ItemName="Content" />
+    </CreateItem>
+
+  </Target>
+
+  <Target Name="TransformAllAppConfigTransformFiles"
+          Condition="'$(WebProjectOutputDir)'==''"
+          BeforeTargets="AssignTargetPaths">
+
+    <ItemGroup>
+      <AppConfigTransformFile Include="@(None);@(Content)" Condition="'$([System.Text.RegularExpressions.Regex]::IsMatch(%(Filename),&quot;(?i)^app\.&quot;))' == true and '%(Extension)'=='.config'" />
+    </ItemGroup>
+
+    <TransformXml Source="app.config" Destination="%(AppConfigTransformFile.Identity).transformed" Transform="@(AppConfigTransformFile)"
+                  Condition="'@(AppConfigTransformFile)'!=''" />
+
+    <CreateItem Include="%(AppConfigTransformFile.Identity).transformed"
+                AdditionalMetadata="CopyToOutputDirectory=Always">
+      <Output TaskParameter="Include" ItemName="Content"/>
+    </CreateItem>
+
+  </Target>
+
+</Project>
