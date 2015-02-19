@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<st:stdata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd" xmlns:st="SpaceTrafficData" version="1.2">
+  <starsystem name="Solas">
+    <star name="Solas">
+      <trajectory>
+        <stacionary x="0" y="0" />
+      </trajectory>
+      <details>
+        <gravity>0E+000</gravity>
+        <mass>0E+000</mass>
+        <description>Star of Solas system.</description>
+      </details>
+    </star>
+    <planets>
+      <planet altName="Agoje" name="Solas 1">
+        <trajectory>
+          <ellipticOrbit direction="counterclockwise" period="93" a="51" b="50" angle="40.0" initialAngle="320.0" />
+        </trajectory>
+        <details>
+          <gravity>0E+000</gravity>
+          <mass>1.88E+020</mass>
+          <description>Description of Agoje placeholder.</description>
+        </details>
+      </planet>
+      <planet altName="Sextus" name="Solas 2">
+        <trajectory>
+          <circularOrbit direction="clockwise" period="265" initialAngle="117.0" radius="55" />
+        </trajectory>
+        <details>
+          <gravity>0E+000</gravity>
+          <mass>3.428E+019</mass>
+          <description>Description of Sextus placeholder.</description>
+        </details>
+      </planet>
+      <planet altName="Primus" name="Solas 3">
+        <trajectory>
+          <ellipticOrbit direction="counterclockwise" period="442" a="59" b="58" angle="75.0" initialAngle="355.0" />
+        </trajectory>
+        <details>
+          <gravity>0E+000</gravity>
+          <mass>5.33E+018</mass>
+          <description>Description of Primus placeholder.</description>
+        </details>
+      </planet>
+      <planet altName="Quabb" name="Solas 4">
+        <trajectory>
+          <ellipticOrbit direction="counterclockwise" period="992" a="71" b="69" angle="0.0" initialAngle="80.0" />
+        </trajectory>
+        <details>
+          <gravity>0E+000</gravity>
+          <mass>4.087E+021</mass>
+          <description>Description of Quabb placeholder.</description>
+        </details>
+      </planet>
+      <planet altName="Septimus" name="Solas 5">
+        <trajectory>
+          <ellipticOrbit direction="counterclockwise" period="1764" a="75" b="74" angle="280.0" initialAngle="2.0" />
+        </trajectory>
+        <details>
+          <gravity>0E+000</gravity>
+          <mass>3.761E+019</mass>
+          <description>Description of Septimus placeholder.</description>
+        </details>
+      </planet>
+      <planet altName="Imedimer" name="Solas 6">
+        <trajectory>
+          <circularOrbit direction="clockwise" period="7239" initialAngle="74.0" radius="90" />
+        </trajectory>
+        <details>
+          <gravity>0E+000</gravity>
+          <mass>6.541E+018</mass>
+          <description>Description of Imedimer placeholder.</description>
+        </details>
+      </planet>
+      <planet altName="Dyaor" name="Solas 7">
+        <trajectory>
+          <ellipticOrbit direction="counterclockwise" period="16435" a="98" b="97" angle="290.0" initialAngle="312.0" />
+        </trajectory>
+        <details>
+          <gravity>0E+000</gravity>
+          <mass>5.965E+017</mass>
+          <description>Description of Dyaor placeholder.</description>
+        </details>
+      </planet>
+      <planet altName="Optimus" name="Solas 8">
+        <trajectory>
+          <circularOrbit direction="counterclockwise" period="40123" initialAngle="323.0" radius="150" />
+        </trajectory>
+        <details>
+          <gravity>0E+000</gravity>
+          <mass>4.148E+016</mass>
+          <description>Description of Optimus placeholder.</description>
+        </details>
+      </planet>
+    </planets>
+    <wormholeEndpoints>
+      <wormholeEndpoint id="0">
+        <trajectory>
+          <circularOrbit direction="clockwise" period="59000" initialAngle="50.0" radius="200" />
+        </trajectory>
+      </wormholeEndpoint>
+      <wormholeEndpoint id="1">
+        <trajectory>
+          <circularOrbit direction="counterclockwise" period="71000" initialAngle="50.0" radius="212" />
+        </trajectory>
+      </wormholeEndpoint>
+      <wormholeEndpoint id="2">
+        <trajectory>
+          <circularOrbit direction="clockwise" period="99000" initialAngle="50.0" radius="244" />
+        </trajectory>
+      </wormholeEndpoint>
+    </wormholeEndpoints>
+  </starsystem>
+</st:stdata>
