@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Copyright 2010 FAV ZCU
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<st:stdata xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
+    xmlns:st="SpaceTrafficData"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    version="1.2">
+    <starsystem name="Lervos">
+        <star name="Lervos">
+            <trajectory>
+                <stacionary x="0" y="0" />
+            </trajectory>
+            <details>
+	                <gravity>0.0</gravity>
+	                <mass>0.0</mass>
+	                <description>
+	                    Star of Solar system.
+	                </description>
+            </details>
+        </star>
+        <planets>
+            <planet altName="Krydos" name="Lervos 1">
+                <trajectory>
+                    <ellipticOrbit direction="counterclockwise" period="513" a="57" b="55" angle="0" initialAngle="40.0" />
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>5.93279679549948e+025</mass>
+                    <description>
+                        Description of Krydos placeholder.
+                    </description>
+                </details>
+            </planet>
+            <planet altName="Vhalenta" name="Lervos 2">
+                <trajectory>
+                    <ellipticOrbit direction="counterclockwise" period="2890" a="86" b="85" angle="270" initialAngle="100.0" />
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>1.82387287514368e+024</mass>
+                    <description>
+                        Description of Vhalenta placeholder.
+                    </description>
+                </details>
+            </planet>
+            <planet altName="Lemna" name="Lervos 3">
+                <trajectory>
+                    <ellipticOrbit direction="counterclockwise" period="13875" a="130" b="128" angle="0" initialAngle="270.0" />
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>1.40629257374802e+026</mass>
+                    <description>
+                        Description of Lemna placeholder.
+                    </description>
+                </details>
+            </planet>
+            <planet altName="Felli" name="Lervos 4">
+                <trajectory>
+                  <ellipticOrbit direction="clockwise" period="39127" a="194" b="193" angle="0" initialAngle="310.0" />
+                </trajectory>
+                <details>
+                    <gravity>0</gravity>
+                    <mass>8.58103883509689e+023</mass>
+                    <description>
+                        Description of Felli placeholder.
+                    </description>
+                </details>
+            </planet>
+	</planets>
+        <wormholeEndpoints>
+            <wormholeEndpoint id="0">
+                <trajectory>
+                    <circularOrbit direction="counterclockwise" period="49500" initialAngle="50.0" radius="205"/>
+                </trajectory>
+            </wormholeEndpoint>
+            <wormholeEndpoint id="1">
+                <trajectory>
+                    <circularOrbit  direction="counterclockwise" period="64000" initialAngle="50.0" radius="217"/>
+                </trajectory>
+            </wormholeEndpoint>
+            <wormholeEndpoint id="2">
+                <trajectory>
+                    <circularOrbit direction="counterclockwise" period="81000" initialAngle="50.0" radius="243"/>
+                </trajectory>
+            </wormholeEndpoint>
+        </wormholeEndpoints>
+    </starsystem>
+</st:stdata>
