@@ -1,2 +1,6 @@
-# SpaceTraffic
-Projekt SpaceTraffic vyvíjený studenty FAV ZČU.
+﻿# SpaceTraffic
+http://spacetraffic.kiv.zcu.cz
+
+#Wiki
+
+http://spacetraffic.kiv.zcu.cz/code
