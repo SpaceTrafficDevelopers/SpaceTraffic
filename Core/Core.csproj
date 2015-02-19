@@ -147,6 +147,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\ST.licenseheader">
+      <Link>ST.licenseheader</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Resources\ComponentsSchema.xsd">
       <SubType>Designer</SubType>

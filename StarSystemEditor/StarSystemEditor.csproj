@@ -145,6 +145,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="..\ST.licenseheader">
+      <Link>ST.licenseheader</Link>
+    </None>
     <None Include="Assets\schemas\SpaceTrafficGalaxySchema.xsd">
       <SubType>Designer</SubType>
     </None>

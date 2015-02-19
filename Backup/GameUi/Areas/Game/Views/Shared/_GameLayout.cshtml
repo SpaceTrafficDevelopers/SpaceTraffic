@@ -1,0 +1,80 @@
+﻿@{
+	var menu = new List<string>();
+
+	menu.AddRange(new string[] { "Events", "Ships", "Bases", "Messages", "Map", "Scoreboard", "Profile", "Help" });
+}
+<!DOCTYPE html>
+<html>
+  <head>
+  
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Space Traffic - Space trading multiplayer browser game." />
+	<meta name="author" xml:lang="cs" content="Space Traffic Team" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	
+	<title>Space Traffic</title>
+	
+	<link href="@Url.Content("~/Content/Game.less")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/themes/base/jquery.ui.base.css")" rel="stylesheet" type="text/css" />
+	@*<link rel="shortcut icon" href="~/Content/spacetraffic.ico" type="image/x-icon">*@
+
+	@*<link rel="start" href="~/" title="Home" />*@
+  </head>
+  <body>
+	<div id="envelope">
+	  <div id="header">
+		<h1>Space Traffic</h1>
+		<div>Debug Player&nbsp;<span>Czech | English</span></div>
+	  </div>
+	  <div id="logo">
+	  </div>
+	  <div id="content">
+		<div id="topPanel">
+			<div class="topbrick"><p>5/8</p><p>Ships</p></div>
+			<div class="topbrick"><p>10/8</p><p>Bases</p></div>
+			<div class="topbrick"><p>10/8</p><p>Messages</p></div>
+			<div class="topbrick"><p>Credits</p><p>145 830</p></div>
+			<div class="topbrick"><p>&nbsp;@Membership.GetUser().UserName</p></div>
+		</div>
+		<div id="menuPanel">
+			<ul class="mainmenu">
+				@foreach (string menuItem in menu)
+				{
+					<li>
+						<a href="@Url.Action("Index", menuItem, new { Area = "Game" }, null)">
+							<img src="@Url.Content("~/Content/images/"+menuItem.ToLower()+"_button_icon.png")" width="32" height="32" />
+							@menuItem
+						</a>
+						
+					</li>
+				}
+			</ul>
+			
+		</div>
+		<div id="contextPanel">
+			@RenderSection("ContextPanel", false)
+		</div>
+		<div id="mainPanel">
+			@RenderBody()
+		</div>
+		<div id="viewport">
+
+		</div>
+		
+	  </div>
+	  <div id="footer">
+		<p>&copy; Space Traffic Team | <span lang="cs">ZČU</span> | <span lang="cs">FAV</span> | <span lang="cs">KIV</span></p>
+		<p>Sources for background images were taken by Hubble Space Telescope and published by NASA.</p>
+	  </div>
+	</div>
+	@Content.Script("jquery-1.6.4.js",Url)
+	@Content.Script("jquery.unobtrusive-ajax.js", Url)
+	@Content.Script("jquery-ui-1.8.16.js", Url)
+	@Content.Script("jquery.svg.js", Url)
+	@Content.Script("jquery.svgdom.js", Url)
+    @Content.Script("jquery.cookie.js", Url)
+	@Content.Script("mootools-core-1.4.1.js", Url)
+	@Content.JSImport("~/JS/jsimport", Url)
+	@RenderSection("Scripts", false)
+  </body>
+</html>

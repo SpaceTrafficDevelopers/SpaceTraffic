@@ -1,0 +1,137 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServer", "GameServer\GameServer.csproj", "{1CB78E97-E74C-447F-9118-588713E6D295}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameUi", "GameUi\GameUi.csproj", "{AEE0F56B-756A-4631-8CF3-AF667900543F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1CB78E97-E74C-447F-9118-588713E6D295} = {1CB78E97-E74C-447F-9118-588713E6D295}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{9A3A1688-A41C-4F56-8450-43FB64F60C1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServer.Tests", "GameServer.Tests\GameServer.Tests.csproj", "{AFCAFD80-3C3D-4D0A-80A1-9E6C7352B4E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0B2DEBED-EDD1-46AE-8C18-D733DBA6CE79}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		SpaceTraffic.vsmdi = SpaceTraffic.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameUi.Tests", "GameUi.Tests\GameUi.Tests.csproj", "{A36B9C6B-76DF-429D-B58C-A11DEF88D1C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "Core.Tests\Core.Tests.csproj", "{3C1A502B-8229-413F-9D80-ACFBC4A6ED85}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A36B9C6B-76DF-429D-B58C-A11DEF88D1C3} = {A36B9C6B-76DF-429D-B58C-A11DEF88D1C3}
+		{AEE0F56B-756A-4631-8CF3-AF667900543F} = {AEE0F56B-756A-4631-8CF3-AF667900543F}
+		{AFCAFD80-3C3D-4D0A-80A1-9E6C7352B4E5} = {AFCAFD80-3C3D-4D0A-80A1-9E6C7352B4E5}
+		{1CB78E97-E74C-447F-9118-588713E6D295} = {1CB78E97-E74C-447F-9118-588713E6D295}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarSystemEditor", "StarSystemEditor\StarSystemEditor.csproj", "{000D0CA2-D68E-4A90-9842-D38C1B1AAD32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServerScripts", "GameServerScripts\GameServerScripts.csproj", "{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = SpaceTraffic.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CB78E97-E74C-447F-9118-588713E6D295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CB78E97-E74C-447F-9118-588713E6D295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CB78E97-E74C-447F-9118-588713E6D295}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1CB78E97-E74C-447F-9118-588713E6D295}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1CB78E97-E74C-447F-9118-588713E6D295}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1CB78E97-E74C-447F-9118-588713E6D295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CB78E97-E74C-447F-9118-588713E6D295}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CB78E97-E74C-447F-9118-588713E6D295}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1CB78E97-E74C-447F-9118-588713E6D295}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1CB78E97-E74C-447F-9118-588713E6D295}.Release|x86.ActiveCfg = Release|Any CPU
+		{AEE0F56B-756A-4631-8CF3-AF667900543F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEE0F56B-756A-4631-8CF3-AF667900543F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEE0F56B-756A-4631-8CF3-AF667900543F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AEE0F56B-756A-4631-8CF3-AF667900543F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AEE0F56B-756A-4631-8CF3-AF667900543F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AEE0F56B-756A-4631-8CF3-AF667900543F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEE0F56B-756A-4631-8CF3-AF667900543F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEE0F56B-756A-4631-8CF3-AF667900543F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AEE0F56B-756A-4631-8CF3-AF667900543F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AEE0F56B-756A-4631-8CF3-AF667900543F}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A3A1688-A41C-4F56-8450-43FB64F60C1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A3A1688-A41C-4F56-8450-43FB64F60C1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A3A1688-A41C-4F56-8450-43FB64F60C1F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9A3A1688-A41C-4F56-8450-43FB64F60C1F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9A3A1688-A41C-4F56-8450-43FB64F60C1F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A3A1688-A41C-4F56-8450-43FB64F60C1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A3A1688-A41C-4F56-8450-43FB64F60C1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A3A1688-A41C-4F56-8450-43FB64F60C1F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9A3A1688-A41C-4F56-8450-43FB64F60C1F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9A3A1688-A41C-4F56-8450-43FB64F60C1F}.Release|x86.ActiveCfg = Release|Any CPU
+		{AFCAFD80-3C3D-4D0A-80A1-9E6C7352B4E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFCAFD80-3C3D-4D0A-80A1-9E6C7352B4E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFCAFD80-3C3D-4D0A-80A1-9E6C7352B4E5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AFCAFD80-3C3D-4D0A-80A1-9E6C7352B4E5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AFCAFD80-3C3D-4D0A-80A1-9E6C7352B4E5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AFCAFD80-3C3D-4D0A-80A1-9E6C7352B4E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFCAFD80-3C3D-4D0A-80A1-9E6C7352B4E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFCAFD80-3C3D-4D0A-80A1-9E6C7352B4E5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AFCAFD80-3C3D-4D0A-80A1-9E6C7352B4E5}.Release|x86.ActiveCfg = Release|Any CPU
+		{A36B9C6B-76DF-429D-B58C-A11DEF88D1C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A36B9C6B-76DF-429D-B58C-A11DEF88D1C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A36B9C6B-76DF-429D-B58C-A11DEF88D1C3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A36B9C6B-76DF-429D-B58C-A11DEF88D1C3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A36B9C6B-76DF-429D-B58C-A11DEF88D1C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A36B9C6B-76DF-429D-B58C-A11DEF88D1C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A36B9C6B-76DF-429D-B58C-A11DEF88D1C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A36B9C6B-76DF-429D-B58C-A11DEF88D1C3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A36B9C6B-76DF-429D-B58C-A11DEF88D1C3}.Release|x86.ActiveCfg = Release|Any CPU
+		{3C1A502B-8229-413F-9D80-ACFBC4A6ED85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C1A502B-8229-413F-9D80-ACFBC4A6ED85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C1A502B-8229-413F-9D80-ACFBC4A6ED85}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3C1A502B-8229-413F-9D80-ACFBC4A6ED85}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3C1A502B-8229-413F-9D80-ACFBC4A6ED85}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3C1A502B-8229-413F-9D80-ACFBC4A6ED85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C1A502B-8229-413F-9D80-ACFBC4A6ED85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C1A502B-8229-413F-9D80-ACFBC4A6ED85}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3C1A502B-8229-413F-9D80-ACFBC4A6ED85}.Release|x86.ActiveCfg = Release|Any CPU
+		{000D0CA2-D68E-4A90-9842-D38C1B1AAD32}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{000D0CA2-D68E-4A90-9842-D38C1B1AAD32}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{000D0CA2-D68E-4A90-9842-D38C1B1AAD32}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{000D0CA2-D68E-4A90-9842-D38C1B1AAD32}.Debug|x86.ActiveCfg = Debug|x86
+		{000D0CA2-D68E-4A90-9842-D38C1B1AAD32}.Debug|x86.Build.0 = Debug|x86
+		{000D0CA2-D68E-4A90-9842-D38C1B1AAD32}.Release|Any CPU.ActiveCfg = Release|x86
+		{000D0CA2-D68E-4A90-9842-D38C1B1AAD32}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{000D0CA2-D68E-4A90-9842-D38C1B1AAD32}.Release|Mixed Platforms.Build.0 = Release|x86
+		{000D0CA2-D68E-4A90-9842-D38C1B1AAD32}.Release|x86.ActiveCfg = Release|x86
+		{000D0CA2-D68E-4A90-9842-D38C1B1AAD32}.Release|x86.Build.0 = Release|x86
+		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(RocketSvnScc) = preSolution
+		Svn-Managed = True
+		Manager = Rocket SVN - Subversion Support for Visual Studio
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,17 @@
+﻿@using System.Diagnostics;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Debug Index</h2>
+
+@Html.ActionLink("Game", "Index", "Default", new { Area = "Game" }, new { })
+@Html.ActionLink("Registration","Register", "Account")
+@Html.ActionLink("QunitTests", "RunTests", "Home")
+@*Html.Partial("~/Areas/Game/Views/Shared/_GameWindow.cshtml")*@
+
+@ViewBag.Result
+
+ <div id="viewport">
+
+ </div>

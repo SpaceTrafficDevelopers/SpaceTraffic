@@ -1,0 +1,47 @@
+// Css je psáno pomocí less preprocesoru (http://lesscss.org/) a zpracováváno pomocí dotless knihovny (http://www.dotlesscss.org/).
+// Tento soubor slouží jako css šablona pro hru. Includuje css z podadresáře less. 
+// Veškeré změny v css je třeba provádět v těchto souborech.
+// Pro překlad less do css je možné použít utilitku simpless (http://wearekiss.com/simpless), 
+// v případě budoucích problémů s použitým řešením.
+
+// Dotless je nainstalován pomocí NuGet a nakonfigurován v web.xml.
+
+// Debugovat překlad less do css je třeba otevřením stránky s less souborem. Tam se vypisují chyby překladu.
+// Při normální konfiguraci vývojového prostředí je to: http://localhost:2457/Content/Game.less
+
+// URL ve stylech
+// --------------
+// dotless chápe url jako relativní ke zpracovávanému souboru.
+// Např.: 
+//		Pokud bude v souboru less/style.css 
+//		url('images/obr.png'), přeloží se jako url('http://domain/Content/less/images/obr.png')
+//
+// Toto chování je třeba předvídat a upravit cesty příslušným způsobem (../images/), nebo použít escapování:
+//		~"url('images/obr.png')"
+// To zajistí správný výstup cest.
+
+
+// Zakázání SimpLess css mimifikace
+//simpless:!minify
+
+@images-url: "http://localhost:2457/Content/images";
+
+@import "fonts/LeagueGothicRegular.css";
+@import "less/elements.less";
+@import "less/development.less";
+
+@import "less/GameLayout.less";
+
+@import "less/gamewindow.less";
+@import "less/itemtable.less";
+@import "less/defaultforms.less";
+@import "less/summarytable.less";
+
+@import "less/MessagesView.less";
+@import "less/ScoreboardView.less";
+@import "less/ShipsView.less";
+
+@import "less/svg-starsystem.less";
+
+@import "less/Account.less";
+@import "less/debug.less";

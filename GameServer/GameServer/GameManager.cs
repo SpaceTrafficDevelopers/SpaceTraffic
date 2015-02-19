@@ -1,4 +1,20 @@
-﻿using System;
+﻿/**
+Copyright 2010 FAV ZCU
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+**/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,9 +69,14 @@ namespace SpaceTraffic.GameServer
             IGameEvent gameEvent;
             for (int i = 0; this.gameEventQueue.HasMore && (i < MAX_EVENTS_PER_UPDATE); i++)
             {
-                gameEvent = this.gameEventQueue.Dequeue();
-
-                gameEvent.BoundAction.Perform(this.gameServer);
+                //events are sorted in queue by time - but if the first one's time haven't come, it returns null 
+                gameEvent = this.gameEventQueue.Dequeue(currentGameTime);
+                if (gameEvent != null)
+                {
+                    gameEvent.BoundAction.Perform(this.gameServer);
+                } else {//events are sorted, so there is not any older event in queue
+                    break;
+                }
             }
         }
 
