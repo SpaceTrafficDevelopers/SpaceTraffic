@@ -11,6 +11,8 @@
 [Oo]bj
 [Rr]elease
 [Tt]est[Rr]esult*
+!/GameServerScripts/Debug
+!/GameServerScripts/Debug/*
 *.obj
 *.pdb
 *.csproj.user
@@ -36,3 +38,8 @@
 *.build.csdef
 *.licx*.docstates
 *.vs10x
+!/packages/*
+!/packages/*/*
+!/packages/*/*/*
+!/packages/*/*/*/*
+!/packages/*/*/*/*/*
