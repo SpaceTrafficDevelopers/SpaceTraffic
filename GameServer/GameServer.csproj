@@ -98,10 +98,12 @@
     <Compile Include="GameServer\GameManager.cs" />
     <Compile Include="GameServer\ScriptManager.cs" />
     <Compile Include="GameServer\WorldManager.cs" />
+    <Compile Include="Game\Actions\HelloWorld.cs" />
     <Compile Include="Game\Actions\ShipFlyTo.cs" />
     <Compile Include="Game\Actions\ShipLoadCargo.cs" />
     <Compile Include="Game\Actions\ShipRepair.cs" />
     <Compile Include="Game\Actions\ShipUnloadCargo.cs" />
+    <Compile Include="Game\Events\HelloWorldRepeat.cs" />
     <Compile Include="Game\GamePlayer.cs" />
     <Compile Include="GameServer\AssetManager.cs" />
     <Compile Include="GameServer\GameServer.cs" />
