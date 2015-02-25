@@ -24,29 +24,66 @@ namespace SpaceTraffic.Game.Actions
 {
     public class ShipFlyTo : IGameAction
     {
-        public GameActionState State
+       
+        void IGameAction.Perform(IGameServer gameServer)
         {
-            get { throw new NotImplementedException(); }
+            throw new NotImplementedException();
         }
 
-        public int PlayerId
+        object[] ActionArgs { get; set; }
+
+        GameActionState IGameAction.State
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
         }
 
-        public int ActionCode
+        int IGameAction.PlayerId
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
         }
+
+        int IGameAction.ActionCode
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        object[] IGameAction.ActionArgs
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
 
         public object Result
         {
             get { throw new NotImplementedException(); }
-        }
-
-        void IGameAction.Perform(IGameServer gameServer)
-        {
-            throw new NotImplementedException();
         }
     }
 }
