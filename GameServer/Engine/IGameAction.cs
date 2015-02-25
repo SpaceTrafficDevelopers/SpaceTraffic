@@ -44,20 +44,25 @@ namespace SpaceTraffic.Engine
 
     public interface IGameAction
     {
-        GameActionState State { get; }
+        GameActionState State { get; set; }
 
         /// <summary>
         /// Vrací ID hráče, který tuto akci vyžádal.
         /// </summary>
-        int PlayerId { get; }
+        int PlayerId { get; set; }
 
         /// <summary>
         /// Vrací kód akce.
         /// Kód akce je číslo, které jednoznačně identifikuje akci v hráčově seznamu vykonávaných akcí.
         /// </summary>
-        int ActionCode { get; }
+        int ActionCode { get; set; }
 
         object Result { get; }
+
+        /// <summary>
+        /// arguments connected with concreate action
+        /// </summary>
+        object[] ActionArgs { get; set; }
 
         /// <summary>
         /// Vykoná akci s využitím konkrétní instance game serveru.

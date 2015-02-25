@@ -36,4 +36,16 @@ namespace SpaceTraffic.Services.Contracts
         object GetActionResult(int playerId, int actionCode);
     }
 
+    [Serializable]
+    public class ActionNotFoundException : Exception
+    {
+        public ActionNotFoundException() { }
+        public ActionNotFoundException(string message) : base(message) { }
+        public ActionNotFoundException(string message, Exception inner) : base(message, inner) { }
+        protected ActionNotFoundException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context)
+            : base(info, context) { }
+    }
+
 }
