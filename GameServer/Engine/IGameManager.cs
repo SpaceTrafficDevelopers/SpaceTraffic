@@ -27,6 +27,13 @@ namespace SpaceTraffic.Engine
     public interface IGameManager
     {
         /// <summary>
+        /// Time in game.
+        /// </summary>
+        /// <value>
+        /// The current game time.
+        /// </value>
+        GameTime currentGameTime { get; }
+        /// <summary>
         /// Vykoná herní akci.
         /// Vlákno je zablokováno, dokud nedojde k provedení akce (přechod ze stavu PREPARED).
         /// </summary>

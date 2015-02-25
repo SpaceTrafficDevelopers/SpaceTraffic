@@ -29,8 +29,9 @@ namespace SpaceTraffic.GameServer
         public const int MAX_ACTIONS_PER_UPDATE = 100;
 
         private IGameServer gameServer;
+        private Random rand = new System.Random();
 
-        private GameTime currentGameTime;
+        public GameTime currentGameTime { get; private set; }
         private EventQueue gameEventQueue = new EventQueue();
         private ConcurrentQueue<IGameAction> gameActionQueue = new ConcurrentQueue<IGameAction>();        
 
@@ -94,8 +95,10 @@ namespace SpaceTraffic.GameServer
 
         public object PerformAction(IGameAction action)
         {
-
-            throw new NotImplementedException();
+            action.ActionCode = GetUniqueActionId();
+            action.State = GameActionState.PREPARED;
+            this.gameActionQueue.Enqueue(action);
+            return action.ActionCode;
         }
 
         public void PerformActionAsync(IGameAction action)
@@ -107,6 +110,36 @@ namespace SpaceTraffic.GameServer
         public void PlanEvent(IGameEvent gameEvent)
         {
             this.gameEventQueue.Enqueue(gameEvent);
+        }
+
+        /// <summary>
+        /// Generates unique action identifer in List of actions.
+        /// </summary>
+        /// <returns>Unique identifer.</returns>
+        private int GetUniqueActionId()
+        {
+            int unique = rand.Next();
+            while(hasActionCode(gameActionQueue, unique)){
+                unique = rand.Next();
+            }
+
+            return unique;
+        }
+
+        /// <summary>
+        /// Determines whether given queue of action has action with given action code
+        /// </summary>
+        /// <param name="actionQueue">The action queue.</param>
+        /// <param name="unique">The action code.</param>
+        /// <returns></returns>
+        private bool hasActionCode(IEnumerable<IGameAction> actionQueue, int unique)
+        {
+            foreach(IGameAction action in actionQueue){
+                if(action.ActionCode == unique){
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
