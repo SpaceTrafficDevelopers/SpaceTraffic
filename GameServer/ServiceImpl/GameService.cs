@@ -61,7 +61,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
                 if (action == null)
                 {//if action does not implemented action
                     throw new ActionNotFoundException(String.Format(
-                        "Action class with name: {0} does not does not implements IGameAction.",
+                        "Action class with name: {0} does not implements IGameAction.",
                         actionName
                     ));
                 }
@@ -69,19 +69,18 @@ namespace SpaceTraffic.GameServer.ServiceImpl
                 action.PlayerId = playerId;
                 action.State = GameActionState.PLANNED;
                 GameServer.CurrentInstance.Game.PerformAction(action);
+                return action.ActionCode;
             } catch(System.IO.FileNotFoundException e){
                 Console.WriteLine("Action file with name " + actionName + " was not found in SpaceTraffic.Game.Actions namespace.");
                 throw;
-            }           
-            return 0;
+            }
         }
 
         
 
         public object GetActionResult(int playerId, int actionCode)
         {
-            throw new 
-                Exception();
+            throw new NotImplementedException();
         }
     }
 }
