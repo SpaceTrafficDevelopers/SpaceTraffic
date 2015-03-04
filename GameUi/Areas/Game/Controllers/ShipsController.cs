@@ -69,7 +69,9 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             // získání všech dostupných modelů lodí
             List<ShipModel> ships = getShips();
             
-            return GetTabView("BuyShip");
+            var tabView = GetTabView("BuyShip");
+            tabView.ViewBag.Ships = ships;
+            return tabView;
         }
 
         public PartialViewResult NaviComp()
