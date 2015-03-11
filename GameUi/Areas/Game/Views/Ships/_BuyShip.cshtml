@@ -1,63 +1,64 @@
 ﻿@{
-    ViewBag.Title = "_BuyShip";
+	ViewBag.Title = "_BuyShip";
 }
 <table rules="groups" class="itemtable shipsview" frame="box">
-    <thead>
-        <tr>
-            <th style="width: 280px;"> Loď </th>
-            <th style="width: 180px;"> Parametry </th>
-            <th style="width: 110px;"> Kapacita nákladového prostoru </th>
-            <th style="width: 100px;"> Kapacita nádrže </th>
-            <th style="width: 100px;"> Cena </th>
-            <th> &nbsp; </th>
-        </tr>
-    </thead>
-    <tbody>
+	<thead>
+		<tr>
+			<th style="width: 280px;"> Loď </th>
+			<th style="width: 180px;"> Parametry </th>
+			<th style="width: 110px;"> Kapacita nákladového prostoru </th>
+			<th style="width: 100px;"> Kapacita nádrže </th>
+			<th style="width: 100px;"> Cena </th>
+			<th> &nbsp; </th>
+		</tr>
+	</thead>
+	<tbody>
 @{
-    foreach (var ship in @ViewBag.Ships)
-    {
-        <tr class="tline">
-            <td>
-                <img src="http://lorempixel.com/100/80/transport/5" style="float:left;" /> <br />
-                <a href="#" @*onmouseover="contextinfo.load(this, {!="'".$presenter->link('contextshipdetails')."'"})"*@>
-                    @ship.Model
-                </a> <br />
-                @ship.Manufacturer
-            </td>
-            <td style="text-align: left; width: 170px;">
-                Spotřeba: @ship.Consumption u/ly <br />
-                Síla: @ship.Power MW <br />
-                Kapacita: @ship.CarryingCapacity u
-            </td>
-            <td style="vertical-align: middle; line-height: 80px;">
-                <img src="http://lorempixel.com/32/32/abstract/8" style="top: 10px; position: relative; margin-right: 10px" />
-                @ship.CargoholdSpace u
-            </td>
-            <td>
-                @ship.FuelCapacity u
-            </td>
-            <td>
-                @ship.Price C
-            </td>
-            <td>
-                <a>Koupit</a>
-            </td>
-        </tr>
-    }
+	foreach (var ship in @ViewBag.Ships)
+	{
+		<tr class="tline">
+			<td>
+				<img src="@Url.Content("~/Content/images/Ships/" + @ship.Image)" style="float:left; height:80px;" /> <br />
+				<a href="#">
+					@ship.Model
+				</a>
+				@ship.Manufacturer
+			</td>
+			<td style="text-align: left; width: 170px;">
+				Spotřeba: @ship.Consumption u/ly <br />
+				Síla: @ship.Power MW <br />
+			</td>
+			<td style="vertical-align: middle; line-height: 80px;">
+				@ship.CarryingCapacity u
+			</td>
+			<td>
+				@ship.FuelCapacity u
+			</td>
+			<td>
+				@ship.Price C
+			</td>
+			<td colspan="2">
+				@ship.Description
+			</td>
+			<td>
+				<a>Koupit</a>
+			</td>
+		</tr>
+	}
 }
-        
-    </tbody>
+		
+	</tbody>
 </table>
 <ul class="listbar">
-    <li>
-        <button>
-            Clear selection</button></li>
+	<li>
+		<button>
+			Clear selection</button></li>
 </ul>
 <ul class="listbar">
-    <li>
-        <button>
-            Details</button></li>
-    <li>
-        <button>
-            Buy</button></li>
+	<li>
+		<button>
+			Details</button></li>
+	<li>
+		<button>
+			Buy</button></li>
 </ul>
