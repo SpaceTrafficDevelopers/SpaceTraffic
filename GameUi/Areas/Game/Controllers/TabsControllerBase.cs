@@ -20,13 +20,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SpaceTraffic.GameUi.Models.Ui;
+using SpaceTraffic.GameUi.Controllers;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
     /// <summary>
     /// Controller for page with tabs.
     /// </summary>
-    public abstract class TabsControllerBase : Controller
+    public abstract class TabsControllerBase : AbstractController
     {
         /// <summary>
         /// Page which should be displayed for Index action.
