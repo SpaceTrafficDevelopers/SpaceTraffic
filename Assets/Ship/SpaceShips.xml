@@ -1,36 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <st:stdata xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
-    xmlns:st="SpaceTrafficData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
-    <ships>
-        <!-- Prikladovy model lodi -->
-        <ship ID="ship1" altName="Voyager">
-            <maxLoad>1000</maxLoad>
-            <slots>
-                <!-- Slot pro motor -->
-                <slot slotName="engineSlot" required="true" copmonentID="Engine" exchangeable="true">
-                    <whitelist>
-                        <component>Engine</component>
-                    </whitelist>
-                </slot>
-                <!-- Slot pro palivovou nadrz (nakladovy prostor pro palivo) -->
-                <slot slotName="tankSlot" required="true" copmonentID="FuelCargo"
-                    exchangeable="false">
-                    <whitelist>
-                        <component>FuelCargo</component>
-                    </whitelist>
-                </slot>
-                <!-- Slot pro povinny nakladovy prostor -->
-                <slot slotName="cargoSlot" required="true" copmonentID="BasicCargohold"
-                    exchangeable="true">
-                    <whitelist>
-                        <component>BasicCargohold</component>
-                        <component>ExtraCargohold</component>
-                    </whitelist>
-                </slot>
-                <!-- Muzou nasledovat az 3 (podle wiki) dalsi sloty pro nakladovy prostor -->
-                <!-- Muzou nasledovat dalsi sloty pro ostatni komponenty -->
-            </slots>
-        </ship>
-    </ships>
+		xmlns:st="SpaceTrafficData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+	<ships>
+		<ship>
+			<model>Shipunto R4</model>
+			<manufacturer>United Space Ships</manufacturer>
+			<power>200</power>
+			<consumption>0.8</consumption>
+			<fuelCapacity>40</fuelCapacity>
+			<carryingCapacity>1000</carryingCapacity>
+			<image>shipunto.png</image>
+			<price>150000</price>
+			<description>Poslední verze populární lodi od koncernu United Space Ships. Kvalita za dobrou cenu.</description>
+
+			<!-- Example for latest versions - not implemented yet -->
+			<slots>
+				<!-- Slot pro motor -->
+				<slot slotName="engineSlot" required="true" copmonentID="Engine" exchangeable="true">
+					<whitelist>
+						<component>Engine</component>
+					</whitelist>
+				</slot>
+				<!-- Slot pro palivovou nadrz (nakladovy prostor pro palivo) -->
+				<slot slotName="tankSlot" required="true" copmonentID="FuelCargo"
+						exchangeable="false">
+					<whitelist>
+						<component>FuelCargo</component>
+					</whitelist>
+				</slot>
+				<!-- Slot pro povinny nakladovy prostor -->
+				<slot slotName="cargoSlot" required="true" copmonentID="BasicCargohold"
+						exchangeable="true">
+					<whitelist>
+						<component>BasicCargohold</component>
+						<component>ExtraCargohold</component>
+					</whitelist>
+				</slot>
+				<!-- Muzou nasledovat az 3 (podle wiki) dalsi sloty pro nakladovy prostor -->
+				<!-- Muzou nasledovat dalsi sloty pro ostatni komponenty -->
+			</slots>
+		</ship>
+		<ship>
+			<model>中国汤</model>
+			<manufacturer>China Red Sun Corp.</manufacturer>
+			<power>88</power>
+			<consumption>0.4</consumption>
+			<fuelCapacity>30</fuelCapacity>
+			<carryingCapacity>400</carryingCapacity>
+			<image>madeinchina.png</image>
+			<price>99999</price>
+			<description>Model od čínského výrobce, úspěšný především pro svou lidovou cenu. Zkrácená doba záruky.</description>
+		</ship>
+		<ship>
+			<model>Bumper</model>
+			<manufacturer>Cargo Holding</manufacturer>
+			<power>350</power>
+			<consumption>1.5</consumption>
+			<fuelCapacity>90</fuelCapacity>
+			<carryingCapacity>3000</carryingCapacity>
+			<image>bumper.png</image>
+			<price>250000</price>
+			<description>Loď typu Bumper, oblíbená především mezi středními dopravci pro její velkou kapacitu.</description>
+		</ship>
+	</ships>
 </st:stdata>
