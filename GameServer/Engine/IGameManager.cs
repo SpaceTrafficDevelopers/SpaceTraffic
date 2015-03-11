@@ -35,7 +35,7 @@ namespace SpaceTraffic.Engine
         GameTime currentGameTime { get; }
         /// <summary>
         /// Vykoná herní akci.
-        /// Vlákno je zablokováno, dokud nedojde k provedení akce (přechod ze stavu PREPARED).
+        /// Vlákno je zablokováno, dokud nedojde k provedení akce (přechod ze stavu PREPARED). (nenaimplementováno)
         /// </summary>
         /// <param name="action">herní akce.</param>
         /// <returns>vrací výsledek akce</returns>
