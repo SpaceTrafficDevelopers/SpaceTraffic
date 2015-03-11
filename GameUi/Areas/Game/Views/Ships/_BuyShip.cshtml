@@ -1,62 +1,64 @@
 ﻿@{
-    ViewBag.Title = "_BuyShip";
+	ViewBag.Title = "_BuyShip";
 }
 <table rules="groups" class="itemtable shipsview" frame="box">
-    <thead>
-        <tr>
-            <th style="width: 280px;"> Ship </th>
-            <th style="width: 180px;"> Parameters </th>
-            <th style="width: 110px;"> Cargohold space </th>
-            <th style="width: 100px;"> Fuel capacity </th>
-            <th style="width: 100px;"> Price </th>
-            <th> &nbsp; </th>
-        </tr>
-    </thead>
-    <tbody>
+	<thead>
+		<tr>
+			<th style="width: 280px;"> Loď </th>
+			<th style="width: 180px;"> Parametry </th>
+			<th style="width: 110px;"> Kapacita nákladového prostoru </th>
+			<th style="width: 100px;"> Kapacita nádrže </th>
+			<th style="width: 100px;"> Cena </th>
+			<th> &nbsp; </th>
+		</tr>
+	</thead>
+	<tbody>
 @{
-    for(int i=1; i<11; i++)
-    {
-        <tr class="tline">
-            <td>
-                <img src="http://lorempixel.com/100/80/transport/@i" style="float:left;" /> <br/>
-                <a href="#" @*onmouseover="contextinfo.load(this, {!="'".$presenter->link('contextshipdetails')."'"})"*@>
-                    Shipunto LR-3</a> <br/>
-                United Space Ships
-            </td>
-            <td style="text-align: left; width: 170px;">
-                Consumption: 0.5 u/ly <br/>
-                Power: 300 MW <br/>
-                Carrying capacity: 500 u
-            </td>
-            <td style="vertical-align: middle; line-height: 80px;">
-                <img src="http://lorempixel.com/32/32/abstract/@i" style="top: 10px; position: relative; margin-right: 10px" />
-                25 u
-            </td>
-            <td>
-                25 u
-            </td>
-            <td>
-                1 000 000 C
-            </td>
-            <td>
-                <a>Add to card</a>
-            </td>
-        </tr>
-    }
+	foreach (var ship in @ViewBag.Ships)
+	{
+		<tr class="tline">
+			<td>
+				<img src="@Url.Content("~/Content/images/Ships/" + @ship.Image)" style="float:left; height:80px;" /> <br />
+				<a href="#">
+					@ship.Model
+				</a>
+				@ship.Manufacturer
+			</td>
+			<td style="text-align: left; width: 170px;">
+				Spotřeba: @ship.Consumption u/ly <br />
+				Síla: @ship.Power MW <br />
+			</td>
+			<td style="vertical-align: middle; line-height: 80px;">
+				@ship.CarryingCapacity u
+			</td>
+			<td>
+				@ship.FuelCapacity u
+			</td>
+			<td>
+				@ship.Price C
+			</td>
+			<td colspan="2">
+				@ship.Description
+			</td>
+			<td>
+				<a>Koupit</a>
+			</td>
+		</tr>
+	}
 }
-        
-    </tbody>
+		
+	</tbody>
 </table>
 <ul class="listbar">
-    <li>
-        <button>
-            Clear selection</button></li>
+	<li>
+		<button>
+			Clear selection</button></li>
 </ul>
 <ul class="listbar">
-    <li>
-        <button>
-            Details</button></li>
-    <li>
-        <button>
-            Buy</button></li>
+	<li>
+		<button>
+			Details</button></li>
+	<li>
+		<button>
+			Buy</button></li>
 </ul>

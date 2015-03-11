@@ -34,7 +34,7 @@ namespace SpaceTraffic.GameUi.Controllers
     /// Kontroler postkytující data o star systemu.
     /// Obsahuje akce pro získání xml star systemu, jeho napojení a o dynamických objektech, které se v něm nachází.
     /// </summary>
-    public class StarSystemController : Controller
+    public class StarSystemController : AbstractController
     {
         private readonly IGameServerClient GSClient = GameServerClientFactory.GetClientInstance();
         //

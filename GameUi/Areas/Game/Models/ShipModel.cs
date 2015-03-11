@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,38 +25,42 @@ using System.Web.Security;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Models
 {
-    public class ShipModel
-    {
-        [Required]
-        [Display(Name = "Model")]
-        public string Model { get; set; }
+	public class ShipModel
+	{
+		[Required]
+		[Display(Name = "Model")]
+		public string Model { get; set; }
 
-        [Required]
-        [Display(Name = "Manufacturer")]
-        public string Manufacturer { get; set; }
+		[Required]
+		[Display(Name = "Výrobce")]
+		public string Manufacturer { get; set; }
 
-        [Required]
-        [Display(Name = "Consumption")]
-        public double Consumption { get; set; }
+		[Required]
+		[Display(Name = "Spotřeba")]
+		public double Consumption { get; set; }
 
-        [Required]
-        [Display(Name = "Power")]
-        public int Power { get; set; }
+		[Required]
+		[Display(Name = "Výkon")]
+		public int Power { get; set; }
 
-        [Required]
-        [Display(Name = "Carrying capacity")]
-        public int CarryingCapacity { get; set; }
+		[Required]
+		[Display(Name = "Kapacita nákladového prostoru")]
+		public int CarryingCapacity { get; set; }
 
-        [Required]
-        [Display(Name = "Cargohold space")]
-        public int CargoholdSpace { get; set; }
 
-        [Required]
-        [Display(Name = "Fuel capacity")]
-        public int FuelCapacity { get; set; }
+		[Required]
+		[Display(Name = "Kapacita nádrže")]
+		public int FuelCapacity { get; set; }
 
-        [Required]
-        [Display(Name = "Price")]
-        public long Price { get; set; }  
-    }
+		[Required]
+		[Display(Name = "Cena")]
+		public long Price { get; set; }
+
+		//image with its type
+		[Display(Name = "")]
+		public string Image { get; set; }
+
+		[Display(Name = "Popis")]
+		public string Description { get; set; }  
+	}
 }
