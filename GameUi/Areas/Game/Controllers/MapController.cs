@@ -1,4 +1,5 @@
-﻿/**
+﻿using SpaceTraffic.GameUi.Controllers;
+/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +24,7 @@ using System.Web.Mvc;
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
     [Authorize]
-    public class MapController : Controller
+    public class MapController : AbstractController
     {
         //
         // GET: /Map/
