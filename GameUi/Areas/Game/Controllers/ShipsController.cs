@@ -22,6 +22,7 @@ using System.Web.Mvc;
 using SpaceTraffic.GameUi.Models.Ui;
 using SpaceTraffic.GameUi.Areas.Game.Models;
 using System.Xml.Linq;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
@@ -55,7 +56,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		public PartialViewResult ShipList()
 		{
 			// získání lodí uživatele
-			List<ShipModel> ships = getShips();
+			IList<SpaceShip> ships = GSClient.GameService.GetPlayersShips(getCurrentPlayer().PlayerId);
 			
 			return GetTabView("ShipList");
 		}
@@ -68,7 +69,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		public PartialViewResult BuyShip()
 		{
 			// získání všech dostupných modelů lodí
-			List<ShipModel> ships = getShips();
+			List<ShipModel> ships = getAllShips();
 			
 			var tabView = GetTabView("BuyShip");
 			tabView.ViewBag.Ships = ships;
@@ -85,7 +86,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		/// Returns the list of all ships defined in SpaceShips.xml
 		/// </summary>
 		/// <returns>List of ship models with parameters from xml.</returns>
-		private List<ShipModel> getShips()
+		private List<ShipModel> getAllShips()
 		{
 			List<ShipModel> ships = new List<ShipModel>();
 
@@ -112,5 +113,6 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			return ships;
 
 		}
+
 	}
 }
