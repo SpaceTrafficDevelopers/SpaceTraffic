@@ -41,13 +41,13 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         {
             Logger.Info("AccountService: GetAccountInfoByUserName {0}", userName);
 
-            return new AccountInfo { PlayerName = "Tester", PlayerId = "0" };
+            return new AccountInfo { PlayerName = "Tester", PlayerId = 1 };
         }
 
         public AccountInfo GetAccountInfoByAccountId(int accountId)
         {
             Logger.Info("AccountService: GetAccountInfoByAccountId {0}", accountId);
-            return new AccountInfo { PlayerName = "Tester", PlayerId = "0" };
+            return new AccountInfo { PlayerName = "Tester", PlayerId = 1 };
         }
 
 
