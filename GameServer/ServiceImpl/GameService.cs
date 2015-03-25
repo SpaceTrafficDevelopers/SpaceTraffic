@@ -54,6 +54,18 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipsByPlayer(playerId);
 		}
 
+		/// <summary>
+		/// Returns bool value which decides if given player can afford given amount of expenses
+		/// </summary>
+		/// <param name="playerId">The player identifier.</param>
+		/// <param name="amount">The size of expense</param>
+		/// <returns></returns>
+		public bool PlayerHasEnaughCredits(int playerId, long amount)
+		{
+			long actualMoney = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(playerId).Credit;
+			return actualMoney >= amount;
+		}
+
 
 
 
