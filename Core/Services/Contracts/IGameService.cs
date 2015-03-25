@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,32 +20,39 @@ using System.Linq;
 using System.Text;
 using System.ServiceModel;
 using SpaceTraffic.Entities.PublicEntities;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Services.Contracts
 {
-    [ServiceContract]
-    public interface IGameService
-    {
-        [OperationContract]
-        IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem);
+	[ServiceContract]
+	public interface IGameService
+	{
+		[OperationContract]
+		IList<SpaceShip> GetPlayersShips(int playerId);
 
-        [OperationContract]
-        int PerformAction(int playerId, string actionName, params object[] actionArgs);
+		[OperationContract]
+		IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem);
 
-        [OperationContract]
-        object GetActionResult(int playerId, int actionCode);
-    }
+		[OperationContract]
+		int PerformAction(int playerId, string actionName, params object[] actionArgs);
 
-    [Serializable]
-    public class ActionNotFoundException : Exception
-    {
-        public ActionNotFoundException() { }
-        public ActionNotFoundException(string message) : base(message) { }
-        public ActionNotFoundException(string message, Exception inner) : base(message, inner) { }
-        protected ActionNotFoundException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context)
-            : base(info, context) { }
-    }
+		[OperationContract]
+		object GetActionResult(int playerId, int actionCode);
+
+		[OperationContract]
+		bool PlayerHasEnaughCredits(int playerId, long amount);
+	}
+
+	[Serializable]
+	public class ActionNotFoundException : Exception
+	{
+		public ActionNotFoundException() { }
+		public ActionNotFoundException(string message) : base(message) { }
+		public ActionNotFoundException(string message, Exception inner) : base(message, inner) { }
+		protected ActionNotFoundException(
+		  System.Runtime.Serialization.SerializationInfo info,
+		  System.Runtime.Serialization.StreamingContext context)
+			: base(info, context) { }
+	}
 
 }

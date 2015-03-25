@@ -36,7 +36,6 @@ namespace SpaceTraffic.GameUi.Controllers
     /// </summary>
     public class StarSystemController : AbstractController
     {
-        private readonly IGameServerClient GSClient = GameServerClientFactory.GetClientInstance();
         //
         // GET: /StarSystem/
         /// <summary>
