@@ -38,6 +38,9 @@ namespace SpaceTraffic.Services.Contracts
 
 		[OperationContract]
 		object GetActionResult(int playerId, int actionCode);
+
+		[OperationContract]
+		bool PlayerHasEnaughCredits(int playerId, long amount);
 	}
 
 	[Serializable]

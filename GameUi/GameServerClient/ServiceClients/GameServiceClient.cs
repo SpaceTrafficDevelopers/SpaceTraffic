@@ -56,5 +56,13 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 				return (channel as IGameService).GetActionResult(playerId, actionCode);
 			}
 		}
+
+		public bool PlayerHasEnaughCredits(int playerId, long amount)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).PlayerHasEnaughCredits(playerId, amount);
+			}
+		}
 	}
 }

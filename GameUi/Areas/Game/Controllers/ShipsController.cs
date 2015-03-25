@@ -48,6 +48,29 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			return View(INDEX_VIEW);
 		}
 
+		
+		//
+		// GET: /Ships/BuyModel		
+		/// <summary>
+		/// Buys the ship of specified model
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult BuyModel(string model)
+		{
+			ShipModel shipModel = getAllShips().Where(shipType => shipType.Model == model).First();
+			if (shipModel != null){			
+				if (GSClient.GameService.PlayerHasEnaughCredits(getCurrentPlayer().PlayerId, shipModel.Price)){
+					GSClient.GameService.PerformAction(getCurrentPlayer().PlayerId, "ShipBuy", getCurrentPlayer().PlayerId, "Solar System", 1, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model);
+				} else {
+					//TODO: flash Nemáš dostatek kreditů na koupi lodě ship.Model.
+				}
+			}else{ 
+				//TODO: flash Tento typ lodi neexistuje.
+			}
+			Response.Redirect("/Ships/");
+			return null;
+		}
+
 		public PartialViewResult Overview()
 		{
 			return GetTabView("Overview");
@@ -57,8 +80,10 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		{
 			// získání lodí uživatele
 			IList<SpaceShip> ships = GSClient.GameService.GetPlayersShips(getCurrentPlayer().PlayerId);
-			
-			return GetTabView("ShipList");
+
+			var tabView = GetTabView("ShipList");
+			tabView.ViewBag.Ships = ships;
+			return tabView;
 		}
 		
 		public PartialViewResult FleetList()
@@ -70,11 +95,12 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		{
 			// získání všech dostupných modelů lodí
 			List<ShipModel> ships = getAllShips();
-			
+
 			var tabView = GetTabView("BuyShip");
 			tabView.ViewBag.Ships = ships;
 			return tabView;
 		}
+
 
 		public PartialViewResult NaviComp()
 		{
@@ -111,7 +137,6 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 				ships.Add(ship);
 			}
 			return ships;
-
 		}
 
 	}
