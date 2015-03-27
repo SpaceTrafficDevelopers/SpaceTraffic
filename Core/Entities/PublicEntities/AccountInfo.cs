@@ -26,7 +26,7 @@ namespace SpaceTraffic.Entities.PublicEntities
     public class AccountInfo
     {
         [DataMember]
-        public string PlayerId { get; set; }
+        public int PlayerId { get; set; }
 
         [DataMember]
         public string Email { get; set; }

@@ -99,10 +99,11 @@
     <Compile Include="GameServer\ScriptManager.cs" />
     <Compile Include="GameServer\WorldManager.cs" />
     <Compile Include="Game\Actions\HelloWorld.cs" />
+    <Compile Include="Game\Actions\Ships\ShipBuy.cs" />
     <Compile Include="Game\Actions\Ships\ShipFlyTo.cs" />
     <Compile Include="Game\Actions\Ships\ShipLoadCargo.cs" />
     <Compile Include="Game\Actions\Ships\ShipRepair.cs" />
-    <Compile Include="Game\Actions\ShipUnloadCargo.cs" />
+    <Compile Include="Game\Actions\Ships\ShipUnloadCargo.cs" />
     <Compile Include="Game\Events\HelloWorldRepeat.cs" />
     <Compile Include="Game\GamePlayer.cs" />
     <Compile Include="GameServer\AssetManager.cs" />
@@ -124,7 +125,11 @@
     <Compile Include="ServiceImpl\GameService.cs" />
     <Compile Include="ServiceImpl\HelloWorldService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="startup.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>

@@ -22,6 +22,7 @@ using System.Web.Mvc;
 using SpaceTraffic.GameUi.Models.Ui;
 using SpaceTraffic.GameUi.Areas.Game.Models;
 using System.Xml.Linq;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
@@ -47,6 +48,29 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			return View(INDEX_VIEW);
 		}
 
+		
+		//
+		// GET: /Ships/BuyModel		
+		/// <summary>
+		/// Buys the ship of specified model
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult BuyModel(string model)
+		{
+			ShipModel shipModel = getAllShips().Where(shipType => shipType.Model == model).First();
+			if (shipModel != null){			
+				if (GSClient.GameService.PlayerHasEnaughCredits(getCurrentPlayer().PlayerId, shipModel.Price)){
+					GSClient.GameService.PerformAction(getCurrentPlayer().PlayerId, "ShipBuy", getCurrentPlayer().PlayerId, "Solar System", 1, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model);
+				} else {
+					//TODO: flash Nemáš dostatek kreditů na koupi lodě ship.Model.
+				}
+			}else{ 
+				//TODO: flash Tento typ lodi neexistuje.
+			}
+			Response.Redirect("/Ships/");
+			return null;
+		}
+
 		public PartialViewResult Overview()
 		{
 			return GetTabView("Overview");
@@ -55,9 +79,11 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		public PartialViewResult ShipList()
 		{
 			// získání lodí uživatele
-			List<ShipModel> ships = getShips();
-			
-			return GetTabView("ShipList");
+			IList<SpaceShip> ships = GSClient.GameService.GetPlayersShips(getCurrentPlayer().PlayerId);
+
+			var tabView = GetTabView("ShipList");
+			tabView.ViewBag.Ships = ships;
+			return tabView;
 		}
 		
 		public PartialViewResult FleetList()
@@ -68,12 +94,13 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		public PartialViewResult BuyShip()
 		{
 			// získání všech dostupných modelů lodí
-			List<ShipModel> ships = getShips();
-			
+			List<ShipModel> ships = getAllShips();
+
 			var tabView = GetTabView("BuyShip");
 			tabView.ViewBag.Ships = ships;
 			return tabView;
 		}
+
 
 		public PartialViewResult NaviComp()
 		{
@@ -85,7 +112,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		/// Returns the list of all ships defined in SpaceShips.xml
 		/// </summary>
 		/// <returns>List of ship models with parameters from xml.</returns>
-		private List<ShipModel> getShips()
+		private List<ShipModel> getAllShips()
 		{
 			List<ShipModel> ships = new List<ShipModel>();
 
@@ -110,7 +137,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 				ships.Add(ship);
 			}
 			return ships;
-
 		}
+
 	}
 }

@@ -1,5 +1,15 @@
 ﻿@{
-    ViewBag.Title = "_ShipList";
+	ViewBag.Title = "_ShipList";
 }
 
-<h2>ShipList placeholder</h2>
+<h2>Mé lodě</h2>
+
+<table>
+	<tr><th>Loď</th><th>Typ</th><th>Poškození</th></tr>
+@{
+	foreach (var ship in @ViewBag.Ships)
+	{
+		<tr><td>@ship.SpaceShipName</td><td>@ship.SpaceShipModel</td><td>@ship.DamagePercent</td></tr>
+	}
+}
+</table>
