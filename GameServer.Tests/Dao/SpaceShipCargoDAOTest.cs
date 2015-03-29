@@ -252,7 +252,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             newPlayer.PlayerName = RandomString(4);
             newPlayer.CorporationName = "ZCU";
             newPlayer.Credit = 0;
-            newPlayer.DateOfBirth = DateTime.Parse("16/02/2008 12:15:12");
+            newPlayer.DateOfBirth = new DateTime(2008, 02, 16, 12, 15, 12);
             newPlayer.Email = "email@email.cz";
             newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
             newPlayer.PsswdSalt = "cbOpKKxb";
