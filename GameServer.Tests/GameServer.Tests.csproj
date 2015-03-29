@@ -99,6 +99,12 @@
       <Link>ST.licenseheader</Link>
     </None>
     <None Include="App.config" />
+    <None Include="App.Debug.tfs.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="App.Release.tfs.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
     <None Include="ConnectionStringsTest.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -136,4 +142,17 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <!-- XML transformations on App.config definition: http://stackoverflow.com/a/5109530 -->
+  <UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Web\Microsoft.Web.Publishing.Tasks.dll" />
+  <Target Name="AfterCompile" Condition="Exists('App.$(Configuration).tfs.config') And '$(TFSBuild)'=='True'">
+    <!--Generate transformed app config in the intermediate directory-->
+    <TransformXml Source="App.config" Destination="$(IntermediateOutputPath)$(TargetFileName).config" Transform="App.$(Configuration).tfs.config" />
+    <!--Force build process to use the transformed configuration file from now on.-->
+    <ItemGroup>
+      <AppConfigWithTargetPath Remove="App.config" />
+      <AppConfigWithTargetPath Include="$(IntermediateOutputPath)$(TargetFileName).config">
+        <TargetPath>$(TargetFileName).config</TargetPath>
+      </AppConfigWithTargetPath>
+    </ItemGroup>
+  </Target>
 </Project>
