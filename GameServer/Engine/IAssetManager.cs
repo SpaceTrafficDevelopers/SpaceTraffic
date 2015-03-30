@@ -23,7 +23,7 @@ using SpaceTraffic.Game;
 
 namespace SpaceTraffic.Engine
 {
-    public interface IAssetManager : IGalaxyMapDataStreamProvider, IDisposable
+    public interface IAssetManager : IGalaxyMapDataStreamProvider, IGoodsDataStreamProvider,  IDisposable
     {
         /// <summary>
         /// Vrací cestu k assetům

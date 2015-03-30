@@ -44,6 +44,12 @@ namespace SpaceTraffic.GameServer.Configuration
             get { return (MapElement)this["map"]; }
         }
 
+        [ConfigurationProperty("goods", IsRequired = true)]
+        public MapElement Goods
+        {
+            get { return (MapElement)this["goods"]; }
+        }
+
         [ConfigurationProperty("initializer", IsRequired = true)]
         public InitializerElement Initializer
         {
@@ -92,6 +98,24 @@ namespace SpaceTraffic.GameServer.Configuration
     public class MapElement : ConfigurationElement
     {
         [ConfigurationProperty("name", DefaultValue = "GalaxyMap.xml", IsRequired = true)]
+        //TODO: filename validation
+        public string Name
+        {
+            get
+            {
+                return (string)this["name"];
+            }
+
+            set
+            {
+                this["name"] = value;
+            }
+        }
+    }
+
+    public class GoodsElement : ConfigurationElement
+    {
+        [ConfigurationProperty("name", DefaultValue = "Goods.xml", IsRequired = true)]
         //TODO: filename validation
         public string Name
         {

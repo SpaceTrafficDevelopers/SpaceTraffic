@@ -26,6 +26,7 @@ using SpaceTraffic.Game;
 using SpaceTraffic.Data;
 using System.Xml;
 using SpaceTraffic.Engine;
+using SpaceTraffic.Entities.Goods;
 
 namespace SpaceTraffic.GameServer
 {
@@ -94,6 +95,8 @@ namespace SpaceTraffic.GameServer
 
             string assetsPath = GameServerConfiguration.GameServerConfig.Assets.Path;
             string galaxyMapName = GameServerConfiguration.GameServerConfig.Map.Name;
+            string goodsFileName = GameServerConfiguration.GameServerConfig.Goods.Name;
+
 
             logger.Info("Compiling scripts:");
             ScriptManager scriptManager = new ScriptManager();
@@ -101,6 +104,8 @@ namespace SpaceTraffic.GameServer
             
             logger.Debug("CONFIG: Assets path: {0}", assetsPath);
             logger.Debug("CONFIG: Map name: {0}", galaxyMapName);
+            logger.Debug("CONFIG: Goods filename: {0}", goodsFileName);
+
 
             logger.Info("Initializing Asset Manager.");
 
@@ -128,6 +133,11 @@ namespace SpaceTraffic.GameServer
             this.worldManager = new WorldManager();
             GalaxyMap galaxyMap = this.assetManager.LoadGalaxyMap(galaxyMapName);
             this.worldManager.Map = galaxyMap;
+
+
+            //Prozatimní načítání zboží z xml.
+            IList<IGoods> list = this.assetManager.LoadGoods(goodsFileName);
+
 
             // Inicializace herního světa.
             this.gameManager = new GameManager(this);
