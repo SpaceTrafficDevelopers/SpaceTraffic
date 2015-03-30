@@ -25,7 +25,7 @@
               <xs:element name="category" type="firstLetterCategory"></xs:element>
               <xs:element name="description" type="xs:string"></xs:element>
               <xs:element name="size" type="xs:int"></xs:element>
-              <xs:element name="price" type="xs:int"></xs:element>
+              <xs:element name="price" type="xs:double"></xs:element>
               <xs:element name="type" type="typeZbozi"></xs:element>
               <xs:element name="levelToBuy" type="xs:int"></xs:element>
             </xs:sequence>

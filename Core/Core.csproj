@@ -164,6 +164,9 @@
     <None Include="Resources\ComponentsSchema.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Resources\GoodsSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\SpaceShipsSchema.xsd">
       <SubType>Designer</SubType>
     </None>

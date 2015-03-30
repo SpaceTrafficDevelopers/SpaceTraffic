@@ -86,11 +86,12 @@ namespace SpaceTraffic.Data
         public IList<IGoods> LoadGoods(string goodsFileName, IGoodsDataStreamProvider dataService)
         {
             logger.Info("Loading goods: {0}", goodsFileName);
-            this.HasValidationFailed = true;//false;
+            this.HasValidationFailed = false;
 
             XmlReaderSettings readerSettings = new XmlReaderSettings();
             readerSettings.IgnoreComments = true;
 
+            // puvodní komentář ze StarSystemLoader
             // Pro validaci při načítání, možnost zvýšení výkonu.
             //readerSettings.ValidationType = ValidationType.Schema; 
             //readerSettings.ValidationFlags = readerSettings.ValidationFlags | XmlSchemaValidationFlags.ReportValidationWarnings;
@@ -99,15 +100,14 @@ namespace SpaceTraffic.Data
             using (XmlReader reader = XmlReader.Create(dataService.GetGoodsStream(goodsFileName), readerSettings))
             {
                 XmlDocument doc = new XmlDocument();
-                //doc.Schemas.Add(this.GoodsSchema);
+                doc.Schemas.Add(this.GoodsSchema);
                 doc.Load(reader);
-              //  doc.Validate(ValidationEventHandler);
+                doc.Validate(ValidationEventHandler);
 
-                //if (this.HasValidationFailed)
-                //    throw new XmlException(String.Format("Xml validation failed for '{0}'", goods));
+                if (this.HasValidationFailed)
+                    throw new XmlException(String.Format("Xml validation failed for '{0}'", goodsFileName));
 
                 XmlNode goodsNode = doc.GetElementsByTagName("goods")[0];
-
                 IList<IGoods> goodsList = goodsNode.ParseGoods();
 
                 return goodsList;
@@ -115,11 +115,11 @@ namespace SpaceTraffic.Data
         }
 
         /// <summary>
-        /// Loads the goods schema SystemSchema.xsd from resources.
+        /// Loads the goods schema. (GoodsSchema.xsd from resources)
         /// </summary>
         private void LoadSchema()
         {
-            using (XmlReader schemaReader = new XmlTextReader(new MemoryStream(SpaceTraffic.Properties.Resources.StarSystemSchema)))//;//Assembly.GetExecutingAssembly().GetManifestResourceStream("SpaceTraffic.Resources.SpaceTrafficStarSystemSchema.xsd")))
+            using (XmlReader schemaReader = new XmlTextReader(new MemoryStream(SpaceTraffic.Properties.Resources.GoodsSchema)))//;//Assembly.GetExecutingAssembly().GetManifestResourceStream("SpaceTraffic.Resources.SpaceTrafficStarSystemSchema.xsd")))
             {
                 this._goodsSchema = XmlSchema.Read(schemaReader, ValidationEventHandler);
             }

@@ -12,7 +12,7 @@
     <!-- Velikost (objem)  -->
     <size>1</size>
     <!-- Cena  -->
-    <price>15</price>
+    <price>15.5</price>
     <!-- běžné (mainstream) nebo speciální (special)-->
     <type>mainstream</type>
     <!-- Level hráče, aby mohl zboží nakoupit -->

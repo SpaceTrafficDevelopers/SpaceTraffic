@@ -30,6 +30,18 @@ namespace SpaceTraffic.Xml
             return double.Parse(attribute.Value, System.Globalization.CultureInfo.InvariantCulture);
         }
 
+        public static double DoubleValue(this XmlNode node)
+        {
+            if (node == null) return 0.0;
+            return double.Parse(node.InnerText, System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        public static int IntValue(this XmlNode node)
+        {
+            if (node == null) return 0;
+            return int.Parse(node.InnerText, System.Globalization.CultureInfo.InvariantCulture);
+        }
+
         public static int IntValue(this XmlAttribute attribute)
         {
             if (attribute == null) return 0;

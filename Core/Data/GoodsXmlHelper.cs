@@ -24,7 +24,6 @@ namespace SpaceTraffic.Data
 {
     public static class GoodsXmlHelper
     {
-
         /// <summary>
         /// Extension method for parsing Goods instance from XmlNode.
         /// </summary>
@@ -77,7 +76,7 @@ namespace SpaceTraffic.Data
             switch (productNode.Name)
             {
                 case "id":
-                    product.ID = int.Parse(productNode.InnerText);
+                    product.ID = productNode.IntValue();
                     break;
 
                 case "name":
@@ -89,11 +88,11 @@ namespace SpaceTraffic.Data
                     break;
 
                 case "size":
-                    product.Volume = int.Parse(productNode.InnerText);
+                    product.Volume = productNode.IntValue();
                     break;
 
                 case "price":
-                    product.Price = double.Parse(productNode.InnerText);
+                    product.Price = productNode.DoubleValue();
                     break;
 
                 case "type":
@@ -101,10 +100,11 @@ namespace SpaceTraffic.Data
                     break;
 
                 case "levelToBuy":
-                    product.LevelToBuy = int.Parse(productNode.InnerText);
+                    product.LevelToBuy = productNode.IntValue();
                     break;
 
-                case "category": break;
+                case "category": /* Používá se k určení do které třídy zboží patří. Využíváno výše. */ 
+                    break;
 
                 default:
                     throw new XmlException("Unexpected element.");
