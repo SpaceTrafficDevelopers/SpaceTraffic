@@ -15,14 +15,27 @@ limitations under the License.
 
 **/
 using SpaceTraffic.Game.Geometry;
+using System.Collections.Generic;
+using SpaceTraffic.Entities.Goods;
+
 namespace SpaceTraffic.Game
 {
 
     /// <summary>
     /// This class represents planet.
     /// </summary>
-    public class Planet : CelestialObject, ILocation
+    public class Planet : CelestialObject, ILocation, IPlanet
     {
+        /// <summary>
+        /// Current change price of list goods. Value is percent.
+        /// </summary>
+        private int currentChangePrice = 100;
+
+        /// <summary>
+        /// List of goods on planet.
+        /// </summary>
+        private List<IGoods> GoodsList { get; set; } 
+
         public string Location
         {
             get
@@ -58,5 +71,18 @@ namespace SpaceTraffic.Game
         {
         }
         #endregion
+
+        /// <summary>
+        /// Change price goods on planet.
+        /// </summary>
+        /// <param name="percent">Percent of change price goods</param>
+        override
+        public void ChangePriceGoods(int percent)
+        { 
+            foreach(IGoods goods in GoodsList) {
+                goods.Price = goods.Price / currentChangePrice * percent;
+            }
+        }
+            
     }
 }
