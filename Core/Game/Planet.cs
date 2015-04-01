@@ -76,12 +76,12 @@ namespace SpaceTraffic.Game
         /// Change price goods on planet.
         /// </summary>
         /// <param name="percent">Percent of change price goods</param>
-        override
         public void ChangePriceGoods(int percent)
         { 
             foreach(IGoods goods in GoodsList) {
                 goods.Price = goods.Price / currentChangePrice * percent;
             }
+            currentChangePrice = percent;
         }
             
     }
