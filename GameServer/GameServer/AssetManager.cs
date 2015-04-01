@@ -29,7 +29,7 @@ using SpaceTraffic.Entities.Goods;
 
 namespace SpaceTraffic.GameServer
 {
-    class AssetManager : IAssetManager
+    public class AssetManager : IAssetManager
     {
         public const string FILE_EXTENSION = ".xml";
         private string _mapDirectoryPath = ".\\";

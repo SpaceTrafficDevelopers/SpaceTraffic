@@ -36,6 +36,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -52,6 +53,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\GoodsLoaderTest.cs" />
     <Compile Include="Data\OrbitTests.cs" />
     <Compile Include="Data\PathPlannerTests.cs" />
     <Compile Include="Data\TestGalaxyMapDataStreamProvider.cs" />
@@ -73,6 +75,10 @@
       <Project>{9A3A1688-A41C-4F56-8450-43FB64F60C1F}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GameServer\GameServer.csproj">
+      <Project>{1cb78e97-e74c-447f-9118-588713e6d295}</Project>
+      <Name>GameServer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -89,6 +95,9 @@
     <None Include="..\ST.licenseheader">
       <Link>ST.licenseheader</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

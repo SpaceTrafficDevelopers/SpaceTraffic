@@ -91,6 +91,7 @@
     <Compile Include="Game\CelestialObject.cs" />
     <Compile Include="Game\Geometry\Stacionary.cs" />
     <Compile Include="Game\IGameObject.cs" />
+    <Compile Include="Game\IPlanet.cs" />
     <Compile Include="Game\VisibleObject.cs" />
     <Compile Include="Game\Geometry\CircularOrbit.cs" />
     <Compile Include="Game\Geometry\Direction.cs" />
