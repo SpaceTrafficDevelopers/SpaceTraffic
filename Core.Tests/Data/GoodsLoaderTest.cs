@@ -54,13 +54,13 @@ namespace Core.Tests.Data
             Assert.IsTrue(listGoods.Count > 0, "List of goods is empty.");
 
             foreach (IGoods good in listGoods) {
-                Assert.IsNotNull(good.Description, "Goods haven not set description.");
-                Assert.IsNotNull(good.ID, "Goods haven not set id.");
-                Assert.IsNotNull(good.LevelToBuy, "Goods haven not set level to buy.");
-                Assert.IsNotNull(good.Name, "Goods haven not set name.");
-                Assert.IsNotNull(good.Price, "Goods haven not set price.");
-                Assert.IsNotNull(good.type, "Goods haven not set type.");
-                Assert.IsNotNull(good.Volume, "Goods haven not set volume.");
+                Assert.IsNotNull(good.Description, "Goods have not set description.");
+                Assert.IsNotNull(good.ID, "Goods have not set id.");
+                Assert.IsNotNull(good.LevelToBuy, "Goods have not set level to buy.");
+                Assert.IsNotNull(good.Name, "Goods have not set name.");
+                Assert.IsNotNull(good.Price, "Goods have not set price.");
+                Assert.IsNotNull(good.type, "Goods have not set type.");
+                Assert.IsNotNull(good.Volume, "Goods have not set volume.");
                 
             }
         }

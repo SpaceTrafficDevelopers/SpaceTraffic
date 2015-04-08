@@ -17,6 +17,7 @@ limitations under the License.
 using SpaceTraffic.Game.Geometry;
 using System.Collections.Generic;
 using SpaceTraffic.Entities.Goods;
+using NLog;
 
 namespace SpaceTraffic.Game
 {
@@ -26,6 +27,7 @@ namespace SpaceTraffic.Game
     /// </summary>
     public class Planet : CelestialObject, ILocation, IPlanet
     {
+
         /// <summary>
         /// Current change price of list goods. Value is percent.
         /// </summary>
@@ -76,8 +78,10 @@ namespace SpaceTraffic.Game
         /// Change price goods on planet.
         /// </summary>
         /// <param name="percent">Percent of change price goods</param>
+        /// <exception cref="DivideByZeroException">When percent &lt= 0</exception>
         public void ChangePriceGoods(int percent)
         { 
+
             foreach(IGoods goods in GoodsList) {
                 goods.Price = goods.Price / currentChangePrice * percent;
             }
