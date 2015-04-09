@@ -154,8 +154,8 @@ using SpaceTraffic.Entities;
         public CargoConfiguration()
             : base()
         {
-            HasKey(p => p.CargoId);
-            Property(p => p.Price).HasColumnType("int").IsRequired();
+            HasKey(p => p.Goods);
+            Property(p => p.PriceCargo).HasColumnType("int").IsRequired();
             Property(p => p.Type).HasMaxLength(50).HasColumnType("varchar").IsRequired();          ;            
             ToTable("Cargos");
         }
@@ -190,7 +190,7 @@ using SpaceTraffic.Entities;
         {
             HasKey(p => new { p.CargoId, p.SpaceShipId });
             Property(p => p.CargoCount).HasColumnType("int").IsRequired();            
-            HasRequired(a => a.Cargo).WithMany(a => a.SpaceShipsCargos).HasForeignKey(a => a.CargoId);
+            HasRequired(a => a.PriceCargo).WithMany(a => a.SpaceShipsCargos).HasForeignKey(a => a.CargoId);
             HasRequired(a => a.SpaceShip).WithMany(a => a.SpaceShipsCargos).HasForeignKey(a => a.SpaceShipId);
             ToTable("SpaceShipsCargos");
         }

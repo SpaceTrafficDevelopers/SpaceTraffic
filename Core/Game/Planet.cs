@@ -18,6 +18,7 @@ using SpaceTraffic.Game.Geometry;
 using System.Collections.Generic;
 using SpaceTraffic.Entities.Goods;
 using NLog;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Game
 {
@@ -25,7 +26,7 @@ namespace SpaceTraffic.Game
     /// <summary>
     /// This class represents planet.
     /// </summary>
-    public class Planet : CelestialObject, ILocation, IPlanet
+    public class Planet : CelestialObject, IPlanet
     {
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace SpaceTraffic.Game
         /// <summary>
         /// List of goods on planet.
         /// </summary>
-        private List<IGoods> GoodsList { get; set; } 
+        public List<PlanetGoods> GoodsPlanetList { get; set; } 
 
         public string Location
         {
@@ -82,8 +83,8 @@ namespace SpaceTraffic.Game
         public void ChangePriceGoods(int percent)
         { 
 
-            foreach(IGoods goods in GoodsList) {
-                goods.Price = goods.Price / currentChangePrice * percent;
+            foreach(PlanetGoods goods in GoodsPlanetList) {
+                goods.Goods.Price = goods.Goods.Price / currentChangePrice * percent;
             }
             currentChangePrice = percent;
         }
