@@ -24,7 +24,6 @@ namespace SpaceTraffic.Dao
 {
     public class CargoDAO : AbstractDAO, ICargoDAO
     {
-        /*
         public List<Cargo> GetCargos()
         {
             using (var contextDB = CreateContext())
@@ -37,7 +36,7 @@ namespace SpaceTraffic.Dao
         {
             using (var contextDB = CreateContext())
             {
-                return contextDB.Cargos.FirstOrDefault(x => x.Goods.Equals(CargoId));
+                return contextDB.Cargos.FirstOrDefault(x => x.CargoId.Equals(CargoId));
             }
         }
 
@@ -77,7 +76,7 @@ namespace SpaceTraffic.Dao
             {
                 try
                 {
-                    var CargoTab = contextDB.Cargos.FirstOrDefault(x => x.Goods.Equals(CargoId));
+                    var CargoTab = contextDB.Cargos.FirstOrDefault(x => x.CargoId.Equals(CargoId));
                     // remove Cargo to context
                     contextDB.Cargos.Remove(CargoTab);
                     // save context to database
@@ -97,10 +96,10 @@ namespace SpaceTraffic.Dao
             {
                 try
                 {
-                    var CargoTab = contextDB.Cargos.FirstOrDefault(x => x.Goods.Equals(Cargo.Goods));     
-                    CargoTab.Goods = Cargo.Goods;
+                    var CargoTab = contextDB.Cargos.FirstOrDefault(x => x.CargoId.Equals(Cargo.CargoId));     
+                    CargoTab.CargoId = Cargo.CargoId;
                     CargoTab.Type = Cargo.Type;
-                    CargoTab.PriceCargo = Cargo.PriceCargo;                   
+                    CargoTab.Price = Cargo.Price;                   
                     // save context to database
                     contextDB.SaveChanges();
                     return true;
@@ -114,6 +113,6 @@ namespace SpaceTraffic.Dao
         }
 
 
-      */
+      
     }
 }

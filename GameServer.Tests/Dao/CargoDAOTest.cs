@@ -100,7 +100,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             if (cargo != null)
             {
                 CargoDAO cargoDao = new CargoDAO();
-                cargoDao.RemoveCargoById(cargo.Goods);
+                cargoDao.RemoveCargoById(cargo.CargoId);
                 cargoDao.RemoveCargoById(oldId);
             }
         }
@@ -124,9 +124,9 @@ namespace SpaceTraffic.GameServerTests.Dao
             CargoDAO target = new CargoDAO();
             cargo = CreateCargo();
             target.InsertCargo(cargo);
-            Cargo newCargo = target.GetCargoById(cargo.Goods);
-            Assert.IsTrue(newCargo.Goods == cargo.Goods && newCargo.Type == cargo.Type &&
-                cargo.PriceCargo == cargo.PriceCargo);
+            Cargo newCargo = target.GetCargoById(cargo.CargoId);
+            Assert.IsTrue(newCargo.CargoId == cargo.CargoId && newCargo.Type == cargo.Type &&
+                cargo.Price == cargo.Price);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             CargoDAO target = new CargoDAO();
             cargo = CreateCargo();
             target.InsertCargo(cargo);
-            oldId = cargo.Goods;
+            oldId = cargo.CargoId;
             cargo.Type = "newType";
             target.InsertCargo(cargo);
             List<Cargo> cargos = target.GetCargos();
@@ -155,7 +155,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             CargoDAO target = new CargoDAO();
             cargo = CreateCargo();
             target.InsertCargo(cargo);
-            oldId = cargo.Goods;
+            oldId = cargo.CargoId;
             string type = RandomString(6);
             cargo.Type = type;
             target.InsertCargo(cargo);
@@ -184,7 +184,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             CargoDAO target = new CargoDAO();
             cargo = CreateCargo();
             target.InsertCargo(cargo);            
-            bool remove = target.RemoveCargoById(cargo.Goods);
+            bool remove = target.RemoveCargoById(cargo.CargoId);
             Assert.IsTrue(remove);
             cargo = null;
         }
@@ -198,19 +198,19 @@ namespace SpaceTraffic.GameServerTests.Dao
             CargoDAO target = new CargoDAO();
             cargo = CreateCargo();
             target.InsertCargo(cargo);
-            cargo.PriceCargo = 500;
+            cargo.Price = 500;
             string type = RandomString(6);
             cargo.Type = type;
             target.UpdateCargoById(cargo);
-            Cargo newCargo = target.GetCargoById(cargo.Goods);
-            Assert.IsTrue(newCargo.Goods == cargo.Goods && newCargo.Type == type &&
-                cargo.PriceCargo == 500);
+            Cargo newCargo = target.GetCargoById(cargo.CargoId);
+            Assert.IsTrue(newCargo.CargoId == cargo.CargoId && newCargo.Type == type &&
+                cargo.Price == 500);
         }
 
         private Cargo CreateCargo()
         {
             Cargo cargo = new Cargo();
-            cargo.PriceCargo = 200;
+            cargo.Price = 200;
             cargo.Type = "nářadí";
             return cargo;
         }

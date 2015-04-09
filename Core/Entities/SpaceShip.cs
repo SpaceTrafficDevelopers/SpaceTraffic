@@ -51,9 +51,9 @@ namespace SpaceTraffic.Entities
 
         public int CurrentFuelTank { get; set; }
 
-        //public virtual ICollection<SpaceShipCargo> SpaceShipsCargos { get; set; }
+        public virtual ICollection<SpaceShipCargo> SpaceShipsCargos { get; set; }  
+  
 
-        public List<SpaceShipCargo> SpaceShipsCargo { get; set; } 
 
 
     }

@@ -118,8 +118,8 @@ namespace SpaceTraffic.GameServerTests.Dao
         public void ClenUp()
         {
             CargoDAO cargoDao = new CargoDAO();
-            cargoDao.RemoveCargoById(cargo1.Goods);
-            cargoDao.RemoveCargoById(cargo2.Goods);
+            cargoDao.RemoveCargoById(cargo1.CargoId);
+            cargoDao.RemoveCargoById(cargo2.CargoId);
 
             BaseDAO bas = new BaseDAO();
             bas.RemoveBaseById(newBase.BaseId);
@@ -149,7 +149,7 @@ namespace SpaceTraffic.GameServerTests.Dao
         {
             SpaceShipCargoDAO target = new SpaceShipCargoDAO();
             SpaceShipCargo spaceShipCargo = new SpaceShipCargo();          
-            spaceShipCargo.CargoId = cargo1.Goods;
+            spaceShipCargo.CargoId = cargo1.CargoId;
             spaceShipCargo.CargoCount = 3;
             spaceShipCargo.SpaceShipId = ship.SpaceShipId;
             bool insert = target.InsertSpaceShipCargo(spaceShipCargo);
@@ -164,11 +164,11 @@ namespace SpaceTraffic.GameServerTests.Dao
         {
             SpaceShipCargoDAO target = new SpaceShipCargoDAO();
             SpaceShipCargo spaceShipCargo = new SpaceShipCargo();           
-            spaceShipCargo.CargoId = cargo1.Goods;
+            spaceShipCargo.CargoId = cargo1.CargoId;
             spaceShipCargo.CargoCount = 3;
             spaceShipCargo.SpaceShipId = ship.SpaceShipId;
             bool insert = target.InsertSpaceShipCargo(spaceShipCargo);
-            bool actual = target.RemoveSpaceShipCargoById(ship.SpaceShipId, cargo1.Goods);
+            bool actual = target.RemoveSpaceShipCargoById(ship.SpaceShipId, cargo1.CargoId);
             Assert.IsTrue(actual);
 
             SpaceShipCargoDAO cargo = new SpaceShipCargoDAO();
@@ -184,11 +184,11 @@ namespace SpaceTraffic.GameServerTests.Dao
         {
             SpaceShipCargoDAO target = new SpaceShipCargoDAO();
             SpaceShipCargo spaceShipCargo = new SpaceShipCargo();           
-            spaceShipCargo.CargoId = cargo1.Goods;
+            spaceShipCargo.CargoId = cargo1.CargoId;
             spaceShipCargo.CargoCount = 3;
             spaceShipCargo.SpaceShipId = ship.SpaceShipId;
             bool insert = target.InsertSpaceShipCargo(spaceShipCargo);
-            spaceShipCargo.CargoId = cargo2.Goods;
+            spaceShipCargo.CargoId = cargo2.CargoId;
             target.InsertSpaceShipCargo(spaceShipCargo);
             spaceShipCargo.CargoCount = 5;
 
@@ -208,11 +208,11 @@ namespace SpaceTraffic.GameServerTests.Dao
         {
             SpaceShipCargoDAO target = new SpaceShipCargoDAO();
             SpaceShipCargo spaceShipCargo = new SpaceShipCargo();
-            spaceShipCargo.CargoId = cargo1.Goods;
+            spaceShipCargo.CargoId = cargo1.CargoId;
             spaceShipCargo.CargoCount = 3;
             spaceShipCargo.SpaceShipId = ship.SpaceShipId;
             bool insert = target.InsertSpaceShipCargo(spaceShipCargo);
-            spaceShipCargo.CargoId = cargo2.Goods;
+            spaceShipCargo.CargoId = cargo2.CargoId;
             target.InsertSpaceShipCargo(spaceShipCargo);
 
             List<SpaceShipCargo> cargos = target.GetSpaceShipCargoBySpaceShipId(ship.SpaceShipId);
@@ -222,7 +222,7 @@ namespace SpaceTraffic.GameServerTests.Dao
         private Cargo CreateCargo()
         {
             Cargo cargo = new Cargo();
-            cargo.PriceCargo = 200;
+            cargo.Price = 200;
             cargo.Type = "nářadí";
             return cargo;
         }
