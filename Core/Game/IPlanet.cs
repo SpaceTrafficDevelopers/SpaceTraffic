@@ -1,4 +1,6 @@
-﻿/**
+﻿using SpaceTraffic.Entities;
+using SpaceTraffic.Entities.Goods;
+/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,6 +25,7 @@ namespace SpaceTraffic.Game
 {
     interface IPlanet
     {
+        List<PlanetGoods> PlanetGoodsList { get; set; } 
         void ChangePriceGoods(int percent);
     }
 }

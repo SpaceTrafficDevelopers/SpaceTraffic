@@ -97,6 +97,7 @@
     <Compile Include="GameServer\EventQueue.cs" />
     <Compile Include="GameServer\GameManager.cs" />
     <Compile Include="GameServer\ScriptManager.cs" />
+    <Compile Include="GameServer\TrafficManager.cs" />
     <Compile Include="GameServer\WorldManager.cs" />
     <Compile Include="Game\Actions\HelloWorld.cs" />
     <Compile Include="Game\Actions\Ships\ShipBuy.cs" />

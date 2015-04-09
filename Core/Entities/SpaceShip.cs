@@ -45,15 +45,15 @@ namespace SpaceTraffic.Entities
 
         public int DockedAtBaseId { get; set; }
 
-        public virtual  Base Base { get; set; }        
+        public virtual Base Base { get; set; }
 
         public int FuelTank { get; set; }
 
         public int CurrentFuelTank { get; set; }
 
-        public virtual ICollection<SpaceShipCargo> SpaceShipsCargos { get; set; }  
-  
+        public virtual ICollection<SpaceShipCargo> SpaceShipsCargos { get; set; }
 
+        //public List<SpaceShipCargo> SpaceShipsCargo { get; set; } 
 
 
     }

@@ -25,7 +25,7 @@ namespace SpaceTraffic.Entities
     {
         public int SpaceShipId { get; set; }
 
-        public virtual SpaceShip SpaceShip { get; set; } 
+        public virtual SpaceShip SpaceShip { get; set; }
 
         public int CargoId { get; set; }
 
@@ -33,8 +33,10 @@ namespace SpaceTraffic.Entities
 
         public int CargoCount { get; set; }
 
-       
 
-          
+
+        //public List<Cargo> Cargos { get; set; }
+
+        //public double PriceCargo { get; set; }
     }
 }
