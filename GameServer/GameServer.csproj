@@ -89,6 +89,7 @@
     <Compile Include="Engine\GameTime.cs" />
     <Compile Include="Engine\IGameEvent.cs" />
     <Compile Include="Engine\IGameSimulation.cs" />
+    <Compile Include="Engine\IGoodsManager.cs" />
     <Compile Include="Engine\IRunnableScript.cs" />
     <Compile Include="Engine\IScriptManager.cs" />
     <Compile Include="Engine\IGameManager.cs" />
@@ -97,7 +98,7 @@
     <Compile Include="GameServer\EventQueue.cs" />
     <Compile Include="GameServer\GameManager.cs" />
     <Compile Include="GameServer\ScriptManager.cs" />
-    <Compile Include="GameServer\TrafficManager.cs" />
+    <Compile Include="GameServer\GoodsManager.cs" />
     <Compile Include="GameServer\WorldManager.cs" />
     <Compile Include="Game\Actions\HelloWorld.cs" />
     <Compile Include="Game\Actions\Ships\ShipBuy.cs" />

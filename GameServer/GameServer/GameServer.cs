@@ -47,6 +47,7 @@ namespace SpaceTraffic.GameServer
         private ScriptManager scriptManager;
         private WorldManager worldManager;
         private GameManager gameManager;
+        private GoodsManager goodsManager;
         public volatile bool run = false;
 
         public volatile GameTime currentGameTime;
@@ -133,11 +134,14 @@ namespace SpaceTraffic.GameServer
             this.worldManager = new WorldManager();
             GalaxyMap galaxyMap = this.assetManager.LoadGalaxyMap(galaxyMapName);
             this.worldManager.Map = galaxyMap;
-
+            
 
             //Prozatimní načítání zboží z xml.
             IList<IGoods> list = this.assetManager.LoadGoods(goodsFileName);
 
+            //Prozatimní generování zboží na všech planetách v galaxii
+            this.goodsManager = new GoodsManager();
+            this.goodsManager.GenerateGoodsOverGalaxyMap(list, this.worldManager.Map);
 
             // Inicializace herního světa.
             this.gameManager = new GameManager(this);
