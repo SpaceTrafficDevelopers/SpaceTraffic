@@ -1,4 +1,6 @@
-﻿/**
+﻿using SpaceTraffic.Engine;
+using SpaceTraffic.Entities;
+/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +23,92 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
-    class ShipLoadCargo
+    class ShipLoadCargo : IGameAction
     {
+        private string result = "Zboží se nakládá.";
+
+		
+		public object Result
+		{
+			get { return new { result = this.result }; }
+		}
+
+        void IGameAction.Perform(IGameServer gameServer)
+        {
+            getArgumentsFromActionArgs(gameServer);
+            Cargo cargo = gameServer.Persistence.GetCargoDAO().GetCargoById(CargoID);
+            SpaceShip spaceship = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SpaceShipID);
+            List<SpaceShip> spaceships = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipsByPlayer(PlayerId);
+            //Base basePlanet = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceship.DockedAtBaseId);
+            String location = gameServer.World.Map[StarSystemName].Planets[PlanetName].Location;
+
+            if (String.Compare(location, StarSystemName + "\\" + PlanetName) != 0) { 
+                //TODO: zboží není na stejný planetě jako 
+            }
+            if (!spaceships.Contains(spaceship))
+            {
+                //TODO: loď nepatří hráči, nemůže na ni nakládat
+                // result = String.Format("Loď s ID {0} Vám nepatří", SpaceShipID);
+            }
+            else { 
+                SpaceShipCargo spaceshipcargo = new SpaceShipCargo() {
+                    Cargo = cargo,
+                    CargoId = cargo.CargoId,
+                    CargoCount = Count,
+                    SpaceShip = spaceship,
+                    SpaceShipId = spaceship.SpaceShipId
+                };
+                gameServer.Persistence.GetSpaceShipCargoDAO().InsertSpaceShipCargo(spaceshipcargo);
+            }
+        }
+
+        /// <summary>
+        /// Get all arguments to properties from action args.
+        /// </summary>
+        /// <param name="gameServer">Instance of game server</param>
+        void getArgumentsFromActionArgs(IGameServer gameServer) {
+            StarSystemName = ActionArgs[0].ToString();
+            PlanetName = ActionArgs[1].ToString();
+            SpaceShipID = Convert.ToInt32(ActionArgs[2]);
+            CargoID = Convert.ToInt32(ActionArgs[3]);
+            Count = Convert.ToInt32(ActionArgs[4]);
+        }
+
+        public GameActionState State
+        {
+            get;
+            set;
+        }
+
+        public int PlayerId
+        {
+            get;
+            set;
+        }
+
+        public int ActionCode
+        {
+            get;
+            set;
+        }
+
+        /*
+         * 0: starSystemName
+         * 1: planetName
+         * 2: spaceshipID
+         * 3: cargoID
+         * 4: count
+         */
+        public object[] ActionArgs { get; set; }
+
+        private String StarSystemName { get; set; }
+
+        private String PlanetName { get; set; }
+
+        private int SpaceShipID { get; set; }
+
+        private int CargoID { get; set; }
+
+        private int Count { get; set; }
     }
 }
