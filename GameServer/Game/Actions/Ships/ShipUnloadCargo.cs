@@ -92,7 +92,7 @@ namespace SpaceTraffic.Game.Actions
             if (ssc == null)
             {
                 //TODO: zbozi neni na lodi
-                result = String.Format("Loď {0} nema jako naklad {1}.", spaceShip.SpaceShipName, cargo.);
+                result = String.Format("Loď {0} nema mezi nakladem {1}.", spaceShip.SpaceShipName, cargo.Type);
                 return;
             }
 
