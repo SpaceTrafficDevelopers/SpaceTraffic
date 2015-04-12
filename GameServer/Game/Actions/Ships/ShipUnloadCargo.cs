@@ -26,7 +26,7 @@ namespace SpaceTraffic.Game.Actions
 {
     public class ShipUnloadCargo : IGameAction
     {
-        private string result = "Náklad byl složen.";
+        private string result = "Náklad se vykládá.";
 
         public GameActionState State
         {
@@ -101,7 +101,7 @@ namespace SpaceTraffic.Game.Actions
             gameServer.Persistence.GetSpaceShipCargoDAO().RemoveSpaceShipCargoById(spaceShip.SpaceShipId, cargo.CargoId);
 
             //TODO: vlozit na planetu, nebo obchodníkovy
-            
+            result = String.Format("Náklad {0} byl vyložen.", cargo.Type);
         }
 
         private void getArgumentsFromActionArgs()

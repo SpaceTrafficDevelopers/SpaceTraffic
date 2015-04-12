@@ -63,7 +63,8 @@ namespace SpaceTraffic.Game.Actions
 				SpaceShipModel = this.ActionArgs.ElementAt(5).ToString(),
 				SpaceShipName = this.ActionArgs.ElementAt(6).ToString(),
 				UserCode = "",
-				TimeOfArrival = ""
+				TimeOfArrival = "",
+                CargoSpace = 100    //TODO: je potřeba přidat ještě maximální množství nákladu lodě 
 			};
 			return spaceShip;
 		}

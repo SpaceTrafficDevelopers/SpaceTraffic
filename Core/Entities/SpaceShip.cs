@@ -51,6 +51,11 @@ namespace SpaceTraffic.Entities
 
         public int CurrentFuelTank { get; set; }
 
+        /// <summary>
+        /// Maximum space for cargo.
+        /// </summary>
+        public int CargoSpace { get; set; }
+
         public virtual ICollection<SpaceShipCargo> SpaceShipsCargos { get; set; }
 
         //public List<SpaceShipCargo> SpaceShipsCargo { get; set; } 

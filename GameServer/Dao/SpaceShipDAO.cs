@@ -122,6 +122,7 @@ namespace SpaceTraffic.Dao
 				spaceShipTab.FuelTank = spaceShip.FuelTank;
 				spaceShipTab.CurrentFuelTank = spaceShip.CurrentFuelTank;
 				spaceShipTab.PlayerId = spaceShip.PlayerId;
+                spaceShipTab.CargoSpace = spaceShip.CargoSpace;
 				// save context to database
 				contextDB.SaveChanges();
 				return true;

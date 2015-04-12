@@ -23,7 +23,7 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
-    class ShipLoadCargo : IGameAction
+    public class ShipLoadCargo : IGameAction
     {
         private string result = "Náklad se nakládá.";
 
@@ -56,7 +56,11 @@ namespace SpaceTraffic.Game.Actions
 
             SpaceShipCargo spaceshipcargo = getSpaceshipCargoFromArguments(gameServer, cargo, spaceship);
 
-            //TODO: Kontrola místa na lodi
+            if(!checkSpaceShipCargos(gameServer,spaceship)){
+                
+                result = String.Format("Loď {0} nemá dostatek místa na naložení nákladu.", spaceship.SpaceShipName);
+                return;
+            }
 
             gameServer.Persistence.GetSpaceShipCargoDAO().InsertSpaceShipCargo(spaceshipcargo);
             result = String.Format("Náklad byl úspěšně naložen na loď s {0}.", spaceship.SpaceShipName);
@@ -72,7 +76,7 @@ namespace SpaceTraffic.Game.Actions
             PlanetName = ActionArgs[1].ToString();
             SpaceShipID = Convert.ToInt32(ActionArgs[2]);
             CargoID = Convert.ToInt32(ActionArgs[3]);
-            Count = Convert.ToInt32(ActionArgs[4]);
+            CargoCount = Convert.ToInt32(ActionArgs[4]);
         }
 
         /// <summary>
@@ -88,11 +92,34 @@ namespace SpaceTraffic.Game.Actions
             {
                 Cargo = cargo,
                 CargoId = cargo.CargoId,
-                CargoCount = Count,
+                CargoCount = CargoCount,
                 SpaceShip = spaceship,
                 SpaceShipId = spaceship.SpaceShipId
             };
             return spaceshipcargo;
+        }
+
+        /// <summary>
+        /// Check space for cargo in space ship.
+        /// </summary>
+        /// <param name="gameServer">game server</param>
+        /// <param name="spaceShip">space ship</param>
+        /// <returns>true when ship has space for cargo, otherwise fale</returns>
+        private bool checkSpaceShipCargos(IGameServer gameServer, SpaceShip spaceShip)
+        {
+            List<SpaceShipCargo> cargoList = gameServer.Persistence.GetSpaceShipCargoDAO().GetSpaceShipCargoBySpaceShipId(spaceShip.SpaceShipId);
+
+            int count = 0;
+
+            foreach (SpaceShipCargo ssc in cargoList)
+            {
+                count += ssc.CargoCount;
+            }
+
+            if ((count + this.CargoCount) <= spaceShip.CargoSpace)
+                return true;
+            else
+                return false;
         }
 
         public GameActionState State
@@ -130,6 +157,6 @@ namespace SpaceTraffic.Game.Actions
 
         private int CargoID { get; set; }
 
-        private int Count { get; set; }
+        private int CargoCount { get; set; }
     }
 }
