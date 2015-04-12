@@ -26,7 +26,7 @@ namespace SpaceTraffic.Game.Actions
 {
     public class ShipUnloadCargo : IGameAction
     {
-        private string result = "Nákup je ve vyřizování.";
+        private string result = "Náklad byl složen.";
 
         public GameActionState State
         {
@@ -75,31 +75,32 @@ namespace SpaceTraffic.Game.Actions
             getArgumentsFromActionArgs();
 
             Cargo cargo = gameServer.Persistence.GetCargoDAO().GetCargoById(CargoID);
-            SpaceShip spaceship = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SpaceShipID);
+            SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SpaceShipID);
 
-            Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceship.DockedAtBaseId);
+            Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceShip.DockedAtBaseId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName]; 
             
             if (!dockedBase.Planet.Equals(planet))
             {
                 //TODO: lod neni zadokovana na planete kde se provadi akce
+                result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
                 return;
             }
 
-            SpaceShipCargo ssc = getSpaceShipCargoFromShip(gameServer, spaceship, cargo);
+            SpaceShipCargo ssc = getSpaceShipCargoFromShip(gameServer, spaceShip, cargo);
 
             if (ssc == null)
             {
                 //TODO: zbozi neni na lodi
+                result = String.Format("Loď {0} nema jako naklad {1}.", spaceShip.SpaceShipName, cargo.);
                 return;
             }
 
+            //TODO: kontola jestli je misto na planete
 
-            //TODO: kontola jeslti je misto na planete
+            gameServer.Persistence.GetSpaceShipCargoDAO().RemoveSpaceShipCargoById(spaceShip.SpaceShipId, cargo.CargoId);
 
-            gameServer.Persistence.GetSpaceShipCargoDAO().RemoveSpaceShipCargoById(spaceship.SpaceShipId, cargo.CargoId);
-
-            //TODO: vlozit na planetu
+            //TODO: vlozit na planetu, nebo obchodníkovy
             
         }
 
