@@ -71,15 +71,15 @@ namespace SpaceTraffic.Game
         #endregion
 
         /// <summary>
-        /// Chenge goods price for only one item
+        /// Change price for only one goods
         /// </summary>
         /// <param name="percent">Percent od change price goods</param>
         /// <param name="goods">Entity of goods</param>
         /// <exception cref="DivideByZeroException">When percent &lt= 0</exception>
         public void ChangeOneGoodsPrice(int percent, PlanetGoods goods)
         {
+            goods.Goods.Price = goods.Goods.Price / goods.CurrentChangedPrice * percent;
             goods.CurrentChangedPrice = goods.CurrentChangedPrice * percent;
-            goods.Goods.Price = goods.Goods.Price / goods.CurrentChangedPrice;
         }
 
         /// <summary>

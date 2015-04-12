@@ -25,7 +25,8 @@ namespace SpaceTraffic.Game
 {
     interface IPlanet
     {
-        List<PlanetGoods> PlanetGoodsList { get; set; } 
+        List<PlanetGoods> PlanetGoodsList { get; set; }
+        void ChangeOneGoodsPrice(int percent, PlanetGoods goods);
         void ChangePriceGoods(int percent);
     }
 }
