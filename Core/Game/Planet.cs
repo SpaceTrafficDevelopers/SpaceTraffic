@@ -30,11 +30,6 @@ namespace SpaceTraffic.Game
     {
 
         /// <summary>
-        /// Current change price of list goods. Value is percent.
-        /// </summary>
-        private int currentChangePrice = 100;
-
-        /// <summary>
         /// List of goods on planet.
         /// </summary>
         public List<PlanetGoods> PlanetGoodsList { get; set; } 

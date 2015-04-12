@@ -24,12 +24,18 @@ namespace SpaceTraffic.Entities
 {
     public class PlanetGoods
     {
+        /// <summary>
+        /// Representation of goods on planet
+        /// </summary>
         public IGoods Goods { get; set; }
 
+        /// <summary>
+        /// Count of goods on planet
+        /// </summary>
         public int Count { get; set; }
 
         /// <summary>
-        /// Percent of change goods price
+        /// Percent of change goods price on planet
         /// </summary>
         public int CurrentChangedPrice { get; set; }
     }
