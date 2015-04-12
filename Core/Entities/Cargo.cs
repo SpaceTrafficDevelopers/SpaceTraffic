@@ -1,4 +1,5 @@
-﻿/**
+﻿using SpaceTraffic.Entities.Goods;
+/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +34,7 @@ namespace SpaceTraffic.Entities
 
         public virtual ICollection<SpaceShipCargo> SpaceShipsCargos { get; set; }
 
-        public int PriceCargo { get; set; }
+        //public int PriceCargo { get; set; }
 
 
         //public IGoods Goods { get; set; }
