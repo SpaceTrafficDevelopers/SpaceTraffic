@@ -28,5 +28,9 @@ namespace SpaceTraffic.Entities
 
         public int Count { get; set; }
 
+        /// <summary>
+        /// Percent of change goods price
+        /// </summary>
+        public int CurrentChangedPrice { get; set; }
     }
 }

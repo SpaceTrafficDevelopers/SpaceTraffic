@@ -48,6 +48,8 @@ namespace SpaceTraffic.GameServer
                         planetGoods.Goods = goods;
                         planetGoods.Count = r.Next(1, 101); // generuje pocet zbozi na planete
 
+                        planetGoods.CurrentChangedPrice = 100;
+
                         planetGoodsList.Add(planetGoods);
                     }
                 }
