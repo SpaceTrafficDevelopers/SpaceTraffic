@@ -79,7 +79,7 @@ namespace SpaceTraffic.Game
         public void ChangeOneGoodsPrice(int percent, PlanetGoods goods)
         {
             goods.Goods.Price = goods.Goods.Price / goods.CurrentChangedPrice * percent;
-            goods.CurrentChangedPrice = goods.CurrentChangedPrice * percent;
+            goods.CurrentChangedPrice = percent;
         }
 
         /// <summary>
