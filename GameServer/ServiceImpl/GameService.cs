@@ -90,7 +90,6 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 				}
 				action.ActionArgs = actionArgs;
 				action.PlayerId = playerId;
-				action.State = GameActionState.PLANNED;
 				GameServer.CurrentInstance.Game.PerformAction(action);
 				return action.ActionCode;
 			} catch(System.IO.FileNotFoundException e){
