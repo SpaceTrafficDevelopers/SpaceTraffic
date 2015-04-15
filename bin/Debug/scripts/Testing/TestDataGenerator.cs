@@ -42,7 +42,7 @@ namespace SpaceTraffic.Scripts.Testing
             newPlayer.LastName = "User";
             newPlayer.PlayerName = "tester1";
             newPlayer.CorporationName = "STTeam";
-            newPlayer.Credit = 0;
+            newPlayer.Credit = 120000000;
             newPlayer.DateOfBirth = DateTime.Parse("01/01/2000 00:58:00");
             newPlayer.Email = "nobody@nowhere.local";
             newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
