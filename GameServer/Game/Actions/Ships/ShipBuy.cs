@@ -20,11 +20,14 @@ using System.Linq;
 using System.Text;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
+using NLog;
 
 namespace SpaceTraffic.Game.Actions
 {
 	public class ShipBuy : IGameAction
 	{
+		private Logger logger = LogManager.GetCurrentClassLogger();
+
 		private string result = "Nákup je ve vyřizování.";
 
 		
@@ -40,6 +43,8 @@ namespace SpaceTraffic.Game.Actions
 		{
 			SpaceShip ship = getSpaceShipFromArgs(gameServer);
 			gameServer.Persistence.GetSpaceShipDAO().InsertSpaceShip(ship);
+			int price = Convert.ToInt32(this.ActionArgs.ElementAt(7));
+			gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(this.PlayerId, price);
 			result = String.Format("Loď {0} zakoupena.", ship.SpaceShipName);
 		}
 
@@ -64,7 +69,7 @@ namespace SpaceTraffic.Game.Actions
 				SpaceShipName = this.ActionArgs.ElementAt(6).ToString(),
 				UserCode = "",
 				TimeOfArrival = "",
-                CargoSpace = 100    //TODO: je potřeba přidat ještě maximální množství nákladu lodě 
+				CargoSpace = 100    //TODO: je potřeba přidat ještě maximální množství nákladu lodě 
 			};
 			return spaceShip;
 		}

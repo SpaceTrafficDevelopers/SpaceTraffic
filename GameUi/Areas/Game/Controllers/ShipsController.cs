@@ -60,7 +60,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			ShipModel shipModel = getAllShips().Where(shipType => shipType.Model == model).First();
 			if (shipModel != null){			
 				if (GSClient.GameService.PlayerHasEnaughCredits(getCurrentPlayer().PlayerId, shipModel.Price)){
-					GSClient.GameService.PerformAction(getCurrentPlayer().PlayerId, "ShipBuy", getCurrentPlayer().PlayerId, "Solar System", 1, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model);
+					GSClient.GameService.PerformAction(getCurrentPlayer().PlayerId, "ShipBuy", getCurrentPlayer().PlayerId, "Solar System", 1, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price);
 				} else {
 					//TODO: flash Nemáš dostatek kreditů na koupi lodě ship.Model.
 				}
