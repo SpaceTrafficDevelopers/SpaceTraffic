@@ -37,5 +37,85 @@ namespace SpaceTraffic.Dao
                 return contextDB.Traders.FirstOrDefault(x => x.TraderId.Equals(traderId));
             }
         }
+
+        public List<Trader> GetTradersByBaseId(int baseId) {
+            using (var contextDB = CreateContext())
+            {
+                return (from x in contextDB.Traders
+                        where x.BaseId.Equals(baseId)
+                        select x).ToList<Trader>();
+            }
+        }
+
+        public bool InsertTrader(Trader trader) {
+            using (var contextDB = CreateContext())
+            {
+                try
+                {
+                    // add trader to context
+                    contextDB.Traders.Add(trader);
+                    // save context to database
+                    contextDB.SaveChanges();
+                    return true;
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    Exception raise = dbEx;
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            string message = string.Format("{0}:{1}",
+                                validationErrors.Entry.Entity.ToString(),
+                                validationError.ErrorMessage);
+                            // raise a new exception nesting
+                            // the current instance as InnerException
+                            raise = new InvalidOperationException(message, raise);
+                        }
+                    }
+                    throw raise;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool RemoveTraderById(int traderId) {
+            using (var contextDB = CreateContext())
+            {
+                try
+                {
+                    var traderTab = contextDB.Traders.FirstOrDefault(x => x.TraderId.Equals(traderId));
+                    // remove trader to context
+                    contextDB.Traders.Remove(traderTab);
+                    // save context to database
+                    contextDB.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool UpdateTraderById(Trader trader) {
+            using (var contextDB = CreateContext())
+                try
+                {
+                    var traderTab = contextDB.Traders.FirstOrDefault(x => x.TraderId.Equals(trader.TraderId));
+                    traderTab.BaseId = trader.BaseId;
+    
+                    // save context to database
+                    contextDB.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+        }
     }
 }

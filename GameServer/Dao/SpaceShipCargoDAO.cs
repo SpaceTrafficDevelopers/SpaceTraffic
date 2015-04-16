@@ -50,7 +50,24 @@ namespace SpaceTraffic.Dao
                 try
                 {
                     var spaceShipCargoTab = contextDB.SpaceShipsCargos.FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipCargo.SpaceShipId) && x.CargoId.Equals(spaceShipCargo.CargoId));
-                    spaceShipCargoTab.CargoCount += spaceShipCargo.CargoCount;
+                    spaceShipCargoTab.CargoCount = spaceShipCargo.CargoCount;
+                    contextDB.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool UpdateCargoPriceById(SpaceShipCargo spaceShipCargo) {
+            using (var contextDB = CreateContext())
+            {
+                try
+                {
+                    var spaceShipCargoTab = contextDB.SpaceShipsCargos.FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipCargo.SpaceShipId) && x.CargoId.Equals(spaceShipCargo.CargoId));
+                    spaceShipCargoTab.CargoPrice = spaceShipCargo.CargoPrice;
                     // save context to database
                     contextDB.SaveChanges();
                     return true;

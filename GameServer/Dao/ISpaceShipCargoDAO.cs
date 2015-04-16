@@ -43,6 +43,13 @@ namespace SpaceTraffic.Dao
         bool UpdateCargoCountById(SpaceShipCargo spaceShipCargo);
 
         /// <summary>
+        /// Update spaceship price by ID
+        /// </summary>
+        /// <param name="spaceShipCargo">Instance of pace ship cargo </param>
+        /// <returns>Result of updating</returns>
+        bool UpdateCargoPriceById(SpaceShipCargo spaceShipCargo);
+
+        /// <summary>
         /// Remove spaceShip with Cargo
         /// </summary>
         /// <param name="spaceShipId">SpaceShip id</param>

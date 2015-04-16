@@ -25,12 +25,40 @@ namespace SpaceTraffic.Dao
 {
     public interface ITraderCargoDAO
     {
+        /// <summary>
+        /// Insert trader cargo into table
+        /// </summary>
+        /// <param name="traderCargo">Instance of trader cargo</param>
+        /// <returns>Result of insert</returns>
         bool InsertTraderCargo(TraderCargo traderCargo);
 
+        /// <summary>
+        /// Update cargo count by trader cargo
+        /// </summary>
+        /// <param name="traderCargo">Instance of trader cargo</param>
+        /// <returns>Result of update</returns>
         bool UpdateCargoCountById(TraderCargo traderCargo);
 
+        /// <summary>
+        /// Update cargo price by trader cargo
+        /// </summary>
+        /// <param name="traderCargo">Instance of trader cargo</param>
+        /// <returns>Result of update</returns>
+        bool UpdateCargoPriceById(TraderCargo traderCargo);
+
+        /// <summary>
+        /// Remove trader cargo
+        /// </summary>
+        /// <param name="traderId">Trader ID</param>
+        /// <param name="cargoId">Cargo ID</param>
+        /// <returns></returns>
         bool RemoveTraderCargoById(int traderId, int cargoId);
 
+        /// <summary>
+        /// Get trader cargo list by trader ID
+        /// </summary>
+        /// <param name="traderId">trader ID</param>
+        /// <returns>List of trader cargos</returns>
         List<TraderCargo> GetTraderCargoByTraderId(int traderId);
     }
 }

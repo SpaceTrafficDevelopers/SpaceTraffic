@@ -24,8 +24,44 @@ namespace SpaceTraffic.Dao
 {
     public interface ITraderDAO
     {
+        /// <summary>
+        /// Get all traders
+        /// </summary>
+        /// <returns>List of traders</returns>
         List<Trader> GetTraders();
 
+        /// <summary>
+        /// Get instance of trader by ID
+        /// </summary>
+        /// <param name="traderId">trader ID</param>
+        /// <returns>Instance of trader</returns>
         Trader GetTraderById(int traderId);
+
+        /// <summary>
+        /// Get list of traders on one base
+        /// </summary>
+        /// <returns>List of traders</returns>
+        List<Trader> GetTradersByBaseId(int baseId);
+
+        /// <summary>
+        /// Insert trader into Traders
+        /// </summary>
+        /// <param name="trader">instance of trader</param>
+        /// <returns>Result of insert</returns>
+        bool InsertTrader(Trader trader);
+
+        /// <summary>
+        /// Remove trader from Traders by trader ID
+        /// </summary>
+        /// <param name="traderId">trader ID</param>
+        /// <returns>Result of remove</returns>
+        bool RemoveTraderById(int traderId);
+
+        /// <summary>
+        /// Update trader by Trader ID 
+        /// </summary>
+        /// <param name="trader">instance of trader</param>
+        /// <returns>Result of update</returns>
+        bool UpdateTraderById(Trader trader);
     }
 }
