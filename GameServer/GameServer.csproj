@@ -80,12 +80,16 @@
     <Compile Include="Dao\IBaseDAO.cs" />
     <Compile Include="Dao\ISpaceShipCargoDAO.cs" />
     <Compile Include="Dao\ISpaceShipDAO.cs" />
+    <Compile Include="Dao\ITraderCargoDAO.cs" />
+    <Compile Include="Dao\ITraderDAO.cs" />
     <Compile Include="Dao\MessageDAO.cs" />
     <Compile Include="Dao\IMessageDAO.cs" />
     <Compile Include="Dao\IPlayerDAO.cs" />
     <Compile Include="Dao\PlayerDAO.cs" />
     <Compile Include="Dao\SpaceShipCargoDAO.cs" />
     <Compile Include="Dao\SpaceShipDAO.cs" />
+    <Compile Include="Dao\TraderCargoDAO.cs" />
+    <Compile Include="Dao\TraderDAO.cs" />
     <Compile Include="Engine\GameTime.cs" />
     <Compile Include="Engine\IGameEvent.cs" />
     <Compile Include="Engine\IGameSimulation.cs" />

@@ -86,6 +86,10 @@
     <Compile Include="Entities\SpaceShipCargo.cs" />
     <Compile Include="Entities\PublicEntities\WormholeEndpointDestination.cs" />
     <Compile Include="Entities\SpaceShip.cs" />
+    <Compile Include="Entities\Trader.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Entities\TraderCargo.cs" />
     <Compile Include="Game\Base.cs" />
     <Compile Include="Game\CelestialObjectInfo.cs" />
     <Compile Include="Game\CelestialObject.cs" />

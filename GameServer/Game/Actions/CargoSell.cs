@@ -97,7 +97,8 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            player.Credit += (int)(cargo.Cargo.Price * Count);
+            // TODO: pocitani ceny
+            //player.Credit += (int)(cargo.Cargo.Price * Count);
 
             if (gameServer.Persistence.GetPlayerDAO().UpdatePlayerById(player))
             {
