@@ -23,7 +23,7 @@ using System.Text;
 
 namespace SpaceTraffic.GameServerTests.Dao
 {
-
+    //TODO: change test, Cargo was changed
 
 
     /// <summary>
@@ -125,8 +125,8 @@ namespace SpaceTraffic.GameServerTests.Dao
             cargo = CreateCargo();
             target.InsertCargo(cargo);
             Cargo newCargo = target.GetCargoById(cargo.CargoId);
-            Assert.IsTrue(newCargo.CargoId == cargo.CargoId && newCargo.Type == cargo.Type &&
-                cargo.Price == cargo.Price);
+            Assert.IsTrue(newCargo.CargoId == cargo.CargoId && newCargo.Type == cargo.Type/* &&
+                cargo.Price == cargo.Price*/);
         }
 
         /// <summary>
@@ -198,19 +198,19 @@ namespace SpaceTraffic.GameServerTests.Dao
             CargoDAO target = new CargoDAO();
             cargo = CreateCargo();
             target.InsertCargo(cargo);
-            cargo.Price = 500;
+            //cargo.Price = 500;
             string type = RandomString(6);
             cargo.Type = type;
             target.UpdateCargoById(cargo);
             Cargo newCargo = target.GetCargoById(cargo.CargoId);
-            Assert.IsTrue(newCargo.CargoId == cargo.CargoId && newCargo.Type == type &&
-                cargo.Price == 500);
+            Assert.IsTrue(newCargo.CargoId == cargo.CargoId && newCargo.Type == type /*&&
+                cargo.Price == 500*/);
         }
 
         private Cargo CreateCargo()
         {
             Cargo cargo = new Cargo();
-            cargo.Price = 200;
+           // cargo.Price = 200;
             cargo.Type = "nářadí";
             return cargo;
         }

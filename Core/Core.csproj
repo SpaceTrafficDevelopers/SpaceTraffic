@@ -82,13 +82,13 @@
     <Compile Include="Entities\Goods\ShipComponents.cs" />
     <Compile Include="Entities\Goods\Technics.cs" />
     <Compile Include="Entities\Goods\Textile.cs" />
+    <Compile Include="Entities\ICargoLoad.cs" />
+    <Compile Include="Entities\ICargoLoadEntity.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\SpaceShipCargo.cs" />
     <Compile Include="Entities\PublicEntities\WormholeEndpointDestination.cs" />
     <Compile Include="Entities\SpaceShip.cs" />
-    <Compile Include="Entities\Trader.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="Entities\Trader.cs" />
     <Compile Include="Entities\TraderCargo.cs" />
     <Compile Include="Game\Base.cs" />
     <Compile Include="Game\CelestialObjectInfo.cs" />

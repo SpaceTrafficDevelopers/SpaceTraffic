@@ -101,5 +101,45 @@ namespace SpaceTraffic.Dao
                 return contextDB.TraderCargos.Where(x => x.TraderId.Equals(traderId)).ToList();
             }
         }
+
+        public bool InsertCargo(ICargoLoadEntity cargoLoadEntity)
+        {
+            TraderCargo tc = cargoLoadEntity as TraderCargo;
+
+            if (tc == null)
+                return false;
+
+            return this.InsertTraderCargo(tc);
+        }
+
+        public bool UpdateCargoPriceById(ICargoLoadEntity cargoLoadEntity)
+        {
+            TraderCargo tc = cargoLoadEntity as TraderCargo;
+
+            if (tc == null)
+                return false;
+
+            return this.UpdateCargoPriceById(tc);
+        }
+
+        public bool UpdateCargoCountById(ICargoLoadEntity cargoLoadEntity)
+        {
+            TraderCargo tc = cargoLoadEntity as TraderCargo;
+
+            if (tc == null)
+                return false;
+
+            return this.UpdateCargoCountById(tc);
+        }
+
+        public bool RemoveCargo(ICargoLoadEntity cargoLoadEntity)
+        {
+            TraderCargo tc = cargoLoadEntity as TraderCargo;
+
+            if (tc == null)
+                return false;
+
+            return this.RemoveTraderCargoById(tc.TraderId, tc.CargoId);
+        }
     }
 }

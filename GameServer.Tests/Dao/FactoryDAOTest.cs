@@ -22,7 +22,7 @@ using System.Collections.Generic;
 
 namespace SpaceTraffic.GameServerTests.Dao
 {
-    
+    //TODO: change test, cargo was changed
     
     /// <summary>
     ///This is a test class for FactoryDAOTest and is intended
@@ -89,7 +89,7 @@ namespace SpaceTraffic.GameServerTests.Dao
         public void TestInitialize()
         {
             cargo = new Cargo();
-            cargo.Price = 200;
+            //cargo.Price = 200;
             cargo.Type = "nářadí";
             CargoDAO dao = new CargoDAO();
             dao.InsertCargo(cargo);

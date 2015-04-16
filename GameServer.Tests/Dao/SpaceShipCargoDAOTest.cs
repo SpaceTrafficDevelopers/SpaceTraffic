@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 namespace SpaceTraffic.GameServerTests.Dao
 {
-    
+    //TODO: change test, cargo was changed
     
     /// <summary>
     ///This is a test class for SpaceShipCargoDAOTest and is intended
@@ -222,7 +222,7 @@ namespace SpaceTraffic.GameServerTests.Dao
         private Cargo CreateCargo()
         {
             Cargo cargo = new Cargo();
-            cargo.Price = 200;
+            //cargo.Price = 200;
             cargo.Type = "nářadí";
             return cargo;
         }
