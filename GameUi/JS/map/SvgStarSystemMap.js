@@ -180,13 +180,22 @@ var SvgStarSystemMap = {
 			this.$svgOverlayLayer.removeClass('fade');
 		}).bind(this));
     },
-    
+
+    //updating star object list (changed for cargo controller tests)
     updateObjectList: function() {
     	var buffer = "<ul>";
 		for (var i = 0; i < this.svgItems.length; i++) {
-	    	buffer += '<li>' + this.svgItems[i].getName() +'</li>\n';
+		    buffer += '<li>' + this.svgItems[i].getName() + '</li>\n';
 	    };
-	    buffer += "</lu>";
+		buffer += "</ul>";
+
+        //tohle je potøeba mìnit, parametry se predavaji jako v LoadCargo
+		buffer += '<ul>'+
+            '<li><a href="/Game/Cargo/BuyCargo">BuyCargo</a></li>' +
+            '<li><a href="/Game/Cargo/LoadCargo?cargoId=1&objectId=2">LoadCargo</a></li>' +
+            '<li><a href="/Game/Cargo/UnloadCargo">UnloadCargo</a></li>' +
+            '<li><a href="/Game/Cargo/SellCargo">SellCargo</a></li>' +
+            '</ul>';
 	    $("#contextPanel").html(buffer);
 	    buffer = null;
     }
