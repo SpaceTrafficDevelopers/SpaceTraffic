@@ -75,6 +75,7 @@
     <Compile Include="Dao\BaseDAO.cs" />
     <Compile Include="Dao\CargoDAO.cs" />
     <Compile Include="Dao\ICargoDAO.cs" />
+    <Compile Include="Dao\ICargoLoadDao.cs" />
     <Compile Include="Dao\IFactoryDAO.cs" />
     <Compile Include="Dao\FactoryDAO.cs" />
     <Compile Include="Dao\IBaseDAO.cs" />

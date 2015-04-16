@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SpaceTraffic.Dao;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Engine
 {
@@ -41,5 +42,12 @@ namespace SpaceTraffic.Engine
         ISpaceShipCargoDAO GetSpaceShipCargoDAO();
 
         IBaseDAO GetBaseDAO();
+        
+        /// <summary>
+        /// Return ICargoLoadDao by cargoLoad.
+        /// </summary>
+        /// <param name="cargoLoad">instance ICargoLoad</param>
+        /// <returns>ICargoLoadDao</returns>
+        ICargoLoadDao GetCargoLoadDao(ICargoLoad cargoLoad);
     }
 }

@@ -102,5 +102,12 @@ namespace SpaceTraffic.GameServer
         {
             return new BaseDAO();
         }
+
+
+        public ICargoLoadDao GetCargoLoadDao(ICargoLoad cargoLoad)
+        {
+            Type classGoodsType = Type.GetType("SpaceTraffic.Dao." + cargoLoad.CargoLoadDaoName);
+            return (ICargoLoadDao) Activator.CreateInstance(classGoodsType);
+        }
     }
 }

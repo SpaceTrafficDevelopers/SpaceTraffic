@@ -23,7 +23,7 @@ using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Dao
 {
-    public interface ITraderCargoDAO
+    public interface ITraderCargoDAO : ICargoLoadDao
     {
         /// <summary>
         /// Insert trader cargo into table

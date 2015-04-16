@@ -22,7 +22,7 @@ using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Dao
 {
-    public interface ISpaceShipCargoDAO
+    public interface ISpaceShipCargoDAO : ICargoLoadDao
     {
         /// <summary>
         /// Insert spaceShip with Cargo

@@ -14,21 +14,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 **/
+using SpaceTraffic.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SpaceTraffic.Entities
+namespace SpaceTraffic.Dao
 {
-    public class Trader
+    public interface ICargoLoadDao
     {
-        public int TraderId { get; set; }
 
-        public int BaseId { get; set; }
+        bool InsertCargo(ICargoLoadEntity cargoLoadEntity);
 
-        public virtual Base Base { get; set; }
+        bool UpdateCargoPriceById(ICargoLoadEntity cargoLoadEntity);
 
-        public virtual ICollection<TraderCargo> TraderCargos { get; set; }
+        bool UpdateCargoCountById(ICargoLoadEntity cargoLoadEntity);
+
+        bool RemoveCargo(ICargoLoadEntity cargoLoadEntity);
+
     }
 }

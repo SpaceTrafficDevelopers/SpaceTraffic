@@ -21,7 +21,7 @@ using System.Text;
 
 namespace SpaceTraffic.Entities
 {
-    public class SpaceShipCargo
+    public class SpaceShipCargo : ICargoLoadEntity
     {
         public int SpaceShipId { get; set; }
 
@@ -38,5 +38,17 @@ namespace SpaceTraffic.Entities
         //public List<Cargo> Cargos { get; set; }
 
         //public double PriceCargo { get; set; }
+
+        public int CargoLoadEntityId
+        {
+            get
+            {
+                return SpaceShipId;
+            }
+            set
+            {
+                SpaceShipId = value;
+            }
+        }
     }
 }

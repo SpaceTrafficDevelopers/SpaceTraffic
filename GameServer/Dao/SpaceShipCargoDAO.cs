@@ -108,5 +108,46 @@ namespace SpaceTraffic.Dao
         }
 
 
+
+        public bool InsertCargo(ICargoLoadEntity cargoLoadEntity)
+        {
+            SpaceShipCargo ssc = cargoLoadEntity as SpaceShipCargo;
+
+            if(ssc == null)
+                return false;
+
+            return this.InsertSpaceShipCargo(ssc);
+        }
+
+        public bool UpdateCargoCountById(ICargoLoadEntity cargoLoadEntity)
+        {
+            SpaceShipCargo ssc = cargoLoadEntity as SpaceShipCargo;
+
+            if (ssc == null)
+                return false;
+
+            return this.UpdateCargoCountById(ssc);
+        }
+
+        public bool RemoveCargo(ICargoLoadEntity cargoLoadEntity)
+        {
+            SpaceShipCargo ssc = cargoLoadEntity as SpaceShipCargo;
+
+            if (ssc == null)
+                return false;
+
+            return this.RemoveSpaceShipCargoById(ssc.SpaceShipId, ssc.CargoId);
+        }
+
+
+        public bool UpdateCargoPriceById(ICargoLoadEntity cargoLoadEntity)
+        {
+            SpaceShipCargo ssc = cargoLoadEntity as SpaceShipCargo;
+
+            if (ssc == null)
+                return false;
+
+            return this.UpdateCargoPriceById(ssc);
+        }
     }
 }

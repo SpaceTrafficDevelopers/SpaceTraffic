@@ -21,7 +21,7 @@ using System.Text;
 
 namespace SpaceTraffic.Entities
 {
-    public class Trader
+    public class Trader : ICargoLoad
     {
         public int TraderId { get; set; }
 
@@ -30,5 +30,10 @@ namespace SpaceTraffic.Entities
         public virtual Base Base { get; set; }
 
         public virtual ICollection<TraderCargo> TraderCargos { get; set; }
+
+        public string CargoLoadDaoName
+        {
+            get { return "TraderCargoDao"; }
+        }
     }
 }
