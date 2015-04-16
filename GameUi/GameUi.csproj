@@ -104,6 +104,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Game\Controllers\CargoController.cs" />
     <Compile Include="Controllers\AbstractController.cs" />
     <Compile Include="Areas\Game\Controllers\TabsControllerBase.cs" />
     <Compile Include="Areas\Game\GameAreaRegistration.cs" />
