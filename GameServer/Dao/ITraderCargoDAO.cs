@@ -18,25 +18,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SpaceTraffic.Entities;
 
-namespace SpaceTraffic.Entities
+
+namespace SpaceTraffic.Dao
 {
-    public class SpaceShipCargo
+    public interface ITraderCargoDAO
     {
-        public int SpaceShipId { get; set; }
+        bool InsertTraderCargo(TraderCargo traderCargo);
 
-        public virtual SpaceShip SpaceShip { get; set; }
+        bool UpdateCargoCountById(TraderCargo traderCargo);
 
-        public int CargoId { get; set; }
+        bool RemoveTraderCargoById(int traderId, int cargoId);
 
-        public virtual Cargo Cargo { get; set; }
-
-        public int CargoCount { get; set; }
-
-        public int CargoPrice { get; set; }
-
-        //public List<Cargo> Cargos { get; set; }
-
-        //public double PriceCargo { get; set; }
+        List<TraderCargo> GetTraderCargoByTraderId(int traderId);
     }
 }

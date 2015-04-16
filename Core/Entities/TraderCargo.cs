@@ -19,13 +19,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 namespace SpaceTraffic.Entities
 {
-    public class SpaceShipCargo
+    public class TraderCargo
     {
-        public int SpaceShipId { get; set; }
+        public int TraderId { get; set; }
 
-        public virtual SpaceShip SpaceShip { get; set; }
+        public virtual Trader Trader { get; set; }
 
         public int CargoId { get; set; }
 
@@ -34,9 +35,5 @@ namespace SpaceTraffic.Entities
         public int CargoCount { get; set; }
 
         public int CargoPrice { get; set; }
-
-        //public List<Cargo> Cargos { get; set; }
-
-        //public double PriceCargo { get; set; }
     }
 }

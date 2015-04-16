@@ -40,6 +40,10 @@ using SpaceTraffic.Entities;
 
         public DbSet<SpaceShipCargo> SpaceShipsCargos { get; set; }
 
+        public DbSet<Trader> Traders { get; set; }
+
+        public DbSet<TraderCargo> TraderCargos { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new MessageConfiguration());
@@ -49,6 +53,8 @@ using SpaceTraffic.Entities;
             modelBuilder.Configurations.Add(new CargoConfiguration());
             modelBuilder.Configurations.Add(new FactoryConfiguration());
             modelBuilder.Configurations.Add(new SpaceShipCargoConfiguration());
+            modelBuilder.Configurations.Add(new TraderConfiguration());
+            modelBuilder.Configurations.Add(new TraderCargoConfiguration());
             base.OnModelCreating(modelBuilder); 
             
         }
@@ -156,7 +162,11 @@ using SpaceTraffic.Entities;
             : base()
         {
             HasKey(p => p.CargoId);
-            Property(p => p.Price).HasColumnType("int").IsRequired();
+            //Property(p => p.Price).HasColumnType("int").IsRequired();
+            Property(p => p.Name).HasMaxLength(255).HasColumnType("varchar").IsRequired();
+            Property(p => p.Description).HasMaxLength(255).HasColumnType("varchar").IsRequired();
+            Property(p => p.Category).HasMaxLength(255).HasColumnType("varchar").IsRequired();
+            Property(p => p.LevelToBuy).HasColumnType("int").IsRequired();
             Property(p => p.Type).HasMaxLength(50).HasColumnType("varchar").IsRequired();          ;            
             ToTable("Cargos");
         }
@@ -190,7 +200,8 @@ using SpaceTraffic.Entities;
             : base()
         {
             HasKey(p => new { p.CargoId, p.SpaceShipId });
-            Property(p => p.CargoCount).HasColumnType("int").IsRequired();            
+            Property(p => p.CargoCount).HasColumnType("int").IsRequired();
+            Property(p => p.CargoPrice).HasColumnType("int").IsRequired();   
             HasRequired(a => a.Cargo).WithMany(a => a.SpaceShipsCargos).HasForeignKey(a => a.CargoId);
             HasRequired(a => a.SpaceShip).WithMany(a => a.SpaceShipsCargos).HasForeignKey(a => a.SpaceShipId);
             ToTable("SpaceShipsCargos");
@@ -198,7 +209,37 @@ using SpaceTraffic.Entities;
 
     }
 
-    
+    public class TraderConfiguration : EntityTypeConfiguration<Trader>
+    {
+        /// <summary>
+        /// Trader configuration of persistent layer
+        /// </summary>
+        public TraderConfiguration()
+            : base()
+        {
+            HasKey(p => p.TraderId);
+            HasRequired(p => p.Base).WithMany().HasForeignKey(s => s.BaseId).WillCascadeOnDelete(false);
+            ToTable("Traders");
+        }
+
+    }
+
+    public class TraderCargoConfiguration : EntityTypeConfiguration<TraderCargo>
+    {
+        /// <summary>
+        /// Factory configuration of persistent layer
+        /// </summary>
+        public TraderCargoConfiguration()
+            : base()
+        {
+            HasKey(p => new { p.CargoId, p.TraderId });
+            Property(p => p.CargoCount).HasColumnType("int").IsRequired();
+            Property(p => p.CargoPrice).HasColumnType("int").IsRequired();
+            HasRequired(a => a.Cargo).WithMany(a => a.TraderCargos).HasForeignKey(a => a.CargoId);
+            HasRequired(a => a.Trader).WithMany(a => a.TraderCargos).HasForeignKey(a => a.TraderId);
+            ToTable("TraderCargos");
+        }
+    }
 
 #endregion
 }

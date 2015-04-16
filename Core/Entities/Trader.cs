@@ -21,22 +21,14 @@ using System.Text;
 
 namespace SpaceTraffic.Entities
 {
-    public class SpaceShipCargo
+    public class Trader
     {
-        public int SpaceShipId { get; set; }
+        public int TraderId { get; set; }
 
-        public virtual SpaceShip SpaceShip { get; set; }
+        public int BaseId { get; set; }
 
-        public int CargoId { get; set; }
+        public virtual Base Base { get; set; }
 
-        public virtual Cargo Cargo { get; set; }
-
-        public int CargoCount { get; set; }
-
-        public int CargoPrice { get; set; }
-
-        //public List<Cargo> Cargos { get; set; }
-
-        //public double PriceCargo { get; set; }
+        public virtual ICollection<TraderCargo> TraderCargos { get; set; }
     }
 }

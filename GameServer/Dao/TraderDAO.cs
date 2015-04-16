@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,25 +18,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SpaceTraffic.Entities;
 
-namespace SpaceTraffic.Entities
+namespace SpaceTraffic.Dao
 {
-    public class SpaceShipCargo
+    public class TraderDAO : AbstractDAO, ITraderDAO
     {
-        public int SpaceShipId { get; set; }
+        public List<Trader> GetTraders() {
+            using (var contextDB = CreateContext())
+            {
+                return contextDB.Traders.ToList<Trader>();
+            }
+        }
 
-        public virtual SpaceShip SpaceShip { get; set; }
-
-        public int CargoId { get; set; }
-
-        public virtual Cargo Cargo { get; set; }
-
-        public int CargoCount { get; set; }
-
-        public int CargoPrice { get; set; }
-
-        //public List<Cargo> Cargos { get; set; }
-
-        //public double PriceCargo { get; set; }
+        public Trader GetTraderById(int traderId) {
+            using (var contextDB = CreateContext())
+            {
+                return contextDB.Traders.FirstOrDefault(x => x.TraderId.Equals(traderId));
+            }
+        }
     }
 }
