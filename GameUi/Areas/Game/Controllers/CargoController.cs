@@ -23,8 +23,9 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             return View(INDEX_VIEW);
         }
 
-        public ActionResult BuyCargo(int cargoId)
+        public ActionResult BuyCargo(int cargoId, int cargoCount, string from, int fromID, string where, int whereID)
         {
+
             Response.Redirect(Request.Headers.Get("Referer"));
             return null;
         }

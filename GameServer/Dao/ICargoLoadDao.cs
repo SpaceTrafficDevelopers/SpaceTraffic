@@ -33,5 +33,9 @@ namespace SpaceTraffic.Dao
 
         bool RemoveCargo(ICargoLoadEntity cargoLoadEntity);
 
+        ICargoLoadEntity GetCargoByID(int cargoOwnerID, int cargoID);
+
+        //ICargo UpdateOrRemoveCargoByCountAndID(int cargoOwnerID, int CargoID, int Count);
+
     }
 }

@@ -22,6 +22,7 @@ using System.Text;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
 using SpaceTraffic.Entities.Goods;
+using SpaceTraffic.Dao;
 
 namespace SpaceTraffic.Game.Actions
 {
@@ -63,18 +64,23 @@ namespace SpaceTraffic.Game.Actions
         /// </summary>
         private int Count { get; set; }
 
-        private ICargoLoad LoadingPlace { get; set; }
+        private ICargoLoadDao LoadingPlace { get; set; }
 
-        private int TraderID { get; set; }
+        private ICargoLoadDao BuyingPlace { get; set; }
+
+        private int ownerID { get; set; }
+
+       /* private string where { get; set; }
+        private string from { get; set; }*/
+
 
         public void Perform(IGameServer gameServer)
         {
             getArgumentsFromActionArgs();
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
-            Trader trader = gameServer.Persistence.GetTraderDAO().GetTraderById(TraderID);
-            TraderCargo cargo = trader.TraderCargos.ElementAt(CargoID);
-            
-            if(player == null || trader == null || cargo == null)
+            ICargoLoadEntity cargo = BuyingPlace.GetCargoByID(ownerID, CargoID);
+
+            if(player == null || cargo == null)
             {
                 result = String.Format("Nastala chyba při vyhledávání položek");
                 return;
@@ -82,7 +88,7 @@ namespace SpaceTraffic.Game.Actions
 
             if (cargo.CargoCount < Count)
             {
-                result = String.Format("U obchodníka id={0} není požadovaných {1} jednotek zboží id={2}.", trader.TraderId, Count, CargoID);
+                result = String.Format("U obchodníka id={0} není požadovaných {1} jednotek zboží id={2}.", ownerID, Count, CargoID);
                 return;
             }
 
@@ -97,18 +103,33 @@ namespace SpaceTraffic.Game.Actions
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
                 return;
             }
-            
-           
+
+            cargo.CargoCount -= Count;
+
+            if(cargo.CargoCount == 0)
+            {
+                BuyingPlace.RemoveCargo(cargo);
+            }
+            else
+            {
+                BuyingPlace.UpdateCargoCountById(cargo);
+            }
+
+            cargo.CargoCount = Count;
+            //Zavolat LoadCargo
         }
 
         private void getArgumentsFromActionArgs()
         {
-            TraderID = Convert.ToInt32(ActionArgs[0].ToString());
-            CargoID = Convert.ToInt32(ActionArgs[1]);
-            Count = Convert.ToInt32(ActionArgs[2]);
-            LoadingPlace = (ICargoLoad)ActionArgs[3];
+            CargoID = Convert.ToInt32(ActionArgs[0].ToString());
+            Count = Convert.ToInt32(ActionArgs[1]);
+            BuyingPlace = (ICargoLoadDao)ActionArgs[2];
+            LoadingPlace = (ICargoLoadDao)ActionArgs[3];
+            ownerID = Convert.ToInt32(ActionArgs[4]); 
            
-            
         }
+
     }
+
+   
 }
