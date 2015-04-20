@@ -149,5 +149,14 @@ namespace SpaceTraffic.Dao
 
             return this.UpdateCargoPriceById(ssc);
         }
+
+        public ICargoLoadEntity GetCargoByID(int spaceShipId, int cargoId)
+        {
+            using (var contextDB = CreateContext())
+            {
+
+                return (ICargoLoadEntity)contextDB.TraderCargos.Where(x => x.TraderId.Equals(spaceShipId)).Where(x => x.CargoId.Equals(cargoId));
+            }
+        }
     }
 }

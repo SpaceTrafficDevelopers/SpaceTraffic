@@ -22,6 +22,7 @@ using System.Text;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
 using SpaceTraffic.Entities.Goods;
+using SpaceTraffic.Dao;
 
 namespace SpaceTraffic.Game.Actions
 {
@@ -52,64 +53,83 @@ namespace SpaceTraffic.Game.Actions
         /// </summary>
         public object[] ActionArgs { get; set; }
         
-        /// <summary>
-        /// Star system where sale was made
-        /// </summary>
-        private String StarSystemName { get; set; }
-
-        /// <summary>
-        /// Planet where sale was made
-        /// </summary>
-        private String PlanetName { get; set; }
        
         /// <summary>
         /// Identifier of goods to buy
         /// </summary>
-        private int GoodsID { get; set; }
+        private int CargoID { get; set; }
 
         /// <summary>
         /// Amount of goods to buy
         /// </summary>
         private int Count { get; set; }
 
+        private ICargoLoadDao LoadingPlace { get; set; }
+
+        private ICargoLoadDao BuyingPlace { get; set; }
+
+        private int ownerID { get; set; }
+
+       /* private string where { get; set; }
+        private string from { get; set; }*/
+
+
         public void Perform(IGameServer gameServer)
         {
             getArgumentsFromActionArgs();
-            Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
-            PlanetGoods item = planet.PlanetGoodsList.ElementAt(GoodsID);
+            ICargoLoadEntity cargo = BuyingPlace.GetCargoByID(ownerID, CargoID);
 
-            if (item.Count < Count)
+            if(player == null || cargo == null)
             {
-                //TODO: V seznamu na planetě není požadovaný počet zboží
-                result = String.Format("Na planetě {0} není požadovaných {1} jednotek {2}.", planet.Name, Count, item.Goods.Name);
+                result = String.Format("Nastala chyba při vyhledávání položek");
                 return;
             }
 
-            if(player.Credit < item.Goods.Price * Count)
+            if (cargo.CargoCount < Count)
             {
-                //TODO: hráč nemá peníze
-                result = String.Format("Hráč {0} nemá peníze na nákup {1} jednotek {2}.", player.PlayerId, Count, item.Goods.Name);
+                result = String.Format("U obchodníka id={0} není požadovaných {1} jednotek zboží id={2}.", ownerID, Count, CargoID);
                 return;
             }
 
-            player.Credit -= (int)(item.Goods.Price * Count);
-
-            if (gameServer.Persistence.GetPlayerDAO().UpdatePlayerById(player))
+            if(player.Credit < cargo.CargoPrice * Count)
             {
-                //TODO: Chyba při přístupu do databáze - neprovedl se update
+                result = String.Format("Hráč id={0} nemá peníze na nákup {1} jednotek zboží id={2}.", player.PlayerId, Count, cargo.CargoId);
                 return;
             }
 
-            //TODO: Odebrání zboží ze seznamu a převod na Cargo?
+            if (gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(player.PlayerId, (int)(cargo.CargoPrice * Count)))
+            {
+                result = String.Format("Změny se nepovedlo zapsat do databáze");
+                return;
+            }
+
+            cargo.CargoCount -= Count;
+
+            if(cargo.CargoCount == 0)
+            {
+                BuyingPlace.RemoveCargo(cargo);
+            }
+            else
+            {
+                BuyingPlace.UpdateCargoCountById(cargo);
+            }
+
+            cargo.CargoCount = Count;
+            //Zavolat LoadCargo
         }
 
         private void getArgumentsFromActionArgs()
         {
-            StarSystemName = ActionArgs[0].ToString();
-            PlanetName = ActionArgs[1].ToString();
-            GoodsID = Convert.ToInt32(ActionArgs[2]);
-            Count = Convert.ToInt32(ActionArgs[3]);
+            CargoID = Convert.ToInt32(ActionArgs[0].ToString());
+            Count = Convert.ToInt32(ActionArgs[1]);
+            BuyingPlace = (ICargoLoadDao)ActionArgs[2];
+            LoadingPlace = (ICargoLoadDao)ActionArgs[3];
+            ownerID = Convert.ToInt32(ActionArgs[4]); 
+           
         }
+
     }
+
+   
 }

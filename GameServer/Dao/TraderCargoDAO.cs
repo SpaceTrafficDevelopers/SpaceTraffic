@@ -95,6 +95,15 @@ namespace SpaceTraffic.Dao
             }
         }
 
+        public ICargoLoadEntity GetCargoByID(int traderId, int cargoId)
+        {
+            using (var contextDB = CreateContext())
+            {
+
+                return (ICargoLoadEntity)contextDB.TraderCargos.Where(x => x.TraderId.Equals(traderId)).Where(x => x.CargoId.Equals(cargoId));
+            }
+        }
+
         public List<TraderCargo> GetTraderCargoByTraderId(int traderId) {
             using (var contextDB = CreateContext())
             {
@@ -141,5 +150,15 @@ namespace SpaceTraffic.Dao
 
             return this.RemoveTraderCargoById(tc.TraderId, tc.CargoId);
         }
+
+      /*  public ICargo UpdateOrRemoveCargoByCountAndID(int traderID, int cargoID, int Count)
+        {
+            TraderCargo tc = cargoLoadEntity as TraderCargo;
+
+            if (tc == null)
+                return false;
+
+            return this.UpdateCargoCountById(tc);
+        }*/
     }
 }
