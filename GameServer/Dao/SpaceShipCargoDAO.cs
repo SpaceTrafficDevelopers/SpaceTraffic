@@ -155,7 +155,27 @@ namespace SpaceTraffic.Dao
             using (var contextDB = CreateContext())
             {
 
-                return (ICargoLoadEntity)contextDB.TraderCargos.Where(x => x.TraderId.Equals(spaceShipId)).Where(x => x.CargoId.Equals(cargoId));
+                return (ICargoLoadEntity)contextDB.TraderCargos.Where(x => x.TraderId.Equals(spaceShipId) && x.CargoId.Equals(cargoId));
+            }
+        }
+
+        public bool InsertOrUpdateCargo(ICargoLoadEntity cargo)
+        {
+            using (var contextDB = CreateContext())
+            {
+
+               List<SpaceShipCargo> cargos = contextDB.SpaceShipsCargos.Where(x => x.SpaceShipId.Equals(cargo.CargoLoadEntityId)).ToList();
+               SpaceShipCargo item = cargos.First(x => x.CargoId.Equals(cargo.CargoId) && x.CargoPrice.Equals(cargo.CargoPrice));
+
+                if(item == null)
+                {
+                    return this.InsertCargo(cargo);
+                }
+                else
+                {
+                    cargo.CargoCount += item.CargoCount;
+                    return this.UpdateCargoCountById(cargo);
+                }
             }
         }
     }

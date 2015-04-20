@@ -100,7 +100,7 @@ namespace SpaceTraffic.Dao
             using (var contextDB = CreateContext())
             {
 
-                return (ICargoLoadEntity)contextDB.TraderCargos.Where(x => x.TraderId.Equals(traderId)).Where(x => x.CargoId.Equals(cargoId));
+                return (ICargoLoadEntity)contextDB.TraderCargos.Where(x => x.TraderId.Equals(traderId) && x.CargoId.Equals(cargoId));
             }
         }
 
