@@ -19,7 +19,7 @@ limitations under the License.
     xmlns:st="SpaceTrafficData"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="1.2">
-    <starsystem name="Granari">
+    <starsystem name="Granari" x="250" y="220">
         <star name="Granari">
             <trajectory>
                 <stacionary x="0" y="0" />

@@ -54,13 +54,14 @@ limitations under the License.
 
   <xs:complexType name="starsystem">
     <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="x" type="xs:int"/>
+    <xs:attribute name="y" type="xs:int"/>
   </xs:complexType>
 
   <xs:complexType name="wormholes">
     <xs:sequence>
       <xs:element name="wormhole" minOccurs="1" maxOccurs="unbounded" type="wormhole"/>
     </xs:sequence>
-    
   </xs:complexType>
   
   <xs:complexType name="wormhole">

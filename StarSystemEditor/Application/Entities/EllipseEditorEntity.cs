@@ -91,22 +91,58 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         /// Metoda nastavujici velikost hlavni poloosy elipsy
         /// </summary>
         /// <param name="newSemiMajorAxis">Nova velikost</param>
-        public void SetA(int newSemiMajorAxis)
+        public override void SetWidth(int newSemiMajorAxis)
         {
             if (newSemiMajorAxis < 0) throw new ArgumentOutOfRangeException("Hlavni osa musi byt vetsi nez 0");
             TryToSet();
-            ((EllipticOrbit)LoadedObject).A = newSemiMajorAxis;
+            EllipticOrbit orbit = (EllipticOrbit)LoadedObject;
+            orbit.A = newSemiMajorAxis;
+            // zmena mesi eliptickou a kruhovou orbitou
+          /*  if (orbit.A == orbit.B)
+            {
+                CircularOrbit newOrbit = new CircularOrbit(orbit.A, (int)orbit.PeriodInSec, orbit.Direction, orbit.InitialAngleRad);
+                LoadObject(newOrbit);
+                return;
+            }
+            else if (orbit.A < orbit.B)
+            {
+                int pom = orbit.B;
+                orbit.B = orbit.A;
+                orbit.A = pom;
+                // prohodim major a minor osy a pootocim elipsu 
+                // mozne TODO - presunout planetu aby jeji pozice odpovidala
+                orbit.RotationAngleInRad -= Math.PI/2.0;
+            }*/
+
+            
         }
 
         /// <summary>
         /// Metoda nastavujici velikost vedlejsi poloosy elipsy
         /// </summary>
         /// <param name="newSemiMinorAxis">Nova velikost</param>
-        public void SetB(int newSemiMinorAxis)
+        public override void SetHeight(int newSemiMinorAxis)
         {
             if (newSemiMinorAxis < 0) throw new ArgumentOutOfRangeException("Vedlejsi osa musi byt vetsi nez 0");
             TryToSet();
-            ((EllipticOrbit)LoadedObject).A = newSemiMinorAxis;
+            EllipticOrbit orbit = (EllipticOrbit)LoadedObject;
+            orbit.B = newSemiMinorAxis;
+            // zmena mesi eliptickou a circularni orbitou
+      /*      if (orbit.A == orbit.B)
+            {
+                CircularOrbit newOrbit = new CircularOrbit(orbit.B, (int)orbit.PeriodInSec, orbit.Direction, orbit.InitialAngleRad);
+                LoadObject(newOrbit);
+                return;
+            }
+            else if (orbit.A < orbit.B)
+            {
+                int pom = orbit.B;
+                orbit.B = orbit.A;
+                orbit.A = pom;
+                // prohodim major a minor osy a pootocim elipsu 
+                // mozne TODO - presunout planetu aby jeji pozice odpovidala
+                orbit.RotationAngleInRad -= Math.PI / 2.0;
+            }*/
         }
 
         /// <summary>

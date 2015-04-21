@@ -27,6 +27,13 @@ using SpaceTraffic.Game;
 using SpaceTraffic.Tools.StarSystemEditor.Data;
 using SpaceTraffic.Tools.StarSystemEditor.Entities;
 using SpaceTraffic.Tools.StarSystemEditor.Presentation;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Shapes;
+using System.Windows;
+using SpaceTraffic.Game.Geometry;
+using System.Windows.Media;
+using SpaceTraffic.Utils;
 
 namespace SpaceTraffic.Tools.StarSystemEditor
 {    
@@ -66,6 +73,10 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// </summary>
         public static StacionaryEditorEntity StacionaryOrbitEditor { get; private set; }
         /// <summary>
+        /// Instance generatoru star systemu
+        /// </summary>
+     //   public static StarSystemCreator starSystemCreator { get; private set; }
+        /// <summary>
         /// Property se soucasnou mapou galaxie
         /// </summary>
         public static GalaxyMap GalaxyMap { get; private set; }
@@ -85,6 +96,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// Cas simulace
         /// </summary>
         public static int Time { get; set; }
+        public static string ButtonName = "Galaxy Map";
         #endregion
         #region Constants
         /// <summary>
@@ -116,6 +128,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             CircleOrbitEditor = new CircleEditorEntity();
             EllipseOrbitEditor = new EllipseEditorEntity();
             StacionaryOrbitEditor = new StacionaryEditorEntity();
+       //     starSystemCreator = new StarSystemCreator();
         }
         /// <summary>
         /// Metoda starajici se o pripravu editoru
@@ -146,7 +159,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// </summary>
         /// <param name="galaxyName">Jmeno galaxie</param>
         /// <param name="filePath">Cesta ke galaxii</param>
-        public static void LoadGalaxy(String galaxyName, String filePath) 
+        public static void LoadGalaxy(String galaxyName, String filePath)
         {
             //pokusim se nacist mapu
             Log("Nacitam galaxii " + galaxyName);
@@ -171,11 +184,41 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             }
             catch (Exception ex)
             {
-                Log("Nacitani galaxie " +GalaxyName +"se nezdarilo! " + ex.Message);
+                Log("Nacitani galaxie " + GalaxyName + "se nezdarilo! " + ex.Message);
             }
-
-            //XmlSaver.CreateXml(GalaxyMap);
         }
+        /// <summary>
+        /// Metoda vytvarejici novy star system, a ulozi jeho xml
+        /// </summary>
+        /// <returns>Star system</returns>
+        public static void NewSystem(string name, int planetCount, int wormholeCount, string type)
+        {
+            StarSystemCreator starSystemCreator = new StarSystemCreator();
+            StarSystem system = starSystemCreator.createSystem(name, planetCount, wormholeCount, type);
+            GalaxyMap.Add(system);
+            
+            ListView view = dataPresenter.GetStarSystemList();
+            view.Items.Clear(); // clears loaded starsystems
+            dataPresenter.StarSystemListLoader();
+            //XmlSaver.CreateStarSystemXml(system);
+            //XmlSaver.AddStarSystemToGalaxy(system.Name, GalaxyMap.MapName);
+        }
+        /// <summary>
+        /// metoda, ktera prida planetu do vybraneho systemu
+        /// </summary>
+        public static void newPlanet()
+        {
+            StarSystemCreator.addPlanet(Editor.dataPresenter.SelectedStarSystem, "circular");
+        }
+
+        /// <summary>
+        /// metoda, ktera prida wormhole do vybraneho systemu
+        /// </summary>
+        public static void newWormhole()
+        {
+
+        }
+
         /// <summary>
         /// Metoda vracejici seznam jmen starsystemu nactene galaxie
         /// </summary>
@@ -189,6 +232,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             }
             return list;
         }
+
         /// <summary>
         /// Metoda zapisujici informace jak do logu tak do konzole
         /// </summary>
@@ -211,6 +255,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             Nullable<bool> result = dlg.ShowDialog();
             if (result == true)
             {
+
                 XmlReaderSettings readerSettings = new XmlReaderSettings();
                 readerSettings.IgnoreComments = true;
                 // Open document 
@@ -230,53 +275,13 @@ namespace SpaceTraffic.Tools.StarSystemEditor
                         throw new FileFormatException("This file doesn't contain galaxy map!");
                     }
                     
-                    map.MapName = galaxyNode.Attributes["name"].Value.ToString();
-                    
-                    foreach (XmlNode childNode in galaxyNode.ChildNodes)
-                    {
-                        switch (childNode.Name.ToLowerInvariant())
-                        {
-                            case "starsystems":
-
-                                foreach (XmlNode starSystemNode in childNode.ChildNodes)
-                                {
-                                    string starSystemFileName = starSystemNode.Attributes["name"].Value.ToString();
-                                    starSystemNamesList.Add(starSystemFileName);
-                                    //Editor.Log(starSystemFileName);
-                                    if (File.Exists(dlg.FileName.Replace(dlg.SafeFileName, "") + Path.DirectorySeparatorChar + starSystemFileName + ".xml"))
-                                    {
-                                        Editor.Log("parsing");
-                                        loadList.Add(starSystemFileName);
-                                    }
-                                    else
-                                    {
-                                        StarSystem starSystem = new StarSystem();
-                                        starSystem.Name = starSystemFileName;
-                                        Star star = new Star();
-                                        star.Name = starSystemFileName;
-                                        starSystem.Star = star;
-                                        map.Add(starSystem);
-                                    }
-                                }
-                                break;
-                            case "wormholes":
-                                //TODO: Implementation
-                                //connections = childNode.ParseWormholes();
-                                break;
-                            default:
-                                throw new XmlException("Unexpected childNode.");
-                        }
-                    }  
+                    String MapName = galaxyNode.Attributes["name"].Value.ToString();
+                    // jmeno mapy + cesta
+                    LoadGalaxy(MapName, dlg.FileName);
                 }
-                fs.Close();
-                foreach (String starSystemName in loadList)
-                {
-                    String starSystemPath = (dlg.FileName.Replace(dlg.SafeFileName, "") + starSystemName + ".xml");
-                    map.Add(LoadStarSystem(starSystemPath, readerSettings));
-                }
-                Editor.GalaxyMap = map;
             }
         }
+
         /// <summary>
         /// Metoda pro zpracovani souboru se starsystemem
         /// </summary>
@@ -298,6 +303,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             starSystemStream.Close();
             return parsedStarSystem;
         }
+
         /// <summary>
         /// Metoda pripracujici slozky pro nacitani dat
         /// </summary>
@@ -305,6 +311,27 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         {
             Directory.CreateDirectory(".//Assets//");
             Directory.CreateDirectory(".//Assets//map");
+        }
+
+        /// <summary>
+        /// Selects element on canvas
+        /// </summary>
+        /// <param name="source">element on canvas clicked</param>
+        public static void selectEntity(object source)
+        {
+            if (!Editor.dataPresenter.selected)
+            {
+                if (source is Shape)
+                {
+                    Shape selectedShape = (Shape)source;
+                    if (selectedShape.Tag is StarSystemView)
+                    {
+                        Editor.dataPresenter.DrawStarSystemPoint(selectedShape.Tag as StarSystemView);
+                    }
+                    else
+                    Editor.dataPresenter.DrawPoints((View)selectedShape.Tag);
+                }
+            }
         }
     }
 

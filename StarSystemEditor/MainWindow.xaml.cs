@@ -18,6 +18,12 @@ using System.Windows;
 using System.Windows.Controls;
 using SpaceTraffic.Tools.StarSystemEditor.Data;
 using SpaceTraffic.Tools.StarSystemEditor.Presentation;
+using System.Windows.Input;
+using SpaceTraffic.Tools.StarSystemEditor.Entities;
+using System.Windows.Shapes;
+using SpaceTraffic.Game;
+using System.Collections.Generic;
+using System;
 
 namespace SpaceTraffic.Tools.StarSystemEditor
 {
@@ -26,18 +32,30 @@ namespace SpaceTraffic.Tools.StarSystemEditor
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Properties
+        /// <summary>
+        /// detector wether left mouse button is held
+        /// </summary>
+        public bool mouseDown { get; set; }
+        private int pointEditing { get; set; }
+        private int modifier { get; set; }
+        /// <summary>
+        /// casovac, zabranuje tomu aby se fronta eventu zaplnila eventem MouseMove, a program missnul MouseUp event
+        /// </summary>
+        DateTime start = DateTime.Now;
+       
+        #endregion
+
         /// <summary>
         /// Konstruktor
         /// </summary>
         public MainWindow()
         {
             Editor.Preload();
+            Editor.dataPresenter.planetSelectionChanged = planetSelected;
             Editor.LoadGalaxy("GalaxyMap2", ".//Assets");
             InitializeComponent();
-            
             this.StarSystemSelectorPanel.Children.Add(new StarSystemSelector());
-            //Editor.dataPresenter.StarSystemDrawer(Editor.GalaxyMap["Lervos2"], this.starSystemRenderer);
-            //Editor.Log(((CircularOrbit)Editor.GalaxyMap["Vitera"].WormholeEndpoints[0].Trajectory).Radius.ToString());
         }
         /// <summary>
         /// Reakce na ukonceni programu
@@ -47,7 +65,30 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             Application.Current.Shutdown();
 
         }
-
+        /// <summary>
+        /// Reakce na Galaxy Map
+        /// </summary>
+        private void buttonGalaxyMap_Click(object sender, RoutedEventArgs e)
+        {
+            string content = (string)((Button)e.Source).Content;
+            if (content.Equals("Galaxy Map"))
+            {
+                // vycisteni properties
+                Editor.dataPresenter.selected = false;
+                List<SelectedPointView> points = Editor.dataPresenter.GetPoints();
+                points.Clear();
+                // zobrazeni mapy
+                Editor.ButtonName = "Star System";
+                ((Button)e.Source).Content = Editor.ButtonName;
+                Editor.dataPresenter.DrawGalaxyMap();
+            }
+            else if (content.Equals("Star System"))
+            {
+                Editor.ButtonName = "Galaxy Map";
+                ((Button)e.Source).Content = Editor.ButtonName;
+                Editor.dataPresenter.StarSystemDrawer();
+            }
+        }
         /// <summary>
         /// Reakce na zoom in
         /// </summary>
@@ -57,6 +98,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             if (DrawingArea.Canvas == null) return;
             DrawingArea.Canvas.Width = Editor.dataPresenter.DrawingAreaSize * 2;
             DrawingArea.Canvas.Height = Editor.dataPresenter.DrawingAreaSize * 2;
+            
             ReDrawMap();
         }
         /// <summary>
@@ -135,7 +177,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// </summary>
         private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
         {
-            this.drawingAreaScrollViewew.Content = DrawingArea.Canvas;
+            this.drawingAreaScrollViewer.Content = DrawingArea.Canvas;
         }
         /// <summary>
         /// Inicializace object data
@@ -144,6 +186,34 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         {
             (sender as GroupBox).Content = Editor.dataPresenter.GetLoadedObjectData();
         }
+
+        /// <summary>
+        /// Metoda volana z dataPresenteru pro prekresleni Planet Info
+        /// </summary>
+        private void planetSelected()
+        {
+           this.loadedObjectData.Content = Editor.dataPresenter.GetLoadedObjectData();   
+        }
+
+        /// <summary>
+        /// Reakce na kliknuti na new
+        /// </summary>
+        private void MenuNew_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                NewStarSystem form = new NewStarSystem();
+                form.Owner = this;
+                form.ShowDialog();
+                this.Focusable = false;
+                this.ProgramStatus.Content = "Created";
+            }
+            catch
+            {
+                this.ProgramStatus.Content = "Unable to create";
+            }
+        }
+
         /// <summary>
         /// Reakce na kliknuti na load
         /// </summary>
@@ -155,6 +225,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
                 this.ProgramStatus.Content = "Loaded";
                 DrawingArea.Canvas.Children.Clear();    
                 Editor.dataPresenter = new DataPresenter();
+                Editor.dataPresenter.planetSelectionChanged = planetSelected;
                 Editor.dataPresenter.GetDrawingArea();
                 this.StarSystemSelectorPanel.Children.Clear();
                 this.StarSystemSelectorPanel.Children.Add(new StarSystemSelector());
@@ -174,6 +245,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         {
             try
             {
+                
                 XmlSaver.CreateXml(Editor.GalaxyMap);
                 this.ProgramStatus.Content = "Saved";
             }
@@ -197,5 +269,103 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         {
             this.galaxyInfoGroup.Content = Editor.dataPresenter.GetGalaxyInfo();
         }
+
+        private void window_mouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+            if (mouseDown)
+            {
+                Point mousePos = e.GetPosition(drawingAreaScrollViewer);
+                Editor.dataPresenter.editShape(mousePos.X, mousePos.Y, pointEditing, modifier);
+            }
+            mouseDown = false;
+        }
+
+        private void window_mouseMove(object sender, MouseEventArgs e)
+        {
+            TimeSpan timeItTook = DateTime.Now - start;
+            if (timeItTook.Milliseconds < 1) return;
+            start = DateTime.Now;
+
+            Point p = new Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
+            this.ProgramStatus.Content = "" + drawingAreaScrollViewer.PointFromScreen(p).ToString();
+
+            //      this.ProgramStatus.Content = "" + e.GetPosition(drawingAreaScrollViewer).ToString(); ;
+            if (mouseDown)
+            {
+                Point mousePos = e.GetPosition(drawingAreaScrollViewer);
+                Editor.dataPresenter.editShape(mousePos.X, mousePos.Y, pointEditing, modifier);
+            }
+        }
+   
+      /*  private void canvas_mouseMove(object sender, MouseEventArgs e)
+        {
+            Point p = new Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
+            this.ProgramStatus.Content = "" + drawingAreaScrollViewer.PointFromScreen(p).ToString();
+            
+      //      this.ProgramStatus.Content = "" + e.GetPosition(drawingAreaScrollViewer).ToString(); ;
+            if (mouseDown)
+            {
+                Point mousePos = e.GetPosition(drawingAreaScrollViewer);
+                Editor.dataPresenter.editShape(mousePos.X, mousePos.Y, pointEditing, modifier);
+            }
+        }
+        */
+        private void canvas_mouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Editor.dataPresenter.selected)
+            {
+                Point pointClicked = e.GetPosition(drawingAreaScrollViewer);
+                pointEditing = Editor.dataPresenter.pointHit(pointClicked.X, pointClicked.Y);
+                if (pointEditing == -1)
+                {
+                    mouseDown = false;
+                }
+                else
+                    mouseDown = true;
+            }
+            else if (!Editor.dataPresenter.selected)
+            {
+                Editor.selectEntity(e.OriginalSource);
+            }
+        }
+
+
+
+        private void canvas_keyModifierDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftShift)
+            {
+                modifier = 1;
+            }
+            else if (e.Key == Key.LeftCtrl)
+            {
+                modifier = 2;
+            }
+        }
+
+        private void canvas_keyModifierUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            modifier = 0;
+        }
+
+        private void NewPlanet_Click(object sender, RoutedEventArgs e)
+        {
+            if (Editor.dataPresenter.SelectedStarSystem == null)
+            {
+                MessageBox.Show("Select a StarSystem first.");
+            }
+            Editor.newPlanet();
+        }
+
+        private void NewWormhole_Click(object sender, RoutedEventArgs e)
+        {
+            if (Editor.dataPresenter.SelectedStarSystem == null)
+            {
+                MessageBox.Show("Select a StarSystem first.");
+            }
+            Editor.newWormhole();
+        }
+
     }
 }

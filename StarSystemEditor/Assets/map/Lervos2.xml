@@ -19,7 +19,7 @@ limitations under the License.
     xmlns:st="SpaceTrafficData"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="1.2">
-    <starsystem name="Lervos2">
+    <starsystem name="Lervos2" x="420" y="78">
         <star name="Lervos2">
             <trajectory>
                 <stacionary x="0" y="0" />

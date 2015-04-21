@@ -60,6 +60,18 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         }
 
         /// <summary>
+        /// metoda nastavujici sirku orbity - hlavni osa
+        /// </summary>
+        /// <param name="width">nova sirka</param>
+        public abstract void SetWidth(int width);
+
+        /// <summary>
+        /// metoda nstavujici vysku orbity - vedlejsi osa
+        /// </summary>
+        /// <param name="height">nova vyska</param>
+        public abstract void SetHeight(int height);
+
+        /// <summary>
         /// Metoda nastavujici excentricitu orbity, je zde potreba velke mnozstvi matematiky, protoze pri zmene excentricity muze dojit ke zmene typu objektu
         /// </summary>
         /// <param name="newEccentricity">Nova excentricita</param>
@@ -95,7 +107,6 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
                     newOrbit.Barycenter = new Point2d(0, 0);
                     newOrbit.A = ((CircularOrbit)LoadedObject).Radius;
                     newOrbit.B = (int)Math.Round(Math.Sqrt(newOrbit.A * newOrbit.A - newEccentricity * newEccentricity));
-                    //TODO: Correct transformation from circle to ellipse and backwards
                     newOrbit.RotationAngleInRad = 0;
                     newOrbit.PeriodInSec = ((CircularOrbit)LoadedObject).PeriodInSec;
                     newOrbit.Direction = ((CircularOrbit)LoadedObject).Direction;

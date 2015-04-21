@@ -1,0 +1,19 @@
+﻿<Window x:Class="SpaceTraffic.Tools.StarSystemEditor.NewStarSystem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="New Star System" Height="254" Width="293" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="System Name:" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content="Planet Count:" Height="28" HorizontalAlignment="Left" Margin="12,46,0,0" Name="label2" VerticalAlignment="Top" />
+        <Label Content="Wormhole count" Height="28" HorizontalAlignment="Left" Margin="12,82,0,0" Name="label3" VerticalAlignment="Top" />
+        <Label Content="System Type:" Height="28" HorizontalAlignment="Left" Margin="12,120,0,0" Name="label4" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="139,14,0,0" Name="name_text" VerticalAlignment="Top" Width="120" Text="5" TextAlignment="Center" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="139,48,0,0" Name="planetcount_text" VerticalAlignment="Top" Width="120" Text="5" TextAlignment="Center" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="139,84,0,0" Name="wormholecount_text" Text="3" TextAlignment="Center" VerticalAlignment="Top" Width="120" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="139,125,0,0" Name="systemtypebox" VerticalAlignment="Top" Width="120" IsReadOnly="True">
+            
+        </ComboBox>
+        
+        <Button Content="Confirm" Height="23" HorizontalAlignment="Left" Margin="184,180,0,0" Name="Confirm_button" VerticalAlignment="Top" Width="75" Click="Confirm_button_Click" />
+    </Grid>
+</Window>

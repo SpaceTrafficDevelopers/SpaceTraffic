@@ -29,7 +29,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
     /// <summary>
     /// Trida starajici se o zobrazeni cervich der
     /// </summary>
-    public class EndpointView : View
+    public class EndpointView : CelestialObjectView
     {
         /// <summary>
         /// Instance zobrazovaneho WormholeEndpoint
@@ -42,7 +42,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// <summary>
         /// Pozice pro vykresleni
         /// </summary>
-        public Point2d Position { get; private set; }
+        public override Point2d Position { get; set; }
         /// <summary>
         /// Zobrazovac trajektorie
         /// </summary>
@@ -81,7 +81,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// Metoda volajici zobrazovac trajektorie a vracejici objekt pro zobrazeni
         /// </summary>
         /// <returns>Grafika pro zobrazeni</returns>
-        public Ellipse GetTrajectoryShape()
+        public override Ellipse GetTrajectoryShape()
         {
             TrajectoryView = new TrajectoryView(this.WormholeEndpoint.Trajectory);
             Ellipse trajectory = TrajectoryView.GetShape();
@@ -114,6 +114,23 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             size.Width = Editor.dataPresenter.GetPlanetRadius();
             size.Height = size.Width;
             return size;
+        }
+
+        /// <summary>
+        /// Metoda vracejici TrajectoryView tohoto objektu
+        /// </summary>
+        /// <returns>TrajectoryView instance</returns>
+        public override TrajectoryView GetTrajectoryView()
+        {
+            return TrajectoryView;
+        }
+        /// <summary>
+        /// Metoda nastavujici TrajectoryView - potrebna pro zmenu mezi kruhovou a eliptickou orbitou
+        /// </summary>
+        /// <param name="view"></param>
+        public override void SetTrajectoryView(TrajectoryView view)
+        {
+            this.TrajectoryView = view;
         }
     }
 }
