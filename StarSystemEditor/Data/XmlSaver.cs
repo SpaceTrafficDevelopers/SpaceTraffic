@@ -26,6 +26,8 @@ using SpaceTraffic.Game;
 using SpaceTraffic.Game.Geometry;
 using SpaceTraffic.Utils;
 using SpaceTraffic.Entities.PublicEntities;
+using Microsoft.Win32;
+using System.Xml;
 
 namespace SpaceTraffic.Tools.StarSystemEditor.Data
 {
@@ -68,106 +70,138 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
         /// <param name="map">Mapa pro ulozeni</param>
         private static void CreateGalaxyMapXml(GalaxyMap map)
         {
-            FileStream fileStream = new FileStream(".\\saveddata\\maps\\" + map.MapName + ".xml", FileMode.Create);
-
-            XNamespace defaultNamespace = XNamespace.Get("SpaceTrafficData");
-            XElement doc = new XElement(
-                new XElement(defaultNamespace + "stdata",
-                    new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
-                    new XAttribute(XNamespace.Xmlns + "html", "http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"),
-                    new XAttribute(XNamespace.Xmlns + "st", "SpaceTrafficData"),
-                    new XAttribute("version", "1.2")
-                )
-            );
-
-            XElement root = new XElement("galaxy");
-            root.Add(new XAttribute("name", map.MapName));
-
-            XElement starSystems = new XElement("starSystems");
-            XElement wormholes = new XElement("wormholes");
-            foreach (StarSystem starSystem in map.GetStarSystems())
+            //Log("dialog");
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.FileName = map.MapName;
+            dlg.DefaultExt = ".xml";
+            dlg.Filter = "GalaxyMap XML File(.xml)|*.xml";
+            Nullable<bool> result = dlg.ShowDialog();
+            if (result == true)
             {
-                XElement item = new XElement("starsystem");
-                item.Add(new XAttribute("name", starSystem.Name));
-                starSystems.Add(item);
-                CreateStarSystemXml(starSystem);
-                
-            //    XElement wormhole = new XElement("wormhole");
-            //    map.GetStarSystemConnections(starSystem.Name).
-            //    foreach (WormholeEndpointDestination destination in map.GetStarSystemConnections(starSystem.Name))
-            //    {
-                    
-            //        wormholes.Add(destination);
-            //    }
-            //    wormholes.Add(WormholesToElement(map.GetStarSystemConnections(starSystem.Name)));
+                XmlReaderSettings readerSettings = new XmlReaderSettings();
+                readerSettings.IgnoreComments = true;
+                // Open document 
+                string filename = dlg.FileName;
+                FileStream fileStream = new FileStream(".\\saveddata\\maps\\" + map.MapName + ".xml", FileMode.Create);
+
+                XNamespace defaultNamespace = XNamespace.Get("SpaceTrafficData");
+                XElement doc = new XElement(
+                    new XElement(defaultNamespace + "stdata",
+                        new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
+                        new XAttribute(XNamespace.Xmlns + "html", "http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"),
+                        new XAttribute(XNamespace.Xmlns + "st", "SpaceTrafficData"),
+                        new XAttribute("version", "1.2")
+                    )
+                );
+
+                XElement root = new XElement("galaxy");
+                root.Add(new XAttribute("name", map.MapName));
+
+                XElement starSystems = new XElement("starSystems");
+                XElement wormholes = new XElement("wormholes");
+                int id = 0;
+                foreach (StarSystem starSystem in map.GetStarSystems())
+                {
+                    XElement item = new XElement("starsystem");
+                    item.Add(new XAttribute("name", starSystem.Name));
+                    starSystems.Add(item);
+                    CreateStarSystemXml(starSystem);
+                    XElement wormhole = null;
+                    foreach (WormholeEndpoint wormholeEndpoint in starSystem.WormholeEndpoints)
+                    {
+
+                        if (wormholeEndpoint.IsConnected)
+                        {
+                            wormhole = WormholesToElement(id, wormholeEndpoint);
+                            wormholes.Add(wormhole);
+                            id++;
+                        }
+                    }
+                }
+
+                root.Add(starSystems);
+
+                root.Add(wormholes);
+
+                doc.Add(root);
+
+                doc.Save(fileStream);
             }
-
-            root.Add(starSystems);
-
-            doc.Add(root);
-
-            doc.Save(fileStream);
         }
         /// <summary>
         /// Metoda pro vytvoreni elementu ze spojeni mezi starsystemy
         /// </summary>
-        /// <param name="destination">Spojeni pro zpracovani</param>
+        /// <param name="id">id Xelementu wormhole</param>
+        /// <param name="wormholeEndpoint">Spojeni pro zpracovani</param>
         /// <returns>Zpracovany element</returns>
-        private static XElement WormholesToElement(WormholeEndpointDestination destination)
+        private static XElement WormholesToElement(int id, WormholeEndpoint wormholeEndpoint)
         {
-            XElement destinationElement = new XElement("wormhole");
-            //TODO: code;
-            return destinationElement;
+            XElement wormhole = new XElement("wormhole");
+            wormhole.Add(new XAttribute("id", id));
+            XElement endpoint = new XElement("endpoint");
+            endpoint.Add(new XAttribute("system", wormholeEndpoint.StarSystem.Name));
+            endpoint.Add(new XAttribute("id", wormholeEndpoint.Id));
+            wormhole.Add(endpoint);
+            endpoint = new XElement("endpoint");
+            endpoint.Add(new XAttribute("system", wormholeEndpoint.Destination.StarSystem.Name));
+            endpoint.Add(new XAttribute("id", wormholeEndpoint.Destination.Id));
+            wormhole.Add(endpoint);
+            
+
+            return wormhole;
         }
         /// <summary>
         /// Metoda pro vytvoreni elementu ze starsystemu
         /// </summary>
         /// <param name="starSystem">Starsystem pro zpracovani</param>
-        private static void CreateStarSystemXml(StarSystem starSystem)
+        public static void CreateStarSystemXml(StarSystem starSystem)
         {
-            FileStream fileStream = new FileStream(".\\saveddata\\starsystems\\" + starSystem.Name + ".xml", FileMode.Create);
-
-            XNamespace defaultNamespace = XNamespace.Get("SpaceTrafficData");
-            XElement doc = new XElement(
-                new XElement(defaultNamespace + "stdata",
-                    new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
-                    new XAttribute(XNamespace.Xmlns + "html", "http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"),
-                    new XAttribute(XNamespace.Xmlns + "st", "SpaceTrafficData"),
-                    new XAttribute("version", "1.2")
-                )
-            );
-
-            XElement root = new XElement("starsystem");
-            root.Add(new XAttribute("name", starSystem.Name));
             
-            XElement star = new XElement("star");
-            star.Add(new XAttribute("name", starSystem.Star.Name));
-            star.Add(TrajectoryToElement(starSystem.Star.Trajectory));
-            star.Add(DetailsToElement(starSystem.Star.Details));
-            root.Add(star);
-            
-            XElement planets = new XElement("planets");
-            foreach (Planet planet in starSystem.Planets)
-            {
-                XElement planetElement = new XElement("planet");
-                planetElement.Add(new XAttribute("altName", planet.AlternativeName));
-                planetElement.Add(new XAttribute("name", planet.Name));
-                planetElement.Add(TrajectoryToElement(planet.Trajectory));
-                planetElement.Add(DetailsToElement(planet.Details));
-                planets.Add(planetElement);
-            }
-            root.Add(planets);
+                FileStream fileStream = new FileStream(".\\saveddata\\maps\\" + starSystem.Name + ".xml", FileMode.Create);
 
-            XElement wormholeEndpoints = new XElement("wormholeEndpoints");
-            foreach (WormholeEndpoint endpoint in starSystem.WormholeEndpoints)
-            {
-                wormholeEndpoints.Add(EndpointToElement(endpoint));
-            }
-            root.Add(wormholeEndpoints);
+                XNamespace defaultNamespace = XNamespace.Get("SpaceTrafficData");
+                XElement doc = new XElement(
+                    new XElement(defaultNamespace + "stdata",
+                        new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
+                        new XAttribute(XNamespace.Xmlns + "html", "http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"),
+                        new XAttribute(XNamespace.Xmlns + "st", "SpaceTrafficData"),
+                        new XAttribute("version", "1.2")
+                    )
+                );
 
-            doc.Add(root);
+                XElement root = new XElement("starsystem");
+                root.Add(new XAttribute("name", starSystem.Name));
+                root.Add(new XAttribute("x", starSystem.MapPosition.X));
+                root.Add(new XAttribute("y", starSystem.MapPosition.Y));
 
-            doc.Save(fileStream);
+                XElement star = new XElement("star");
+                star.Add(new XAttribute("name", starSystem.Star.Name));
+                star.Add(TrajectoryToElement(starSystem.Star.Trajectory));
+                star.Add(DetailsToElement(starSystem.Star.Details));
+                root.Add(star);
+
+                XElement planets = new XElement("planets");
+                foreach (Planet planet in starSystem.Planets)
+                {
+                    XElement planetElement = new XElement("planet");
+                    planetElement.Add(new XAttribute("altName", planet.AlternativeName));
+                    planetElement.Add(new XAttribute("name", planet.Name));
+                    planetElement.Add(TrajectoryToElement(planet.Trajectory));
+                    planetElement.Add(DetailsToElement(planet.Details));
+                    planets.Add(planetElement);
+                }
+                root.Add(planets);
+
+                XElement wormholeEndpoints = new XElement("wormholeEndpoints");
+                foreach (WormholeEndpoint endpoint in starSystem.WormholeEndpoints)
+                {
+                    wormholeEndpoints.Add(EndpointToElement(endpoint));
+                }
+                root.Add(wormholeEndpoints);
+
+                doc.Add(root);
+
+                doc.Save(fileStream);
         }
         /// <summary>
         /// Metoda pro vytvoreni elementu z trajektorie
@@ -242,6 +276,19 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
             wheElement.Add(TrajectoryToElement(endpoint.Trajectory));
             
             return wheElement;
+        }
+        /// <summary>
+        /// Metoda ktera prida nove vytvoreny star system do xml galaxy mapy
+        /// </summary>
+        /// <param name="name"></param>
+        public static void AddStarSystemToGalaxy(string name, string galaxyname)
+        {
+            XDocument doc = XDocument.Load(".\\saveddata\\maps\\" + galaxyname + ".xml");
+            XElement starSystems = doc.Descendants("starSystems").Single();
+            XElement item = new XElement("starsystem");
+            item.Add(new XAttribute("name", name));
+            starSystems.Add(item);
+            doc.Save(".\\saveddata\\maps\\" + galaxyname + ".xml");
         }
         /// <summary>
         /// Metoda pro pripravu slozek pro ukladani dat
