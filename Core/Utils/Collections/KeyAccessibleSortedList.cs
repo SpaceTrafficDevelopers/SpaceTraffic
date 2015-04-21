@@ -18,17 +18,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace SpaceTraffic.Utils.Collections
 {
+    [DataContract(Name="KeyAccessibleList")]
     public abstract class KeyAccessibleSortedList<K, V> : IKeyAccessibleList<K, V>
     {
+        [DataMember]
         protected SortedList<K, V> internalList = new SortedList<K, V>();
 
         #region IKeyAccessible indexers
         /// <summary>
         /// Gets or sets the <see cref="V"/> value with the specified key.
         /// </summary>
+        [DataMember]
         public V this[K key]
         {
             get
@@ -59,6 +63,7 @@ namespace SpaceTraffic.Utils.Collections
         /// <summary>
         /// Gets the number of star systems in this map.
         /// </summary>
+        [DataMember]
         public int Count
         {
             get { return this.internalList.Count; }

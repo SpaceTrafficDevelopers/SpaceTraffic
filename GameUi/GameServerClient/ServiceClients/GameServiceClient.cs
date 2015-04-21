@@ -20,16 +20,36 @@ using System.Linq;
 using System.Web;
 using SpaceTraffic.Services.Contracts;
 using SpaceTraffic.Entities.PublicEntities;
+using SpaceTraffic.Game;
+using System.ServiceModel;
+using System.Diagnostics;
 
 namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 {
     public class GameServiceClient : ServiceClientBase<IGameService>, IGameService
     {
+        public IList<StarSystem> GetGalaxyMap(string galaxyMap)
+        {
+            try
+            {
+                var channel = this.GetClientChannel();
+                channel.Open();
+                var ret = (channel as IGameService).GetGalaxyMap(galaxyMap);
+                channel.Close();
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+            }
+        }
+
         public IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem)
         {
             using (var channel = this.GetClientChannel())
             {
-                return (channel as IGameService).GetStarSystemConnections(starSystem);
+                 return (channel as IGameService).GetStarSystemConnections(starSystem);
             }
         }
 

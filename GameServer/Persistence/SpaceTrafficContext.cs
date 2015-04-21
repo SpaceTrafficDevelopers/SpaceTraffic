@@ -19,8 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration;
 using SpaceTraffic.Entities;
+using System.Data.Entity.ModelConfiguration;
 
  namespace SpaceTraffic.Persistence
 {

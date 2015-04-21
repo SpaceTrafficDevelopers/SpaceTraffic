@@ -25,6 +25,7 @@ using GS = SpaceTraffic.GameServer.GameServer;
 using SpaceTraffic.Entities.PublicEntities;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Game.Actions;
+using SpaceTraffic.Game;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
 {
@@ -41,6 +42,32 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
             DebugEx.Exit(result);
             return result;
+        }
+
+        public IList<StarSystem> GetGalaxyMap(string galaxyMap)
+        {
+                DebugEx.Entry(galaxyMap);
+                try
+                {
+                    GalaxyMap map = GS.CurrentInstance.World.Map;
+                    IList<StarSystem> result = map.GetStarSystems();
+                    foreach (StarSystem system in result)
+                    {
+                        // prekopiruju data z mapy do seznamu, z duvodu serializace
+                        system.WormholeEndpointsList = new List<WormholeEndpoint>();
+                        foreach (WormholeEndpoint endpoint in system.WormholeEndpoints)
+                        {
+                            system.WormholeEndpointsList.Add(endpoint);
+                        }
+                    }
+                    DebugEx.Exit(result);
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    return null;
+                }
         }
 
 

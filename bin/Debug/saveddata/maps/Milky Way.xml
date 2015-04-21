@@ -13,5 +13,103 @@
       <starsystem name="Tertius" />
       <starsystem name="Vitera" />
     </starSystems>
+    <wormholes>
+      <wormhole id="0">
+        <endpoint system="Atabea" id="0" />
+        <endpoint system="Solar system" id="2" />
+      </wormhole>
+      <wormhole id="1">
+        <endpoint system="Atabea" id="1" />
+        <endpoint system="Tertius" id="0" />
+      </wormhole>
+      <wormhole id="2">
+        <endpoint system="Atabea" id="2" />
+        <endpoint system="Lervos2" id="0" />
+      </wormhole>
+      <wormhole id="3">
+        <endpoint system="Atabea" id="3" />
+        <endpoint system="Granari" id="0" />
+      </wormhole>
+      <wormhole id="4">
+        <endpoint system="Granari" id="0" />
+        <endpoint system="Atabea" id="3" />
+      </wormhole>
+      <wormhole id="5">
+        <endpoint system="Granari" id="1" />
+        <endpoint system="Lervos2" id="1" />
+      </wormhole>
+      <wormhole id="6">
+        <endpoint system="Lervos2" id="0" />
+        <endpoint system="Atabea" id="2" />
+      </wormhole>
+      <wormhole id="7">
+        <endpoint system="Lervos2" id="1" />
+        <endpoint system="Granari" id="1" />
+      </wormhole>
+      <wormhole id="8">
+        <endpoint system="Madrona" id="0" />
+        <endpoint system="Solar system" id="3" />
+      </wormhole>
+      <wormhole id="9">
+        <endpoint system="Madrona" id="1" />
+        <endpoint system="Proxima Centauri" id="4" />
+      </wormhole>
+      <wormhole id="10">
+        <endpoint system="Proxima Centauri" id="0" />
+        <endpoint system="Solar system" id="0" />
+      </wormhole>
+      <wormhole id="11">
+        <endpoint system="Proxima Centauri" id="1" />
+        <endpoint system="Vitera" id="1" />
+      </wormhole>
+      <wormhole id="12">
+        <endpoint system="Proxima Centauri" id="2" />
+        <endpoint system="Solas" id="0" />
+      </wormhole>
+      <wormhole id="13">
+        <endpoint system="Proxima Centauri" id="3" />
+        <endpoint system="Rurawua" id="0" />
+      </wormhole>
+      <wormhole id="14">
+        <endpoint system="Proxima Centauri" id="4" />
+        <endpoint system="Madrona" id="1" />
+      </wormhole>
+      <wormhole id="15">
+        <endpoint system="Rurawua" id="0" />
+        <endpoint system="Proxima Centauri" id="3" />
+      </wormhole>
+      <wormhole id="16">
+        <endpoint system="Solar system" id="0" />
+        <endpoint system="Proxima Centauri" id="0" />
+      </wormhole>
+      <wormhole id="17">
+        <endpoint system="Solar system" id="1" />
+        <endpoint system="Vitera" id="0" />
+      </wormhole>
+      <wormhole id="18">
+        <endpoint system="Solar system" id="2" />
+        <endpoint system="Atabea" id="0" />
+      </wormhole>
+      <wormhole id="19">
+        <endpoint system="Solar system" id="3" />
+        <endpoint system="Madrona" id="0" />
+      </wormhole>
+      <wormhole id="20">
+        <endpoint system="Solas" id="0" />
+        <endpoint system="Proxima Centauri" id="2" />
+      </wormhole>
+      <wormhole id="21">
+        <endpoint system="Tertius" id="0" />
+        <endpoint system="Atabea" id="1" />
+      </wormhole>
+      <wormhole id="22">
+        <endpoint system="Vitera" id="0" />
+        <endpoint system="Solar system" id="1" />
+      </wormhole>
+      <wormhole id="23">
+        <endpoint system="Vitera" id="1" />
+        <endpoint system="Proxima Centauri" id="1" />
+      </wormhole>
+    </wormholes>
   </galaxy>
 </st:stdata>

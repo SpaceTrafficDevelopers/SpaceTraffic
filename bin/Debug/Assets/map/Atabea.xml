@@ -19,7 +19,7 @@ limitations under the License.
     xmlns:st="SpaceTrafficData"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="1.2">
-    <starsystem name="Atabea">
+    <starsystem name="Atabea" x="432" y="378">
         <star name="Atabea">
             <trajectory>
                 <stacionary x="0" y="0" />

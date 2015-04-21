@@ -210,15 +210,15 @@ namespace Core.Tests
         {
             testPath.Clear();
             testPath.Add(new NavPoint(map["Tertius"].Planets["Tertius 2"]));
-            testPath.Add(new NavPoint(map["Tertius"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[1]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[1]));
+            testPath.Add(new NavPoint(map["Tertius"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[1]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[1]));
             testPath.Add(new NavPoint(map["Solar system"].Planets["Sol 3"]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[2]));
-            testPath.Add(new NavPoint(map["Solas"].WormholeEndpoints[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[2]));
+            testPath.Add(new NavPoint(map["Solas"].WormholeEndpointsList[0]));
             testPath.Add(new NavPoint(map["Solas"].Planets["Solas 2"]));
 
             pathTesting(10, 0.0, pointsPath1_speed10, timesPath1_speed10); 
@@ -230,15 +230,15 @@ namespace Core.Tests
         {
             testPath.Clear();
             testPath.Add(new NavPoint(map["Granari"].Planets["Granari 1"]));
-            testPath.Add(new NavPoint(map["Granari"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[3]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[1]));
+            testPath.Add(new NavPoint(map["Granari"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[3]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[1]));
             testPath.Add(new NavPoint(map["Solar system"].Planets["Sol 1"]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[3]));
-            testPath.Add(new NavPoint(map["Rurawua"].WormholeEndpoints[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[3]));
+            testPath.Add(new NavPoint(map["Rurawua"].WormholeEndpointsList[0]));
             testPath.Add(new NavPoint(map["Rurawua"].Planets["Rurawua 2"]));
 
             pathTesting(3, 0.0, pointsPath2_speed3, timesPath2_speed3);
@@ -249,10 +249,10 @@ namespace Core.Tests
         {
             testPath.Clear();
             testPath.Add(new NavPoint(map["Granari"].Planets["Granari 1"]));
-            testPath.Add(new NavPoint(map["Granari"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[3]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[1]));
+            testPath.Add(new NavPoint(map["Granari"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[3]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[1]));
             testPath.Add(new NavPoint(map["Solar system"].Planets["Sol 1"]));
 
 
@@ -265,59 +265,59 @@ namespace Core.Tests
             // 5O points
             testPath.Clear();
             testPath.Add(new NavPoint(map["Tertius"].Planets["Tertius 2"]));
-            testPath.Add(new NavPoint(map["Tertius"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[1]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[1]));
+            testPath.Add(new NavPoint(map["Tertius"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[1]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[1]));
             testPath.Add(new NavPoint(map["Solar system"].Planets["Sol 3"]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[2]));
-            testPath.Add(new NavPoint(map["Solas"].WormholeEndpoints[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[2]));
+            testPath.Add(new NavPoint(map["Solas"].WormholeEndpointsList[0]));
             testPath.Add(new NavPoint(map["Solas"].Planets["Solas 2"]));
             // back
-            testPath.Add(new NavPoint(map["Solas"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[2]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[0]));
+            testPath.Add(new NavPoint(map["Solas"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[2]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[0]));
             testPath.Add(new NavPoint(map["Solar system"].Planets["Sol 3"]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[1]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[1]));
-            testPath.Add(new NavPoint(map["Tertius"].WormholeEndpoints[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[1]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[1]));
+            testPath.Add(new NavPoint(map["Tertius"].WormholeEndpointsList[0]));
             testPath.Add(new NavPoint(map["Tertius"].Planets["Tertius 2"]));
             // back
-            testPath.Add(new NavPoint(map["Tertius"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[1]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[1]));
+            testPath.Add(new NavPoint(map["Tertius"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[1]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[1]));
             testPath.Add(new NavPoint(map["Solar system"].Planets["Sol 3"]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[2]));
-            testPath.Add(new NavPoint(map["Solas"].WormholeEndpoints[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[2]));
+            testPath.Add(new NavPoint(map["Solas"].WormholeEndpointsList[0]));
             testPath.Add(new NavPoint(map["Solas"].Planets["Solas 2"]));
             // back
-            testPath.Add(new NavPoint(map["Solas"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[2]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[0]));
+            testPath.Add(new NavPoint(map["Solas"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[2]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[0]));
             testPath.Add(new NavPoint(map["Solar system"].Planets["Sol 3"]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[1]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[1]));
-            testPath.Add(new NavPoint(map["Tertius"].WormholeEndpoints[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[1]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[1]));
+            testPath.Add(new NavPoint(map["Tertius"].WormholeEndpointsList[0]));
             testPath.Add(new NavPoint(map["Tertius"].Planets["Tertius 2"]));
             // back
-            testPath.Add(new NavPoint(map["Tertius"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[1]));
-            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[1]));
+            testPath.Add(new NavPoint(map["Tertius"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[1]));
+            testPath.Add(new NavPoint(map["Atabea"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[1]));
             testPath.Add(new NavPoint(map["Solar system"].Planets["Sol 3"]));
-            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[0]));
-            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpoints[2]));
-            testPath.Add(new NavPoint(map["Solas"].WormholeEndpoints[0]));
+            testPath.Add(new NavPoint(map["Solar system"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[0]));
+            testPath.Add(new NavPoint(map["Proxima Centauri"].WormholeEndpointsList[2]));
+            testPath.Add(new NavPoint(map["Solas"].WormholeEndpointsList[0]));
             testPath.Add(new NavPoint(map["Solas"].Planets["Solas 2"]));
 
             testShip.MaxSpeed = 10;

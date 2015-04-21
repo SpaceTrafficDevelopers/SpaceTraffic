@@ -266,6 +266,8 @@ limitations under the License.
       </xs:element>
     </xs:all>
     <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="x" use="required" type="xs:int"/>
+    <xs:attribute name="y" use="required" type="xs:int"/>
   </xs:complexType>
   <xs:group name="ResourceDefinition">
     <xs:choice>

@@ -307,6 +307,10 @@ namespace SpaceTraffic.Game
             this._locked = true;
         }
 
+        public void Unlock()
+        {
+            this._locked = false;
+        }
         /// <summary>
         /// Gets the list of star system instances in read only collection.
         /// </summary>

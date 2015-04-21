@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.ServiceModel;
 using SpaceTraffic.Entities.PublicEntities;
+using SpaceTraffic.Game;
 
 namespace SpaceTraffic.Services.Contracts
 {
@@ -30,10 +31,14 @@ namespace SpaceTraffic.Services.Contracts
         IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem);
 
         [OperationContract]
+        IList<StarSystem> GetGalaxyMap(string galaxyMap);
+
+        [OperationContract]
         int PerformAction(int playerId, string actionName, params object[] actionArgs);
 
         [OperationContract]
         object GetActionResult(int playerId, int actionCode);
+
     }
 
     [Serializable]
