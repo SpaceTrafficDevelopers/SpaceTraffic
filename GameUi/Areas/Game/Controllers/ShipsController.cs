@@ -23,6 +23,7 @@ using SpaceTraffic.GameUi.Models.Ui;
 using SpaceTraffic.GameUi.Areas.Game.Models;
 using System.Xml.Linq;
 using SpaceTraffic.Entities;
+using SpaceTraffic.GameUi.Extensions;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
@@ -62,13 +63,12 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 				if (GSClient.GameService.PlayerHasEnaughCredits(getCurrentPlayer().PlayerId, shipModel.Price)){
 					GSClient.GameService.PerformAction(getCurrentPlayer().PlayerId, "ShipBuy", getCurrentPlayer().PlayerId, "Solar System", 1, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price);
 				} else {
-					//TODO: flash Nemáš dostatek kreditů na koupi lodě ship.Model.
+					return RedirectToAction("").Warning(String.Format("Nemáš dostatek kreditů na koupi lodě {0}.", shipModel.Model));
 				}
-			}else{ 
-				//TODO: flash Tento typ lodi neexistuje.
+			}else{
+				return RedirectToAction("").Error("Tento typ lodi neexistuje.");
 			}
-			Response.Redirect("/Ships/");
-			return null;
+			return RedirectToAction("").Success(String.Format("Loď typu {0} byla úspěšně zakoupena.", shipModel.Model));
 		}
 
 		public PartialViewResult Overview()

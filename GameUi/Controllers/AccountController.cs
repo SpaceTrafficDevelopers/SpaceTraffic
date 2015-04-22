@@ -27,7 +27,7 @@ using SpaceTraffic.Utils.Debugging;
 namespace SpaceTraffic.GameUi.Controllers
 {
     //RequireHttps]
-    public class AccountController : Controller
+    public class AccountController : AbstractController
     {
 
         //
