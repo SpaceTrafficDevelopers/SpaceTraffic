@@ -132,10 +132,63 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             return planets;
         }
 
-        public static void addPlanet(StarSystem system, string trajectoryType)
+        /// <summary>
+        /// vytvori novou planetu s kruznicovou orbitou
+        /// </summary>
+        /// <param name="system">system do ktereho pridavame planetu</param>
+        /// <returns>true, pokud planetu uspesne pridame, false v opacnem pripade</returns>
+        public static bool addPlanet(StarSystem system)
         {
+            // TODO generator jmen
+            string pname = "newPlanet"+system.Planets.Count;
+            string paltName = "newPlanet"+system.Planets.Count;
+            // hmotnost jupiteru 1,898E27 kg nasobena faktore mezi (0, 80)
+            double mass = JUPITER_MASS * (rand.NextDouble() + 0.01) * rand.Next(1, 80);
+            CelestialObjectInfo pdetails = new CelestialObjectInfo(0.0, mass, "Description of " + system.Name + " placeholder.");
+            // radius je vnejsi okraj pred wormholami, pricita se k nemu pocet planet,
+            // aby se pri pridani vice planet nevygenerovali dve prez sebe
+            int radius = BASE_WORMHOLE_RADIUS - 40 + system.Planets.Count*3;
+            // perioda natvrdo, pak se snadno prenastavi pres editor
+            int period = radius * 300;
+            Game.Geometry.Direction direction = Game.Geometry.Direction.CLOCKWISE;
+            //  1:6 pravdepodobnost ze pobezi opacne
+            if (rand.Next(6) == 1)
+                direction = Game.Geometry.Direction.COUNTERCLOCKWISE;
+            int initangle = rand.Next(360);
+            Game.Geometry.Trajectory ptrajectory = null;
+            ptrajectory = new Game.Geometry.CircularOrbit(radius, period, direction, initangle);
+            if (ptrajectory == null)
+                return false;
+            system.Planets.Add(new Planet(pname, paltName, pdetails, system, ptrajectory));
+            return true;
+        }
 
+
+        /// <summary>
+        /// vytvori novou wormhole na vnejsku systemu
+        /// </summary>
+        /// <param name="system">system do ktereho pridavame wormhole</param>
+        /// <returns>true, pokud wormhole uspesne pridame, false v opacnem pripade</returns>
+        public static bool addWormhole(StarSystem system)
+        {
+            //radius o 20 vetsi nez posledni wormhole v systemu
+            int radius = BASE_WORMHOLE_RADIUS + 10*system.WormholeEndpoints.Count;
+            // perioda natvrdo, pak se snadno prenastavi pres editor
+            int period = radius * 3000;
+            Game.Geometry.Direction direction = Game.Geometry.Direction.CLOCKWISE;
+            //  1:6 pravdepodobnost ze pobezi opacne
+            if (rand.Next(6) == 1)
+                direction = Game.Geometry.Direction.COUNTERCLOCKWISE;
+            int initangle = rand.Next(360);
+            Game.Geometry.Trajectory trajectory = null;
+            trajectory = new Game.Geometry.CircularOrbit(radius, period, direction, initangle);
+            if (trajectory == null)
+                return false;
+            system.WormholeEndpoints.Add(new WormholeEndpoint(system.WormholeEndpoints.Count, system ,trajectory));
+            return true;
         }
 
     }
 }
+
+

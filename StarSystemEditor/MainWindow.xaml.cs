@@ -370,8 +370,15 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             if (Editor.dataPresenter.SelectedStarSystem == null)
             {
                 MessageBox.Show("Select a StarSystem first.");
+                return;
             }
-            Editor.newPlanet();
+            if (Editor.newPlanet())
+            {
+                MessageBox.Show("Planet created.");
+                ReDrawMap();
+            }
+            else MessageBox.Show("Planet was not created.");
+
         }
 
         private void NewWormhole_Click(object sender, RoutedEventArgs e)
@@ -379,8 +386,14 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             if (Editor.dataPresenter.SelectedStarSystem == null)
             {
                 MessageBox.Show("Select a StarSystem first.");
+                return;
             }
-            Editor.newWormhole();
+            if (Editor.newWormhole())
+            {
+                MessageBox.Show("Wormhole created.");
+                ReDrawMap();
+            }
+            else MessageBox.Show("Wormhole was not created."); 
         }
 
     }

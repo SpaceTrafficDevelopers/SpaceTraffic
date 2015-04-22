@@ -206,17 +206,17 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// <summary>
         /// metoda, ktera prida planetu do vybraneho systemu
         /// </summary>
-        public static void newPlanet()
+        public static bool newPlanet()
         {
-            StarSystemCreator.addPlanet(Editor.dataPresenter.SelectedStarSystem, "circular");
+            return StarSystemCreator.addPlanet(Editor.dataPresenter.SelectedStarSystem);
         }
 
         /// <summary>
         /// metoda, ktera prida wormhole do vybraneho systemu
         /// </summary>
-        public static void newWormhole()
+        public static bool newWormhole()
         {
-
+            return StarSystemCreator.addWormhole(Editor.dataPresenter.SelectedStarSystem);
         }
 
         /// <summary>
