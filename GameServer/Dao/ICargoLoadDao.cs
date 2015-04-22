@@ -25,17 +25,14 @@ namespace SpaceTraffic.Dao
     public interface ICargoLoadDao
     {
 
-        bool InsertCargo(ICargoLoadEntity cargoLoadEntity);
+        bool RemoveCargoById(int cargoLoadEntityId);
 
-        bool UpdateCargoPriceById(ICargoLoadEntity cargoLoadEntity);
+        bool UpdateCargo(ICargoLoadEntity cargoLoadEntity);
 
-        bool UpdateCargoCountById(ICargoLoadEntity cargoLoadEntity);
-
-        bool RemoveCargo(ICargoLoadEntity cargoLoadEntity);
-
-        ICargoLoadEntity GetCargoByID(int cargoOwnerID, int cargoID);
+        ICargoLoadEntity GetCargoByID(int cargoLoadEntityId);
         bool InsertOrUpdateCargo(ICargoLoadEntity cargo);
-        //ICargo UpdateOrRemoveCargoByCountAndID(int cargoOwnerID, int CargoID, int Count);
+        bool UpdateOrRemoveCargo(ICargoLoadEntity cargo);
+        List<ICargoLoadEntity> GetCargoListByOwnerId(int ownerID);
 
     }
 }

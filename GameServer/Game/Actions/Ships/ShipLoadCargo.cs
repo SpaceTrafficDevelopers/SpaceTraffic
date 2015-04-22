@@ -53,8 +53,6 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-           // SpaceShipCargo spaceshipcargo = getSpaceshipCargoFromArguments(gameServer, cargo, spaceship);
-
             if(!checkSpaceShipCargos(gameServer,spaceship)){
                 
                 result = String.Format("Loď {0} nemá dostatek místa na naložení nákladu.", spaceship.SpaceShipName);
@@ -105,7 +103,7 @@ namespace SpaceTraffic.Game.Actions
         /// <returns>true when ship has space for cargo, otherwise fale</returns>
         private bool checkSpaceShipCargos(IGameServer gameServer, SpaceShip spaceShip)
         {
-            List<SpaceShipCargo> cargoList = gameServer.Persistence.GetSpaceShipCargoDAO().GetSpaceShipCargoBySpaceShipId(spaceShip.SpaceShipId);
+            List<ICargoLoadEntity> cargoList = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoListByOwnerId(spaceShip.SpaceShipId);
 
             int count = 0;
 
@@ -148,12 +146,12 @@ namespace SpaceTraffic.Game.Actions
          */
         public object[] ActionArgs { get; set; }
 
-        private String StarSystemName { get; set; }
+        public String StarSystemName { get; set; }
 
-        private String PlanetName { get; set; }
+        public String PlanetName { get; set; }
 
-        private int SpaceShipID { get; set; }
+        public int SpaceShipID { get; set; }
 
-        private ICargoLoadEntity Cargo { get; set; }
+        public ICargoLoadEntity Cargo { get; set; }
     }
 }
