@@ -199,7 +199,9 @@ using SpaceTraffic.Entities;
         public SpaceShipCargoConfiguration()
             : base()
         {
-            HasKey(p => new { p.CargoId, p.SpaceShipId });
+            HasKey(p => p.SpaceShipCargoId);
+            Property(p => p.CargoId).HasColumnType("int").IsRequired();
+            Property(p => p.SpaceShipId).HasColumnType("int").IsRequired();
             Property(p => p.CargoCount).HasColumnType("int").IsRequired();
             Property(p => p.CargoPrice).HasColumnType("int").IsRequired();   
             HasRequired(a => a.Cargo).WithMany(a => a.SpaceShipsCargos).HasForeignKey(a => a.CargoId);
@@ -232,7 +234,9 @@ using SpaceTraffic.Entities;
         public TraderCargoConfiguration()
             : base()
         {
-            HasKey(p => new { p.CargoId, p.TraderId });
+            HasKey(p => p.TraderCargoId);
+            Property(p => p.CargoId).HasColumnType("int").IsRequired();
+            Property(p => p.TraderId).HasColumnType("int").IsRequired();
             Property(p => p.CargoCount).HasColumnType("int").IsRequired();
             Property(p => p.CargoPrice).HasColumnType("int").IsRequired();
             HasRequired(a => a.Cargo).WithMany(a => a.TraderCargos).HasForeignKey(a => a.CargoId);

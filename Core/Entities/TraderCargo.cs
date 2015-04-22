@@ -24,6 +24,8 @@ namespace SpaceTraffic.Entities
 {
     public class TraderCargo : ICargoLoadEntity
     {
+        public int TraderCargoId { get; set; }
+
         public int TraderId { get; set; }
 
         public virtual Trader Trader { get; set; }

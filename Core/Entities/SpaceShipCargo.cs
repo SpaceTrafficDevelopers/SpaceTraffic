@@ -23,6 +23,8 @@ namespace SpaceTraffic.Entities
 {
     public class SpaceShipCargo : ICargoLoadEntity
     {
+        public int SpaceShipCargoId { get; set; }
+
         public int SpaceShipId { get; set; }
 
         public virtual SpaceShip SpaceShip { get; set; }
