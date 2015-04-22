@@ -24,7 +24,7 @@ namespace SpaceTraffic.Dao
 {
     public interface ISpaceShipCargoDAO : ICargoLoadDao
     {
-        /// <summary>
+       /* /// <summary>
         /// Insert spaceShip with Cargo
         /// </summary>
         /// <param name="spaceShipId">SpaceShip id</param>
@@ -68,8 +68,8 @@ namespace SpaceTraffic.Dao
         /// <exception cref="UpdateException" >The exception that is thrown when modifications to object instances cannot be persisted to the data store.</exception>
         List<SpaceShipCargo> GetSpaceShipCargoBySpaceShipId(int spaceShipId);
 
-        bool InsertOrUpdateCargo(ICargoLoadEntity cargo);
-
+        bool InsertOrUpdateCargo(ICargoLoadEntity cargo);*/
+        
 
     }
 }

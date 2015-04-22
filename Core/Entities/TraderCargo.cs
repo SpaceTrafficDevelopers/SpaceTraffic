@@ -38,7 +38,7 @@ namespace SpaceTraffic.Entities
 
         public int CargoPrice { get; set; }
 
-        public int CargoLoadEntityId
+        public int CargoOwnerId
         {
             get
             {
@@ -47,6 +47,18 @@ namespace SpaceTraffic.Entities
             set
             {
                 TraderId = value;
+            }
+        }
+
+        public int CargoLoadEntityId
+        {
+            get
+            {
+                return TraderCargoId;
+            }
+            set
+            {
+                TraderCargoId = value;
             }
         }
     }

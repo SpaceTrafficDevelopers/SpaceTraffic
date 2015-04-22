@@ -47,34 +47,48 @@ namespace SpaceTraffic.Game.Actions
         /// </summary>
         public object[] ActionArgs { get; set; }
 
-        private int CargoID { get; set; }
+        public int CargoLoadEntityID { get; set; }
 
         /// <summary>
         /// Amount of goods to buy
         /// </summary>
-        private int Count { get; set; }
+        public int Count { get; set; }
 
-        private ICargoLoadDao LoadingPlace { get; set; }
+        public String StarSystemName { get; set; }
 
-        private ICargoLoadDao SellingPlace { get; set; }
+        public String PlanetName { get; set; }
 
-        private int BuyerID { get; set; }
+        public ICargoLoadDao LoadingPlace { get; set; }
+
+        public int SellerShipId { get; set; }
+
+        public int BuyerID { get; set; }
 
         public void Perform(IGameServer gameServer)
         {
             getArgumentsFromActionArgs();
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
-            ICargoLoadEntity cargo = SellingPlace.GetCargoByID(player.PlayerId, CargoID);
+            SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SellerShipId);
+
+            Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceShip.DockedAtBaseId);
+            Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
+            ICargoLoadEntity cargo = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoByID(CargoLoadEntityID);
 
             if (cargo == null)
             {
-                result = String.Format("Hráč {0} nemá zboží s ID = {1}.", player.PlayerId, CargoID);
+                result = String.Format("Hráč {0} nemá zboží s ID = {1}.", player.PlayerId, CargoLoadEntityID);
+                return;
+            }
+
+            if (!dockedBase.Planet.Equals(planet))
+            {
+                result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
                 return;
             }
 
             if(cargo.CargoCount < Count)
             {
-                result = String.Format("Hráč {0} nemá požadovaných {1} jednotek zboží s ID = {1}.", player.PlayerId, Count, CargoID);
+                result = String.Format("Hráč {0} nemá požadovaných {1} jednotek zboží s ID = {1}.", player.PlayerId, Count, CargoLoadEntityID);
                 return;
             }
 
@@ -85,24 +99,27 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            cargo.CargoCount -= Count;
-            if(cargo.CargoCount == 0)
-            {
-                SellingPlace.RemoveCargo(cargo);
-            }
-            else
-            {
-                SellingPlace.UpdateCargoCountById(cargo);
-            }
+            ShipUnloadCargo unloadingAction = new ShipUnloadCargo();
+            unloadingAction.PlayerId = PlayerId;
+            unloadingAction.SpaceShipID = SellerShipId;
+            unloadingAction.StarSystemName = StarSystemName;
+            unloadingAction.PlanetName = PlanetName;
+            unloadingAction.CargoLoadEntityID = cargo.CargoLoadEntityId;
+            unloadingAction.LoadingPlace = LoadingPlace;
+            unloadingAction.BuyerID = BuyerID;
+
+
+            gameServer.Game.PerformAction(unloadingAction);
         }
 
         private void getArgumentsFromActionArgs()
         {
-            CargoID = Convert.ToInt32(ActionArgs[0]);
-            Count = Convert.ToInt32(ActionArgs[1]);
-            LoadingPlace = (ICargoLoadDao)ActionArgs[2];
-            SellingPlace = (ICargoLoadDao)ActionArgs[3];
-            BuyerID = Convert.ToInt32(ActionArgs[4]);
+            StarSystemName = ActionArgs[0].ToString();
+            PlanetName = ActionArgs[1].ToString();
+            CargoLoadEntityID = Convert.ToInt32(ActionArgs[3]);
+            Count = Convert.ToInt32(ActionArgs[4]);
+            LoadingPlace = (ICargoLoadDao)ActionArgs[5];
+            BuyerID = Convert.ToInt32(ActionArgs[6]);
         }
     }
 }

@@ -61,15 +61,16 @@ namespace SpaceTraffic.Game.Actions
          */
         public object[] ActionArgs { get; set; }
 
-        private String StarSystemName { get; set; }
+        public String StarSystemName { get; set; }
 
-        private String PlanetName { get; set; }
+        public String PlanetName { get; set; }
 
-        private int SpaceShipID { get; set; }
+        public int SpaceShipID { get; set; }
+        public int BuyerID { get; set; }
 
-        private int CargoID { get; set; }
-        private int Count { get; set; }
-        private ICargoLoadDao LoadingPlace { get; set; }
+        public int CargoLoadEntityID { get; set; }
+        public int Count { get; set; }
+        public ICargoLoadDao LoadingPlace { get; set; }
 
 
         public void Perform(IGameServer gameServer)
@@ -79,7 +80,7 @@ namespace SpaceTraffic.Game.Actions
 
             Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceShip.DockedAtBaseId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
-            ICargoLoadEntity cargo = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoByID(SpaceShipID, CargoID);
+            ICargoLoadEntity cargo = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoByID(CargoLoadEntityID);
             
             if (!dockedBase.Planet.Equals(planet))
             {
@@ -101,18 +102,16 @@ namespace SpaceTraffic.Game.Actions
 
             cargo.CargoCount -= Count;
 
-            if(cargo.CargoCount == 0)
+            if (!gameServer.Persistence.GetSpaceShipCargoDAO().UpdateOrRemoveCargo(cargo))
             {
-                gameServer.Persistence.GetSpaceShipCargoDAO().RemoveCargo(cargo);
-            }
-            else
-            {
-                gameServer.Persistence.GetSpaceShipCargoDAO().UpdateCargoCountById(cargo);
+                result = String.Format("Změny se nepovedlo zapsat do databáze");
+                return;
             }
 
+            cargo.CargoCount = Count;
+            cargo.CargoOwnerId = BuyerID;
             LoadingPlace.InsertOrUpdateCargo(cargo);
             
-
             result = String.Format("Náklad {0} byl vyložen.", cargo.CargoId);
         }
 
@@ -121,12 +120,13 @@ namespace SpaceTraffic.Game.Actions
             StarSystemName = ActionArgs[0].ToString();
             PlanetName = ActionArgs[1].ToString();
             SpaceShipID = Convert.ToInt32(ActionArgs[2]);
-            CargoID = Convert.ToInt32(ActionArgs[3]);
+            CargoLoadEntityID = Convert.ToInt32(ActionArgs[3]);
             Count = Convert.ToInt32(ActionArgs[4]);
             LoadingPlace = (ICargoLoadDao)ActionArgs[5];
+            BuyerID = Convert.ToInt32(ActionArgs[6]);
         }
 
-        /// <summary>
+      /*  /// <summary>
         /// Return SpaceShipCargo from SpaceShipCargos which contains cargo instance.
         /// Or return null when space ship not contains cargo instance.
         /// </summary>
@@ -145,7 +145,7 @@ namespace SpaceTraffic.Game.Actions
             }
 
             return null;
-        }
+        }*/
         
     }
 }

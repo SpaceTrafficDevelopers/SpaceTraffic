@@ -9,6 +9,8 @@ namespace SpaceTraffic.Entities
     {
         int CargoLoadEntityId { get; set; }
 
+        int CargoOwnerId { get; set; }
+
         int CargoId { get; set; }
 
         int CargoCount { get; set; }

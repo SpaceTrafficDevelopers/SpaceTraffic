@@ -24,14 +24,19 @@ namespace SpaceTraffic.Dao
 {
     public class SpaceShipCargoDAO : AbstractDAO, ISpaceShipCargoDAO
     {
-        public bool InsertSpaceShipCargo(SpaceShipCargo spaceShipCargo)
+        private bool InsertCargo(ICargoLoadEntity cargoLoadEntity)
         {
             using (var contextDB = CreateContext())
             {
+                SpaceShipCargo ssc = cargoLoadEntity as SpaceShipCargo;
+
+                if (ssc == null)
+                    return false;
+
                 try
                 {
                     // add space ship to context
-                    contextDB.SpaceShipsCargos.Add(spaceShipCargo);
+                    contextDB.SpaceShipsCargos.Add(ssc);
                     // save context to database
                     contextDB.SaveChanges();
                     return true;
@@ -43,14 +48,15 @@ namespace SpaceTraffic.Dao
             }
         }
 
-        public bool UpdateCargoCountById(SpaceShipCargo spaceShipCargo)
+        public bool UpdateCargo(ICargoLoadEntity cargoLoadEntity)
         {
             using (var contextDB = CreateContext())
             {
                 try
-                {
-                    var spaceShipCargoTab = contextDB.SpaceShipsCargos.FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipCargo.SpaceShipId) && x.CargoId.Equals(spaceShipCargo.CargoId));
-                    spaceShipCargoTab.CargoCount = spaceShipCargo.CargoCount;
+                { 
+                    var spaceShipCargoTab = contextDB.SpaceShipsCargos.First(x => x.SpaceShipCargoId.Equals(cargoLoadEntity.CargoLoadEntityId));
+                    spaceShipCargoTab.CargoCount = cargoLoadEntity.CargoCount;
+                    spaceShipCargoTab.CargoPrice = cargoLoadEntity.CargoPrice;
                     contextDB.SaveChanges();
                     return true;
                 }
@@ -61,31 +67,13 @@ namespace SpaceTraffic.Dao
             }
         }
 
-        public bool UpdateCargoPriceById(SpaceShipCargo spaceShipCargo) {
-            using (var contextDB = CreateContext())
-            {
-                try
-                {
-                    var spaceShipCargoTab = contextDB.SpaceShipsCargos.FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipCargo.SpaceShipId) && x.CargoId.Equals(spaceShipCargo.CargoId));
-                    spaceShipCargoTab.CargoPrice = spaceShipCargo.CargoPrice;
-                    // save context to database
-                    contextDB.SaveChanges();
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-        }
-
-        public bool RemoveSpaceShipCargoById(int spaceShipId, int cargoId)
+        public bool RemoveCargoById(int spaceShipCargoId)
         {
             using (var contextDB = CreateContext())
             {
                 try
                 {
-                    var spaceShipCargoTab = contextDB.SpaceShipsCargos.FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipId) && x.CargoId.Equals(cargoId));
+                    var spaceShipCargoTab = contextDB.SpaceShipsCargos.First(x => x.SpaceShipCargoId.Equals(spaceShipCargoId));
                     contextDB.SpaceShipsCargos.Remove(spaceShipCargoTab);
                     // save context to database
                     contextDB.SaveChanges();
@@ -98,64 +86,42 @@ namespace SpaceTraffic.Dao
             }
         }
 
-
-        public List<SpaceShipCargo> GetSpaceShipCargoBySpaceShipId(int spaceShipId)
+        public bool UpdateOrRemoveCargo(ICargoLoadEntity cargo)
         {
             using (var contextDB = CreateContext())
             {
-                return contextDB.SpaceShipsCargos.Where(x => x.SpaceShipId.Equals(spaceShipId)).ToList();
+                SpaceShipCargo tc = cargo as SpaceShipCargo;
+
+                if (!(cargo is SpaceShipCargo))
+                    return false;
+
+                if (cargo.CargoCount == 0)
+                {
+                    return RemoveCargoById(cargo.CargoLoadEntityId);
+                }
+                else
+                {
+                    return UpdateCargo(cargo);
+                }
+
             }
         }
 
 
-
-        public bool InsertCargo(ICargoLoadEntity cargoLoadEntity)
-        {
-            SpaceShipCargo ssc = cargoLoadEntity as SpaceShipCargo;
-
-            if(ssc == null)
-                return false;
-
-            return this.InsertSpaceShipCargo(ssc);
-        }
-
-        public bool UpdateCargoCountById(ICargoLoadEntity cargoLoadEntity)
-        {
-            SpaceShipCargo ssc = cargoLoadEntity as SpaceShipCargo;
-
-            if (ssc == null)
-                return false;
-
-            return this.UpdateCargoCountById(ssc);
-        }
-
-        public bool RemoveCargo(ICargoLoadEntity cargoLoadEntity)
-        {
-            SpaceShipCargo ssc = cargoLoadEntity as SpaceShipCargo;
-
-            if (ssc == null)
-                return false;
-
-            return this.RemoveSpaceShipCargoById(ssc.SpaceShipId, ssc.CargoId);
-        }
-
-
-        public bool UpdateCargoPriceById(ICargoLoadEntity cargoLoadEntity)
-        {
-            SpaceShipCargo ssc = cargoLoadEntity as SpaceShipCargo;
-
-            if (ssc == null)
-                return false;
-
-            return this.UpdateCargoPriceById(ssc);
-        }
-
-        public ICargoLoadEntity GetCargoByID(int spaceShipId, int cargoId)
+        public List<ICargoLoadEntity> GetCargoListByOwnerId(int spaceShipId)
         {
             using (var contextDB = CreateContext())
             {
+                return contextDB.SpaceShipsCargos.Where(x => x.SpaceShipId.Equals(spaceShipId)).ToList<ICargoLoadEntity>();
+            }
+        }
 
-                return (ICargoLoadEntity)contextDB.TraderCargos.Where(x => x.TraderId.Equals(spaceShipId) && x.CargoId.Equals(cargoId));
+
+        public ICargoLoadEntity GetCargoByID(int cargoLoadEntityId)
+        {
+            using (var contextDB = CreateContext())
+            {
+                return (ICargoLoadEntity)contextDB.SpaceShipsCargos.First(x => x.SpaceShipCargoId.Equals(cargoLoadEntityId));
             }
         }
 
@@ -163,18 +129,15 @@ namespace SpaceTraffic.Dao
         {
             using (var contextDB = CreateContext())
             {
+                SpaceShipCargo item = contextDB.SpaceShipsCargos.First(x => x.SpaceShipCargoId.Equals(cargo.CargoLoadEntityId));
 
-               List<SpaceShipCargo> cargos = contextDB.SpaceShipsCargos.Where(x => x.SpaceShipId.Equals(cargo.CargoLoadEntityId)).ToList();
-               SpaceShipCargo item = cargos.First(x => x.CargoId.Equals(cargo.CargoId) && x.CargoPrice.Equals(cargo.CargoPrice));
-
-                if(item == null)
+                if (item == null)
                 {
                     return this.InsertCargo(cargo);
                 }
                 else
                 {
-                    cargo.CargoCount += item.CargoCount;
-                    return this.UpdateCargoCountById(cargo);
+                    return this.UpdateCargo(cargo);
                 }
             }
         }

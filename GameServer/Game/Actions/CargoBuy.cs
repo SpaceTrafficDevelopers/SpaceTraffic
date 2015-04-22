@@ -57,18 +57,21 @@ namespace SpaceTraffic.Game.Actions
         /// <summary>
         /// Identifier of goods to buy
         /// </summary>
-        private int CargoID { get; set; }
+        public int CargoLoadEntityID { get; set; }
 
         /// <summary>
         /// Amount of goods to buy
         /// </summary>
-        private int Count { get; set; }
+        public int Count { get; set; }
 
-        private ICargoLoadDao LoadingPlace { get; set; }
+        public int BuyerShipID { get; set; }
 
-        private ICargoLoadDao BuyingPlace { get; set; }
+        public ICargoLoadDao BuyingPlace { get; set; }
 
-        private int ownerID { get; set; }
+        public String StarSystemName { get; set; }
+
+        public String PlanetName { get; set; }
+
 
        /* private string where { get; set; }
         private string from { get; set; }*/
@@ -78,7 +81,17 @@ namespace SpaceTraffic.Game.Actions
         {
             getArgumentsFromActionArgs();
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
-            ICargoLoadEntity cargo = BuyingPlace.GetCargoByID(ownerID, CargoID);
+            ICargoLoadEntity cargo = BuyingPlace.GetCargoByID(CargoLoadEntityID);
+            SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(BuyerShipID);
+
+            Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceShip.DockedAtBaseId);
+            Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
+
+            if (!dockedBase.Planet.Equals(planet))
+            {
+                result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
+                return;
+            }
 
             if(player == null || cargo == null)
             {
@@ -88,7 +101,7 @@ namespace SpaceTraffic.Game.Actions
 
             if (cargo.CargoCount < Count)
             {
-                result = String.Format("U obchodníka id={0} není požadovaných {1} jednotek zboží id={2}.", ownerID, Count, CargoID);
+                result = String.Format("U obchodníka id={0} není požadovaných {1} jednotek zboží id={2}.", cargo.CargoOwnerId, Count, cargo.CargoId);
                 return;
             }
 
@@ -105,28 +118,35 @@ namespace SpaceTraffic.Game.Actions
             }
 
             cargo.CargoCount -= Count;
-
-            if(cargo.CargoCount == 0)
+            
+            if(!BuyingPlace.UpdateOrRemoveCargo(cargo))
             {
-                BuyingPlace.RemoveCargo(cargo);
-            }
-            else
-            {
-                BuyingPlace.UpdateCargoCountById(cargo);
+                result = String.Format("Změny se nepovedlo zapsat do databáze");
+                return;
             }
 
             cargo.CargoCount = Count;
-            cargo.CargoLoadEntityId = player.PlayerId;
-            //Zavolat ShipLoadCargo
+            cargo.CargoOwnerId = player.PlayerId;
+
+            ShipLoadCargo loadingAction = new ShipLoadCargo();
+            loadingAction.PlayerId = PlayerId;
+            loadingAction.SpaceShipID = BuyerShipID;
+            loadingAction.StarSystemName = StarSystemName;
+            loadingAction.PlanetName = PlanetName;
+            loadingAction.Cargo = cargo;
+
+            
+            gameServer.Game.PerformAction(loadingAction);
         }
 
         private void getArgumentsFromActionArgs()
         {
-            CargoID = Convert.ToInt32(ActionArgs[0].ToString());
-            Count = Convert.ToInt32(ActionArgs[1]);
-            BuyingPlace = (ICargoLoadDao)ActionArgs[2];
-            LoadingPlace = (ICargoLoadDao)ActionArgs[3];
-            ownerID = Convert.ToInt32(ActionArgs[4]); 
+            StarSystemName = ActionArgs[0].ToString();
+            PlanetName = ActionArgs[1].ToString();
+            CargoLoadEntityID = Convert.ToInt32(ActionArgs[2].ToString());
+            Count = Convert.ToInt32(ActionArgs[3]);
+            BuyingPlace = (ICargoLoadDao)ActionArgs[4];
+            BuyerShipID = Convert.ToInt32(ActionArgs[5]); 
            
         }
 
