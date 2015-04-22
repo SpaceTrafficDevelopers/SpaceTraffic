@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <st:stdata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd" xmlns:st="SpaceTrafficData" version="1.2">
-  <starsystem name="Lervos2">
+  <starsystem name="Lervos2" x="420" y="78">
     <star name="Lervos2">
       <trajectory>
         <stacionary x="0" y="0" />
@@ -12,9 +12,9 @@
       </details>
     </star>
     <planets>
-      <planet altName="Vhalenta" name="Lervos2 1">
+      <planet altName="Vhalenta1" name="Lervos2 1">
         <trajectory>
-          <ellipticOrbit direction="clockwise" period="2890" a="86" b="65" angle="135.0" initialAngle="200.0" />
+          <ellipticOrbit direction="clockwise" period="2890" a="86" b="50" angle="135.0" initialAngle="200.0" />
         </trajectory>
         <details>
           <gravity>0E+000</gravity>
@@ -22,7 +22,7 @@
           <description>Description of Vhalenta placeholder.</description>
         </details>
       </planet>
-      <planet altName="Vhalenta" name="Lervos2 2">
+      <planet altName="Vhalenta2" name="Lervos2 2">
         <trajectory>
           <ellipticOrbit direction="counterclockwise" period="2890" a="86" b="65" angle="45.0" initialAngle="0.0" />
         </trajectory>
@@ -42,9 +42,9 @@
           <description>Description of Lemna placeholder.</description>
         </details>
       </planet>
-      <planet altName="Vhalenta" name="Lervos2 5">
+      <planet altName="Vhalenta3" name="Lervos2 5">
         <trajectory>
-          <ellipticOrbit direction="clockwise" period="2890" a="86" b="65" angle="0.0" initialAngle="0.0" />
+          <ellipticOrbit direction="clockwise" period="2890" a="86" b="83" angle="0.0" initialAngle="0.0" />
         </trajectory>
         <details>
           <gravity>0E+000</gravity>

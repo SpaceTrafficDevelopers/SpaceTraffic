@@ -459,13 +459,13 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                     if (trajectoryView.Trajectory is CircularOrbit)
                     {
                         Editor.CircleOrbitEditor.LoadObject(trajectoryView.Trajectory);
-                        traj = (CircleEditorEntity)Editor.CircleOrbitEditor;
+                        traj = Editor.CircleOrbitEditor;
                         initangle = (Editor.CircleOrbitEditor.LoadedObject as CircularOrbit).InitialAngleRad;
                     }
                     else if (trajectoryView.Trajectory is EllipticOrbit)
                     {
                         Editor.EllipseOrbitEditor.LoadObject(trajectoryView.Trajectory);
-                        traj = (EllipseEditorEntity)Editor.EllipseOrbitEditor;
+                        traj = Editor.EllipseOrbitEditor;
                         center.X += (traj.LoadedObject as EllipticOrbit).A; //       TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO :(
                         center.Y += (traj.LoadedObject as EllipticOrbit).B;
                         initangle = (Editor.EllipseOrbitEditor.LoadedObject as EllipticOrbit).InitialAngleRad;
@@ -570,6 +570,34 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                             double angle = Math.Atan2(pomX, pomY);
                             traj.SetInitialAngleRad(angle);
                         }
+                    }
+                    else if (trajectoryView.Trajectory is EllipticOrbit)
+                    {
+                        EllipticOrbit orbit = (EllipticOrbit)trajectoryView.Trajectory;
+                        Point2d pointOnLine = translatePoint(center, points[index].Position, mousePos);
+                        //vzdalenost noveho bodu na primce vedouci oznacenym bodem od stredu elipsy (neni stred platna,
+                        // tam je pouze ohnisko)
+                        double dis = distance(pointOnLine, center);
+                        double diff = dis - orbit.B / 2;
+                        orbit.B = (int)(diff * this.ObjectSizeRatio);
+                        Editor.EllipseOrbitEditor.LoadObject(orbit);
+                        traj = (EllipseEditorEntity)Editor.EllipseOrbitEditor;
+                        // zmena hlavni poloosy
+                        traj.SetHeight(orbit.B);
+                    }
+                }
+                // posun stredu elipsy
+                else if (index == 3)
+                {
+                    if (trajectoryView.Trajectory is CircularOrbit)
+                    {
+                      /*  points[index].Position, mousePos
+                        //vzdalenost noveho bodu na primce vedouci oznacenym bodem od stredu elipsy (neni stred platna,
+                        // tam je pouze ohnisko)
+                        Editor.CircleOrbitEditor.LoadObject(trajectoryView.Trajectory);
+                        traj = Editor.CircleOrbitEditor;
+                        traj.LoadedObject 
+*/                    
                     }
                     else if (trajectoryView.Trajectory is EllipticOrbit)
                     {
@@ -691,12 +719,12 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// Draws and elipse, symbolising point which will be used to edit trajectories
         /// </summary>
         /// <param name="pointView">zobrazovac bodu</param>
-        private static void drawPoint(SelectedPointView pointView)
+        private void drawPoint(SelectedPointView pointView)
         {
             Ellipse ellipse = pointView.GetShape();
             ellipse.Tag = pointView;
-            Canvas.SetLeft(ellipse, pointView.Point.X - pointView.Size / 2);
-            Canvas.SetTop(ellipse, pointView.Point.Y - pointView.Size / 2);
+            Canvas.SetLeft(ellipse, pointView.Point.X - pointView.Size* this.ObjectSizeRatio / 2.0);
+            Canvas.SetTop(ellipse, pointView.Point.Y - pointView.Size * this.ObjectSizeRatio / 2.0);
             DrawingArea.Canvas.Children.Add(ellipse);
         }
 
@@ -748,6 +776,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             this.SelectedObject = entityView;
             if (entityView is PlanetView)
             {
+                // nastavi se null, metoda get potom zavola create
                 this.loadedObjectData = null;
                 GetLoadedObjectData();
                 PlanetView selectedEntity = (PlanetView)entityView;
@@ -823,6 +852,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                         starSystemObjectTree.Items.Clear();
                         //refresh selectoru
                         starSystemListChanged();
+                        StarSystemDrawer();
                         return;
                     }
                     else if (dialogResult == MessageBoxResult.No)

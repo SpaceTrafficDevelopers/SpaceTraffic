@@ -110,5 +110,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             }
             return "Planeta: " + thisPlanet.Name + starSystemInfo + ", trajektorie: " + thisPlanet.Trajectory.ToString();
         }
+
+        
     }
 }

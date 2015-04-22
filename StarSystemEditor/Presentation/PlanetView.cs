@@ -129,5 +129,6 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         {
             this.TrajectoryView = view;
         }
+
     }
 }

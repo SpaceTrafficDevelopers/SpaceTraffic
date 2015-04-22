@@ -28,6 +28,7 @@ using SpaceTraffic.Utils;
 using SpaceTraffic.Entities.PublicEntities;
 using Microsoft.Win32;
 using System.Xml;
+using System.Diagnostics;
 
 namespace SpaceTraffic.Tools.StarSystemEditor.Data
 {
@@ -82,7 +83,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
                 readerSettings.IgnoreComments = true;
                 // Open document 
                 string filename = dlg.FileName;
-                FileStream fileStream = new FileStream(".\\saveddata\\maps\\" + map.MapName + ".xml", FileMode.Create);
+                FileStream fileStream = new FileStream(".\\saveddata\\Map\\" + map.MapName + ".xml", FileMode.Create);
 
                 XNamespace defaultNamespace = XNamespace.Get("SpaceTrafficData");
                 XElement doc = new XElement(
@@ -100,25 +101,36 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
                 XElement starSystems = new XElement("starSystems");
                 XElement wormholes = new XElement("wormholes");
                 int id = 0;
+                // kolekce dvojici endpointu
+                SortedList<int, WormholeEndpoint> connections = new SortedList<int, WormholeEndpoint>();
                 foreach (StarSystem starSystem in map.GetStarSystems())
                 {
                     XElement item = new XElement("starsystem");
                     item.Add(new XAttribute("name", starSystem.Name));
                     starSystems.Add(item);
                     CreateStarSystemXml(starSystem);
-                    XElement wormhole = null;
+                    
                     foreach (WormholeEndpoint wormholeEndpoint in starSystem.WormholeEndpoints)
                     {
-
                         if (wormholeEndpoint.IsConnected)
                         {
-                            wormhole = WormholesToElement(id, wormholeEndpoint);
-                            wormholes.Add(wormhole);
-                            id++;
+                            // rozdil hash funkci da unikatni klic pro kazdou wormhole dvojici
+                            int klic = Math.Abs(wormholeEndpoint.GetHashCode() - wormholeEndpoint.Destination.GetHashCode());
+                            if (!connections.ContainsKey(klic))
+                            {
+                                connections.Add(klic, wormholeEndpoint);
+                            }
+
                         }
                     }
                 }
-
+                foreach (WormholeEndpoint endpoint in connections.Values)
+                {
+                    XElement wormhole = null;
+                    wormhole = WormholesToElement(id, endpoint);
+                    wormholes.Add(wormhole);
+                    id++;
+                }
                 root.Add(starSystems);
 
                 root.Add(wormholes);
@@ -126,6 +138,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
                 doc.Add(root);
 
                 doc.Save(fileStream);
+                fileStream.Close();
             }
         }
         /// <summary>
@@ -157,7 +170,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
         public static void CreateStarSystemXml(StarSystem starSystem)
         {
             
-                FileStream fileStream = new FileStream(".\\saveddata\\maps\\" + starSystem.Name + ".xml", FileMode.Create);
+                FileStream fileStream = new FileStream(".\\saveddata\\Map\\" + starSystem.Name + ".xml", FileMode.Create);
 
                 XNamespace defaultNamespace = XNamespace.Get("SpaceTrafficData");
                 XElement doc = new XElement(
@@ -202,6 +215,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
                 doc.Add(root);
 
                 doc.Save(fileStream);
+                fileStream.Close();
+            
         }
         /// <summary>
         /// Metoda pro vytvoreni elementu z trajektorie

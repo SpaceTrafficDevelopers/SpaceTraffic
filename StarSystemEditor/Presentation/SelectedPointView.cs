@@ -55,6 +55,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         {
             this.AssociatedObject = associatedObject;
             this.Point = point;
+            this.Name = "point";
         }
         #endregion
 
@@ -98,21 +99,33 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             {
                 
                 EllipticOrbit orbit = ((EllipticOrbit)celestialObjectView.GetTrajectoryView().Trajectory);
+                double rotationAngle = MathUtil.RadianToDegree(orbit.RotationAngleInRad);
+                // stred canvasu, ne elipsy - pro rotaci
+                Point2d center = new Point2d(Editor.dataPresenter.DrawingAreaSize, Editor.dataPresenter.DrawingAreaSize);
+                //bod sirky
                 double x = celestialObjectView.GetTrajectoryView().Position.X +
                     orbit.Cx * Editor.dataPresenter.ObjectSizeRatio + orbit.A * 2 * Editor.dataPresenter.ObjectSizeRatio;
                 double y = celestialObjectView.GetTrajectoryView().Position.Y + trajectory.Height / 2.0;
-                double x2 = x - trajectory.Width / 2.0;
-                double y2 = y - trajectory.Height / 2.0;
                 Point2d point = new Point2d(x, y);
-
-                double rotationAngle = MathUtil.RadianToDegree(orbit.RotationAngleInRad);
-                Point2d center = new Point2d(Editor.dataPresenter.DrawingAreaSize, Editor.dataPresenter.DrawingAreaSize);
                 Point2d newPoint = RotatePoint(point, center, -rotationAngle);
                 SelectedPointView pointView = new SelectedPointView(celestialObjectView.GetTrajectoryView(), newPoint);
                 //add points to list of points, needed for hit testing
                 points.Add(pointView);
+                // bod vysky
+                double x2 = x - trajectory.Width / 2.0;
+                double y2 = y - trajectory.Height / 2.0;
                 point.X = x2;
                 point.Y = y2;
+                // draw trajectory minor axis dragging point 
+                newPoint = RotatePoint(point, center, -rotationAngle);
+                pointView = new SelectedPointView(celestialObjectView.GetTrajectoryView(), newPoint);
+                //add points to list of points, needed for hit testing
+                points.Add(pointView);
+                //bod stredu - posouvaci
+                double x3 = x2;
+                double y3 = y2 + trajectory.Height / 2.0;
+                point.X = x3;
+                point.Y = y3;
                 // draw trajectory minor axis dragging point 
                 newPoint = RotatePoint(point, center, -rotationAngle);
                 pointView = new SelectedPointView(celestialObjectView.GetTrajectoryView(), newPoint);
@@ -122,18 +135,28 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             if (celestialObjectView.GetTrajectoryView().Trajectory is CircularOrbit)
             {
                 CircularOrbit orbit = ((CircularOrbit)celestialObjectView.GetTrajectoryView().Trajectory);
+                // bod sirky
                 double x = celestialObjectView.GetTrajectoryView().Position.X + trajectory.Width;
                 double y = celestialObjectView.GetTrajectoryView().Position.Y + trajectory.Height / 2.0;
-                double x2 = x - trajectory.Width / 2.0;
-                double y2 = y - trajectory.Height / 2.0;
                 Point2d point = new Point2d(x, y);
                 SelectedPointView pointView = new SelectedPointView(celestialObjectView.GetTrajectoryView(), point);
                 //add points to list of points, needed for hit testing
                 points.Add(pointView);
+                // bod vysky
+                double x2 = x - trajectory.Width / 2.0;
+                double y2 = y - trajectory.Height / 2.0;
                 point.X = x2;
                 point.Y = y2;
-                //add points to list of points, needed for hit testing
                 pointView = new SelectedPointView(celestialObjectView.GetTrajectoryView(), point);
+                //add points to list of points, needed for hit testing
+                points.Add(pointView);
+                //bod stredu - posouvaci
+                double x3 = x2;
+                double y3 = y2 + trajectory.Height / 2.0;
+                point.X = x3;
+                point.Y = y3;
+                pointView = new SelectedPointView(celestialObjectView.GetTrajectoryView(), point);
+                //add points to list of points, needed for hit testing
                 points.Add(pointView);
             }
             return points;
@@ -162,16 +185,26 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             return ellipse;
         }
 
+        /// <summary>
+        /// objekt kteremu vykreslujeme bod
+        /// </summary>
+        /// <returns>objekt</returns>
         public override object GetLoadedObject()
         {
             return this.AssociatedObject;
         }
-
+        /// <summary>
+        /// jmeno objektu
+        /// </summary>
+        /// <returns>jmeno</returns>
         public override string GetName()
         {
             return this.Name;
         }
-
+        /// <summary>
+        /// velikost bodu
+        /// </summary>
+        /// <returns>velikost</returns>
         public override Size GetSize()
         {
             Size size = new Size();

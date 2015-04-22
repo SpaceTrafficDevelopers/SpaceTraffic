@@ -38,14 +38,14 @@ using SpaceTraffic.Utils;
 namespace SpaceTraffic.Tools.StarSystemEditor
 {    
     /// <summary>
-    /// Trida s editory
+    /// Editor class
     /// </summary>
     public static class Editor
     {
         #region Properties
         //editors section
         /// <summary>
-        /// Instance editoru starsystemu
+        /// Instance of StarSystem Editor
         /// </summary>
         public static StarSystemEditorEntity StarSystemEditor { get; private set; }
         /// <summary>
@@ -276,8 +276,16 @@ namespace SpaceTraffic.Tools.StarSystemEditor
                     }
                     
                     String MapName = galaxyNode.Attributes["name"].Value.ToString();
-                    // jmeno mapy + cesta
-                    LoadGalaxy(MapName, dlg.FileName);
+                    fs.Close();
+                    // odrizne jmeno souboru
+                    int index = dlg.FileName.LastIndexOf("\\");
+                    string filepath = dlg.FileName.Remove(index);
+                    //pusunuti o adresar vys
+                    index = filepath.LastIndexOf("\\");
+                    filepath = filepath.Remove(index);
+                    
+
+                    LoadGalaxy(MapName, filepath);
                 }
             }
         }

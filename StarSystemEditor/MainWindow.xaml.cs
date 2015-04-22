@@ -242,6 +242,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
                 DrawingArea.Canvas.Children.Clear();    
                 Editor.dataPresenter = new DataPresenter();
                 Editor.dataPresenter.planetSelectionChanged = planetSelected;
+                Editor.dataPresenter.wormholeSelectionChanged = wormholeSelected;
                 Editor.dataPresenter.GetDrawingArea();
                 this.StarSystemSelectorPanel.Children.Clear();
                 this.StarSystemSelectorPanel.Children.Add(new StarSystemSelector());

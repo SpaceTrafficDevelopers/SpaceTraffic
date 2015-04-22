@@ -117,5 +117,6 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             TryToSet();
             ((CircularOrbit)LoadedObject).Radius = newRadius;
         }
+
     }
 }
