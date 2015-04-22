@@ -314,19 +314,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             }
         }
    
-      /*  private void canvas_mouseMove(object sender, MouseEventArgs e)
-        {
-            Point p = new Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
-            this.ProgramStatus.Content = "" + drawingAreaScrollViewer.PointFromScreen(p).ToString();
-            
-      //      this.ProgramStatus.Content = "" + e.GetPosition(drawingAreaScrollViewer).ToString(); ;
-            if (mouseDown)
-            {
-                Point mousePos = e.GetPosition(drawingAreaScrollViewer);
-                Editor.dataPresenter.editShape(mousePos.X, mousePos.Y, pointEditing, modifier);
-            }
-        }
-        */
+     
         private void canvas_mouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Editor.dataPresenter.selected)
@@ -350,7 +338,13 @@ namespace SpaceTraffic.Tools.StarSystemEditor
 
         private void canvas_keyModifierDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key == Key.LeftShift)
+            if(e.Key == Key.Delete){
+                if(Editor.dataPresenter.SelectedStarSystem != null)
+                {
+                    Editor.dataPresenter.DeleteObject();  
+                }
+            }
+            else if (e.Key == Key.LeftShift)
             {
                 modifier = 1;
             }

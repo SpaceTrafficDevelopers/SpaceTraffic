@@ -325,7 +325,17 @@ namespace SpaceTraffic.Game
         {
             return new ReadOnlyCollection<StarSystem>(this.starSystems.Values);
         }
-        
+
+        /// <summary>
+        /// Gets the list of star system instances in editable collection.
+        /// for starsystemeditor purposes - deleting desired star systems.
+        /// </summary>
+        /// <returns>IList of starSystems.</returns>
+        public SortedList<string, StarSystem> GetEditableStarSystems()
+        {
+            return this.starSystems;
+        }
+
         /// <summary>
         /// Gets the star system connections in list of WormholeEndpointDestination instances.
         /// Thread-safety of this method is guaranteed by locking the map after it is successfuly loaded by server.

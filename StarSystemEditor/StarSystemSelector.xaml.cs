@@ -30,6 +30,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         public StarSystemSelector()
         {
             InitializeComponent();
+            Editor.dataPresenter.starSystemListChanged = StarSystemListChanged;
         }
         /// <summary>
         /// Inicializace seznamu starsystemu
@@ -66,6 +67,19 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             this.starSystemListBox.Content = Editor.dataPresenter.GetStarSystemList();
             this.starSystemObjectTreeBox.Content = Editor.dataPresenter.GetStarSystemObjectTree();
         }
+        
+        /// <summary>
+        /// Metoda volana z dataPresenteru pro refresh seznamu star systemu
+        /// </summary>
+        private void StarSystemListChanged()
+        {
+            Editor.dataPresenter.StarSystemListLoader();
+            this.starSystemListBox.Content = Editor.dataPresenter.GetStarSystemList();
+            this.starSystemObjectTreeBox.Content = Editor.dataPresenter.GetStarSystemObjectTree();
+            //refresh combobox itemlistu
+            this.starSystemSingleSelector.ItemsSource = Editor.LoadStarSystemNames();
+        }
+
         /// <summary>
         /// Inicializace
         /// </summary>

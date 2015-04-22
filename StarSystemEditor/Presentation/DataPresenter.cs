@@ -103,6 +103,14 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// Pointer na metodu
         /// </summary>
         public WormholeSelected wormholeSelectionChanged { get; set; }
+        /// <summary>
+        /// Definice delegatni metody
+        /// </summary>
+        public delegate void StarSystemListChanged();
+        /// <summary>
+        /// Pointer na metodu
+        /// </summary>
+        public StarSystemListChanged starSystemListChanged { get; set; }
         #endregion
 
         #region Getters
@@ -790,9 +798,90 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
 
             //  selected.Name;
             //selected.GetName();
+        }
+        /// <summary>
+        /// smaze vybrany objekt
+        /// </summary>
+        public void DeleteObject()
+        {
+            if (this.SelectedObject == null)
+            {
+                if (this.SelectedStarSystem != null)
+                {
+                    MessageBoxResult dialogResult = MessageBox.Show(
+                            "Opravdu chceš odstranit vybraný Star System?","Odstranit Star System", MessageBoxButton.YesNo);
+                    if (dialogResult == MessageBoxResult.Yes)
+                    {
+                        SortedList<string, StarSystem> starSystems = Editor.GalaxyMap.GetEditableStarSystems();
+                        Editor.GalaxyMap.Unlock();
+                        // odstranit StarSystem
+                        starSystems.Remove(this.SelectedStarSystem.Name);
+                        Editor.GalaxyMap.Lock();
+                        deselect();
+                        this.SelectedStarSystem = null;
+                        starSystemList.Items.Clear();
+                        starSystemObjectTree.Items.Clear();
+                        //refresh selectoru
+                        starSystemListChanged();
+                        return;
+                    }
+                    else if (dialogResult == MessageBoxResult.No)
+                    {
+                        //do nothing
+                        return;
+                    }
+                }
+            }
+            object selectedObject = this.SelectedObject.GetLoadedObject();
+            if(selectedObject is Planet)
+            {
+                string PlanetName = (selectedObject as Planet).Name;
+                if (this.SelectedStarSystem.Planets.Remove(PlanetName))
+                {
+                    MessageBox.Show("planeta " + PlanetName + " byla odstranena.");
+                    //redraw
+                    deselect();
+                    StarSystemDrawer();
+                    TreeDataLoader();
+                }
+            }
+            else if (selectedObject is WormholeEndpoint)
+            {
+                int id = (selectedObject as WormholeEndpoint).Id;
+                if (this.SelectedStarSystem.WormholeEndpoints.Remove(id))
+                {
+                    MessageBox.Show("wormhole" + id + " byla odstranena.");
+                    //redraw
+                    deselect();
+                    StarSystemDrawer();
+                }
+            }
+        } 
+
+        /// <summary>
+        /// odvybere objekt
+        /// </summary>
+        public void deselect()
+        {
+            this.selected = false;
+            this.SelectedObject = null;
+            points.Clear();
+            TextBlock objectData = new TextBlock();
+            objectData.Text = "No object selected.";
+            this.loadedObjectData = objectData;
+            planetSelectionChanged();
+            TextBlock wormholeData = new TextBlock();
+            wormholeData.Text = "No object selected.";
+            this.loadedWormholeData = wormholeData;
+            wormholeSelectionChanged();
 
         }
-
+        /// <summary>
+        /// vzdalenost dvou bodu
+        /// </summary>
+        /// <param name="point1">bod1</param>
+        /// <param name="point2">bod2</param>
+        /// <returns>vzdalenost</returns>
         private double distance(Point2d point1, Point2d point2)
         {
             double dX = point1.X - point2.X;
@@ -970,7 +1059,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// </summary>
         public void TreeDataLoader()
         {
-            this.GetStarSystemObjectTree().Items.Clear();
+       //     this.starSystemObjectTree = null;
             TreeView tree = this.GetStarSystemObjectTree();
             //StarSystem starSystem = Editor.GalaxyMap[SelectedStarSystem];
             StarSystem starSystem = SelectedStarSystem;
@@ -1191,20 +1280,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             StarSystemDrawer();
             return -1;
         }
-        public void deselect()
-        {
-            this.selected = false;
-            points.Clear();
-            TextBlock objectData = new TextBlock();
-            objectData.Text = "No object selected.";
-            this.loadedObjectData = objectData;
-            planetSelectionChanged();
-            TextBlock wormholeData = new TextBlock();
-            wormholeData.Text = "No object selected.";
-            this.loadedWormholeData = wormholeData;
-            wormholeSelectionChanged();
-            
-        }
+        
 
         #endregion
 

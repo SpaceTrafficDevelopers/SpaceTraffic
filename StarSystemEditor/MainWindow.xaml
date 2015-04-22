@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:p="clr-namespace:SpaceTraffic.Tools.StarSystemEditor"
-        Title="Editor" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="768" d:DesignWidth="1024" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" MinWidth="1024" ResizeMode="CanResize" MinHeight="650" PreviewMouseLeftButtonUp="window_mouseUp" MouseMove="window_mouseMove">
+        Title="Editor" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="768" d:DesignWidth="1024" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" MinWidth="1024" ResizeMode="CanResize" MinHeight="650" PreviewMouseLeftButtonUp="window_mouseUp" MouseMove="window_mouseMove" PreviewKeyDown="canvas_keyModifierDown" KeyUp="canvas_keyModifierUp">
     <Window.Resources>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="Height" Value="25" />
@@ -91,8 +91,7 @@
         </TabControl>
         <ScrollViewer Name="drawingAreaScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top" 
                       VerticalContentAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                      Loaded="ScrollViewer_Loaded" PreviewMouseLeftButtonDown="canvas_mouseDown" PreviewKeyDown="canvas_keyModifierDown" KeyUp="canvas_keyModifierUp">
-
+                      Loaded="ScrollViewer_Loaded" PreviewMouseLeftButtonDown="canvas_mouseDown">
         </ScrollViewer>
        
     </DockPanel>
