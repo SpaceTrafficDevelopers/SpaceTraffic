@@ -137,6 +137,7 @@
     <Compile Include="Models\Ui\TabItem.cs" />
     <Compile Include="Models\Ui\Tabs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Extensions\FlashMessageExtensions.cs" />
     <Compile Include="Utils\JSImportReader.cs" />
     <Content Include="CodeAssassin.ConfigTransform.Readme.txt" />
     <Content Include="Content\**" Exclude="Content\**\.*" />
@@ -148,6 +149,7 @@
     <Content Include="Libs\System.Web.WebPages.dll" />
     <Content Include="Libs\System.Web.WebPages.Razor.dll" />
     <Content Include="README.jQuery.vsdoc.txt" />
+    <Content Include="Scripts\jquery.flash-message.js" />
     <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
@@ -338,6 +340,12 @@
     <Content Include="..\ST.licenseheader">
       <Link>ST.licenseheader</Link>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Flash.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="JS\layoutImport" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

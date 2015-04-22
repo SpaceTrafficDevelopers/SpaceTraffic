@@ -54,6 +54,7 @@
 		<div id="contextPanel">
 			@RenderSection("ContextPanel", false)
 		</div>
+		@Html.Partial("_Flash")
 		<div id="mainPanel">
 			@RenderBody()
 		</div>
@@ -74,7 +75,9 @@
 	@Content.Script("jquery.svgdom.js", Url)
 	@Content.Script("jquery.cookie.js", Url)
 	@Content.Script("mootools-core-1.4.1.js", Url)
+  	@Content.Script("jquery.flash-message.js", Url)
 	@Content.JSImport("~/JS/jsimport", Url)
+	@Content.JSImport("~/JS/layoutImport", Url)
 	@RenderSection("Scripts", false)
   </body>
 </html>
