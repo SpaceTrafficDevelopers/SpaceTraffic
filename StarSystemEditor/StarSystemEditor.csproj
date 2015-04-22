@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -95,10 +95,11 @@
     <Compile Include="Application\Entities\ObjectEditorEntity.cs" />
     <Compile Include="Application\Entities\OrbitEditorEntity.cs" />
     <Compile Include="Application\Entities\PlanetEditorEntity.cs" />
-    <Compile Include="Application\Entities\PlanetType.cs" />
+    <Compile Include="Data\ObjectData.cs" />
+    <Compile Include="Data\PlanetType.cs" />
     <Compile Include="Application\Entities\StacionaryEditorEntity.cs" />
     <Compile Include="Application\Entities\StarEditorEntity.cs" />
-    <Compile Include="Application\Entities\StarSystemCreator.cs" />
+    <Compile Include="Data\StarSystemCreator.cs" />
     <Compile Include="Application\Entities\StarSystemEditorEntity.cs" />
     <Compile Include="Application\Entities\WormholeEditorEntity.cs" />
     <Compile Include="Application\Exceptions\MapFilesCannotBeLoaded.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Assets\schemas\InternalGalaxyMap.cs" />
     <Compile Include="Data\Names.cs" />
     <Compile Include="Data\StreamDataProvider.cs" />
+    <Compile Include="Data\WormholeData.cs" />
     <Compile Include="Data\XmlSaver.cs" />
     <Compile Include="Presentation\CelestialObjectView.cs" />
     <Compile Include="Presentation\DataPresenter.cs" />

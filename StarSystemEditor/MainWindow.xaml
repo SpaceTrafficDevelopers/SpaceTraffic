@@ -72,7 +72,7 @@
         </StackPanel>
         
         <TabControl DockPanel.Dock="Right" Name="rightMenu" MinWidth="275">
-            <TabItem Header="Editor">
+            <TabItem Header="Planet Editor">
                 <StackPanel>
                     <GroupBox Name="loadedObjectData" Header="Object info" Margin="2" Loaded="loadedObjectData_Loaded">
                     </GroupBox>
@@ -81,6 +81,12 @@
             <TabItem Header="Connections">
                 <GroupBox Name="connectionListBox" Header="Wormhole connection list" Margin="2" Loaded="connectionListBox_Loaded">
                 </GroupBox>
+            </TabItem>
+            <TabItem Header="Wormhole Editor">
+                <StackPanel>
+                    <GroupBox Name="loadedWormholeData" Header="Object info" Margin="2" Loaded="loadedWormholeData_Loaded">
+                    </GroupBox>
+                </StackPanel>
             </TabItem>
         </TabControl>
         <ScrollViewer Name="drawingAreaScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top" 

@@ -53,6 +53,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         {
             Editor.Preload();
             Editor.dataPresenter.planetSelectionChanged = planetSelected;
+            Editor.dataPresenter.wormholeSelectionChanged = wormholeSelected;
             Editor.LoadGalaxy("GalaxyMap2", ".//Assets");
             InitializeComponent();
             this.StarSystemSelectorPanel.Children.Add(new StarSystemSelector());
@@ -136,6 +137,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         {
             if (Editor.IsLoaded)
             {
+                Editor.dataPresenter.deselect();
                 Editor.dataPresenter.StarSystemDrawer();
                 //Editor.dataPresenter.GetDrawingArea().ShowStarSystemInfo();
                 this.SimulationTime.Content = "Simulation time: " + Editor.Time;
@@ -186,13 +188,27 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         {
             (sender as GroupBox).Content = Editor.dataPresenter.GetLoadedObjectData();
         }
-
+        /// <summary>
+        /// Inicializace wormhole data
+        /// </summary>
+        private void loadedWormholeData_Loaded(object sender, RoutedEventArgs e)
+        {
+            (sender as GroupBox).Content = Editor.dataPresenter.GetLoadedWormholeData();
+        }
         /// <summary>
         /// Metoda volana z dataPresenteru pro prekresleni Planet Info
         /// </summary>
         private void planetSelected()
         {
            this.loadedObjectData.Content = Editor.dataPresenter.GetLoadedObjectData();   
+        }
+
+        /// <summary>
+        /// Metoda volana z dataPresenteru pro prekresleni Wormhole Info
+        /// </summary>
+        private void wormholeSelected()
+        {
+            this.loadedWormholeData.Content = Editor.dataPresenter.GetLoadedWormholeData();
         }
 
         /// <summary>
