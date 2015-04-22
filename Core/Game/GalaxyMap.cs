@@ -146,8 +146,14 @@ namespace SpaceTraffic.Game
         {
             if (this.IsReadOnly)
                 throw new InvalidOperationException("GalaxyMap instance is locked, no modifications allowed.");
-
-            this.starSystems.Add(starSystem.Name, starSystem);
+            try
+            {
+                this.starSystems.Add(starSystem.Name, starSystem);
+            }
+            catch{
+                starSystem.Name += ""+2;
+                Add(starSystem);
+            }
         }
 
         public void AddAll(ICollection<StarSystem> starSystems)

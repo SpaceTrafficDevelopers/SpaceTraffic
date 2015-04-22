@@ -11,6 +11,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
     {
         private static Random rand = new Random();
 
+        private const double JUPITER_MASS = 1.898E27;
+        private const int BASE_WORMHOLE_RADIUS = 205;
         /// <summary>
         /// Creates new Star System
         /// </summary>
@@ -68,7 +70,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             for(int i = 0; i < wormholeCount; i++)
             {
                 int id = i;
-                int radius = 205 + 15*i;
+                int radius = BASE_WORMHOLE_RADIUS + 15 * i;
                 int period = radius * 300;
                 Game.Geometry.Direction direction = Game.Geometry.Direction.CLOCKWISE;
                 if (rand.Next(6) == 1) // 1:6 pravděpodobnost obihani counterclockwise
@@ -83,16 +85,18 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         private static List<Planet> createPlanets(StarSystem system, int planetsCount, string type)
         {
             List<Planet> planets = new List<Planet>();
-            for (int i = 0; i < planetsCount; i++)
+            for (int i = 1; i <= planetsCount; i++)
             {
                 // TODO generator jmen
                 string pname = "planet" + i;
                 string paltName = "planet" + i;
-                // hmotnost jupiteru 1,898E27 kg
-                double mass = 1.898E27 * (rand.NextDouble() + 0.01) * rand.Next(1, 80);
+                // hmotnost jupiteru 1,898E27 kg nasobena faktore mezi (0, 80)
+                double mass = JUPITER_MASS * (rand.NextDouble() + 0.01) * rand.Next(1, 80);
                 CelestialObjectInfo pdetails = new CelestialObjectInfo(0.0, mass, "Description of " + system.Name + " placeholder.");
                 // y = 200 - (250/(sqrt(x+5)))
-                int radius =  (int)(200 - 250/(Math.Sqrt(i*3+5)));
+                int diff = BASE_WORMHOLE_RADIUS / 2;
+                //int radius = (int)(BASE_WORMHOLE_RADIUS + 250 / (Math.Sqrt(i * 3 + 5)));
+                int radius = (int)(40 + diff/(planetsCount - i+1));
                 // TODO upravit, odmocnina nebo logaritmus 50-200, cim vetsi i tim dal na funkci
                 int period = radius + i * rand.Next(50, 70);
                 Game.Geometry.Direction direction = Game.Geometry.Direction.CLOCKWISE;
@@ -106,8 +110,14 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
                 }
                 else if (type == "Elliptic")
                 {
-                    int A = radius + rand.Next(radius/2);
-                    int B = radius - rand.Next(radius/2);
+                    int A = radius + rand.Next(radius/10);
+                    int B = A - rand.Next(radius/10);
+                    // zajisteni aby nepresahla velikost editoru
+                    if (A >= 250)
+                    {
+                        A /= 2;
+                        B /= 2;
+                    }
                     double rotation = rand.NextDouble()*360;
                     ptrajectory = new Game.Geometry.EllipticOrbit(
                         new Point2d(0, 0), A, B,rotation, period, direction, initangle);

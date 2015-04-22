@@ -47,7 +47,7 @@ limitations under the License.
     </authentication>
     <membership defaultProvider="SpaceTrafficMembershipProvider">
       <providers>
-        <clear />
+        <clear/>
         <add name="SpaceTrafficMembershipProvider" type="SpaceTraffic.GameUi.Security.SpaceTrafficMembershipProvider" applicationName="/" />
       </providers>
     </membership>
