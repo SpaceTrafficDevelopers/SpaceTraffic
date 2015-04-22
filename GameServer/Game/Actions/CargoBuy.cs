@@ -116,7 +116,8 @@ namespace SpaceTraffic.Game.Actions
             }
 
             cargo.CargoCount = Count;
-            //Zavolat LoadCargo
+            cargo.CargoLoadEntityId = player.PlayerId;
+            //Zavolat ShipLoadCargo
         }
 
         private void getArgumentsFromActionArgs()

@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Dao;
 
 
 namespace SpaceTraffic.Game.Actions
@@ -67,41 +68,52 @@ namespace SpaceTraffic.Game.Actions
         private int SpaceShipID { get; set; }
 
         private int CargoID { get; set; }
-
         private int Count { get; set; }
+        private ICargoLoadDao LoadingPlace { get; set; }
+
 
         public void Perform(IGameServer gameServer)
         {
             getArgumentsFromActionArgs();
-
-            Cargo cargo = gameServer.Persistence.GetCargoDAO().GetCargoById(CargoID);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SpaceShipID);
 
             Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceShip.DockedAtBaseId);
-            Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName]; 
+            Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
+            ICargoLoadEntity cargo = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoByID(SpaceShipID, CargoID);
             
             if (!dockedBase.Planet.Equals(planet))
             {
-                //TODO: lod neni zadokovana na planete kde se provadi akce
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
                 return;
             }
 
-            SpaceShipCargo ssc = getSpaceShipCargoFromShip(gameServer, spaceShip, cargo);
-
-            if (ssc == null)
+            if (cargo == null)
             {
-                //TODO: zbozi neni na lodi
-                result = String.Format("Loď {0} nema mezi nakladem {1}.", spaceShip.SpaceShipName, cargo.Type);
+                result = String.Format("Neni co vykladat");
                 return;
             }
 
-            //TODO: kontola jestli je misto na planete
+            if(cargo.CargoCount < Count)
+            {
+                result = String.Format("Loď {0} nemá naloženo {1} jednotek zboží id={1}.", spaceShip.SpaceShipName, Count, cargo.CargoId);
+                return;
+            }
 
-            gameServer.Persistence.GetSpaceShipCargoDAO().RemoveSpaceShipCargoById(spaceShip.SpaceShipId, cargo.CargoId);
+            cargo.CargoCount -= Count;
 
-            //TODO: vlozit na planetu, nebo obchodníkovy
-            result = String.Format("Náklad {0} byl vyložen.", cargo.Type);
+            if(cargo.CargoCount == 0)
+            {
+                gameServer.Persistence.GetSpaceShipCargoDAO().RemoveCargo(cargo);
+            }
+            else
+            {
+                gameServer.Persistence.GetSpaceShipCargoDAO().UpdateCargoCountById(cargo);
+            }
+
+            LoadingPlace.InsertOrUpdateCargo(cargo);
+            
+
+            result = String.Format("Náklad {0} byl vyložen.", cargo.CargoId);
         }
 
         private void getArgumentsFromActionArgs()
@@ -111,6 +123,7 @@ namespace SpaceTraffic.Game.Actions
             SpaceShipID = Convert.ToInt32(ActionArgs[2]);
             CargoID = Convert.ToInt32(ActionArgs[3]);
             Count = Convert.ToInt32(ActionArgs[4]);
+            LoadingPlace = (ICargoLoadDao)ActionArgs[5];
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using SpaceTraffic.Engine;
+﻿using SpaceTraffic.Dao;
+using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
 /**
 Copyright 2010 FAV ZCU
@@ -46,76 +47,62 @@ namespace SpaceTraffic.Game.Actions
         /// </summary>
         public object[] ActionArgs { get; set; }
 
-        /// <summary>
-        /// Star system where sale was made
-        /// </summary>
-        private String StarSystemName { get; set; }
-
-        /// <summary>
-        /// Planet where sale was made
-        /// </summary>
-        private String PlanetName { get; set; }
-
-        /// <summary>
-        /// Identifier of goods to sell
-        /// </summary>
         private int CargoID { get; set; }
 
         /// <summary>
-        /// Amount of goods to sell
+        /// Amount of goods to buy
         /// </summary>
         private int Count { get; set; }
 
-        /// <summary>
-        /// Ship with sold goods
-        /// </summary>
-        private int ShipID { get; set; }
+        private ICargoLoadDao LoadingPlace { get; set; }
+
+        private ICargoLoadDao SellingPlace { get; set; }
+
+        private int BuyerID { get; set; }
 
         public void Perform(IGameServer gameServer)
         {
             getArgumentsFromActionArgs();
-            Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
-            SpaceShip ship = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ShipID);
-            List<PlanetGoods> planetGoods = planet.PlanetGoodsList;
-            SpaceShipCargo cargo = null;
+            ICargoLoadEntity cargo = SellingPlace.GetCargoByID(player.PlayerId, CargoID);
 
-            foreach (SpaceShipCargo car in ship.SpaceShipsCargos)
+            if (cargo == null)
             {
-                if (CargoID == car.CargoId)
-                {
-                    cargo = car;
-                    break;
-                }
-            }
-
-
-            if (cargo == null || cargo.CargoCount < Count)
-            {
-                //TODO: V seznamu na planetě není požadovaný počet zboží
-                result = String.Format("Na lodi {0} není požadovaných {1} jednotek nákaldu s ID = {2}.", planet.Name, Count, cargo.CargoId);
+                result = String.Format("Hráč {0} nemá zboží s ID = {1}.", player.PlayerId, CargoID);
                 return;
             }
 
-            // TODO: pocitani ceny
-            //player.Credit += (int)(cargo.Cargo.Price * Count);
-
-            if (gameServer.Persistence.GetPlayerDAO().UpdatePlayerById(player))
+            if(cargo.CargoCount < Count)
             {
-                //TODO: Chyba při přístupu do databáze - neprovedl se update
+                result = String.Format("Hráč {0} nemá požadovaných {1} jednotek zboží s ID = {1}.", player.PlayerId, Count, CargoID);
                 return;
             }
 
-            //TODO: Odebrání zboží ze seznamu a převod na Cargo?
+
+            if (gameServer.Persistence.GetPlayerDAO().IncrasePlayersCredits(player.PlayerId,(int)(cargo.CargoPrice*Count)))
+            {
+                result = String.Format("Změny se nepovedlo zapsat do databáze");
+                return;
+            }
+
+            cargo.CargoCount -= Count;
+            if(cargo.CargoCount == 0)
+            {
+                SellingPlace.RemoveCargo(cargo);
+            }
+            else
+            {
+                SellingPlace.UpdateCargoCountById(cargo);
+            }
         }
 
         private void getArgumentsFromActionArgs()
         {
-            StarSystemName = ActionArgs[0].ToString();
-            PlanetName = ActionArgs[1].ToString();
-            CargoID = Convert.ToInt32(ActionArgs[2]);
-            Count = Convert.ToInt32(ActionArgs[3]);
-            ShipID = Convert.ToInt32(ActionArgs[4]);
+            CargoID = Convert.ToInt32(ActionArgs[0]);
+            Count = Convert.ToInt32(ActionArgs[1]);
+            LoadingPlace = (ICargoLoadDao)ActionArgs[2];
+            SellingPlace = (ICargoLoadDao)ActionArgs[3];
+            BuyerID = Convert.ToInt32(ActionArgs[4]);
         }
     }
 }

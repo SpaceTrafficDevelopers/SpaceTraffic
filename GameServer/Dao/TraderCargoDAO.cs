@@ -100,7 +100,7 @@ namespace SpaceTraffic.Dao
             using (var contextDB = CreateContext())
             {
 
-                return (ICargoLoadEntity)contextDB.TraderCargos.Where(x => x.TraderId.Equals(traderId)).Where(x => x.CargoId.Equals(cargoId));
+                return (ICargoLoadEntity)contextDB.TraderCargos.Where(x => x.TraderId.Equals(traderId) && x.CargoId.Equals(cargoId));
             }
         }
 
@@ -149,6 +149,26 @@ namespace SpaceTraffic.Dao
                 return false;
 
             return this.RemoveTraderCargoById(tc.TraderId, tc.CargoId);
+        }
+
+        public bool InsertOrUpdateCargo(ICargoLoadEntity cargo)
+        {
+            using (var contextDB = CreateContext())
+            {
+
+                List<TraderCargo> cargos = contextDB.TraderCargos.Where(x => x.TraderId.Equals(cargo.CargoLoadEntityId)).ToList();
+                TraderCargo item = cargos.First(x => x.CargoId.Equals(cargo.CargoId) && x.CargoPrice.Equals(cargo.CargoPrice));
+
+                if (item == null)
+                {
+                    return this.InsertCargo(cargo);
+                }
+                else
+                {
+                    cargo.CargoCount += item.CargoCount;
+                    return this.UpdateCargoCountById(cargo);
+                }
+            }
         }
 
       /*  public ICargo UpdateOrRemoveCargoByCountAndID(int traderID, int cargoID, int Count)

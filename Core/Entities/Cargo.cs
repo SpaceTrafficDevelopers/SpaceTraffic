@@ -38,6 +38,8 @@ namespace SpaceTraffic.Entities
 
         public int LevelToBuy { get; set; }
 
+        public int Volume { get; set; }
+
         public virtual ICollection<Factory> Factories { get; set; }
 
         public virtual ICollection<SpaceShipCargo> SpaceShipsCargos { get; set; }
