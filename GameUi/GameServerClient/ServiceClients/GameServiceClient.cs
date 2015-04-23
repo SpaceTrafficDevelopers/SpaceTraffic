@@ -65,19 +65,27 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			}
 		}
 
-        public bool SpaceShipHasCargoSpace(int spaceShipId, long volume)
+        public bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count, int traderId)
         {
             using (var channel = this.GetClientChannel())
             {
-                return (channel as IGameService).SpaceShipHasCargoSpace(spaceShipId, volume);
+                return (channel as IGameService).PlayerHasEnaughCreditsForCargo(playerId, cargoLoadEntityId, count, traderId);
             }
         }
 
-        public bool SpaceShipDockedAtBase(int spaceShipId, int baseId)
+        public bool SpaceShipHasCargoSpace(int spaceShipId, string buyingPlace, int cargoLoadEntityId)
         {
             using (var channel = this.GetClientChannel())
             {
-                return (channel as IGameService).SpaceShipDockedAtBase(spaceShipId, baseId);
+                return (channel as IGameService).SpaceShipHasCargoSpace(spaceShipId, buyingPlace, cargoLoadEntityId);
+            }
+        }
+
+        public bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IGameService).SpaceShipDockedAtBase(spaceShipId, starSystemName, planetName);
             }
         }
 
