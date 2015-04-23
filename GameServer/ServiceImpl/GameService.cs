@@ -66,8 +66,66 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return actualMoney >= amount;
 		}
 
+        public bool SpaceShipHasCargoSpace(int spaceShipId, long volume)
+        {
+            long actualVolume = 0;
+            long cargoSpace = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId).CargoSpace;
+            List<ICargoLoadEntity> cargos = GS.CurrentInstance.Persistence.GetSpaceShipCargoDAO().GetCargoListByOwnerId(spaceShipId);
+           
+            foreach (SpaceShipCargo ssc in cargos)
+            {
+                Cargo cargo = GS.CurrentInstance.Persistence.GetCargoDAO().GetCargoById(ssc.CargoId);
+                actualVolume += (cargo.Volume * ssc.CargoCount);
+            }
 
+            return cargoSpace <= (actualVolume + volume);
+        }
 
+        public bool SpaceShipDockedAtBase(int spaceShipId, int baseId)
+        {
+            int dockedBaseId = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId).DockedAtBaseId;
+            return baseId == dockedBaseId;
+        }
+
+        public bool PlayerHasSpaceShip(int playerId, int spaceShipId) 
+        {
+            SpaceShip spaceShip = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
+            return spaceShip.PlayerId == playerId;
+        }
+
+        public bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoId, int cargoCount) 
+        {
+            int count = 0;
+            List<ICargoLoadEntity> cargos = GS.CurrentInstance.Persistence.GetSpaceShipCargoDAO().GetCargoListByOwnerId(spaceShipId);
+
+            foreach (SpaceShipCargo cargo in cargos) 
+            {
+                if (cargo.CargoId == cargoId) 
+                {
+                    count += cargo.CargoCount;
+                }
+            }
+            if (count < cargoCount) 
+                return false;
+            return true;
+        }
+
+        public bool TraderHasEnoughCargo(int traderId, int cargoId, int cargoCount) 
+        {
+            int count = 0;
+            List<ICargoLoadEntity> cargos = GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoListByOwnerId(traderId);
+
+            foreach (SpaceShipCargo cargo in cargos)
+            {
+                if (cargo.CargoId == cargoId)
+                {
+                    count += cargo.CargoCount;
+                }
+            }
+            if (count < cargoCount)
+                return false;
+            return true;
+        }
 
 		/// <summary>
 		/// Finds action in SpaceTraffic.Game.Actions namespace and performs it with its arguments.
