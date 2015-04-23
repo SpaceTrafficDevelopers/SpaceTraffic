@@ -190,8 +190,8 @@ var SvgStarSystemMap = {
 		buffer += "</ul>";
 
         //tohle je potøeba mìnit, parametry se predavaji jako v LoadCargo
-		buffer += '<ul>' +
-            '<li><a href="/Game/Cargo/BuyCargo?starSystemName=ProximaCentauri&planetName=fff&cargoLoadEntityId=2&count=5&buyingPlace=TraderCargoDAO&buyerShipId=2&traderId=5">BuyCargo</a></li>' +
+		buffer += '<ul>' + 
+        '<li><a href="/Game/Cargo/BuyCargo?starSystemName=Proxima Centauri&planetName=Proxima Centauri 1&cargoLoadEntityId=1&count=5&buyingPlace=TraderCargoDAO&buyerShipId=1&traderId=1">BuyCargo</a></li>' +
             '<li><a href="/Game/Cargo/LoadCargo?cargoId=1&objectId=2">LoadCargo</a></li>' +
             '<li><a href="/Game/Cargo/UnloadCargo">UnloadCargo</a></li>' +
             '<li><a href="/Game/Cargo/SellCargo">SellCargo</a></li>' +

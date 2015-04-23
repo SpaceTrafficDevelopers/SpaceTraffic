@@ -94,7 +94,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
                 actualVolume += (cargo.Volume * ssc.CargoCount);
             }
 
-            return cargoSpace <= (actualVolume + volume);
+            return cargoSpace >= (actualVolume + volume);
         }
 
         public bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName)

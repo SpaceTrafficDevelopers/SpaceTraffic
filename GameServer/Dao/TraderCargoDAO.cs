@@ -87,8 +87,8 @@ namespace SpaceTraffic.Dao
         public ICargoLoadEntity GetCargoByID(int cargoLoadEntityId)
         {
             using (var contextDB = CreateContext())
-            {
-                return (ICargoLoadEntity)contextDB.TraderCargos.Where(x => x.TraderCargoId.Equals(cargoLoadEntityId));
+            {                                                   // místo WHERE se používá first
+                return (ICargoLoadEntity)contextDB.TraderCargos.FirstOrDefault(x => x.TraderCargoId.Equals(cargoLoadEntityId));
             }
         }
 
