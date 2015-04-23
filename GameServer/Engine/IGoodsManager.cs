@@ -29,6 +29,9 @@ namespace SpaceTraffic.Engine
     /// </summary>
     public interface IGoodsManager
     {
+        /// <summary>
+        /// List of all Goods.
+        /// </summary>
         IList<IGoods> GoodsList { get; set; }
 
         /// <summary>
@@ -47,10 +50,23 @@ namespace SpaceTraffic.Engine
         /// <param name="map">mapa galaxie</param>
         void GenerateGoodsOverGalaxyMap(GalaxyMap map);
 
+        /// <summary>
+        /// Insert all goods as Cargo into db.
+        /// </summary>
         void InsertCargoIntoDb();
 
+        /// <summary>
+        /// Change price goods in traderCargo and update in database.
+        /// </summary>
+        /// <param name="percent">percet</param>
+        /// <param name="traderCargo">trader cargo</param>
         void ChangeOneGoodsPrice(int percent, TraderCargo traderCargo);
 
+        /// <summary>
+        /// Change price of all goods on planet and update in database.
+        /// </summary>
+        /// <param name="percent">percent</param>
+        /// <param name="planet">planet</param>
         void ChangePriceGoods(int percent, Planet planet);
     }
 }

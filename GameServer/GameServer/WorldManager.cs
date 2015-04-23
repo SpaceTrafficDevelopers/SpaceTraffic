@@ -110,6 +110,9 @@ namespace SpaceTraffic.GameServer
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Generate Bases and Trader on planet and insert into db.
+        /// </summary>
         public void GenerateBasesAndTraders()
         {
             foreach (StarSystem starSys in galaxyMap.GetStarSystems())
@@ -127,6 +130,11 @@ namespace SpaceTraffic.GameServer
             }   
         }
 
+        /// <summary>
+        /// Create Base on planet, insert into db and return created base instance.
+        /// </summary>
+        /// <param name="planet">planet</param>
+        /// <returns>return new Base instace</returns>
         private Entities.Base CreateBase(Planet planet)
         {
             Entities.Base planetBase = new Entities.Base();
@@ -137,6 +145,11 @@ namespace SpaceTraffic.GameServer
             return this.gameServer.Persistence.GetBaseDAO().GetBaseByPlanetFullName(planet.Location);
         }
 
+        /// <summary>
+        /// Create Trader on planet, insert into db and return created trader instance.
+        /// </summary>
+        /// <param name="planet">planet</param>
+        /// <returns>return new Trader instace</returns>
         private Entities.Trader CreateTrader(Planet planet)
         {
             Trader trader = new Trader();

@@ -25,6 +25,9 @@ namespace SpaceTraffic.Game
 {
     interface IPlanet
     {
+        /// <summary>
+        /// Base property.
+        /// </summary>
         Entities.Base Base { get; set; }
     }
 }

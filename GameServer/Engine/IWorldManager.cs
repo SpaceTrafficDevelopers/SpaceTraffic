@@ -49,6 +49,9 @@ namespace SpaceTraffic.Engine
 
         void ShipUpdateLocation(int spaceshipId, GameTime gameTime);
 
+        /// <summary>
+        /// Generate bases and traders and insert into db.
+        /// </summary>
         void GenerateBasesAndTraders();
     }
 }

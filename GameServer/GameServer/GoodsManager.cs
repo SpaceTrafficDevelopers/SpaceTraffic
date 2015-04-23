@@ -36,12 +36,15 @@ namespace SpaceTraffic.GameServer
             this.gameServer = gameServer;
         }
 
+        /// <summary>
+        /// Generate goods on all planets from list and insert as TraderCargo into db.
+        /// </summary>
+        /// <param name="planets">planet list</param>
         public void GenerateGoodsOnPlanets(IList<Planet> planets)
         {
             Random r = new Random();
             foreach (Planet planet in planets)
             {
-                //List<PlanetGoods> planetGoodsList = new List<PlanetGoods>();
                 List<TraderCargo> list = new List<TraderCargo>();
                 foreach (IGoods goods in GoodsList)
                 {
@@ -54,6 +57,10 @@ namespace SpaceTraffic.GameServer
             }
         }
 
+        /// <summary>
+        /// Generate goods over all galaxy. (Using GenerateGoodsOnPlanets).
+        /// </summary>
+        /// <param name="map">galaxy map</param>
         public void GenerateGoodsOverGalaxyMap(GalaxyMap map)
         {
             foreach (StarSystem starSys in map.GetStarSystems())
@@ -64,6 +71,9 @@ namespace SpaceTraffic.GameServer
             }          
         }
 
+        /// <summary>
+        /// Insert goods from GoodsList into db.
+        /// </summary>
         public void InsertCargoIntoDb()
         {
             foreach (IGoods goods in GoodsList)
@@ -81,6 +91,12 @@ namespace SpaceTraffic.GameServer
             }
         }
 
+        /// <summary>
+        /// Generate trader cargo.
+        /// </summary>
+        /// <param name="planet">planet</param>
+        /// <param name="goods">goods</param>
+        /// <returns>generated trader cargo</returns>
         private TraderCargo generateTraderCargo(Planet planet, IGoods goods)
         {
             Random r = new Random();
@@ -98,7 +114,10 @@ namespace SpaceTraffic.GameServer
             return traderCargo;
         }
 
-
+        /// <summary>
+        /// Insert trader cargo into db.
+        /// </summary>
+        /// <param name="tc">trader cargo</param>
         private void InsertTraderCargo(TraderCargo tc)
         {
             this.gameServer.Persistence.GetTraderCargoDAO().InsertCargo(tc);
@@ -118,9 +137,10 @@ namespace SpaceTraffic.GameServer
         }
 
         /// <summary>
-        /// Change price goods on planet.
+        /// Change price goods in traderCargo and update in database.
         /// </summary>
-        /// <param name="percent">Percent of change price goods</param>
+        /// <param name="percent">percet</param>
+        /// <param name="traderCargo">trader cargo</param>
         /// <exception cref="DivideByZeroException">When percent &lt= 0</exception>
         public void ChangePriceGoods(int percent, Planet planet)
         {
@@ -132,6 +152,11 @@ namespace SpaceTraffic.GameServer
             }
         }
 
+        /// <summary>
+        /// Gets list of trader cargos by trader from db.
+        /// </summary>
+        /// <param name="trader">trader</param>
+        /// <returns>list of trader cargos by trader</returns>
         private List<TraderCargo> getTraderCargos(Trader trader)
         {
             List<TraderCargo> list =

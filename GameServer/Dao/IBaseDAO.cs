@@ -36,6 +36,12 @@ namespace SpaceTraffic.Dao
         /// <returns>Base.</returns>
         Base GetBaseById(int baseId);
 
+        /// <summary>
+        /// Get Base by full planet name. 
+        /// Full planet name (location) = "StarSystem.Name\Planet.Name"
+        /// </summary>
+        /// <param name="planetFullName">full planet name (location)</param>
+        /// <returns>Base</returns>
         Base GetBaseByPlanetFullName(string planetFullName);
 
         /// <summary>
