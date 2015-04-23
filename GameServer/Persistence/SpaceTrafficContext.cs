@@ -130,6 +130,7 @@ using SpaceTraffic.Entities;
         {
             HasKey(b => b.BaseId);
             Property(b => b.Planet).HasMaxLength(50).HasColumnType("varchar").IsRequired();
+            Ignore(p => p.Trader);
             ToTable("Bases");
         }
 
@@ -162,7 +163,7 @@ using SpaceTraffic.Entities;
             : base()
         {
             HasKey(p => p.CargoId);
-            //Property(p => p.Price).HasColumnType("int").IsRequired();
+            Property(p => p.DefaultPrice).HasColumnType("int").IsRequired();
             Property(p => p.Name).HasMaxLength(255).HasColumnType("varchar").IsRequired();
             Property(p => p.Description).HasMaxLength(255).HasColumnType("varchar").IsRequired();
             Property(p => p.Category).HasMaxLength(255).HasColumnType("varchar").IsRequired();
@@ -206,6 +207,8 @@ using SpaceTraffic.Entities;
             Property(p => p.CargoPrice).HasColumnType("int").IsRequired();   
             HasRequired(a => a.Cargo).WithMany(a => a.SpaceShipsCargos).HasForeignKey(a => a.CargoId);
             HasRequired(a => a.SpaceShip).WithMany(a => a.SpaceShipsCargos).HasForeignKey(a => a.SpaceShipId);
+            Ignore(p => p.CargoOwnerId);
+            Ignore(p => p.CargoLoadEntityId);
             ToTable("SpaceShipsCargos");
         }
 
@@ -241,6 +244,8 @@ using SpaceTraffic.Entities;
             Property(p => p.CargoPrice).HasColumnType("int").IsRequired();
             HasRequired(a => a.Cargo).WithMany(a => a.TraderCargos).HasForeignKey(a => a.CargoId);
             HasRequired(a => a.Trader).WithMany(a => a.TraderCargos).HasForeignKey(a => a.TraderId);
+            Ignore(p => p.CargoOwnerId);
+            Ignore(p => p.CargoLoadEntityId);
             ToTable("TraderCargos");
         }
     }

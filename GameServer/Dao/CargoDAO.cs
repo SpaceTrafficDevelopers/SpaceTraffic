@@ -40,6 +40,14 @@ namespace SpaceTraffic.Dao
             }
         }
 
+        public Cargo GetCargoByName(string cargoName)
+        {
+            using (var contextDB = CreateContext())
+            {
+                return contextDB.Cargos.FirstOrDefault(x => x.Name.Equals(cargoName));
+            }
+        }
+
         public List<Cargo> GetCargosByType(string type)
         {
             using (var contextDB = CreateContext())

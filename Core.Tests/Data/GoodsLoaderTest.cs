@@ -59,7 +59,7 @@ namespace Core.Tests.Data
                 Assert.IsNotNull(good.LevelToBuy, "Goods have not set level to buy.");
                 Assert.IsNotNull(good.Name, "Goods have not set name.");
                 Assert.IsNotNull(good.Price, "Goods have not set price.");
-                Assert.IsNotNull(good.type, "Goods have not set type.");
+                Assert.IsNotNull(good.Type, "Goods have not set type.");
                 Assert.IsNotNull(good.Volume, "Goods have not set volume.");
                 
             }

@@ -38,10 +38,10 @@ namespace SpaceTraffic.Dao
         Trader GetTraderById(int traderId);
 
         /// <summary>
-        /// Get list of traders on one base
+        /// Get trader by base id
         /// </summary>
-        /// <returns>List of traders</returns>
-        List<Trader> GetTradersByBaseId(int baseId);
+        /// <returns>Trader</returns>
+        Trader GetTraderByBaseId(int baseId);
 
         /// <summary>
         /// Insert trader into Traders

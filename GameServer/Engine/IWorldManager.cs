@@ -48,5 +48,10 @@ namespace SpaceTraffic.Engine
         void ShipTakeoff(int spaceshipId, NavPath path, GameTime gameTime);
 
         void ShipUpdateLocation(int spaceshipId, GameTime gameTime);
+
+        /// <summary>
+        /// Generate bases and traders and insert into db.
+        /// </summary>
+        void GenerateBasesAndTraders();
     }
 }

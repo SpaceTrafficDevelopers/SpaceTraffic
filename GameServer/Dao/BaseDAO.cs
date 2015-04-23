@@ -95,5 +95,14 @@ namespace SpaceTraffic.Dao
                     return false;
                 }
         }
+
+
+        public Base GetBaseByPlanetFullName(string planetFullName)
+        {
+            using (var contextDB = CreateContext())
+            {
+                return contextDB.Bases.FirstOrDefault(x => x.Planet.Equals(planetFullName));
+            }
+        }
     }
 }
