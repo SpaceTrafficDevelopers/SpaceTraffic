@@ -27,6 +27,8 @@ namespace SpaceTraffic.Entities
 
         public string Planet { get; set; }
 
+        public Trader Trader { get; set; }
+
         public virtual ICollection<SpaceShip> SpaceShips { get; set; }
 
         public virtual ICollection<Factory> Factories { get; set; }  

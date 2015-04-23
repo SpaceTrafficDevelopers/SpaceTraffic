@@ -35,6 +35,9 @@ namespace SpaceTraffic.Dao
         /// <param name="baseId">The base id.</param>
         /// <returns>Base.</returns>
         Base GetBaseById(int baseId);
+
+        Base GetBaseByPlanetFullName(string planetFullName);
+
         /// <summary>
         /// Inserts the base to DB.
         /// </summary>

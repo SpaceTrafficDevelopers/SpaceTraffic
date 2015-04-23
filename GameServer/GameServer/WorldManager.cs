@@ -30,6 +30,8 @@ namespace SpaceTraffic.GameServer
     {
         private GalaxyMap galaxyMap;
 
+        private IGameServer gameServer;
+
         public IList<Game.IGamePlayer> ActivePlayers
         {
             get
@@ -49,9 +51,9 @@ namespace SpaceTraffic.GameServer
             internal set { this.galaxyMap = value; }
         }
 
-        public WorldManager()
+        public WorldManager(IGameServer gameServer)
         {
-            
+            this.gameServer = gameServer;
         }
 
         IGamePlayer PlayerLoad(int playerId)
@@ -106,6 +108,43 @@ namespace SpaceTraffic.GameServer
         void IWorldManager.ShipUpdateLocation(int spaceshipId, GameTime gameTime)
         {
             throw new NotImplementedException();
+        }
+
+        public void GenerateBasesAndTraders()
+        {
+            foreach (StarSystem starSys in galaxyMap.GetStarSystems())
+            {
+                IList<Planet> list = starSys.Planets;
+
+                foreach (Planet planet in starSys.Planets)
+                {
+                    Entities.Base planetBase = CreateBase(planet);
+                    planet.Base = planetBase;
+
+                    Trader trader = CreateTrader(planet);
+                    planetBase.Trader = trader;
+                }
+            }   
+        }
+
+        private Entities.Base CreateBase(Planet planet)
+        {
+            Entities.Base planetBase = new Entities.Base();
+            planetBase.Planet = planet.Location;
+
+            this.gameServer.Persistence.GetBaseDAO().InsertBase(planetBase);
+
+            return this.gameServer.Persistence.GetBaseDAO().GetBaseByPlanetFullName(planet.Location);
+        }
+
+        private Entities.Trader CreateTrader(Planet planet)
+        {
+            Trader trader = new Trader();
+            trader.BaseId = planet.Base.BaseId;
+
+            this.gameServer.Persistence.GetTraderDAO().InsertTrader(trader);
+
+            return this.gameServer.Persistence.GetTraderDAO().GetTraderByBaseId(planet.Base.BaseId);
         }
     }
 }

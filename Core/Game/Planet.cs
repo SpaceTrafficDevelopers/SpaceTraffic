@@ -28,11 +28,7 @@ namespace SpaceTraffic.Game
     /// </summary>
     public class Planet : CelestialObject, ILocation, IPlanet
     {
-
-        /// <summary>
-        /// List of goods on planet.
-        /// </summary>
-        public List<PlanetGoods> PlanetGoodsList { get; set; } 
+        public Entities.Base Base { get; set; }
 
         public string Location
         {
@@ -68,33 +64,6 @@ namespace SpaceTraffic.Game
             : base(name, altName, details, starSystem, trajectory)
         {
         }
-        #endregion
-
-        /// <summary>
-        /// Change price for only one goods
-        /// </summary>
-        /// <param name="percent">Percent od change price goods</param>
-        /// <param name="goods">Entity of goods</param>
-        /// <exception cref="DivideByZeroException">When percent &lt= 0</exception>
-        public void ChangeOneGoodsPrice(int percent, PlanetGoods goods)
-        {
-            goods.Goods.Price = goods.Goods.Price / goods.CurrentChangedPrice * percent;
-            goods.CurrentChangedPrice = percent;
-        }
-
-        /// <summary>
-        /// Change price goods on planet.
-        /// </summary>
-        /// <param name="percent">Percent of change price goods</param>
-        /// <exception cref="DivideByZeroException">When percent &lt= 0</exception>
-        public void ChangePriceGoods(int percent)
-        { 
-
-            foreach(PlanetGoods goods in PlanetGoodsList) {
-                ChangeOneGoodsPrice(percent, goods);
-            }
-            
-        }
-            
+        #endregion  
     }
 }

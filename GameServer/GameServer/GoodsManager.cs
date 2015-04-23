@@ -27,87 +27,122 @@ namespace SpaceTraffic.GameServer
 {
     public class GoodsManager : IGoodsManager
     {
-        public List<Planet> planets { get; set; }
+        public IList<IGoods> GoodsList { get; set; }
 
-        public GoodsManager() 
+        private IGameServer gameServer;
+
+        public GoodsManager(IGameServer gameServer) 
         {
-        
+            this.gameServer = gameServer;
         }
 
-        public void GenerateGoodsOnPlanets(IList<IGoods> goodsList, IList<Planet> planets)
+        public void GenerateGoodsOnPlanets(IList<Planet> planets)
         {
             Random r = new Random();
             foreach (Planet planet in planets)
             {
-                List<PlanetGoods> planetGoodsList = new List<PlanetGoods>();
-                foreach (IGoods goods in goodsList)
+                //List<PlanetGoods> planetGoodsList = new List<PlanetGoods>();
+                List<TraderCargo> list = new List<TraderCargo>();
+                foreach (IGoods goods in GoodsList)
                 {
                     if (r.Next(0, 2) == 1) // 50% sance, ze se zbozi prida na planetu 
                     {
-                        PlanetGoods planetGoods = new PlanetGoods();
-                        planetGoods.Goods = goods;
-                        planetGoods.Count = r.Next(1, 101); // generuje pocet zbozi na planete
-
-                        planetGoods.CurrentChangedPrice = 100;
-
-                        planetGoodsList.Add(planetGoods);
+                        TraderCargo traderCargo = generateTraderCargo(planet, goods);
+                        InsertTraderCargo(traderCargo);
                     }
-                }
-                planet.PlanetGoodsList = planetGoodsList;
+                }     
             }
         }
 
-        public void GenerateGoodsOverGalaxyMap(IList<IGoods> goodsList,GalaxyMap map)
+        public void GenerateGoodsOverGalaxyMap(GalaxyMap map)
         {
             foreach (StarSystem starSys in map.GetStarSystems())
             {
                 IList<Planet> list = starSys.Planets;
 
-                this.GenerateGoodsOnPlanets(goodsList, list);
+                this.GenerateGoodsOnPlanets(list);
             }          
         }
 
-       /* public void BuyGoods(List<PlanetGoods> buyGoodsList, Planet _planet, SpaceShip spaceShip)
+        public void InsertCargoIntoDb()
         {
-            //nalezeni planety z ktere se nakupuje
-            foreach (Planet planet in planets)
+            foreach (IGoods goods in GoodsList)
             {
-                if (planet == _planet)
-                {
-                    // nalezeni pozadovaneho zbozi na planete
-                    foreach (PlanetGoods buyGoods in buyGoodsList)
-                    {
-                        foreach (PlanetGoods goodsPlanet in planet.PlanetGoodsList)
-                        {
-                            if (buyGoods == goodsPlanet)
-                            {
-                                goodsPlanet.Count -= buyGoods.Count; //TODO: kontrola mnozstvi
-                                buyGoods.Goods.Price = goodsPlanet.Goods.Price; //nastaveni ceny zbozi z planety
-                                break;
-                            }
-                        }
-                    }
-                    break;
-                }
-            }
-            //nalozeni zbozi na lod
+                Cargo cargo = new Cargo();
+                cargo.DefaultPrice = (int)goods.Price;
+                cargo.Description = goods.Description;
+                cargo.Name = goods.Name;
+                cargo.Type = goods.Type.ToString();
+                cargo.LevelToBuy = goods.LevelToBuy;
+                cargo.Volume = goods.Volume;
+                cargo.Category = goods.GetType().Name;
 
-            // je potreba zmenit entity = chyby v kontextu db a v dao tridach
-           //
-           // SpaceShipCargo spaceShipCargo = new SpaceShipCargo();
-           // Cargo cargo;
-           // double totalPriceCargo = 0;
-           // foreach (PlanetGoods buyGoods in buyGoodsList)
-           // {
-           //     cargo = new Cargo();
-           //     cargo.Goods = buyGoods.Goods;
-           //     cargo.Count = buyGoods.Count;
-           //     totalPriceCargo += (cargo.Count * cargo.Goods.Price);
-           //     spaceShipCargo.Cargo.Add(cargo);
-           // }
-           // spaceShipCargo.PriceCargo = totalPriceCargo;
-           // spaceShip.SpaceShipsCargo.Add(spaceShipCargo);
-             
-        }*/
+                this.gameServer.Persistence.GetCargoDAO().InsertCargo(cargo);
+            }
+        }
+
+        private TraderCargo generateTraderCargo(Planet planet, IGoods goods)
+        {
+            Random r = new Random();
+
+            TraderCargo traderCargo = new TraderCargo();
+
+            Trader trader = gameServer.Persistence.GetTraderDAO().GetTraderByBaseId(planet.Base.BaseId);
+            Cargo cargo = gameServer.Persistence.GetCargoDAO().GetCargoByName(goods.Name);
+
+            traderCargo.TraderId = trader.TraderId;
+            traderCargo.CargoPrice = (int)goods.Price;
+            traderCargo.CargoCount = r.Next(1, 101); // generuje pocet zbozi na planete
+            traderCargo.CargoId = cargo.CargoId;
+
+            return traderCargo;
+        }
+
+
+        private void InsertTraderCargo(TraderCargo tc)
+        {
+            this.gameServer.Persistence.GetTraderCargoDAO().InsertCargo(tc);
+        }
+
+        /// <summary>
+        /// Change price for only one goods
+        /// </summary>
+        /// <param name="percent">Percent od change price goods</param>
+        /// <param name="goods">Entity of goods</param>
+        /// <exception cref="DivideByZeroException">When percent &lt= 0</exception>
+        public void ChangeOneGoodsPrice(int percent, TraderCargo traderCargo)
+        {
+            traderCargo.CargoPrice = traderCargo.Cargo.DefaultPrice * percent / 100;
+
+            this.gameServer.Persistence.GetTraderCargoDAO().UpdateCargo(traderCargo);
+        }
+
+        /// <summary>
+        /// Change price goods on planet.
+        /// </summary>
+        /// <param name="percent">Percent of change price goods</param>
+        /// <exception cref="DivideByZeroException">When percent &lt= 0</exception>
+        public void ChangePriceGoods(int percent, Planet planet)
+        {
+            List<TraderCargo> list = getTraderCargos(planet.Base.Trader);
+            
+            foreach (TraderCargo tc in list)
+            {
+                ChangeOneGoodsPrice(percent, tc);
+            }
+        }
+
+        private List<TraderCargo> getTraderCargos(Trader trader)
+        {
+            List<TraderCargo> list =
+                this.gameServer.Persistence.GetTraderCargoDAO().GetCargoListByOwnerId(trader.TraderId).Cast<TraderCargo>().ToList();
+
+            foreach (TraderCargo tc in list)
+            {
+                tc.Cargo = this.gameServer.Persistence.GetCargoDAO().GetCargoById(tc.CargoId);
+            }
+
+            return list;
+        }
     }
 }

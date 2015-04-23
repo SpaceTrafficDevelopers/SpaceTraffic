@@ -28,7 +28,7 @@ namespace SpaceTraffic.Entities.Goods
         public string Description { get; set; }
         public double Price { get; set; }
         public int Volume { get; set; }
-        public GoodsType type { get; set; }
+        public GoodsType Type { get; set; }
         public int LevelToBuy { get; set; }
     }
 }

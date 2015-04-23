@@ -51,7 +51,7 @@ namespace SpaceTraffic.Entities.Goods
         /// <summary>
         /// Type of goods
         /// </summary>
-        GoodsType type { get; set; }
+        GoodsType Type { get; set; }
 
         /// <summary>
         /// Lowest player level to buy this item

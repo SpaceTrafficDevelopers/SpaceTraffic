@@ -108,6 +108,10 @@ namespace SpaceTraffic.GameServer
             return new TraderDAO();
         }
 
+        public ITraderCargoDAO GetTraderCargoDAO()
+        {
+            return new TraderCargoDAO();
+        }
 
         public ICargoLoadDao GetCargoLoadDao(string cargoLoadDaoName)
         {

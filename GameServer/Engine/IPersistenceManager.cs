@@ -42,6 +42,8 @@ namespace SpaceTraffic.Engine
         ISpaceShipCargoDAO GetSpaceShipCargoDAO();
 
         IBaseDAO GetBaseDAO();
+
+        ITraderCargoDAO GetTraderCargoDAO();
         
         /// <summary>
         /// Return ICargoLoadDao by cargoLoad.
