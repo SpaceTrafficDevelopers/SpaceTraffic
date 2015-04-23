@@ -38,12 +38,10 @@ namespace SpaceTraffic.Dao
             }
         }
 
-        public List<Trader> GetTradersByBaseId(int baseId) {
+        public Trader GetTraderByBaseId(int baseId) {
             using (var contextDB = CreateContext())
             {
-                return (from x in contextDB.Traders
-                        where x.BaseId.Equals(baseId)
-                        select x).ToList<Trader>();
+                return contextDB.Traders.FirstOrDefault(x => x.BaseId.Equals(baseId));
             }
         }
 

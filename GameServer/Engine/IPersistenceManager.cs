@@ -43,6 +43,7 @@ namespace SpaceTraffic.Engine
 
         IBaseDAO GetBaseDAO();
 
+
         ITraderCargoDAO GetTraderCargoDAO();
 
         ITraderDAO GetTraderDAO();
@@ -53,5 +54,6 @@ namespace SpaceTraffic.Engine
         /// <param name="cargoLoad">instance ICargoLoad</param>
         /// <returns>ICargoLoadDao</returns>
         ICargoLoadDao GetCargoLoadDao(string cargoLoadName);
+
     }
 }

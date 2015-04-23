@@ -37,7 +37,13 @@ namespace SpaceTraffic.Dao
         /// <returns>Cargo</returns>
         Cargo GetCargoById(int CargoId);
 
-    
+
+        /// <summary>
+        /// Return Cargo by name
+        /// </summary>
+        /// <param name="CargoId">Cargo name</param>
+        /// <returns>Cargo</returns>
+        Cargo GetCargoByName(string CargoName);
 
         /// <summary>
         /// Return list of Cargos by type

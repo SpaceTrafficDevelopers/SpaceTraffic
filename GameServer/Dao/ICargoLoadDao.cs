@@ -24,6 +24,7 @@ namespace SpaceTraffic.Dao
 {
     public interface ICargoLoadDao
     {
+        bool InsertCargo(ICargoLoadEntity cargoLoadEntity);
 
         bool RemoveCargoById(int cargoLoadEntityId);
 

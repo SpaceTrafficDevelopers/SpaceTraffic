@@ -96,7 +96,7 @@ namespace SpaceTraffic.Data
                     break;
 
                 case "type":
-                    product.type = (GoodsType)Enum.Parse(typeof(GoodsType), productNode.InnerText, true);
+                    product.Type = (GoodsType)Enum.Parse(typeof(GoodsType), productNode.InnerText, true);
                     break;
 
                 case "levelToBuy":

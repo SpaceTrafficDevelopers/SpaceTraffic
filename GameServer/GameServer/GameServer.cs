@@ -131,17 +131,16 @@ namespace SpaceTraffic.GameServer
             scriptManager.RunScript("SpaceTraffic.Scripts.Testing.TestDataGenerator");
 
             logger.Info("Restoring game world.");
-            this.worldManager = new WorldManager();
+            this.worldManager = new WorldManager(this);
             GalaxyMap galaxyMap = this.assetManager.LoadGalaxyMap(galaxyMapName);
             this.worldManager.Map = galaxyMap;
-            
 
-            //Prozatimní načítání zboží z xml.
-            IList<IGoods> list = this.assetManager.LoadGoods(goodsFileName);
+            this.worldManager.GenerateBasesAndTraders();
 
-            //Prozatimní generování zboží na všech planetách v galaxii
-            this.goodsManager = new GoodsManager();
-            this.goodsManager.GenerateGoodsOverGalaxyMap(list, this.worldManager.Map);
+            this.goodsManager = new GoodsManager(this);
+            this.goodsManager.GoodsList = this.assetManager.LoadGoods(goodsFileName);
+            this.goodsManager.InsertCargoIntoDb();
+            this.goodsManager.GenerateGoodsOverGalaxyMap(this.worldManager.Map);
 
             // Inicializace herního světa.
             this.gameManager = new GameManager(this);

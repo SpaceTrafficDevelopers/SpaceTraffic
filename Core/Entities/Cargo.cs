@@ -26,7 +26,7 @@ namespace SpaceTraffic.Entities
     {
         public int CargoId { get; set; }
 
-       // public int Price { get; set; }
+        public int DefaultPrice { get; set; }
 
         public string Name { get; set; }
 

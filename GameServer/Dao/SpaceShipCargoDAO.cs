@@ -24,7 +24,7 @@ namespace SpaceTraffic.Dao
 {
     public class SpaceShipCargoDAO : AbstractDAO, ISpaceShipCargoDAO
     {
-        private bool InsertCargo(ICargoLoadEntity cargoLoadEntity)
+        public bool InsertCargo(ICargoLoadEntity cargoLoadEntity)
         {
             using (var contextDB = CreateContext())
             {
