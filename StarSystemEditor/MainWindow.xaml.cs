@@ -40,14 +40,14 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         private int pointEditing { get; set; }
         private int modifier { get; set; }
         /// <summary>
-        /// casovac, zabranuje tomu aby se fronta eventu zaplnila eventem MouseMove, a program missnul MouseUp event
+        /// timer, used in MouseMove. Necessary for program not to miss MouseUp event occasionally
         /// </summary>
         DateTime start = DateTime.Now;
        
         #endregion
 
         /// <summary>
-        /// Konstruktor
+        /// Construktor
         /// </summary>
         public MainWindow()
         {
@@ -59,7 +59,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             this.StarSystemSelectorPanel.Children.Add(new StarSystemSelector());
         }
         /// <summary>
-        /// Reakce na ukonceni programu
+        /// Reaction on Quit
         /// </summary>
         private void QuitProgram(object sender, RoutedEventArgs e)
         {
@@ -67,31 +67,33 @@ namespace SpaceTraffic.Tools.StarSystemEditor
 
         }
         /// <summary>
-        /// Reakce na Galaxy Map
+        /// Reaction on Galaxy Map button
         /// </summary>
         private void buttonGalaxyMap_Click(object sender, RoutedEventArgs e)
         {
             string content = (string)((Button)e.Source).Content;
             if (content.Equals("Galaxy Map"))
             {
-                // vycisteni properties
+                // cleaning up
+                Editor.dataPresenter.deselect();
                 Editor.dataPresenter.selected = false;
                 List<SelectedPointView> points = Editor.dataPresenter.GetPoints();
                 points.Clear();
-                // zobrazeni mapy
+                // shows galaxy map
                 Editor.ButtonName = "Star System";
                 ((Button)e.Source).Content = Editor.ButtonName;
                 Editor.dataPresenter.DrawGalaxyMap();
             }
             else if (content.Equals("Star System"))
             {
+                // shows star system 
                 Editor.ButtonName = "Galaxy Map";
                 ((Button)e.Source).Content = Editor.ButtonName;
                 Editor.dataPresenter.StarSystemDrawer();
             }
         }
         /// <summary>
-        /// Reakce na zoom in
+        /// Reaction on zoom in
         /// </summary>
         private void buttonZoomIn_Click(object sender, RoutedEventArgs e)
         {
@@ -103,7 +105,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             ReDrawMap();
         }
         /// <summary>
-        /// Reakce na zoom out
+        /// Reaction on zoom out
         /// </summary>
         private void buttonZoomOut_Click(object sender, RoutedEventArgs e)
         {
@@ -116,7 +118,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         }
 
         /// <summary>
-        /// Inicializace seznamu starsystemu
+        /// Initialization of star system list
         /// </summary>
         private void starSystemList_Loaded(object sender, RoutedEventArgs e)
         {
@@ -124,14 +126,14 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             Editor.dataPresenter.StarSystemListLoader();
         }
         /// <summary>
-        /// Reakce na vybrani prvku z listu
+        /// Reaction on selecting star system in list
         /// </summary>
         private void starSystemList_GotFocus(object sender, RoutedEventArgs e)
         {
             Editor.dataPresenter.SetStarSystemListFocus(sender, e);
         }
         /// <summary>
-        /// Metoda pro prekresleni mapy
+        /// Redraw Star System on canvas
         /// </summary>
         public void ReDrawMap() 
         {
@@ -139,12 +141,19 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             {
                 Editor.dataPresenter.deselect();
                 Editor.dataPresenter.StarSystemDrawer();
-                //Editor.dataPresenter.GetDrawingArea().ShowStarSystemInfo();
                 this.SimulationTime.Content = "Simulation time: " + Editor.Time;
             }
         }
         /// <summary>
-        /// Pridani 50 sekund k simulatoru
+        /// Adds 10 second to simulation
+        /// </summary>
+        private void buttonTime10_Click(object sender, RoutedEventArgs e)
+        {
+            Editor.Time += 10;
+            ReDrawMap();
+        }
+        /// <summary>
+        /// Adds 50 seconds to simulation
         /// </summary>
         private void buttonTime50_Click(object sender, RoutedEventArgs e)
         {
@@ -152,7 +161,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             ReDrawMap();
         }
         /// <summary>
-        /// Pridani 200 sekund k simulatoru
+        /// Adds 200 seconds to simulation
         /// </summary>
         private void buttonTime200_Click(object sender, RoutedEventArgs e)
         {
@@ -160,7 +169,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             ReDrawMap();
         }
         /// <summary>
-        /// Restart casu simulatoru
+        /// Restart simulation time
         /// </summary>
         private void buttonTimeReset_Click(object sender, RoutedEventArgs e)
         {
@@ -168,35 +177,35 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             ReDrawMap();
         }
         /// <summary>
-        /// Inicializace seznamu spojeni
+        /// Initialization wormhole connections
         /// </summary>
         private void connectionListBox_Loaded(object sender, RoutedEventArgs e)
         {
             (sender as GroupBox).Content = Editor.dataPresenter.GetConnectionList();
         }
         /// <summary>
-        /// Inicializace scrollvieweru
+        /// Initialization of scrollviewer
         /// </summary>
         private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
         {
             this.drawingAreaScrollViewer.Content = DrawingArea.Canvas;
         }
         /// <summary>
-        /// Inicializace object data
+        /// Initialization object data
         /// </summary>
         private void loadedObjectData_Loaded(object sender, RoutedEventArgs e)
         {
             (sender as GroupBox).Content = Editor.dataPresenter.GetLoadedObjectData();
         }
         /// <summary>
-        /// Inicializace wormhole data
+        /// Initialization wormhole data
         /// </summary>
         private void loadedWormholeData_Loaded(object sender, RoutedEventArgs e)
         {
             (sender as GroupBox).Content = Editor.dataPresenter.GetLoadedWormholeData();
         }
         /// <summary>
-        /// Metoda volana z dataPresenteru pro prekresleni Planet Info
+        /// Method called from dataPresenter, updating planet data
         /// </summary>
         private void planetSelected()
         {
@@ -204,7 +213,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         }
 
         /// <summary>
-        /// Metoda volana z dataPresenteru pro prekresleni Wormhole Info
+        /// Method called from dataPresenter, updating wormhole data
         /// </summary>
         private void wormholeSelected()
         {
@@ -212,7 +221,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         }
 
         /// <summary>
-        /// Reakce na kliknuti na new
+        /// Reaction on New button in menu
         /// </summary>
         private void MenuNew_Click(object sender, RoutedEventArgs e)
         {
@@ -231,7 +240,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         }
 
         /// <summary>
-        /// Reakce na kliknuti na load
+        /// Reaction on Load button in menu
         /// </summary>
         private void MenuLoad_Click(object sender, RoutedEventArgs e)
         {
@@ -256,7 +265,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             }
         }
         /// <summary>
-        /// Reakce na kliknuti na save
+        /// Reaction on Save button in menu
         /// </summary>
         private void MenuSave_Click(object sender, RoutedEventArgs e)
         {
@@ -271,14 +280,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
                 this.ProgramStatus.Content = "Unable to save";
             }
         }
-        /// <summary>
-        /// Prida 10 sekund do simulatoru
-        /// </summary>
-        private void buttonTime10_Click(object sender, RoutedEventArgs e)
-        {
-            Editor.Time += 10;
-            ReDrawMap();
-        }
+
         /// <summary>
         /// Inicializace galaxy info
         /// </summary>
@@ -290,18 +292,18 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         private void window_mouseUp(object sender, MouseButtonEventArgs e)
         {
 
-            if (mouseDown)
+          /*  if (mouseDown)
             {
                 Point mousePos = e.GetPosition(drawingAreaScrollViewer);
                 Editor.dataPresenter.editShape(mousePos.X, mousePos.Y, pointEditing, modifier);
-            }
+            }*/
             mouseDown = false;
         }
 
         private void window_mouseMove(object sender, MouseEventArgs e)
         {
             TimeSpan timeItTook = DateTime.Now - start;
-            if (timeItTook.Milliseconds < 1) return;
+            if (timeItTook.Milliseconds < 20) return;
             start = DateTime.Now;
 
             Point p = new Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);

@@ -24,20 +24,20 @@ using SpaceTraffic.Game.Geometry;
 namespace SpaceTraffic.Tools.StarSystemEditor.Entities
 {
     /// <summary>
-    /// Interface ktery by mely implementovat veskere editory pracujici s presunutelnymi objekty
+    /// Interface for objects that has to be moved
     /// </summary>
     public interface IMovable
     {
         /// <summary>
-        /// Metoda pro presunuti objektu na danou pozici
+        /// Method for moving object to coordinates
         /// </summary>
-        /// <param name="coordX">Souradnice X</param>
-        /// <param name="coordY">Souradnice Y</param>
+        /// <param name="coordX">coordinate X</param>
+        /// <param name="coordY">coordinate Y</param>
         void MoveTo(double coordX, double coordY);
         /// <summary>
-        /// Metoda pro presunuti objektu na danou pozici
+        /// Method for moving to given point
         /// </summary>
-        /// <param name="coords">Souradnice</param>
+        /// <param name="coords">Point coordinates</param>
         void MoveTo(Point2d coords);
     }
 }

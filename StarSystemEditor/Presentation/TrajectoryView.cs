@@ -189,7 +189,11 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             }
             return size;
         }
-
+        
+        /// <summary>
+        /// sets trajectory
+        /// </summary>
+        /// <param name="trajectory"></param>
         public void SetTrajectory(Trajectory trajectory)
         {
             this.Trajectory = trajectory;

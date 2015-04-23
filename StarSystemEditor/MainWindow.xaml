@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:p="clr-namespace:SpaceTraffic.Tools.StarSystemEditor"
-        Title="Editor" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="768" d:DesignWidth="1024" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" MinWidth="1024" ResizeMode="CanResize" MinHeight="650" PreviewMouseLeftButtonUp="window_mouseUp" MouseMove="window_mouseMove" PreviewKeyDown="canvas_keyModifierDown" KeyUp="canvas_keyModifierUp">
+        Title="Editor" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="768" d:DesignWidth="1024" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" MinWidth="1024" ResizeMode="CanResize" MinHeight="650" PreviewMouseLeftButtonUp="window_mouseUp" PreviewKeyDown="canvas_keyModifierDown" KeyUp="canvas_keyModifierUp">
     <Window.Resources>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="Height" Value="25" />
@@ -22,30 +22,30 @@
         </StatusBar>
         <Menu Width="Auto" Height="25" DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="New" Click="MenuNew_Click"></MenuItem>
-                <MenuItem Header="Load" Click="MenuLoad_Click"></MenuItem>
-                <MenuItem Header="Save" Click="MenuSave_Click"></MenuItem>
+                <MenuItem Header="New System" Click="MenuNew_Click"></MenuItem>
+                <MenuItem Header="Load Galaxy" Click="MenuLoad_Click"></MenuItem>
+                <MenuItem Header="Save Galaxy" Click="MenuSave_Click"></MenuItem>
                 <!--<Separator></Separator>
                 <MenuItem Header="Import"></MenuItem>-->
                 <Separator></Separator>
                 <MenuItem Header="Quit" Click="QuitProgram"></MenuItem>
             </MenuItem>
             <MenuItem Header="Edit">
-                <MenuItem Header="Undo"></MenuItem>
+                <MenuItem Header="Add">
+                    <!--    <MenuItem Header="New star"></MenuItem> -->
+                    <MenuItem Header="New planet" Click="NewPlanet_Click"></MenuItem>
+                    <MenuItem Header="New wormhole" Click="NewWormhole_Click"></MenuItem>
+                </MenuItem>
+                <!--    <MenuItem Header="Undo"></MenuItem>
                 <MenuItem Header="Redo"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="Copy"></MenuItem>
-                <MenuItem Header="Paste"></MenuItem>
+                <MenuItem Header="Paste"></MenuItem> -->
             </MenuItem>
             <MenuItem Header="Simulation">
             <!--   <MenuItem Name="SimulationPauseButton" Header="Run"></MenuItem> -->
                 <MenuItem Header="Reset"></MenuItem>
-            </MenuItem>
-            <MenuItem Header="Add">
-                <!--    <MenuItem Header="New star"></MenuItem> -->
-                <MenuItem Header="New planet" Click="NewPlanet_Click"></MenuItem>
-                <MenuItem Header="New wormhole" Click="NewWormhole_Click"></MenuItem>
-            </MenuItem>
+            </MenuItem>  
         </Menu>
         <ToolBar DockPanel.Dock="Top" Height="26" Width="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Header="Controls">
             <Button Content="Galaxy Map" Height="23" Name="buttonGalaxyMap" Width="75" Click="buttonGalaxyMap_Click" />
@@ -91,7 +91,7 @@
         </TabControl>
         <ScrollViewer Name="drawingAreaScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top" 
                       VerticalContentAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                      Loaded="ScrollViewer_Loaded" PreviewMouseLeftButtonDown="canvas_mouseDown">
+                      Loaded="ScrollViewer_Loaded" PreviewMouseLeftButtonDown="canvas_mouseDown" PreviewMouseMove="window_mouseMove">
         </ScrollViewer>
        
     </DockPanel>

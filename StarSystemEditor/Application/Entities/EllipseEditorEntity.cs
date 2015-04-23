@@ -24,17 +24,16 @@ using SpaceTraffic.Game.Geometry;
 namespace SpaceTraffic.Tools.StarSystemEditor.Entities
 {
     /// <summary>
-    /// Editor spravujici elipticke orbity
+    /// Editor for elliptic orbits
     /// </summary>
     public class EllipseEditorEntity : OrbitEditorEntity, IMovable
     {
         /// <summary>
-        /// Prepsana metoda z EditableEntity.cs, provadi typovou kontrolu a nacita objekt k editaci
+        /// Override from EditableEntity.cs, checs if object is EllipticOrbit and loads it
         /// </summary>
-        /// <param name="editableObject">upravovany objekt, elipticka orbita</param>
+        /// <param name="editableObject">edited object, Elliptic orbit</param>
         public override void LoadObject(Object editableObject)
         {
-            TryToLoad();
             if (editableObject is EllipticOrbit)
             {
                 LoadedObject = editableObject;
@@ -43,20 +42,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         }
 
         /// <summary>
-        /// Prepsana metoda z EditableEntity.cs, v Iteraci 2 provede kontrolu objektu a pak ho ulozi do XML souboru s mapou
-        /// </summary>
-        public override void SaveObject()
-        {
-            if (EditFlag == false) Editor.Log("Byl zde pokus ulozit nezmeneny objekt");
-            else
-            {
-                EditFlag = false;
-                //TODO: Pokrocila implementace v iteraci 2
-            }
-        }
-
-        /// <summary>
-        /// Metoda volajici pretizeny MoveTo jen vytvori se souradnic Point2d
+        /// Method calling overloaded MoveTo, only makes point from x and y
         /// </summary>
         /// <param name="posX">Nova x pozice stredu</param>
         /// <param name="posY">Nova y pozice stredu</param>
@@ -66,92 +52,103 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         }
 
         /// <summary>
-        /// Metoda z IMovable, ktera presune celou orbitu na urceny bod (pomoci jejiho stredu)
+        /// Method from IMovable, moving orbit to different point, using its center
         /// </summary>
-        /// <param name="newCentralPoint">Nova pozice stredu</param>
+        /// <param name="newCentralPoint">new central point</param>
         public void MoveTo(Point2d newCentralPoint)
         {
             ((EllipticOrbit)LoadedObject).Barycenter = newCentralPoint;
         }
 
         /// <summary>
-        /// Metoda menici velikost cele orbity pomoci pomeru
+        /// Method scaling the whole orbit
         /// </summary>
-        /// <param name="newRatio">Novy pomer orbity</param>
+        /// <param name="newRatio">new ratio</param>
         public void Resize(double newRatio)
         {
-            if (newRatio <= 0) throw new ArgumentOutOfRangeException("Pomer zvetseni/zmenseni velikosti nesmi byt mensi roven 0");
+            if (newRatio <= 0) throw new ArgumentOutOfRangeException("new ratio must not be negative or 0");
             TryToSet();
-            //Pracuji s poloosami ale cilem jsou cele osy, proto pomer delim 2
+            // Elliptic orbit works with semi axis, therefore we must divide by 2.
             ((EllipticOrbit)LoadedObject).A = (int)(Math.Floor(((EllipticOrbit)LoadedObject).A * (newRatio / 2.0)));
             ((EllipticOrbit)LoadedObject).B = (int)(Math.Floor(((EllipticOrbit)LoadedObject).B * (newRatio / 2.0)));
         }
 
         /// <summary>
-        /// Metoda nastavujici velikost hlavni poloosy elipsy
+        /// Method changing semimajoraxis of orbit
         /// </summary>
-        /// <param name="newSemiMajorAxis">Nova velikost</param>
+        /// <param name="newSemiMajorAxis">new semi major axis</param>
         public override void SetWidth(int newSemiMajorAxis)
         {
-            if (newSemiMajorAxis < 0) throw new ArgumentOutOfRangeException("Hlavni osa musi byt vetsi nez 0");
+            if (newSemiMajorAxis < 0) throw new ArgumentOutOfRangeException("Semi major axis must be greater than 0");
             TryToSet();
             EllipticOrbit orbit = (EllipticOrbit)LoadedObject;
+            // update corespoding ellipse orbit parameters
             orbit.A = newSemiMajorAxis;
-            // zmena mesi eliptickou a kruhovou orbitou
-          /*  if (orbit.A == orbit.B)
+            if (orbit.A <= orbit.B)
             {
-                CircularOrbit newOrbit = new CircularOrbit(orbit.A, (int)orbit.PeriodInSec, orbit.Direction, orbit.InitialAngleRad);
-                LoadObject(newOrbit);
+                // scale orbit.A approximately with B, because B can never be bigger than A 
+                //orbit.A = (int)Math.Sqrt(orbit.B * orbit.B + orbit.Cx * orbit.Cx);
+                orbit.B = orbit.A;
+                orbit.OrbitalEccentricity = 0;
+                orbit.Cx = 0;
                 return;
             }
-            else if (orbit.A < orbit.B)
-            {
-                int pom = orbit.B;
-                orbit.B = orbit.A;
-                orbit.A = pom;
-                // prohodim major a minor osy a pootocim elipsu 
-                // mozne TODO - presunout planetu aby jeji pozice odpovidala
-                orbit.RotationAngleInRad -= Math.PI/2.0;
-            }*/
-
-            
+            double a2 = orbit.A * orbit.A;
+            double b2 = orbit.B * orbit.B;
+            orbit.OrbitalEccentricity = Math.Sqrt(Math.Abs((a2 - b2) / a2));
+            orbit.Cx = orbit.OrbitalEccentricity * orbit.A;
+            orbit.Cy = 0;
         }
 
         /// <summary>
-        /// Metoda nastavujici velikost vedlejsi poloosy elipsy
+        /// Method changing semiminoraxis of orbit
         /// </summary>
-        /// <param name="newSemiMinorAxis">Nova velikost</param>
+        /// <param name="newSemiMinorAxis">new semi minor axis</param>
         public override void SetHeight(int newSemiMinorAxis)
         {
-            if (newSemiMinorAxis < 0) throw new ArgumentOutOfRangeException("Vedlejsi osa musi byt vetsi nez 0");
+            if (newSemiMinorAxis < 0) throw new ArgumentOutOfRangeException("Semi minor axis must be greater than 0");
             TryToSet();
             EllipticOrbit orbit = (EllipticOrbit)LoadedObject;
+            // assign new value
             orbit.B = newSemiMinorAxis;
-            // zmena mesi eliptickou a circularni orbitou
-      /*      if (orbit.A == orbit.B)
+            // scale
+            if (orbit.B >= orbit.A)
             {
-                CircularOrbit newOrbit = new CircularOrbit(orbit.B, (int)orbit.PeriodInSec, orbit.Direction, orbit.InitialAngleRad);
-                LoadObject(newOrbit);
+                //
+                /*
+                 *sqrt ( a^2 - b^2) / a^2 )     = e
+                 *e^2 = a^2 - b^2 / a^2
+                 *e^2 * a^2 + b^2 = a^2
+                 *e^2
+                 *
+                 * e = exc * a 
+                 * e^2 = a^2 - b^2
+                 * (exc * a) ^2= a^2 - b^2
+                 * exc^2 
+                 * 
+                 * b = sqrt(a^2 - cx^2)
+                 * */
+                // scale orbit.A approximately with B, because B can never be bigger than A 
+                //orbit.A = (int)Math.Sqrt(orbit.B * orbit.B + orbit.Cx * orbit.Cx);
+                orbit.A = orbit.B;
+                orbit.OrbitalEccentricity = 0;
+                orbit.Cx = 0;
                 return;
             }
-            else if (orbit.A < orbit.B)
-            {
-                int pom = orbit.B;
-                orbit.B = orbit.A;
-                orbit.A = pom;
-                // prohodim major a minor osy a pootocim elipsu 
-                // mozne TODO - presunout planetu aby jeji pozice odpovidala
-                orbit.RotationAngleInRad -= Math.PI / 2.0;
-            }*/
+            double a2 = orbit.A * orbit.A;
+            double b2 = orbit.B * orbit.B;
+            orbit.OrbitalEccentricity = Math.Sqrt(Math.Abs((a2 - b2) / a2));
+            orbit.Cx = orbit.OrbitalEccentricity * orbit.A;
+            orbit.Cy = 0;
         }
 
         /// <summary>
-        /// Metoda nastavujici uhel rotace elipsy
+        /// Method changing rotation of orbit
         /// </summary>
-        /// <param name="angleInRad">Novy uhel rotace</param>
+        /// <param name="angleInRad">new rotation angle</param>
         public void SetRotationAngleInRad(double angleInRad)
         {
-            if (angleInRad < 0 || angleInRad > (2 * Math.PI)) throw new ArgumentOutOfRangeException("Uhel rotace musi byt v intervalu <0,2*PI)");
+            if (angleInRad < 0 || angleInRad > (2 * Math.PI)) throw new ArgumentOutOfRangeException("rotation angle must be from <0,2*PI)");
             TryToSet();
             ((EllipticOrbit)LoadedObject).RotationAngleInRad = angleInRad;
         }

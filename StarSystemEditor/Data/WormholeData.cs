@@ -35,7 +35,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
                     this.loadedWormholeData = textBlock;
                 }
             }
-            else
+            else if (Editor.dataPresenter.SelectedObject is EndpointView) 
             {
                 WormholeEndpoint selectedWormhole = (Editor.dataPresenter.SelectedObject as EndpointView).WormholeEndpoint;
 

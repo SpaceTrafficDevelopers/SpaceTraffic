@@ -69,10 +69,6 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// </summary>
         public static EllipseEditorEntity EllipseOrbitEditor { get; private set; }
         /// <summary>
-        /// Instance editoru bodovych drah
-        /// </summary>
-        public static StacionaryEditorEntity StacionaryOrbitEditor { get; private set; }
-        /// <summary>
         /// Instance generatoru star systemu
         /// </summary>
      //   public static StarSystemCreator starSystemCreator { get; private set; }
@@ -127,7 +123,6 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             WormholeEditor = new WormholeEditorEntity();
             CircleOrbitEditor = new CircleEditorEntity();
             EllipseOrbitEditor = new EllipseEditorEntity();
-            StacionaryOrbitEditor = new StacionaryEditorEntity();
        //     starSystemCreator = new StarSystemCreator();
         }
         /// <summary>
@@ -147,7 +142,6 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             WormholeEditor = new WormholeEditorEntity();
             CircleOrbitEditor = new CircleEditorEntity();
             EllipseOrbitEditor = new EllipseEditorEntity();
-            StacionaryOrbitEditor = new StacionaryEditorEntity();
             IsLoaded = false;
             Time = 0;
             Log("Inicializace dokoncena");

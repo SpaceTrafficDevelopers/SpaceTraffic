@@ -26,40 +26,27 @@ using SpaceTraffic.Game.Geometry;
 namespace SpaceTraffic.Tools.StarSystemEditor.Entities
 {
     /// <summary>
-    /// Editor spravujici starsystemy
+    /// Editor for star systems
     /// </summary>
     public class StarSystemEditorEntity : EditableEntity
     {
         /// <summary>
-        /// Prepsana metoda z EditableEntity.cs, provadi typovou kontrolu a nacita objekt k editaci
+        /// Override from EditableEntity.cs, checks if object is StarSystem and loads it
         /// </summary>
-        /// <param name="editableObject">upravovany objekt, hvezdny system</param>
+        /// <param name="editableObject">edited object, StarSystem</param>
         public override void LoadObject(object editableObject)
         {
-            TryToLoad();
             if (editableObject is StarSystem)
             {
                 LoadedObject = editableObject;
             }
         }
 
+        
         /// <summary>
-        /// Prepsana metoda z EditableEntity.cs, v Iteraci 2 provede kontrolu objektu a pak ho ulozi do XML souboru s mapou
+        /// Method setting position on galaxy map
         /// </summary>
-        public override void SaveObject()
-        {
-            if (EditFlag == false) Editor.Log("Byl zde pokus ulozit nezmeneny objekt");
-            else
-            {
-                EditFlag = false;
-                //TODO: Pokrocila implementace v iteraci 2
-            }
-        }
-
-        /// <summary>
-        /// Metoda nastavujici pozici v galaxy mape
-        /// </summary>
-        /// <param name="newPoint">Nova pozice</param>
+        /// <param name="newPoint">new position</param>
         public void SetMapPosition(Point2d newPoint)
         {
             TryToSet();
@@ -67,91 +54,79 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         }
 
         /// <summary>
-        /// Metoda menici soucasnou hvezdu na novou
+        /// Method setting new name
         /// </summary>
-        /// <param name="newStar">nova hvezda</param>
-        public void SetStar(Star newStar)
-        {
-            TryToSet();
-            newStar.StarSystem = ((StarSystem)LoadedObject);
-            ((StarSystem)LoadedObject).Star = newStar;
-        }
-
-        /// <summary>
-        /// Metoda nastavujici nove jmeno StarSystemu
-        /// </summary>
-        /// <param name="newName">Nove jmeno</param>
+        /// <param name="newName">new name</param>
         public void SetName(String newName)
         {
-            if (newName.Length == 0) throw new ArgumentException("Jmenem soustavy nemuze byt prazdny retezec");
+            if (newName.Length == 0) throw new ArgumentException("name of starsystem must not be empty string.");
             TryToSet();
-            //Je pouzivan indexer, kteremu by zmena jmena starsystemu mohla delat problem, proto starsystem odeberu a znovu pridam
             Editor.GalaxyMap.Remove(((StarSystem)LoadedObject).Name);
             ((StarSystem)LoadedObject).Name = newName;
             Editor.GalaxyMap.Add(((StarSystem)LoadedObject));
         }
 
         /// <summary>
-        /// Metoda pro pridavani planet do starsystemu
+        /// Method adding planet to system
         /// </summary>
-        /// <param name="newPlanet">Nova planeta</param>
+        /// <param name="newPlanet">New planet</param>
         public void AddPlanet(Planet newPlanet)
         {
             TryToSet();
-            if (newPlanet.StarSystem != null) throw new ArgumentException("Planeta jiz ma definovany starsystem");
+            if (newPlanet.StarSystem != null) throw new ArgumentException("Planet already has star system");
             newPlanet.StarSystem = ((StarSystem)LoadedObject);
             ((StarSystem)LoadedObject).Planets.Add(newPlanet);
         }
 
         /// <summary>
-        /// Metoda pro odstraneni planety ze starsystemu
+        /// Method for removing planet from system
         /// </summary>
-        /// <param name="planetName">Jmeno planety</param>
+        /// <param name="planetName">Name of planet</param>
         public void RemovePlanet(String planetName)
         {
-            if (planetName.Length == 0) throw new ArgumentException("Probehlo hledani prazdneho retezce ve jmenech planet");
-            if (!((StarSystem)LoadedObject).Planets.ContainsKey(planetName)) throw new ArgumentException("Planeta s timto jmenem se v soustave nevyskytuje");
+            if (planetName.Length == 0) throw new ArgumentException("Planet name must not be empty string.");
+            if (!((StarSystem)LoadedObject).Planets.ContainsKey(planetName)) throw new ArgumentException("star system has no planet with given name.");
             TryToSet();
             ((StarSystem)LoadedObject).Planets[planetName].StarSystem = null;
             ((StarSystem)LoadedObject).Planets.Remove(planetName);
         }
 
         /// <summary>
-        /// Prida cervi diru do systemu
+        /// Method for adding wormhole to system
         /// </summary>
-        /// <param name="newWormhole">Nova cervi dira</param>
+        /// <param name="newWormhole">new wormhole</param>
         public void AddWormhole(WormholeEndpoint newWormhole)
         {
-            if (newWormhole.StarSystem != null) throw new ArgumentException("Zadana wormhole jiz ma definovany starsystem");
+            if (newWormhole.StarSystem != null) throw new ArgumentException("wormhole already has star system.");
             TryToSet();
             ((StarSystem)LoadedObject).WormholeEndpoints.Add(newWormhole);
         }
 
         /// <summary>
-        /// Odstrani cervi diru ze systemu
+        /// Removes wormhole from system
         /// </summary>
-        /// <param name="wormholeId">ID cervi diry</param>
+        /// <param name="wormholeId">wormhole Id</param>
         public void RemoveWormhole(int wormholeId)
         {
-            if (wormholeId < 0) throw new ArgumentException("Wormholes maji index vetsi nez 0");
+            if (wormholeId < 0) throw new ArgumentException("wormholes have non-negative Id");
             TryToSet();
-            if (wormholeId > ((StarSystem)LoadedObject).WormholeEndpoints.Count) throw new ArgumentException("Wormhole id[" + wormholeId + "] neni v starsystemu");
+            if (wormholeId > ((StarSystem)LoadedObject).WormholeEndpoints.Count) throw new ArgumentException("Wormhole id[" + wormholeId + "] is not in the system");
             if (((StarSystem)LoadedObject).WormholeEndpoints[wormholeId].IsConnected)
             {
-                Editor.Log("Pri odstranovani wormhole id[" + wormholeId + "] v systemu " + ((StarSystem)LoadedObject).Name + " byla odstranena i vazba ciloveho systemu");
+                Editor.Log("During removing wormhole with id[" + wormholeId + "] from Star System " + ((StarSystem)LoadedObject).Name + ", its destination wormhole was also deleted");
                 ((StarSystem)LoadedObject).WormholeEndpoints[wormholeId].Destination.Destination = null;
             }          
             ((StarSystem)LoadedObject).WormholeEndpoints.Remove(wormholeId);
         }
         /// <summary>
-        /// Metoda vracejici zakladni info v rezetci, slouzi jen pro konzolovou aplikaci, ToString() bude vyuzit v gui
+        ///Method returning basic info about wormhole
         /// </summary>
-        /// <returns>Retezec s informacemi</returns>
+        /// <returns>info string</returns>
         public String GetInfo()
         {
             StarSystem thisStarSystem = ((StarSystem)LoadedObject);
             return "Starsystem[" + ((StarSystem)LoadedObject).MapPosition.X + ";" +((StarSystem)LoadedObject).MapPosition.Y + "]: " + thisStarSystem.Name
-                + ", hvezda: " + thisStarSystem.Star.Name + ", # planet: " + thisStarSystem.Planets.Count;
+                + ", star: " + thisStarSystem.Star.Name + ", # planet: " + thisStarSystem.Planets.Count;
         }
     }
 }

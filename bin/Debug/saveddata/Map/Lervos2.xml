@@ -12,9 +12,9 @@
       </details>
     </star>
     <planets>
-      <planet altName="Vhalenta1" name="Lervos2 1">
+      <planet altName="Vhalenta" name="Lervos2 1">
         <trajectory>
-          <ellipticOrbit direction="clockwise" period="2890" a="86" b="35" angle="135.0" initialAngle="200.0" />
+          <ellipticOrbit direction="clockwise" period="2890" a="86" b="65" angle="135.0" initialAngle="200.0" />
         </trajectory>
         <details>
           <gravity>0E+000</gravity>
@@ -22,9 +22,9 @@
           <description>Description of Vhalenta placeholder.</description>
         </details>
       </planet>
-      <planet altName="Vhalenta2" name="Lervos2 2">
+      <planet altName="Vhalenta" name="Lervos2 2">
         <trajectory>
-          <ellipticOrbit direction="counterclockwise" period="2890" a="86" b="84" angle="45.0" initialAngle="0.0" />
+          <ellipticOrbit direction="counterclockwise" period="2890" a="86" b="65" angle="45.0" initialAngle="0.0" />
         </trajectory>
         <details>
           <gravity>0E+000</gravity>
@@ -44,7 +44,7 @@
       </planet>
       <planet altName="Vhalenta" name="Lervos2 5">
         <trajectory>
-          <ellipticOrbit direction="clockwise" period="2890" a="86" b="65" angle="0.0" initialAngle="0.0" />
+          <ellipticOrbit direction="clockwise" period="2890" a="150" b="65" angle="0.0" initialAngle="0.0" />
         </trajectory>
         <details>
           <gravity>0E+000</gravity>

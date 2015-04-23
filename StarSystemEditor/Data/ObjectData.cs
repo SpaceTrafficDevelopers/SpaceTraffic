@@ -36,7 +36,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
                     this.loadedObjectData = textBlock;
                 }
             }
-            else
+            else if(Editor.dataPresenter.SelectedObject is PlanetView)
             {
                 Planet selectedPlanet = (Editor.dataPresenter.SelectedObject as PlanetView).Planet;
                 

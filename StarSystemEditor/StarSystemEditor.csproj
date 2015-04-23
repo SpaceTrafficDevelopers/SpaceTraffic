@@ -97,7 +97,6 @@
     <Compile Include="Application\Entities\PlanetEditorEntity.cs" />
     <Compile Include="Data\ObjectData.cs" />
     <Compile Include="Data\PlanetType.cs" />
-    <Compile Include="Application\Entities\StacionaryEditorEntity.cs" />
     <Compile Include="Application\Entities\StarEditorEntity.cs" />
     <Compile Include="Data\StarSystemCreator.cs" />
     <Compile Include="Application\Entities\StarSystemEditorEntity.cs" />

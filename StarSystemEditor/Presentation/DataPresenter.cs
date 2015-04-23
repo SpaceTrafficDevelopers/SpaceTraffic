@@ -388,47 +388,121 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         }
 
 
-        public static double findAngle(Point2d center, Point2d b, Point2d c)
+        public static double findAngle(Point2d center, Point2d mouse)
         {
-            Debug.WriteLine(""+center.X+":"+center.Y + "   , " + b.X + ":" + b.Y+ "   , " + c.X + ":" + c.Y); 
-            if (b.X == c.X && b.Y == c.Y)
-            {
-                return 0f;
-            }
-            if (center.X == b.X && center.Y == b.Y)
-            {
-                return 0f;
-            }
-            if (center.X == c.X && center.Y == c.Y)
-            {
-                return 0f;
-            }
+              double arc = Math.Atan2(-mouse.Y + center.Y, -mouse.X + center.X); 
 
-            double u1 = b.X - center.X;
-            double u2 = b.Y - center.Y;
-            double v1 = c.X - center.X;
-            double v2 = c.Y - center.Y;
-
-            double ul = Math.Sqrt(u1 * u1 + u2 * u2);
-            double vl = Math.Sqrt(v1 * v1 + v2 * v2);
-
-            double det = u1 * v2 - u2 * v1;
-            double ndet;
-            if (Math.Abs(det) < 0.00001)
-            {
-                ndet = 0;
-            }
-            else
-            {
-                ndet = det / Math.Abs(det);
-            }
-
-            double res = Math.Acos((u1 * v1 + u2 * v2) / (ul * vl));
-
-
-            return -1 * (int)ndet * res;
+              if (arc < 0) arc += Math.PI*2;
+              else if (arc > 360) arc -= Math.PI*2;
+            return arc;
         }
 
+        /// <summary>
+        /// sets new init angle for selected object
+        /// </summary>
+        public void editObjectInitAngle(double mouseX, double mouseY)
+        {
+            //gets trajectoryView of selected object
+            TrajectoryView trajectoryView = (this.SelectedObject as CelestialObjectView).GetTrajectoryView();
+            Point2d center = new Point2d(DrawingAreaSize*ObjectSizeRatio, DrawingAreaSize*ObjectSizeRatio);
+            Point2d mouse = new Point2d(mouseX, mouseY);
+            double angle = findAngle(center, mouse);
+            Debug.WriteLine(MathUtil.RadianToDegree(angle));
+            
+            if (trajectoryView.Trajectory is CircularOrbit)
+            {
+                Editor.CircleOrbitEditor.LoadObject(trajectoryView.Trajectory);
+                // circular orbit is -PI behind
+                angle -= Math.PI;
+                Editor.CircleOrbitEditor.SetInitialAngleRad(angle);
+            }
+            else if (trajectoryView.Trajectory is EllipticOrbit)
+            {
+                Editor.EllipseOrbitEditor.LoadObject(trajectoryView.Trajectory);
+                // elliptic orbit may have rotation of its own, add that angle to our angle
+                angle += (Editor.EllipseOrbitEditor.LoadedObject as EllipticOrbit).RotationAngleInRad;
+                Editor.EllipseOrbitEditor.SetInitialAngleRad(angle);
+            }
+        }
+
+        /// <summary>
+        /// sets new width to selected object
+        /// </summary>
+        /// <param name="mouseX">mouse position X</param>
+        /// <param name="mouseY">mouse position Y</param>
+        public void editObjectWidth(double mouseX, double mouseY, int modifier)
+        {
+            //gets trajectoryView of selected object
+            TrajectoryView trajectoryView = (this.SelectedObject as CelestialObjectView).GetTrajectoryView();
+            Point2d center = new Point2d(DrawingAreaSize, DrawingAreaSize);
+            Point2d mouse = new Point2d(mouseX, mouseY);
+            // translate mouse position to be in line center - selected point - mouse
+            Point2d mouseActualPosition = translatePoint(center, points[1].Position, mouse);
+            int width = (int)distance(center, mouseActualPosition);
+            if (trajectoryView.Trajectory is CircularOrbit)
+            {
+                Editor.CircleOrbitEditor.LoadObject(trajectoryView.Trajectory);
+                Editor.CircleOrbitEditor.SetWidth(width);
+                // sets new trajectory to trajectoryView in case of changing types from circular to elliptic
+                trajectoryView.SetTrajectory((Trajectory)Editor.CircleOrbitEditor.LoadedObject);
+            }
+            else if (trajectoryView.Trajectory is EllipticOrbit)
+            {
+                Editor.EllipseOrbitEditor.LoadObject(trajectoryView.Trajectory);
+                EllipticOrbit orbit = (EllipticOrbit)Editor.EllipseOrbitEditor.LoadedObject;
+                //ellipse doesnt have its center in actual canvas center like circle, so we mas recalculate width
+                Point2d EllipseCenter = new Point2d(center.X + orbit.Cx, center.Y + orbit.Cy);
+                // now to rotate it 
+                EllipseCenter = RotatePoint(EllipseCenter, center, orbit.RotationAngleInRad);
+                width = (int)distance(EllipseCenter, mouseActualPosition);
+                Editor.EllipseOrbitEditor.SetWidth(width/2);
+                // sets new trajectory to trajectoryView in case of changing types from elliptic to circular
+                trajectoryView.SetTrajectory((Trajectory)Editor.EllipseOrbitEditor.LoadedObject);
+            }
+        }
+
+        /// <summary>
+        /// sets new width to selected object
+        /// </summary>
+        /// <param name="mouseX">mouse position X</param>
+        /// <param name="mouseY">mouse position Y</param>
+        public void editObjectHeight(double mouseX, double mouseY, int modifier)
+        {
+            //gets trajectoryView of selected object
+            TrajectoryView trajectoryView = (this.SelectedObject as CelestialObjectView).GetTrajectoryView();
+            Point2d center = new Point2d(DrawingAreaSize, DrawingAreaSize);
+            Point2d mouse = new Point2d(mouseX, mouseY);
+            // translate mouse position to be in line center - selected point - mouse
+            Point2d mouseActualPosition = translatePoint(center, points[2].Position, mouse);
+            int height = (int)distance(center, mouseActualPosition);
+            if (trajectoryView.Trajectory is CircularOrbit)
+            {
+                Editor.CircleOrbitEditor.LoadObject(trajectoryView.Trajectory);
+                if (modifier == 0)
+                    Editor.CircleOrbitEditor.SetHeight(height);
+                // shift - scaling
+                else if (modifier == 1)
+                    Editor.CircleOrbitEditor.SetRadius(height);
+                //ctrl - rotate 
+                else if (modifier == 2)
+
+                // sets new trajectory to trajectoryView in case of changing types from circular to elliptic
+                trajectoryView.SetTrajectory((Trajectory)Editor.CircleOrbitEditor.LoadedObject);
+            }
+            else if (trajectoryView.Trajectory is EllipticOrbit)
+            {
+                Editor.EllipseOrbitEditor.LoadObject(trajectoryView.Trajectory);
+                EllipticOrbit orbit = (EllipticOrbit)Editor.EllipseOrbitEditor.LoadedObject;
+                //ellipse doesnt have its center in actual canvas center like circle, so we mas recalculate height
+                Point2d EllipseCenter = new Point2d(center.X + orbit.Cx, center.Y + orbit.Cy);
+                // now to rotate it 
+                EllipseCenter = RotatePoint(EllipseCenter, center, orbit.RotationAngleInRad);
+                height = (int)distance(EllipseCenter, mouseActualPosition);
+                Editor.EllipseOrbitEditor.SetHeight(height);
+                // sets new trajectory to trajectoryView in case of changing types from elliptic to circular
+                trajectoryView.SetTrajectory((Trajectory)Editor.EllipseOrbitEditor.LoadedObject);
+            }
+        }
 
         /// <summary>
         /// edits objects when mouse is draging points on canvas
@@ -452,39 +526,17 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                 Point2d center = new Point2d(PosX, PosY);
 
                 OrbitEditorEntity traj = null;
-                double initangle = 0;
                 // planet position editing
                 if (index == 0)
                 {
-                    if (trajectoryView.Trajectory is CircularOrbit)
-                    {
-                        Editor.CircleOrbitEditor.LoadObject(trajectoryView.Trajectory);
-                        traj = Editor.CircleOrbitEditor;
-                        initangle = (Editor.CircleOrbitEditor.LoadedObject as CircularOrbit).InitialAngleRad;
-                    }
-                    else if (trajectoryView.Trajectory is EllipticOrbit)
-                    {
-                        Editor.EllipseOrbitEditor.LoadObject(trajectoryView.Trajectory);
-                        traj = Editor.EllipseOrbitEditor;
-                        center.X += (traj.LoadedObject as EllipticOrbit).A; //       TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO :(
-                        center.Y += (traj.LoadedObject as EllipticOrbit).B;
-                        initangle = (Editor.EllipseOrbitEditor.LoadedObject as EllipticOrbit).InitialAngleRad;
-                    }
-                    Point2d objectPosition = new Point2d(selectedEntity.Position.X + DEFAULT_PLANET_RADIUS * ObjectSizeRatio,
-                                                         selectedEntity.Position.Y + DEFAULT_PLANET_RADIUS * ObjectSizeRatio);
-                    double pomX = mousePos.X - this.DrawingAreaSize * this.ObjectSizeRatio;
-                    double pomY = mousePos.Y - this.DrawingAreaSize * this.ObjectSizeRatio;
-                    double angle = findAngle(center, mousePos, objectPosition);
-                    if (angle < 0) angle += 2 * Math.PI;
-                    angle += initangle;
-                    angle = angle % (2 * Math.PI);
-                   // Debug.WriteLine(angle);
-                    traj.SetInitialAngleRad(angle);
+                    // sends mouse position altered by selected point radius
+                    editObjectInitAngle(X - points[index].Size/2, Y - points[index].Size/2);
                 }
                 // ellipse width
                 else if (index == 1)
                 {
-                    if (trajectoryView.Trajectory is CircularOrbit)
+                    editObjectWidth(X, Y, modifier);
+                    /*if (trajectoryView.Trajectory is CircularOrbit)
                     {
                         Point2d pointOnLine = translatePoint(center, points[index].Position, mousePos);
                         //vzdalenost noveho bodu na primce vedouci oznacenym bodem od stredu elipsy
@@ -546,12 +598,13 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                             traj.SetInitialAngleRad(angle);
                         }
                     }
-
+                    */
                 }
                 //ellipse height
                 else if (index == 2)
                 {
-                    if (trajectoryView.Trajectory is CircularOrbit)
+                    editObjectHeight(X + points[index].Size / 2, Y + points[index].Size / 2, modifier);
+                    /*if (trajectoryView.Trajectory is CircularOrbit)
                     {
                         Point2d pointOnLine = translatePoint(center, points[index].Position, mousePos);
                         //vzdalenost noveho bodu na primce vedouci oznacenym bodem od stredu elipsy (neni stred platna,
@@ -585,19 +638,20 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                         // zmena hlavni poloosy
                         traj.SetHeight(orbit.B);
                     }
+                     * */
                 }
                 // posun stredu elipsy
                 else if (index == 3)
                 {
                     if (trajectoryView.Trajectory is CircularOrbit)
                     {
-                      /*  points[index].Position, mousePos
-                        //vzdalenost noveho bodu na primce vedouci oznacenym bodem od stredu elipsy (neni stred platna,
-                        // tam je pouze ohnisko)
-                        Editor.CircleOrbitEditor.LoadObject(trajectoryView.Trajectory);
-                        traj = Editor.CircleOrbitEditor;
-                        traj.LoadedObject 
-*/                    
+                        /*  points[index].Position, mousePos
+                          //vzdalenost noveho bodu na primce vedouci oznacenym bodem od stredu elipsy (neni stred platna,
+                          // tam je pouze ohnisko)
+                          Editor.CircleOrbitEditor.LoadObject(trajectoryView.Trajectory);
+                          traj = Editor.CircleOrbitEditor;
+                          traj.LoadedObject 
+  */
                     }
                     else if (trajectoryView.Trajectory is EllipticOrbit)
                     {
@@ -615,71 +669,100 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                     }
                 }
                 // nactu zmenenou trajectorii pro ulozeni do view
-                if (traj != null)
+                ellipse = trajectoryView.GetShape();
+                ellipse.Tag = trajectoryView;
+                Canvas.SetLeft(ellipse, trajectoryView.Position.X);
+                Canvas.SetTop(ellipse, trajectoryView.Position.Y);
+                DrawingArea.Canvas.Children.Add(ellipse);
+                selectedEntity.SetTrajectoryView(trajectoryView);
+                //selectedEntity.SetTrajectoryView(trajectoryView);
+                // odebrani objektu na orbite pro jeho znovu pridani na spravne pozici
+                removeElement(selectedEntity);
+                Ellipse objectShape = (selectedEntity).GetShape();
+                objectShape.Tag = selectedEntity;
+                Canvas.SetLeft(objectShape, selectedEntity.Position.X);
+                Canvas.SetTop(objectShape, selectedEntity.Position.Y);
+                DrawingArea.Canvas.Children.Add(objectShape);
+                // odebere označené body
+                foreach (SelectedPointView point in points)
                 {
-                    ellipse = trajectoryView.GetShape();
-                    ellipse.Tag = trajectoryView;
-                    Canvas.SetLeft(ellipse, trajectoryView.Position.X);
-                    Canvas.SetTop(ellipse, trajectoryView.Position.Y);
-                    DrawingArea.Canvas.Children.Add(ellipse);
-                    selectedEntity.SetTrajectoryView(trajectoryView);
-                    //selectedEntity.SetTrajectoryView(trajectoryView);
-                    // odebrani objektu na orbite pro jeho znovu pridani na spravne pozici
-                    removeElement(selectedEntity);
-                    Ellipse objectShape = (selectedEntity).GetShape();
-                    objectShape.Tag = selectedEntity;
-                    Canvas.SetLeft(objectShape, selectedEntity.Position.X);
-                    Canvas.SetTop(objectShape, selectedEntity.Position.Y);
-                    DrawingArea.Canvas.Children.Add(objectShape);
-                    // odebere označené body
-                    foreach (SelectedPointView point in points)
-                    {
-                        removeElement(point);
-                    }
-                    points.Clear();
-                    //StarSystemDrawer();
-                    DrawPoints(selectedEntity);
+                    removeElement(point);
                 }
+                points.Clear();
+                //StarSystemDrawer();
+                DrawPoints(selectedEntity);
+
+                //  StarSystemDrawer();
             }
             else if (this.SelectedObject is StarSystemView)
             {
                 MoveStarSystem(X, Y);
             }
         }
+        /// <summary>
+        /// Rotates one point around another
+        /// </summary>
+        /// <param name="pointToRotate">The point to rotate.</param>
+        /// <param name="centerPoint">The centre point of rotation.</param>
+        /// <param name="angleInDegrees">The rotation angle in radians.</param>
+        /// <returns>Rotated point</returns>
+        static Point2d RotatePoint(Point2d pointToRotate, Point2d centerPoint, double angleInRadians)
+        {
+            double cosTheta = Math.Cos(angleInRadians);
+            double sinTheta = Math.Sin(angleInRadians);
+            return new Point2d
+            {
+                X =
+                    // (int)
+                    (cosTheta * (pointToRotate.X - centerPoint.X) -
+                    sinTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.X),
+                Y =
+                    //  (int)
+                    (sinTheta * (pointToRotate.X - centerPoint.X) +
+                    cosTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.Y)
+            };
+        }
+
 
         /// <summary>
-        /// Presune bod na primku prochazejici stredem elipsy a tazenym bodem (styl orto, jen natocene)
+        /// Returns point translated on rotated axis of ellipse
         /// </summary>
-        /// <param name="center">stred elipsy</param>
-        /// <param name="elipsa">tazeny bod</param>
-        /// <param name="mouse">pozice mysi - kam to chceme presunout</param>
+        /// <param name="center">center of ellipse</param>
+        /// <param name="ellipse">selected dragging point</param>
+        /// <param name="mouse">mouse position</param>
         /// <returns>bod na primce</returns>
-        private Point2d translatePoint(Point2d center, Point2d elipsa, Point2d mouse)
+        private Point2d translatePoint(Point2d center, Point2d ellipse, Point2d mouse)
         {
-            Point2d v1 = new Point2d(elipsa.X - center.X, elipsa.Y - center.Y);
-            Point2d v2 = new Point2d(mouse.X - center.X, mouse.Y - center.Y);
-            double velikost = Math.Sqrt(v1.X * v1.X + v1.Y * v1.Y);
-            v1.X = v1.X / velikost;
-            v1.Y = v1.Y / velikost;
-            double velikost2 = Math.Sqrt(v2.X * v2.X + v2.Y * v2.Y);
-            // aby nesla nastavit zaporna nebo nulova velikost 
-            if (velikost2 <= 0)
+            Point2d v1 = new Point2d(ellipse.X - center.X, ellipse.Y - center.Y);
+            // move mouse position by half of planet radius, so it is in center, not topleft corner
+            Point2d v2 = new Point2d(mouse.X + DEFAULT_PLANET_RADIUS * ObjectSizeRatio - center.X,
+                                     mouse.Y+DEFAULT_PLANET_RADIUS * ObjectSizeRatio - center.Y);
+            double size = Math.Sqrt(v1.X * v1.X + v1.Y * v1.Y);
+            v1.X = v1.X / size;
+            v1.Y = v1.Y / size;
+            double size2 = Math.Sqrt(v2.X * v2.X + v2.Y * v2.Y);
+            // size must be positive
+            if (size2 <= 0)
             {
                 return v1;
             }
-            v2.X = v2.X / velikost2;
-            v2.Y = v2.Y / velikost2;
-            // skalarni soucin dvou vektoru = uhel mezi nimi
+            v2.X = v2.X / size2;
+            v2.Y = v2.Y / size2;
             double angle = v1.X * v2.X + v1.Y * v2.Y;
-            //velikost noveho vektoru v3
-            double vel = velikost2 * angle;
-            Point2d v3 = new Point2d(v1.X * vel, v1.Y * vel);
-            // novy posunuty bod
+            //size of new vector v3
+            double size3 = size2 * angle;
+            Point2d v3 = new Point2d(v1.X * size3, v1.Y * size3);
+            // new translated point
             v3.X = v3.X + center.X;
             v3.Y = v3.Y + center.Y;
             return v3;
         }
 
+        /// <summary>
+        /// Gets element on canvas by its tag
+        /// </summary>
+        /// <param name="view">View, element.Tag</param>
+        /// <returns></returns>
         private Ellipse getElement(View view)
         {
             UIElementCollection list = DrawingArea.Canvas.Children;
@@ -698,6 +781,10 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             return null;
         }
 
+        /// <summary>
+        /// removes element from canvas
+        /// </summary>
+        /// <param name="view">View, element.Tag</param>
         private void removeElement(View view)
         {
             UIElementCollection list = DrawingArea.Canvas.Children;
@@ -708,7 +795,6 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                 {
                     Ellipse ellipse = element as Ellipse;
                     if (ellipse == null) continue;
-                    //Editor.Log("found");
                     DrawingArea.Canvas.Children.Remove(element);
                     break;
                 }
@@ -718,7 +804,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// <summary>
         /// Draws and elipse, symbolising point which will be used to edit trajectories
         /// </summary>
-        /// <param name="pointView">zobrazovac bodu</param>
+        /// <param name="pointView">SelectedPoint view</param>
         private void drawPoint(SelectedPointView pointView)
         {
             Ellipse ellipse = pointView.GetShape();
@@ -739,7 +825,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             {
                 points.Clear();
                 StarSystemView starSystemView = (StarSystemView)objectView;
-                // pozice planety
+                // PlanetPosition
                 double x = starSystemView.Position.X;
                 double y = starSystemView.Position.Y;
                 Point2d point = new Point2d(x, y);
@@ -753,17 +839,16 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             }
         }
         
-        
+        /// <summary>
+        /// Moves StarSystem on GalaxyMap canvas
+        /// </summary>
+        /// <param name="X">Position X</param>
+        /// <param name="Y">Position Y</param>
         private void MoveStarSystem(double X, double Y)
         {
             StarSystemView view = this.SelectedObject as StarSystemView;
             Point2d position = new Point2d((int)X, (int)Y);
             view.StarSystem.MapPosition = position;
-           /* Ellipse ellipse = view.GetShape();
-            ellipse.Tag = view;
-            Canvas.SetLeft(ellipse, view.Position.X);
-            Canvas.SetTop(ellipse, view.Position.Y);
-            DrawingArea.Canvas.Children.Add(ellipse);*/
             DrawGalaxyMap();
         }
 
@@ -774,62 +859,41 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         public void DrawPoints(View entityView)
         {
             this.SelectedObject = entityView;
+
+
             if (entityView is PlanetView)
             {
-                // nastavi se null, metoda get potom zavola create
                 this.loadedObjectData = null;
-                GetLoadedObjectData();
-                PlanetView selectedEntity = (PlanetView)entityView;
-                Ellipse trajectory = selectedEntity.TrajectoryView.GetShape();
-                // pozice planety
-                double x = selectedEntity.Position.X + DEFAULT_PLANET_RADIUS * this.ObjectSizeRatio;
-                double y = selectedEntity.Position.Y + DEFAULT_PLANET_RADIUS * this.ObjectSizeRatio;
-                Point2d point = new Point2d(x, y);
-                SelectedPointView pointView = new SelectedPointView(selectedEntity, point);
-                // draw planet draging point
-                drawPoint(pointView);
-                //add points to list of points, needed for hit testing
-                points.Add(pointView);
-
-                foreach (SelectedPointView p in pointView.getTrajectoryPoint(selectedEntity))
-                {
-                    // ulozeni bodu na trajektorii a jejich vykresleni
-                    points.Add(p);
-                    drawPoint(p);
-                }
-                this.selected = true;
-
+                planetSelectionChanged();
             }
             if (entityView is EndpointView)
             {
                 this.loadedWormholeData = null;
-                GetLoadedWormholeData();
-                EndpointView selectedEntity = (EndpointView)entityView;
-                Ellipse trajectory = selectedEntity.TrajectoryView.GetShape();
-                // pozice planety
-                double x = selectedEntity.Position.X + DEFAULT_PLANET_RADIUS * this.ObjectSizeRatio;
-                double y = selectedEntity.Position.Y + DEFAULT_PLANET_RADIUS * this.ObjectSizeRatio;
-                Point2d point = new Point2d(x, y);
-                SelectedPointView pointView = new SelectedPointView(selectedEntity, point);
-                // draw planet draging point
-                drawPoint(pointView);
-                //add points to list of points, needed for hit testing
-                points.Add(pointView);
-
-                foreach (SelectedPointView p in pointView.getTrajectoryPoint(selectedEntity))
-                {
-                    // ulozeni bodu na trajektorii a jejich vykresleni
-                    points.Add(p);
-                    drawPoint(p);
-                }
-                this.selected = true;
+                wormholeSelectionChanged();
             }
+            CelestialObjectView selectedEntity = (CelestialObjectView)entityView;
+            Ellipse trajectory = selectedEntity.GetTrajectoryView().GetShape();
+            // object position
+            double x = selectedEntity.Position.X + DEFAULT_PLANET_RADIUS * this.ObjectSizeRatio;
+            double y = selectedEntity.Position.Y + DEFAULT_PLANET_RADIUS * this.ObjectSizeRatio;
+            Point2d point = new Point2d(x, y);
+            SelectedPointView pointView = new SelectedPointView(selectedEntity, point);
+            // draw planet draging point
+            drawPoint(pointView);
+            //add points to list of points, needed for hit testing
+            points.Add(pointView);
 
-            //  selected.Name;
-            //selected.GetName();
+            foreach (SelectedPointView p in pointView.getTrajectoryPoint(selectedEntity))
+            {
+                // save points on trajectory and draw them
+                points.Add(p);
+                drawPoint(p);
+            }
+            this.selected = true;
         }
+
         /// <summary>
-        /// smaze vybrany objekt
+        /// Deletes selected object
         /// </summary>
         public void DeleteObject()
         {
@@ -914,8 +978,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// <returns>vzdalenost</returns>
         private double distance(Point2d point1, Point2d point2)
         {
-            double dX = point1.X - point2.X;
-            double dY = point1.Y - point2.Y;
+            double dX = point2.X - point1.X;
+            double dY = point2.Y - point1.Y;
             return Math.Sqrt(dX * dX + dY * dY);
         }
 
@@ -1090,10 +1154,11 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         public void TreeDataLoader()
         {
        //     this.starSystemObjectTree = null;
+           // this.CreateStarSystemObjectTree();
             TreeView tree = this.GetStarSystemObjectTree();
             //StarSystem starSystem = Editor.GalaxyMap[SelectedStarSystem];
             StarSystem starSystem = SelectedStarSystem;
-            //tree.Items.Clear();
+            tree.Items.Clear();
             TreeViewItem baseSun = new TreeViewItem();
             baseSun.Header = "Sun";
             baseSun.IsExpanded = true;
@@ -1127,6 +1192,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// <param name="e">argumenty</param>
         public void SetStarSystemListFocus(object sender, RoutedEventArgs e)
         {
+            deselect();
             this.SelectedStarSystem = ((e.Source as ListViewItem).Tag as StarSystem);
             this.TreeDataLoader();
             this.StarSystemDrawer();
@@ -1152,6 +1218,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             if(Editor.ButtonName.Equals("Star System"))
                 return;
             Editor.Log("got focus");
+         //   this.starSystemObjectTree = null;
             TreeViewItem treeView = (TreeViewItem)e.Source;
             View view = (View)treeView.Tag;
             this.SelectedObject = view;
@@ -1159,7 +1226,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             {
                 PlanetView planetView = (PlanetView)view;
                 this.SelectedObject = planetView;
-                this.CreateLoadedObjectData();
+                planetSelectionChanged();
             }
             if (treeView.Items.Count == 0)
             {
