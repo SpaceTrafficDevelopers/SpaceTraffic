@@ -292,11 +292,11 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         private void window_mouseUp(object sender, MouseButtonEventArgs e)
         {
 
-          /*  if (mouseDown)
+            if (mouseDown)
             {
                 Point mousePos = e.GetPosition(drawingAreaScrollViewer);
-                Editor.dataPresenter.editShape(mousePos.X, mousePos.Y, pointEditing, modifier);
-            }*/
+                Editor.dataPresenter.editShape(mousePos.X, mousePos.Y, pointEditing, modifier, true);
+            }
             mouseDown = false;
         }
 
@@ -306,14 +306,14 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             if (timeItTook.Milliseconds < 20) return;
             start = DateTime.Now;
 
-            Point p = new Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
+      /*      Point p = new Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
             this.ProgramStatus.Content = "" + drawingAreaScrollViewer.PointFromScreen(p).ToString();
-
-            //      this.ProgramStatus.Content = "" + e.GetPosition(drawingAreaScrollViewer).ToString(); ;
+      */
             if (mouseDown)
             {
                 Point mousePos = e.GetPosition(drawingAreaScrollViewer);
-                Editor.dataPresenter.editShape(mousePos.X, mousePos.Y, pointEditing, modifier);
+                Editor.dataPresenter.editShape(mousePos.X, mousePos.Y, pointEditing, modifier, false);
+                
             }
         }
    

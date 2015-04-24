@@ -179,8 +179,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             ellipse.Height = Size*ratio;
             Name = "Point" + 0;
             Point2d pos = new Point2d();
-            pos.X = Point.X + this.Size/2.0 * ratio;
-            pos.Y = Point.Y + this.Size/2.0 * ratio;
+            pos.X = Point.X - this.Size/2.0 * ratio;
+            pos.Y = Point.Y - this.Size/2.0 * ratio;
             Position = pos;
             return ellipse;
         }

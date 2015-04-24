@@ -42,15 +42,51 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         }
 
         /// <summary>
-        /// Method resing whole trajectory using ratio
+        /// Method changing width of orbit, but not changing any other parameters
         /// </summary>
-        /// <param name="newRatio">New ratio</param>
-        public void Resize(double newRatio)
+        /// <param name="newWidth">New width - major axis</param>
+        public override void PreviewSetWidth(int newWidth)
         {
-            if (newRatio <= 0) throw new ArgumentOutOfRangeException("new ratio must not be negative or 0");
+            if (newWidth <= 0) throw new ArgumentOutOfRangeException("new width must not be negative or 0");
             TryToSet();
-            // Circular orbit works with radius, therefore we must divide by 2.
-            ((CircularOrbit)LoadedObject).Radius = (int)(Math.Floor(((CircularOrbit)LoadedObject).Radius * (newRatio/2.0)));
+            CircularOrbit curOrbit = (CircularOrbit)LoadedObject;
+            if (newWidth != curOrbit.Radius)
+            {
+                if (newWidth > curOrbit.Radius)
+                {
+                    double angleindegree = MathUtil.RadianToDegree(curOrbit.InitialAngleRad);
+                    EllipticOrbit newOrbit = new EllipticOrbit(new Point2d(0, 0), newWidth, curOrbit.Radius, 0, (int)curOrbit.PeriodInSec, curOrbit.Direction, angleindegree);
+                    LoadedObject = newOrbit;
+                }
+                else if (newWidth < curOrbit.Radius)
+                {
+                    this.SetRadius(newWidth);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method changing height of orbit, but not changing any other parameters
+        /// </summary>
+        /// <param name="newHeight">new height, minor axis</param>
+        public override void PreviewSetHeight(int newHeight)
+        {
+            if (newHeight <= 0) throw new ArgumentOutOfRangeException("new height must not be negative or 0");
+            TryToSet();
+            CircularOrbit curOrbit = (CircularOrbit)LoadedObject;
+            double angleindegree = MathUtil.RadianToDegree(curOrbit.InitialAngleRad);
+            if (newHeight != curOrbit.Radius)
+            {
+                if (newHeight < curOrbit.Radius)
+                {
+                    EllipticOrbit newOrbit = new EllipticOrbit(new Point2d(0, 0), curOrbit.Radius, newHeight, 0, (int)curOrbit.PeriodInSec, curOrbit.Direction, curOrbit.InitialAngleRad);
+                    LoadedObject = newOrbit;
+                }
+                else if (newHeight > curOrbit.Radius)
+                {
+                    this.SetRadius(newHeight);
+                }
+            }
         }
 
         /// <summary>
@@ -66,16 +102,12 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             {
                 if (newWidth > curOrbit.Radius)
                 {
-                    double angleindegree = MathUtil.RadianToDegree(curOrbit.InitialAngleRad+Math.PI);
+                    double angleindegree = MathUtil.RadianToDegree(curOrbit.InitialAngleRad);
                     EllipticOrbit newOrbit = new EllipticOrbit(new Point2d(0, 0), newWidth, curOrbit.Radius, 0, (int)curOrbit.PeriodInSec, curOrbit.Direction, angleindegree);
                     LoadedObject = newOrbit;
                 }
                 else if (newWidth < curOrbit.Radius)
                 {
-                  /*  //rotation angle shifted -PI/2
-                    double angleindegree = MathUtil.RadianToDegree(curOrbit.InitialAngleRad);
-                    EllipticOrbit newOrbit = new EllipticOrbit(new Point2d(0, 0), curOrbit.Radius, newWidth, -Math.PI/2, (int)curOrbit.PeriodInSec, curOrbit.Direction, angleindegree);
-                    LoadedObject = newOrbit;*/
                     this.SetRadius(newWidth);
                 }
             }
@@ -92,9 +124,19 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             if (newHeight <= 0) throw new ArgumentOutOfRangeException("new height must not be negative or 0");
             TryToSet();
             CircularOrbit curOrbit = (CircularOrbit)LoadedObject;
-            EllipticOrbit newOrbit = new EllipticOrbit(new Point2d(0, 0), curOrbit.Radius, newHeight, 0, (int)curOrbit.PeriodInSec, curOrbit.Direction, curOrbit.InitialAngleRad);
-            LoadedObject = newOrbit;
-
+            if (newHeight != curOrbit.Radius)
+            {
+                if (newHeight < curOrbit.Radius)
+                {
+                    EllipticOrbit newOrbit = new EllipticOrbit(new Point2d(0, 0), curOrbit.Radius, newHeight, 0,
+                        (int)curOrbit.PeriodInSec, curOrbit.Direction, curOrbit.InitialAngleRad);
+                    LoadedObject = newOrbit;
+                }
+                else if (newHeight > curOrbit.Radius)
+                {
+                    this.SetRadius(newHeight);
+                }
+            }
         }
         
         /// <summary>

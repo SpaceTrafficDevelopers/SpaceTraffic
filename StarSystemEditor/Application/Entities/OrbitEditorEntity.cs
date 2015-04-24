@@ -67,6 +67,18 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         }
 
         /// <summary>
+        /// Method changing semimajoraxis of orbit, but not updating any other ellipse parameters
+        /// </summary>
+        /// <param name="newSemiMajorAxis">new semi major axis</param>
+        public abstract void PreviewSetWidth(int newSemiMajorAxis);
+
+        /// <summary>
+        /// Method changing semiminoraxis of orbit, but not updating any other ellipse parameters
+        /// </summary>
+        /// <param name="newSemiMinorAxis">new semi minor axis</param>
+        public abstract void PreviewSetHeight(int newSemiMinorAxis);
+
+        /// <summary>
         ///  Method changing semimajoraxis of orbit
         /// </summary>
         /// <param name="width">nova sirka</param>

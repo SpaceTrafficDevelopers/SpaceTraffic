@@ -61,16 +61,60 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         }
 
         /// <summary>
-        /// Method scaling the whole orbit
+        /// Method scaling the whole orbit, is not precise, because orbit axis are of type integer
         /// </summary>
         /// <param name="newRatio">new ratio</param>
         public void Resize(double newRatio)
         {
             if (newRatio <= 0) throw new ArgumentOutOfRangeException("new ratio must not be negative or 0");
             TryToSet();
-            // Elliptic orbit works with semi axis, therefore we must divide by 2.
-            ((EllipticOrbit)LoadedObject).A = (int)(Math.Floor(((EllipticOrbit)LoadedObject).A * (newRatio / 2.0)));
-            ((EllipticOrbit)LoadedObject).B = (int)(Math.Floor(((EllipticOrbit)LoadedObject).B * (newRatio / 2.0)));
+            // do nothing if ellipse is already too small, mainly to prevent ellipse to go "invisible"
+            if (((EllipticOrbit)LoadedObject).A < 10 || ((EllipticOrbit)LoadedObject).B < 10)
+                // if ratio is bigger than 1, allow it
+                if (newRatio <= 1)
+                    return;
+            EllipticOrbit orbit = (EllipticOrbit)LoadedObject;
+            orbit.A = (int)(orbit.A * (newRatio));
+            orbit.B = (int)(orbit.B * (newRatio));
+            //everything stays the same except position of focus
+            orbit.Cx = orbit.OrbitalEccentricity * orbit.A;
+            orbit.SemiLatusRectum = orbit.A * (1 - orbit.OrbitalEccentricity * orbit.OrbitalEccentricity);
+            orbit.Sqrt1PlusESlash1MinusE = Math.Sqrt((1 + orbit.OrbitalEccentricity) / (1 - orbit.OrbitalEccentricity));
+        }
+
+        /// <summary>
+        /// Method changing semimajoraxis of orbit, but not updating any other ellipse parameters
+        /// </summary>
+        /// <param name="newSemiMajorAxis">new semi major axis</param>
+        public override void PreviewSetWidth(int newSemiMajorAxis)
+        {
+            if (newSemiMajorAxis < 0) throw new ArgumentOutOfRangeException("Semi major axis must be greater than 0");
+            TryToSet();
+            EllipticOrbit orbit = (EllipticOrbit)LoadedObject;
+            // update corespoding ellipse orbit parameters
+            orbit.A = newSemiMajorAxis;
+            if (orbit.A <= orbit.B)
+            {
+                orbit.B = orbit.A;
+             }
+        }
+
+        /// <summary>
+        /// Method changing semiminoraxis of orbit, but not updating any other ellipse parameters
+        /// </summary>
+        /// <param name="newSemiMinorAxis">new semi minor axis</param>
+        public override void PreviewSetHeight(int newSemiMinorAxis)
+        {
+            if (newSemiMinorAxis < 0) throw new ArgumentOutOfRangeException("Semi minor axis must be greater than 0");
+            TryToSet();
+            EllipticOrbit orbit = (EllipticOrbit)LoadedObject;
+            // assign new value
+            orbit.B = newSemiMinorAxis;
+            // scale
+            if (orbit.B >= orbit.A)
+            {
+                orbit.A = orbit.B;
+            }
         }
 
         /// <summary>
@@ -87,7 +131,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             if (orbit.A <= orbit.B)
             {
                 // scale orbit.A approximately with B, because B can never be bigger than A 
-                //orbit.A = (int)Math.Sqrt(orbit.B * orbit.B + orbit.Cx * orbit.Cx);
+             //   orbit.A = (int)Math.Sqrt(orbit.B * orbit.B + orbit.Cx * orbit.Cx);
                 orbit.B = orbit.A;
                 orbit.OrbitalEccentricity = 0;
                 orbit.Cx = 0;
@@ -98,6 +142,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             orbit.OrbitalEccentricity = Math.Sqrt(Math.Abs((a2 - b2) / a2));
             orbit.Cx = orbit.OrbitalEccentricity * orbit.A;
             orbit.Cy = 0;
+            orbit.SemiLatusRectum = orbit.A * (1 - orbit.OrbitalEccentricity * orbit.OrbitalEccentricity);
+            orbit.Sqrt1PlusESlash1MinusE = Math.Sqrt((1 + orbit.OrbitalEccentricity) / (1 - orbit.OrbitalEccentricity));
         }
 
         /// <summary>
@@ -114,22 +160,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             // scale
             if (orbit.B >= orbit.A)
             {
-                //
-                /*
-                 *sqrt ( a^2 - b^2) / a^2 )     = e
-                 *e^2 = a^2 - b^2 / a^2
-                 *e^2 * a^2 + b^2 = a^2
-                 *e^2
-                 *
-                 * e = exc * a 
-                 * e^2 = a^2 - b^2
-                 * (exc * a) ^2= a^2 - b^2
-                 * exc^2 
-                 * 
-                 * b = sqrt(a^2 - cx^2)
-                 * */
                 // scale orbit.A approximately with B, because B can never be bigger than A 
-                //orbit.A = (int)Math.Sqrt(orbit.B * orbit.B + orbit.Cx * orbit.Cx);
                 orbit.A = orbit.B;
                 orbit.OrbitalEccentricity = 0;
                 orbit.Cx = 0;
@@ -140,6 +171,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             orbit.OrbitalEccentricity = Math.Sqrt(Math.Abs((a2 - b2) / a2));
             orbit.Cx = orbit.OrbitalEccentricity * orbit.A;
             orbit.Cy = 0;
+            orbit.SemiLatusRectum = orbit.A * (1 - orbit.OrbitalEccentricity * orbit.OrbitalEccentricity);
+            orbit.Sqrt1PlusESlash1MinusE = Math.Sqrt((1 + orbit.OrbitalEccentricity) / (1 - orbit.OrbitalEccentricity));
         }
 
         /// <summary>
@@ -148,7 +181,14 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         /// <param name="angleInRad">new rotation angle</param>
         public void SetRotationAngleInRad(double angleInRad)
         {
-            if (angleInRad < 0 || angleInRad > (2 * Math.PI)) throw new ArgumentOutOfRangeException("rotation angle must be from <0,2*PI)");
+            // make angle valid
+            while (angleInRad < 0 || angleInRad > Math.PI * 2)
+            {
+                if (angleInRad < 0)
+                    angleInRad += Math.PI * 2;
+                else if (angleInRad > Math.PI * 2)
+                    angleInRad -= Math.PI * 2;
+            }
             TryToSet();
             ((EllipticOrbit)LoadedObject).RotationAngleInRad = angleInRad;
         }
