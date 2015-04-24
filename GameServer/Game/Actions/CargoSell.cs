@@ -116,10 +116,10 @@ namespace SpaceTraffic.Game.Actions
         {
             StarSystemName = ActionArgs[0].ToString();
             PlanetName = ActionArgs[1].ToString();
-            CargoLoadEntityID = Convert.ToInt32(ActionArgs[3]);
-            Count = Convert.ToInt32(ActionArgs[4]);
-            LoadingPlace = (ICargoLoadDao)ActionArgs[5];
-            BuyerID = Convert.ToInt32(ActionArgs[6]);
+            CargoLoadEntityID = Convert.ToInt32(ActionArgs[2]);
+            Count = Convert.ToInt32(ActionArgs[3]);
+            LoadingPlace = (ICargoLoadDao)ActionArgs[4];
+            BuyerID = Convert.ToInt32(ActionArgs[5]);
         }
     }
 }

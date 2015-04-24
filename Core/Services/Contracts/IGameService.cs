@@ -43,10 +43,10 @@ namespace SpaceTraffic.Services.Contracts
 		bool PlayerHasEnaughCredits(int playerId, long amount);
 
         [OperationContract]
-        bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count, int traderId);
+        bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count);
         
         [OperationContract]
-        bool SpaceShipHasCargoSpace(int spaceShipId, string buyingPlace, int cargoLoadEntityID);
+        bool SpaceShipHasCargoSpace(int spaceShipId, int cargoLoadEntityID, int count);
 
         [OperationContract]
         bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName);
@@ -55,10 +55,10 @@ namespace SpaceTraffic.Services.Contracts
         bool PlayerHasSpaceShip(int playerId, int spaceShipId);
         
         [OperationContract]
-        bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoId, int cargoCount);
+        bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount);
 
         [OperationContract]
-        bool TraderHasEnoughCargo(int traderId, int cargoId, int cargoCount);
+        bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount);
 	}
 
 	[Serializable]

@@ -65,19 +65,19 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			}
 		}
 
-        public bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count, int traderId)
+        public bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count)
         {
             using (var channel = this.GetClientChannel())
             {
-                return (channel as IGameService).PlayerHasEnaughCreditsForCargo(playerId, cargoLoadEntityId, count, traderId);
+                return (channel as IGameService).PlayerHasEnaughCreditsForCargo(playerId, cargoLoadEntityId, count);
             }
         }
 
-        public bool SpaceShipHasCargoSpace(int spaceShipId, string buyingPlace, int cargoLoadEntityId)
+        public bool SpaceShipHasCargoSpace(int spaceShipId, int cargoLoadEntityId, int count)
         {
             using (var channel = this.GetClientChannel())
             {
-                return (channel as IGameService).SpaceShipHasCargoSpace(spaceShipId, buyingPlace, cargoLoadEntityId);
+                return (channel as IGameService).SpaceShipHasCargoSpace(spaceShipId, cargoLoadEntityId, count);
             }
         }
 
@@ -97,19 +97,19 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             }
         }
 
-        public bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoId, int cargoCount)
+        public bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount)
         {
             using (var channel = this.GetClientChannel())
             {
-                return (channel as IGameService).PlayerHasEnoughCargoOnSpaceShip(spaceShipId, cargoId, cargoCount);
+                return (channel as IGameService).PlayerHasEnoughCargoOnSpaceShip(spaceShipId, cargoLoadEntityId, cargoCount);
             }
         }
 
-        public bool TraderHasEnoughCargo(int traderId, int cargoId, int cargoCount)
+        public bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount)
         {
             using (var channel = this.GetClientChannel())
             {
-                return (channel as IGameService).TraderHasEnoughCargo(traderId, cargoId, cargoCount);
+                return (channel as IGameService).TraderHasEnoughCargo(traderId, cargoLoadEntityId, cargoCount);
             }
         }
 	}

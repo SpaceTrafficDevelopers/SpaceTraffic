@@ -138,7 +138,6 @@ namespace SpaceTraffic.Game.Actions
             loadingAction.PlanetName = PlanetName;
             loadingAction.Cargo = cargo;
 
-            
             gameServer.Game.PerformAction(loadingAction);
         }
 

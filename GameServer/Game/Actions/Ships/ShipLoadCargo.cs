@@ -72,7 +72,7 @@ namespace SpaceTraffic.Game.Actions
             StarSystemName = ActionArgs[0].ToString();
             PlanetName = ActionArgs[1].ToString();
             SpaceShipID = Convert.ToInt32(ActionArgs[2]);
-            Cargo = (ICargoLoadEntity)ActionArgs[3];
+            Cargo = gameServer.Persistence.GetTraderCargoDAO().GetCargoByID(Convert.ToInt32(ActionArgs[3]));
         }
 
        /* /// <summary>
@@ -141,8 +141,7 @@ namespace SpaceTraffic.Game.Actions
          * 0: starSystemName
          * 1: planetName
          * 2: spaceshipID
-         * 3: cargoID
-         * 4: count
+         * 3: cargoLoadEntityId
          */
         public object[] ActionArgs { get; set; }
 
