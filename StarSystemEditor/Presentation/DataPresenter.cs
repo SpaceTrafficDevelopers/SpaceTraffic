@@ -576,6 +576,9 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                 }
                 // redraws edited entity on canvas
                 redrawElement(selectedEntity);
+                // when done with editing one segment, redraw
+                if (finalize)
+                    StarSystemDrawer();
             }
             else if (this.SelectedObject is StarSystemView)
             {
@@ -590,13 +593,21 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         {
             CelestialObjectView selectedEntity = (CelestialObjectView)SelectedObject;
             TrajectoryView trajectoryView = selectedEntity.GetTrajectoryView();
-            Ellipse ellipse = getElement(trajectoryView);
-            ellipse = trajectoryView.GetShape();
+            removeElement(trajectoryView);
+            Ellipse ellipse = trajectoryView.GetShape();
             ellipse.Tag = trajectoryView;
             Canvas.SetLeft(ellipse, trajectoryView.Position.X);
             Canvas.SetTop(ellipse, trajectoryView.Position.Y);
             DrawingArea.Canvas.Children.Add(ellipse);
             selectedEntity.SetTrajectoryView(trajectoryView);
+            //removes and adds objects shape on canvas
+            removeElement(selectedEntity);
+            ellipse = selectedEntity.GetShape();
+            ellipse.Tag = selectedEntity;
+            Canvas.SetLeft(ellipse, selectedEntity.Position.X);
+            Canvas.SetTop(ellipse, selectedEntity.Position.Y);
+            DrawingArea.Canvas.Children.Add(ellipse);
+            
             // adding new orbit to Planet behind PlanetView
             if (selectedEntity is PlanetView)
             {
