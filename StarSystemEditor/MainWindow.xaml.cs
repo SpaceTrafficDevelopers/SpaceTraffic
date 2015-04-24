@@ -37,7 +37,17 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// detector wether left mouse button is held
         /// </summary>
         public bool mouseDown { get; set; }
+        /// <summary>
+        /// index of point hit
+        /// </summary>
         private int pointEditing { get; set; }
+        /// <summary>
+        /// property for simmulation
+        /// </summary>
+        public bool running { get; set; }
+        /// <summary>
+        /// property for editing key modifiers
+        /// </summary>
         private int modifier { get; set; }
         /// <summary>
         /// timer, used in MouseMove. Necessary for program not to miss MouseUp event occasionally
@@ -45,6 +55,10 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         DateTime start = DateTime.Now;
        
         #endregion
+        /// <summary>
+        /// Timer field, used for simulation
+        /// </summary>
+        System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
         /// <summary>
         /// Construktor
@@ -57,12 +71,18 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             Editor.LoadGalaxy("GalaxyMap2", ".//Assets");
             InitializeComponent();
             this.StarSystemSelectorPanel.Children.Add(new StarSystemSelector());
+            // initialize timer
+            timer.Interval = 1000;
+            timer.Tick += new EventHandler(SimulationTick);
+
         }
         /// <summary>
         /// Reaction on Quit
         /// </summary>
         private void QuitProgram(object sender, RoutedEventArgs e)
         {
+            timer.Stop();
+            timer.Dispose();
             Application.Current.Shutdown();
 
         }
@@ -71,6 +91,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// </summary>
         private void buttonGalaxyMap_Click(object sender, RoutedEventArgs e)
         {
+            timer.Stop();
             string content = (string)((Button)e.Source).Content;
             if (content.Equals("Galaxy Map"))
             {
@@ -225,6 +246,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// </summary>
         private void MenuNew_Click(object sender, RoutedEventArgs e)
         {
+            timer.Stop();
             try
             {
                 NewStarSystem form = new NewStarSystem();
@@ -244,6 +266,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// </summary>
         private void MenuLoad_Click(object sender, RoutedEventArgs e)
         {
+            timer.Stop();
             try 
             {
                 Editor.LoadGalaxyFile();
@@ -269,6 +292,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// </summary>
         private void MenuSave_Click(object sender, RoutedEventArgs e)
         {
+            timer.Stop();
             try
             {
                 
@@ -320,6 +344,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
      
         private void canvas_mouseDown(object sender, MouseButtonEventArgs e)
         {
+            timer.Stop();
             if (Editor.dataPresenter.selected)
             {
                 Point pointClicked = e.GetPosition(drawingAreaScrollViewer);
@@ -364,6 +389,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
 
         private void NewPlanet_Click(object sender, RoutedEventArgs e)
         {
+            timer.Stop();
             if (Editor.dataPresenter.SelectedStarSystem == null)
             {
                 MessageBox.Show("Select a StarSystem first.");
@@ -380,6 +406,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
 
         private void NewWormhole_Click(object sender, RoutedEventArgs e)
         {
+            timer.Stop();
             if (Editor.dataPresenter.SelectedStarSystem == null)
             {
                 MessageBox.Show("Select a StarSystem first.");
@@ -393,5 +420,21 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             else MessageBox.Show("Wormhole was not created."); 
         }
 
+        private void SimulationPauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+        }
+
+        private void SimulationRunButton_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Start();
+        }
+
+        
+        private void SimulationTick(object source, EventArgs e)
+        {
+            Editor.Time += 1;
+            ReDrawMap();
+        }
     }
 }
