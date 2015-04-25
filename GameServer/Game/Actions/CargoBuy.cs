@@ -113,14 +113,13 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            // tady chybel strednik
             if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(player.PlayerId, (int)(cargo.CargoPrice * Count)))
             {
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
                 return;
             }
 
-            cargo.CargoCount -= Count;
+           /* cargo.CargoCount -= Count;
             
             if(!BuyingPlace.UpdateOrRemoveCargo(cargo))
             {
@@ -129,15 +128,16 @@ namespace SpaceTraffic.Game.Actions
             }
 
             cargo.CargoCount = Count;
-            cargo.CargoOwnerId = player.PlayerId;
+            cargo.CargoOwnerId = player.PlayerId;*/
 
             ShipLoadCargo loadingAction = new ShipLoadCargo();
-            loadingAction.PlayerId = PlayerId;
+            Object[] args = { StarSystemName, PlanetName, BuyerShipID, CargoLoadEntityID, Count, BuyingPlace };
+            loadingAction.ActionArgs = args;
+           /* loadingAction.PlayerId = PlayerId;
             loadingAction.SpaceShipID = BuyerShipID;
             loadingAction.StarSystemName = StarSystemName;
             loadingAction.PlanetName = PlanetName;
-            loadingAction.Cargo = cargo;
-
+            loadingAction.Cargo = cargo;*/
             gameServer.Game.PerformAction(loadingAction);
         }
 

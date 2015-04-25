@@ -100,13 +100,16 @@ namespace SpaceTraffic.Game.Actions
             }
 
             ShipUnloadCargo unloadingAction = new ShipUnloadCargo();
-            unloadingAction.PlayerId = PlayerId;
+            Object[] args = { StarSystemName, PlanetName, SellerShipId, CargoLoadEntityID, Count, LoadingPlace,BuyerID };
+            unloadingAction.ActionArgs = args;
+
+            /*unloadingAction.PlayerId = PlayerId;
             unloadingAction.SpaceShipID = SellerShipId;
             unloadingAction.StarSystemName = StarSystemName;
             unloadingAction.PlanetName = PlanetName;
             unloadingAction.CargoLoadEntityID = cargo.CargoLoadEntityId;
             unloadingAction.LoadingPlace = LoadingPlace;
-            unloadingAction.BuyerID = BuyerID;
+            unloadingAction.BuyerID = BuyerID;*/
 
 
             gameServer.Game.PerformAction(unloadingAction);

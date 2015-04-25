@@ -1,4 +1,5 @@
-﻿using SpaceTraffic.Engine;
+﻿using SpaceTraffic.Dao;
+using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
 /**
 Copyright 2010 FAV ZCU
@@ -38,6 +39,7 @@ namespace SpaceTraffic.Game.Actions
             getArgumentsFromActionArgs(gameServer);
 
             SpaceShip spaceship = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SpaceShipID);
+            ICargoLoadEntity cargo = BuyingPlace.GetCargoByID(CargoLoadEntityId);
 
             Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceship.DockedAtBaseId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
@@ -53,13 +55,30 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            if(!checkSpaceShipCargos(gameServer,spaceship)){
+            if(!checkSpaceShipCargos(gameServer,spaceship, cargo)){
                 
                 result = String.Format("Loď {0} nemá dostatek místa na naložení nákladu.", spaceship.SpaceShipName);
                 return;
             }
 
-            gameServer.Persistence.GetSpaceShipCargoDAO().InsertOrUpdateCargo(Cargo);
+            if (cargo.CargoCount < Count)
+            {
+                result = String.Format("U obchodníka id={0} není požadovaných {1} jednotek zboží id={2}.", cargo.CargoOwnerId, Count, cargo.CargoId);
+                return;
+            }
+
+            cargo.CargoCount -= Count;
+
+            if (!BuyingPlace.UpdateOrRemoveCargo(cargo))
+            {
+                result = String.Format("Změny se nepovedlo zapsat do databáze");
+                return;
+            }
+
+            cargo.CargoCount = Count;
+            cargo.CargoOwnerId = PlayerId;
+
+            gameServer.Persistence.GetSpaceShipCargoDAO().InsertOrUpdateCargo(cargo);
             result = String.Format("Náklad byl úspěšně naložen na loď s {0}.", spaceship.SpaceShipName);
         }
 
@@ -69,10 +88,12 @@ namespace SpaceTraffic.Game.Actions
         /// <param name="gameServer">Instance of game server</param>
         private void getArgumentsFromActionArgs(IGameServer gameServer)
         {
-            StarSystemName = ActionArgs[0].ToString();
-            PlanetName = ActionArgs[1].ToString();
-            SpaceShipID = Convert.ToInt32(ActionArgs[2]);
-            Cargo = gameServer.Persistence.GetTraderCargoDAO().GetCargoByID(Convert.ToInt32(ActionArgs[3]));
+                StarSystemName = ActionArgs[0].ToString();
+                PlanetName = ActionArgs[1].ToString();
+                SpaceShipID = Convert.ToInt32(ActionArgs[2]);
+                CargoLoadEntityId = Convert.ToInt32(ActionArgs[3]);
+                Count = Convert.ToInt32(ActionArgs[4]);
+                BuyingPlace = (ICargoLoadDao)ActionArgs[5];
         }
 
        /* /// <summary>
@@ -101,22 +122,20 @@ namespace SpaceTraffic.Game.Actions
         /// <param name="gameServer">game server</param>
         /// <param name="spaceShip">space ship</param>
         /// <returns>true when ship has space for cargo, otherwise fale</returns>
-        private bool checkSpaceShipCargos(IGameServer gameServer, SpaceShip spaceShip)
+        private bool checkSpaceShipCargos(IGameServer gameServer, SpaceShip spaceShip, ICargoLoadEntity cargo)
         {
             List<ICargoLoadEntity> cargoList = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoListByOwnerId(spaceShip.SpaceShipId);
 
-            int count = 0;
+            int freeSpace = spaceShip.CargoSpace;
 
             foreach (SpaceShipCargo ssc in cargoList)
             {
-                count += ssc.CargoCount;
+                freeSpace -= ssc.CargoCount * ssc.Cargo.Volume;
             }
 
-            int demandedSpace = gameServer.Persistence.GetCargoDAO().GetCargoById(Cargo.CargoId).Volume * (count + Cargo.CargoCount);
-            if ( demandedSpace <= spaceShip.CargoSpace)
-                return true;
-            else
-                return false;
+            int demandedSpace = gameServer.Persistence.GetCargoDAO().GetCargoById(cargo.CargoId).Volume * cargo.CargoCount;
+            
+            return demandedSpace < freeSpace;
         }
 
         public GameActionState State
@@ -151,6 +170,9 @@ namespace SpaceTraffic.Game.Actions
 
         public int SpaceShipID { get; set; }
 
-        public ICargoLoadEntity Cargo { get; set; }
+        public int CargoLoadEntityId { get; set; }
+        public int Count { get; set; }
+
+        public ICargoLoadDao BuyingPlace { get; set; }
     }
 }
