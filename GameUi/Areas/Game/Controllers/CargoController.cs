@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SpaceTraffic.GameUi.Extensions;
+using SpaceTraffic.GameUi.Controllers;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
@@ -12,19 +13,19 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
     /// 
     /// </summary>
     [Authorize]
-    public class CargoController : TabsControllerBase
+    public class CargoController : AbstractController
     {
-        protected override void BuildTabs()
+       /* protected override void BuildTabs()
         {
             //this.Tabs.AddTab("BuyCargo", "Buy cargo", "Buy new cargo", partialViewName: "_BuyCargo");
             //TODO: create views for actions
-        }
+        }*/
+
 
         public ActionResult Index()
         {
-            return View(INDEX_VIEW);
+            return View();
         }
-
         public ActionResult BuyCargo(string starSystemName, string planetName, int cargoLoadEntityId, int count, string buyingPlace, int buyerShipId, int traderId)
         {
             /*
