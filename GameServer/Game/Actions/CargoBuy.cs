@@ -131,9 +131,12 @@ namespace SpaceTraffic.Game.Actions
             cargo.CargoOwnerId = player.PlayerId;*/
 
             ShipLoadCargo loadingAction = new ShipLoadCargo();
+
+
             Object[] args = { StarSystemName, PlanetName, BuyerShipID, CargoLoadEntityID, Count, BuyingPlace };
             loadingAction.ActionArgs = args;
-           /* loadingAction.PlayerId = PlayerId;
+            loadingAction.PlayerId = PlayerId;
+            /*
             loadingAction.SpaceShipID = BuyerShipID;
             loadingAction.StarSystemName = StarSystemName;
             loadingAction.PlanetName = PlanetName;
@@ -147,7 +150,7 @@ namespace SpaceTraffic.Game.Actions
             PlanetName = ActionArgs[1].ToString();
             CargoLoadEntityID = Convert.ToInt32(ActionArgs[2].ToString());
             Count = Convert.ToInt32(ActionArgs[3]);
-            BuyingPlace = gameServer.Persistence.GetCargoLoadDao(ActionArgs[4].ToString()); //tady se nemůže přetypovávat string na objekt rozhraní
+            BuyingPlace = gameServer.Persistence.GetCargoLoadDao(ActionArgs[4].ToString());
             BuyerShipID = Convert.ToInt32(ActionArgs[5]); 
            
         }

@@ -82,11 +82,11 @@ namespace SpaceTraffic.Game.Actions
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
             ICargoLoadEntity cargo = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoByID(CargoLoadEntityID);
             
-            if (!dockedBase.Planet.Equals(planet))
+           /* if (!dockedBase.Planet.Equals(planet))
             {
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
                 return;
-            }
+            }*/
 
             if (cargo == null)
             {

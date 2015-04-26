@@ -44,11 +44,11 @@ namespace SpaceTraffic.Game.Actions
             Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceship.DockedAtBaseId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
 
-            if (!dockedBase.Planet.Equals(planet))
+            /*if (!dockedBase.Planet.Equals(planet))
             {
                 result = String.Format("Loď {0} není zadokována na planetě {1}.", spaceship.SpaceShipName, PlanetName);
                 return;
-            }
+            }*/
             if (spaceship.PlayerId != PlayerId)
             {
                 result = String.Format("Loď {0} Vám nepatří, nemůžete na ní naložit náklad.", spaceship.SpaceShipName);
@@ -130,7 +130,7 @@ namespace SpaceTraffic.Game.Actions
 
             foreach (SpaceShipCargo ssc in cargoList)
             {
-                freeSpace -= ssc.CargoCount * ssc.Cargo.Volume;
+                freeSpace -= ssc.CargoCount * gameServer.Persistence.GetCargoDAO().GetCargoById(cargo.CargoId).Volume;
             }
 
             int demandedSpace = gameServer.Persistence.GetCargoDAO().GetCargoById(cargo.CargoId).Volume * cargo.CargoCount;
@@ -144,7 +144,7 @@ namespace SpaceTraffic.Game.Actions
             set;
         }
 
-        public int PlayerId
+       public int PlayerId
         {
             get;
             set;

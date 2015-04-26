@@ -80,11 +80,11 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            if (!dockedBase.Planet.Equals(planet))
+            /*if (!dockedBase.Planet.Equals(planet))
             {
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
                 return;
-            }
+            }*/
 
             if(cargo.CargoCount < Count)
             {
