@@ -26,6 +26,7 @@ using SpaceTraffic.Entities.PublicEntities;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Game.Actions;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Dao;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
 {
@@ -114,12 +115,25 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             return spaceShip.PlayerId == playerId;
         }
 
-        public bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount) 
+        public bool PlayerHasEnoughCargo(string loadingPlace, int cargoLoadEntityId, int cargoCount) 
         {
-            SpaceShipCargo ssc = (SpaceShipCargo)GS.CurrentInstance.Persistence.GetSpaceShipCargoDAO().GetCargoByID(cargoLoadEntityId);
-            if (spaceShipId != ssc.CargoOwnerId || ssc == null)
+            ICargoLoadDao loading = GS.CurrentInstance.Persistence.GetCargoLoadDao(loadingPlace);
+            ICargoLoadEntity cargo = loading.GetCargoByID(cargoLoadEntityId);
+            if (cargo == null)
                 return false;
-            int count = ssc.CargoCount;
+            int count = cargo.CargoCount;
+            return count >= cargoCount;
+        }
+
+        public bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount)
+        {
+            SpaceShip spaceShip = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
+            ICargoLoadEntity cargo = GS.CurrentInstance.Persistence.GetSpaceShipCargoDAO().GetCargoByID(cargoLoadEntityId);
+            
+            if (cargo == null || spaceShipId != cargo.CargoOwnerId)
+                return false;
+            
+            int count = cargo.CargoCount;
             return count >= cargoCount;
         }
 

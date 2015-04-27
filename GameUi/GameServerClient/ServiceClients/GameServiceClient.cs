@@ -97,6 +97,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             }
         }
 
+        public bool PlayerHasEnoughCargo(string buyingPlace, int cargoLoadEntityId, int cargoCount)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IGameService).PlayerHasEnoughCargo(buyingPlace, cargoLoadEntityId, cargoCount);
+            }
+        }
+
         public bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount)
         {
             using (var channel = this.GetClientChannel())

@@ -55,10 +55,14 @@ namespace SpaceTraffic.Services.Contracts
         bool PlayerHasSpaceShip(int playerId, int spaceShipId);
         
         [OperationContract]
-        bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount);
+        bool PlayerHasEnoughCargo(string buyingPlace, int cargoLoadEntityId, int cargoCount);
 
         [OperationContract]
         bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount);
+
+        [OperationContract]
+        bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount);
+        
 	}
 
 	[Serializable]

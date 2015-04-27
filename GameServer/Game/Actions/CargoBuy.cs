@@ -119,21 +119,22 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-           /* cargo.CargoCount -= Count;
+            /*cargo.CargoCount -= Count;
+           // BuyingPlace.UpdateOrRemoveCargo(cargo);
             
             if(!BuyingPlace.UpdateOrRemoveCargo(cargo))
             {
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
                 return;
-            }
+            }*/
 
             cargo.CargoCount = Count;
-            cargo.CargoOwnerId = player.PlayerId;*/
+            cargo.CargoOwnerId = player.PlayerId;
 
             ShipLoadCargo loadingAction = new ShipLoadCargo();
 
 
-            Object[] args = { StarSystemName, PlanetName, BuyerShipID, CargoLoadEntityID, Count, BuyingPlace };
+            Object[] args = { StarSystemName, PlanetName, BuyerShipID, CargoLoadEntityID, Count, ActionArgs[4].ToString() };
             loadingAction.ActionArgs = args;
             loadingAction.PlayerId = PlayerId;
             /*

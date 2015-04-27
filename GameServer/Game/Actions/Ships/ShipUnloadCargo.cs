@@ -122,9 +122,9 @@ namespace SpaceTraffic.Game.Actions
             SpaceShipID = Convert.ToInt32(ActionArgs[2]);
             CargoLoadEntityID = Convert.ToInt32(ActionArgs[3]);
             Count = Convert.ToInt32(ActionArgs[4]);
-            //LoadingPlace = gameServer.Persistence.GetCargoLoadDao(ActionArgs[5].ToString());
-            LoadingPlace = (ICargoLoadDao)ActionArgs[5];
-            BuyerID = Convert.ToInt32(ActionArgs[6]);
+            LoadingPlace = gameServer.Persistence.GetCargoLoadDao(ActionArgs[5].ToString());
+            //LoadingPlace = (ICargoLoadDao)ActionArgs[5];
+            BuyerID = Convert.ToInt32(ActionArgs[6].ToString());
         }
 
       /*  /// <summary>
