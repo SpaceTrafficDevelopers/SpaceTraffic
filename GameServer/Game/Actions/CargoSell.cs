@@ -66,7 +66,7 @@ namespace SpaceTraffic.Game.Actions
 
         public void Perform(IGameServer gameServer)
         {
-            getArgumentsFromActionArgs();
+            getArgumentsFromActionArgs(gameServer);
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SellerShipId);
 
@@ -80,11 +80,11 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            if (!dockedBase.Planet.Equals(planet))
+            /*if (!dockedBase.Planet.Equals(planet))
             {
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
                 return;
-            }
+            }*/
 
             if(cargo.CargoCount < Count)
             {
@@ -93,33 +93,38 @@ namespace SpaceTraffic.Game.Actions
             }
 
 
-            if (gameServer.Persistence.GetPlayerDAO().IncrasePlayersCredits(player.PlayerId,(int)(cargo.CargoPrice*Count)))
+            if (!gameServer.Persistence.GetPlayerDAO().IncrasePlayersCredits(player.PlayerId,(int)(cargo.CargoPrice*Count)))
             {
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
                 return;
             }
 
             ShipUnloadCargo unloadingAction = new ShipUnloadCargo();
+            Object[] args = { StarSystemName, PlanetName, SellerShipId, CargoLoadEntityID, Count, ActionArgs[4].ToString(),BuyerID, SellerShipId };
+            unloadingAction.ActionArgs = args;
             unloadingAction.PlayerId = PlayerId;
+            /*unloadingAction.PlayerId = PlayerId;
             unloadingAction.SpaceShipID = SellerShipId;
             unloadingAction.StarSystemName = StarSystemName;
             unloadingAction.PlanetName = PlanetName;
             unloadingAction.CargoLoadEntityID = cargo.CargoLoadEntityId;
             unloadingAction.LoadingPlace = LoadingPlace;
-            unloadingAction.BuyerID = BuyerID;
+            unloadingAction.BuyerID = BuyerID;*/
 
 
             gameServer.Game.PerformAction(unloadingAction);
         }
 
-        private void getArgumentsFromActionArgs()
+        private void getArgumentsFromActionArgs(IGameServer gameServer)
         {
             StarSystemName = ActionArgs[0].ToString();
             PlanetName = ActionArgs[1].ToString();
-            CargoLoadEntityID = Convert.ToInt32(ActionArgs[3]);
-            Count = Convert.ToInt32(ActionArgs[4]);
-            LoadingPlace = (ICargoLoadDao)ActionArgs[5];
-            BuyerID = Convert.ToInt32(ActionArgs[6]);
+            CargoLoadEntityID = Convert.ToInt32(ActionArgs[2].ToString());
+            Count = Convert.ToInt32(ActionArgs[3].ToString());
+            LoadingPlace = gameServer.Persistence.GetCargoLoadDao(ActionArgs[4].ToString()) ;
+            //LoadingPlace = (ICargoLoadDao)(ActionArgs[5]);
+            BuyerID = Convert.ToInt32(ActionArgs[5].ToString());
+            SellerShipId = Convert.ToInt32(ActionArgs[6].ToString());
         }
     }
 }

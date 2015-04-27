@@ -75,18 +75,18 @@ namespace SpaceTraffic.Game.Actions
 
         public void Perform(IGameServer gameServer)
         {
-            getArgumentsFromActionArgs();
+            getArgumentsFromActionArgs(gameServer);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SpaceShipID);
 
             Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceShip.DockedAtBaseId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
             ICargoLoadEntity cargo = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoByID(CargoLoadEntityID);
             
-            if (!dockedBase.Planet.Equals(planet))
+           /* if (!dockedBase.Planet.Equals(planet))
             {
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
                 return;
-            }
+            }*/
 
             if (cargo == null)
             {
@@ -115,15 +115,16 @@ namespace SpaceTraffic.Game.Actions
             result = String.Format("Náklad {0} byl vyložen.", cargo.CargoId);
         }
 
-        private void getArgumentsFromActionArgs()
+        private void getArgumentsFromActionArgs(IGameServer gameServer)
         {
             StarSystemName = ActionArgs[0].ToString();
             PlanetName = ActionArgs[1].ToString();
             SpaceShipID = Convert.ToInt32(ActionArgs[2]);
             CargoLoadEntityID = Convert.ToInt32(ActionArgs[3]);
             Count = Convert.ToInt32(ActionArgs[4]);
-            LoadingPlace = (ICargoLoadDao)ActionArgs[5];
-            BuyerID = Convert.ToInt32(ActionArgs[6]);
+            LoadingPlace = gameServer.Persistence.GetCargoLoadDao(ActionArgs[5].ToString());
+            //LoadingPlace = (ICargoLoadDao)ActionArgs[5];
+            BuyerID = Convert.ToInt32(ActionArgs[6].ToString());
         }
 
       /*  /// <summary>

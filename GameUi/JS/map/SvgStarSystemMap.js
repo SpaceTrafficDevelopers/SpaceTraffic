@@ -190,11 +190,11 @@ var SvgStarSystemMap = {
 		buffer += "</ul>";
 
         //tohle je potøeba mìnit, parametry se predavaji jako v LoadCargo
-		buffer += '<ul>'+
-            '<li><a href="/Game/Cargo/BuyCargo">BuyCargo</a></li>' +
-            '<li><a href="/Game/Cargo/LoadCargo?cargoId=1&objectId=2">LoadCargo</a></li>' +
-            '<li><a href="/Game/Cargo/UnloadCargo">UnloadCargo</a></li>' +
-            '<li><a href="/Game/Cargo/SellCargo">SellCargo</a></li>' +
+		buffer += '<ul>' + 
+        '<li><a href="/Game/Cargo/BuyCargo?starSystemName=Proxima Centauri&planetName=Proxima Centauri 1&cargoLoadEntityId=1&count=1&buyingPlace=TraderCargoDAO&buyerShipId=1&traderId=1">BuyCargo</a></li>' +
+            //'<li><a href="/Game/Cargo/LoadCargo?cargoId=1&objectId=2">LoadCargo</a></li>' +
+            //'<li><a href="/Game/Cargo/UnloadCargo">UnloadCargo</a></li>' +
+            '<li><a href="/Game/Cargo/SellCargo?starSystemName=Proxima Centauri&planetName=Proxima Centauri 1&cargoLoadEntityId=1&count=1&loadingPlace=TraderCargoDAO&buyerId=1&sellerShipId=1">SellCargo</a></li>' +
             '</ul>';
 	    $("#contextPanel").html(buffer);
 	    buffer = null;

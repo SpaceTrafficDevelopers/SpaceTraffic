@@ -79,7 +79,7 @@ namespace SpaceTraffic.Game.Actions
 
         public void Perform(IGameServer gameServer)
         {
-            getArgumentsFromActionArgs();
+            getArgumentsFromActionArgs(gameServer);
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             ICargoLoadEntity cargo = BuyingPlace.GetCargoByID(CargoLoadEntityID);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(BuyerShipID);
@@ -87,11 +87,13 @@ namespace SpaceTraffic.Game.Actions
             Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceShip.DockedAtBaseId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
 
-            if (!dockedBase.Planet.Equals(planet))
+
+            //tohle zatim nemuze fungovat protoze lod se nedokuje
+            /*if (!dockedBase.Planet.Equals(planet))
             {
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
                 return;
-            }
+            }*/
 
             if(player == null || cargo == null)
             {
@@ -111,41 +113,45 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            if (gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(player.PlayerId, (int)(cargo.CargoPrice * Count)))
+            if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(player.PlayerId, (int)(cargo.CargoPrice * Count)))
             {
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
                 return;
             }
 
-            cargo.CargoCount -= Count;
+            /*cargo.CargoCount -= Count;
+           // BuyingPlace.UpdateOrRemoveCargo(cargo);
             
             if(!BuyingPlace.UpdateOrRemoveCargo(cargo))
             {
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
                 return;
-            }
+            }*/
 
             cargo.CargoCount = Count;
             cargo.CargoOwnerId = player.PlayerId;
 
             ShipLoadCargo loadingAction = new ShipLoadCargo();
+
+
+            Object[] args = { StarSystemName, PlanetName, BuyerShipID, CargoLoadEntityID, Count, ActionArgs[4].ToString() };
+            loadingAction.ActionArgs = args;
             loadingAction.PlayerId = PlayerId;
+            /*
             loadingAction.SpaceShipID = BuyerShipID;
             loadingAction.StarSystemName = StarSystemName;
             loadingAction.PlanetName = PlanetName;
-            loadingAction.Cargo = cargo;
-
-            
+            loadingAction.Cargo = cargo;*/
             gameServer.Game.PerformAction(loadingAction);
         }
 
-        private void getArgumentsFromActionArgs()
+        private void getArgumentsFromActionArgs(IGameServer gameServer)
         {
             StarSystemName = ActionArgs[0].ToString();
             PlanetName = ActionArgs[1].ToString();
             CargoLoadEntityID = Convert.ToInt32(ActionArgs[2].ToString());
             Count = Convert.ToInt32(ActionArgs[3]);
-            BuyingPlace = (ICargoLoadDao)ActionArgs[4];
+            BuyingPlace = gameServer.Persistence.GetCargoLoadDao(ActionArgs[4].ToString());
             BuyerShipID = Convert.ToInt32(ActionArgs[5]); 
            
         }

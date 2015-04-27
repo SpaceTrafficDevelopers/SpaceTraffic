@@ -41,6 +41,28 @@ namespace SpaceTraffic.Services.Contracts
 
 		[OperationContract]
 		bool PlayerHasEnaughCredits(int playerId, long amount);
+
+        [OperationContract]
+        bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count);
+        
+        [OperationContract]
+        bool SpaceShipHasCargoSpace(int spaceShipId, int cargoLoadEntityID, int count);
+
+        [OperationContract]
+        bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName);
+
+        [OperationContract]
+        bool PlayerHasSpaceShip(int playerId, int spaceShipId);
+        
+        [OperationContract]
+        bool PlayerHasEnoughCargo(string buyingPlace, int cargoLoadEntityId, int cargoCount);
+
+        [OperationContract]
+        bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount);
+
+        [OperationContract]
+        bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount);
+        
 	}
 
 	[Serializable]
