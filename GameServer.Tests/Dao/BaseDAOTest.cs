@@ -157,8 +157,6 @@ namespace SpaceTraffic.GameServerTests.Dao
         private Base CreateBase()
         {
             Base baseVar = new Base();
-
-            baseVar.BaseId = 1;
             baseVar.Planet = "Tatooine";
 
             return baseVar;

@@ -96,7 +96,6 @@ namespace SpaceTraffic.GameServerTests.Dao
             cargo.LevelToBuy = 2;
             cargo.Name = "Lopata";
             cargo.Volume = 100;
-            cargo.CargoId = 1;
 
             CargoDAO dao = new CargoDAO();
             dao.InsertCargo(cargo);

@@ -60,16 +60,17 @@ namespace SpaceTraffic.Dao
             {
                 try
                 {
-
-                    var dbCargoLoadEntity = contextDB.TraderCargos.FirstOrDefault(x => x.CargoId.Equals(cargoLoadEntity.CargoId)
-                               && x.CargoPrice.Equals(cargoLoadEntity.CargoPrice) && x.TraderId.Equals(cargoLoadEntity.CargoOwnerId));
+                    var dbCargoLoadEntity = contextDB.TraderCargos.FirstOrDefault(x => x.TraderCargoId.Equals(cargoLoadEntity.CargoLoadEntityId));
 
                     if (dbCargoLoadEntity == null)
                         return false;
 
+                    dbCargoLoadEntity.CargoId = cargoLoadEntity.CargoId;
                     dbCargoLoadEntity.CargoCount = cargoLoadEntity.CargoCount;
                     dbCargoLoadEntity.CargoPrice = cargoLoadEntity.CargoPrice;
+
                     contextDB.SaveChanges();
+
                     return true;
                 }
                 catch (Exception)
@@ -113,7 +114,7 @@ namespace SpaceTraffic.Dao
                     {
                         return true;
                     }
-                    
+
                     contextDB.TraderCargos.Remove(traderCargoTab);
                     // save context to database
                     contextDB.SaveChanges();
@@ -130,12 +131,13 @@ namespace SpaceTraffic.Dao
         public ICargoLoadEntity GetCargoByID(int cargoLoadEntityId)
         {
             using (var contextDB = CreateContext())
-            {                                                   
+            {
                 return (ICargoLoadEntity)contextDB.TraderCargos.FirstOrDefault(x => x.TraderCargoId.Equals(cargoLoadEntityId));
             }
         }
 
-        public List<ICargoLoadEntity> GetCargoListByOwnerId(int traderId) {
+        public List<ICargoLoadEntity> GetCargoListByOwnerId(int traderId)
+        {
             using (var contextDB = CreateContext())
             {
                 return contextDB.TraderCargos.Where(x => x.TraderId.Equals(traderId)).ToList<ICargoLoadEntity>();
@@ -164,21 +166,28 @@ namespace SpaceTraffic.Dao
         {
             using (var contextDB = CreateContext())
             {
-                if (!(cargo is TraderCargo))
-                {
-                   var dbCargo = contextDB.TraderCargos.FirstOrDefault(x => x.CargoId.Equals(cargo.CargoId)
+                if (cargo == null)
+                    return false;
+
+                var dbCargo = contextDB.TraderCargos.FirstOrDefault(x => x.CargoId.Equals(cargo.CargoId)
                                 && x.CargoPrice.Equals(cargo.CargoPrice) && x.TraderId.Equals(cargo.CargoOwnerId));
 
-                   if (cargo == null)
-                       return false;
-                   
-                   cargo.CargoLoadEntityId = dbCargo.CargoLoadEntityId;
+                try
+                {
+                    dbCargo.CargoCount -= cargo.CargoCount;
+                    contextDB.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return false;
                 }
 
-                if (cargo.CargoCount == 0)
-                    return RemoveCargoById(cargo.CargoLoadEntityId);
-                else
-                    return UpdateCargo(cargo);
+                if (dbCargo.CargoCount == 0)
+                {
+                    return RemoveCargoById(dbCargo.CargoLoadEntityId);
+                }
+
+                return true;
             }
         }
     }

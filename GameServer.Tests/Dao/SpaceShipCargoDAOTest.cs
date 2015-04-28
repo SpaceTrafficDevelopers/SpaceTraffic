@@ -91,6 +91,40 @@ namespace SpaceTraffic.GameServerTests.Dao
         }
 
         /// <summary>
+        ///A test for GetCargoByID
+        ///</summary>
+        [TestMethod()]
+        public void GetCargoByIDTest()
+        {
+            SpaceShipCargoDAO target = new SpaceShipCargoDAO();
+            spaceShipCargo = CreateSpaceShipCargo();
+
+            target.InsertCargo(spaceShipCargo);
+
+            SpaceShipCargo ssc = target.GetCargoByID(spaceShipCargo.SpaceShipCargoId) as SpaceShipCargo;
+
+            SpaceShipCargoTest(spaceShipCargo, ssc);
+        }
+
+        /// <summary>
+        ///A test for GetCargoListByOwnerId
+        ///</summary>
+        [TestMethod()]
+        public void GetCargoListByOwnerIdTest()
+        {
+            SpaceShipCargoDAO target = new SpaceShipCargoDAO();
+            spaceShipCargo = CreateSpaceShipCargo();
+            target.InsertCargo(spaceShipCargo);
+            spaceShipCargo.CargoCount = 20;
+            target.InsertCargo(spaceShipCargo);
+
+            List<ICargoLoadEntity> cargos = target.GetCargoListByOwnerId(spaceShipCargo.SpaceShipId);
+
+            Assert.IsNotNull(cargos);
+            Assert.IsTrue(cargos.Count == 2, "GetCargoListByOwnerIdTest: List of cargo does not have expected number of items.");
+        }
+
+        /// <summary>
         ///A test for SpaceShipCargoDAO Constructor
         ///</summary>
         [TestMethod()]
@@ -128,10 +162,10 @@ namespace SpaceTraffic.GameServerTests.Dao
         }
 
         /// <summary>
-        ///A test for UpdateCargoCountById
+        ///A test for UpdateCargo
         ///</summary>
         [TestMethod()]
-        public void UpdateCargoCountByIdTest()
+        public void UpdateCargoTest()
         {
             SpaceShipCargoDAO target = new SpaceShipCargoDAO();
             
@@ -139,8 +173,8 @@ namespace SpaceTraffic.GameServerTests.Dao
             target.InsertCargo(spaceShipCargo);
 
             spaceShipCargo.CargoId = cargo2.CargoId;
-            spaceShipCargo.CargoPrice = 500;
-            spaceShipCargo.CargoCount = 200;
+            spaceShipCargo.CargoPrice = 100;
+            spaceShipCargo.CargoCount = 100;
                        
             target.UpdateCargo(spaceShipCargo);
 
@@ -150,29 +184,61 @@ namespace SpaceTraffic.GameServerTests.Dao
         }
 
         /// <summary>
-        ///A test for UpdateCargoCountById
+        ///A test for InsertOrUpdateCargo
         ///</summary>
         [TestMethod()]
-        public void GetSpaceShipCargoBySpaceShipId()
+        public void InsertOrUpdateCargoTest()
         {
-           /* SpaceShipCargoDAO target = new SpaceShipCargoDAO();
-            SpaceShipCargo spaceShipCargo = new SpaceShipCargo();
-            spaceShipCargo.CargoId = cargo1.CargoId;
-            spaceShipCargo.CargoCount = 3;
-            spaceShipCargo.SpaceShipId = ship.SpaceShipId;
-            bool insert = target.InsertSpaceShipCargo(spaceShipCargo);
-            spaceShipCargo.CargoId = cargo2.CargoId;
-            target.InsertSpaceShipCargo(spaceShipCargo);
+            SpaceShipCargoDAO target = new SpaceShipCargoDAO();
 
-            List<SpaceShipCargo> cargos = target.GetSpaceShipCargoBySpaceShipId(ship.SpaceShipId);
-            Assert.IsTrue(cargos.Count == 2);*/
+            spaceShipCargo = CreateSpaceShipCargo();
+            spaceShipCargo.CargoCount = 100;
+            target.InsertOrUpdateCargo(spaceShipCargo);
+
+            SpaceShipCargo ssc = target.GetCargoByID(spaceShipCargo.SpaceShipCargoId) as SpaceShipCargo;
+
+            SpaceShipCargoTest(spaceShipCargo, ssc);
+            spaceShipCargo.CargoCount = 20;
+
+            target.InsertOrUpdateCargo(spaceShipCargo);
+
+            ssc = target.GetCargoByID(spaceShipCargo.SpaceShipCargoId) as SpaceShipCargo;
+            spaceShipCargo.CargoCount = 120;
+
+            SpaceShipCargoTest(spaceShipCargo, ssc);
+        }
+
+        /// <summary>
+        ///A test for UpdateOrRemoveCargo
+        ///</summary>
+        [TestMethod()]
+        public void UpdateOrRemoveCargoTest()
+        {
+            SpaceShipCargoDAO target = new SpaceShipCargoDAO();
+
+            spaceShipCargo = CreateSpaceShipCargo();
+            spaceShipCargo.CargoCount = 100;
+            target.InsertCargo(spaceShipCargo);
+
+            spaceShipCargo.CargoCount = 50;
+
+            target.UpdateOrRemoveCargo(spaceShipCargo);
+
+            SpaceShipCargo ssc = target.GetCargoByID(spaceShipCargo.SpaceShipCargoId) as SpaceShipCargo;
+
+            SpaceShipCargoTest(spaceShipCargo, ssc);
+
+            target.UpdateOrRemoveCargo(spaceShipCargo);
+
+            ssc = target.GetCargoByID(spaceShipCargo.SpaceShipCargoId) as SpaceShipCargo;
+
+            Assert.IsNull(ssc);
         }
 
         private Cargo CreateCargo()
         {
             Cargo cargo = new Cargo();
 
-            cargo.CargoId = 1;
             cargo.Name = "M4";
             cargo.Description = "Fakt dobrej kulomet.";
             cargo.Type = GoodsType.Mainstream.ToString();
@@ -207,7 +273,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             Player newPlayer = new Player();
             newPlayer.FirstName = "Michel";
             newPlayer.LastName = "Párek";
-            newPlayer.PlayerName = RandomString(4);
+            newPlayer.PlayerName = "UplneNejvicNejbozesjiJmeno";
             newPlayer.CorporationName = "ZCU";
             newPlayer.Credit = 0;
             newPlayer.DateOfBirth = new DateTime(2008, 02, 16, 12, 15, 12);
@@ -226,7 +292,6 @@ namespace SpaceTraffic.GameServerTests.Dao
             SpaceShipCargo ssc = new SpaceShipCargo();
             ssc.CargoCount = 300;
             ssc.CargoId = cargo1.CargoId;
-            ssc.SpaceShipCargoId = 1;
             ssc.SpaceShipId = ship.SpaceShipId;
             ssc.CargoPrice = 200;
 
@@ -243,23 +308,6 @@ namespace SpaceTraffic.GameServerTests.Dao
             Assert.AreEqual(excepted.CargoPrice, actual.CargoPrice, "CargoPrice are not equal.");
         }
 
-        /// <summary>
-        /// Generate random player name
-        /// </summary>
-        /// <param name="size">length of the string</param>
-        /// <returns>string</returns>
-        private string RandomString(int size)
-        {
-            StringBuilder builder = new StringBuilder();
-            Random random = new Random();
-            char ch;
-            for (int i = 0; i < size; i++)
-            {
-                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
-                builder.Append(ch);
-            }
-            return builder.ToString();
-        }
 
         [ClassCleanup()]
         public static void DropDatabase()
