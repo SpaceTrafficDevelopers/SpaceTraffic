@@ -89,8 +89,15 @@ namespace SpaceTraffic.GameServerTests.Dao
         public void TestInitialize()
         {
             cargo = new Cargo();
-            //cargo.Price = 200;
-            cargo.Type = "nářadí";
+            cargo.DefaultPrice = 200;
+            cargo.Description = "Popisek";
+            cargo.Type = GoodsType.Mainstream.ToString();
+            cargo.Category = "Nářadí";
+            cargo.LevelToBuy = 2;
+            cargo.Name = "Lopata";
+            cargo.Volume = 100;
+            cargo.CargoId = 1;
+
             CargoDAO dao = new CargoDAO();
             dao.InsertCargo(cargo);
         }
@@ -131,6 +138,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             dao.UpdateFactoryById(factory);
 
             Factory factoryPom = dao.GetFactoryById(factory.FacotryId);
+
             Assert.IsTrue(factoryPom.BaseId == bas.BaseId && factoryPom.CargoCount == 40 && factoryPom.Type == "služby");
 
             dao.RemoveFactoryById(factory.FacotryId);

@@ -45,12 +45,5 @@ namespace SpaceTraffic.Entities
         public virtual ICollection<SpaceShipCargo> SpaceShipsCargos { get; set; }
 
         public virtual ICollection<TraderCargo> TraderCargos { get; set; }
-
-        //public int PriceCargo { get; set; }
-
-
-        //public IGoods Goods { get; set; }
-
-        //public double Count { get; set; }
     }
 }
