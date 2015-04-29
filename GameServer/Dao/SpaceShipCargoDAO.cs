@@ -60,12 +60,12 @@ namespace SpaceTraffic.Dao
             {
                 try
                 { 
-                    var dbCargoLoadEntity = contextDB.SpaceShipsCargos.FirstOrDefault(x => x.CargoId.Equals(cargoLoadEntity.CargoId)
-                                && x.CargoPrice.Equals(cargoLoadEntity.CargoPrice) && x.SpaceShipId.Equals(cargoLoadEntity.CargoOwnerId));
+                    var dbCargoLoadEntity = contextDB.SpaceShipsCargos.FirstOrDefault(x => x.SpaceShipCargoId.Equals(cargoLoadEntity.CargoLoadEntityId));
 
                     if (dbCargoLoadEntity == null)
                         return false;
 
+                    dbCargoLoadEntity.CargoId = cargoLoadEntity.CargoId;
                     dbCargoLoadEntity.CargoCount = cargoLoadEntity.CargoCount;
                     dbCargoLoadEntity.CargoPrice = cargoLoadEntity.CargoPrice;
                     contextDB.SaveChanges();
@@ -130,26 +130,26 @@ namespace SpaceTraffic.Dao
         {
             using (var contextDB = CreateContext())
             {
-                if (!(cargo is SpaceShipCargo))
-                {
-                    var dbCargo = contextDB.SpaceShipsCargos.FirstOrDefault(x => x.CargoId.Equals(cargo.CargoId)
-                                 && x.CargoPrice.Equals(cargo.CargoPrice) && x.SpaceShipId.Equals(cargo.CargoOwnerId));
+                if (cargo == null)
+                    return false;
 
-                    if (cargo == null)
-                        return false;
+                var dbCargo = contextDB.SpaceShipsCargos.FirstOrDefault(x => x.CargoId.Equals(cargo.CargoId)
+                                && x.CargoPrice.Equals(cargo.CargoPrice) && x.SpaceShipId.Equals(cargo.CargoOwnerId));
 
-                    cargo.CargoLoadEntityId = dbCargo.CargoLoadEntityId;
+                try { 
+                    dbCargo.CargoCount -= cargo.CargoCount;
+                    contextDB.SaveChanges();
+                }
+                catch (Exception) { 
+                    return false;
                 }
 
-                if (cargo.CargoCount == 0)
+                if (dbCargo.CargoCount == 0)
                 {
-                    return RemoveCargoById(cargo.CargoLoadEntityId);
-                }
-                else
-                {
-                    return UpdateCargo(cargo);
+                    return RemoveCargoById(dbCargo.CargoLoadEntityId);
                 }
 
+                return true;
             }
         }
 

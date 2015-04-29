@@ -67,7 +67,7 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            cargo.CargoCount -= Count;
+            cargo.CargoCount = Count;
 
             if (!BuyingPlace.UpdateOrRemoveCargo(cargo))
             {
@@ -75,7 +75,7 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            cargo.CargoCount = Count;
+            //cargo.CargoCount = Count; //TODO: overit funkčnost
             cargo.CargoOwnerId = PlayerId;
 
             gameServer.Persistence.GetSpaceShipCargoDAO().InsertOrUpdateCargo(cargo);

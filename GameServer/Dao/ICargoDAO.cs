@@ -53,6 +53,13 @@ namespace SpaceTraffic.Dao
         List<Cargo> GetCargosByType(string type);
 
         /// <summary>
+        /// Return list of Cargos by category
+        /// </summary>
+        /// <param name="type">Category of Cargo</param>
+        /// <returns>List of Cargo</returns>
+        List<Cargo> GetCargosByCategory(string category);
+
+        /// <summary>
         /// Insert Cargo to database
         /// </summary>
         /// <param name="Cargo">Cargo</param>

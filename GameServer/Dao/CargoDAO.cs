@@ -110,7 +110,10 @@ namespace SpaceTraffic.Dao
                     CargoTab.Category = Cargo.Category;
                     CargoTab.Description = Cargo.Description;
                     CargoTab.Type = Cargo.Type;
-                    CargoTab.LevelToBuy = Cargo.LevelToBuy;   
+                    CargoTab.LevelToBuy = Cargo.LevelToBuy;
+                    CargoTab.DefaultPrice = Cargo.DefaultPrice;
+                    CargoTab.Volume = Cargo.Volume;
+
                     // save context to database
                     contextDB.SaveChanges();
                     return true;
@@ -124,6 +127,15 @@ namespace SpaceTraffic.Dao
         }
 
 
-      
+
+
+
+        public List<Cargo> GetCargosByCategory(string category)
+        {
+            using (var contextDB = CreateContext())
+            {
+                return contextDB.Cargos.Where(x => x.Category.Equals(category)).ToList<Cargo>();
+            }
+        }
     }
 }

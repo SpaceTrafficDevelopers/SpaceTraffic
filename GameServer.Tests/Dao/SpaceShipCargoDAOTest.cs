@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 namespace SpaceTraffic.GameServerTests.Dao
 {
-    //TODO: change test, cargo was changed
+
     
     /// <summary>
     ///This is a test class for SpaceShipCargoDAOTest and is intended
@@ -40,69 +40,22 @@ namespace SpaceTraffic.GameServerTests.Dao
         private Cargo cargo1;
         private Cargo cargo2;
         private Base newBase;
+        private SpaceShipCargo spaceShipCargo;
 
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-        
-        #region Additional test attributes
-        // 
-        //You can use the following additional attributes as you write your tests:
-        //
-        //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
-        //Use ClassCleanup to run code after all tests in a class have run
-        //[ClassCleanup()]
-        //public static void MyClassCleanup()
-        //{
-        //}
-        //
-        //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
-        //
-        //Use TestCleanup to run code after each test has run
-        //[TestCleanup()]
-        //public void MyTestCleanup()
-        //{
-        //}
-        //
-        #endregion
-
+       
         [TestInitialize]
         public void Initialize()
         {  
             CargoDAO cargoDao = new CargoDAO();
             cargo1 = CreateCargo();
             cargo2 = CreateCargo();
-            cargo2.Type = "newtype";
+            cargo2.Name = "AK47";
             cargoDao.InsertCargo(cargo1);
             cargoDao.InsertCargo(cargo2);
 
             BaseDAO bas = new BaseDAO();
             newBase = new Base();
-            newBase.Planet = "Země";
+            newBase.Planet = "Los Santos";
             bas.InsertBase(newBase);
 
             PlayerDAO playerDao = new PlayerDAO();
@@ -115,7 +68,7 @@ namespace SpaceTraffic.GameServerTests.Dao
         }
 
         [TestCleanup]
-        public void ClenUp()
+        public void CleanUp()
         {
             CargoDAO cargoDao = new CargoDAO();
             cargoDao.RemoveCargoById(cargo1.CargoId);
@@ -129,6 +82,46 @@ namespace SpaceTraffic.GameServerTests.Dao
 
             SpaceShipDAO shipDao = new SpaceShipDAO();
             shipDao.RemoveSpaceShipById(ship.SpaceShipId);
+            
+            if(spaceShipCargo != null)
+            {
+                SpaceShipCargoDAO sscDAO = new SpaceShipCargoDAO();
+                sscDAO.RemoveCargoById(spaceShipCargo.SpaceShipCargoId);
+            }
+        }
+
+        /// <summary>
+        ///A test for GetCargoByID
+        ///</summary>
+        [TestMethod()]
+        public void GetCargoByIDTest()
+        {
+            SpaceShipCargoDAO target = new SpaceShipCargoDAO();
+            spaceShipCargo = CreateSpaceShipCargo();
+
+            target.InsertCargo(spaceShipCargo);
+
+            SpaceShipCargo ssc = target.GetCargoByID(spaceShipCargo.SpaceShipCargoId) as SpaceShipCargo;
+
+            SpaceShipCargoTest(spaceShipCargo, ssc);
+        }
+
+        /// <summary>
+        ///A test for GetCargoListByOwnerId
+        ///</summary>
+        [TestMethod()]
+        public void GetCargoListByOwnerIdTest()
+        {
+            SpaceShipCargoDAO target = new SpaceShipCargoDAO();
+            spaceShipCargo = CreateSpaceShipCargo();
+            target.InsertCargo(spaceShipCargo);
+            spaceShipCargo.CargoCount = 20;
+            target.InsertCargo(spaceShipCargo);
+
+            List<ICargoLoadEntity> cargos = target.GetCargoListByOwnerId(spaceShipCargo.SpaceShipId);
+
+            Assert.IsNotNull(cargos);
+            Assert.IsTrue(cargos.Count == 2, "GetCargoListByOwnerIdTest: List of cargo does not have expected number of items.");
         }
 
         /// <summary>
@@ -147,13 +140,11 @@ namespace SpaceTraffic.GameServerTests.Dao
         [TestMethod()]
         public void InsertSpaceShipCargoTest()
         {
-            /*SpaceShipCargoDAO target = new SpaceShipCargoDAO();
-            SpaceShipCargo spaceShipCargo = new SpaceShipCargo();          
-            spaceShipCargo.CargoId = cargo1.CargoId;
-            spaceShipCargo.CargoCount = 3;
-            spaceShipCargo.SpaceShipId = ship.SpaceShipId;
-            bool insert = target.InsertSpaceShipCargo(spaceShipCargo);
-            Assert.IsTrue(insert); */          
+            SpaceShipCargoDAO target = new SpaceShipCargoDAO();
+            spaceShipCargo = CreateSpaceShipCargo();
+            bool insert = target.InsertCargo(spaceShipCargo);
+
+            Assert.IsTrue(insert);  
         }
 
         /// <summary>
@@ -162,76 +153,109 @@ namespace SpaceTraffic.GameServerTests.Dao
         [TestMethod()]
         public void RemoveSpaceShipCargoByIdTest()
         {
-            /*SpaceShipCargoDAO target = new SpaceShipCargoDAO();
-            SpaceShipCargo spaceShipCargo = new SpaceShipCargo();           
-            spaceShipCargo.CargoId = cargo1.CargoId;
-            spaceShipCargo.CargoCount = 3;
-            spaceShipCargo.SpaceShipId = ship.SpaceShipId;
-            bool insert = target.InsertSpaceShipCargo(spaceShipCargo);
-            bool actual = target.RemoveSpaceShipCargoById(ship.SpaceShipId, cargo1.CargoId);
+            SpaceShipCargoDAO target = new SpaceShipCargoDAO();
+            spaceShipCargo = CreateSpaceShipCargo();           
+             
+            target.InsertCargo(spaceShipCargo);
+            bool actual = target.RemoveCargoById(spaceShipCargo.SpaceShipCargoId);
             Assert.IsTrue(actual);
-
-            SpaceShipCargoDAO cargo = new SpaceShipCargoDAO();
-            List<SpaceShipCargo> cargos = cargo.GetSpaceShipCargoBySpaceShipId(ship.SpaceShipId);
-            Assert.IsTrue(cargos != null);*/
         }
 
         /// <summary>
-        ///A test for UpdateCargoCountById
+        ///A test for UpdateCargo
         ///</summary>
         [TestMethod()]
-        public void UpdateCargoCountByIdTest()
+        public void UpdateCargoTest()
         {
-            /*SpaceShipCargoDAO target = new SpaceShipCargoDAO();
-            SpaceShipCargo spaceShipCargo = new SpaceShipCargo();           
-            spaceShipCargo.CargoId = cargo1.CargoId;
-            spaceShipCargo.CargoCount = 3;
-            spaceShipCargo.SpaceShipId = ship.SpaceShipId;
-            bool insert = target.InsertSpaceShipCargo(spaceShipCargo);
-            spaceShipCargo.CargoId = cargo2.CargoId;
-            target.InsertSpaceShipCargo(spaceShipCargo);
-            spaceShipCargo.CargoCount = 5;
-
-            target.UpdateCargoCountById(spaceShipCargo);
-
-            List<SpaceShipCargo> cargos = target.GetSpaceShipCargoBySpaceShipId(ship.SpaceShipId);
-            Assert.IsTrue(cargos.Count == 2);
-            Assert.IsTrue(cargos[1].CargoCount == 8);*/
+            SpaceShipCargoDAO target = new SpaceShipCargoDAO();
             
+            spaceShipCargo = CreateSpaceShipCargo();
+            target.InsertCargo(spaceShipCargo);
+
+            spaceShipCargo.CargoId = cargo2.CargoId;
+            spaceShipCargo.CargoPrice = 100;
+            spaceShipCargo.CargoCount = 100;
+                       
+            target.UpdateCargo(spaceShipCargo);
+
+            SpaceShipCargo ssc = target.GetCargoByID(spaceShipCargo.SpaceShipCargoId) as SpaceShipCargo;
+
+            SpaceShipCargoTest(spaceShipCargo, ssc);
         }
 
         /// <summary>
-        ///A test for UpdateCargoCountById
+        ///A test for InsertOrUpdateCargo
         ///</summary>
         [TestMethod()]
-        public void GetSpaceShipCargoBySpaceShipId()
+        public void InsertOrUpdateCargoTest()
         {
-            /*SpaceShipCargoDAO target = new SpaceShipCargoDAO();
-            SpaceShipCargo spaceShipCargo = new SpaceShipCargo();
-            spaceShipCargo.CargoId = cargo1.CargoId;
-            spaceShipCargo.CargoCount = 3;
-            spaceShipCargo.SpaceShipId = ship.SpaceShipId;
-            bool insert = target.InsertSpaceShipCargo(spaceShipCargo);
-            spaceShipCargo.CargoId = cargo2.CargoId;
-            target.InsertSpaceShipCargo(spaceShipCargo);
+            SpaceShipCargoDAO target = new SpaceShipCargoDAO();
 
-            List<SpaceShipCargo> cargos = target.GetSpaceShipCargoBySpaceShipId(ship.SpaceShipId);
-            Assert.IsTrue(cargos.Count == 2);*/
+            spaceShipCargo = CreateSpaceShipCargo();
+            spaceShipCargo.CargoCount = 100;
+            target.InsertOrUpdateCargo(spaceShipCargo);
+
+            SpaceShipCargo ssc = target.GetCargoByID(spaceShipCargo.SpaceShipCargoId) as SpaceShipCargo;
+
+            SpaceShipCargoTest(spaceShipCargo, ssc);
+            spaceShipCargo.CargoCount = 20;
+
+            target.InsertOrUpdateCargo(spaceShipCargo);
+
+            ssc = target.GetCargoByID(spaceShipCargo.SpaceShipCargoId) as SpaceShipCargo;
+            spaceShipCargo.CargoCount = 120;
+
+            SpaceShipCargoTest(spaceShipCargo, ssc);
+        }
+
+        /// <summary>
+        ///A test for UpdateOrRemoveCargo
+        ///</summary>
+        [TestMethod()]
+        public void UpdateOrRemoveCargoTest()
+        {
+            SpaceShipCargoDAO target = new SpaceShipCargoDAO();
+
+            spaceShipCargo = CreateSpaceShipCargo();
+            spaceShipCargo.CargoCount = 100;
+            target.InsertCargo(spaceShipCargo);
+
+            spaceShipCargo.CargoCount = 50;
+
+            target.UpdateOrRemoveCargo(spaceShipCargo);
+
+            SpaceShipCargo ssc = target.GetCargoByID(spaceShipCargo.SpaceShipCargoId) as SpaceShipCargo;
+
+            SpaceShipCargoTest(spaceShipCargo, ssc);
+
+            target.UpdateOrRemoveCargo(spaceShipCargo);
+
+            ssc = target.GetCargoByID(spaceShipCargo.SpaceShipCargoId) as SpaceShipCargo;
+
+            Assert.IsNull(ssc);
         }
 
         private Cargo CreateCargo()
         {
             Cargo cargo = new Cargo();
-            //cargo.Price = 200;
-            cargo.Type = "nářadí";
+
+            cargo.Name = "M4";
+            cargo.Description = "Fakt dobrej kulomet.";
+            cargo.Type = GoodsType.Mainstream.ToString();
+            cargo.DefaultPrice = 200;
+            cargo.Category = "Zbraně";
+            cargo.LevelToBuy = 2;
+            cargo.Volume = 100;
+
             return cargo;
         }
 
         private SpaceShip CreateSpaceShip()
         {
             SpaceShip ship = new SpaceShip();
-            ship.CurrentStarSystem = "Země";
-            ship.SpaceShipName = "Moje lod";
+            ship.SpaceShipId = 1;
+            ship.CurrentStarSystem = "Star Wars";
+            ship.SpaceShipName = "Autokár";
             ship.SpaceShipModel = "model";
             ship.DamagePercent = 40;
             ship.FuelTank = 50;
@@ -247,39 +271,43 @@ namespace SpaceTraffic.GameServerTests.Dao
         private Player CreatePlayer()
         {
             Player newPlayer = new Player();
-            newPlayer.FirstName = "Karel";
-            newPlayer.LastName = "Malý";
-            newPlayer.PlayerName = RandomString(4);
+            newPlayer.FirstName = "Michel";
+            newPlayer.LastName = "Párek";
+            newPlayer.PlayerName = "UplneNejvicNejbozesjiJmeno";
             newPlayer.CorporationName = "ZCU";
             newPlayer.Credit = 0;
             newPlayer.DateOfBirth = new DateTime(2008, 02, 16, 12, 15, 12);
-            newPlayer.Email = "email@email.cz";
+            newPlayer.Email = "michel@párek.cz";
             newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
             newPlayer.PsswdSalt = "cbOpKKxb";
-            newPlayer.OrionEmail = "email@students.zcu.cz";
+            newPlayer.OrionEmail = "párek@students.zcu.cz";
             newPlayer.AddedDate = DateTime.Now;
             newPlayer.LastVisitedDate = DateTime.Now;
             return newPlayer;
         }
 
 
-        /// <summary>
-        /// Generate random player name
-        /// </summary>
-        /// <param name="size">length of the string</param>
-        /// <returns>string</returns>
-        private string RandomString(int size)
+        private SpaceShipCargo CreateSpaceShipCargo()
         {
-            StringBuilder builder = new StringBuilder();
-            Random random = new Random();
-            char ch;
-            for (int i = 0; i < size; i++)
-            {
-                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
-                builder.Append(ch);
-            }
-            return builder.ToString();
+            SpaceShipCargo ssc = new SpaceShipCargo();
+            ssc.CargoCount = 300;
+            ssc.CargoId = cargo1.CargoId;
+            ssc.SpaceShipId = ship.SpaceShipId;
+            ssc.CargoPrice = 200;
+
+            return ssc;
         }
+
+        private void SpaceShipCargoTest(SpaceShipCargo excepted, SpaceShipCargo actual)
+        {
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(excepted.SpaceShipCargoId, actual.SpaceShipCargoId, "SpaceShipCargoID are not equal.");
+            Assert.AreEqual(excepted.CargoId, actual.CargoId, "CargoID are not equal.");
+            Assert.AreEqual(excepted.SpaceShipId, actual.SpaceShipId, "SpaceShipID are not equal.");
+            Assert.AreEqual(excepted.CargoCount, actual.CargoCount, "CargoCount are not equal.");
+            Assert.AreEqual(excepted.CargoPrice, actual.CargoPrice, "CargoPrice are not equal.");
+        }
+
 
         [ClassCleanup()]
         public static void DropDatabase()

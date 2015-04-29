@@ -79,6 +79,9 @@
     <Compile Include="Dao\FactoryDAOTest.cs" />
     <Compile Include="Dao\PlayerDAOTest.cs" />
     <Compile Include="Dao\MessageDAOTest.cs" />
+    <Compile Include="Dao\BaseDAOTest.cs" />
+    <Compile Include="Dao\TraderDAOTest.cs" />
+    <Compile Include="Dao\TraderCargoDAOTest.cs" />
     <Compile Include="ServiceImpl\AccountServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dao\SpaceShipDAOTest.cs" />
