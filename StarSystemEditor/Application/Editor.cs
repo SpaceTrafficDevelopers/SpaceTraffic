@@ -49,39 +49,35 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// </summary>
         public static StarSystemEditorEntity StarSystemEditor { get; private set; }
         /// <summary>
-        /// Intance editoru planet
+        /// Instance of Planet editor
         /// </summary>
         public static PlanetEditorEntity PlanetEditor { get; private set; }
         /// <summary>
-        /// Instance editoru hvezd
+        /// Instance of Star Editor
         /// </summary>
         public static StarEditorEntity StarEditor { get; private set; }
         /// <summary>
-        /// Instance editoru cercich der
+        /// Instance of Wormhole Editor
         /// </summary>
         public static WormholeEditorEntity WormholeEditor { get; private set; }
         /// <summary>
-        /// Instance editoru kruhovych orbit
+        /// Instance of Circular Orbit editor
         /// </summary>
         public static CircleEditorEntity CircleOrbitEditor { get; private set; }
         /// <summary>
-        /// Instance editoru eliptickych orbit
+        /// Instance of Elliptic Orbit Editor
         /// </summary>
         public static EllipseEditorEntity EllipseOrbitEditor { get; private set; }
         /// <summary>
-        /// Instance generatoru star systemu
-        /// </summary>
-     //   public static StarSystemCreator starSystemCreator { get; private set; }
-        /// <summary>
-        /// Property se soucasnou mapou galaxie
+        /// Galaxy Map property
         /// </summary>
         public static GalaxyMap GalaxyMap { get; private set; }
         /// <summary>
-        /// Property s mnozinou moznych jmen pro nove generovane objekty
+        /// Name of all generated objects property
         /// </summary>
         public static Names Names { get; private set; }
         /// <summary>
-        /// Jmeno galaxie
+        /// Galaxy Name
         /// </summary> 
         public static String GalaxyName { get; set; }
         /// <summary>
@@ -89,31 +85,34 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// </summary>
         public static bool IsLoaded { get; private set; }
         /// <summary>
-        /// Cas simulace
+        /// Simulation time
         /// </summary>
         public static int Time { get; set; }
+        /// <summary>
+        /// Name displayed on button in top left corner of editor, used to determine wheter galaxy or star system is shown
+        /// </summary>
         public static string ButtonName = "Galaxy Map";
         #endregion
         #region Constants
         /// <summary>
-        /// Cesta k souboru se jmeny
+        /// Filepath to names file
         /// </summary>
         public const String NAMESFILEPATH = "Assets\\names.txt";
         /// <summary>
-        /// Cesta k souboru s mapou galaxie
+        /// Filepath to galaxy map file
         /// </summary>
         public const String GALAXYFILEPATH = "Assets\\map\\GalaxyMap2.xml";
         #endregion
         /// <summary>
-        /// Datapresenter slouzici pro zobrazeni GUI
+        /// Datapresenter used to for showing GUI
         /// </summary>
         public static DataPresenter dataPresenter;
         /// <summary>
-        /// Instance loggeru
+        /// logger instance
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
         /// <summary>
-        /// Metoda pro vycisteni editoru
+        /// method for cleaning of editor
         /// </summary>
         public static void FlushEditors() 
         {
@@ -123,19 +122,18 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             WormholeEditor = new WormholeEditorEntity();
             CircleOrbitEditor = new CircleEditorEntity();
             EllipseOrbitEditor = new EllipseEditorEntity();
-       //     starSystemCreator = new StarSystemCreator();
         }
         /// <summary>
-        /// Metoda starajici se o pripravu editoru
+        /// Method preloading the editor
         /// </summary>
         public static void Preload()
         {
             
-            Log("Inicializuji editor");
+            Log("Initializin editor");
             Names = new Names(NAMESFILEPATH);
             GalaxyMap = new GalaxyMap();
             dataPresenter = new DataPresenter();
-            //vytvorim instance vsech editoru
+            //create instance of all editors
             StarSystemEditor = new StarSystemEditorEntity();
             PlanetEditor = new PlanetEditorEntity();
             StarEditor = new StarEditorEntity();
@@ -144,19 +142,19 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             EllipseOrbitEditor = new EllipseEditorEntity();
             IsLoaded = false;
             Time = 0;
-            Log("Inicializace dokoncena");
+            Log("Initialization complete");
 
             
         }
         /// <summary>
-        /// Metoda pro nacteni galaxie pro potreby editoru
+        /// Method loading galaxy for editor purposes
         /// </summary>
-        /// <param name="galaxyName">Jmeno galaxie</param>
-        /// <param name="filePath">Cesta ke galaxii</param>
+        /// <param name="galaxyName">Galaxy Name</param>
+        /// <param name="filePath">filepath to galaxy file</param>
         public static void LoadGalaxy(String galaxyName, String filePath)
         {
-            //pokusim se nacist mapu
-            Log("Nacitam galaxii " + galaxyName);
+            //attempting to laod galaxy
+            Log("Loading galaxy " + galaxyName);
             try
             {
                 StreamDataProvider provider = new StreamDataProvider(filePath);
@@ -174,15 +172,15 @@ namespace SpaceTraffic.Tools.StarSystemEditor
                     GalaxyName = "";
                 }
 
-                Log("Galaxie " + GalaxyName + " nactena!");
+                Log("Galaxy " + GalaxyName + " loaded!");
             }
             catch (Exception ex)
             {
-                Log("Nacitani galaxie " + GalaxyName + "se nezdarilo! " + ex.Message);
+                Log("Loading of galaxy: " + GalaxyName + "failed! " + ex.Message);
             }
         }
         /// <summary>
-        /// Metoda vytvarejici novy star system, a ulozi jeho xml
+        /// Method creating new star system
         /// </summary>
         /// <returns>Star system</returns>
         public static void NewSystem(string name, int planetCount, int wormholeCount, string type)
@@ -194,11 +192,9 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             ListView view = dataPresenter.GetStarSystemList();
             view.Items.Clear(); // clears loaded starsystems
             dataPresenter.StarSystemListLoader();
-            //XmlSaver.CreateStarSystemXml(system);
-            //XmlSaver.AddStarSystemToGalaxy(system.Name, GalaxyMap.MapName);
         }
         /// <summary>
-        /// metoda, ktera prida planetu do vybraneho systemu
+        /// Method adding planet to selected starsystem
         /// </summary>
         public static bool newPlanet()
         {
@@ -206,7 +202,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         }
 
         /// <summary>
-        /// metoda, ktera prida wormhole do vybraneho systemu
+        /// method adding wormhole endpoint to selected starsystem
         /// </summary>
         public static bool newWormhole()
         {
@@ -214,7 +210,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         }
 
         /// <summary>
-        /// Metoda vracejici seznam jmen starsystemu nactene galaxie
+        /// method return list of names of starsystems
         /// </summary>
         /// <returns>Seznam jmen</returns>
         public static List<String> LoadStarSystemNames()
@@ -228,7 +224,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         }
 
         /// <summary>
-        /// Metoda zapisujici informace jak do logu tak do konzole
+        /// Method writing to logger and console
         /// </summary>
         /// <param name="text"></param>
         public static void Log(String text)
@@ -237,7 +233,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             logger.Info(text);
         }
         /// <summary>
-        /// Metoda pro nacteni souboru s galaxii, jeho zpracovani a pak ulozeni do pameti
+        /// Method for loading galaxy file, process it, and save it to editor
         /// </summary>
         public static void LoadGalaxyFile()
         {
@@ -271,43 +267,37 @@ namespace SpaceTraffic.Tools.StarSystemEditor
                     
                     String MapName = galaxyNode.Attributes["name"].Value.ToString();
                     fs.Close();
-                    // odrizne jmeno souboru
+                    // cuts filename of galaxy map file name
                     int index = dlg.FileName.LastIndexOf("\\");
                     string filepath = dlg.FileName.Remove(index);
-                    //pusunuti o adresar vys
                     index = filepath.LastIndexOf("\\");
                     filepath = filepath.Remove(index);
                     
-
                     LoadGalaxy(MapName, filepath);
                 }
             }
         }
 
         /// <summary>
-        /// Metoda pro zpracovani souboru se starsystemem
+        /// Method for processing of star system file
         /// </summary>
-        /// <param name="path">Cesta k starsystemu</param>
-        /// <param name="settings">Nastaveni loadingu</param>
-        /// <returns>Instance zpracovaneho starsystemu</returns>
+        /// <param name="path">Starsystem filepath</param>
+        /// <param name="settings">loading settings</param>
+        /// <returns>Instance of Star System</returns>
         private static StarSystem LoadStarSystem(String path, XmlReaderSettings settings)
         {
-            //Editor.Log(path);
             FileStream starSystemStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            //Editor.Log(starSystemStream.CanRead.ToString());
             XmlReader starSystemReader = XmlReader.Create(starSystemStream, settings);
             XmlDocument docStarSystem = new XmlDocument();
             docStarSystem.Load(starSystemReader);
             XmlNode starSystemNode = docStarSystem.GetElementsByTagName("starsystem")[0];
-            //Editor.Log(starSystemNode.FirstChild.ToString());
             StarSystem parsedStarSystem = starSystemNode.ParseStarSystem();
-            //Editor.Log("parsing complete, adding: " + parsedStarSystem.Name);
             starSystemStream.Close();
             return parsedStarSystem;
         }
 
         /// <summary>
-        /// Metoda pripracujici slozky pro nacitani dat
+        /// Method preparing folders
         /// </summary>
         private static void prepareDataFolder()
         {

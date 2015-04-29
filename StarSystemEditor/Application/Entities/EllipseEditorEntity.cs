@@ -135,6 +135,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
                 orbit.B = orbit.A;
                 orbit.OrbitalEccentricity = 0;
                 orbit.Cx = 0;
+                orbit.SemiLatusRectum = orbit.A;
+                orbit.Sqrt1PlusESlash1MinusE = 1;
                 return;
             }
             double a2 = orbit.A * orbit.A;
@@ -164,6 +166,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
                 orbit.A = orbit.B;
                 orbit.OrbitalEccentricity = 0;
                 orbit.Cx = 0;
+                orbit.SemiLatusRectum = orbit.A;
+                orbit.Sqrt1PlusESlash1MinusE = 1;
                 return;
             }
             double a2 = orbit.A * orbit.A;
