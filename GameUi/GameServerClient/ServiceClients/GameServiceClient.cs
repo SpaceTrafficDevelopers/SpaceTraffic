@@ -120,5 +120,66 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
                 return (channel as IGameService).TraderHasEnoughCargo(traderId, cargoLoadEntityId, cargoCount);
             }
         }
+
+
+
+
+
+
+
+
+        public IList<Entities.Base> GetBases(String playerName)
+        {
+
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IGameService).GetBases(playerName);
+            }
+
+        }
+
+        public Entities.Base GetBase(String starSystem, String planet)
+        {
+
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IGameService).GetBase(starSystem, planet);
+            }
+
+        }
+
+        public IList<Entities.Base> GetBasesIn(String starSystem)
+        {
+
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IGameService).GetBasesIn(starSystem);
+            }
+
+        }
+
+        public IList<Entities.SpaceShip> GetSpaceShipsIn(String starSystem)
+        {
+
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IGameService).GetSpaceShipsIn(starSystem);
+            }
+
+        }
+
+        public IList<String> GetStarSystemObjects(String starSystem)
+        {
+
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IGameService).GetStarSystemObjects(starSystem);
+            }
+
+        }
+
+
+
+
 	}
 }

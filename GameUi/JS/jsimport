@@ -3,6 +3,7 @@
  util/Queue.js
  ui/ViewportManager.js
  ui/GameWindowTabs.js 
+ ui/ContextPanel.js 
  game/geometry/Trajectory.js
  game/geometry/Point.js
  game/geometry/Orbit.js
