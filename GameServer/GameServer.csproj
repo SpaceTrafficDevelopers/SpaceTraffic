@@ -99,6 +99,7 @@
     <Compile Include="Engine\IGameEvent.cs" />
     <Compile Include="Engine\IGameSimulation.cs" />
     <Compile Include="Engine\IGoodsManager.cs" />
+    <Compile Include="Engine\IInterpreterManager.cs" />
     <Compile Include="Engine\IRunnableScript.cs" />
     <Compile Include="Engine\IScriptManager.cs" />
     <Compile Include="Engine\IGameManager.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Engine\IWorldManager.cs" />
     <Compile Include="GameServer\EventQueue.cs" />
     <Compile Include="GameServer\GameManager.cs" />
+    <Compile Include="GameServer\InterpreterManager.cs" />
     <Compile Include="GameServer\ScriptManager.cs" />
     <Compile Include="GameServer\GoodsManager.cs" />
     <Compile Include="GameServer\WorldManager.cs" />
@@ -183,6 +185,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Desktop\space traffic svn\trunk\StarshipBasicInterpreter\StarshipBasicInterpreter.csproj">
+      <Project>{b60d8e6d-5cc3-4fa9-8e64-4fb7aa51d342}</Project>
+      <Name>StarshipBasicInterpreter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{9A3A1688-A41C-4F56-8450-43FB64F60C1F}</Project>
       <Name>Core</Name>

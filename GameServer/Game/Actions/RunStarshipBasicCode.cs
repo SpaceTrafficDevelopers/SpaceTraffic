@@ -13,12 +13,12 @@ using SpaceTraffic.Constants;
 
 namespace SpaceTraffic.Game.Actions
 {
-    class RunStarshipBasicCode : IGameAction
+    public class RunStarshipBasicCode : IGameAction
     {
         public GameActionState State
         {
             get;
-            private set;
+            set;
         }
 
         public int PlayerId { get; set; }

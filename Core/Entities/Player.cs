@@ -61,6 +61,25 @@ namespace SpaceTraffic.Entities
 
         public int Credit { get; set; }       
 
-        public virtual ICollection<SpaceShip> SpaceShips { get; set; }  
+        public virtual ICollection<SpaceShip> SpaceShips { get; set; }
+
+
+
+
+
+
+
+        public SpaceShip GetSpaceShip(int shipId)
+        {
+            //this has O(n)! Dictionary will be better, but it can not be mapped to entity framework
+            foreach (SpaceShip s in SpaceShips)
+            {
+                if (s.SpaceShipId.Equals(shipId))
+                {
+                    return s;
+                }
+            }
+            return null;
+        }
     }
 }

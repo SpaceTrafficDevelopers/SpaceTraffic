@@ -77,5 +77,6 @@ namespace SpaceTraffic.Entities
         public string TimeOfStart { get; set; }
         public string Start { get; set; }
         public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<SpaceShipProgram> SpaceShipsUserPrograms { get; set; }
     }
 }

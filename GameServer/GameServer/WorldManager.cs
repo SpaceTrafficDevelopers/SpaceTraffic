@@ -90,10 +90,10 @@ namespace SpaceTraffic.GameServer
             throw new NotImplementedException();
         }
 
-        public IGamePlayer GetPlayer(int playerId)
-        {
-            throw new NotImplementedException();
-        }
+        //public IGamePlayer GetPlayer(int playerId)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         void IWorldManager.ShipDock(int spaceshipId)
         {
@@ -158,6 +158,35 @@ namespace SpaceTraffic.GameServer
             this.gameServer.Persistence.GetTraderDAO().InsertTrader(trader);
 
             return this.gameServer.Persistence.GetTraderDAO().GetTraderByBaseId(planet.Base.BaseId);
+        }
+
+
+
+
+
+
+
+
+
+
+
+        public Player GetPlayer(int playerId)
+        {
+            // TODO: id in ActivePlayerList are different from id in globalPlayer (DB)
+            // when I am seeking by id, this must go through the entire ActivePlayerList
+            // some hashList <key,value> ?
+
+            foreach (Player player in ActivePlayers)
+            {
+                if (player.PlayerId.Equals(playerId))
+                {
+                    return player;
+                }
+            }
+
+            throw new Exception("User id " + playerId + " is not active player id!");
+
+            //return ActivePlayers.ElementAt(0);
         }
     }
 }
