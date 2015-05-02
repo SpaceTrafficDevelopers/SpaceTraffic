@@ -356,6 +356,54 @@ namespace SpaceTraffic.Game
                 return emptyList;
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// Get planets of star system.
+        /// </summary>
+        /// <param name="starSystemName"></param>
+        /// <returns></returns>
+        public IList<Planet> GetPlanets(string starSystemName)
+        {
+            DebugEx.Entry(starSystemName);
+            StarSystem starSystem = null;
+            if (this.starSystems.TryGetValue(starSystemName, out starSystem))
+            {
+                IList<Planet> planets = new List<Planet>(starSystem.Planets.Count);
+
+                foreach (Planet p in starSystem.Planets)
+                {
+                    if (p.StarSystem.Equals(starSystem))
+                    {
+                        planets.Add(p);
+                    }
+                }
+
+                DebugEx.Exit(planets);
+
+                return planets;
+            }
+            else
+            {
+                // StarSystem was not found, returning empty list.
+                IList<Planet> emptyList = new List<Planet>(0);
+                DebugEx.Exit(emptyList);
+                return emptyList;
+            }
+        }
     }
 
 

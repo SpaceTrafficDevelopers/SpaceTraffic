@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
+using SpaceTraffic.Game;
 
 namespace SpaceTraffic.Entities
 {
@@ -69,6 +70,8 @@ namespace SpaceTraffic.Entities
 
 
 
+
+
         public SpaceShip GetSpaceShip(int shipId)
         {
             //this has O(n)! Dictionary will be better, but it can not be mapped to entity framework
@@ -80,6 +83,14 @@ namespace SpaceTraffic.Entities
                 }
             }
             return null;
+        }
+
+
+        private StarSystem CurrentStarSystem { get; set; }
+
+        public StarSystem getCurrentStarSystem()
+        {
+            return CurrentStarSystem;
         }
     }
 }

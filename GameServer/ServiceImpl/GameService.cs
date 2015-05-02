@@ -27,6 +27,8 @@ using SpaceTraffic.Engine;
 using SpaceTraffic.Game.Actions;
 using SpaceTraffic.Entities;
 using SpaceTraffic.Dao;
+using SpaceTraffic.Game;
+using SpaceTraffic.Utils.Collections;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
 {
@@ -181,5 +183,89 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 		{
 			throw new NotImplementedException();
 		}
+
+
+
+
+
+
+
+
+
+
+        public IList<Entities.Base> GetBasesInCurrent(String playerName, int shipId)
+        {
+            Player shipOwner = this.GetPlayer(playerName);
+            String currentStarSystem = shipOwner.SpaceShips.FirstOrDefault(s => s.SpaceShipId == shipId).CurrentStarSystem;
+            return GetBasesIn(currentStarSystem);
+        }
+
+        public IList<Entities.Base> GetBasesIn(String starSystem)
+        {
+            IList<Entities.Base> bases = new List<Entities.Base>();
+            if (starSystem != null)
+            {
+                foreach (Planet p in GameServer.CurrentInstance.World.Map.GetPlanets(starSystem))
+                {
+                    if (p.Base != null)
+                    {
+                        bases.Add(p.Base);
+                    }
+                }
+            }
+            return bases;
+        }
+
+        public Player GetPlayer(String userName)
+        {
+            return GameServer.CurrentInstance.World.GetPlayer(userName);
+        }
+
+        public IKeyAccessibleList<string, Planet> GetPlanetsIn(String starSystem)
+        {
+            return GameServer.CurrentInstance.World.Map[starSystem].Planets;
+        }
+
+        public IKeyAccessibleList<string, Planet> GetPlanetsInCurrent(String playerName, int shipId)
+        {
+            Player shipOwner = this.GetPlayer(playerName);
+            String currentStarSystem = shipOwner.SpaceShips.FirstOrDefault(s => s.SpaceShipId == shipId).CurrentStarSystem;
+            return GetPlanetsIn(currentStarSystem);
+        }
+
+        public long GetPrice(String goodsName)
+        {
+            //Entities.Goods
+            //throw new NotImplementedException();
+            // TODO: pridat informaci o planete (zakladne) kde zjistuji cenu zbozi, nebo zjistit na vsech, pak ale stejne nevi kde
+            // nebo na aktualni, kde lod dokuje?
+            return 128;
+        }
+
+        public long GetPriceFromPlayer(String goodsName, String playerName)
+        {
+            //Entities.Goods
+            //throw new NotImplementedException();
+            // TODO: tataz uvaha jako v GetPrice
+            return 89;
+        }
+
+        public double GetSupplyOfGoodsFromPlayer(String goodsName, String playerName)
+        {
+            //throw new NotImplementedException();
+            return 0.3;
+        }
+
+        public double GetSupplyOfGoods(String goodsName)
+        {
+            //throw new NotImplementedException();
+            // TODO vseho zbozi na planete od vsech hracu???
+            return 0.1;
+        }
+
+        public IList<StarSystem> GetStarSystems()
+        {
+            return GameServer.CurrentInstance.World.Map.GetStarSystems();
+        }
 	}
 }

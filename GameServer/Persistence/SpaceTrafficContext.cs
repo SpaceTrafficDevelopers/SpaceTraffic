@@ -55,9 +55,49 @@ using SpaceTraffic.Entities;
             modelBuilder.Configurations.Add(new SpaceShipCargoConfiguration());
             modelBuilder.Configurations.Add(new TraderConfiguration());
             modelBuilder.Configurations.Add(new TraderCargoConfiguration());
+
+
+            modelBuilder.Configurations.Add(new EventConfiguration());
+
+
             base.OnModelCreating(modelBuilder); 
             
         }
+
+
+
+
+
+
+
+
+        public DbSet<Event> Events { get; set; }
+
+        public class EventConfiguration : EntityTypeConfiguration<Event>
+        {
+            /// <summary>
+            /// Event configuration of persistent layer
+            /// </summary>
+            public EventConfiguration()
+                : base()
+            {
+                HasKey(e => e.EventId);
+                Property(e => e.CreationedTime).HasColumnType("datetime").IsRequired();
+                Property(e => e.Type).HasMaxLength(50).HasColumnType("varchar").IsRequired();
+                Property(e => e.Content).HasMaxLength(500).HasColumnType("varchar").IsRequired();
+                HasRequired(e => e.SpaceShip).WithMany(e => e.Events).HasForeignKey(s => s.SpaceShipId).WillCascadeOnDelete(); ;
+                ToTable("Events");
+            }
+        }
+
+
+
+
+
+
+
+
+
     }
 
     //TODO: UniqueConstraint http://stackoverflow.com/questions/9363967/trying-to-create-a-hasunique-on-entitytypeconfiguration-in-entity-framework-gen
@@ -251,4 +291,6 @@ using SpaceTraffic.Entities;
     }
 
 #endregion
+
+
 }
