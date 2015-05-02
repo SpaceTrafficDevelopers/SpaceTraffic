@@ -114,7 +114,9 @@
     <Compile Include="Game\Actions\CargoSell.cs" />
     <Compile Include="Game\Actions\CargoBuy.cs" />
     <Compile Include="Game\Actions\HelloWorld.cs" />
+    <Compile Include="Game\Actions\PrepareShipFlyTo.cs" />
     <Compile Include="Game\Actions\RunStarshipBasicCode.cs" />
+    <Compile Include="Game\Actions\ShipResolvePath.cs" />
     <Compile Include="Game\Actions\Ships\ShipBuy.cs" />
     <Compile Include="Game\Actions\ShipFlyTo.cs" />
     <Compile Include="Game\Actions\Ships\ShipLoadCargo.cs" />

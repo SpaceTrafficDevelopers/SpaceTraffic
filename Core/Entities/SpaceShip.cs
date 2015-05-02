@@ -1,4 +1,5 @@
-﻿/**
+﻿using SpaceTraffic.Game.Navigation;
+/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -82,5 +83,11 @@ namespace SpaceTraffic.Entities
         /// Maximal speed of starship
         /// </summary>
         public int MaxSpeed { get; set; }
+
+        /// <summary>
+        /// Path of starship
+        /// </summary>
+        public NavPath Path { get; set; }
+        public NavPath GetPath() { return Path; }
     }
 }
