@@ -26,6 +26,8 @@ namespace SpaceTraffic.Game
 {
     public class StarSystem : IVersionedObject
     {
+        public int Id { get; set; }
+
         #region Properties
         /// <summary>
         /// This is a unique identifier of a system.

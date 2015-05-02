@@ -30,6 +30,8 @@ namespace SpaceTraffic.Game.Navigation
     public class NavPoint
     {
 
+        public int Id { get; set; }
+
         /// <summary>
         /// Unknown time of arrival for this NavPoint.
         /// </summary>
