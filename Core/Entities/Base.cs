@@ -31,6 +31,35 @@ namespace SpaceTraffic.Entities
 
         public virtual ICollection<SpaceShip> SpaceShips { get; set; }
 
-        public virtual ICollection<Factory> Factories { get; set; }  
+        public virtual ICollection<Factory> Factories { get; set; }
+
+
+
+
+
+
+
+        public void AddSpaceShip(SpaceShip ship)
+        {
+            SpaceShips.Add(ship);
+        }
+
+        public SpaceShip GetSpaceShip(int shipId)
+        {
+            //this has O(n)! Dictionary will be better, but it can not be mapped to entity framework
+            foreach (SpaceShip s in SpaceShips)
+            {
+                if (s.SpaceShipId.Equals(shipId))
+                {
+                    return s;
+                }
+            }
+            return null;
+        }
+
+        public bool RemoveSpaceShip(SpaceShip ship)
+        {
+            return SpaceShips.Remove(ship);
+        }
     }
 }

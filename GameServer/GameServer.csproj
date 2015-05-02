@@ -71,11 +71,15 @@
   <ItemGroup>
     <Compile Include="Configuration\GameServerConfiguration.cs" />
     <Compile Include="Configuration\GameServerConfigurationSection.cs" />
+    <Compile Include="Constants\ActionConstants.cs" />
+    <Compile Include="Constants\ShipEventsConstants.cs" />
     <Compile Include="Dao\AbstractDAO.cs" />
     <Compile Include="Dao\BaseDAO.cs" />
     <Compile Include="Dao\CargoDAO.cs" />
+    <Compile Include="Dao\EventDAO.cs" />
     <Compile Include="Dao\ICargoDAO.cs" />
     <Compile Include="Dao\ICargoLoadDao.cs" />
+    <Compile Include="Dao\IEventDAO.cs" />
     <Compile Include="Dao\IFactoryDAO.cs" />
     <Compile Include="Dao\FactoryDAO.cs" />
     <Compile Include="Dao\IBaseDAO.cs" />
@@ -108,11 +112,13 @@
     <Compile Include="Game\Actions\CargoSell.cs" />
     <Compile Include="Game\Actions\CargoBuy.cs" />
     <Compile Include="Game\Actions\HelloWorld.cs" />
+    <Compile Include="Game\Actions\RunStarshipBasicCode.cs" />
     <Compile Include="Game\Actions\Ships\ShipBuy.cs" />
-    <Compile Include="Game\Actions\Ships\ShipFlyTo.cs" />
+    <Compile Include="Game\Actions\ShipFlyTo.cs" />
     <Compile Include="Game\Actions\Ships\ShipLoadCargo.cs" />
     <Compile Include="Game\Actions\Ships\ShipRepair.cs" />
     <Compile Include="Game\Actions\Ships\ShipUnloadCargo.cs" />
+    <Compile Include="Game\Events\DefaultEvent.cs" />
     <Compile Include="Game\Events\HelloWorldRepeat.cs" />
     <Compile Include="Game\GamePlayer.cs" />
     <Compile Include="GameServer\AssetManager.cs" />

@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using SpaceTraffic.Utils.Collections;
 using SpaceTraffic.Game.Geometry;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Game
 {
@@ -100,5 +101,43 @@ namespace SpaceTraffic.Game
             
         }
         #endregion
+
+
+
+
+
+
+
+        // seznam lodi leticich ve star systemu
+        public virtual ICollection<SpaceShip> SpaceShips { get; set; }
+
+        public void AddSpaceShip(SpaceShip ship)
+        {
+            SpaceShips.Add(ship);
+        }
+
+
+        public SpaceShip GetSpaceShip(int shipId)
+        {
+            //this has O(n)! Dictionary will be better, but it can not be mapped to entity framework
+            foreach (SpaceShip s in SpaceShips)
+            {
+                if (s.SpaceShipId.Equals(shipId))
+                {
+                    return s;
+                }
+            }
+            return null;
+        }
+
+        public ICollection<SpaceShip> GetSpaceShips()
+        {
+            return SpaceShips;
+        }     
+
+        public bool RemoveSpaceShip(SpaceShip ship)
+        {
+            return SpaceShips.Remove(ship);
+        }
     }
 }
