@@ -43,7 +43,10 @@ function addBase(SvgStarSystemMap, planetName, planetAltName, base, loggedPlayer
 * String planetName, String planetAltName, Entities.Base base, int logget player id
 */
 function addShips(planetName, planetAltName, base, loggedPlayerId) {
-    var buffer = '<h3>Ships</h3>';
+    var buffer = '<h3>Ships;' + planetName + ";" + planetAltName + ";jmeno-id=" + base.SpaceShips + ";" + loggedPlayerId + "</h3>";
+    
+   
+
     $.each(base.SpaceShips, function (index, ship) {
         //pouze zadokovane lode
         if (!ship.IsFlying) {
@@ -57,7 +60,8 @@ function addShips(planetName, planetAltName, base, loggedPlayerId) {
             }
         }
     });
-    buffer += "<div><a class='alert tiny button' href='" + $("#appRoot").attr("href") + "Game/Ships#Buy_new_ship' onclick=addInfoToCookies()>Buy a new ship</a></div>";
+    buffer += "<div><a class='alert tiny button' href='http://localhost:2457/Game/Ships#Buy_new_ship' onclick=addInfoToCookies()>Buy a new ship</a></div>";
+    
     return buffer;
 }
 
