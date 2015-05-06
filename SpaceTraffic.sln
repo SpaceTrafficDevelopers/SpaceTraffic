@@ -32,7 +32,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarSystemEditor", "StarSys
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServerScripts", "GameServerScripts\GameServerScripts.csproj", "{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarshipBasicInterpreter", "StarshipBasicInterpreter\StarshipBasicInterpreter.csproj", "{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarshipBasicInterpreter", "..\..\Desktop\space traffic svn\trunk\StarshipBasicInterpreter\StarshipBasicInterpreter.csproj", "{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
