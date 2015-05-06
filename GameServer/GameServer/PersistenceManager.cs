@@ -118,18 +118,5 @@ namespace SpaceTraffic.GameServer
             Type classGoodsType = Type.GetType("SpaceTraffic.Dao." + cargoLoadDaoName);
             return (ICargoLoadDao) Activator.CreateInstance(classGoodsType);
         }
-
-
-
-
-
-
-
-
-        public IEventDAO GetEventDAO()
-        {
-            return new EventDAO();
-        }
-
     }
 }

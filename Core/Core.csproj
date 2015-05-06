@@ -74,7 +74,6 @@
     <Compile Include="Data\StarSystemXmlHelper.cs" />
     <Compile Include="Entities\Base.cs" />
     <Compile Include="Entities\Cargo.cs" />
-    <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\Factory.cs" />
     <Compile Include="Entities\Goods\AGoods.cs" />
     <Compile Include="Entities\Goods\Energy.cs" />

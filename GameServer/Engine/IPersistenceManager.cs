@@ -55,16 +55,5 @@ namespace SpaceTraffic.Engine
         /// <returns>ICargoLoadDao</returns>
         ICargoLoadDao GetCargoLoadDao(string cargoLoadName);
 
-
-
-
-
-
-
-
-
-
-        IEventDAO GetEventDAO();
-
     }
 }

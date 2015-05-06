@@ -66,16 +66,5 @@ namespace SpaceTraffic.Entities
         {
             get { return "SpaceShipCargoDao"; }
         }
-
-
-
-
-
-
-
-        public string Target { get; set; }
-        public string TimeOfStart { get; set; }
-        public string Start { get; set; }
-        public virtual ICollection<Event> Events { get; set; }
     }
 }
