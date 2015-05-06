@@ -24,8 +24,6 @@ namespace SpaceTraffic.Game
 {
     public abstract class VisibleObject
     {
-        public int Id { get; set; }
-
         #region Properties
 
         /// <summary>
