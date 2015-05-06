@@ -1,9 +1,24 @@
-﻿using System;
+﻿/**
+Copyright 2010 FAV ZCU
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+**/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SpaceTraffic.Game.Geometry;
-using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Game.Navigation
 {
@@ -18,7 +33,7 @@ namespace SpaceTraffic.Game.Navigation
         /// <param name="path">The path instance to be solved.</param>
         /// <param name="sh">The space ship.</param>
         /// <param name="startTime">The start time of path.</param>
-        public static void SolvePath(NavPath path, SpaceShip sh, double startTime)
+        internal static void SolvePath(NavPath path, Spaceship sh, double startTime)
         {
             double time = 0.0;
             double eps = (1 / sh.MaxSpeed) > 0.01 ? (1 / sh.MaxSpeed) : 0.01;
@@ -40,7 +55,7 @@ namespace SpaceTraffic.Game.Navigation
                 startPoint = getPosition(path[i], startTime + time);
 
                 // from wormhole to wormhole between different star systems
-                if ((path[i].Location is WormholeEndpoint) && path[i + 1].Location is WormholeEndpoint && !path[i].Location.StarSystem.Equals(path[i + 1].Location.StarSystem))
+                if ((path[i].Location is WormholeEndpoint) && path[i + 1].Location is WormholeEndpoint && !path[i].Location.StarSystem.Equals(path[i+1].Location.StarSystem))
                 {
                     path[i].TrajectoryToDest = new Stacionary(startPoint.X, startPoint.Y);
                     continue;
@@ -118,9 +133,9 @@ namespace SpaceTraffic.Game.Navigation
         /// <param name="point">Navigation point.</param>	
         /// <param name="time">Current time.</param>	
         /// <returns>Returns position of navigation point.</returns>
-        private static Point2d getPosition(NavPoint point, double time)
+        private static Point2d getPosition(NavPoint point, double time) 
         {
-            return point.Location.Trajectory.CalculatePosition(time);
+          return point.Location.Trajectory.CalculatePosition(time);
         }
 
         /// <summary>
