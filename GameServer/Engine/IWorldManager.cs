@@ -62,7 +62,6 @@ namespace SpaceTraffic.Engine
 
 
         Player GetPlayer(int playerId);
-        Player GetPlayer(String userName);
 
     }
 }

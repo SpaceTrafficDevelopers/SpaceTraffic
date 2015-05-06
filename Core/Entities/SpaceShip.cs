@@ -78,9 +78,5 @@ namespace SpaceTraffic.Entities
         public string Start { get; set; }
         public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<SpaceShipProgram> SpaceShipsUserPrograms { get; set; }
-        /// <summary>
-        /// Maximal speed of starship
-        /// </summary>
-        public int MaxSpeed { get; set; }
     }
 }

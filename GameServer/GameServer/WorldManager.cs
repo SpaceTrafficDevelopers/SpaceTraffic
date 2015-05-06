@@ -188,18 +188,5 @@ namespace SpaceTraffic.GameServer
 
             //return ActivePlayers.ElementAt(0);
         }
-
-        public Player GetPlayer(String userName)
-        {
-            foreach (Player player in ActivePlayers)
-            {
-                if (player.PlayerName.Equals(userName))
-                {
-                    return player;
-                }
-            }
-            return null;
-            //throw new Exception("User name "+userName+" is not active player user name!");
-        }
     }
 }
