@@ -16,14 +16,11 @@ limitations under the License.
 **/
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace SpaceTraffic.Entities
 {
-    [DataContract(Name = "Base")]
     public class Base
     {
         public int BaseId { get; set; }
@@ -32,18 +29,13 @@ namespace SpaceTraffic.Entities
 
         public Trader Trader { get; set; }
 
-        [DataMember]
         public virtual ICollection<SpaceShip> SpaceShips { get; set; }
 
         public virtual ICollection<Factory> Factories { get; set; }
 
 
-        
-        public Base()
-        {
-            SpaceShips = new Collection<SpaceShip>();
-        }
-        
+
+
 
 
 

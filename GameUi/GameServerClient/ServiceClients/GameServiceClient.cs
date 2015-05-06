@@ -140,8 +140,9 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 
         public Entities.Base GetBase(String starSystem, String planet)
         {
+
             using (var channel = this.GetClientChannel())
-            {              
+            {
                 return (channel as IGameService).GetBase(starSystem, planet);
             }
 

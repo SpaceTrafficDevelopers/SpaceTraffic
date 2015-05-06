@@ -188,7 +188,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StarshipBasicInterpreter\StarshipBasicInterpreter.csproj">
+    <ProjectReference Include="..\..\..\Desktop\space traffic svn\trunk\StarshipBasicInterpreter\StarshipBasicInterpreter.csproj">
       <Project>{b60d8e6d-5cc3-4fa9-8e64-4fb7aa51d342}</Project>
       <Name>StarshipBasicInterpreter</Name>
     </ProjectReference>

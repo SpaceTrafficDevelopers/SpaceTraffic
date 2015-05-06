@@ -21,7 +21,6 @@ using System.Text;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
 using NLog;
-using SpaceTraffic.Utils.Collections;
 
 namespace SpaceTraffic.Game.Actions
 {
@@ -47,12 +46,6 @@ namespace SpaceTraffic.Game.Actions
 			int price = Convert.ToInt32(this.ActionArgs.ElementAt(7));
 			gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(this.PlayerId, price);
 			result = String.Format("Loď {0} zakoupena.", ship.SpaceShipName);
-
-            Console.WriteLine(this.ActionArgs.ElementAt(0).ToString());
-            Console.WriteLine("zakladna: " + gameServer.World.Map[this.ActionArgs.ElementAt(1).ToString()].Planets["Sol 1"].AlternativeName);
-            
-            gameServer.World.Map[this.ActionArgs.ElementAt(1).ToString()].Planets["Sol 1"].Base.SpaceShips.Add(ship);
-                     
 		}
 
 		/// <summary>
