@@ -94,6 +94,10 @@
       <Project>{9A3A1688-A41C-4F56-8450-43FB64F60C1F}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GameUi\GameUi.csproj">
+      <Project>{AEE0F56B-756A-4631-8CF3-AF667900543F}</Project>
+      <Name>GameUi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

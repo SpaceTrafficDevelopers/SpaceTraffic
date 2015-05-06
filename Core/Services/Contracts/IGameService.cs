@@ -62,29 +62,8 @@ namespace SpaceTraffic.Services.Contracts
 
         [OperationContract]
         bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount);
-
-
-
-
-
-
-        [OperationContract]
-        Entities.Base GetBase(String starSystem, String planet);
-        [OperationContract]
-        IList<String> GetStarSystemObjects(String starSystem);
-        [OperationContract]
-        IList<Entities.Base> GetBases(String playerName);
-        [OperationContract]
-        IList<Entities.Base> GetBasesIn(String starSystem);
-        [OperationContract]
-        IList<Entities.SpaceShip> GetSpaceShipsIn(String starSystem);
-    
-
-
-
-
-    
-    }
+        
+	}
 
 	[Serializable]
 	public class ActionNotFoundException : Exception

@@ -191,17 +191,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
 
 
-        public IList<Entities.Base> GetBases(String playerName)
-        {
-            StarSystem currentStarSystem = this.GetPlayer(playerName).getCurrentStarSystem();
-            return GetBasesIn(currentStarSystem.Name);
-        }
 
-
-        public Entities.Base GetBase(String starSystem, String planet)
-        {
-            return GameServer.CurrentInstance.World.Map[starSystem].Planets[planet].Base;
-        }
 
         public IList<Entities.Base> GetBasesInCurrent(String playerName, int shipId)
         {
@@ -277,51 +267,5 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         {
             return GameServer.CurrentInstance.World.Map.GetStarSystems();
         }
-
-        // TODO: jsou v seznamu i lode které odlétají, dokují ???
-        public IList<Entities.SpaceShip> GetSpaceShipsIn(String starSystem)
-        {
-            DebugEx.Entry("SSS " + starSystem);
-
-            IList<Entities.SpaceShip> list = (IList<Entities.SpaceShip>)GameServer.CurrentInstance.World.Map[starSystem].GetSpaceShips();
-
-            DebugEx.Entry("SSS " + list.Count);
-
-            foreach (SpaceShip s in list)
-            {
-                DebugEx.Entry("SSS " + s.SpaceShipName);
-            }
-
-            return (IList<Entities.SpaceShip>)GameServer.CurrentInstance.World.Map[starSystem].GetSpaceShips();
-        }
-
-        public IList<String> GetStarSystemObjects(String starSystem)
-        {
-            List<String> planetNames = new List<string>();
-
-            planetNames.Add("s");
-            planetNames.Add(GameServer.CurrentInstance.World.Map[starSystem].Star.Name);
-
-            foreach (Planet p in GameServer.CurrentInstance.World.Map[starSystem].Planets)
-            {
-                planetNames.Add("p");
-                planetNames.Add(p.Name);
-                planetNames.Add(p.AlternativeName);
-            }
-
-            foreach (WormholeEndpoint w in GameServer.CurrentInstance.World.Map[starSystem].WormholeEndpoints)
-            {
-                if (w.IsConnected)
-                {
-                    planetNames.Add("w");
-                    planetNames.Add(w.Destination.StarSystem.Name);
-                }
-            }
-
-            return planetNames;
-        }
-
-
-
 	}
 }

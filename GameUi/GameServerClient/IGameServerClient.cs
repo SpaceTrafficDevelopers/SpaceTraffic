@@ -34,6 +34,5 @@ namespace SpaceTraffic.GameUi.GameServerClient
         IAccountService AccountService { get; }
 
         IGameService GameService { get; }
-
     }
 }
