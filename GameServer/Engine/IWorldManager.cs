@@ -20,7 +20,6 @@ using System.Linq;
 using System.Text;
 using SpaceTraffic.Game;
 using SpaceTraffic.Game.Navigation;
-using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Engine
 {
@@ -42,7 +41,7 @@ namespace SpaceTraffic.Engine
         /// <returns>seznam aktivních hráčů</returns>
         IList<IGamePlayer> GetActivePlayers();
 
-        //IGamePlayer GetPlayer(int playerId);
+        IGamePlayer GetPlayer(int playerId);
 
         void ShipDock(int spaceshipId);
 
@@ -54,14 +53,5 @@ namespace SpaceTraffic.Engine
         /// Generate bases and traders and insert into db.
         /// </summary>
         void GenerateBasesAndTraders();
-
-
-
-
-
-
-
-        Player GetPlayer(int playerId);
-
     }
 }

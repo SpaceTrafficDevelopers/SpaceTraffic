@@ -25,5 +25,11 @@ namespace SpaceTraffic.Game.Events
         {
             return PlannedTime.Value.CompareTo(other.PlannedTime.Value); 
         }
+
+
+        int IComparable<IGameEvent>.CompareTo(IGameEvent other)
+        {
+            return PlannedTime.Value.CompareTo(other.PlannedTime.Value);  
+        }
     }
 }

@@ -89,7 +89,6 @@
     <Compile Include="Entities\SpaceShipCargo.cs" />
     <Compile Include="Entities\PublicEntities\WormholeEndpointDestination.cs" />
     <Compile Include="Entities\SpaceShip.cs" />
-    <Compile Include="Entities\SpaceShipProgram.cs" />
     <Compile Include="Entities\Trader.cs" />
     <Compile Include="Entities\TraderCargo.cs" />
     <Compile Include="Game\Base.cs" />
@@ -187,12 +186,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Desktop\space traffic svn\trunk\StarshipBasicInterpreter\StarshipBasicInterpreter.csproj">
-      <Project>{b60d8e6d-5cc3-4fa9-8e64-4fb7aa51d342}</Project>
-      <Name>StarshipBasicInterpreter</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

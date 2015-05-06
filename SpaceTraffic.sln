@@ -1,5 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0B2DEBED-EDD1-46AE-8C18-D733DBA6CE79}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
@@ -32,12 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarSystemEditor", "StarSys
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServerScripts", "GameServerScripts\GameServerScripts.csproj", "{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarshipBasicInterpreter", "..\..\Desktop\space traffic svn\trunk\StarshipBasicInterpreter\StarshipBasicInterpreter.csproj", "{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}"
-EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = SpaceTraffic.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -124,16 +121,6 @@ Global
 		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{10ABAB49-E8B9-40AC-81ED-EBA8CD50D86F}.Release|x86.ActiveCfg = Release|Any CPU
-		{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}.Debug|x86.ActiveCfg = Debug|x86
-		{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}.Debug|x86.Build.0 = Debug|x86
-		{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}.Release|Any CPU.ActiveCfg = Release|x86
-		{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}.Release|Mixed Platforms.Build.0 = Release|x86
-		{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}.Release|x86.ActiveCfg = Release|x86
-		{B60D8E6D-5CC3-4FA9-8E64-4FB7AA51D342}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,6 +128,9 @@ Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
 		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = SpaceTraffic.vsmdi
 	EndGlobalSection
 	GlobalSection(RocketSvnScc) = preSolution
 		Svn-Managed = True
