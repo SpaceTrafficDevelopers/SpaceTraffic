@@ -20,6 +20,8 @@ using System.Linq;
 using System.Text;
 using SpaceTraffic.Engine;
 using System.Collections.Concurrent;
+using SpaceTraffic.Game.Actions;
+using SpaceTraffic.Game.Events;
 
 namespace SpaceTraffic.GameServer
 {
@@ -29,6 +31,10 @@ namespace SpaceTraffic.GameServer
         public const int MAX_ACTIONS_PER_UPDATE = 100;
 
         private IGameServer gameServer;
+        /// <summary>
+        /// Manager used to persist and restore game state.
+        /// </summary>
+        private IGameStateManager gameStateManager;
         private Random rand = new System.Random();
 
         public GameTime currentGameTime { get; private set; }
@@ -37,15 +43,16 @@ namespace SpaceTraffic.GameServer
 
 
         private Dictionary<string, IGameSimulation> simulations = new Dictionary<string, IGameSimulation>();
-        
+
         public IDictionary<string, IGameSimulation> Simulations
         {
             get { return this.simulations; }
         }
 
-        public GameManager(IGameServer gameServer)
+        public GameManager(IGameServer gameServer, IGameStateManager gameStateManager)
         {
             this.gameServer = gameServer;
+            this.gameStateManager = gameStateManager;
         }
 
         public void Update(GameTime gameTime)
@@ -55,14 +62,42 @@ namespace SpaceTraffic.GameServer
             this.DoActions();
         }
 
+        /// <summary>
+        /// Restores previously stored state of the game.
+        /// 
+        /// Only list of events and actions is restored. Game time is determined by the system time.
+        /// </summary>
         internal void RestoreGameState()
         {
-            //TODO: Obnovení stavu hry
+            IEnumerable<IGameAction> actions = gameStateManager.RestoreActions();
+            foreach (var action in actions)
+            {
+                gameActionQueue.Enqueue(action);
+            }
+            IEnumerable<IGameEvent> events = gameStateManager.RestoreEvents();
+            foreach (var evnt in events)
+            {
+                gameEventQueue.Enqueue(evnt);
+            }
+
+            PerformAction(new HelloWorld());
+
+            PlanEvent(new HelloWorldRepeat()
+            {
+                PlannedTime = new GameTime() {Value = DateTime.UtcNow},
+                BoundAction = new HelloWorld()
+            });
         }
 
+        /// <summary>
+        /// Stores state of the game to the persistence store.
+        /// 
+        /// Only list of events and actions is stored. Game time is determined by the system time.
+        /// </summary>
         internal void PersistGameState()
         {
-            //TODO: Uložení stavu hry
+            gameStateManager.PersistActions(gameActionQueue);
+            gameStateManager.PersistEvents(gameEventQueue.GetItems());
         }
         
         internal void DoEvents()
