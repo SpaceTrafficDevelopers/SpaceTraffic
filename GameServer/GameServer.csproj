@@ -116,6 +116,7 @@
     <Compile Include="Game\Actions\HelloWorld.cs" />
     <Compile Include="Game\Actions\Ships\ShipBuy.cs" />
     <Compile Include="Game\Actions\Ships\ShipFlyTo.cs" />
+    <Compile Include="Game\Actions\Ships\ShipLand.cs" />
     <Compile Include="Game\Actions\Ships\ShipLoadCargo.cs" />
     <Compile Include="Game\Actions\Ships\ShipRepair.cs" />
     <Compile Include="Game\Actions\Ships\ShipTakeOff.cs" />

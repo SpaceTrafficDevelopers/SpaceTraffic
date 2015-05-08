@@ -64,7 +64,7 @@ namespace SpaceTraffic.Game.Actions.Ships
                 return;
             }
 
-            Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseByPlanetFullName(planet.StarSystem + "\\" + planet.Name);
+            Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseByPlanetFullName(planet.Location);
 
             if (dockedBase == null)
             {
