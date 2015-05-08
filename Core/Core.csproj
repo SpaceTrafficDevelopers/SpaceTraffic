@@ -75,6 +75,8 @@
     <Compile Include="Entities\Base.cs" />
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\Factory.cs" />
+    <Compile Include="Entities\GameAction.cs" />
+    <Compile Include="Entities\GameEvent.cs" />
     <Compile Include="Entities\Goods\AGoods.cs" />
     <Compile Include="Entities\Goods\Energy.cs" />
     <Compile Include="Entities\Goods\Food.cs" />

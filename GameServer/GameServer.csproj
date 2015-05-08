@@ -74,11 +74,15 @@
     <Compile Include="Dao\AbstractDAO.cs" />
     <Compile Include="Dao\BaseDAO.cs" />
     <Compile Include="Dao\CargoDAO.cs" />
+    <Compile Include="Dao\GameEventDAO.cs" />
+    <Compile Include="Dao\GameActionDAO.cs" />
     <Compile Include="Dao\ICargoDAO.cs" />
     <Compile Include="Dao\ICargoLoadDao.cs" />
     <Compile Include="Dao\IFactoryDAO.cs" />
     <Compile Include="Dao\FactoryDAO.cs" />
     <Compile Include="Dao\IBaseDAO.cs" />
+    <Compile Include="Dao\IGameEventDAO.cs" />
+    <Compile Include="Dao\IGameActionDAO.cs" />
     <Compile Include="Dao\ISpaceShipCargoDAO.cs" />
     <Compile Include="Dao\ISpaceShipDAO.cs" />
     <Compile Include="Dao\ITraderCargoDAO.cs" />
@@ -94,6 +98,7 @@
     <Compile Include="Engine\GameTime.cs" />
     <Compile Include="Engine\IGameEvent.cs" />
     <Compile Include="Engine\IGameSimulation.cs" />
+    <Compile Include="Engine\IGameStateManager.cs" />
     <Compile Include="Engine\IGoodsManager.cs" />
     <Compile Include="Engine\IRunnableScript.cs" />
     <Compile Include="Engine\IScriptManager.cs" />
@@ -102,6 +107,7 @@
     <Compile Include="Engine\IWorldManager.cs" />
     <Compile Include="GameServer\EventQueue.cs" />
     <Compile Include="GameServer\GameManager.cs" />
+    <Compile Include="GameServer\GameStateManager.cs" />
     <Compile Include="GameServer\ScriptManager.cs" />
     <Compile Include="GameServer\GoodsManager.cs" />
     <Compile Include="GameServer\WorldManager.cs" />

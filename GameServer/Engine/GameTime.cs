@@ -78,12 +78,20 @@ namespace SpaceTraffic.Engine
 
         public int CompareTo(GameTime other)
         {
-            throw new NotImplementedException();
+            return _currentTime.CompareTo(other._currentTime);
         }
 
         int IComparable.CompareTo(object obj)
         {
-            throw new NotImplementedException();
+            if (obj == null)
+            {
+                return 1;
+            }
+            if (obj is GameTime)
+            {
+                return CompareTo((GameTime) obj);
+            }
+            throw new ArgumentException("GameTime can be compared only to null and other GameTime instance.");
         }
 
         public static double DateTimeToSeconds(DateTime dateTime)

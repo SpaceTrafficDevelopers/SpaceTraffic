@@ -46,6 +46,7 @@ namespace SpaceTraffic.GameServer
         private PersistenceManager persistenceManager;
         private ScriptManager scriptManager;
         private WorldManager worldManager;
+        private GameStateManager gameStateManager;
         private GameManager gameManager;
         private GoodsManager goodsManager;
         public volatile bool run = false;
@@ -142,8 +143,14 @@ namespace SpaceTraffic.GameServer
             this.goodsManager.InsertCargoIntoDb();
             this.goodsManager.GenerateGoodsOverGalaxyMap(this.worldManager.Map);
 
+            // Create the GameStateManager used to persist and restore state of GameManager.
+            this.gameStateManager = new GameStateManager(
+                this.persistenceManager.GetGameActionDao(),
+                this.persistenceManager.GetGameEventDao()
+            );
+
             // Inicializace herního světa.
-            this.gameManager = new GameManager(this);
+            this.gameManager = new GameManager(this, this.gameStateManager);
             this.gameManager.RestoreGameState();
 
             

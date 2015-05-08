@@ -23,8 +23,8 @@ namespace SpaceTraffic.Engine
 {
     public interface IGameEvent
     {
-        GameTime PlannedTime { get; }
+        GameTime PlannedTime { get; set; }
 
-        IGameAction BoundAction { get; }
+        IGameAction BoundAction { get; set; }
     }
 }

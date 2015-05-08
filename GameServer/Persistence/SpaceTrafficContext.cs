@@ -16,10 +16,12 @@ limitations under the License.
 **/
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using SpaceTraffic.Dao;
 using SpaceTraffic.Entities;
 
  namespace SpaceTraffic.Persistence
@@ -44,6 +46,10 @@ using SpaceTraffic.Entities;
 
         public DbSet<TraderCargo> TraderCargos { get; set; }
 
+        public DbSet<GameAction> GameActions { get; set; }
+
+        public DbSet<GameEvent> GameEvents { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new MessageConfiguration());
@@ -55,6 +61,8 @@ using SpaceTraffic.Entities;
             modelBuilder.Configurations.Add(new SpaceShipCargoConfiguration());
             modelBuilder.Configurations.Add(new TraderConfiguration());
             modelBuilder.Configurations.Add(new TraderCargoConfiguration());
+            modelBuilder.Configurations.Add(new GameActionConfiguration());
+            modelBuilder.Configurations.Add(new GameEventConfiguration());
             base.OnModelCreating(modelBuilder); 
             
         }
@@ -247,6 +255,59 @@ using SpaceTraffic.Entities;
             Ignore(p => p.CargoOwnerId);
             Ignore(p => p.CargoLoadEntityId);
             ToTable("TraderCargos");
+        }
+    }
+
+
+    public class GameActionConfiguration : EntityTypeConfiguration<GameAction>
+    {
+        /// <summary>
+        /// Configures the persistence store for the <see cref="GameAction"/> entity.
+        /// </summary>
+        /// <seealso cref="GameActionDAO"/>
+        /// <seealso cref="GameActionDAO.RemoveAllActions"/>
+        public GameActionConfiguration()
+            : base()
+        {
+            HasKey(p => p.ActionCode);
+            Property(p => p.ActionCode).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            Property(p => p.Type).HasColumnType("varchar").HasMaxLength(1024).IsRequired();
+            Property(p => p.Sequence).HasColumnType("int").IsRequired();
+            Property(p => p.PlayerId).HasColumnType("int").IsRequired();
+            Property(p => p.State).HasColumnType("int").IsRequired();
+            Property(p => p.ActionArgs).HasColumnType("varbinary(max)").IsOptional();
+
+            // Table renamers, beware! The following table name is used directly in a SQL command.
+            // If you would like to change the name of the table, also change the SQL command in
+            // SpaceTraffic.Dao.GameActionDAO::RemoveAllActions().
+            // The reason for this heresy is explained in the mentioned method.
+            ToTable("GameActions");
+        }
+    }
+
+    public class GameEventConfiguration : EntityTypeConfiguration<GameEvent>
+    {
+        /// <summary>
+        /// Configures the persistence store for the <see cref="GameAction"/> entity.
+        /// </summary>
+        /// <seealso cref="GameEventDAO"/>
+        /// <seealso cref="GameEventDAO.RemoveAllEvents"/>
+        public GameEventConfiguration()
+            : base()
+        {
+            HasKey(p => p.Id);
+            Property(p => p.EventType).HasColumnType("varchar").HasMaxLength(1024).IsRequired();
+            Property(p => p.PlannedTime).HasColumnType("datetime2").IsRequired();
+            Property(p => p.ActionType).HasColumnType("varchar").HasMaxLength(1024).IsRequired();
+            Property(p => p.ActionCode).HasColumnType("int").IsOptional();
+            Property(p => p.PlayerId).HasColumnType("int").IsRequired();
+            Property(p => p.ActionState).HasColumnType("int").IsOptional();
+            Property(p => p.ActionArgs).HasColumnType("varbinary(max)").IsOptional();
+
+            // Table renamers, beware! The following table name is also used directly in a SQL command.
+            // If you would like to change the name of the table, also change the SQL command in
+            // SpaceTraffic.Dao.GameEventDAO::RemoveAllEvents().
+            ToTable("GameEvents");
         }
     }
 

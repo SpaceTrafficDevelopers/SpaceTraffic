@@ -57,5 +57,17 @@ namespace SpaceTraffic.GameServer
             }
             //TODO: optimalizace přidávání do fronty
         }
+
+        /// <summary>
+        /// Gets ordered list of items in the queue.
+        /// </summary>
+        /// <returns>Collection of items from the queue.</returns>
+        public IEnumerable<IGameEvent> GetItems()
+        {
+            // It would be better to clone the queue for safety reasons,
+            // but since the implementation is quite internal, it is better to
+            // use the more performant approach.
+            return queue;
+        }
     }
 }
