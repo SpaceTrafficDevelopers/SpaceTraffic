@@ -77,7 +77,7 @@ namespace SpaceTraffic.Game.Actions.Ships
             
             if(!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
             {
-                result = String.Format("Změny se nepovedlo zapsat do databáze", planet.Name);
+                result = String.Format("Změny se nepovedlo zapsat do databáze");
                 return;
             }
 

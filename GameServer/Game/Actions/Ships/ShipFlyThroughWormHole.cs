@@ -23,10 +23,10 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions.Ships
 {
-    class ShipTakeOff : IGameAction
+    class ShipFlyThroughWormHole : IGameAction
     {
 
-        private string result = "Loď odlétá z planety";
+        private string result = "Loď prolétá červí dírou";
 
         public object Result
         {
@@ -40,9 +40,7 @@ namespace SpaceTraffic.Game.Actions.Ships
 
         public object[] ActionArgs { get; set; }
 
-        public String StarSystemName { get; set; }
-
-        public String PlanetName { get; set; }
+        public int WormHoleId { get; set; }
 
         public int ShipID { get; set; }
 
@@ -51,9 +49,7 @@ namespace SpaceTraffic.Game.Actions.Ships
             getArgumentsFromActionArgs();
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ShipID);
-            Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceShip.DockedAtBaseId);
-            Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
-
+            
             if (player == null || spaceShip == null)
             {
                 result = String.Format("Nastala chyba při vyhledávání položek");
@@ -66,14 +62,15 @@ namespace SpaceTraffic.Game.Actions.Ships
                 return;
             }
 
-            /*if (!dockedBase.Planet.Equals(planet))
-            {
-                result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, planet.Name);
-                return;
-            }*/
+            WormholeEndpoint wormHole = gameServer.World.Map[spaceShip.CurrentStarSystem].WormholeEndpoints[WormHoleId];
 
-            spaceShip.DockedAtBaseId = -1;
-            spaceShip.IsFlying = true;
+            if (wormHole == null)
+            {
+                result = String.Format("V systému {0} není červí díra {1}.", spaceShip.CurrentStarSystem, WormHoleId);
+                return;
+            }
+
+            spaceShip.CurrentStarSystem = wormHole.Destination.StarSystem.Name;
 
             if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
             {
@@ -84,8 +81,7 @@ namespace SpaceTraffic.Game.Actions.Ships
 
         private void getArgumentsFromActionArgs()
         {
-            StarSystemName = ActionArgs[0].ToString();
-            PlanetName = ActionArgs[1].ToString();
+            WormHoleId = Convert.ToInt32(ActionArgs[0].ToString());
             ShipID = Convert.ToInt32(ActionArgs[2]);
         }
     }
