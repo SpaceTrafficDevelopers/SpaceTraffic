@@ -274,7 +274,7 @@ namespace SpaceTraffic.GameServer
         /// <returns>String identifing the type.</returns>
         private string GetStringIdentifierFromType(Type actionType)
         {
-            return actionType.FullName;
+            return String.Format("{0}, {1}", actionType.FullName, actionType.Assembly.GetName().Name);
         }
 
         /// <summary>
