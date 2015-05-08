@@ -20,8 +20,8 @@ namespace SpaceTraffic.Dao
         /// <summary>
         /// Preforms a bulk-insert of the given events to the persistence store.
         /// </summary>
-        /// <param name="gameActions">List of game events to persist.</param>
-        void InsertEvents(IEnumerable<GameEvent> gameActions);
+        /// <param name="gameEvents">List of game events to persist.</param>
+        void InsertEvents(IEnumerable<GameEvent> gameEvents);
 
         /// <summary>
         /// Removes all persisted events.
