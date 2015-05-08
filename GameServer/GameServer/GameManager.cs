@@ -79,14 +79,6 @@ namespace SpaceTraffic.GameServer
             {
                 gameEventQueue.Enqueue(evnt);
             }
-
-            PerformAction(new HelloWorld());
-
-            PlanEvent(new HelloWorldRepeat()
-            {
-                PlannedTime = new GameTime() {Value = DateTime.UtcNow},
-                BoundAction = new HelloWorld()
-            });
         }
 
         /// <summary>
