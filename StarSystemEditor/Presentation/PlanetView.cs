@@ -51,6 +51,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         public PlanetView(Planet planet)
         {
             this.Planet = planet;
+            this.Name = planet.AlternativeName.ToString().Replace(" ", "");
         }
         /// <summary>
         /// Metoda vracejici grafiku objektu
@@ -65,8 +66,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             planetShape.Width = 2 * planetRadius;
             planetShape.Height = 2 * planetRadius;
             planetShape.Fill = Brushes.Green;
-            Name = Planet.Name.Replace(" ", "");
-            planetShape.Name = Planet.AlternativeName.ToString().Replace(" ", "");
+            Name = Planet.AlternativeName.ToString().Replace(" ", "");
+            planetShape.Name = Name;//Planet.AlternativeName.ToString().Replace(" ", "");
             Point2d point = TrajectoryView.Trajectory.CalculatePosition(Editor.Time);
             point.X *= Editor.dataPresenter.ObjectSizeRatio;
             point.Y *= Editor.dataPresenter.ObjectSizeRatio;
@@ -99,7 +100,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// <returns>Jmeno objektu</returns>
         public override String GetName()
         {
-            return this.Planet.AlternativeName;
+            return this.Name;
         }
         /// <summary>
         /// Metoda vracejici velikost objektu

@@ -47,35 +47,35 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// <summary>
         /// Instance of StarSystem Editor
         /// </summary>
-        public static StarSystemEditorEntity StarSystemEditor { get; private set; }
+        public static StarSystemEditorEntity StarSystemEditor { get; set; }
         /// <summary>
         /// Instance of Planet editor
         /// </summary>
-        public static PlanetEditorEntity PlanetEditor { get; private set; }
+        public static PlanetEditorEntity PlanetEditor { get; set; }
         /// <summary>
         /// Instance of Star Editor
         /// </summary>
-        public static StarEditorEntity StarEditor { get; private set; }
+        public static StarEditorEntity StarEditor { get; set; }
         /// <summary>
         /// Instance of Wormhole Editor
         /// </summary>
-        public static WormholeEditorEntity WormholeEditor { get; private set; }
+        public static WormholeEditorEntity WormholeEditor { get; set; }
         /// <summary>
         /// Instance of Circular Orbit editor
         /// </summary>
-        public static CircleEditorEntity CircleOrbitEditor { get; private set; }
+        public static CircleEditorEntity CircleOrbitEditor { get; set; }
         /// <summary>
         /// Instance of Elliptic Orbit Editor
         /// </summary>
-        public static EllipseEditorEntity EllipseOrbitEditor { get; private set; }
+        public static EllipseEditorEntity EllipseOrbitEditor { get; set; }
         /// <summary>
         /// Galaxy Map property
         /// </summary>
-        public static GalaxyMap GalaxyMap { get; private set; }
+        public static GalaxyMap GalaxyMap { get; set; }
         /// <summary>
         /// Name of all generated objects property
         /// </summary>
-        public static Names Names { get; private set; }
+        public static Names Names { get; set; }
         /// <summary>
         /// Galaxy Name
         /// </summary> 
@@ -83,7 +83,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         /// <summary>
         /// Property pro kontrolu zda je editor nacten
         /// </summary>
-        public static bool IsLoaded { get; private set; }
+        public static bool IsLoaded { get; set; }
         /// <summary>
         /// Simulation time
         /// </summary>
@@ -187,6 +187,14 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         {
             StarSystemCreator starSystemCreator = new StarSystemCreator();
             StarSystem system = starSystemCreator.createSystem(name, planetCount, wormholeCount, type);
+            // saves base name of system
+            string systemName = system.Name;
+            // index to add to system name if galaxy map already contains system with same name
+            int index = 1;
+            while (GalaxyMap.ContainsKey(system.Name))
+            {
+                system.Name = systemName + index++;
+            }
             GalaxyMap.Add(system);
             
             ListView view = dataPresenter.GetStarSystemList();
@@ -272,8 +280,10 @@ namespace SpaceTraffic.Tools.StarSystemEditor
                     string filepath = dlg.FileName.Remove(index);
                     index = filepath.LastIndexOf("\\");
                     filepath = filepath.Remove(index);
-                    
-                    LoadGalaxy(MapName, filepath);
+                    //finds index where .xml starts and removes it
+                    index = dlg.SafeFileName.LastIndexOf(".");
+                    string galaxyName = dlg.SafeFileName.Remove(index);
+                    LoadGalaxy(galaxyName, filepath);
                 }
             }
         }

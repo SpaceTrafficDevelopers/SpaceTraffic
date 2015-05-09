@@ -12,7 +12,12 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         private static Random rand = new Random();
 
         private const double JUPITER_MASS = 1.898E27;
+        private const double STAR_MASS = 1.9891E30;
+        private const double CCW_PROBABILITY = 0.2;
+        private const int TERRA_PERIOD = 365;
+        private const int TERRA_RADIUS = 54;
         private const int BASE_WORMHOLE_RADIUS = 205;
+        private const int BASE_WORMHOLE_DIFFERENCE = 10;
         /// <summary>
         /// Creates new Star System
         /// </summary>
@@ -49,7 +54,6 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             string saltname = system.Name;
             CelestialObjectInfo sdetails = new CelestialObjectInfo(0.0, 0.0, "star of " + system.Name + " system.");
             Game.Geometry.Trajectory strajectory = new Game.Geometry.Stacionary(0, 0);
-
             Star star = new Star(sname, saltname, sdetails, system, strajectory);
 
             return star;
@@ -70,11 +74,9 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             for(int i = 0; i < wormholeCount; i++)
             {
                 int id = i;
-                int radius = BASE_WORMHOLE_RADIUS + 15 * i;
-                int period = radius * 300;
-                Game.Geometry.Direction direction = Game.Geometry.Direction.CLOCKWISE;
-                if (rand.Next(6) == 1) // 1:6 pravděpodobnost obihani counterclockwise
-                    direction = Game.Geometry.Direction.COUNTERCLOCKWISE;
+                int radius = BASE_WORMHOLE_RADIUS + BASE_WORMHOLE_DIFFERENCE * i;
+                int period = radius * 3000;
+                Direction direction = newDirection(CCW_PROBABILITY); 
                 Game.Geometry.Trajectory wtrajectory = new Game.Geometry.CircularOrbit(radius, period, direction, winitangl);
                 wormholeEndpoints.Add(new WormholeEndpoint(id, system, wtrajectory));
             }
@@ -82,12 +84,19 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             return wormholeEndpoints;
         }
 
+        /// <summary>
+        /// Creates planets
+        /// </summary>
+        /// <param name="system">system of the planets</param>
+        /// <param name="planetsCount">count of planets</param>
+        /// <param name="type">circular or elliptic</param>
+        /// <returns></returns>
         private static List<Planet> createPlanets(StarSystem system, int planetsCount, string type)
         {
             List<Planet> planets = new List<Planet>();
             for (int i = 1; i <= planetsCount; i++)
             {
-                // TODO generator jmen
+          //      createPlanet(system, i, type);
                 string pname = "planet" + i;
                 string paltName = "planet" + i;
                 // hmotnost jupiteru 1,898E27 kg nasobena faktore mezi (0, 80)
@@ -95,12 +104,16 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
                 CelestialObjectInfo pdetails = new CelestialObjectInfo(0.0, mass, "Description of " + system.Name + " placeholder.");
                 // y = 200 - (250/(sqrt(x+5)))
                 int diff = BASE_WORMHOLE_RADIUS / 2;
-                //int radius = (int)(BASE_WORMHOLE_RADIUS + 250 / (Math.Sqrt(i * 3 + 5)));
+                // int radius = (int)(BASE_WORMHOLE_RADIUS + 250 / (Math.Sqrt(i * 3 + 5)));
                 int radius = (int)(40 + diff/(planetsCount - i+1));
-                // TODO upravit, odmocnina nebo logaritmus 50-200, cim vetsi i tim dal na funkci
-                int period = radius + i * rand.Next(50, 70);
+                int r3 = radius * radius * radius;
+                int terraR3 = TERRA_RADIUS * TERRA_RADIUS * TERRA_RADIUS;
+                int terraP2 = TERRA_PERIOD * TERRA_PERIOD;
+                // period of planet 
+                int period = (int)Math.Sqrt((r3 / terraR3) * terraP2);
                 Game.Geometry.Direction direction = Game.Geometry.Direction.CLOCKWISE;
-                if (rand.Next(6) == 5)
+
+                if (rand.Next(6) == 1)
                     direction = Game.Geometry.Direction.COUNTERCLOCKWISE;
                 int initangle = rand.Next(360);
                 Game.Geometry.Trajectory ptrajectory = null;
@@ -118,7 +131,10 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
                         A /= 2;
                         B /= 2;
                     }
-                    double rotation = rand.NextDouble()*360;
+                    // rotation from -10 to 10 degree
+                    double rotation = rand.NextDouble()*20 - 10;
+                    if (rotation < 0)
+                        rotation = 360 - rotation;
                     ptrajectory = new Game.Geometry.EllipticOrbit(
                         new Point2d(0, 0), A, B,rotation, period, direction, initangle);
                 }
@@ -133,33 +149,81 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         }
 
         /// <summary>
+        /// creates new planet
+        /// </summary>
+        /// <param name="system">system of planet</param>
+        /// <param name="planetNumber">number of the planet</param>
+        /// <returns>planet</returns>
+        private static Planet createPlanet(StarSystem system, int planetNumber, string type)
+        {
+            string pname = "planet" + planetNumber;
+            string paltName = "planet" + planetNumber;
+            // hmotnost jupiteru 1,898E27 kg nasobena faktore mezi (0, 80)
+            double mass = JUPITER_MASS * (rand.NextDouble() + 0.01) * rand.Next(1, 80);
+            CelestialObjectInfo pdetails = new CelestialObjectInfo(0.0, mass, "Description of " + system.Name + " placeholder.");
+            // y = 200 - (250/(sqrt(x+5)))
+            int diff = BASE_WORMHOLE_RADIUS / 2;
+            // int radius = (int)(BASE_WORMHOLE_RADIUS + 250 / (Math.Sqrt(i * 3 + 5)));
+            int radius = (int)(40 + diff / (system.Planets.Count - planetNumber + 2));
+            int r3 = radius * radius * radius;
+            int terraR3 = TERRA_RADIUS * TERRA_RADIUS * TERRA_RADIUS;
+            int terraP2 = TERRA_PERIOD * TERRA_PERIOD;
+            // period of planet 
+            int period = (int)Math.Sqrt((r3 / terraR3) * terraP2);
+            
+            int initangle = rand.Next(360);
+            Direction direction = newDirection(CCW_PROBABILITY);
+            Game.Geometry.Trajectory ptrajectory = null;
+            if (type == "Circular")
+            {
+                ptrajectory = new Game.Geometry.CircularOrbit(radius, period, direction, initangle);
+            }
+            else if (type == "Elliptic")
+            {
+                int A = radius + rand.Next(radius / 10);
+                int B = A - rand.Next(radius / 10);
+                // zajisteni aby nepresahla velikost editoru
+                if (A >= 250)
+                {
+                    A /= 2;
+                    B /= 2;
+                }
+                // rotation from -10 to 10 degree
+                double rotation = rand.NextDouble() * 20 - 10;
+                if (rotation < 0)
+                    rotation = 360 - rotation;
+                ptrajectory = new Game.Geometry.EllipticOrbit(
+                    new Point2d(0, 0), A, B, rotation, period, direction, initangle);
+            }
+            Planet planet = new Planet(pname, paltName, pdetails, system, ptrajectory);
+            return planet;
+        }
+        /// <summary>
+        /// generates direction based on probability of counterclockwise
+        /// </summary>
+        /// <param name="probabilityOfCCW">chance to get counterclockwise (should be 0,2 or lower)<param>
+        /// <returns>direction</returns>
+        private static Direction newDirection(double probabilityOfCCW)
+        {
+            Game.Geometry.Direction direction = Game.Geometry.Direction.CLOCKWISE;
+            // incorrect probability, return clockwise
+            if (probabilityOfCCW < 0 || probabilityOfCCW > 1)
+                return direction;
+            else if (rand.NextDouble() <= probabilityOfCCW)
+                direction = Game.Geometry.Direction.COUNTERCLOCKWISE;
+            return direction;
+        }
+
+        /// <summary>
         /// vytvori novou planetu s kruznicovou orbitou
         /// </summary>
         /// <param name="system">system do ktereho pridavame planetu</param>
         /// <returns>true, pokud planetu uspesne pridame, false v opacnem pripade</returns>
         public static bool addPlanet(StarSystem system)
         {
-            // TODO generator jmen
-            string pname = "newPlanet"+system.Planets.Count;
-            string paltName = "newPlanet"+system.Planets.Count;
-            // hmotnost jupiteru 1,898E27 kg nasobena faktore mezi (0, 80)
-            double mass = JUPITER_MASS * (rand.NextDouble() + 0.01) * rand.Next(1, 80);
-            CelestialObjectInfo pdetails = new CelestialObjectInfo(0.0, mass, "Description of " + system.Name + " placeholder.");
-            // radius je vnejsi okraj pred wormholami, pricita se k nemu pocet planet,
-            // aby se pri pridani vice planet nevygenerovali dve prez sebe
-            int radius = BASE_WORMHOLE_RADIUS - 40 + system.Planets.Count*3;
-            // perioda natvrdo, pak se snadno prenastavi pres editor
-            int period = radius * 300;
-            Game.Geometry.Direction direction = Game.Geometry.Direction.CLOCKWISE;
-            //  1:6 pravdepodobnost ze pobezi opacne
-            if (rand.Next(6) == 1)
-                direction = Game.Geometry.Direction.COUNTERCLOCKWISE;
-            int initangle = rand.Next(360);
-            Game.Geometry.Trajectory ptrajectory = null;
-            ptrajectory = new Game.Geometry.CircularOrbit(radius, period, direction, initangle);
-            if (ptrajectory == null)
-                return false;
-            system.Planets.Add(new Planet(pname, paltName, pdetails, system, ptrajectory));
+            Planet planet = createPlanet(system, system.Planets.Count, "Circular");
+            (planet.Trajectory as CircularOrbit).Radius += BASE_WORMHOLE_DIFFERENCE;
+            system.Planets.Add(planet);
             return true;
         }
 
@@ -171,14 +235,11 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         /// <returns>true, pokud wormhole uspesne pridame, false v opacnem pripade</returns>
         public static bool addWormhole(StarSystem system)
         {
-            //radius o 20 vetsi nez posledni wormhole v systemu
-            int radius = BASE_WORMHOLE_RADIUS + 10*system.WormholeEndpoints.Count;
+            //radius o pevný kus vetsi nez posledni wormhole v systemu
+            int radius = BASE_WORMHOLE_RADIUS + BASE_WORMHOLE_DIFFERENCE * system.WormholeEndpoints.Count;
             // perioda natvrdo, pak se snadno prenastavi pres editor
             int period = radius * 3000;
-            Game.Geometry.Direction direction = Game.Geometry.Direction.CLOCKWISE;
-            //  1:6 pravdepodobnost ze pobezi opacne
-            if (rand.Next(6) == 1)
-                direction = Game.Geometry.Direction.COUNTERCLOCKWISE;
+            Direction direction = newDirection(CCW_PROBABILITY);
             int initangle = rand.Next(360);
             Game.Geometry.Trajectory trajectory = null;
             trajectory = new Game.Geometry.CircularOrbit(radius, period, direction, initangle);

@@ -66,8 +66,11 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         public MainWindow()
         {
             Editor.Preload();
+            // initializing delegates
             Editor.dataPresenter.planetSelectionChanged = planetSelected;
             Editor.dataPresenter.wormholeSelectionChanged = wormholeSelected;
+            Editor.dataPresenter.connectionsChanged = connectionsChanged;
+            //load galaxy
             Editor.LoadGalaxy("GalaxyMap2", ".//Assets");
             InitializeComponent();
             this.StarSystemSelectorPanel.Children.Add(new StarSystemSelector());
@@ -242,6 +245,14 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         }
 
         /// <summary>
+        /// Method called from dataPresenter, updating planet data
+        /// </summary>
+        private void connectionsChanged()
+        {
+            this.connectionListBox.Content = Editor.dataPresenter.GetConnectionList();
+        }
+
+        /// <summary>
         /// Reaction on New button in menu
         /// </summary>
         private void MenuNew_Click(object sender, RoutedEventArgs e)
@@ -298,10 +309,12 @@ namespace SpaceTraffic.Tools.StarSystemEditor
                 
                 XmlSaver.CreateXml(Editor.GalaxyMap);
                 this.ProgramStatus.Content = "Saved";
+                MessageBox.Show("Saved");
             }
             catch
             {
                 this.ProgramStatus.Content = "Unable to save";
+                MessageBox.Show("Unable to Saved");
             }
         }
 
@@ -398,6 +411,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             if (Editor.newPlanet())
             {
                 MessageBox.Show("Planet created.");
+                Editor.dataPresenter.TreeDataLoader();
                 ReDrawMap();
             }
             else MessageBox.Show("Planet was not created.");
@@ -415,19 +429,45 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             if (Editor.newWormhole())
             {
                 MessageBox.Show("Wormhole created.");
+                Editor.dataPresenter.TreeDataLoader();
+                Editor.dataPresenter.ConnectionsLoader();
                 ReDrawMap();
             }
             else MessageBox.Show("Wormhole was not created."); 
         }
 
+        private void RenameStarSystem_Click(object sender, RoutedEventArgs e)
+        {
+            if (Editor.dataPresenter.SelectedStarSystem == null)
+            {
+                MessageBox.Show("Select a StarSystem first.");
+                return;
+            }
+            // rename star system, and its star, change its name in lisview
+            try
+            {
+                RenameSystem form = new RenameSystem();
+                form.Owner = this;
+                form.ShowDialog();
+                this.Focusable = false;
+                this.ProgramStatus.Content = "Rename Successful";
+            }
+            catch
+            {
+                this.ProgramStatus.Content = "Rename failed";
+            }
+        }
+
         private void SimulationPauseButton_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
+            this.SimulationStatus.Content = "Simulation stopped";
         }
 
         private void SimulationRunButton_Click(object sender, RoutedEventArgs e)
         {
             timer.Start();
+            this.SimulationStatus.Content = "Simulation running";
         }
 
         

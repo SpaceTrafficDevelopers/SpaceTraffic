@@ -28,9 +28,10 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             this.Activate();
         }
 
-        //obsluha kliknuti na krizek - zavrit
+        //Closing handler
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            // activate main window
             this.Owner.Focusable = true;
         }
 
@@ -50,9 +51,48 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             int wcount = Convert.ToInt32(wormholecount_text.Text);
             string type = systemtypebox.Text;
             Editor.NewSystem(name_text.Text, pcount, wcount, type);
-            //aktivace hlavniho okna
+            //activate main window
             this.Owner.Focusable = true;
             Close();
+        }
+
+        private void planetcount_text_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            checkDigit(sender, e);
+        }
+
+        private void wormholecount_text_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            checkDigit(sender, e);
+        }
+
+        /// <summary>
+        /// checks content of textbox for positive digits
+        /// </summary>
+        /// <param name="sender">textbox</param>
+        /// <param name="e">args</param>
+        private void checkDigit(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                int planetCount = Convert.ToInt16((sender as TextBox).Text);
+                if (planetCount <= 0)
+                {
+                    MessageBox.Show("You must enter positive number");
+                    // clears textbox content
+                    (sender as TextBox).Text = "" + 5;
+                }
+            }
+            catch (FormatException exception)
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch((sender as TextBox).Text, "[^0-9]"))
+                {
+                    MessageBox.Show("You must enter positive number");
+                    Editor.Log(exception.ToString());
+                    // clears textbox content
+                    (sender as TextBox).Text = "" + 5;
+                }
+            }
         }
     }
 }

@@ -53,6 +53,15 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             TryToSet();
             ((Star)LoadedObject).Name = newName;
         }
+
+        /// <summary>
+        /// Sets new gravity of star
+        /// </summary>
+        /// <param name="newGravity">new gravity</param>
+        public void setGravity(double newGravity)
+        {
+            ((Star)LoadedObject).Details = new CelestialObjectInfo();
+        }
         
         /// <summary>
         /// Method returning basic info about star system

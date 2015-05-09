@@ -41,24 +41,9 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         {
             Editor.Log("Loading starsystem list");
         }
+     
         /// <summary>
-        /// Reakce na tlacitko expandovat/skryt (+/-)
-        /// </summary>
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.starSystemListBox.Visibility == Visibility.Collapsed)
-            {
-                this.starSystemListExpander.Content = "-";
-                this.starSystemListBox.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                this.starSystemListExpander.Content = "+";
-                this.starSystemListBox.Visibility = Visibility.Collapsed;
-            }
-        }
-        /// <summary>
-        /// Inicializace comboboxu
+        /// Combobox initialization
         /// </summary>
         private void starSystemListBox_Loaded(object sender, RoutedEventArgs e)
         {
@@ -69,25 +54,14 @@ namespace SpaceTraffic.Tools.StarSystemEditor
         }
         
         /// <summary>
-        /// Metoda volana z dataPresenteru pro refresh seznamu star systemu
+        /// Method called from dataPresenter to refresh starsystems
         /// </summary>
         private void StarSystemListChanged()
         {
             Editor.dataPresenter.StarSystemListLoader();
             this.starSystemListBox.Content = Editor.dataPresenter.GetStarSystemList();
             this.starSystemObjectTreeBox.Content = Editor.dataPresenter.GetStarSystemObjectTree();
-            //refresh combobox itemlistu
-            this.starSystemSingleSelector.ItemsSource = Editor.LoadStarSystemNames();
         }
 
-        /// <summary>
-        /// Inicializace
-        /// </summary>
-        private void starSystemSingleSelector_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (Editor.dataPresenter == null) return;
-            this.starSystemSingleSelector.SelectionChanged += new SelectionChangedEventHandler(Editor.dataPresenter.StarSystemSelectorChange);
-            this.starSystemSingleSelector.ItemsSource = Editor.LoadStarSystemNames();
-        }
     }
 }

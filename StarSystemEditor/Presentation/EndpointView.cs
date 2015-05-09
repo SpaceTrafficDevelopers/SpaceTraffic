@@ -54,6 +54,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         public EndpointView(WormholeEndpoint endpoint)
         {
             this.WormholeEndpoint = endpoint;
+            IdentityName = "Wormhole" + endpoint.Id;
         }
         /// <summary>
         /// Metoda objekt cervi diry pro zobrazeni
@@ -68,7 +69,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             endpointShape.Width = 2 * planetRadius;
             endpointShape.Height = 2 * planetRadius;
             endpointShape.Fill = Brushes.Blue;
-            IdentityName = "Wormhole[" + WormholeEndpoint.Id + "]";
+            endpointShape.Name = "Wormhole" + WormholeEndpoint.Id;
+            IdentityName = "Wormhole" + WormholeEndpoint.Id;
             Point2d point = TrajectoryView.Trajectory.CalculatePosition(Editor.Time);
             point.X *= Editor.dataPresenter.ObjectSizeRatio;
             point.Y *= Editor.dataPresenter.ObjectSizeRatio;
@@ -102,7 +104,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// <returns>Jmeno objektu</returns>
         public override String GetName()
         {
-            return "Wormhole[" + WormholeEndpoint.Id +"]";
+            return "Wormhole" + WormholeEndpoint.Id;
         }
         /// <summary>
         /// Metoda vracejici rozmer vykreslovaneho objektu

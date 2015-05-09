@@ -29,7 +29,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
     /// <summary>
     /// Zobrazovac hvezdy
     /// </summary>
-    public class StarView : View
+    public class StarView : CelestialObjectView
     {
         /// <summary>
         /// Vykreslovany objekt
@@ -53,12 +53,12 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             double ratio = Editor.dataPresenter.ObjectSizeRatio;
             //Editor.Log(Editor.dataPresenter.ObjectSizeRatio.ToString());
             starRadius *= ratio;
-            Ellipse planetShape = new Ellipse();
-            planetShape.Width = 2 * starRadius;
-            planetShape.Height = 2 * starRadius;
-            planetShape.Fill = Brushes.Yellow;
-            planetShape.Name = Star.Name.ToString().Replace(" ", "");
-            return planetShape;
+            Ellipse starShape = new Ellipse();
+            starShape.Width = 2 * starRadius;
+            starShape.Height = 2 * starRadius;
+            starShape.Fill = Brushes.Yellow;
+            starShape.Name = Star.Name.ToString().Replace(" ", "");
+            return starShape;
         }
         /// <summary>
         /// Metoda vracejici zobrazovany objekt
@@ -86,6 +86,33 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             size.Width = Editor.dataPresenter.GetStarRadius();
             size.Height = size.Width;
             return size;
+        }
+
+        public override Point2d Position
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public override TrajectoryView GetTrajectoryView()
+        {
+            return null;
+        }
+
+        public override void SetTrajectoryView(TrajectoryView view)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Ellipse GetTrajectoryShape()
+        {
+            throw new NotImplementedException();
         }
     }
 }

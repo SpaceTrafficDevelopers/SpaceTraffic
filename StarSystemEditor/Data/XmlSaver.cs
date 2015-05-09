@@ -73,7 +73,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
         {
             //Log("dialog");
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.FileName = map.MapName;
+            dlg.FileName = "GalaxyMap";
             dlg.DefaultExt = ".xml";
             dlg.Filter = "GalaxyMap XML File(.xml)|*.xml";
             Nullable<bool> result = dlg.ShowDialog();
@@ -83,7 +83,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
                 readerSettings.IgnoreComments = true;
                 // Open document 
                 string filename = dlg.FileName;
-                FileStream fileStream = new FileStream(".\\saveddata\\Map\\" + map.MapName + ".xml", FileMode.Create);
+                FileStream fileStream = new FileStream(filename, FileMode.Create);
 
                 XNamespace defaultNamespace = XNamespace.Get("SpaceTrafficData");
                 XElement doc = new XElement(
@@ -108,7 +108,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
                     XElement item = new XElement("starsystem");
                     item.Add(new XAttribute("name", starSystem.Name));
                     starSystems.Add(item);
-                    CreateStarSystemXml(starSystem);
+                    CreateStarSystemXml(starSystem, filename);
                     
                     foreach (WormholeEndpoint wormholeEndpoint in starSystem.WormholeEndpoints)
                     {
@@ -167,56 +167,60 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
         /// Metoda pro vytvoreni elementu ze starsystemu
         /// </summary>
         /// <param name="starSystem">Starsystem pro zpracovani</param>
-        public static void CreateStarSystemXml(StarSystem starSystem)
+        public static void CreateStarSystemXml(StarSystem starSystem, String filename)
         {
-            
-                FileStream fileStream = new FileStream(".\\saveddata\\Map\\" + starSystem.Name + ".xml", FileMode.Create);
+            // remove "GalaxyMap.xml" from filepath
+            int index = filename.LastIndexOf("\\");
+            string filepath = filename.Remove(index);
+            //index = filepath.LastIndexOf("\\");
+            //filepath = filepath.Remove(index);
+            FileStream fileStream = new FileStream(filepath + "//" + starSystem.Name + ".xml", FileMode.Create);
 
-                XNamespace defaultNamespace = XNamespace.Get("SpaceTrafficData");
-                XElement doc = new XElement(
-                    new XElement(defaultNamespace + "stdata",
-                        new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
-                        new XAttribute(XNamespace.Xmlns + "html", "http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"),
-                        new XAttribute(XNamespace.Xmlns + "st", "SpaceTrafficData"),
-                        new XAttribute("version", "1.2")
-                    )
-                );
+            XNamespace defaultNamespace = XNamespace.Get("SpaceTrafficData");
+            XElement doc = new XElement(
+                new XElement(defaultNamespace + "stdata",
+                    new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"),
+                    new XAttribute(XNamespace.Xmlns + "html", "http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"),
+                    new XAttribute(XNamespace.Xmlns + "st", "SpaceTrafficData"),
+                    new XAttribute("version", "1.2")
+                )
+            );
 
-                XElement root = new XElement("starsystem");
-                root.Add(new XAttribute("name", starSystem.Name));
-                root.Add(new XAttribute("x", starSystem.MapPosition.X));
-                root.Add(new XAttribute("y", starSystem.MapPosition.Y));
+            XElement root = new XElement("starsystem");
+            root.Add(new XAttribute("name", starSystem.Name));
+            root.Add(new XAttribute("x", starSystem.MapPosition.X));
+            root.Add(new XAttribute("y", starSystem.MapPosition.Y));
 
-                XElement star = new XElement("star");
-                star.Add(new XAttribute("name", starSystem.Star.Name));
-                star.Add(TrajectoryToElement(starSystem.Star.Trajectory));
-                star.Add(DetailsToElement(starSystem.Star.Details));
-                root.Add(star);
+            XElement star = new XElement("star");
+            star.Add(new XAttribute("name", starSystem.Star.Name));
+            star.Add(TrajectoryToElement(starSystem.Star.Trajectory));
+            star.Add(DetailsToElement(starSystem.Star.Details));
+            root.Add(star);
 
-                XElement planets = new XElement("planets");
-                foreach (Planet planet in starSystem.Planets)
-                {
-                    XElement planetElement = new XElement("planet");
-                    planetElement.Add(new XAttribute("altName", planet.AlternativeName));
-                    planetElement.Add(new XAttribute("name", planet.Name));
-                    planetElement.Add(TrajectoryToElement(planet.Trajectory));
-                    planetElement.Add(DetailsToElement(planet.Details));
-                    planets.Add(planetElement);
-                }
-                root.Add(planets);
+            XElement planets = new XElement("planets");
+            foreach (Planet planet in starSystem.Planets)
+            {
+                XElement planetElement = new XElement("planet");
+                planetElement.Add(new XAttribute("altName", planet.AlternativeName));
+                planetElement.Add(new XAttribute("name", planet.Name));
+                planetElement.Add(TrajectoryToElement(planet.Trajectory));
+                planetElement.Add(DetailsToElement(planet.Details));
+                planets.Add(planetElement);
+            }
+            root.Add(planets);
 
-                XElement wormholeEndpoints = new XElement("wormholeEndpoints");
-                foreach (WormholeEndpoint endpoint in starSystem.WormholeEndpoints)
-                {
-                    wormholeEndpoints.Add(EndpointToElement(endpoint));
-                }
-                root.Add(wormholeEndpoints);
+            XElement wormholeEndpoints = new XElement("wormholeEndpoints");
+            foreach (WormholeEndpoint endpoint in starSystem.WormholeEndpoints)
+            {
+                wormholeEndpoints.Add(EndpointToElement(endpoint));
+            }
+            root.Add(wormholeEndpoints);
 
-                doc.Add(root);
+            doc.Add(root);
 
-                doc.Save(fileStream);
-                fileStream.Close();
-            
+            doc.Save(fileStream);
+            fileStream.Close();
+
         }
         /// <summary>
         /// Metoda pro vytvoreni elementu z trajektorie

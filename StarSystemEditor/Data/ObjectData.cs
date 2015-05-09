@@ -24,6 +24,9 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
             return this.loadedObjectData;
         }
 
+        /// <summary>
+        /// Constructor creating graphics for selected object editor
+        /// </summary>
         public ObjectData()
         {
             if (Editor.dataPresenter.SelectedObject == null)
@@ -39,81 +42,16 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
             else if(Editor.dataPresenter.SelectedObject is PlanetView)
             {
                 Planet selectedPlanet = (Editor.dataPresenter.SelectedObject as PlanetView).Planet;
+
+                Grid grid = createGrid();
                 
-                Grid grid = new Grid();
-                grid.Width = 250;
-                grid.MaxWidth = 250;
-                grid.MinHeight = 350;
-                grid.HorizontalAlignment = HorizontalAlignment.Left;
-                grid.VerticalAlignment = VerticalAlignment.Top;
-
-                // Define the Columns
-                ColumnDefinition labels = new ColumnDefinition();
-                ColumnDefinition textFields = new ColumnDefinition();
-                grid.ColumnDefinitions.Add(labels);
-                grid.ColumnDefinitions.Add(textFields);
-
-                // Define the Rows
-                RowDefinition PlanetName = new RowDefinition();
-                RowDefinition PlanetAltName = new RowDefinition();
-                RowDefinition Period = new RowDefinition();
-                RowDefinition Direction = new RowDefinition();
-                RowDefinition Mass = new RowDefinition();
-                RowDefinition Gravity = new RowDefinition();
-                RowDefinition DescriptionLabel = new RowDefinition();
-                RowDefinition DescriptionText = new RowDefinition();
-                DescriptionText.MinHeight = 200;
-                grid.RowDefinitions.Add(PlanetName);
-                grid.RowDefinitions.Add(PlanetAltName);
-                grid.RowDefinitions.Add(Period);
-                grid.RowDefinitions.Add(Direction);
-                grid.RowDefinitions.Add(Mass);
-                grid.RowDefinitions.Add(Gravity);
-                grid.RowDefinitions.Add(DescriptionLabel);
-                grid.RowDefinitions.Add(DescriptionText);
-
-                Label planetName = new Label();
-                planetName.MinWidth = 60;
-                planetName.Content = "Planet Name:";
-                planetName.HorizontalAlignment = HorizontalAlignment.Left;
-                Grid.SetColumn(planetName, 0);
-                Grid.SetRow(planetName, 0);
-
-                Label planetAltName = new Label();
-                planetAltName.MinWidth = 60;
-                planetAltName.Content = "Planet Alt Name:";
-                planetAltName.HorizontalAlignment = HorizontalAlignment.Left;
-                Grid.SetColumn(planetAltName, 0);
-                Grid.SetRow(planetAltName, 1);
-
-                Label period = new Label();
-                period.MinWidth = 60;
-                period.Content = "Period:";
-                period.HorizontalAlignment = HorizontalAlignment.Left;
-                Grid.SetColumn(period, 0);
-                Grid.SetRow(period, 2);
-
-                Label direction = new Label();
-                direction.MinWidth = 60;
-                direction.Content = "Direction:";
-                direction.HorizontalAlignment = HorizontalAlignment.Left;
-                Grid.SetColumn(direction, 0);
-                Grid.SetRow(direction, 3);
-
-                Label mass = new Label();
-                mass.MinWidth = 60;
-                mass.Content = "Mass:";
-                mass.HorizontalAlignment = HorizontalAlignment.Left;
-                Grid.SetColumn(mass, 0);
-                Grid.SetRow(mass, 4);
-
-                Label gravity = new Label();
-                gravity.MinWidth = 60;
-                gravity.Content = "Gravity:";
-                gravity.HorizontalAlignment = HorizontalAlignment.Left;
-                Grid.SetColumn(gravity, 0);
-                Grid.SetRow(gravity, 5);
-
+                Label planetName = createLabel("Planet Name:", 0, 0);
+                Label planetAltName = createLabel("Planet Alt Name:", 0, 1);
+                Label period = createLabel("Period:", 0, 2);
+                Label direction = createLabel("Direction:", 0, 3);
+                Label mass = createLabel("Mass:", 0, 4);
+                Label gravity = createLabel("Gravity:", 0, 5);
+                
                 Label description = new Label();
                 description.MinWidth = 60;
                 description.Content = "Description:";
@@ -121,82 +59,29 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
                 Grid.SetColumnSpan(description, 2);
                 Grid.SetRow(description, 6);
 
-                TextBox planetName_text = new TextBox();
-                planetName_text.MinWidth = 60;
+                TextBox planetName_text = createTextBox(0, 1, 0);
                 planetName_text.Text = selectedPlanet.Name;
-                planetName_text.HorizontalAlignment = HorizontalAlignment.Left;
-                planetName_text.SelectionChanged += selection_changed;
-                planetName_text.Tag = 0;
-                Grid.SetColumn(planetName_text, 1);
-                Grid.SetRow(planetName_text, 0);
 
-                TextBox planetAltName_text = new TextBox();
-                planetAltName_text.MinWidth = 60;
+                TextBox planetAltName_text = createTextBox(1, 1, 1);
                 planetAltName_text.Text = selectedPlanet.AlternativeName;
-                planetAltName_text.HorizontalAlignment = HorizontalAlignment.Left;
-                planetAltName_text.SelectionChanged += selection_changed;
-                planetAltName_text.Tag = 1;
-                Grid.SetColumn(planetAltName_text, 1);
-                Grid.SetRow(planetAltName_text, 1);
 
-                TextBox period_text = new TextBox();
-                period_text.MinWidth = 60;
+                TextBox period_text = createTextBox(2, 1, 2);
                 period_text.Text = (selectedPlanet.Trajectory as OrbitDefinition).PeriodInSec.ToString();
-                period_text.SelectionChanged += selection_changed;
-                period_text.Tag = 2;
-                period_text.HorizontalAlignment = HorizontalAlignment.Left;
-                Grid.SetColumn(period_text, 1);
-                Grid.SetRow(period_text, 2);
 
-                ComboBox direction_box = new ComboBox();
-                direction_box.MinWidth = 60;
-                ComboBoxItem clockwise = new ComboBoxItem();
-                clockwise.Content = "Clockwise";
-                ComboBoxItem counter_clockwise = new ComboBoxItem();
-                counter_clockwise.Content = "Counterclockwise";
-                direction_box.Items.Add(clockwise);
-                direction_box.Items.Add(counter_clockwise);
-                direction_box.HorizontalAlignment = HorizontalAlignment.Left;
+                ComboBox direction_box = createDirectionComboBox();
                 if ((selectedPlanet.Trajectory as OrbitDefinition).Direction == SpaceTraffic.Game.Geometry.Direction.CLOCKWISE)
                     direction_box.SelectedIndex = 0;
                 else direction_box.SelectedIndex = 1;
-                direction_box.SelectionChanged += selection_changed;
-                direction_box.Tag = 3;
-                Grid.SetColumn(direction_box, 1);
-                Grid.SetRow(direction_box, 3);
-
-                TextBox mass_text = new TextBox();
-                mass_text.MinWidth = 60;
-                mass_text.SelectionChanged += selection_changed;
-                mass_text.Tag = 4;
+                
+                TextBox mass_text = createTextBox(4, 1, 4);
                 mass_text.Text = selectedPlanet.Details.Mass.ToString();
-                mass_text.HorizontalAlignment = HorizontalAlignment.Left;
-                Grid.SetColumn(mass_text, 1);
-                Grid.SetRow(mass_text, 4);
 
-                TextBox gravity_text = new TextBox();
-                gravity_text.MinWidth = 60;
-                gravity_text.SelectionChanged += selection_changed;
-                gravity_text.Tag = 5;
+                TextBox gravity_text = createTextBox(5, 1, 5);
                 gravity_text.Text = selectedPlanet.Details.Gravity.ToString();
-                gravity_text.HorizontalAlignment = HorizontalAlignment.Left;
-                Grid.SetColumn(gravity_text, 1);
-                Grid.SetRow(gravity_text, 5);
 
-                TextBox description_text = new TextBox();
-                description_text.MinWidth = 240;
-                description_text.SelectionChanged += selection_changed;
-                description_text.Tag = 6;
-                description_text.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-                description_text.Background = Brushes.White;
-                description_text.AcceptsReturn = true;
-                description_text.AcceptsTab = true;
-                description_text.TextWrapping = TextWrapping.Wrap;
+                TextBox description_text = createDescriptionTextBox();
                 description_text.Text = selectedPlanet.Details.Description;
-                description_text.HorizontalAlignment = HorizontalAlignment.Left;
-                Grid.SetColumnSpan(description_text, 2);
-                Grid.SetRow(description_text, 7);
-
+                
                 grid.Children.Add(planetName);
                 grid.Children.Add(planetAltName);
                 grid.Children.Add(planetName_text);
@@ -214,6 +99,122 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Data
 
                 this.loadedObjectData = grid;
             }
+        }
+
+        private TextBox createDescriptionTextBox()
+        {
+            TextBox description_text = new TextBox();
+            description_text.MinWidth = 240;
+            description_text.SelectionChanged += selection_changed;
+            description_text.Tag = 6;
+            description_text.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            description_text.Background = Brushes.White;
+            description_text.AcceptsReturn = true;
+            description_text.AcceptsTab = true;
+            description_text.TextWrapping = TextWrapping.Wrap;
+            description_text.HorizontalAlignment = HorizontalAlignment.Left;
+            Grid.SetColumnSpan(description_text, 2);
+            Grid.SetRow(description_text, 7);
+            return description_text;
+        }
+
+        /// <summary>
+        /// creates direction combobox
+        /// </summary>
+        /// <returns>combobox</returns>
+        private ComboBox createDirectionComboBox()
+        {
+            ComboBox direction_box = new ComboBox();
+            direction_box.MinWidth = 60;
+            ComboBoxItem clockwise = new ComboBoxItem();
+            clockwise.Content = "Clockwise";
+            ComboBoxItem counter_clockwise = new ComboBoxItem();
+            counter_clockwise.Content = "Counterclockwise";
+            direction_box.Items.Add(clockwise);
+            direction_box.Items.Add(counter_clockwise);
+            direction_box.HorizontalAlignment = HorizontalAlignment.Left;
+            direction_box.SelectionChanged += selection_changed;
+            direction_box.Tag = 3;
+            Grid.SetColumn(direction_box, 1);
+            Grid.SetRow(direction_box, 3);
+            return direction_box;
+        }
+        /// <summary>
+        /// creates label
+        /// </summary>
+        /// <param name="content">Text on label</param>
+        /// <param name="Column">column in grid</param>
+        /// <param name="Row">row in grid</param>
+        /// <returns></returns>
+        private Label createLabel(String content, int Column, int Row)
+        {
+            Label label = new Label();
+            label.MinWidth = 60;
+            label.Content = content;
+            label.HorizontalAlignment = HorizontalAlignment.Left;
+            Grid.SetColumn(label, Column);
+            Grid.SetRow(label, Row);
+            return label;
+        }
+
+        /// <summary>
+        /// creates TextBox
+        /// </summary>
+        /// <param name="tag">tag</param>
+        /// <param name="Column">column in grid</param>
+        /// <param name="Row">column in grid</param>
+        /// <returns></returns>
+        private TextBox createTextBox(int tag, int Column, int Row)
+        {
+            TextBox textBox = new TextBox();
+            textBox.MinWidth = 60;
+            textBox.HorizontalAlignment = HorizontalAlignment.Left;
+            textBox.SelectionChanged += selection_changed;
+            textBox.Tag = tag;
+            Grid.SetColumn(textBox, Column);
+            Grid.SetRow(textBox, Row);
+            return textBox;
+        }
+
+        /// <summary>
+        /// creates Grid
+        /// </summary>
+        /// <returns>grid</returns>
+        private Grid createGrid()
+        {
+            Grid grid = new Grid();
+            grid.Width = 250;
+            grid.MaxWidth = 250;
+            grid.MinHeight = 350;
+            grid.HorizontalAlignment = HorizontalAlignment.Left;
+            grid.VerticalAlignment = VerticalAlignment.Top;
+
+            // Define the Columns
+            ColumnDefinition labels = new ColumnDefinition();
+            ColumnDefinition textFields = new ColumnDefinition();
+            grid.ColumnDefinitions.Add(labels);
+            grid.ColumnDefinitions.Add(textFields);
+
+            // Define the Rows
+            RowDefinition PlanetName = new RowDefinition();
+            RowDefinition PlanetAltName = new RowDefinition();
+            RowDefinition Period = new RowDefinition();
+            RowDefinition Direction = new RowDefinition();
+            RowDefinition Mass = new RowDefinition();
+            RowDefinition Gravity = new RowDefinition();
+            RowDefinition DescriptionLabel = new RowDefinition();
+            RowDefinition DescriptionText = new RowDefinition();
+            DescriptionText.MinHeight = 200;
+            grid.RowDefinitions.Add(PlanetName);
+            grid.RowDefinitions.Add(PlanetAltName);
+            grid.RowDefinitions.Add(Period);
+            grid.RowDefinitions.Add(Direction);
+            grid.RowDefinitions.Add(Mass);
+            grid.RowDefinitions.Add(Gravity);
+            grid.RowDefinitions.Add(DescriptionLabel);
+            grid.RowDefinitions.Add(DescriptionText);
+
+            return grid;
         }
 
         /// <summary>

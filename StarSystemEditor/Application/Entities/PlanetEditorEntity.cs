@@ -74,9 +74,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
             {
                 starSystemInfo = ", StarSystem: " + ((Planet)LoadedObject).StarSystem.Name;
             }
-            return "Planet: " + thisPlanet.Name + starSystemInfo + ", Trajectory: " + thisPlanet.Trajectory.ToString();
+            return ("Planet: " + thisPlanet.Name + starSystemInfo + ", Trajectory: " + thisPlanet.Trajectory.ToString());
         }
 
-        
     }
 }

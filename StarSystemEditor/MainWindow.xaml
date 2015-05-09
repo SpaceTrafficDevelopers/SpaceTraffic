@@ -29,15 +29,9 @@
                 <MenuItem Header="Quit" Click="QuitProgram"></MenuItem>
             </MenuItem>
             <MenuItem Header="Edit">
-                <MenuItem Header="Add">
-                    <MenuItem Header="New planet" Click="NewPlanet_Click"></MenuItem>
-                    <MenuItem Header="New wormhole" Click="NewWormhole_Click"></MenuItem>
-                </MenuItem>
-                <!--    <MenuItem Header="Undo"></MenuItem>
-                <MenuItem Header="Redo"></MenuItem>
-                <Separator></Separator>
-                <MenuItem Header="Copy"></MenuItem>
-                <MenuItem Header="Paste"></MenuItem> -->
+                <MenuItem Header="Rename star system" Click="RenameStarSystem_Click"></MenuItem>
+                <MenuItem Header="Add planet" Click="NewPlanet_Click"></MenuItem>
+                <MenuItem Header="Add wormhole" Click="NewWormhole_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="Simulation">
                <MenuItem Name="SimulationRunItem" Header="Run" Click="SimulationRunButton_Click"></MenuItem>
@@ -58,7 +52,7 @@
             <Button Content="Add 50s" Height="23" Width="75" Click="buttonTime50_Click" />
             <Button Content="Add 200s" Height="23" Width="75" Click="buttonTime200_Click" />
         </ToolBar>
-        <StackPanel DockPanel.Dock="Left" Name="leftMenu" MinWidth="200">
+        <StackPanel DockPanel.Dock="Left" Name="leftMenu" MinWidth="200" Height="655">
             <StackPanel DockPanel.Dock="Left" Margin="2">
                 <GroupBox Header="Galaxy info" Visibility="Collapsed">
                     <GroupItem Name="galaxyInfoGroup" Loaded="galaxyInfoGroup_Loaded">
@@ -93,6 +87,5 @@
                       VerticalContentAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" 
                       Loaded="ScrollViewer_Loaded" PreviewMouseLeftButtonDown="canvas_mouseDown" PreviewMouseMove="window_mouseMove">
         </ScrollViewer>
-       
     </DockPanel>
 </Window>

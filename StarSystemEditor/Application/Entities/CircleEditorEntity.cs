@@ -47,22 +47,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         /// <param name="newWidth">New width - major axis</param>
         public override void PreviewSetWidth(int newWidth)
         {
-            if (newWidth <= 0) throw new ArgumentOutOfRangeException("new width must not be negative or 0");
-            TryToSet();
-            CircularOrbit curOrbit = (CircularOrbit)LoadedObject;
-            if (newWidth != curOrbit.Radius)
-            {
-                if (newWidth > curOrbit.Radius)
-                {
-                    double angleindegree = MathUtil.RadianToDegree(curOrbit.InitialAngleRad);
-                    EllipticOrbit newOrbit = new EllipticOrbit(new Point2d(0, 0), newWidth, curOrbit.Radius, 0, (int)curOrbit.PeriodInSec, curOrbit.Direction, angleindegree);
-                    LoadedObject = newOrbit;
-                }
-                else if (newWidth < curOrbit.Radius)
-                {
-                    this.SetRadius(newWidth);
-                }
-            }
+            SetWidth(newWidth);
         }
 
         /// <summary>
@@ -71,22 +56,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         /// <param name="newHeight">new height, minor axis</param>
         public override void PreviewSetHeight(int newHeight)
         {
-            if (newHeight <= 0) throw new ArgumentOutOfRangeException("new height must not be negative or 0");
-            TryToSet();
-            CircularOrbit curOrbit = (CircularOrbit)LoadedObject;
-            double angleindegree = MathUtil.RadianToDegree(curOrbit.InitialAngleRad);
-            if (newHeight != curOrbit.Radius)
-            {
-                if (newHeight < curOrbit.Radius)
-                {
-                    EllipticOrbit newOrbit = new EllipticOrbit(new Point2d(0, 0), curOrbit.Radius, newHeight, 0, (int)curOrbit.PeriodInSec, curOrbit.Direction, curOrbit.InitialAngleRad);
-                    LoadedObject = newOrbit;
-                }
-                else if (newHeight > curOrbit.Radius)
-                {
-                    this.SetRadius(newHeight);
-                }
-            }
+            SetHeight(newHeight);
         }
 
         /// <summary>
@@ -145,7 +115,9 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         /// <param name="newRadius">new radius</param>
         public void SetRadius(int newRadius)
         {
-            if (newRadius <= 0) throw new ArgumentOutOfRangeException("Radius must not be negative or 0");
+            // forbid seting trajectory into star
+            if (newRadius <= 20)
+                return;
             TryToSet();
             ((CircularOrbit)LoadedObject).Radius = newRadius;
         }

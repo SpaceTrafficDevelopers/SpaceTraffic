@@ -111,6 +111,14 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// Pointer na metodu
         /// </summary>
         public StarSystemListChanged starSystemListChanged { get; set; }
+        /// <summary>
+        /// Definice delegatni metody
+        /// </summary>
+        public delegate void ConnectionsChanged();
+        /// <summary>
+        /// Pointer na metodu
+        /// </summary>
+        public ConnectionsChanged connectionsChanged { get; set; }
         #endregion
 
         #region Getters
@@ -433,6 +441,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// </summary>
         /// <param name="mouseX">mouse position X</param>
         /// <param name="mouseY">mouse position Y</param>
+        /// <param name="modifier">shift or ctrl modifier</param>
+        /// <param name="finalize">true if called from mouse up, false otherwise</param>
         private void editObjectWidth(double mouseX, double mouseY, int modifier, bool finalize)
         {
             //gets trajectoryView of selected object
@@ -492,6 +502,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// </summary>
         /// <param name="mouseX">mouse position X</param>
         /// <param name="mouseY">mouse position Y</param>
+        /// <param name="modifier">shift or ctrl modifier</param>
+        /// <param name="finalize">true if called from mouse up, false otherwise</param>
         public void editObjectHeight(double mouseX, double mouseY, int modifier, bool finalize)
         {
             //gets trajectoryView of selected object
@@ -533,6 +545,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                 else if (modifier == 2)
                 {
                     double angle = findAngle(mouse, center, 1);
+                    // translate angle by 90 degrees
+                    angle -= Math.PI / 4;
                     Editor.EllipseOrbitEditor.SetRotationAngleInRad(angle);
                 }
             }
@@ -545,6 +559,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// <param name="Y">mouse Y position</param>
         /// <param name="index">point selected</param>
         /// <param name="modifier">shift or ctrl modifier</param>
+        /// <param name="finalize">true if called from mouse up, false otherwise</param>
         public void editShape(double X, double Y, int index, int modifier, bool finalize)
         {
             if (this.SelectedObject is CelestialObjectView)
@@ -578,7 +593,10 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                 redrawElement(selectedEntity);
                 // when done with editing one segment, redraw
                 if (finalize)
+                {
+                    deselect();
                     StarSystemDrawer();
+                }
             }
             else if (this.SelectedObject is StarSystemView)
             {
@@ -628,7 +646,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// </summary>
         /// <param name="pointToRotate">The point to rotate.</param>
         /// <param name="centerPoint">The centre point of rotation.</param>
-        /// <param name="angleInDegrees">The rotation angle in radians.</param>
+        /// <param name="angleInRadians">The rotation angle in radians.</param>
         /// <returns>Rotated point</returns>
         static Point2d RotatePoint(Point2d pointToRotate, Point2d centerPoint, double angleInRadians)
         {
@@ -783,8 +801,6 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         public void DrawPoints(View entityView)
         {
             this.SelectedObject = entityView;
-
-
             if (entityView is PlanetView)
             {
                 this.loadedObjectData = null;
@@ -843,6 +859,9 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                         this.SelectedStarSystem = null;
                         starSystemList.Items.Clear();
                         starSystemObjectTree.Items.Clear();
+                        //remove connections
+                        this.connectionList = null;
+                        connectionsChanged();
                         //refresh selectoru
                         starSystemListChanged();
                         StarSystemDrawer();
@@ -871,12 +890,19 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             else if (selectedObject is WormholeEndpoint)
             {
                 int id = (selectedObject as WormholeEndpoint).Id;
+                if ((selectedObject as WormholeEndpoint).IsConnected)
+                    {
+                        //zrusime destinaci cilove wormhole
+                        (selectedObject as WormholeEndpoint).Destination.Destination = null;
+                    }
                 if (this.SelectedStarSystem.WormholeEndpoints.Remove(id))
                 {
                     MessageBox.Show("wormhole" + id + " byla odstranena.");
                     //redraw
                     deselect();
                     StarSystemDrawer();
+                    TreeDataLoader();
+                    ConnectionsLoader();
                 }
             }
         } 
@@ -911,7 +937,46 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             double dY = point2.Y - point1.Y;
             return Math.Sqrt(dX * dX + dY * dY);
         }
+        /// <summary>
+        /// selects planet based on selected object
+        /// </summary>
+        private void selectPlanet()
+        {
+            UIElementCollection list = DrawingArea.Canvas.Children;
+            foreach (UIElement element in list)
+            {
+                if (element is GroupBox) continue;
+                if (((Ellipse)element).Name.Equals(this.SelectedObject.GetName()))
+                {
+                    Ellipse ellipse = element as Ellipse;
+                    if (ellipse == null) continue;
+                    //select
+                    points.Clear();
+                    DrawPoints(ellipse.Tag as PlanetView);
+                    //Editor.Log("found");
+                    break;
+                }
+            }
+        }
 
+        private void selectWormhole()
+        {
+            UIElementCollection list = DrawingArea.Canvas.Children;
+            foreach (UIElement element in list)
+            {
+                if (element is GroupBox) continue;
+                if (((Ellipse)element).Name.Equals(this.SelectedObject.GetName()))
+                {
+                    Ellipse ellipse = element as Ellipse;
+                    if (ellipse == null) continue;
+                    //select
+                    points.Clear();
+                    DrawPoints(ellipse.Tag as PlanetView);
+                    //Editor.Log("found");
+                    break;
+                }
+            }
+        }
         #region ObjectCreators
         private void CreateConnectionList()
         {
@@ -1089,7 +1154,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             StarSystem starSystem = SelectedStarSystem;
             tree.Items.Clear();
             TreeViewItem baseSun = new TreeViewItem();
-            baseSun.Header = "Sun";
+            baseSun.Header = "Star";
             baseSun.IsExpanded = true;
             TreeViewItem sun = new TreeViewItem();
             sun.Header = starSystem.Star.Name;
@@ -1103,13 +1168,25 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             {
                 TreeViewItem planetNode = new TreeViewItem();
                 planetNode.Tag = new PlanetView(planet);
-                planetNode.Header = planet.AlternativeName;
+                planetNode.Header = planet.AlternativeName.ToString().Replace(" ", "");
                 planetNode.GotFocus += new RoutedEventHandler(SetStarSystemTreeFocus);
                 basePlanet.Items.Add(planetNode);
             }
 
+            TreeViewItem baseWormhole = new TreeViewItem();
+            baseWormhole.Header = "Wormholes";
+            baseWormhole.IsExpanded = true;
+            foreach (WormholeEndpoint wormhole in starSystem.WormholeEndpoints)
+            {
+                TreeViewItem wormholeNode = new TreeViewItem();
+                wormholeNode.Tag = new EndpointView(wormhole);
+                wormholeNode.Header = "Wormhole" + wormhole.Id;
+                wormholeNode.GotFocus += new RoutedEventHandler(SetStarSystemTreeFocus);
+                baseWormhole.Items.Add(wormholeNode);
+            }
             tree.Items.Add(basePlanet);
             tree.Items.Add(baseSun);
+            tree.Items.Add(baseWormhole);
         }
         #endregion 
 
@@ -1156,11 +1233,17 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                 this.SelectedObject = planetView;
                 planetSelectionChanged();
             }
+            else if (view is EndpointView)
+            {
+                EndpointView endpointView = (EndpointView)view;
+                this.SelectedObject = endpointView;
+                wormholeSelectionChanged();
+            }
             if (treeView.Items.Count == 0)
             {
                 //redraw
                 Editor.dataPresenter.StarSystemDrawer();
-                
+
                 UIElementCollection list = DrawingArea.Canvas.Children;
                 foreach (UIElement element in list)
                 {
@@ -1171,7 +1254,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                         if (ellipse == null) continue;
                         //select
                         points.Clear();
-                        DrawPoints(ellipse.Tag as PlanetView);
+                        DrawPoints(ellipse.Tag as CelestialObjectView);
                         //Editor.Log("found");
                         break;
                     }
@@ -1218,7 +1301,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                 // nalezli jsme nami upravovanou
                 if (endpoint == ((sender as ComboBox).Tag))
                 {
-                    // pokud uz nekam vedla, je treba nastavic jeji parove wormhole, ze od ted nikam nevede
+                    // pokud uz nekam vedla, je treba nastavit jeji parove wormhole, ze od ted nikam nevede
                     if (endpoint.IsConnected)
                     {
                         //zrusime destinaci cilove wormhole, ted uz nevede nikam ona
