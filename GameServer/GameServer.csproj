@@ -123,6 +123,7 @@
     <Compile Include="Game\Actions\Ships\ShipTakeOff.cs" />
     <Compile Include="Game\Actions\Ships\ShipUnloadCargo.cs" />
     <Compile Include="Game\Events\HelloWorldRepeat.cs" />
+    <Compile Include="Game\Events\ShipEvent.cs" />
     <Compile Include="Game\GamePlayer.cs" />
     <Compile Include="GameServer\AssetManager.cs" />
     <Compile Include="GameServer\GameServer.cs" />
@@ -132,6 +133,9 @@
     <Compile Include="GameServer\ServiceManager.cs" />
     <Compile Include="Engine\IGameAction.cs" />
     <Compile Include="GameServer\PersistenceManager.cs" />
+    <Compile Include="Game\Planner\IPathPlan.cs" />
+    <Compile Include="Game\Planner\PathPlan.cs" />
+    <Compile Include="Game\Planner\PlanItem.cs" />
     <Compile Include="Persistence\SpaceTrafficCreateDatabaseIfNotExists.cs" />
     <Compile Include="Persistence\SpaceTrafficCustomInitializer.cs" />
     <Compile Include="Persistence\SpaceTrafficContext.cs" />
