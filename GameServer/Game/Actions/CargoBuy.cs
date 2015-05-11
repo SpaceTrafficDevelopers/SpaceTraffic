@@ -143,6 +143,7 @@ namespace SpaceTraffic.Game.Actions
             loadingAction.PlanetName = PlanetName;
             loadingAction.Cargo = cargo;*/
             gameServer.Game.PerformAction(loadingAction);
+            State = GameActionState.FINISHED;
         }
 
         private void getArgumentsFromActionArgs(IGameServer gameServer)

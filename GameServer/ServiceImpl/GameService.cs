@@ -189,7 +189,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         public bool TestPlanner()
         {
 
-            PathPlan plan = new PathPlan();
+            PathPlan plan = new PathPlan(1);
             PlanItem item1 = new PlanItem();
             
             NavPoint firstPoint = new NavPoint();
@@ -237,7 +237,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
             Spaceship sh = new Spaceship(1, "pussywagon");
 
-            sh.MaxSpeed = 100;
+            sh.MaxSpeed = 1;
 
             plan.PlanFirstItem(GameServer.CurrentInstance, sh);
 

@@ -69,7 +69,7 @@ namespace SpaceTraffic.Game.Actions
                 newPlanEvent.BoundAction = this;
                 GameTime eventTime = new GameTime();
                 eventTime.Value =  gameServer.Game.currentGameTime.Value;
-                eventTime.Value.AddSeconds(10);
+                eventTime.Value = eventTime.Value.AddSeconds(10);
                 newPlanEvent.PlannedTime = eventTime;
 
                 gameServer.Game.PlanEvent(newPlanEvent);

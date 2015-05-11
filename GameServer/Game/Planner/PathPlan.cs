@@ -13,6 +13,12 @@ namespace SpaceTraffic.Game.Planner
     public class PathPlan : IPathPlan
     {
         List<PlanItem> planItems = new List<PlanItem>();
+        int PlayerID;
+
+        public PathPlan(int _PlayerID)
+        {
+            PlayerID = _PlayerID;
+        }
 
         public NavPath getNavPath()
         {
@@ -29,7 +35,7 @@ namespace SpaceTraffic.Game.Planner
        public NavPath getPathBetweenTwoItems(PlanItem source, PlanItem dest)
         {
             NavPath path = new NavPath();
-           for(int i = this.IndexOf(source) +1; i < this.Count && i <= this.IndexOf(dest); i++)
+           for(int i = this.IndexOf(source); i < this.Count && i <= this.IndexOf(dest); i++)
            {
                path.Add(this.ElementAt(i).Place);
            }
@@ -74,6 +80,7 @@ namespace SpaceTraffic.Game.Planner
                     time.Value = nextItem.Place.TimeOfArrival.AddSeconds(5);
                     newEvent.BoundAction = action;
                     newEvent.PlannedTime = time;
+                    action.PlayerId = PlayerID;
                     gameServer.Game.PlanEvent(newEvent);
                 }
 
@@ -81,7 +88,8 @@ namespace SpaceTraffic.Game.Planner
                 time = new GameTime();
                 time.Value = nextItem.Place.TimeOfArrival.AddSeconds(10);
                 IGameAction eventsPlan = new PlanEvents();
-                eventsPlan.ActionArgs = new object[] { this, nextItem };
+                eventsPlan.ActionArgs = new object[] { this, nextItem, ship };
+                eventsPlan.PlayerId = PlayerID;
                 newEvent.BoundAction = eventsPlan;
                 newEvent.PlannedTime = time;
                 gameServer.Game.PlanEvent(newEvent);
@@ -100,6 +108,7 @@ namespace SpaceTraffic.Game.Planner
                 newEvent = new ShipEvent();
                 newEvent.BoundAction = action;
                 newEvent.PlannedTime = gameServer.Game.currentGameTime;
+                action.PlayerId = PlayerID;
                 gameServer.Game.PlanEvent(newEvent);
             }
 
@@ -110,7 +119,8 @@ namespace SpaceTraffic.Game.Planner
                 time = new GameTime();
                 time.Value = gameServer.Game.currentGameTime.Value.AddSeconds(5);
                 IGameAction eventsPlan = new PlanEvents();
-                eventsPlan.ActionArgs = new object[] { this, nextItem };
+                eventsPlan.ActionArgs = new object[] { this, item, ship };
+                eventsPlan.PlayerId = PlayerID;
                 newEvent.BoundAction = eventsPlan;
                 newEvent.PlannedTime = time;
                 gameServer.Game.PlanEvent(newEvent);
@@ -128,14 +138,14 @@ namespace SpaceTraffic.Game.Planner
             if (depart.Place.Location is Planet)
             {
                 Planet actualPlanet = depart.Place.Location as Planet;
-                shipEvent = new ShipEvent();
+
                 gameAction = new ShipTakeOff();
-
                 gameAction.ActionArgs = new object[] { actualPlanet.StarSystem.Name, actualPlanet.Name, ship.Id };
+                gameAction.PlayerId = PlayerID;
 
-                time.Value = dest.Place.TimeOfArrival;
+                shipEvent = new ShipEvent();
                 shipEvent.BoundAction = gameAction;
-                shipEvent.PlannedTime = time;
+                shipEvent.PlannedTime = gameServer.Game.currentGameTime;
                 gameServer.Game.PlanEvent(shipEvent);
             }
 
@@ -149,6 +159,7 @@ namespace SpaceTraffic.Game.Planner
                     gameAction = new ShipFlyThroughWormHole();
                     time = new GameTime();
                     gameAction.ActionArgs = new object[] { wormHole.Id, ship.Id };
+                    gameAction.PlayerId = PlayerID;
 
                     time.Value = point.TimeOfArrival;
                     shipEvent.BoundAction = gameAction;
@@ -164,6 +175,7 @@ namespace SpaceTraffic.Game.Planner
                 gameAction = new ShipLand();
 
                 gameAction.ActionArgs = new object[] { actualPlanet.StarSystem.Name, actualPlanet.Name, ship.Id };
+                gameAction.PlayerId = PlayerID;
 
                 time.Value = dest.Place.TimeOfArrival;
                 shipEvent.BoundAction = gameAction;

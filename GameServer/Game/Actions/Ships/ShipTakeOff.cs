@@ -66,11 +66,11 @@ namespace SpaceTraffic.Game.Actions.Ships
                 return;
             }
 
-            /*if (!dockedBase.Planet.Equals(planet))
+            if (!dockedBase.Planet.Equals(planet.Location))
             {
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, planet.Name);
                 return;
-            }*/
+            }
 
             spaceShip.DockedAtBaseId = -1;
             spaceShip.IsFlying = true;
