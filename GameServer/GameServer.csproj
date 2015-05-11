@@ -114,6 +114,7 @@
     <Compile Include="Game\Actions\CargoSell.cs" />
     <Compile Include="Game\Actions\CargoBuy.cs" />
     <Compile Include="Game\Actions\HelloWorld.cs" />
+    <Compile Include="Game\Actions\PlanEvents.cs" />
     <Compile Include="Game\Actions\Ships\ShipBuy.cs" />
     <Compile Include="Game\Actions\Ships\ShipFlyThroughWormHole.cs" />
     <Compile Include="Game\Actions\Ships\ShipFlyTo.cs" />

@@ -13,6 +13,12 @@ namespace SpaceTraffic.Game.Planner
 
         public List<IGameAction> Actions { get; set; }
 
+        public bool hasActions()
+        {
+            if (this.Actions == null || this.Actions.Count == 0)
+                return false;
+            return true;
+        }
 
         public PlanItem()
         {
