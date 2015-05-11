@@ -195,6 +195,7 @@ var SvgStarSystemMap = {
             //'<li><a href="/Game/Cargo/LoadCargo?cargoId=1&objectId=2">LoadCargo</a></li>' +
             //'<li><a href="/Game/Cargo/UnloadCargo">UnloadCargo</a></li>' +
             '<li><a href="/Game/Cargo/SellCargo?starSystemName=Proxima Centauri&planetName=Proxima Centauri 1&cargoLoadEntityId=1&count=1&loadingPlace=TraderCargoDAO&buyerId=1&sellerShipId=1">SellCargo</a></li>' +
+            '<li><a href="/Game/Cargo/Planner">TestPlanner</a></li>' + //TODO: delete after test
             '</ul>';
 	    $("#contextPanel").html(buffer);
 	    buffer = null;

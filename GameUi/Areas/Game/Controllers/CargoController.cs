@@ -28,26 +28,6 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
         }
         public ActionResult BuyCargo(string starSystemName, string planetName, int cargoLoadEntityId, int count, string buyingPlace, int buyerShipId, int traderId)
         {
-            /*
-                částečně funkční, spadne to při nakládání, resp. neprovede se nakládání sou tam nějak blbě argumenty buď parsovaný nebo předávaný
-             
-             * dokování zatim nefunguje takže bych ho ani netestovatl HOTOVO 
-             * kontrolovat jestli má hráč loď je třeba určitě dřív než místo na lodi :) HOTOVO
-             * ten link na cargo buy jak tam teď je tak by měl prolézt SUPER
-             * když se volá ta akce tak jako první param nedávat id hráče, tak jak je to tady je dobře
-             * hadyho daa nefungujou, hlavně tam kde má podmínku where, je třeba tam dát first případně first or default
-             * v SpaceShipHasCargoSpace si porovnával CargoSpace což by měla být maximální nosnost lodi (byla tam špatná podmínka) DÍK
-             * v akci Cargo buy hady parsoval argumenty a typoval tam string názvu toho daa rovnou na objekt rozhraní toho daa cože je blbě,
-               určitě počítal s tim že mu tou službou pošleš objekt toho rozhraní což je blbost (asi by to šlo poslat, nevim jak ty služby fungujou
-               ale rozhodně by se tady neměli vytvářet a pak je tam posílat)
-             * ve chvíli kdy to neprojde nějakou kontrolou a volá se to RedirectToAction tak to hodí vyjímku že tu nejsou taby
-               ty nevim jak se sem dávaj to můžeš zkusit nastudovat
-             
-             */
-
-
-
-
             /*if(!GSClient.GameService.SpaceShipDockedAtBase(buyerShipId, starSystemName, planetName))
             {
                 return RedirectToAction("").Warning(String.Format("Loď není zadokována na stejné planetě jako obchodník"));
@@ -134,5 +114,11 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             //return null;
         }
 
+
+        public ActionResult Planner()
+        {
+            GSClient.GameService.TestPlanner();
+            return RedirectToAction("").Success("Možná se to naplánovalo :D");
+        }
     }
 }

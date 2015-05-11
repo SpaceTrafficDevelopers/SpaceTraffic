@@ -27,6 +27,9 @@ using SpaceTraffic.Engine;
 using SpaceTraffic.Game.Actions;
 using SpaceTraffic.Entities;
 using SpaceTraffic.Dao;
+using SpaceTraffic.Game.Planner;
+using SpaceTraffic.Game.Navigation;
+using SpaceTraffic.Game;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
 {
@@ -181,5 +184,64 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 		{
 			throw new NotImplementedException();
 		}
-	}
+
+
+        public bool TestPlanner()
+        {
+
+            PathPlan plan = new PathPlan();
+            PlanItem item1 = new PlanItem();
+            
+            NavPoint firstPoint = new NavPoint();
+            firstPoint.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].Planets["Proxima Centauri 1"];
+
+            item1.Place = firstPoint;
+            CargoBuy cba = new CargoBuy();
+
+            cba.PlayerId = 1;
+            cba.ActionArgs = new object[]{
+                    "Proxima Centauri",
+                    "Proxima Centauri 1",
+                    1,
+                    10,
+                    "TraderCargoDAO",
+                    1
+            };
+
+            item1.Actions.Add(cba);
+
+
+            NavPoint secondPoint = new NavPoint();
+            secondPoint.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].Planets["Proxima Centauri 2"];
+
+            PlanItem item2 = new PlanItem();
+
+            item2.Place = secondPoint;
+
+            CargoSell csa = new CargoSell();
+
+            cba.PlayerId = 1;
+            cba.ActionArgs = new object[]{
+                    "Proxima Centauri",
+                    "Proxima Centauri 1",
+                    1,
+                    10,
+                    "TraderCargoDAO",
+                    1
+            };
+
+            item2.Actions.Add(csa);
+
+            plan.Add(item1);
+            plan.Add(item2);
+
+            Spaceship sh = new Spaceship(1, "pussywagon");
+
+            sh.MaxSpeed = 100;
+
+            plan.PlanFirstItem(GameServer.CurrentInstance, sh);
+
+            return true;
+        }
+    }
 }

@@ -48,6 +48,8 @@ namespace SpaceTraffic.Game.Actions
 
         public void Perform(IGameServer gameServer)
         {
+            getArgumentsFromActionArgs();
+
             if (plan == null || plan.Count == 0 || actualItem == null || !plan.Contains(actualItem) || ship == null)
                 return;
 
