@@ -100,10 +100,10 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         {
            
                 SpaceShip spaceShip = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
-                Entities.Base dockedBase = GS.CurrentInstance.Persistence.GetBaseDAO().GetBaseById(spaceShip.DockedAtBaseId);
+                Entities.Base dockedBase = GS.CurrentInstance.Persistence.GetBaseDAO().GetBaseById((int)spaceShip.DockedAtBaseId);
                 Game.Planet planet = GS.CurrentInstance.World.Map[starSystemName].Planets[planetName];
 
-                if (dockedBase.Planet.Equals(planet))
+                if (dockedBase.Planet.Equals(planet.Location))
                 {
                     return true;
                 }
@@ -220,13 +220,14 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
             CargoSell csa = new CargoSell();
 
-            cba.PlayerId = 1;
-            cba.ActionArgs = new object[]{
+            csa.PlayerId = 1;
+            csa.ActionArgs = new object[]{
                     "Proxima Centauri",
-                    "Proxima Centauri 1",
+                    "Proxima Centauri 2",
                     1,
                     10,
                     "TraderCargoDAO",
+                    1,
                     1
             };
 

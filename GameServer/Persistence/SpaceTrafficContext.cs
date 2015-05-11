@@ -122,7 +122,7 @@ using SpaceTraffic.Entities;
             Property(p => p.CurrentFuelTank).HasColumnType("int").IsRequired();
             Property(p => p.IsFlying).IsRequired();
             Property(p => p.CargoSpace).HasColumnType("int").IsRequired();
-            HasRequired(a => a.Base).WithMany(a => a.SpaceShips).HasForeignKey(a => a.DockedAtBaseId);
+            HasOptional(a => a.Base).WithMany(a => a.SpaceShips).HasForeignKey(a => a.DockedAtBaseId);
             HasRequired(p => p.Player).WithMany(p => p.SpaceShips).HasForeignKey(s => s.PlayerId);                    
             ToTable("SpaceShips");
         }

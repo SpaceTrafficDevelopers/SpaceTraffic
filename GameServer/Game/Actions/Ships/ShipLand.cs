@@ -64,6 +64,12 @@ namespace SpaceTraffic.Game.Actions.Ships
                 return;
             }
 
+            if(!spaceShip.IsFlying)
+            {
+                result = String.Format("Loď {0} neletí a nemůže tedy ani přistát", spaceShip.SpaceShipName);
+                return;
+            }
+
             Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseByPlanetFullName(planet.Location);
 
             if (dockedBase == null)

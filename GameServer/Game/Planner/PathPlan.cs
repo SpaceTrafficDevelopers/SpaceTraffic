@@ -73,7 +73,7 @@ namespace SpaceTraffic.Game.Planner
                 PlanFlightBetweenPoints(item, nextItem, gameServer, ship);
 
 
-                foreach (IGameAction action in item.Actions)
+                foreach (IGameAction action in nextItem.Actions)
                 {
                     newEvent = new ShipEvent();
                     time = new GameTime();

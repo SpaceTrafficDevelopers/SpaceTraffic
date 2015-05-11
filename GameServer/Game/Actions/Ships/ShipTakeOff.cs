@@ -51,8 +51,11 @@ namespace SpaceTraffic.Game.Actions.Ships
             getArgumentsFromActionArgs();
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ShipID);
-            Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceShip.DockedAtBaseId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
+            Entities.Base dockedBase = null;
+
+            if (spaceShip.DockedAtBaseId != null)
+                dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById((int)spaceShip.DockedAtBaseId);
 
             if (player == null || spaceShip == null)
             {
@@ -66,13 +69,19 @@ namespace SpaceTraffic.Game.Actions.Ships
                 return;
             }
 
-            if (!dockedBase.Planet.Equals(planet.Location))
+            if (dockedBase == null || !dockedBase.Planet.Equals(planet.Location))
             {
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, planet.Name);
                 return;
             }
 
-            spaceShip.DockedAtBaseId = -1;
+            if(spaceShip.IsFlying)
+            {
+                result = String.Format("Loď {0} letí, nemůže tedy znovu vzletět", spaceShip.SpaceShipName);
+                return;
+            }
+
+            spaceShip.DockedAtBaseId = null;
             spaceShip.IsFlying = true;
 
             if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
