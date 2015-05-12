@@ -169,6 +169,7 @@ namespace SpaceTraffic.Dao
 					if (incrase){
 						playerTab.Credit = credits + amount;
 					} else {
+						if (credits < amount) return false; //returns false if players has not enaugh money
 						playerTab.Credit = credits - amount;
 					}
 					contextDB.SaveChanges();
