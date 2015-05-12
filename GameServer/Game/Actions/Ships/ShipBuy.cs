@@ -42,10 +42,11 @@ namespace SpaceTraffic.Game.Actions
 		void IGameAction.Perform(IGameServer gameServer)
 		{
 			SpaceShip ship = getSpaceShipFromArgs(gameServer);
-			gameServer.Persistence.GetSpaceShipDAO().InsertSpaceShip(ship);
 			int price = Convert.ToInt32(this.ActionArgs.ElementAt(7));
-			gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(this.PlayerId, price);
-			result = String.Format("Loď {0} zakoupena.", ship.SpaceShipName);
+			if (gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(this.PlayerId, price)) {
+				gameServer.Persistence.GetSpaceShipDAO().InsertSpaceShip(ship);
+				result = String.Format("Loď {0} zakoupena.", ship.SpaceShipName);
+			}			
 		}
 
 		/// <summary>
