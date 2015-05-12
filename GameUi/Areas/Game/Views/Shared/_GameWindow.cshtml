@@ -17,7 +17,7 @@
 	@foreach (SpaceTraffic.GameUi.Models.Ui.TabItem tabItem in tabs.Items)
 	{
 		<li>
-			<a href="@Url.Action(tabItem.Action, new { Area="Game" })" title="@tabItem.Title"><span>@tabItem.Text</span></a>
+			<a href="@Url.Action(tabItem.Action, tabItem.PartialViewModel)" title="@tabItem.Title"><span>@tabItem.Text</span></a>
 			
 		</li>
 	}
