@@ -90,6 +90,11 @@ namespace SpaceTraffic.GameServer
             throw new NotImplementedException();
         }
 
+		/// <summary>
+		/// Achievements.
+		/// </summary>
+		public Achievements Achievements { get; set; }
+
         public IGamePlayer GetPlayer(int playerId)
         {
             throw new NotImplementedException();

@@ -135,6 +135,7 @@ namespace SpaceTraffic.GameServer
             this.worldManager = new WorldManager(this);
             GalaxyMap galaxyMap = this.assetManager.LoadGalaxyMap(galaxyMapName);
             this.worldManager.Map = galaxyMap;
+			this.worldManager.Achievements = this.assetManager.LoadAchievements();
 
             this.worldManager.GenerateBasesAndTraders();
 

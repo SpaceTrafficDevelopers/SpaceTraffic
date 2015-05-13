@@ -217,5 +217,18 @@ namespace SpaceTraffic.GameServer
 
             return goodsLoader.LoadGoods(goodsFileName, this);
         }
+
+		/// <summary>
+		/// Loads the achievements from xml.
+		/// </summary>
+		public Entities.Achievements LoadAchievements()
+		{
+			string fileName = Path.Combine(this.AssetRootPath, "Achievements", "Achievements.xml");
+			logger.Info("Loading achievements: {0}", fileName);
+
+			Entities.Achievements achievements = AchievementsLoader.LoadAchievements(fileName);
+
+			return achievements;
+		}
     }
 }
