@@ -38,26 +38,29 @@ namespace SpaceTraffic.Game.Actions
         {
             getArgumentsFromActionArgs(gameServer);
 
-            SpaceShip spaceship = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SpaceShipID);
+            SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SpaceShipID);
             ICargoLoadEntity cargo = BuyingPlace.GetCargoByID(CargoLoadEntityId);
-
-            Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceship.DockedAtBaseId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
+            Entities.Base dockedBase = null;
 
-            /*if (!dockedBase.Planet.Equals(planet))
+            if (spaceShip.DockedAtBaseId != null)
+                dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById((int)spaceShip.DockedAtBaseId);
+
+            if (dockedBase == null || !dockedBase.Planet.Equals(planet.Location))
             {
-                result = String.Format("Loď {0} není zadokována na planetě {1}.", spaceship.SpaceShipName, PlanetName);
-                return;
-            }*/
-            if (spaceship.PlayerId != PlayerId)
-            {
-                result = String.Format("Loď {0} Vám nepatří, nemůžete na ní naložit náklad.", spaceship.SpaceShipName);
+                result = String.Format("Loď {0} není zadokována na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
                 return;
             }
 
-            if(!checkSpaceShipCargos(gameServer,spaceship, cargo)){
+            if (spaceShip.PlayerId != PlayerId)
+            {
+                result = String.Format("Loď {0} Vám nepatří, nemůžete na ní naložit náklad.", spaceShip.SpaceShipName);
+                return;
+            }
+
+            if(!checkSpaceShipCargos(gameServer,spaceShip, cargo)){
                 
-                result = String.Format("Loď {0} nemá dostatek místa na naložení nákladu.", spaceship.SpaceShipName);
+                result = String.Format("Loď {0} nemá dostatek místa na naložení nákladu.", spaceShip.SpaceShipName);
                 return;
             }
 
@@ -79,7 +82,7 @@ namespace SpaceTraffic.Game.Actions
             cargo.CargoOwnerId = PlayerId;
 
             gameServer.Persistence.GetSpaceShipCargoDAO().InsertOrUpdateCargo(cargo);
-            result = String.Format("Náklad byl úspěšně naložen na loď s {0}.", spaceship.SpaceShipName);
+            result = String.Format("Náklad byl úspěšně naložen na loď s {0}.", spaceShip.SpaceShipName);
         }
 
         /// <summary>

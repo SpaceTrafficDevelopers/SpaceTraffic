@@ -128,5 +128,13 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
                 return (channel as IGameService).TraderHasEnoughCargo(traderId, cargoLoadEntityId, cargoCount);
             }
         }
+
+        public bool TestPlanner()
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IGameService).TestPlanner();
+            }
+        }
 	}
 }

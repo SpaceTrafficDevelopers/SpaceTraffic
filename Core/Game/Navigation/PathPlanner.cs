@@ -33,7 +33,7 @@ namespace SpaceTraffic.Game.Navigation
         /// <param name="path">The path instance to be solved.</param>
         /// <param name="sh">The space ship.</param>
         /// <param name="startTime">The start time of path.</param>
-        internal static void SolvePath(NavPath path, Spaceship sh, double startTime)
+        public static void SolvePath(NavPath path, Spaceship sh, double startTime)
         {
             double time = 0.0;
             double eps = (1 / sh.MaxSpeed) > 0.01 ? (1 / sh.MaxSpeed) : 0.01;

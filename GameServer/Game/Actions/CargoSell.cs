@@ -69,10 +69,12 @@ namespace SpaceTraffic.Game.Actions
             getArgumentsFromActionArgs(gameServer);
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SellerShipId);
-
-            Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById(spaceShip.DockedAtBaseId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
             ICargoLoadEntity cargo = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoByID(CargoLoadEntityID);
+            Entities.Base dockedBase = null;
+            
+            if(spaceShip.DockedAtBaseId != null)
+                dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById((int)spaceShip.DockedAtBaseId);         
 
             if (cargo == null)
             {
@@ -80,11 +82,11 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            /*if (!dockedBase.Planet.Equals(planet))
+            if (dockedBase == null || !dockedBase.Planet.Equals(planet.Location))
             {
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
                 return;
-            }*/
+            }
 
             if(cargo.CargoCount < Count)
             {
@@ -113,6 +115,7 @@ namespace SpaceTraffic.Game.Actions
 
 
             gameServer.Game.PerformAction(unloadingAction);
+            State = GameActionState.FINISHED;
         }
 
         private void getArgumentsFromActionArgs(IGameServer gameServer)
