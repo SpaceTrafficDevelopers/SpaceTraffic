@@ -41,7 +41,7 @@
 				@ship.Description
 			</td>
 			<td>
-				<a href="@Url.Action("BuyModel", "Ships", new { baseId = ViewBag.baseId, model = ship.Model })">Koupit</a>
+				<a href="@Url.Action("BuyModel", "Ships", new { baseId = ViewBag.baseId, starSystemName = ViewBag.starSystemName, model = ship.Model })">Koupit</a>
 			</td>
 		</tr>
 	}

@@ -33,10 +33,11 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		protected override void BuildTabs()
 		{
 			int baseId = Convert.ToInt32(Request.QueryString["baseId"]);/* getting parameter from url */
+			string starSystem = Request.QueryString["starSystemName"];/* getting parameter from url */
 			this.Tabs.AddTab("Overview", title: "Overview of all active ships and fleets", partialViewName: "_Overview", partialViewModel: new { Area="Game" });
 			this.Tabs.AddTab("ShipList", "Ships", "List of all your ships.", partialViewName: "_ShipList", partialViewModel: new { Area = "Game" });
 			if (baseId != 0) {
-				this.Tabs.AddTab("BuyShip", "Buy ship", "Buy new ship", partialViewName: "_BuyShip", partialViewModel: new { Area = "Game", baseId = baseId });
+				this.Tabs.AddTab("BuyShip", "Buy ship", "Buy new ship", partialViewName: "_BuyShip", partialViewModel: new { Area = "Game", baseId = baseId, starSystem = starSystem });
 			}
 			
 			this.Tabs.AddTab("NaviComp", title: "Navicomp view", partialViewName: "_NaviComp", partialViewModel: new { Area = "Game" });
@@ -58,12 +59,12 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		/// Buys the ship of specified model
 		/// </summary>
 		/// <returns></returns>
-		public ActionResult BuyModel(int baseId, string model)
+		public ActionResult BuyModel(int baseId, string starSystemName, string model)
 		{
 			ShipModel shipModel = getAllShips().Where(shipType => shipType.Model == model).First();
 			if (shipModel != null){			
 				if (GSClient.GameService.PlayerHasEnaughCredits(getCurrentPlayer().PlayerId, shipModel.Price)){
-					GSClient.GameService.PerformAction(getCurrentPlayer().PlayerId, "ShipBuy", getCurrentPlayer().PlayerId, "Solar System", baseId, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price, shipModel.Consumption, shipModel.WearRate);
+					GSClient.GameService.PerformAction(getCurrentPlayer().PlayerId, "ShipBuy", getCurrentPlayer().PlayerId, starSystemName, baseId, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price, shipModel.Consumption, shipModel.WearRate);
 				} else {
 					return RedirectToAction("").Warning(String.Format("Nemáš dostatek kreditů na koupi lodě {0}.", shipModel.Model));
 				}
@@ -93,7 +94,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			return GetTabView("FleetList");
 		}
 
-		public PartialViewResult BuyShip(int baseId)
+		public PartialViewResult BuyShip(int baseId, string starSystem)
 		{
 			// získání všech dostupných modelů lodí
 			List<ShipModel> ships = getAllShips();
@@ -101,6 +102,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			var tabView = GetTabView("BuyShip");
 			tabView.ViewBag.Ships = ships;
 			tabView.ViewBag.baseId = baseId;
+			tabView.ViewBag.starSystemName = starSystem;
 			return tabView;
 		}
 
