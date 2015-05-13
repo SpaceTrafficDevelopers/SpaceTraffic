@@ -1,31 +1,51 @@
 ﻿@{
-    ViewBag.Title = "Achievements";
-}
+    @*ViewBag.Title = "Achievements";*@
+		SpaceTraffic.GameUi.GameServerClient.IGameServerClient Client = SpaceTraffic.GameUi.GameServerClient.GameServerClientFactory.GetClientInstance();
 
-<h2>Achievements</h2>
-<div class="profile">
-	<div class="profile_achievementTable">
-		<div class="profile_achievementImg"></div>
-		<div style="float:left;width:80%;">
-			<div class="profile_achievementTitle" style="color:#55FF55;">Machr nad machry</div>
-			<div class="profile_achievementDesc">Betatester!</div>
-			<div class="profile_achievementRew">Title: &quot;Maister&quot;</div>
-		</div>
-		<div class="profile_achievementDate"><br />22.1.<br />2001</div>
-		<div style="clear:both"></div>
-		<div style="float:left;width:75%;">
-		</div>
+		SpaceTraffic.Entities.Achievements achievements = Client.GameService.GetAchievements();
+	}
+
+	<h2>Achievements</h2>
+	<div class="profile">
+		@for (int i = 1; i <= achievements.Items.Count; i++)
+		{
+			SpaceTraffic.Entities.TAchievement id = achievements.GetAchievement(i.ToString());
+
+			if (id != null)
+			{
+				<div class="profile_achievementTable">
+					<div>@(id.AchievementID.ToString())</div>
+				</div>
+			}
+		}
+
 	</div>
-	<div class="profile_achievementTable">
-		<div class="profile_achievementImg"></div>
-		<div style="float:left;width:80%;">
-			<div class="profile_achievementTitle" style="color:#FF0000;">Looser</div>
-			<div class="profile_achievementDesc">Betatester!</div>
-			<div class="profile_achievementRew">Title: &quotTeh Lame&quot;</div>
-		</div>
-		<div class="profile_achievementDate"><br />23.1.<br />2001</div>
-		<div style="clear:both"></div>
-		<div style="float:left;width:75%;">
-		</div>
-	</div>
-</div>
+
+	@*
+		<h2>Achievements</h2>
+		<div class="profile">
+			<div class="profile_achievementTable">
+				<div class="profile_achievementImg"></div>
+				<div style="float:left;width:80%;">
+					<div class="profile_achievementTitle" style="color:#55FF55;">Machr nad machry</div>
+					<div class="profile_achievementDesc">Betatester!</div>
+					<div class="profile_achievementRew">Title: &quot;Maister&quot;</div>
+				</div>
+				<div class="profile_achievementDate"><br />22.1.<br />2001</div>
+				<div style="clear:both"></div>
+				<div style="float:left;width:75%;">
+				</div>
+			</div>
+			<div class="profile_achievementTable">
+				<div class="profile_achievementImg"></div>
+				<div style="float:left;width:80%;">
+					<div class="profile_achievementTitle" style="color:#FF0000;">Looser</div>
+					<div class="profile_achievementDesc">Betatester!</div>
+					<div class="profile_achievementRew">Title: &quotTeh Lame&quot;</div>
+				</div>
+				<div class="profile_achievementDate"><br />23.1.<br />2001</div>
+				<div style="clear:both"></div>
+				<div style="float:left;width:75%;">
+				</div>
+			</div>
+		</div>*@

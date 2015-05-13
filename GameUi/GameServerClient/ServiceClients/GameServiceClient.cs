@@ -65,6 +65,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			}
 		}
 
+		public Entities.Achievements GetAchievements()
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).GetAchievements();
+			}
+		}
+
         public bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count)
         {
             using (var channel = this.GetClientChannel())

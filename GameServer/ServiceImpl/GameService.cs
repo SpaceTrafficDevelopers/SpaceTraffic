@@ -137,6 +137,11 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             return count >= cargoCount;
         }
 
+		public Entities.Achievements GetAchievements()
+		{
+			return GS.CurrentInstance.World.Achievements;
+		}
+
         public bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount) 
         {
             TraderCargo tc = (TraderCargo) GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);

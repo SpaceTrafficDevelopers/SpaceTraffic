@@ -42,6 +42,9 @@ namespace SpaceTraffic.Services.Contracts
 		[OperationContract]
 		bool PlayerHasEnaughCredits(int playerId, long amount);
 
+		[OperationContract]
+		Entities.Achievements GetAchievements();
+
         [OperationContract]
         bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count);
         
