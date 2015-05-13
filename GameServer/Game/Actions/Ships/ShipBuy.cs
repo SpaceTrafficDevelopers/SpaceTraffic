@@ -68,6 +68,8 @@ namespace SpaceTraffic.Game.Actions
 				CurrentFuelTank = Convert.ToInt32(this.ActionArgs.ElementAt(4)),
 				SpaceShipModel = this.ActionArgs.ElementAt(5).ToString(),
 				SpaceShipName = this.ActionArgs.ElementAt(6).ToString(),
+				Consumption = Convert.ToDouble(this.ActionArgs.ElementAt(8)),
+				WearRate = Convert.ToDouble(this.ActionArgs.ElementAt(9)),
 				UserCode = "",
 				TimeOfArrival = "",
 				CargoSpace = 100    //TODO: je potřeba přidat ještě maximální množství nákladu lodě 
