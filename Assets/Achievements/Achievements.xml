@@ -2,19 +2,29 @@
 <Achievements xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="SpaceTrafficData">
 	<Achievement achievementID="1">
 		<Name>Achievement A</Name>
+		<Description>Lorem ipsum</Description>
+		<Image>../abc1.jpg</Image>
 		<Conditions>
-			<CondName>condition1</CondName>
-			<CondValue>10</CondValue>
+			<Condition>
+				<CondName>condition1</CondName>
+				<CondValue>10</CondValue>
+			</Condition>
 		</Conditions>
 	</Achievement>
 
 	<Achievement achievementID="2">
 		<Name>Achievement B</Name>
+		<Description>Lorem ipsum</Description>
+		<Image>../abc2.jpg</Image>
 		<Conditions>
-			<CondName>condition2</CondName>
-			<CondValue>20</CondValue>
-			<CondName>condition3</CondName>
-			<CondValue>30</CondValue>
+			<Condition>
+				<CondName>condition1</CondName>
+				<CondValue>20</CondValue>
+			</Condition>
+			<Condition>
+				<CondName>condition3</CondName>
+				<CondValue>30</CondValue>
+			</Condition>
 		</Conditions>
 	</Achievement>
 

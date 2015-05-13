@@ -34,7 +34,7 @@ namespace SpaceTraffic.Entities
 		#region "Fields and Properties"
 
 		/// <summary>
-		/// List of factories/>
+		/// List of achievements
 		/// </summary>
 		[System.Xml.Serialization.XmlElement(ElementName = "Achievement")]
 		public List<TAchievement> Items { get; set; }
@@ -83,11 +83,14 @@ namespace SpaceTraffic.Entities
 		[System.Xml.Serialization.XmlElement(ElementName = "Name")]
 		public string Name { get; set; }
 
+		[System.Xml.Serialization.XmlElement(ElementName = "Description")]
+		public string Description { get; set; }
+
+		[System.Xml.Serialization.XmlElement(ElementName = "Image")]
+		public string Image { get; set; }
+
 		[System.Xml.Serialization.XmlElement(ElementName = "Conditions")]
-		//public SpaceTraffic.Utils.Collections.SerializableDictionary<String, int> conditions = new SpaceTraffic.Utils.Collections.SerializableDictionary<String, int>();
-
-		public HashSet<TConditions> conditions { set; get; }
-
+		public TConditions Conditions { set; get; }
 
 		#endregion
 
@@ -106,45 +109,39 @@ namespace SpaceTraffic.Entities
 		#endregion
 
 		#region "Public Methods"
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Link()
-		{
-			try
-			{
-				foreach (TConditions condition in conditions)
-				{
-					Statistics.events[condition.CondName] += Change;
-				}
-			}
-			catch (KeyNotFoundException exception)
-			{
-				Logger logger = LogManager.GetCurrentClassLogger();
-				logger.Error("Achievement and stats liking failed:{0}", exception.Message, exception);
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="arg"></param>
-		public void Change(object sender, string arg)
-		{
-			Logger logger = LogManager.GetCurrentClassLogger();
-			logger.Debug("{0}: {1} - {2}", Name, (sender as Statistics).StatisticsId, arg);
-		}
 		#endregion
 	}
 
+
+	/// <summary>
+	/// List of achievement's conditions
+	/// </summary>
+	[System.Serializable()]
+	[System.Xml.Serialization.XmlType(Namespace = "SpaceTrafficData")]
+	public class TConditions
+	{
+		#region "Fields and Properties"
+		[System.Xml.Serialization.XmlElement(ElementName = "Condition")]
+		public HashSet<TCondition> AchievementConditions { set; get; }
+
+		#endregion
+
+		#region "Constructors"
+
+		public TConditions()
+		{
+			this.AchievementConditions = new HashSet<TCondition>();
+		}
+		#endregion
+
+	}
 
 	/// <summary>
 	/// Description of achievement's conditions
 	/// </summary>
 	[System.Serializable()]
 	[System.Xml.Serialization.XmlType(Namespace = "SpaceTrafficData")]
-	public class TConditions
+	public class TCondition
 	{
 		#region "Fields and Properties"
 		[System.Xml.Serialization.XmlElement(ElementName = "CondName")]
@@ -157,14 +154,17 @@ namespace SpaceTraffic.Entities
 
 		#region "Constructors"
 
-		public TConditions()
-		{
+		public TCondition() { }
 
+		public TCondition(string condName, int condValue)
+		{
+			this.CondName = condName;
+			this.CondValue = condValue;
 		}
+
 		#endregion
 
 	}
-
 
 
 }
