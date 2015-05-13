@@ -26,33 +26,6 @@ namespace SpaceTraffic.Entities
 {
 	public delegate void StatisticsChangeEventHandler(object sender, string key);
 
-	public class Achievement
-	{
-		public Dictionary<string, int> conditions = new Dictionary<string, int>();
-
-		public string Name { get; set; }
-
-		public Achievement()
-		{
-		}
-
-		public void Link()
-		{
-			foreach (KeyValuePair<string, int> condition in conditions)
-			{
-				Statistics.events[condition.Key] += Change;
-			}
-		}
-
-		public void Change(object sender, string arg)
-		{
-			Logger logger = LogManager.GetCurrentClassLogger();
-			logger.Debug("{0}: {1} - {2}", Name, (sender as Statistics).StatisticsId, arg);
-		}
-
-	}
-
-
 	[DataContract(Name = "Statistics")]
 	public class Statistics
 	{

@@ -1,9 +1,21 @@
 <?xml version="1.0"?>
 <Achievements xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="SpaceTrafficData">
-	<achievement achievementID="1">
-	</achievement>
+	<Achievement achievementID="1">
+		<Name>Achievement A</Name>
+		<Conditions>
+			<CondName>condition1</CondName>
+			<CondValue>10</CondValue>
+		</Conditions>
+	</Achievement>
 
-	<achievement achievementID="2">
-	</achievement>
+	<Achievement achievementID="2">
+		<Name>Achievement B</Name>
+		<Conditions>
+			<CondName>condition2</CondName>
+			<CondValue>20</CondValue>
+			<CondName>condition3</CondName>
+			<CondValue>30</CondValue>
+		</Conditions>
+	</Achievement>
 
 </Achievements>

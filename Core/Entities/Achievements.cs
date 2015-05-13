@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-	http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,11 +19,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
+using NLog;
 
 namespace SpaceTraffic.Entities
 {
 	/// <summary>
-	/// The class Factories contains all factory
+	/// The class Achievements contains all achievements
 	/// </summary>
 	[System.Serializable()]
 	[System.Xml.Serialization.XmlType(AnonymousType = true, Namespace = "SpaceTrafficData")]
@@ -35,7 +36,7 @@ namespace SpaceTraffic.Entities
 		/// <summary>
 		/// List of factories/>
 		/// </summary>
-		[System.Xml.Serialization.XmlElement(ElementName = "achievement")]
+		[System.Xml.Serialization.XmlElement(ElementName = "Achievement")]
 		public List<TAchievement> Items { get; set; }
 
 		#endregion
@@ -54,7 +55,7 @@ namespace SpaceTraffic.Entities
 
 		#region "Public Methods"
 
-		public TAchievement GetAchievement(string achievementId)
+		public TAchievement GetAchievement(int achievementId)
 		{
 			if (Items.Exists(p => p.AchievementID == achievementId))
 			{
@@ -77,15 +78,26 @@ namespace SpaceTraffic.Entities
 		#region "Fields and Properties"
 
 		[System.Xml.Serialization.XmlAttribute(AttributeName = "achievementID")]
-		public string AchievementID { get; set; }
+		public int AchievementID { get; set; }
+
+		[System.Xml.Serialization.XmlElement(ElementName = "Name")]
+		public string Name { get; set; }
+
+		[System.Xml.Serialization.XmlElement(ElementName = "Conditions")]
+		//public SpaceTraffic.Utils.Collections.SerializableDictionary<String, int> conditions = new SpaceTraffic.Utils.Collections.SerializableDictionary<String, int>();
+
+		public HashSet<TConditions> conditions { set; get; }
+
 
 		#endregion
 
 		#region "Constructors"
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public TAchievement()
 		{
-
 		}
 
 		#endregion
@@ -94,150 +106,65 @@ namespace SpaceTraffic.Entities
 		#endregion
 
 		#region "Public Methods"
-		#endregion
-	}
-/**
-	/// <summary>
-	/// Description general information about the factory
-	/// </summary>
-	[System.Serializable()]
-	[System.Xml.Serialization.XmlType(Namespace = "SpaceTrafficData")]
-	public class TFactoryGeneralInformation
-	{
-		#region "Fields and Properties"
-
 		/// <summary>
-		/// Name of the factory.
+		/// 
 		/// </summary>
-		[System.Xml.Serialization.XmlElement(ElementName = "name")]
-		public string Name { get; set; }
-		/// <summary>
-		/// Needed rank to buy.
-		/// </summary>
-		[System.Xml.Serialization.XmlElement(ElementName = "rankToBay")]
-		public int RankToBay { get; set; }
-		/// <summary>
-		/// Purchase price of the factory.
-		/// </summary>
-		[System.Xml.Serialization.XmlElement(ElementName = "price")]
-		public decimal Price { get; set; }
-		/// <summary>
-		/// Description of the factory.
-		/// </summary>
-		[System.Xml.Serialization.XmlElement(ElementName = "description")]
-		public string Description { get; set; }
-		#endregion
-
-		#region "Constructors"
-
-		public TFactoryGeneralInformation() { }
-
-		#endregion
-
-	}
-
-	/// <summary>
-	/// Description resources for produce
-	/// </summary>
-	[System.Serializable()]
-	[System.Xml.Serialization.XmlType(Namespace = "SpaceTrafficData")]
-	public class TFactoryResources
-	{
-		#region "Fields and Properties"
-
-		/// <summary>
-		/// List of resources
-		/// </summary>
-		[System.Xml.Serialization.XmlElement(ElementName = "resource")]
-		public List<TFactoryResource> Resources { get; set; }
-		#endregion
-
-		#region "Constructors"
-
-		public TFactoryResources()
+		public void Link()
 		{
-			this.Resources = new List<TFactoryResource>();
+			try
+			{
+				foreach (TConditions condition in conditions)
+				{
+					Statistics.events[condition.CondName] += Change;
+				}
+			}
+			catch (KeyNotFoundException exception)
+			{
+				Logger logger = LogManager.GetCurrentClassLogger();
+				logger.Error("Achievement and stats liking failed:{0}", exception.Message, exception);
+			}
 		}
 
-		#endregion
-
-	}
-
-	/// <summary> 
-	/// Description resource for produce
-	/// </summary>
-	[System.Serializable()]
-	[System.Xml.Serialization.XmlType(Namespace = "SpaceTrafficData")]
-	public class TFactoryResource
-	{
-		#region "Fields and Properties"
-
-		[System.Xml.Serialization.XmlIgnore()]
-		public int ID { get; set; }
 		/// <summary>
-		/// Information about production cycle: needed product.
+		/// 
 		/// </summary>
-		[System.Xml.Serialization.XmlElement(ElementName = "product")]
-		public string ProductID { get; set; }
-		/// <summary>
-		/// Information about production cycle: needed quantity by cycle.
-		/// </summary>
-		[System.Xml.Serialization.XmlElement(ElementName = "quantityByCycle")]
-		public int QuantityByCycle { get; set; }
-
-		#endregion
-
-		#region "Constructors"
-
-		public TFactoryResource(string productID, int quantityByCycle)
+		/// <param name="sender"></param>
+		/// <param name="arg"></param>
+		public void Change(object sender, string arg)
 		{
-			this.ProductID = productID;
-			this.QuantityByCycle = quantityByCycle;
+			Logger logger = LogManager.GetCurrentClassLogger();
+			logger.Debug("{0}: {1} - {2}", Name, (sender as Statistics).StatisticsId, arg);
 		}
-
-		public TFactoryResource() : this(string.Empty, 0) { }
-
-		#endregion
-
-		#region "Private Methods"
-		#endregion
-
-		#region "Public Methods"
 		#endregion
 	}
+
 
 	/// <summary>
-	/// Description produced product and production cycle
+	/// Description of achievement's conditions
 	/// </summary>
 	[System.Serializable()]
 	[System.Xml.Serialization.XmlType(Namespace = "SpaceTrafficData")]
-	public class TFactoryManufacturing
+	public class TConditions
 	{
 		#region "Fields and Properties"
+		[System.Xml.Serialization.XmlElement(ElementName = "CondName")]
+		public string CondName { set; get; }
 
-		/// <summary>
-		/// Manufacturing: product.
-		/// </summary>
-		[System.Xml.Serialization.XmlElement(ElementName = "product")]
-		public string ProductID { get; set; }
-		/// <summary>
-		/// Manufacturing: cycle-time.
-		/// </summary>
-		[System.Xml.Serialization.XmlElement(ElementName = "cycle-time")]
-		public int CycleTime { get; set; }
-		/// <summary>
-		/// Manufacturing: quantity by cycle.
-		/// </summary>
-		[System.Xml.Serialization.XmlElement(ElementName = "quantityByCycle")]
-		public int QuantityByCycle { get; set; }
+		[System.Xml.Serialization.XmlElement(ElementName = "CondValue")]
+		public int CondValue { set; get; }
 
 		#endregion
 
 		#region "Constructors"
 
-		public TFactoryManufacturing() { }
+		public TConditions()
+		{
 
+		}
 		#endregion
-	}*/
+
+	}
+
+
 
 }
