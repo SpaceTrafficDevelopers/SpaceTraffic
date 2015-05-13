@@ -21,42 +21,35 @@ using System.Text;
 using System.Runtime.Serialization;
 using NLog;
 
-
 namespace SpaceTraffic.Entities
 {
-	public delegate void StatisticsChangeEventHandler(object sender, string key);
+    [DataContract(Name = "EarnedAchievement")]
+    public class EarnedAchievement
+    {
 
-	[DataContract(Name = "Statistics")]
-	public class Statistics
-	{
-		[DataMember]
-		public int StatisticsId { get; set; }
+        [DataMember]
+        public int EarnedAchievementsId { get; set; }
 
-		[DataMember]
-		public Dictionary<string, int> monitoredItems = new Dictionary<string, int>();
+        [DataMember]
+        public int AchievementId { get; set; }
 
-		public int this[string key]
-		{
-			get
-			{
-				return monitoredItems[key];
-			}
-			set
-			{
-				monitoredItems[key] = value;
-				if (!events.ContainsKey(key))
-				{
-					events.Add(key, null);
-				}
-				if (events[key] != null)
-				{
-					events[key](this, key);
-				}
+        [DataMember]
+        public DateTime UnlockedAt { get; set; }
 
-			}
-		}
+        // TODO db or not? remove from the eaDAO and contextManager table.
+        //[IgnoreDataMemberAttribute]
+        [DataMember]
+        public bool IsJustEarned { get; set; }
 
-		public static Dictionary<string, StatisticsChangeEventHandler> events = new Dictionary<string, StatisticsChangeEventHandler>();
+        // Player ID
+        [DataMember]
+        public int PlayerId { get; set; }
 
-	}
+        public virtual Player Player { get; set; }
+
+        public EarnedAchievement()
+        {
+            this.IsJustEarned = false;
+        }
+    }
 }

@@ -74,6 +74,8 @@
     <Compile Include="Data\StarSystemLoader.cs" />
     <Compile Include="Data\StarSystemXmlHelper.cs" />
     <Compile Include="Entities\Achievements.cs" />
+    <Compile Include="Entities\Achievements\EarnedAchievement.cs" />
+    <Compile Include="Entities\Achievements\Statistic.cs" />
     <Compile Include="Entities\Base.cs" />
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\Factory.cs" />
@@ -92,7 +94,6 @@
     <Compile Include="Entities\SpaceShipCargo.cs" />
     <Compile Include="Entities\PublicEntities\WormholeEndpointDestination.cs" />
     <Compile Include="Entities\SpaceShip.cs" />
-    <Compile Include="Entities\Statistics.cs" />
     <Compile Include="Entities\Trader.cs" />
     <Compile Include="Entities\TraderCargo.cs" />
     <Compile Include="Game\Base.cs" />
