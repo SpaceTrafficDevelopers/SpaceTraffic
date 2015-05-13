@@ -63,7 +63,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			ShipModel shipModel = getAllShips().Where(shipType => shipType.Model == model).First();
 			if (shipModel != null){			
 				if (GSClient.GameService.PlayerHasEnaughCredits(getCurrentPlayer().PlayerId, shipModel.Price)){
-					GSClient.GameService.PerformAction(getCurrentPlayer().PlayerId, "ShipBuy", getCurrentPlayer().PlayerId, "Solar System", baseId, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price);
+					GSClient.GameService.PerformAction(getCurrentPlayer().PlayerId, "ShipBuy", getCurrentPlayer().PlayerId, "Solar System", baseId, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price, shipModel.Consumption, shipModel.WearRate);
 				} else {
 					return RedirectToAction("").Warning(String.Format("Nemáš dostatek kreditů na koupi lodě {0}.", shipModel.Model));
 				}
@@ -131,6 +131,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 				ship.Manufacturer = (string)shipNode.Descendants("manufacturer").FirstOrDefault();
 				ship.Power = (int)shipNode.Descendants("power").FirstOrDefault();
 				ship.Consumption = (double)shipNode.Descendants("consumption").FirstOrDefault();
+				ship.WearRate = (double)shipNode.Descendants("wearRate").FirstOrDefault();
 				ship.FuelCapacity = (int)shipNode.Descendants("fuelCapacity").FirstOrDefault();
 				ship.CarryingCapacity = (int)shipNode.Descendants("carryingCapacity").FirstOrDefault();
 				ship.Image = (string)shipNode.Descendants("image").FirstOrDefault();

@@ -8,6 +8,7 @@
 			<manufacturer>United Space Ships</manufacturer>
 			<power>200</power>
 			<consumption>0.8</consumption>
+			<wearRate>0.3</wearRate>
 			<fuelCapacity>40</fuelCapacity>
 			<carryingCapacity>1000</carryingCapacity>
 			<image>shipunto.png</image>
@@ -46,6 +47,7 @@
 			<manufacturer>China Red Sun Corp.</manufacturer>
 			<power>88</power>
 			<consumption>0.4</consumption>
+			<wearRate>1</wearRate>
 			<fuelCapacity>30</fuelCapacity>
 			<carryingCapacity>400</carryingCapacity>
 			<image>madeinchina.png</image>
@@ -57,6 +59,7 @@
 			<manufacturer>Cargo Holding</manufacturer>
 			<power>350</power>
 			<consumption>1.5</consumption>
+			<wearRate>0.6</wearRate>
 			<fuelCapacity>90</fuelCapacity>
 			<carryingCapacity>3000</carryingCapacity>
 			<image>bumper.png</image>

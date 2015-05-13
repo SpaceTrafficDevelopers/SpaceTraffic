@@ -40,6 +40,10 @@ namespace SpaceTraffic.GameUi.Areas.Game.Models
 		public double Consumption { get; set; }
 
 		[Required]
+		[Display(Name = "Rychlost opotřebování")]
+		public double WearRate { get; set; }
+
+		[Required]
 		[Display(Name = "Výkon")]
 		public int Power { get; set; }
 
