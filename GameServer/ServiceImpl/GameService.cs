@@ -248,7 +248,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
             Spaceship sh = new Spaceship(1, "pussywagon");
 
-            sh.MaxSpeed = 1;
+            sh.MaxSpeed = 20;
 
             plan.PlanFirstItem(GameServer.CurrentInstance, sh);
 

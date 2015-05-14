@@ -34,10 +34,17 @@ namespace SpaceTraffic.Game.Planner
 
        public NavPath getPathBetweenTwoItems(PlanItem source, PlanItem dest)
         {
-            NavPath path = new NavPath();
+           NavPath path = new NavPath();
            for(int i = this.IndexOf(source); i < this.Count && i <= this.IndexOf(dest); i++)
            {
-               path.Add(this.ElementAt(i).Place);
+               NavPoint point = this.ElementAt(i).Place;
+               path.Add(point);
+               
+              /* if(point.Location is WormholeEndpoint)
+               {
+                   path.Add(new NavPoint((point.Location as WormholeEndpoint).Destination));
+               }*/
+               
            }
 
            return path;
@@ -173,6 +180,7 @@ namespace SpaceTraffic.Game.Planner
                 Planet actualPlanet = dest.Place.Location as Planet;
                 shipEvent = new ShipEvent();
                 gameAction = new ShipLand();
+                time = new GameTime();
 
                 gameAction.ActionArgs = new object[] { actualPlanet.StarSystem.Name, actualPlanet.Name, ship.Id };
                 gameAction.PlayerId = PlayerID;

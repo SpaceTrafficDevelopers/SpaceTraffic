@@ -82,7 +82,7 @@ namespace SpaceTraffic.Game.Actions.Ships
         private void getArgumentsFromActionArgs()
         {
             WormHoleId = Convert.ToInt32(ActionArgs[0].ToString());
-            ShipID = Convert.ToInt32(ActionArgs[2]);
+            ShipID = Convert.ToInt32(ActionArgs[1]);
         }
     }
 }
