@@ -29,5 +29,7 @@ namespace SpaceTraffic.Engine
 		void DecrementStatisticItem(Player player, string statisticName, int declineBy);
 
 		void SetStatisticItemTo(Player player, string statisticName, int value);
+
+		void IncrementExperiences(Player player, int riseBy);
 	}
 }

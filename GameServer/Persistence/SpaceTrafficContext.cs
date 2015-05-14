@@ -140,7 +140,9 @@ using SpaceTraffic.Entities;
 			Property(p => p.AddedDate).HasColumnType("datetime").IsOptional();
 			Property(p => p.LastVisitedDate).HasColumnType("datetime").IsOptional();
 			Property(p => p.CorporationName).HasMaxLength(50).HasColumnType("varchar").IsOptional();
-			Property(p => p.Credit).HasColumnType("int").IsOptional();            
+			Property(p => p.Credit).HasColumnType("int").IsOptional();
+			Property(p => p.ExperienceLevel).HasColumnType("int").IsOptional();
+			Property(p => p.Experiences).HasColumnType("int").IsOptional();
 			ToTable("Players");
 		}
 

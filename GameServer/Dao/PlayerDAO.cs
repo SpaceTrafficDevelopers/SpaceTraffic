@@ -120,6 +120,8 @@ namespace SpaceTraffic.Dao
 					playerTab.OrionEmail = player.OrionEmail;                   
 					player.PsswdHash = player.PsswdHash;
 					player.PsswdSalt = player.PsswdSalt;
+					playerTab.ExperienceLevel = player.ExperienceLevel;
+					playerTab.Experiences = player.Experiences;
 					// save context to database
 					contextDB.SaveChanges();
 					return true;

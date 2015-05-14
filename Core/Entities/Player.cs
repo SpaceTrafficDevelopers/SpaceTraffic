@@ -29,6 +29,8 @@ namespace SpaceTraffic.Entities
 			this.Statistics = new HashSet<Entities.Statistic>();
 			this.EarnedAchievements = new HashSet<Entities.EarnedAchievement>();
 
+			this.ExperienceLevel = 1;
+
 			// fill statistics
 			initStatistics();
 		}
@@ -108,6 +110,12 @@ namespace SpaceTraffic.Entities
 
 		public int Credit { get; set; }       
 
-		public virtual ICollection<SpaceShip> SpaceShips { get; set; }  
+		public virtual ICollection<SpaceShip> SpaceShips { get; set; }
+
+		[DataMember]
+		public int ExperienceLevel { get; set; }
+
+		[DataMember]
+		public int Experiences { get; set; }
 	}
 }

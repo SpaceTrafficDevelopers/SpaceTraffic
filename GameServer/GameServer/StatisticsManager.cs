@@ -177,5 +177,45 @@ namespace SpaceTraffic.GameServer
 				}
 			}
 		}
+
+		/// <summary>
+		/// Increment player experiences.
+		/// </summary>
+		/// <param name="player">Player who to increase.</param>
+		/// <param name="riseBy">Incrementation amount.</param>
+		public void IncrementExperiences(Player player, int riseBy)
+		{
+			if (riseBy <= 0)
+			{
+				throw new ArgumentOutOfRangeException("The increment has to be positive.");
+			}
+
+			player.Experiences += riseBy;
+
+			CheckPlayersLevel(player);
+
+			// save experience related changes to DB
+			IPlayerDAO playerDao = gameServer.Persistence.GetPlayerDAO();
+			playerDao.UpdatePlayerById(player);
+		}
+
+		/// <summary>
+		/// Check state of player's experience level.
+		/// </summary>
+		/// <param name="player">Player to check.</param>
+		private void CheckPlayersLevel(Player player)
+		{
+			Entities.ExperienceLevels globalExperienceLevels = gameServer.World.ExperienceLevels;
+
+			foreach (Entities.TLevel level in globalExperienceLevels.Items)
+			{
+				// player has more than required experiences although still has lower level
+				if (level.RequiredXP <= player.Experiences && player.ExperienceLevel < level.LevelID)
+				{
+					player.ExperienceLevel = level.LevelID;
+					break;
+				}
+			}
+		}
 	}
 }
