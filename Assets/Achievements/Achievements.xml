@@ -3,7 +3,7 @@
 	<Achievement achievementID="1">
 		<Name>Factory Investor</Name>
 		<Description>Build your first factory</Description>
-		<Image>../Content/images/Achievements/FactoryInvestorComplete.jpg</Image>
+		<Image>/Content/images/Achievements/FactoryInvestorComplete.jpg</Image>
 		<Conditions>
 			<Condition>
 				<CondName>factoryCount</CondName>
@@ -11,12 +11,12 @@
 			</Condition>
 		</Conditions>
 	</Achievement>
-
+	 
 
 	<Achievement achievementID="2">
 		<Name>Dug Too Greedily and Too Deep</Name>
 		<Description>Build all types of mines on planet Terra</Description>
-		<Image>../Content/images/Achievements/DugTooGreedilyandTooDeepComplete.jpg</Image>
+		<Image>/Content/images/Achievements/DugTooGreedilyandTooDeepComplete.jpg</Image>
 		<Conditions>
 			<Condition>
 				<CondName>terraOreMine</CondName>
@@ -41,7 +41,7 @@
 	<Achievement achievementID="3">
 		<Name>Old McDonald Had A Farm</Name>
 		<Description>Build all types of farms on planet Terra</Description>
-		<Image>../Content/images/Achievements/OldMcDonaldHadAFarmComplete.jpg</Image>
+		<Image>/Content/images/Achievements/OldMcDonaldHadAFarmComplete.jpg</Image>
 		<Conditions>
 			<Condition>
 				<CondName>terraWheatFarm</CondName>
@@ -69,7 +69,7 @@
 	<Achievement achievementID="4">
 		<Name>Industry Magnate</Name>
 		<Description>Build all types of factories with size 3x3</Description>
-		<Image>../Content/images/Achievements/IndustryMagnateComplete.jpg</Image>
+		<Image>/Content/images/Achievements/IndustryMagnateComplete.jpg</Image>
 		<Conditions>
 			<Condition>
 				<CondName>soilFactory3x3</CondName>
@@ -113,24 +113,24 @@
 	<Achievement achievementID="5">
 		<Name>Lieutenant Commander</Name>
 		<Description>Buy your first ship</Description>
-		<Image>../Content/images/Achievements/LieutenantCommanderComplete.jpg</Image>
+		<Image>/Content/images/Achievements/LieutenantCommanderComplete.jpg</Image>
 		<Conditions>
 			<Condition>
 				<CondName>shipFleet</CondName>
 				<CondValue>1</CondValue>
-			</Condition>
+			</Condition>			
 		</Conditions>
 	</Achievement>
 
 	<Achievement achievementID="6">
 		<Name>Rear Admiral Lieutenant General Rimmer</Name>
 		<Description>Have a fleet of 10 ships</Description>
-		<Image>../Content/images/Achievements/RearAdmiralLieutenantGeneralRimmerComplete.jpg</Image>
+		<Image>/Content/images/Achievements/RearAdmiralLieutenantGeneralRimmerComplete.jpg</Image>
 		<Conditions>
 			<Condition>
 				<CondName>shipFleet</CondName>
 				<CondValue>10</CondValue>
-			</Condition>
+			</Condition>			
 		</Conditions>
 	</Achievement>
 

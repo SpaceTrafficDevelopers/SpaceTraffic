@@ -25,14 +25,14 @@
 
 
 	@{
-		SpaceTraffic.Entities.TLevel currentLevel = globalExpiriencesLevels.GetLevel(actualPlayer.ExperienceLevel);
+		//SpaceTraffic.Entities.TLevel currentLevel = globalExpiriencesLevels.GetLevel(actualPlayer.ExperienceLevel);
 
-		SpaceTraffic.Entities.TLevel nextLevel = globalExpiriencesLevels.GetLevel(currentLevel.LevelID + 1);
-		var nextLevelExp = "-";
-		if (nextLevel != null)
-		{
-			nextLevelExp = "" + nextLevel.RequiredXP;
-		}
+		//SpaceTraffic.Entities.TLevel nextLevel = globalExpiriencesLevels.GetLevel(currentLevel.LevelID + 1);
+		//var nextLevelExp = "-";
+		//if (nextLevel != null)
+		//{
+		//	nextLevelExp = "" + nextLevel.RequiredXP;
+		//}
 
 	}
 
@@ -40,14 +40,14 @@
 		<table class="experiencetable">
 			<tr>
 				<td class="levelText">Level</td>
-				<td class="level">@currentLevel.LevelID</td>
+				<td class="level">@*currentLevel.LevelID*@</td>
 				<td class="dash">-</td>
-				<td class="levelName">@currentLevel.Name</td>
+				<td class="levelName">@*currentLevel.Name*@</td>
 			</tr>
 			<tr>
 				<td class="currentExp" colspan="2">@*actualPlayer.Experiences*@</td>
 				<td class="slash">/</td>
-				<td class="nextExp">@nextLevelExp</td>
+				<td class="nextExp">@*nextLevelExp*@</td>
 			</tr>
 		</table>
 	</div> 

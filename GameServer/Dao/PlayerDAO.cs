@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SpaceTraffic.Entities;
+using System.Data;
 
 namespace SpaceTraffic.Dao
 {
@@ -105,23 +106,9 @@ namespace SpaceTraffic.Dao
 			{
 				try
 				{
-					var playerTab = contextDB.Players.FirstOrDefault(x => x.PlayerId.Equals(player.PlayerId));
-					playerTab.PlayerName = player.PlayerName;
-					playerTab.FirstName = player.FirstName;
-					playerTab.LastName = player.LastName;
-					playerTab.Email = player.Email;
-					player.DateOfBirth = player.DateOfBirth;
-					player.CorporationName = player.CorporationName;
-					player.Credit = player.Credit;
-					player.IsAccountLocked = player.IsAccountLocked;
-					player.IsEmailConfirmed = player.IsEmailConfirmed;
-					playerTab.IsOrionEmailConfirmed = player.IsOrionEmailConfirmed;
-					playerTab.IsFavStudent = player.IsFavStudent;
-					playerTab.OrionEmail = player.OrionEmail;                   
-					player.PsswdHash = player.PsswdHash;
-					player.PsswdSalt = player.PsswdSalt;
-					playerTab.ExperienceLevel = player.ExperienceLevel;
-					playerTab.Experiences = player.Experiences;
+					// http://stackoverflow.com/questions/14902408/why-does-entity-framework-insert-children-when-i-update-the-parent loudilj
+					contextDB.Players.Attach(player);
+					contextDB.Entry(player).State = EntityState.Modified;
 					// save context to database
 					contextDB.SaveChanges();
 					return true;
