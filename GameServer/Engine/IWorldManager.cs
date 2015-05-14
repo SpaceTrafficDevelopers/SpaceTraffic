@@ -56,5 +56,7 @@ namespace SpaceTraffic.Engine
         void GenerateBasesAndTraders();
 
 		Achievements Achievements { get; set; }
+
+		TAchievement GetAchievementById(int id);
     }
 }

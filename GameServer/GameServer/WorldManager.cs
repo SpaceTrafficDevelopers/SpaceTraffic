@@ -95,6 +95,11 @@ namespace SpaceTraffic.GameServer
 		/// </summary>
 		public Achievements Achievements { get; set; }
 
+		public TAchievement GetAchievementById(int id)
+		{
+			return Achievements.GetAchievement(id);
+		}
+
         public IGamePlayer GetPlayer(int playerId)
         {
             throw new NotImplementedException();

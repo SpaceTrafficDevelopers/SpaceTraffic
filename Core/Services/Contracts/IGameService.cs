@@ -68,6 +68,9 @@ namespace SpaceTraffic.Services.Contracts
 
         [OperationContract]
         bool TestPlanner();
+
+		[OperationContract]
+		List<TAchievement> GetEarnedAchievements(String playerName);
         
 	}
 

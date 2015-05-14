@@ -70,89 +70,113 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return actualMoney >= amount;
 		}
 
-        public bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count)
-        {
-            
-            long actualMoney = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(playerId).Credit;
-            TraderCargo tc = (TraderCargo)GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);
-            long price = tc.CargoPrice;
-            return actualMoney >= (price * count);
-        }
+		public bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count)
+		{
+			
+			long actualMoney = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(playerId).Credit;
+			TraderCargo tc = (TraderCargo)GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);
+			long price = tc.CargoPrice;
+			return actualMoney >= (price * count);
+		}
 
-        public bool SpaceShipHasCargoSpace(int spaceShipId, int cargoLoadEntityId, int count)
-        {
-            int actualVolume = 0;
-            int spaceCargo = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId).CargoSpace;
-            
-            ICargoLoadEntity tc = GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);
-            
-            int cargoVolume = GS.CurrentInstance.Persistence.GetCargoDAO().GetCargoById(tc.CargoId).Volume;
+		public bool SpaceShipHasCargoSpace(int spaceShipId, int cargoLoadEntityId, int count)
+		{
+			int actualVolume = 0;
+			int spaceCargo = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId).CargoSpace;
+			
+			ICargoLoadEntity tc = GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);
+			
+			int cargoVolume = GS.CurrentInstance.Persistence.GetCargoDAO().GetCargoById(tc.CargoId).Volume;
 
-            List<ICargoLoadEntity> cargos = GS.CurrentInstance.Persistence.GetSpaceShipCargoDAO().GetCargoListByOwnerId(spaceShipId);
-            foreach (ICargoLoadEntity cargo in cargos) 
-            {
-                actualVolume += GS.CurrentInstance.Persistence.GetCargoDAO().GetCargoById(cargo.CargoId).Volume;
-            }
-            return (spaceCargo - actualVolume) >= (cargoVolume * count);
-        }
+			List<ICargoLoadEntity> cargos = GS.CurrentInstance.Persistence.GetSpaceShipCargoDAO().GetCargoListByOwnerId(spaceShipId);
+			foreach (ICargoLoadEntity cargo in cargos) 
+			{
+				actualVolume += GS.CurrentInstance.Persistence.GetCargoDAO().GetCargoById(cargo.CargoId).Volume;
+			}
+			return (spaceCargo - actualVolume) >= (cargoVolume * count);
+		}
 
-        public bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName)
-        {
-           
-                SpaceShip spaceShip = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
-                Entities.Base dockedBase = GS.CurrentInstance.Persistence.GetBaseDAO().GetBaseById((int)spaceShip.DockedAtBaseId);
-                Game.Planet planet = GS.CurrentInstance.World.Map[starSystemName].Planets[planetName];
+		public bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName)
+		{
+		   
+				SpaceShip spaceShip = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
+				Entities.Base dockedBase = GS.CurrentInstance.Persistence.GetBaseDAO().GetBaseById((int)spaceShip.DockedAtBaseId);
+				Game.Planet planet = GS.CurrentInstance.World.Map[starSystemName].Planets[planetName];
 
-                if (dockedBase.Planet.Equals(planet.Location))
-                {
-                    return true;
-                }
-                return false;
-        }
+				if (dockedBase.Planet.Equals(planet.Location))
+				{
+					return true;
+				}
+				return false;
+		}
 
-        public bool PlayerHasSpaceShip(int playerId, int spaceShipId) 
-        {
-            SpaceShip spaceShip = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
-            if (spaceShip == null)
-                return false;
-            return spaceShip.PlayerId == playerId;
-        }
+		public bool PlayerHasSpaceShip(int playerId, int spaceShipId) 
+		{
+			SpaceShip spaceShip = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
+			if (spaceShip == null)
+				return false;
+			return spaceShip.PlayerId == playerId;
+		}
 
-        public bool PlayerHasEnoughCargo(string loadingPlace, int cargoLoadEntityId, int cargoCount) 
-        {
-            ICargoLoadDao loading = GS.CurrentInstance.Persistence.GetCargoLoadDao(loadingPlace);
-            ICargoLoadEntity cargo = loading.GetCargoByID(cargoLoadEntityId);
-            if (cargo == null)
-                return false;
-            int count = cargo.CargoCount;
-            return count >= cargoCount;
-        }
+		public bool PlayerHasEnoughCargo(string loadingPlace, int cargoLoadEntityId, int cargoCount) 
+		{
+			ICargoLoadDao loading = GS.CurrentInstance.Persistence.GetCargoLoadDao(loadingPlace);
+			ICargoLoadEntity cargo = loading.GetCargoByID(cargoLoadEntityId);
+			if (cargo == null)
+				return false;
+			int count = cargo.CargoCount;
+			return count >= cargoCount;
+		}
 
-        public bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount)
-        {
-            SpaceShip spaceShip = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
-            ICargoLoadEntity cargo = GS.CurrentInstance.Persistence.GetSpaceShipCargoDAO().GetCargoByID(cargoLoadEntityId);
-            
-            if (cargo == null || spaceShipId != cargo.CargoOwnerId)
-                return false;
-            
-            int count = cargo.CargoCount;
-            return count >= cargoCount;
-        }
+		public bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount)
+		{
+			SpaceShip spaceShip = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
+			ICargoLoadEntity cargo = GS.CurrentInstance.Persistence.GetSpaceShipCargoDAO().GetCargoByID(cargoLoadEntityId);
+			
+			if (cargo == null || spaceShipId != cargo.CargoOwnerId)
+				return false;
+			
+			int count = cargo.CargoCount;
+			return count >= cargoCount;
+		}
 
 		public Entities.Achievements GetAchievements()
 		{
 			return GS.CurrentInstance.World.Achievements;
 		}
 
-        public bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount) 
-        {
-            TraderCargo tc = (TraderCargo) GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);
-            if (traderId != tc.CargoOwnerId || tc == null)
-                return false;
-            int count = tc.CargoCount;
-            return count >= cargoCount;
-        }
+		public Entities.TAchievement GetAchievementById(int id)
+		{
+			return GameServer.CurrentInstance.World.GetAchievementById(id);
+		}
+
+		public List<TAchievement> GetEarnedAchievements(string playerName)
+		{
+
+			List<TAchievement> result = new List<TAchievement>();
+			Player player = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByName(playerName);
+			var unviewedAchievements = from achv in player.EarnedAchievements
+									   where achv.IsJustEarned = true
+									   select achv;
+			//foreach (EarnedAchievement earnedAchv in unviewedAchievements)
+			//{
+			//    result.Add(GetAchievementById(earnedAchv.AchievementId));
+			//    earnedAchv.IsJustEarned = false;
+			//}
+			// TODO ZER0 - Remove dummy data
+			result.Add(new TAchievement() { AchievementID = 1, Image = "img/01.png", Description = "desc", Name = "Barrel Roll" });
+			result.Add(new TAchievement() { AchievementID = 2, Image = "img/02.png", Description = "desc", Name = "All your bases are belong to us" });
+			return result;
+		}
+
+		public bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount) 
+		{
+			TraderCargo tc = (TraderCargo) GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);
+			if (traderId != tc.CargoOwnerId || tc == null)
+				return false;
+			int count = tc.CargoCount;
+			return count >= cargoCount;
+		}
 
 		/// <summary>
 		/// Finds action in SpaceTraffic.Game.Actions namespace and performs it with its arguments.
@@ -191,63 +215,63 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 		}
 
 
-        public bool TestPlanner()
-        {
+		public bool TestPlanner()
+		{
 
-            PathPlan plan = new PathPlan(1);
-            PlanItem item1 = new PlanItem();
-            
-            NavPoint firstPoint = new NavPoint();
-            firstPoint.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].Planets["Proxima Centauri 1"];
+			PathPlan plan = new PathPlan(1);
+			PlanItem item1 = new PlanItem();
+			
+			NavPoint firstPoint = new NavPoint();
+			firstPoint.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].Planets["Proxima Centauri 1"];
 
-            item1.Place = firstPoint;
-            CargoBuy cba = new CargoBuy();
+			item1.Place = firstPoint;
+			CargoBuy cba = new CargoBuy();
 
-            cba.PlayerId = 1;
-            cba.ActionArgs = new object[]{
-                    "Proxima Centauri",
-                    "Proxima Centauri 1",
-                    1,
-                    10,
-                    "TraderCargoDAO",
-                    1
-            };
+			cba.PlayerId = 1;
+			cba.ActionArgs = new object[]{
+					"Proxima Centauri",
+					"Proxima Centauri 1",
+					1,
+					10,
+					"TraderCargoDAO",
+					1
+			};
 
-            item1.Actions.Add(cba);
+			item1.Actions.Add(cba);
 
 
-            NavPoint secondPoint = new NavPoint();
-            secondPoint.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].Planets["Proxima Centauri 2"];
+			NavPoint secondPoint = new NavPoint();
+			secondPoint.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].Planets["Proxima Centauri 2"];
 
-            PlanItem item2 = new PlanItem();
+			PlanItem item2 = new PlanItem();
 
-            item2.Place = secondPoint;
+			item2.Place = secondPoint;
 
-            CargoSell csa = new CargoSell();
+			CargoSell csa = new CargoSell();
 
-            csa.PlayerId = 1;
-            csa.ActionArgs = new object[]{
-                    "Proxima Centauri",
-                    "Proxima Centauri 2",
-                    1,
-                    10,
-                    "TraderCargoDAO",
-                    1,
-                    1
-            };
+			csa.PlayerId = 1;
+			csa.ActionArgs = new object[]{
+					"Proxima Centauri",
+					"Proxima Centauri 2",
+					1,
+					10,
+					"TraderCargoDAO",
+					1,
+					1
+			};
 
-            item2.Actions.Add(csa);
+			item2.Actions.Add(csa);
 
-            plan.Add(item1);
-            plan.Add(item2);
+			plan.Add(item1);
+			plan.Add(item2);
 
-            Spaceship sh = new Spaceship(1, "pussywagon");
+			Spaceship sh = new Spaceship(1, "pussywagon");
 
-            sh.MaxSpeed = 1;
+			sh.MaxSpeed = 1;
 
-            plan.PlanFirstItem(GameServer.CurrentInstance, sh);
+			plan.PlanFirstItem(GameServer.CurrentInstance, sh);
 
-            return true;
-        }
-    }
+			return true;
+		}
+	}
 }
