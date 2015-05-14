@@ -101,6 +101,9 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
+			// increase player experiences by a fraction of cargo price; 1 is minimum gain 
+			gameServer.Statistics.IncrementExperiences(player, Math.Max(1, (int)(cargo.CargoPrice * Count) / ExperienceLevels.FRACTION_OF_CARGO_PRICE));
+
             ShipUnloadCargo unloadingAction = new ShipUnloadCargo();
             Object[] args = { StarSystemName, PlanetName, SellerShipId, CargoLoadEntityID, Count, ActionArgs[4].ToString(),BuyerID, SellerShipId };
             unloadingAction.ActionArgs = args;

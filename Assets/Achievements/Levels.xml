@@ -1,13 +1,53 @@
 <?xml version="1.0"?>
 <Levels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="SpaceTrafficData">
 	<Level levelID="1">
-		<Name>Rookie</Name>
+		<Name>Investor</Name>
+		<RequiredXP>0</RequiredXP>
+	</Level>
+
+	<Level levelID="2">
+		<Name>Entrepreneur</Name>
+		<RequiredXP>500</RequiredXP>
+	</Level>
+
+	<Level levelID="3">
+		<Name>Financier</Name>
 		<RequiredXP>1000</RequiredXP>
+	</Level>
+	
+	<Level levelID="4">
+		<Name>Industrialist</Name>
+		<RequiredXP>2000</RequiredXP>
+	</Level>
+	
+	<Level levelID="5">
+		<Name>Captain of Industry</Name>
+		<RequiredXP>4000</RequiredXP>
+	</Level>
+	
+	<Level levelID="6">
+		<Name>Business Man</Name>
+		<RequiredXP>8000</RequiredXP>
+	</Level>
+	
+	<Level levelID="7">
+		<Name>Mogul</Name>
+		<RequiredXP>16000</RequiredXP>
+	</Level>
+	
+	<Level levelID="8">
+		<Name>Tycoon</Name>
+		<RequiredXP>32000</RequiredXP>
+	</Level>
+	
+	<Level levelID="9">
+		<Name>Business Magnate</Name>
+		<RequiredXP>64000</RequiredXP>
 	</Level>
 
 	<Level levelID="10">
-		<Name>G.O.D</Name>
-		<RequiredXP>100000000</RequiredXP>
+		<Name>President of Universe</Name>
+		<RequiredXP>128000</RequiredXP>
 	</Level>
 
 </Levels>

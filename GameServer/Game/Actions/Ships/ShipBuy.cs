@@ -48,6 +48,8 @@ namespace SpaceTraffic.Game.Actions
 				Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(this.PlayerId);
 				// log the ship buy action to statistics
 				gameServer.Statistics.SetStatisticItemTo(player, "shipFleet", player.SpaceShips.Count);
+				// increase player experiences by a fraction of ship price 
+				gameServer.Statistics.IncrementExperiences(player, price / ExperienceLevels.FRACTION_OF_SHIP_PRICE);
 				result = String.Format("Loď {0} zakoupena.", ship.SpaceShipName);
 			}			
 		}

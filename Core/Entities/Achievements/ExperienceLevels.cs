@@ -31,6 +31,16 @@ namespace SpaceTraffic.Entities
     [System.Xml.Serialization.XmlRoot(ElementName = "Levels", IsNullable = false, Namespace = "SpaceTrafficData")]
     public class ExperienceLevels
     {
+		/// <summary>
+		/// Divider used for calculate number of experiences gained for buying ship (divider for a price of the ship)
+		/// </summary>
+		public static int FRACTION_OF_SHIP_PRICE = 5000;
+
+		/// <summary>
+		/// Divider used for calculate number of experiences gained for buying cargo (divider for a price of the cargo)
+		/// </summary>
+		public static int FRACTION_OF_CARGO_PRICE = 100;
+
         #region "Fields and Properties"
 
         /// <summary>
