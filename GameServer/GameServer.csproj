@@ -108,12 +108,14 @@
     <Compile Include="Engine\IScriptManager.cs" />
     <Compile Include="Engine\IGameManager.cs" />
     <Compile Include="Engine\IServiceManager.cs" />
+    <Compile Include="Engine\IStatisticsManager.cs" />
     <Compile Include="Engine\IWorldManager.cs" />
     <Compile Include="GameServer\EventQueue.cs" />
     <Compile Include="GameServer\GameManager.cs" />
     <Compile Include="GameServer\GameStateManager.cs" />
     <Compile Include="GameServer\ScriptManager.cs" />
     <Compile Include="GameServer\GoodsManager.cs" />
+    <Compile Include="GameServer\StatisticsManager.cs" />
     <Compile Include="GameServer\WorldManager.cs" />
     <Compile Include="Game\Actions\CargoSell.cs" />
     <Compile Include="Game\Actions\CargoBuy.cs" />

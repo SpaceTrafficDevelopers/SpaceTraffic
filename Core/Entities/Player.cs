@@ -33,14 +33,17 @@ namespace SpaceTraffic.Entities
 			initStatistics();
 		}
 
+		#region StatisticsFunctions
 		/// <summary>
 		/// 
 		/// </summary>
 		private void initStatistics()
 		{
-			Statistics.Add(new Statistic("abc"));
-			Statistics.Add(new Statistic("def"));
+			Statistics.Add(new Statistic("condition1"));
+			Statistics.Add(new Statistic("condition2"));
+			Statistics.Add(new Statistic("condition3"));
 		}
+		#endregion
 
 		[DataMember]
 		public int PlayerId { get; set; }
