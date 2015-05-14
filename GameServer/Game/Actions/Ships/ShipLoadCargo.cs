@@ -49,24 +49,28 @@ namespace SpaceTraffic.Game.Actions
             if (dockedBase == null || !dockedBase.Planet.Equals(planet.Location))
             {
                 result = String.Format("Loď {0} není zadokována na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
+                State = GameActionState.FAILED;
                 return;
             }
 
             if (spaceShip.PlayerId != PlayerId)
             {
                 result = String.Format("Loď {0} Vám nepatří, nemůžete na ní naložit náklad.", spaceShip.SpaceShipName);
+                State = GameActionState.FAILED;
                 return;
             }
 
             if(!checkSpaceShipCargos(gameServer,spaceShip, cargo)){
                 
                 result = String.Format("Loď {0} nemá dostatek místa na naložení nákladu.", spaceShip.SpaceShipName);
+                State = GameActionState.FAILED;
                 return;
             }
 
             if (cargo.CargoCount < Count)
             {
                 result = String.Format("U obchodníka id={0} není požadovaných {1} jednotek zboží id={2}.", cargo.CargoOwnerId, Count, cargo.CargoId);
+                State = GameActionState.FAILED;
                 return;
             }
 
@@ -75,6 +79,7 @@ namespace SpaceTraffic.Game.Actions
             if (!BuyingPlace.UpdateOrRemoveCargo(cargo))
             {
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
+                State = GameActionState.FAILED;
                 return;
             }
 
@@ -83,6 +88,7 @@ namespace SpaceTraffic.Game.Actions
 
             gameServer.Persistence.GetSpaceShipCargoDAO().InsertOrUpdateCargo(cargo);
             result = String.Format("Náklad byl úspěšně naložen na loď s {0}.", spaceShip.SpaceShipName);
+            State = GameActionState.FINISHED;
         }
 
         /// <summary>

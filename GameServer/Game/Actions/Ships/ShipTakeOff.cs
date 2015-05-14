@@ -48,6 +48,7 @@ namespace SpaceTraffic.Game.Actions.Ships
 
         public void Perform(IGameServer gameServer)
         {
+            State = GameActionState.PLANNED;
             getArgumentsFromActionArgs();
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ShipID);
@@ -60,24 +61,28 @@ namespace SpaceTraffic.Game.Actions.Ships
             if (player == null || spaceShip == null)
             {
                 result = String.Format("Nastala chyba při vyhledávání položek");
+                State = GameActionState.FAILED;
                 return;
             }
 
             if(spaceShip.PlayerId != PlayerId)
             {
                 result = String.Format("Loď {0} nepatří hráči {1}", spaceShip.SpaceShipName, player.PlayerName);
+                State = GameActionState.FAILED;
                 return;
             }
 
             if (dockedBase == null || !dockedBase.Planet.Equals(planet.Location))
             {
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, planet.Name);
+                State = GameActionState.FAILED;
                 return;
             }
 
             if(spaceShip.IsFlying)
             {
                 result = String.Format("Loď {0} letí, nemůže tedy znovu vzletět", spaceShip.SpaceShipName);
+                State = GameActionState.FAILED;
                 return;
             }
 
@@ -87,8 +92,11 @@ namespace SpaceTraffic.Game.Actions.Ships
             if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
             {
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
+                State = GameActionState.FAILED;
                 return;
             }
+
+            State = GameActionState.FINISHED;
         }
 
         private void getArgumentsFromActionArgs()

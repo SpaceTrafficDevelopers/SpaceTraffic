@@ -26,6 +26,9 @@ namespace SpaceTraffic.Game.Actions
 {
     class PlanEvents : IGameAction
     {
+        private static readonly int REPLAN_TIMEOUT = 30;
+        private int numberOfTries = 10;
+
         private string result = "Plánují se akce";
 
         public object Result
@@ -48,31 +51,39 @@ namespace SpaceTraffic.Game.Actions
 
         public void Perform(IGameServer gameServer)
         {
+            State = GameActionState.PLANNED;
             getArgumentsFromActionArgs();
 
             if (plan == null || plan.Count == 0 || actualItem == null || !plan.Contains(actualItem) || ship == null)
+            {
+                State = GameActionState.FINISHED;
                 return;
+            }
 
-            if(!checkActions(actualItem))
+            if(!checkActions(actualItem) && numberOfTries > 0)
             {
                 replanAction(gameServer);
+                State = GameActionState.PREPARED;
                 return;
             }
 
             plan.planEventsForNextItem(actualItem, gameServer,ship);
+            State = GameActionState.FINISHED;
 
         }
 
         private void replanAction(IGameServer gameServer)
         {
-            ShipEvent newPlanEvent = new ShipEvent();
-                newPlanEvent.BoundAction = this;
-                GameTime eventTime = new GameTime();
-                eventTime.Value =  gameServer.Game.currentGameTime.Value;
-                eventTime.Value = eventTime.Value.AddSeconds(10);
-                newPlanEvent.PlannedTime = eventTime;
+            numberOfTries--;
 
-                gameServer.Game.PlanEvent(newPlanEvent);
+            ShipEvent newPlanEvent = new ShipEvent();
+            newPlanEvent.BoundAction = this;
+            GameTime eventTime = new GameTime();
+            eventTime.Value = gameServer.Game.currentGameTime.Value;
+            eventTime.Value = eventTime.Value.AddSeconds(REPLAN_TIMEOUT);
+            newPlanEvent.PlannedTime = eventTime;
+
+            gameServer.Game.PlanEvent(newPlanEvent);
         }
 
         private bool checkActions(PlanItem item)

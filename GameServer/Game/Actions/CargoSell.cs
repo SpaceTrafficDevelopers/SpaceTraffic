@@ -66,6 +66,7 @@ namespace SpaceTraffic.Game.Actions
 
         public void Perform(IGameServer gameServer)
         {
+            State = GameActionState.PLANNED;
             getArgumentsFromActionArgs(gameServer);
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SellerShipId);
@@ -79,18 +80,21 @@ namespace SpaceTraffic.Game.Actions
             if (cargo == null)
             {
                 result = String.Format("Hráč {0} nemá zboží s ID = {1}.", player.PlayerId, CargoLoadEntityID);
+                State = GameActionState.FAILED;
                 return;
             }
 
             if (dockedBase == null || !dockedBase.Planet.Equals(planet.Location))
             {
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
+                State = GameActionState.FAILED;
                 return;
             }
 
             if(cargo.CargoCount < Count)
             {
                 result = String.Format("Hráč {0} nemá požadovaných {1} jednotek zboží s ID = {1}.", player.PlayerId, Count, CargoLoadEntityID);
+                State = GameActionState.FAILED;
                 return;
             }
 
@@ -98,6 +102,7 @@ namespace SpaceTraffic.Game.Actions
             if (!gameServer.Persistence.GetPlayerDAO().IncrasePlayersCredits(player.PlayerId,(int)(cargo.CargoPrice*Count)))
             {
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
+                State = GameActionState.FAILED;
                 return;
             }
 
@@ -105,14 +110,6 @@ namespace SpaceTraffic.Game.Actions
             Object[] args = { StarSystemName, PlanetName, SellerShipId, CargoLoadEntityID, Count, ActionArgs[4].ToString(),BuyerID, SellerShipId };
             unloadingAction.ActionArgs = args;
             unloadingAction.PlayerId = PlayerId;
-            /*unloadingAction.PlayerId = PlayerId;
-            unloadingAction.SpaceShipID = SellerShipId;
-            unloadingAction.StarSystemName = StarSystemName;
-            unloadingAction.PlanetName = PlanetName;
-            unloadingAction.CargoLoadEntityID = cargo.CargoLoadEntityId;
-            unloadingAction.LoadingPlace = LoadingPlace;
-            unloadingAction.BuyerID = BuyerID;*/
-
 
             gameServer.Game.PerformAction(unloadingAction);
             State = GameActionState.FINISHED;
