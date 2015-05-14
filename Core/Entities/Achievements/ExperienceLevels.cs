@@ -41,6 +41,11 @@ namespace SpaceTraffic.Entities
 		/// </summary>
 		public static int FRACTION_OF_CARGO_PRICE = 100;
 
+		/// <summary>
+		/// How many XP will player get for earning the achievement
+		/// </summary>
+		public static int XP_FOR_ACHIEVEMENT_GET = 400;
+
         #region "Fields and Properties"
 
         /// <summary>
@@ -76,7 +81,9 @@ namespace SpaceTraffic.Entities
         }
 
         #endregion
-    }
+
+		
+	}
 
     /// <summary>
     /// Description of a single level

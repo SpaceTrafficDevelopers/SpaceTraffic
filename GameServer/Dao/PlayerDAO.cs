@@ -42,6 +42,16 @@ namespace SpaceTraffic.Dao
 			}
 		}
 
+
+
+		public Player GetPlayerWithIncludes(int playerId)
+		{
+			using (var contextDB = CreateContext())
+			{
+				return contextDB.Players.Include("SpaceShips").Include("Statistics").Include("EarnedAchievements").FirstOrDefault(x => x.PlayerId.Equals(playerId));
+			}
+		}
+
 		public Player GetPlayerByName(string playerName)
 		{
 			using (var contextDB = CreateContext())

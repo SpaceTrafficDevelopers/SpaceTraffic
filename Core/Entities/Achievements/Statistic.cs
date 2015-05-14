@@ -41,23 +41,6 @@ namespace SpaceTraffic.Entities
         public int PlayerId { get; set; }
 
         public virtual Player Player { get; set; }
-
-        public Statistic()
-        {
-            this.StatValue = 0;
-        }
-
-        public Statistic(string statName)
-        {
-            this.StatName = statName;
-            this.StatValue = 0;
-        }
-
-        public Statistic(string statName, int statValue)
-        {
-            this.StatName = statName;
-            this.StatValue = statValue;
-        }
        
     }
 }

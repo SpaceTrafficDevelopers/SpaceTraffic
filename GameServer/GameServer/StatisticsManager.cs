@@ -53,12 +53,7 @@ namespace SpaceTraffic.GameServer
 				throw new ArgumentOutOfRangeException("The decrement has to be positive.");
 			}
 
-			Statistic statToUpdate = player.Statistics.FirstOrDefault(x => x.StatName.Equals(statisticName));
-
-			if (statToUpdate == null)
-			{
-				throw new ArgumentException("Unknown statistic name.");
-			}
+			Statistic statToUpdate = getStatToUpdate(player, statisticName);
 
 			statToUpdate.StatValue -= declineBy;
 
@@ -67,6 +62,23 @@ namespace SpaceTraffic.GameServer
 			statisticDao.UpdateStatisticById(statToUpdate);
 
 			CheckAchievementsUnlocks(player);
+		}
+
+		/// <summary>
+		/// Allways gives a row with statistics. When it have not existed before, creates one.
+		/// </summary>
+		/// <param name="player">The player.</param>
+		/// <param name="statisticName">Name of the statistic.</param>
+		/// <returns></returns>
+		private Statistic getStatToUpdate(Player player, string statisticName)
+		{
+			Statistic statToUpdate = player.Statistics.FirstOrDefault(x => x.StatName.Equals(statisticName));
+			if(statToUpdate == null){//if does not exist, is added
+				IStatisticDAO statisticDao = gameServer.Persistence.GetStatisticsDAO();
+				statisticDao.InsertStatistic(new Statistic() { StatName = statisticName, PlayerId = player.PlayerId, StatValue = 0 });
+				statToUpdate = statisticDao.GetStatisticsByPlayerId(player.PlayerId).FirstOrDefault(x => x.StatName.Equals(statisticName));
+			}
+			return statToUpdate;
 		}
 
 
@@ -83,12 +95,7 @@ namespace SpaceTraffic.GameServer
 				throw new ArgumentOutOfRangeException("The increment has to be positive.");
 			}
 
-			Statistic statToUpdate = player.Statistics.FirstOrDefault(x => x.StatName.Equals(statisticName));
-
-			if (statToUpdate == null)
-			{
-				throw new ArgumentException("Unknown statistic name.");
-			}
+			Statistic statToUpdate = getStatToUpdate(player, statisticName);
 
 			statToUpdate.StatValue += riseBy;
 
@@ -107,12 +114,7 @@ namespace SpaceTraffic.GameServer
 		/// <param name="value">New value.</param>
 		public void SetStatisticItemTo(Player player, string statisticName, int value)
 		{
-			Statistic statToUpdate = player.Statistics.FirstOrDefault(x => x.StatName.Equals(statisticName));
-
-			if (statToUpdate == null)
-			{
-				throw new ArgumentException("Unknown statistic name.");
-			}
+			Statistic statToUpdate = getStatToUpdate(player, statisticName);
 
 			statToUpdate.StatValue = value;
 
@@ -192,7 +194,7 @@ namespace SpaceTraffic.GameServer
 
 					if (statToCheck == null)
 					{
-						throw new MissingFieldException("Statistic {0} doesn't exist.", condition.CondName);
+						continue; //statistic was never used or changed (is not in DB)
 					}
 
 					// condition is not met by current statistic value
@@ -219,7 +221,7 @@ namespace SpaceTraffic.GameServer
 					player.EarnedAchievements.Add(newlyEarnedAchievement);
 
 					// reward player with some experiences 
-					gameServer.Statistics.IncrementExperiences(player, 400);
+					gameServer.Statistics.IncrementExperiences(player, ExperienceLevels.XP_FOR_ACHIEVEMENT_GET);
 				}
 			}
 		}
