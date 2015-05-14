@@ -1,8 +1,13 @@
 ﻿@{
-	ViewBag.Title = "profile_achievements";
+	
+	var userName = Context.User.Identity.Name;
+
 	SpaceTraffic.GameUi.GameServerClient.IGameServerClient Client = SpaceTraffic.GameUi.GameServerClient.GameServerClientFactory.GetClientInstance();
 
 	SpaceTraffic.Entities.Achievements profile_achievements = Client.GameService.GetAchievements();
+	List<int> earned_achievements_indexes = Client.GameService.GetAllEarnedAchievementsIndexes(userName);
+
+
 }
 
 <h2>Achievements</h2>
@@ -12,7 +17,18 @@
 	@for (int i = 1; i <= profile_achievements.Items.Count; i++)
 	{
 		SpaceTraffic.Entities.TAchievement achievement = profile_achievements.GetAchievement(i);
+		var unlocked_label = "";
 
+		if (earned_achievements_indexes.Contains(i))
+		{
+
+			//TODO url of unlocked file stored in achievement definition.
+			var unlocked_image_name = achievement.Name.Replace(" ", "");
+			achievement.Image = "../Content/images/Achievements/" + unlocked_image_name + "Complete.jpg";
+			unlocked_label = "Unlocked";
+		}
+
+		//TODO "Unlocked" label with date?
 		if (achievement != null)
 		{
 			<div class="profile_achievement">
@@ -20,10 +36,10 @@
 					<tr>
 						<td class="profile_achievementicon" rowspan="2">
 							<img src="@achievement.Image" alt="
-						foto" width="64px" height="64px" />
+                        foto" width="64px" height="64px" />
 						</td>
 						<td class="profile_achievementname">@achievement.Name</td>
-						<td class="profile_achievementdate" rowspan="2"></td>
+						<td class="profile_achievementdate" rowspan="2">@unlocked_label</td>
 					</tr>
 					<tr>
 						<td class="profile_achievementdescription">@achievement.Description</td>
@@ -33,7 +49,10 @@
 		}
 	}
 
+
 </div>
+
+
 
 
 @*
@@ -120,4 +139,4 @@
 				</table>
 			</div>
 	</div>
-*@
+*@ 

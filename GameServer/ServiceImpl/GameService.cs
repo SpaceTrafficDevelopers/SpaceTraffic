@@ -173,6 +173,29 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return result;
 		}
 
+		public List<int> GetAllEarnedAchievementsIndexes(string playerName)
+		{
+
+			List<int> result = new List<int>();
+			Player player = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByName(playerName);
+			var earnedAchievements = from achv in player.EarnedAchievements
+									 select achv;
+
+			foreach (EarnedAchievement earnedAchv in earnedAchievements)
+			{
+				result.Add(earnedAchv.AchievementId);
+
+			}
+
+			//TODO DIWA Static data for purpose of achievement view test. Remove before use. Achivement id = 5 appears as unlocked (earned) at app view.
+			//begin
+			result.Clear();
+			result.Add(5);
+			//end
+
+			return result;
+		}
+
 		public bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount) 
 		{
 			TraderCargo tc = (TraderCargo) GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);

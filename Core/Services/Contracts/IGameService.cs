@@ -71,6 +71,9 @@ namespace SpaceTraffic.Services.Contracts
 
 		[OperationContract]
 		List<TAchievement> GetEarnedAchievements(String playerName);
+
+		[OperationContract]
+		List<int> GetAllEarnedAchievementsIndexes(String playerName);
         
 	}
 
