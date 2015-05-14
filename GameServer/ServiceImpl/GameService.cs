@@ -188,7 +188,6 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
         public bool TestPlanner()
         {
-
             PathPlan plan = new PathPlan(1);
             PlanItem item1 = new PlanItem();
             
@@ -246,7 +245,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             plan.Add(holik);
             plan.Add(item2);
 
-            Spaceship sh = new Spaceship(1, "pussywagon");
+            Spaceship sh = new Spaceship(1, "Ship de la Test");
 
             sh.MaxSpeed = 20;
 

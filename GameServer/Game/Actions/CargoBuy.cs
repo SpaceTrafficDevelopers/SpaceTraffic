@@ -79,6 +79,7 @@ namespace SpaceTraffic.Game.Actions
 
         public void Perform(IGameServer gameServer)
         {
+            State = GameActionState.PLANNED;
             getArgumentsFromActionArgs(gameServer);
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             ICargoLoadEntity cargo = BuyingPlace.GetCargoByID(CargoLoadEntityID);
@@ -92,41 +93,37 @@ namespace SpaceTraffic.Game.Actions
             if (dockedBase == null || !dockedBase.Planet.Equals(planet.Location))
             {
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
+                State = GameActionState.FAILED;
                 return;
             }
 
             if(player == null || cargo == null)
             {
                 result = String.Format("Nastala chyba při vyhledávání položek");
+                State = GameActionState.FAILED;
                 return;
             }
 
             if (cargo.CargoCount < Count)
             {
                 result = String.Format("U obchodníka id={0} není požadovaných {1} jednotek zboží id={2}.", cargo.CargoOwnerId, Count, cargo.CargoId);
+                State = GameActionState.FAILED;
                 return;
             }
 
             if(player.Credit < cargo.CargoPrice * Count)
             {
                 result = String.Format("Hráč id={0} nemá peníze na nákup {1} jednotek zboží id={2}.", player.PlayerId, Count, cargo.CargoId);
+                State = GameActionState.FAILED;
                 return;
             }
 
             if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(player.PlayerId, (int)(cargo.CargoPrice * Count)))
             {
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
+                State = GameActionState.FAILED;
                 return;
             }
-
-            /*cargo.CargoCount -= Count;
-           // BuyingPlace.UpdateOrRemoveCargo(cargo);
-            
-            if(!BuyingPlace.UpdateOrRemoveCargo(cargo))
-            {
-                result = String.Format("Změny se nepovedlo zapsat do databáze");
-                return;
-            }*/
 
             cargo.CargoCount = Count;
             cargo.CargoOwnerId = player.PlayerId;
@@ -137,11 +134,6 @@ namespace SpaceTraffic.Game.Actions
             Object[] args = { StarSystemName, PlanetName, BuyerShipID, CargoLoadEntityID, Count, ActionArgs[4].ToString() };
             loadingAction.ActionArgs = args;
             loadingAction.PlayerId = PlayerId;
-            /*
-            loadingAction.SpaceShipID = BuyerShipID;
-            loadingAction.StarSystemName = StarSystemName;
-            loadingAction.PlanetName = PlanetName;
-            loadingAction.Cargo = cargo;*/
             gameServer.Game.PerformAction(loadingAction);
             State = GameActionState.FINISHED;
         }
