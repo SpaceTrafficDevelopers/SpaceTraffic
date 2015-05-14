@@ -1,11 +1,12 @@
 ﻿@{
+	//ViewBag.Title = "profile_achievements";
 	var userName = Context.User.Identity.Name;
 
 	SpaceTraffic.GameUi.GameServerClient.IGameServerClient Client = SpaceTraffic.GameUi.GameServerClient.GameServerClientFactory.GetClientInstance();
 
 	SpaceTraffic.Entities.Achievements profileAchievements = Client.GameService.GetAchievements();
 
-	//SpaceTraffic.Entities.Player actualPlayer = Client.GameService.
+	//SpaceTraffic.Entities.Player actualPlayer = Client.GameService.GetPlayer(userName);
 }
 
 <h2>Achievements</h2>
@@ -15,15 +16,16 @@
 	@for (int i = 1; i <= profileAchievements.Items.Count; i++)
 	{
 		SpaceTraffic.Entities.TAchievement achievement = profileAchievements.GetAchievement(i);
+		SpaceTraffic.Entities.EarnedAchievement earnedAchievement = null;
 		string unlockedLabel = "";
 
 		if (achievement != null)
 		{
 			// non-null if earned achievements contain achivement with corresponding id
-			//SpaceTraffic.Entities.EarnedAchievement earnedAchievement = actualPlayer.EarnedAchievements.FirstOrDefault(a => a.AchievementId.Equals(achievement.AchievementID));
+			/*earnedAchievement = actualPlayer.EarnedAchievements.FirstOrDefault(a => a.AchievementId.Equals(achievement.AchievementID));
 
 
-			/*if (earnedAchievement != null)
+			if (earnedAchievement != null)
 			{
 				unlockedLabel = earnedAchievement.UnlockedAt.ToString();
 			}
@@ -34,7 +36,44 @@
 			}*/
 		}
 
+		// print earned achievements first
+		if (achievement != null && earnedAchievement != null)
+		{
+			<div class="profile_achievement">
+				<table class="profile_achievementtable">
+					<tr>
+						<td class="profile_achievementicon" rowspan="2">
+							<img src="@achievement.Image" alt="
+						foto" />
+						</td>
+						<td class="profile_achievementname">@achievement.Name</td>
+						<td class="profile_achievementdate" rowspan="2">@unlockedLabel</td>
+					</tr>
+					<tr>
+						<td class="profile_achievementdescription">@achievement.Description</td>
+					</tr>
+				</table>
+			</div>
+		}
+	}
+
+	<br /><br />
+
+	@for (int i = 1; i <= profileAchievements.Items.Count; i++)
+	{
+		SpaceTraffic.Entities.TAchievement achievement = profileAchievements.GetAchievement(i);
+		SpaceTraffic.Entities.EarnedAchievement earnedAchievement = null;
+		string unlockedLabel = "";
+
 		if (achievement != null)
+		{
+			// non-null if earned achievements contain achivement with corresponding id
+			//earnedAchievement = actualPlayer.EarnedAchievements.FirstOrDefault(a => a.AchievementId.Equals(achievement.AchievementID));
+
+		}
+
+		// print non earned achievements second
+		if (achievement != null && earnedAchievement == null)
 		{
 			<div class="profile_achievement">
 				<table class="profile_achievementtable">
