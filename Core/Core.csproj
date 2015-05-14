@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AchievementsLoader.cs" />
+    <Compile Include="Data\ExperienceLevelsLoader.cs" />
     <Compile Include="Data\GalaxyMapLoader.cs" />
     <Compile Include="Data\GalaxyMapBuildingException.cs" />
     <Compile Include="Data\GalaxyMapXmlHelper.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Data\StarSystemXmlHelper.cs" />
     <Compile Include="Entities\Achievements.cs" />
     <Compile Include="Entities\Achievements\EarnedAchievement.cs" />
+    <Compile Include="Entities\Achievements\ExperienceLevels.cs" />
     <Compile Include="Entities\Achievements\Statistic.cs" />
     <Compile Include="Entities\Base.cs" />
     <Compile Include="Entities\Cargo.cs" />

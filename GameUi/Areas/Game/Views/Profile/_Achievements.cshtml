@@ -5,7 +5,7 @@
 
 	SpaceTraffic.Entities.Achievements profileAchievements = Client.GameService.GetAchievements();
 
-	SpaceTraffic.Entities.Player actualPlayer = Client.GameService.GetPlayer(userName);
+	//SpaceTraffic.Entities.Player actualPlayer = Client.GameService.
 }
 
 <h2>Achievements</h2>
@@ -20,10 +20,10 @@
 		if (achievement != null)
 		{
 			// non-null if earned achievements contain achivement with corresponding id
-			SpaceTraffic.Entities.EarnedAchievement earnedAchievement = actualPlayer.EarnedAchievements.FirstOrDefault(a => a.AchievementId.Equals(achievement.AchievementID));
+			//SpaceTraffic.Entities.EarnedAchievement earnedAchievement = actualPlayer.EarnedAchievements.FirstOrDefault(a => a.AchievementId.Equals(achievement.AchievementID));
 
 
-			if (earnedAchievement != null)
+			/*if (earnedAchievement != null)
 			{
 				unlockedLabel = earnedAchievement.UnlockedAt.ToString();
 			}
@@ -31,7 +31,7 @@
 			{
 				// replace the completed image to not completed
 				achievement.Image = achievement.Image.Replace("Complete", string.Empty);
-			}
+			}*/
 		}
 
 		if (achievement != null)
