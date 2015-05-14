@@ -156,17 +156,16 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 		}
 
 
-		public List<TAchievement> GetEarnedAchievements(string playerName)
+		public List<TAchievement> GetEarnedAchievements(int playerId)
 		{
 
 			List<TAchievement> result = new List<TAchievement>();
-			Player player = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByName(playerName);
+			Player player = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(playerId);
 
 			if (player != null)
 			{
-				var unviewedAchievements = from achv in player.EarnedAchievements
-										   where achv.IsJustEarned == true
-										   select achv;
+				EarnedAchievementDAO earnedDao = (EarnedAchievementDAO)GameServer.CurrentInstance.Persistence.GetEarnedAchievementDAO();
+				var unviewedAchievements = earnedDao.GetUnviewedAchievementsByPlayerId(playerId);
 
 				foreach (EarnedAchievement earnedAchv in unviewedAchievements)
 				{
@@ -174,7 +173,6 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 					earnedAchv.IsJustEarned = false;
 
 					// update earned status in DB
-					EarnedAchievementDAO earnedDao = (EarnedAchievementDAO)GameServer.CurrentInstance.Persistence.GetEarnedAchievementDAO();
 					earnedDao.UpdateEarnedAchievementById(earnedAchv);
 				}
 			}

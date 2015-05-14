@@ -73,11 +73,11 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			}
 		}
 
-		public List<TAchievement> GetEarnedAchievements(string playerName)
+		public List<TAchievement> GetEarnedAchievements(int playerId)
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetEarnedAchievements(playerName);
+				return (channel as IGameService).GetEarnedAchievements(playerId);
 			}
 		}
 

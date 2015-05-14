@@ -72,5 +72,13 @@ namespace SpaceTraffic.Dao
         bool UpdateEarnedAchievementById(EarnedAchievement earnedAchievement);
 
 
+		/// <summary>
+		/// Gets the unviewed achievements by player.
+		/// </summary>
+		/// <param name="playerId">The player identifier.</param>
+		/// <returns></returns>
+		List<EarnedAchievement> GetUnviewedAchievementsByPlayerId(int playerId);
+
+
     }
 }

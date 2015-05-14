@@ -136,7 +136,7 @@ var SvgStarSystemMap = {
         	this.svgItems[i].revive();
         }
 
-        $.getJSON($("#appRoot").attr("href") + 'Achievement/GetEarnedAchievements', function (unviewedAchievements) {
+        $.getJSON('/' + 'Achievement/GetEarnedAchievements', function (unviewedAchievements) {
         	if (jQuery.isEmptyObject(unviewedAchievements)) {
         		return;
         	}

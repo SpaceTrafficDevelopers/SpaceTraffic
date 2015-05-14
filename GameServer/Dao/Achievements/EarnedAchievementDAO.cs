@@ -50,6 +50,17 @@ namespace SpaceTraffic.Dao
             }
         }
 
+		public List<EarnedAchievement> GetUnviewedAchievementsByPlayerId(int playerId)
+		{
+			using (var contextDB = CreateContext())
+			{
+				return (from x in contextDB.EarnedAchievements
+						where x.PlayerId.Equals(playerId)
+						where x.IsJustEarned.Equals(true)
+						select x).ToList<EarnedAchievement>();
+			}
+		}
+
         public bool InsertEarnedAchievement(EarnedAchievement earnedAchievement)
         {
             using (var contextDB = CreateContext())
@@ -112,5 +123,7 @@ namespace SpaceTraffic.Dao
                 }
             }
         }
-    }
+
+		
+	}
 }
