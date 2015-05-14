@@ -211,8 +211,17 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             item1.Actions.Add(cba);
 
 
+
+            NavPoint hole = new NavPoint();
+            hole.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].WormholeEndpoints[0];
+
+            PlanItem holik = new PlanItem();
+            holik.Place = hole;
+
+           
+
             NavPoint secondPoint = new NavPoint();
-            secondPoint.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].Planets["Proxima Centauri 2"];
+            secondPoint.Location = GameServer.CurrentInstance.World.Map["Solar system"].Planets["Sol 1"];
 
             PlanItem item2 = new PlanItem();
 
@@ -222,8 +231,8 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
             csa.PlayerId = 1;
             csa.ActionArgs = new object[]{
-                    "Proxima Centauri",
-                    "Proxima Centauri 2",
+                    "Solar system",
+                    "Sol 1",
                     1,
                     10,
                     "TraderCargoDAO",
@@ -234,6 +243,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             item2.Actions.Add(csa);
 
             plan.Add(item1);
+            plan.Add(holik);
             plan.Add(item2);
 
             Spaceship sh = new Spaceship(1, "pussywagon");
