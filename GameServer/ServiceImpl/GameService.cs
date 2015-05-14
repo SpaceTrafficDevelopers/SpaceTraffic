@@ -150,22 +150,26 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return GameServer.CurrentInstance.World.GetAchievementById(id);
 		}
 
+		
 		public List<TAchievement> GetEarnedAchievements(string playerName)
 		{
 
 			List<TAchievement> result = new List<TAchievement>();
 			Player player = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByName(playerName);
 			var unviewedAchievements = from achv in player.EarnedAchievements
-									   where achv.IsJustEarned = true
+									   where achv.IsJustEarned == true
 									   select achv;
-			//foreach (EarnedAchievement earnedAchv in unviewedAchievements)
-			//{
-			//    result.Add(GetAchievementById(earnedAchv.AchievementId));
-			//    earnedAchv.IsJustEarned = false;
-			//}
-			// TODO ZER0 - Remove dummy data
-			result.Add(new TAchievement() { AchievementID = 1, Image = "img/01.png", Description = "desc", Name = "Barrel Roll" });
-			result.Add(new TAchievement() { AchievementID = 2, Image = "img/02.png", Description = "desc", Name = "All your bases are belong to us" });
+
+			foreach (EarnedAchievement earnedAchv in unviewedAchievements)
+			{
+				result.Add(GetAchievementById(earnedAchv.AchievementId));
+				earnedAchv.IsJustEarned = false;
+
+				// update earned status in DB
+				EarnedAchievementDAO earnedDao = (EarnedAchievementDAO)GameServer.CurrentInstance.Persistence.GetEarnedAchievementDAO();
+				earnedDao.UpdateEarnedAchievementById(earnedAchv);
+			}
+
 			return result;
 		}
 

@@ -85,7 +85,7 @@ namespace SpaceTraffic.GameServer
 			// all relevant achievements
 			foreach (TAchievement achievement in achievementsToCheck)
 			{
-				bool conditionsNotMet = false;
+				bool shouldSkip = false;
 
 				// all conditions of each achievement
 				foreach (TCondition condition in achievement.Conditions.AchievementConditions)
@@ -100,13 +100,13 @@ namespace SpaceTraffic.GameServer
 					// condition is not met by current statistic value
 					if (statToCheck.StatValue < condition.CondValue)
 					{
-						conditionsNotMet = true;
+						shouldSkip = true;
 						break;
 					}
 				}
 
 				// achievement should be unlocked
-				if (!conditionsNotMet)
+				if (!shouldSkip)
 				{
 					EarnedAchievement newlyEarnedAchievement = new EarnedAchievement();
 					newlyEarnedAchievement.IsJustEarned = true;
