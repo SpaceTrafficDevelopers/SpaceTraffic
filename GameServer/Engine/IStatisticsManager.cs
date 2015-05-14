@@ -25,5 +25,9 @@ namespace SpaceTraffic.Engine
 	public interface IStatisticsManager
 	{
 		void IncrementStatisticItem(Player player, string statisticName, int riseBy);
+
+		void DecrementStatisticItem(Player player, string statisticName, int declineBy);
+
+		void SetStatisticItemTo(Player player, string statisticName, int value);
 	}
 }

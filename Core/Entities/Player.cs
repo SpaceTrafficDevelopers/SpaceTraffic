@@ -39,9 +39,30 @@ namespace SpaceTraffic.Entities
 		/// </summary>
 		private void initStatistics()
 		{
-			Statistics.Add(new Statistic("condition1"));
-			Statistics.Add(new Statistic("condition2"));
-			Statistics.Add(new Statistic("condition3"));
+			Statistics.Add(new Statistic("shipFleet"));
+
+			Statistics.Add(new Statistic("soilFactory3x3"));
+			Statistics.Add(new Statistic("bioGasFactory3x3"));
+			Statistics.Add(new Statistic("spicesFactory3x3"));
+			Statistics.Add(new Statistic("jewleryFactory3x3"));
+			Statistics.Add(new Statistic("crystalFactory3x3"));
+			Statistics.Add(new Statistic("pcbFactory3x3"));
+			Statistics.Add(new Statistic("weaponsFactory3x3"));
+			Statistics.Add(new Statistic("satelliteFactory3x3"));
+			Statistics.Add(new Statistic("droneFactory3x3"));
+
+			Statistics.Add(new Statistic("terraWheatFarm"));
+			Statistics.Add(new Statistic("terraPlanktonFarm"));
+			Statistics.Add(new Statistic("terraFlowerFarm"));
+			Statistics.Add(new Statistic("terraFruitsFarm"));
+			Statistics.Add(new Statistic("terraMeatFarm"));
+
+			Statistics.Add(new Statistic("terraOreMine"));
+			Statistics.Add(new Statistic("terraSiliconMine"));
+			Statistics.Add(new Statistic("terraIceMine"));
+			Statistics.Add(new Statistic("terraGoldMine"));
+
+			Statistics.Add(new Statistic("factoryCount"));
 		}
 		#endregion
 

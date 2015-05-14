@@ -230,5 +230,15 @@ namespace SpaceTraffic.GameServer
 
 			return achievements;
 		}
+
+		public Entities.ExperienceLevels LoadExperienceLevels()
+		{
+			string fileName = Path.Combine(this.AssetRootPath, "Achievements", "Levels.xml");
+			logger.Info("Loading experience levels: {0}", fileName);
+
+			Entities.ExperienceLevels experienceLevels = ExperienceLevelsLoader.LoadExperienceLevels(fileName);
+
+			return experienceLevels;
+		}
     }
 }

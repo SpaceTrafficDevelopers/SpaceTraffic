@@ -1,34 +1,39 @@
 ﻿@{
-	
 	var userName = Context.User.Identity.Name;
 
 	SpaceTraffic.GameUi.GameServerClient.IGameServerClient Client = SpaceTraffic.GameUi.GameServerClient.GameServerClientFactory.GetClientInstance();
 
-	SpaceTraffic.Entities.Achievements profile_achievements = Client.GameService.GetAchievements();
-	List<int> earned_achievements_indexes = Client.GameService.GetAllEarnedAchievementsIndexes(userName);
+	SpaceTraffic.Entities.Achievements profileAchievements = Client.GameService.GetAchievements();
 
-
+	SpaceTraffic.Entities.Player actualPlayer = Client.GameService.GetPlayer(userName);
 }
 
 <h2>Achievements</h2>
 <div class="profile">
 
 
-	@for (int i = 1; i <= profile_achievements.Items.Count; i++)
+	@for (int i = 1; i <= profileAchievements.Items.Count; i++)
 	{
-		SpaceTraffic.Entities.TAchievement achievement = profile_achievements.GetAchievement(i);
-		var unlocked_label = "";
+		SpaceTraffic.Entities.TAchievement achievement = profileAchievements.GetAchievement(i);
+		string unlockedLabel = "";
 
-		if (earned_achievements_indexes.Contains(i))
+		if (achievement != null)
 		{
+			// non-null if earned achievements contain achivement with corresponding id
+			SpaceTraffic.Entities.EarnedAchievement earnedAchievement = actualPlayer.EarnedAchievements.FirstOrDefault(a => a.AchievementId.Equals(achievement.AchievementID));
 
-			//TODO url of unlocked file stored in achievement definition.
-			var unlocked_image_name = achievement.Name.Replace(" ", "");
-			achievement.Image = "../Content/images/Achievements/" + unlocked_image_name + "Complete.jpg";
-			unlocked_label = "Unlocked";
+
+			if (earnedAchievement != null)
+			{
+				unlockedLabel = earnedAchievement.UnlockedAt.ToString();
+			}
+			else
+			{
+				// replace the completed image to not completed
+				achievement.Image = achievement.Image.Replace("Complete", string.Empty);
+			}
 		}
 
-		//TODO "Unlocked" label with date?
 		if (achievement != null)
 		{
 			<div class="profile_achievement">
@@ -36,10 +41,10 @@
 					<tr>
 						<td class="profile_achievementicon" rowspan="2">
 							<img src="@achievement.Image" alt="
-                        foto" width="64px" height="64px" />
+						foto" />
 						</td>
 						<td class="profile_achievementname">@achievement.Name</td>
-						<td class="profile_achievementdate" rowspan="2">@unlocked_label</td>
+						<td class="profile_achievementdate" rowspan="2">@unlockedLabel</td>
 					</tr>
 					<tr>
 						<td class="profile_achievementdescription">@achievement.Description</td>

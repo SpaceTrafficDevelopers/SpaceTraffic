@@ -57,6 +57,8 @@ namespace SpaceTraffic.Engine
 
 		Achievements Achievements { get; set; }
 
+		ExperienceLevels ExperienceLevels { get; set; }
+
 		TAchievement GetAchievementById(int id);
     }
 }

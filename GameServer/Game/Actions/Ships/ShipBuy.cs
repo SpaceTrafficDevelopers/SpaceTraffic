@@ -45,6 +45,9 @@ namespace SpaceTraffic.Game.Actions
 			int price = Convert.ToInt32(this.ActionArgs.ElementAt(7));
 			if (gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(this.PlayerId, price)) {
 				gameServer.Persistence.GetSpaceShipDAO().InsertSpaceShip(ship);
+				Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(this.PlayerId);
+				// log the ship buy action to statistics
+				gameServer.Statistics.SetStatisticItemTo(player, "shipFleet", player.SpaceShips.Count);
 				result = String.Format("Loď {0} zakoupena.", ship.SpaceShipName);
 			}			
 		}

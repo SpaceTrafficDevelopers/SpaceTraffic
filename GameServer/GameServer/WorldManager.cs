@@ -95,6 +95,11 @@ namespace SpaceTraffic.GameServer
 		/// </summary>
 		public Achievements Achievements { get; set; }
 
+		/// <summary>
+		/// 
+		/// </summary>
+		public ExperienceLevels ExperienceLevels { get; set; }
+
 		public TAchievement GetAchievementById(int id)
 		{
 			return Achievements.GetAchievement(id);

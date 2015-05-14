@@ -45,6 +45,9 @@ namespace SpaceTraffic.Services.Contracts
 		[OperationContract]
 		Entities.Achievements GetAchievements();
 
+		[OperationContract]
+		Entities.ExperienceLevels GetExperienceLevels();
+
         [OperationContract]
         bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count);
         
@@ -72,8 +75,6 @@ namespace SpaceTraffic.Services.Contracts
 		[OperationContract]
 		List<TAchievement> GetEarnedAchievements(String playerName);
 
-		[OperationContract]
-		List<int> GetAllEarnedAchievementsIndexes(String playerName);
         
 	}
 

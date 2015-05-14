@@ -81,11 +81,11 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			}
 		}
 
-		public List<int> GetAllEarnedAchievementsIndexes(string playerName)
+		public Entities.ExperienceLevels GetExperienceLevels()
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetAllEarnedAchievementsIndexes(playerName);
+				return (channel as IGameService).GetExperienceLevels();
 			}
 		}
 

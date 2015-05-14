@@ -25,27 +25,57 @@ using SpaceTraffic.Dao;
 namespace SpaceTraffic.GameServer
 {
 	/// <summary>
-	/// 
+	/// Allows to manipulate with players' statistics data.
 	/// </summary>
 	public class StatisticsManager : IStatisticsManager
 	{
 		private IGameServer gameServer;
 
 		/// <summary>
-		/// 
+		/// Init the manager.
 		/// </summary>
-		/// <param name="gameServer"></param>
+		/// <param name="gameServer">Concrete game server</param>
 		public StatisticsManager(IGameServer gameServer)
 		{
 			this.gameServer = gameServer;
 		}
 
 		/// <summary>
-		/// 
+		/// Decrement a single statistic.
 		/// </summary>
-		/// <param name="player"></param>
-		/// <param name="statisticName"></param>
-		/// <param name="riseBy"></param>
+		/// <param name="player">Owner of statistics.</param>
+		/// <param name="statisticName">Statistic name.</param>
+		/// <param name="declineBy">Decremenatation amount.</param>
+		public void DecrementStatisticItem(Player player, string statisticName, int declineBy)
+		{
+			if (declineBy <= 0)
+			{
+				throw new ArgumentOutOfRangeException("The decrement has to be positive.");
+			}
+
+			Statistic statToUpdate = player.Statistics.FirstOrDefault(x => x.StatName.Equals(statisticName));
+
+			if (statToUpdate == null)
+			{
+				throw new ArgumentException("Unknown statistic name.");
+			}
+
+			statToUpdate.StatValue -= declineBy;
+
+			// save the change to DB
+			IStatisticDAO statisticDao = gameServer.Persistence.GetStatisticsDAO();
+			statisticDao.UpdateStatisticById(statToUpdate);
+
+			CheckAchievementsUnlocks(player);
+		}
+
+
+		/// <summary>
+		/// Increment a single statistic.
+		/// </summary>
+		/// <param name="player">Owner of statistics.</param>
+		/// <param name="statisticName">Statistic name.</param>
+		/// <param name="riseBy">Incrementation amount.</param>
 		public void IncrementStatisticItem(Player player, string statisticName, int riseBy)
 		{
 			if (riseBy <= 0)
@@ -70,8 +100,33 @@ namespace SpaceTraffic.GameServer
 		}
 
 		/// <summary>
-		/// 
+		/// Set a single statistic value.
 		/// </summary>
+		/// <param name="player">Owner of statistics.</param>
+		/// <param name="statisticName">Statistic name.</param>
+		/// <param name="value">New value.</param>
+		public void SetStatisticItemTo(Player player, string statisticName, int value)
+		{
+			Statistic statToUpdate = player.Statistics.FirstOrDefault(x => x.StatName.Equals(statisticName));
+
+			if (statToUpdate == null)
+			{
+				throw new ArgumentException("Unknown statistic name.");
+			}
+
+			statToUpdate.StatValue = value;
+
+			// save the change to DB
+			IStatisticDAO statisticDao = gameServer.Persistence.GetStatisticsDAO();
+			statisticDao.UpdateStatisticById(statToUpdate);
+
+			CheckAchievementsUnlocks(player);
+		}
+
+		/// <summary>
+		/// Check state of player's achievements.
+		/// </summary>
+		/// <param name="player">Player to check.</param>
 		private void CheckAchievementsUnlocks(Player player)
 		{
 			Entities.Achievements globalAchievements = gameServer.World.Achievements;
@@ -121,9 +176,6 @@ namespace SpaceTraffic.GameServer
 					player.EarnedAchievements.Add(newlyEarnedAchievement);
 				}
 			}
-
 		}
-
 	}
 }
-

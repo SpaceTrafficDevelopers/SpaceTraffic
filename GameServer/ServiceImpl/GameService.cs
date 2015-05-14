@@ -150,24 +150,33 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return GameServer.CurrentInstance.World.GetAchievementById(id);
 		}
 
-		
+		public Entities.ExperienceLevels GetExperienceLevels()
+		{
+			return GameServer.CurrentInstance.World.ExperienceLevels;
+		}
+
+
 		public List<TAchievement> GetEarnedAchievements(string playerName)
 		{
 
 			List<TAchievement> result = new List<TAchievement>();
 			Player player = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByName(playerName);
-			var unviewedAchievements = from achv in player.EarnedAchievements
-									   where achv.IsJustEarned == true
-									   select achv;
 
-			foreach (EarnedAchievement earnedAchv in unviewedAchievements)
+			if (player != null)
 			{
-				result.Add(GetAchievementById(earnedAchv.AchievementId));
-				earnedAchv.IsJustEarned = false;
+				var unviewedAchievements = from achv in player.EarnedAchievements
+										   where achv.IsJustEarned == true
+										   select achv;
 
-				// update earned status in DB
-				EarnedAchievementDAO earnedDao = (EarnedAchievementDAO)GameServer.CurrentInstance.Persistence.GetEarnedAchievementDAO();
-				earnedDao.UpdateEarnedAchievementById(earnedAchv);
+				foreach (EarnedAchievement earnedAchv in unviewedAchievements)
+				{
+					result.Add(GetAchievementById(earnedAchv.AchievementId));
+					earnedAchv.IsJustEarned = false;
+
+					// update earned status in DB
+					EarnedAchievementDAO earnedDao = (EarnedAchievementDAO)GameServer.CurrentInstance.Persistence.GetEarnedAchievementDAO();
+					earnedDao.UpdateEarnedAchievementById(earnedAchv);
+				}
 			}
 
 			return result;

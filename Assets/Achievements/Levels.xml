@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Levels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="SpaceTrafficData">
+	<Level levelID="1">
+		<Name>Rookie</Name>
+		<RequiredXP>1000</RequiredXP>
+	</Level>
+
+	<Level levelID="10">
+		<Name>G.O.D</Name>
+		<RequiredXP>100000000</RequiredXP>
+	</Level>
+
+</Levels>
