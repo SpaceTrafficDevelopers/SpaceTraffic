@@ -25,8 +25,8 @@ namespace SpaceTraffic.Game.Actions
 {
     class ShipRepair: IGameAction
     {
-        private static readonly int FIVE_PERCENT_REPAIR_TIME = 10;
-        private string result = "Loď odlétá z planety";
+        private static readonly int PERCENT_REPAIR_TIME = 3;
+        private string result = "Loď je v opravě";
 
         public object Result
         {
@@ -48,17 +48,19 @@ namespace SpaceTraffic.Game.Actions
 
         public int RepairPercentage { get; set; }
 
+        public int PercentRepairTax {get; set; }
+
         public bool RepairFinished { get; set; }
 
         public double Duration
         {
             get
             {
-                return (RepairPercentage / 5) * FIVE_PERCENT_REPAIR_TIME;
+                return RepairPercentage * PERCENT_REPAIR_TIME;
             }
             set
             {
-                RepairPercentage = (int)(value / FIVE_PERCENT_REPAIR_TIME) * 5;
+                RepairPercentage = (int)(value / PERCENT_REPAIR_TIME);
             }
         }
 
@@ -82,6 +84,13 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
+            if(player.Credit < RepairPercentage * PercentRepairTax)
+            {
+                result = String.Format("Hráč {0} nemá dostatek peněz na opravu", player.PlayerName);
+                State = GameActionState.FAILED;
+                return;
+            }
+
             if(spaceShip.PlayerId != PlayerId)
             {
                 result = String.Format("Loď {0} nepatří hráči {1}", spaceShip.SpaceShipName, player.PlayerName);
@@ -101,6 +110,13 @@ namespace SpaceTraffic.Game.Actions
             {
                 spaceShip.DamagePercent = Math.Max(0, spaceShip.DamagePercent - RepairPercentage);
 
+                if (gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, RepairPercentage * PercentRepairTax))
+                {
+                    result = String.Format("Změny se nepovedlo zapsat do databáze");
+                    State = GameActionState.FAILED;
+                    return;
+                }
+                
                 if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
                 {
                     result = String.Format("Změny se nepovedlo zapsat do databáze");
@@ -123,6 +139,7 @@ namespace SpaceTraffic.Game.Actions
             PlanetName = ActionArgs[1].ToString();
             ShipID = Convert.ToInt32(ActionArgs[2]);
             RepairPercentage = Convert.ToInt32(ActionArgs[3]);
+            PercentRepairTax = Convert.ToInt32(ActionArgs[4]);
         }
     }
 }
