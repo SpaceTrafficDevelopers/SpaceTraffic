@@ -23,7 +23,7 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
-    class ShipRepair: IGameAction
+    class ShipRepair: IPlannableAction
     {
         private static readonly int PERCENT_REPAIR_TIME = 3;
         private string result = "Loď je v opravě";
@@ -58,10 +58,6 @@ namespace SpaceTraffic.Game.Actions
             {
                 getArgumentsFromActionArgs();
                 return RepairPercentage * PERCENT_REPAIR_TIME;
-            }
-            set
-            {
-                RepairPercentage = (int)(value / PERCENT_REPAIR_TIME);
             }
         }
 
@@ -111,7 +107,7 @@ namespace SpaceTraffic.Game.Actions
             {
                 spaceShip.DamagePercent = Math.Max(0, spaceShip.DamagePercent - RepairPercentage);
 
-                if (gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, RepairPercentage * PercentRepairTax))
+                if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, -RepairPercentage * PercentRepairTax))
                 {
                     result = String.Format("Změny se nepovedlo zapsat do databáze");
                     State = GameActionState.FAILED;
@@ -124,14 +120,16 @@ namespace SpaceTraffic.Game.Actions
                     State = GameActionState.FAILED;
                     return;
                 }
+
+                State = GameActionState.FINISHED;
             }
             else
             {
                 RepairFinished = true;
-                gameServer.Game.ReplanEvent(this, Duration);
+                gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddSeconds(Duration));
             }
 
-            State = GameActionState.FINISHED;
+           
         }
 
         private void getArgumentsFromActionArgs()

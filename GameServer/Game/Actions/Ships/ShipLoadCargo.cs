@@ -24,7 +24,7 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
-    public class ShipLoadCargo : IGameAction
+    public class ShipLoadCargo : IPlannableAction
     {
         private string result = "Náklad se nakládá.";
 
@@ -32,6 +32,11 @@ namespace SpaceTraffic.Game.Actions
         public object Result
         {
             get { return new { result = this.result }; }
+        }
+
+        public double Duration
+        {
+            get { return 1; }
         }
 
         void IGameAction.Perform(IGameServer gameServer)

@@ -24,7 +24,7 @@ using NLog;
 
 namespace SpaceTraffic.Game.Actions
 {
-	public class ShipBuy : IGameAction
+	public class ShipBuy : IPlannableAction
 	{
 		private Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -36,7 +36,11 @@ namespace SpaceTraffic.Game.Actions
 			get { return new { result = this.result }; }
 		}
 
-		
+        public double Duration
+        {
+            get { return 1; }
+        }
+        
 
 
 		void IGameAction.Perform(IGameServer gameServer)

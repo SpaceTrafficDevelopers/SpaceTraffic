@@ -23,7 +23,7 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions.Ships
 {
-    class ShipRefuel : IGameAction
+    class ShipRefuel : IPlannableAction
     {
         private static readonly double LITER_REFUEL_TIME = 0.2;
         private string result = "Loď tankuje";
@@ -58,10 +58,6 @@ namespace SpaceTraffic.Game.Actions.Ships
             {
                 getArgumentsFromActionArgs();
                 return Liters * LITER_REFUEL_TIME;
-            }
-            set
-            {
-                Liters = (int)(value / LITER_REFUEL_TIME);
             }
         }
 
@@ -111,7 +107,7 @@ namespace SpaceTraffic.Game.Actions.Ships
             {
                 spaceShip.CurrentFuelTank = Math.Min(spaceShip.FuelTank, spaceShip.CurrentFuelTank + Liters);
 
-                if (gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, Liters * PricePerLiter))
+                if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, -Liters * PricePerLiter))
                 {
                     result = String.Format("Změny se nepovedlo zapsat do databáze");
                     State = GameActionState.FAILED;
@@ -124,14 +120,15 @@ namespace SpaceTraffic.Game.Actions.Ships
                     State = GameActionState.FAILED;
                     return;
                 }
+
+                State = GameActionState.FINISHED;
             }
             else
             {
                 RefuelingFinished = true;
-                gameServer.Game.ReplanEvent(this, Duration);
+                gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddSeconds(Duration));
             }
 
-            State = GameActionState.FINISHED;
         }
 
         private void getArgumentsFromActionArgs()

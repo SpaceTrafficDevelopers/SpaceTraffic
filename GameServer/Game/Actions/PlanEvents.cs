@@ -75,7 +75,7 @@ namespace SpaceTraffic.Game.Actions
         private void replanAction(IGameServer gameServer)
         {
             numberOfTries--;
-            gameServer.Game.ReplanEvent(this, REPLAN_TIME);
+            gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddSeconds(REPLAN_TIME));
         }
 
         private bool checkActions(PlanItem item)

@@ -25,7 +25,7 @@ using SpaceTraffic.Dao;
 
 namespace SpaceTraffic.Game.Actions
 {
-    public class ShipUnloadCargo : IGameAction
+    public class ShipUnloadCargo : IPlannableAction
     {
         private string result = "Náklad se vykládá.";
 
@@ -71,6 +71,11 @@ namespace SpaceTraffic.Game.Actions
         public int CargoLoadEntityID { get; set; }
         public int Count { get; set; }
         public ICargoLoadDao LoadingPlace { get; set; }
+
+        public double Duration
+        {
+            get { return 1; }
+        }
 
 
         public void Perform(IGameServer gameServer)
