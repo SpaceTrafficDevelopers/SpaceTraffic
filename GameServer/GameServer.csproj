@@ -120,6 +120,7 @@
     <Compile Include="Game\Actions\Ships\ShipFlyTo.cs" />
     <Compile Include="Game\Actions\Ships\ShipLand.cs" />
     <Compile Include="Game\Actions\Ships\ShipLoadCargo.cs" />
+    <Compile Include="Game\Actions\Ships\ShipRefuel.cs" />
     <Compile Include="Game\Actions\Ships\ShipRepair.cs" />
     <Compile Include="Game\Actions\Ships\ShipTakeOff.cs" />
     <Compile Include="Game\Actions\Ships\ShipUnloadCargo.cs" />
