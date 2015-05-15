@@ -168,5 +168,21 @@ namespace SpaceTraffic.GameServer
             }
             return false;
         }
+
+        public void ReplanEvent(IGameAction action, double seconds)
+        {
+            if (action != null && seconds >= 0)
+            {
+                action.State = GameActionState.PREPARED;
+                GeneralEvent newEvent = new GeneralEvent();
+                GameTime time = new GameTime();
+                time.Value = this.currentGameTime.Value.AddSeconds(seconds);
+
+                newEvent.BoundAction = action;
+                newEvent.PlannedTime = time;
+
+                PlanEvent(newEvent);
+            }
+        }
     }
 }

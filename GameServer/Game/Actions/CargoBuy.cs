@@ -135,6 +135,7 @@ namespace SpaceTraffic.Game.Actions
             loadingAction.ActionArgs = args;
             loadingAction.PlayerId = PlayerId;
             gameServer.Game.PerformAction(loadingAction);
+            
             State = GameActionState.FINISHED;
         }
 
