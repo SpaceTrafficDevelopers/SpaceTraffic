@@ -248,7 +248,9 @@ namespace SpaceTraffic.GameServer.ServiceImpl
                     200,
                     1
             };
+
             item2.Actions.Add(sra);
+
             CargoSell csa = new CargoSell();
 
             csa.PlayerId = 1;
@@ -263,7 +265,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             };
 
             item2.Actions.Add(csa);
-            item2.Actions.Add(sra);
+            //item2.Actions.Add(sra);
 
             plan.Add(item1);
             plan.Add(holik);

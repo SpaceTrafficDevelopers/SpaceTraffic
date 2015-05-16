@@ -71,7 +71,7 @@ namespace SpaceTraffic.Game.Planner
             {
                 PlanFlightBetweenPoints(item, nextItem, gameServer, ship);
 
-                double actionStartDelay = 0;
+                double actionStartDelay = 1;
                 foreach (IPlannableAction action in nextItem.Actions)
                 {
                     action.PlayerId = PlayerID;

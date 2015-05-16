@@ -21,6 +21,7 @@ using System.Web;
 using SpaceTraffic.Services.Contracts;
 using SpaceTraffic.Entities.PublicEntities;
 using SpaceTraffic.Entities;
+using System.ServiceModel;
 
 namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 {
@@ -125,6 +126,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
         {
             using (var channel = this.GetClientChannel())
             {
+                ((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
                 return (channel as IGameService).TestPlanner();
             }
         }
