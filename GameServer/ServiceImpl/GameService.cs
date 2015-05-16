@@ -30,6 +30,7 @@ using SpaceTraffic.Dao;
 using SpaceTraffic.Game.Planner;
 using SpaceTraffic.Game.Navigation;
 using SpaceTraffic.Game;
+using SpaceTraffic.Game.Actions.Ships;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
 {
@@ -209,6 +210,17 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
             item1.Actions.Add(cba);
 
+            ShipRepair srpa = new ShipRepair();
+
+            srpa.PlayerId = 1;
+            srpa.ActionArgs = new object[]{
+                   "Proxima Centauri",
+                    "Proxima Centauri 1",
+                    1,
+                    30,
+                    1
+            };
+            item1.Actions.Add(srpa);
 
 
             NavPoint hole = new NavPoint();
@@ -225,6 +237,19 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             PlanItem item2 = new PlanItem();
 
             item2.Place = secondPoint;
+            
+            ShipRefuel sra = new ShipRefuel();
+
+            sra.PlayerId = 1;
+            sra.ActionArgs = new object[]{
+                    "Solar system",
+                    "Sol 1",
+                    1,
+                    200,
+                    1
+            };
+
+            item2.Actions.Add(sra);
 
             CargoSell csa = new CargoSell();
 
@@ -240,6 +265,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             };
 
             item2.Actions.Add(csa);
+            //item2.Actions.Add(sra);
 
             plan.Add(item1);
             plan.Add(holik);

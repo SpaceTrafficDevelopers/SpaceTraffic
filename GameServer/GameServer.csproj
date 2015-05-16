@@ -100,6 +100,7 @@
     <Compile Include="Engine\IGameSimulation.cs" />
     <Compile Include="Engine\IGameStateManager.cs" />
     <Compile Include="Engine\IGoodsManager.cs" />
+    <Compile Include="Engine\IPlannableAction.cs" />
     <Compile Include="Engine\IRunnableScript.cs" />
     <Compile Include="Engine\IScriptManager.cs" />
     <Compile Include="Engine\IGameManager.cs" />
@@ -120,9 +121,11 @@
     <Compile Include="Game\Actions\Ships\ShipFlyTo.cs" />
     <Compile Include="Game\Actions\Ships\ShipLand.cs" />
     <Compile Include="Game\Actions\Ships\ShipLoadCargo.cs" />
+    <Compile Include="Game\Actions\Ships\ShipRefuel.cs" />
     <Compile Include="Game\Actions\Ships\ShipRepair.cs" />
     <Compile Include="Game\Actions\Ships\ShipTakeOff.cs" />
     <Compile Include="Game\Actions\Ships\ShipUnloadCargo.cs" />
+    <Compile Include="Game\Events\GeneralEvent.cs" />
     <Compile Include="Game\Events\HelloWorldRepeat.cs" />
     <Compile Include="Game\Events\ShipEvent.cs" />
     <Compile Include="Game\GamePlayer.cs" />

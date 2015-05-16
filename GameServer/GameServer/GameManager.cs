@@ -136,6 +136,7 @@ namespace SpaceTraffic.GameServer
 
         public void PlanEvent(IGameEvent gameEvent)
         {
+            Console.WriteLine(gameEvent.PlannedTime.Value);
             this.gameEventQueue.Enqueue(gameEvent);
         }
 
@@ -167,6 +168,22 @@ namespace SpaceTraffic.GameServer
                 }
             }
             return false;
+        }
+
+        public void PlanEvent(IGameAction action, DateTime when)
+        {
+            if (action != null && when != null)
+            {
+                action.State = GameActionState.PREPARED;
+                GeneralEvent newEvent = new GeneralEvent();
+                GameTime time = new GameTime();
+                time.Value = when;
+
+                newEvent.BoundAction = action;
+                newEvent.PlannedTime = time;
+
+                PlanEvent(newEvent);
+            }
         }
     }
 }

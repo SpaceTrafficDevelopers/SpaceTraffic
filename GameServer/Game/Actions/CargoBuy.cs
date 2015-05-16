@@ -26,13 +26,18 @@ using SpaceTraffic.Dao;
 
 namespace SpaceTraffic.Game.Actions
 {
-    public class CargoBuy : IGameAction
+    public class CargoBuy : IPlannableAction
     {
         private string result = "Provádí se nákup zboží.";
 
         public object Result
         {
             get { return new { result = this.result }; }
+        }
+
+        public double Duration
+        {
+            get { return 1; }
         }
 
         public GameActionState State { get; set; }
@@ -135,6 +140,7 @@ namespace SpaceTraffic.Game.Actions
             loadingAction.ActionArgs = args;
             loadingAction.PlayerId = PlayerId;
             gameServer.Game.PerformAction(loadingAction);
+            
             State = GameActionState.FINISHED;
         }
 

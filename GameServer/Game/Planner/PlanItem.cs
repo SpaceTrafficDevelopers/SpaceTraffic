@@ -11,7 +11,7 @@ namespace SpaceTraffic.Game.Planner
     {
         public NavPoint Place { get; set; }
 
-        public List<IGameAction> Actions { get; set; }
+        public List<IPlannableAction> Actions { get; set; }
 
         public bool hasActions()
         {
@@ -22,7 +22,7 @@ namespace SpaceTraffic.Game.Planner
 
         public PlanItem()
         {
-            this.Actions = new List<IGameAction>();
+            this.Actions = new List<IPlannableAction>();
         }
 
     }

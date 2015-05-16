@@ -24,13 +24,18 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
-    class CargoSell : IGameAction
+    class CargoSell : IPlannableAction
     {
         private string result = "Provádí se prodej zboží.";
 
         public object Result
         {
             get { return new { result = this.result }; }
+        }
+
+        public double Duration
+        {
+            get { return 1; }
         }
 
         public GameActionState State { get; set; }

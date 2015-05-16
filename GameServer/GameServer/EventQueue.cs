@@ -41,7 +41,10 @@ namespace SpaceTraffic.GameServer
         public void Enqueue(IGameEvent gameEvent)
         {
             this.queue.Add(gameEvent);
-            this.queue.Sort((a, b) => a.PlannedTime.CompareTo(b.PlannedTime));
+
+            if(this.queue.Count > 1)
+                this.queue.Sort((a, b) => a.PlannedTime.CompareTo(b.PlannedTime));
+
             //TODO: optimalizace přidávání do fronty
         }
 

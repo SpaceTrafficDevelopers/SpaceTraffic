@@ -26,7 +26,7 @@ namespace SpaceTraffic.Game.Actions
 {
     class PlanEvents : IGameAction
     {
-        private static readonly int REPLAN_TIMEOUT = 30;
+        private static readonly int REPLAN_TIME = 30;
         private int numberOfTries = 10;
 
         private string result = "Plánují se akce";
@@ -68,22 +68,14 @@ namespace SpaceTraffic.Game.Actions
             }
 
             plan.planEventsForNextItem(actualItem, gameServer,ship);
+            
             State = GameActionState.FINISHED;
-
         }
 
         private void replanAction(IGameServer gameServer)
         {
             numberOfTries--;
-
-            ShipEvent newPlanEvent = new ShipEvent();
-            newPlanEvent.BoundAction = this;
-            GameTime eventTime = new GameTime();
-            eventTime.Value = gameServer.Game.currentGameTime.Value;
-            eventTime.Value = eventTime.Value.AddSeconds(REPLAN_TIMEOUT);
-            newPlanEvent.PlannedTime = eventTime;
-
-            gameServer.Game.PlanEvent(newPlanEvent);
+            gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddSeconds(REPLAN_TIME));
         }
 
         private bool checkActions(PlanItem item)
