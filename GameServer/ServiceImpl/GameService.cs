@@ -31,10 +31,6 @@ using SpaceTraffic.Game.Planner;
 using SpaceTraffic.Game.Navigation;
 using SpaceTraffic.Game;
 
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
-
 namespace SpaceTraffic.GameServer.ServiceImpl
 {
 	public class GameService : IGameService
@@ -182,133 +178,10 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			}
 		}
 
-		
-
 		public object GetActionResult(int playerId, int actionCode)
 		{
 			throw new NotImplementedException();
 		}
-
-
-        public bool TestPlanner()
-        {
-            Spaceship sh = new Spaceship(1, "Ship de la Test");
-
-            sh.MaxSpeed = 20;
-
-            PathPlan plan = new PathPlan(1,sh);
-            PlanItem item1 = new PlanItem();
-            
-            NavPoint firstPoint = new NavPoint();
-            firstPoint.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].Planets["Proxima Centauri 1"];
-
-            item1.Place = firstPoint;
-            CargoBuy cba = new CargoBuy();
-
-            cba.PlayerId = 1;
-            cba.ActionArgs = new object[]{
-                    "Proxima Centauri",
-                    "Proxima Centauri 1",
-                    1,
-                    10,
-                    "TraderCargoDAO",
-                    1
-            };
-
-            item1.Actions.Add(cba);
-
-            ShipRepair srpa = new ShipRepair();
-
-            srpa.PlayerId = 1;
-            srpa.ActionArgs = new object[]{
-                   "Proxima Centauri",
-                    "Proxima Centauri 1",
-                    1,
-                    30,
-                    1
-            };
-            item1.Actions.Add(srpa);
-
-
-            NavPoint hole = new NavPoint();
-            hole.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].WormholeEndpoints[0];
-
-            PlanItem holik = new PlanItem();
-            holik.Place = hole;
-
-           
-
-            NavPoint secondPoint = new NavPoint();
-            secondPoint.Location = GameServer.CurrentInstance.World.Map["Solar system"].Planets["Sol 1"];
-
-            PlanItem item2 = new PlanItem();
-
-            item2.Place = secondPoint;
-            
-            ShipRefuel sra = new ShipRefuel();
-
-            sra.PlayerId = 1;
-            sra.ActionArgs = new object[]{
-                    "Solar system",
-                    "Sol 1",
-                    1,
-                    200,
-                    1
-            };
-
-            item2.Actions.Add(sra);
-
-            CargoSell csa = new CargoSell();
-
-            csa.PlayerId = 1;
-            csa.ActionArgs = new object[]{
-                    "Solar system",
-                    "Sol 1",
-                    1,
-                    10,
-                    "TraderCargoDAO",
-                    1,
-                    1
-            };
-
-            item2.Actions.Add(csa);
-            //item2.Actions.Add(sra);
-
-            plan.Add(item1);
-            plan.Add(holik);
-            plan.Add(item2);
-
-            
-
-
-
-
-            BinaryFormatter bf = new BinaryFormatter();
-
-            byte [] arry;
-
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                bf.Serialize(memoryStream, plan);
-                arry = memoryStream.ToArray();
-            }
-
-            List<IPlannableAction> l;
-            using (MemoryStream memoryStream = new MemoryStream(arry))
-            {
-                plan = bf.Deserialize(memoryStream) as PathPlan;
-            }
-
-            plan.ToString();
-
-            
-
-            plan.PlanFirstItem(GameServer.CurrentInstance/*, sh*/);
-
-            return true;
-        }
-
-
 
         public int CreatePathPlan(int playerId, int spaceShipId)
         {

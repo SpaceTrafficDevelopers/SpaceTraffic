@@ -122,16 +122,6 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             }
         }
 
-        public bool TestPlanner()
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                ((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
-                return (channel as IGameService).TestPlanner();
-            }
-        }
-
-
         public int CreatePathPlan(int playerId, int spaceShipId)
         {
             using (var channel = this.GetClientChannel())

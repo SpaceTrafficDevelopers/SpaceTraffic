@@ -64,9 +64,6 @@ namespace SpaceTraffic.Services.Contracts
         bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount);
 
         [OperationContract]
-        bool TestPlanner();
-
-        [OperationContract]
         int CreatePathPlan(int playerId, int spaceShipId);
 
         [OperationContract]
