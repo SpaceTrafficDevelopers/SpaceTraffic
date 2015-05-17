@@ -5,7 +5,6 @@ using System.Text;
 using SpaceTraffic.Game.Navigation;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Game.Events;
-using SpaceTraffic.Game.Actions.Ships;
 using SpaceTraffic.Game.Actions;
 
 namespace SpaceTraffic.Game.Planner
@@ -13,11 +12,15 @@ namespace SpaceTraffic.Game.Planner
     public class PathPlan : IPathPlan
     {
         List<PlanItem> planItems = new List<PlanItem>();
-        int PlayerID;
 
-        public PathPlan(int _PlayerID)
+        public int PlayerID { get; set; }
+
+        public Spaceship ship { get; set; }
+
+        public PathPlan(int _PlayerID, Spaceship ship)
         {
             PlayerID = _PlayerID;
+            this.ship = ship;
         }
 
         public NavPath getNavPath()
@@ -46,10 +49,10 @@ namespace SpaceTraffic.Game.Planner
 
         // tady je použito Spaceship jen kvůli tomu že ho chce ten PathPlanner
         // možná by byla lepší ta entita (SpaceShip)???
-        public void SolvePath(Spaceship sh, double startTime)
+        public void SolvePath(/*Spaceship sh,*/ double startTime)
         {
             NavPath path = this.getNavPath();
-            PathPlanner.SolvePath(path, sh, startTime);
+            PathPlanner.SolvePath(path, ship, startTime);
         }
 
         public List<IGameEvent> getEventsFromPath()
@@ -64,7 +67,7 @@ namespace SpaceTraffic.Game.Planner
             return eventList;
         }
 
-        public void planEventsForNextItem(PlanItem item, IGameServer gameServer, Spaceship ship)
+        public void planEventsForNextItem(PlanItem item, IGameServer gameServer/*, Spaceship ship*/)
         {
             PlanItem nextItem = this.getNextBusyItem(item);
             if (nextItem != null)
@@ -88,7 +91,7 @@ namespace SpaceTraffic.Game.Planner
 
         }
 
-        public void PlanFirstItem(IGameServer gameServer, Spaceship ship)
+        public void PlanFirstItem(IGameServer gameServer/*, Spaceship ship*/)
         {
             PlanItem item = this.ElementAt(0);
 
@@ -104,7 +107,7 @@ namespace SpaceTraffic.Game.Planner
             if (nextItem != null)
             {
                 IGameAction eventsPlan = new PlanEvents();
-                eventsPlan.ActionArgs = new object[] { this, item, ship };
+                eventsPlan.ActionArgs = new object[] { this, item/*, ship*/ };
                 eventsPlan.PlayerId = PlayerID;
 
                 gameServer.Game.PlanEvent(eventsPlan, gameServer.Game.currentGameTime.Value.AddSeconds(actionStartDelay));

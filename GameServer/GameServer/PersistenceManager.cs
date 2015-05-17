@@ -136,5 +136,21 @@ namespace SpaceTraffic.GameServer
         {
             return new GameEventDAO();
         }
+
+
+        public IPlanActionDAO GetPlanActionDAO()
+        {
+            return new PlanActionDAO();
+        }
+
+        public IPathPlanEntityDAO GetPathPlanEntityDAO()
+        {
+            return new PathPlanEntityDAO();
+        }
+
+        public IPlanItemEntityDAO GetPlanItemEntityDAO()
+        {
+            return new PlanItemEntityDAO();
+        }
     }
 }

@@ -30,11 +30,14 @@ using SpaceTraffic.Dao;
 using SpaceTraffic.Game.Planner;
 using SpaceTraffic.Game.Navigation;
 using SpaceTraffic.Game;
-using SpaceTraffic.Game.Actions.Ships;
+
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
 {
-	public class GameService :IGameService
+	public class GameService : IGameService
 	{
 		private Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -189,7 +192,11 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
         public bool TestPlanner()
         {
-            PathPlan plan = new PathPlan(1);
+            Spaceship sh = new Spaceship(1, "Ship de la Test");
+
+            sh.MaxSpeed = 20;
+
+            PathPlan plan = new PathPlan(1,sh);
             PlanItem item1 = new PlanItem();
             
             NavPoint firstPoint = new NavPoint();
@@ -271,13 +278,113 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             plan.Add(holik);
             plan.Add(item2);
 
-            Spaceship sh = new Spaceship(1, "Ship de la Test");
+            
 
-            sh.MaxSpeed = 20;
 
-            plan.PlanFirstItem(GameServer.CurrentInstance, sh);
+
+
+            BinaryFormatter bf = new BinaryFormatter();
+
+            byte [] arry;
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                bf.Serialize(memoryStream, plan);
+                arry = memoryStream.ToArray();
+            }
+
+            List<IPlannableAction> l;
+            using (MemoryStream memoryStream = new MemoryStream(arry))
+            {
+                plan = bf.Deserialize(memoryStream) as PathPlan;
+            }
+
+            plan.ToString();
+
+            
+
+            plan.PlanFirstItem(GameServer.CurrentInstance/*, sh*/);
 
             return true;
+        }
+
+
+
+        public int CreatePathPlan(int playerId, int spaceShipId)
+        {
+            IPathPlanEntityDAO pped = GameServer.CurrentInstance.Persistence.GetPathPlanEntityDAO();
+
+            PathPlanEntity plan = new PathPlanEntity();
+            plan.PlayerId = playerId;
+            plan.SpaceShipId = spaceShipId;
+
+            return pped.InsertPathPlan(plan);
+        }
+
+        public int AddPlanItem(int pathPlanId, string solarSystem, bool isPlanet, string index, int sequenceNumber)
+        {
+            IPlanItemEntityDAO pied = GameServer.CurrentInstance.Persistence.GetPlanItemEntityDAO();
+
+            PlanItemEntity item = new PlanItemEntity();
+            item.PathPlanId = pathPlanId;
+            item.SolarSystem = solarSystem;
+            item.IsPlanet = isPlanet;
+            item.Index = index;
+            item.SequenceNumber = sequenceNumber;
+
+            return pied.InsertPlanItem(item);
+        }
+
+        public bool AddPlanAction(int planItemId, int sequenceNumber, int playerId, string actionName, params object[] actionArgs)
+        {
+            IPlanActionDAO pad = GameServer.CurrentInstance.Persistence.GetPlanActionDAO();
+            PlanAction pa = new PlanAction() { PlanItemId = planItemId, SequenceNumber = sequenceNumber };
+
+            try
+            {
+                IPlannableAction action = Activator.CreateInstance(Type.GetType("SpaceTraffic.Game.Actions." + actionName)) as IPlannableAction;
+                
+                if (action == null)
+                    throw new ActionNotFoundException(
+                        String.Format("Action class with name: {0} does not implements IGameAction.",
+                        actionName));
+
+                action.ActionArgs = actionArgs;
+                action.PlayerId = playerId;
+                
+                pa.ActionType = action.GetType().ToString();
+                pa.GameAction = PlannerConverter.convertPlannableAction(action);
+
+                if(pad.InsertPlanAction(pa))
+                    return true;
+
+                return false;
+            }
+            catch (System.IO.FileNotFoundException e)
+            {
+                Console.WriteLine("Action file with name " + actionName + " was not found in SpaceTraffic.Game.Actions namespace.");
+                throw;
+            } 
+        }
+
+        public bool StartPathPlan(int pathPlanId)
+        {
+            IPathPlanEntityDAO pped = GameServer.CurrentInstance.Persistence.GetPathPlanEntityDAO();
+            PathPlanEntity plan = pped.GetPathPlanById(pathPlanId);
+
+            if (plan != null) {
+                PlannerConverter converter = new PlannerConverter();
+                PathPlan pathPlan = converter.createPathPlan(plan);
+
+                pathPlan.PlanFirstItem(GameServer.CurrentInstance);
+
+                plan.IsPlanned = true;
+                pped.UpdatePathPlanById(plan);
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

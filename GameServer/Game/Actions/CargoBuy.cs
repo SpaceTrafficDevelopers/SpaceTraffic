@@ -23,9 +23,11 @@ using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
 using SpaceTraffic.Entities.Goods;
 using SpaceTraffic.Dao;
+using System.Runtime.Serialization;
 
 namespace SpaceTraffic.Game.Actions
 {
+    [Serializable]
     public class CargoBuy : IPlannableAction
     {
         private string result = "Provádí se nákup zboží.";

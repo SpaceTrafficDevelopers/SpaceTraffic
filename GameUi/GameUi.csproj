@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Game\Controllers\CargoController.cs" />
+    <Compile Include="Areas\Game\Controllers\PlannerController.cs" />
     <Compile Include="Controllers\AbstractController.cs" />
     <Compile Include="Areas\Game\Controllers\TabsControllerBase.cs" />
     <Compile Include="Areas\Game\GameAreaRegistration.cs" />
@@ -349,6 +350,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Game\Views\Cargo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Game\Views\Planner\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

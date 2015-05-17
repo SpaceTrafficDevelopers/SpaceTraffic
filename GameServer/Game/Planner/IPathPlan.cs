@@ -11,7 +11,7 @@ namespace SpaceTraffic.Game.Planner
     {
         NavPath getNavPath();
 
-        void SolvePath(Spaceship sh, double startTime);
+        void SolvePath(/*Spaceship ship,*/ double startTime);
 
         List<IGameEvent> getEventsFromPath();
     }

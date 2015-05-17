@@ -43,7 +43,7 @@ namespace SpaceTraffic.Game.Actions
 
         public PlanItem actualItem { get; set; }
 
-        public Spaceship ship { get; set; }
+       /* public Spaceship ship { get; set; }*/
 
         public int ActionCode { get; set; }
 
@@ -54,7 +54,7 @@ namespace SpaceTraffic.Game.Actions
             State = GameActionState.PLANNED;
             getArgumentsFromActionArgs();
 
-            if (plan == null || plan.Count == 0 || actualItem == null || !plan.Contains(actualItem) || ship == null)
+            if (plan == null || plan.Count == 0 || actualItem == null || !plan.Contains(actualItem) /* || ship == null*/)
             {
                 State = GameActionState.FINISHED;
                 return;
@@ -67,7 +67,7 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            plan.planEventsForNextItem(actualItem, gameServer,ship);
+            plan.planEventsForNextItem(actualItem, gameServer/*, ship*/);
             
             State = GameActionState.FINISHED;
         }
@@ -92,7 +92,7 @@ namespace SpaceTraffic.Game.Actions
         {
             plan = (PathPlan)ActionArgs[0];
             actualItem = (PlanItem)ActionArgs[1];
-            ship = (Spaceship)ActionArgs[2];
+            /*ship = (Spaceship)ActionArgs[2];*/
         }
     }
 }
