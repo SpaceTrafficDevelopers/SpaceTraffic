@@ -247,7 +247,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
             if (plan != null) {
                 PlannerConverter converter = new PlannerConverter();
-                PathPlan pathPlan = converter.createPathPlan(plan);
+                IPathPlan pathPlan = converter.createPathPlan(plan);
 
                 pathPlan.PlanFirstItem(GameServer.CurrentInstance);
 

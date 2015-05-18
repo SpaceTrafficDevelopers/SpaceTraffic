@@ -15,10 +15,10 @@ namespace SpaceTraffic.Game.Planner
     {
         private static BinaryFormatter bf = new BinaryFormatter();
 
-        public PathPlan createPathPlan(PathPlanEntity entity)
+        public IPathPlan createPathPlan(PathPlanEntity entity)
         {
             Spaceship ship = getShip(entity);
-            PathPlan plan = new PathPlan(entity.PlayerId, ship);
+            IPathPlan plan = new PathPlan(entity.PlayerId, ship);
 
             createPlanItem(plan, entity);
 
@@ -36,7 +36,7 @@ namespace SpaceTraffic.Game.Planner
             return ship;
         }
 
-        private void createPlanItem(PathPlan plan, PathPlanEntity entity)
+        private void createPlanItem(IPathPlan plan, PathPlanEntity entity)
         {
             IPlanItemEntityDAO pped = GameServer.GameServer.CurrentInstance.Persistence.GetPlanItemEntityDAO();
 

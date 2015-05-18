@@ -7,12 +7,16 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Planner
 {
-    interface IPathPlan : IList<PlanItem>
+    public interface IPathPlan : IList<PlanItem>
     {
         NavPath getNavPath();
-
-        void SolvePath(/*Spaceship ship,*/ double startTime);
-
+        NavPath getPathBetweenTwoItems(PlanItem source, PlanItem dest);
+        void SolvePath(double startTime);
         List<IGameEvent> getEventsFromPath();
+        void planEventsForNextItem(PlanItem item, IGameServer gameServer);
+        void PlanFirstItem(IGameServer gameServer);
+        void PlanFlightBetweenPoints(PlanItem depart, PlanItem dest, IGameServer gameServer, Spaceship ship);
+
+
     }
 }
