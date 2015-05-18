@@ -74,6 +74,7 @@ namespace SpaceTraffic.Dao
                     var planDB = contextDB.PathPlan.FirstOrDefault(x => x.PathPlanId.Equals(plan.PathPlanId));
                     
                     planDB.IsPlanned = plan.IsPlanned;
+                    planDB.IsCycled = plan.IsCycled;
                     // save context to database
                     contextDB.SaveChanges();
                     return true;

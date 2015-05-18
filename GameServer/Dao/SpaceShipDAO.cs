@@ -126,6 +126,7 @@ namespace SpaceTraffic.Dao
                 spaceShipTab.Consumption = spaceShip.Consumption;
                 spaceShipTab.WearRate = spaceShip.WearRate;
                 spaceShipTab.MaxSpeed = spaceShip.MaxSpeed;
+
 				// save context to database
 				contextDB.SaveChanges();
 				return true;

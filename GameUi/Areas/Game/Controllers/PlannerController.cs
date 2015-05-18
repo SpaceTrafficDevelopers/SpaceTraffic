@@ -20,7 +20,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
         public ActionResult TestPlanner()
         {
 
-            int pathPlanID = GSClient.GameService.CreatePathPlan(1, 1);
+            int pathPlanID = GSClient.GameService.CreatePathPlan(1, 1, false);
 
             if(pathPlanID == -1)
                 return RedirectToAction("").Error("Vytváření plánu se nepovedlo. Máš loď?");

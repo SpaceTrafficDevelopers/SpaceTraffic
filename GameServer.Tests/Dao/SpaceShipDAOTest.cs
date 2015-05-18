@@ -198,17 +198,27 @@ namespace SpaceTraffic.GameServerTests.Dao
             bool result = target.InsertSpaceShip(spaceShip);
             Assert.IsTrue(result);
 
-            SpaceShip actual = target.GetSpaceShipById(spaceShip.SpaceShipId);
+            //SpaceShip actual = target.GetSpaceShipById(spaceShip.SpaceShipId);
 
-            
+            spaceShip.DamagePercent = 20;
+            spaceShip.UserCode = "Destruction";
+            spaceShip.TimeOfArrival = "23:42";
             spaceShip.IsFlying = false;
-            spaceShip.DamagePercent = 70;
-            spaceShip.CurrentStarSystem = "Mars";
+            spaceShip.SpaceShipName = "Superkár";
+            spaceShip.SpaceShipModel = "Autokár";
+            spaceShip.DockedAtBaseId = null;
+            spaceShip.CurrentStarSystem = "BramBory";
+            spaceShip.FuelTank = 100;
+            spaceShip.CurrentFuelTank = 10;
+            spaceShip.CargoSpace = 300;
+            spaceShip.Consumption = 0.3;
+            spaceShip.WearRate = 0.1;
+            spaceShip.MaxSpeed = 68;
+            
             target.UpdateSpaceShipById(spaceShip);
-
             SpaceShip compare = target.GetSpaceShipById(spaceShip.SpaceShipId);
-            Assert.IsTrue(compare.IsFlying.Equals(false) & compare.DamagePercent == 70
-                & compare.CurrentStarSystem.Equals("Mars"));
+
+            SpaceShipTest(spaceShip, compare);
 
             target.RemoveSpaceShipById(spaceShip.SpaceShipId);
         }
@@ -226,6 +236,26 @@ namespace SpaceTraffic.GameServerTests.Dao
             bas.RemoveBaseById(newBase.BaseId);
         }
 
+        private void SpaceShipTest(SpaceShip excepted, SpaceShip actual)
+        {
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(excepted.DamagePercent, actual.DamagePercent, "DamagePercents are not equal.");
+            Assert.AreEqual(excepted.UserCode, actual.UserCode, "UserCodes are not equal.");
+            Assert.AreEqual(excepted.TimeOfArrival, actual.TimeOfArrival, "TimeOfArrivals are not equal.");
+            Assert.AreEqual(excepted.IsFlying, actual.IsFlying, "IsFlying attributes are not equal.");
+            Assert.AreEqual(excepted.SpaceShipName, actual.SpaceShipName, "SpaceShipNames are not equal.");
+            Assert.AreEqual(excepted.SpaceShipModel, actual.SpaceShipModel, "SpaceShipModels are not equal.");
+            Assert.AreEqual(excepted.DockedAtBaseId, actual.DockedAtBaseId, "DockedAtBaseId attributes are not equal.");
+            Assert.AreEqual(excepted.CurrentStarSystem, actual.CurrentStarSystem, "CurrentStarSystems are not equal.");
+            Assert.AreEqual(excepted.FuelTank, actual.FuelTank, "FuelTanks are not equal.");
+            Assert.AreEqual(excepted.CurrentFuelTank, actual.CurrentFuelTank, "CurrentFuelTanks are not equal.");
+            Assert.AreEqual(excepted.PlayerId, actual.PlayerId, "PlayerId attributes are not equal.");
+            Assert.AreEqual(excepted.CargoSpace, actual.CargoSpace, "CargoSpace attributes are not equal.");
+            Assert.AreEqual(excepted.Consumption, actual.Consumption, "Consumption attributes are not equal.");
+            Assert.AreEqual(excepted.WearRate, actual.WearRate, "WearRate attributes are not equal.");
+            Assert.AreEqual(excepted.MaxSpeed, actual.MaxSpeed, "MaxSpeed attributes are not equal.");
+        }
+
         private SpaceShip CreateSpaceShip()
         {
             SpaceShip ship = new SpaceShip();
@@ -240,6 +270,10 @@ namespace SpaceTraffic.GameServerTests.Dao
             ship.PlayerId = player.PlayerId;
             ship.IsFlying = true;
             ship.DockedAtBaseId = newBase.BaseId;
+            ship.CargoSpace = 100;
+            ship.Consumption = 0.8;
+            ship.MaxSpeed = 100;
+            ship.WearRate = 0.5;
             return ship;
         }
 

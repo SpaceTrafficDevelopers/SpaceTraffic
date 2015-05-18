@@ -108,7 +108,7 @@ namespace SpaceTraffic.Game.Actions
             {
                 spaceShip.DamagePercent = Math.Max(0, spaceShip.DamagePercent - RepairPercentage);
 
-                if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, -RepairPercentage * PercentRepairTax))
+                if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, RepairPercentage * PercentRepairTax))
                 {
                     result = String.Format("Změny se nepovedlo zapsat do databáze");
                     State = GameActionState.FAILED;

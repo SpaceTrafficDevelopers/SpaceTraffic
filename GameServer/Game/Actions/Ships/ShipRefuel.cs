@@ -108,7 +108,7 @@ namespace SpaceTraffic.Game.Actions
             {
                 spaceShip.CurrentFuelTank = Math.Min(spaceShip.FuelTank, spaceShip.CurrentFuelTank + Liters);
 
-                if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, -Liters * PricePerLiter))
+                if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, Liters * PricePerLiter))
                 {
                     result = String.Format("Změny se nepovedlo zapsat do databáze");
                     State = GameActionState.FAILED;

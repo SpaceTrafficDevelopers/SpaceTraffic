@@ -183,13 +183,14 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			throw new NotImplementedException();
 		}
 
-        public int CreatePathPlan(int playerId, int spaceShipId)
+        public int CreatePathPlan(int playerId, int spaceShipId, bool isCycled)
         {
             IPathPlanEntityDAO pped = GameServer.CurrentInstance.Persistence.GetPathPlanEntityDAO();
 
             PathPlanEntity plan = new PathPlanEntity();
             plan.PlayerId = playerId;
             plan.SpaceShipId = spaceShipId;
+            plan.IsCycled = isCycled;
 
             return pped.InsertPathPlan(plan);
         }

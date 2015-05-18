@@ -9,6 +9,9 @@ namespace SpaceTraffic.Game.Planner
 {
     public interface IPathPlan : IList<PlanItem>
     {
+        int PlayerID { get; set; }
+        Spaceship ship { get; set; }
+        bool IsCycled { get; set; }
         NavPath getNavPath();
         NavPath getPathBetweenTwoItems(PlanItem source, PlanItem dest);
         void SolvePath(double startTime);

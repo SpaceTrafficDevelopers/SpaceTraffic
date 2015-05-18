@@ -19,10 +19,13 @@ namespace SpaceTraffic.Game.Planner
 
         public Spaceship ship { get; set; }
 
-        public PathPlan(int _PlayerID, Spaceship ship)
+        public bool IsCycled { get; set; }
+
+        public PathPlan(int _PlayerID, Spaceship ship, bool isCycled)
         {
             PlayerID = _PlayerID;
             this.ship = ship;
+            this.IsCycled = isCycled;
         }
 
         public NavPath getNavPath()
