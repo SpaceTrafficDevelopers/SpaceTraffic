@@ -21,8 +21,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SpaceTraffic.Game.Actions.Ships
+namespace SpaceTraffic.Game.Actions
 {
+    [Serializable]
     class ShipRefuel : IPlannableAction
     {
         private static readonly double LITER_REFUEL_TIME = 0.2;

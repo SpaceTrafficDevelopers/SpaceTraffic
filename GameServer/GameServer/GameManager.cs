@@ -22,6 +22,7 @@ using SpaceTraffic.Engine;
 using System.Collections.Concurrent;
 using SpaceTraffic.Game.Actions;
 using SpaceTraffic.Game.Events;
+using System.Threading;
 
 namespace SpaceTraffic.GameServer
 {
@@ -39,8 +40,9 @@ namespace SpaceTraffic.GameServer
 
         public GameTime currentGameTime { get; private set; }
         private EventQueue gameEventQueue = new EventQueue();
-        private ConcurrentQueue<IGameAction> gameActionQueue = new ConcurrentQueue<IGameAction>();        
+        private ConcurrentQueue<IGameAction> gameActionQueue = new ConcurrentQueue<IGameAction>();
 
+        private readonly Mutex mutex = new Mutex();
 
         private Dictionary<string, IGameSimulation> simulations = new Dictionary<string, IGameSimulation>();
 
@@ -94,6 +96,8 @@ namespace SpaceTraffic.GameServer
         
         internal void DoEvents()
         {
+            mutex.WaitOne();
+
             IGameEvent gameEvent;
             for (int i = 0; this.gameEventQueue.HasMore && (i < MAX_EVENTS_PER_UPDATE); i++)
             {
@@ -101,11 +105,14 @@ namespace SpaceTraffic.GameServer
                 gameEvent = this.gameEventQueue.Dequeue(currentGameTime);
                 if (gameEvent != null)
                 {
+                    Console.WriteLine("Jdu na to " + gameEvent.BoundAction.ToString() + " " + currentGameTime);
                     gameEvent.BoundAction.Perform(this.gameServer);
                 } else {//events are sorted, so there is not any older event in queue
                     break;
                 }
             }
+
+            mutex.ReleaseMutex();
         }
 
         internal void DoActions()
@@ -136,8 +143,12 @@ namespace SpaceTraffic.GameServer
 
         public void PlanEvent(IGameEvent gameEvent)
         {
-            Console.WriteLine(gameEvent.PlannedTime.Value);
+            mutex.WaitOne();
+
+            Console.WriteLine("Planuju " + gameEvent.BoundAction.ToString() +" "+gameEvent.PlannedTime.Value);
             this.gameEventQueue.Enqueue(gameEvent);
+
+            mutex.ReleaseMutex();
         }
 
         /// <summary>
@@ -182,7 +193,11 @@ namespace SpaceTraffic.GameServer
                 newEvent.BoundAction = action;
                 newEvent.PlannedTime = time;
 
+                mutex.WaitOne();
+
                 PlanEvent(newEvent);
+
+                mutex.ReleaseMutex();
             }
         }
     }

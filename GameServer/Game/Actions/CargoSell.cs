@@ -24,6 +24,7 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
+    [Serializable]
     class CargoSell : IPlannableAction
     {
         private string result = "Provádí se prodej zboží.";

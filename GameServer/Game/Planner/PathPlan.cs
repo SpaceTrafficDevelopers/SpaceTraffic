@@ -5,19 +5,24 @@ using System.Text;
 using SpaceTraffic.Game.Navigation;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Game.Events;
-using SpaceTraffic.Game.Actions.Ships;
 using SpaceTraffic.Game.Actions;
 
 namespace SpaceTraffic.Game.Planner
 {
     public class PathPlan : IPathPlan
     {
-        List<PlanItem> planItems = new List<PlanItem>();
-        int PlayerID;
+        private static readonly int TIME_BETWEEN_EVENTS = 5;
 
-        public PathPlan(int _PlayerID)
+        List<PlanItem> planItems = new List<PlanItem>();
+
+        public int PlayerID { get; set; }
+
+        public Spaceship ship { get; set; }
+
+        public PathPlan(int _PlayerID, Spaceship ship)
         {
             PlayerID = _PlayerID;
+            this.ship = ship;
         }
 
         public NavPath getNavPath()
@@ -44,12 +49,10 @@ namespace SpaceTraffic.Game.Planner
            return path;
         }
 
-        // tady je použito Spaceship jen kvůli tomu že ho chce ten PathPlanner
-        // možná by byla lepší ta entita (SpaceShip)???
-        public void SolvePath(Spaceship sh, double startTime)
+        public void SolvePath(double startTime)
         {
             NavPath path = this.getNavPath();
-            PathPlanner.SolvePath(path, sh, startTime);
+            PathPlanner.SolvePath(path, ship, startTime);
         }
 
         public List<IGameEvent> getEventsFromPath()
@@ -64,19 +67,19 @@ namespace SpaceTraffic.Game.Planner
             return eventList;
         }
 
-        public void planEventsForNextItem(PlanItem item, IGameServer gameServer, Spaceship ship)
+        public void planEventsForNextItem(PlanItem item, IGameServer gameServer)
         {
             PlanItem nextItem = this.getNextBusyItem(item);
             if (nextItem != null)
             {
                 PlanFlightBetweenPoints(item, nextItem, gameServer, ship);
 
-                double actionStartDelay = 1;
+                double actionStartDelay = TIME_BETWEEN_EVENTS;
                 foreach (IPlannableAction action in nextItem.Actions)
                 {
                     action.PlayerId = PlayerID;
                     gameServer.Game.PlanEvent(action, nextItem.Place.TimeOfArrival.AddSeconds(actionStartDelay));
-                    actionStartDelay += action.Duration + 5;
+                    actionStartDelay += action.Duration + TIME_BETWEEN_EVENTS;
                 }
 
                 IGameAction eventsPlan = new PlanEvents();
@@ -88,30 +91,30 @@ namespace SpaceTraffic.Game.Planner
 
         }
 
-        public void PlanFirstItem(IGameServer gameServer, Spaceship ship)
+        public void PlanFirstItem(IGameServer gameServer)
         {
             PlanItem item = this.ElementAt(0);
 
-            double actionStartDelay = 0;
+            double actionStartDelay = TIME_BETWEEN_EVENTS;
             foreach (IPlannableAction action in item.Actions)
             {
                 action.PlayerId = PlayerID;              
                 gameServer.Game.PlanEvent(action, gameServer.Game.currentGameTime.Value.AddSeconds(actionStartDelay));
-                actionStartDelay += action.Duration + 5;
+                actionStartDelay += action.Duration + TIME_BETWEEN_EVENTS;
             }
 
             PlanItem nextItem = this.getNextBusyItem(item);
             if (nextItem != null)
             {
                 IGameAction eventsPlan = new PlanEvents();
-                eventsPlan.ActionArgs = new object[] { this, item, ship };
+                eventsPlan.ActionArgs = new object[] { this, item };
                 eventsPlan.PlayerId = PlayerID;
 
                 gameServer.Game.PlanEvent(eventsPlan, gameServer.Game.currentGameTime.Value.AddSeconds(actionStartDelay));
             }
         }
 
-        private void PlanFlightBetweenPoints(PlanItem depart, PlanItem dest, IGameServer gameServer, Spaceship ship)
+        public void PlanFlightBetweenPoints(PlanItem depart, PlanItem dest, IGameServer gameServer, Spaceship ship)
         {
             NavPath path = getPathBetweenTwoItems(depart, dest);
             PathPlanner.SolvePath(path, ship, gameServer.Game.currentGameTime.ValueInSeconds);
@@ -152,18 +155,6 @@ namespace SpaceTraffic.Game.Planner
 
                 gameServer.Game.PlanEvent(gameAction, dest.Place.TimeOfArrival);
             }
-        }
-
-        private PlanItem getNextPlanet(PlanItem item)
-        {
-            int actualIndex = this.IndexOf(item);
-            for (int i = actualIndex + 1; i < this.Count; i++)
-            {
-                PlanItem itemOnIndex = this.ElementAt(i);
-                if (itemOnIndex.Place.Location is Planet)
-                    return itemOnIndex;
-            }
-            return null;
         }
 
         private PlanItem getNextBusyItem(PlanItem item)

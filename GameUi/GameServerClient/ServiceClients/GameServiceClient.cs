@@ -122,13 +122,40 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             }
         }
 
-        public bool TestPlanner()
+        public int CreatePathPlan(int playerId, int spaceShipId)
         {
             using (var channel = this.GetClientChannel())
             {
                 ((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
-                return (channel as IGameService).TestPlanner();
+                return (channel as IGameService).CreatePathPlan(playerId, spaceShipId);
             }
         }
-	}
+
+        public int AddPlanItem(int pathPlanId, string solarSystem, bool isPlanet, string index, int sequenceNumber)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                ((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
+                return (channel as IGameService).AddPlanItem(pathPlanId, solarSystem, isPlanet, index, sequenceNumber);
+            }
+        }
+
+        public bool AddPlanAction(int planItemId, int sequenceNumber, int playerId, string actionName, params object[] actionArgs)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                ((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
+                return (channel as IGameService).AddPlanAction(planItemId, sequenceNumber, playerId, actionName, actionArgs);
+            }
+        }
+
+        public bool StartPathPlan(int pathPlanId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                ((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
+                return (channel as IGameService).StartPathPlan(pathPlanId);
+            }
+        }
+    }
 }

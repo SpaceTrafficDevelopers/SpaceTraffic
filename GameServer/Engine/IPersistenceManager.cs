@@ -55,5 +55,11 @@ namespace SpaceTraffic.Engine
         /// <returns>ICargoLoadDao</returns>
         ICargoLoadDao GetCargoLoadDao(string cargoLoadName);
 
+        IPlanActionDAO GetPlanActionDAO();
+
+        IPathPlanEntityDAO GetPathPlanEntityDAO();
+
+        IPlanItemEntityDAO GetPlanItemEntityDAO();
+
     }
 }

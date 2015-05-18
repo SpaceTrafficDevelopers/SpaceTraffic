@@ -50,6 +50,12 @@ using SpaceTraffic.Entities;
 
         public DbSet<GameEvent> GameEvents { get; set; }
 
+        public DbSet<PathPlanEntity> PathPlan { get; set; }
+
+        public DbSet<PlanItemEntity> PlanItem { get; set; }
+
+        public DbSet<PlanAction> PlanAction { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new MessageConfiguration());
@@ -63,6 +69,9 @@ using SpaceTraffic.Entities;
             modelBuilder.Configurations.Add(new TraderCargoConfiguration());
             modelBuilder.Configurations.Add(new GameActionConfiguration());
             modelBuilder.Configurations.Add(new GameEventConfiguration());
+            modelBuilder.Configurations.Add(new PathPlanEntityConfiguration());
+            modelBuilder.Configurations.Add(new PlanItemEntityConfiguration());
+            modelBuilder.Configurations.Add(new PlanActionConfiguration());
             base.OnModelCreating(modelBuilder); 
             
         }
@@ -122,6 +131,9 @@ using SpaceTraffic.Entities;
             Property(p => p.CurrentFuelTank).HasColumnType("int").IsRequired();
             Property(p => p.IsFlying).IsRequired();
             Property(p => p.CargoSpace).HasColumnType("int").IsRequired();
+            Property(p => p.Consumption).IsRequired();
+            Property(p => p.WearRate).IsRequired();
+            Property(p => p.MaxSpeed).HasColumnType("int").IsRequired();
             HasOptional(a => a.Base).WithMany(a => a.SpaceShips).HasForeignKey(a => a.DockedAtBaseId);
             HasRequired(p => p.Player).WithMany(p => p.SpaceShips).HasForeignKey(s => s.PlayerId);                    
             ToTable("SpaceShips");
@@ -308,6 +320,56 @@ using SpaceTraffic.Entities;
             // If you would like to change the name of the table, also change the SQL command in
             // SpaceTraffic.Dao.GameEventDAO::RemoveAllEvents().
             ToTable("GameEvents");
+        }
+    }
+
+    public class PathPlanEntityConfiguration : EntityTypeConfiguration<PathPlanEntity>
+    {
+
+        public PathPlanEntityConfiguration()
+            : base()
+        {
+            HasKey(p => p.PathPlanId);
+            Property(p => p.IsPlanned).IsRequired();
+            HasRequired(p => p.Player).WithMany().HasForeignKey(p => p.PlayerId).WillCascadeOnDelete(true);
+            HasRequired(p => p.SpaceShip).WithMany().HasForeignKey(p => p.SpaceShipId).WillCascadeOnDelete(false);
+
+            ToTable("PathPlan");
+        }
+    }
+
+    public class PlanItemEntityConfiguration : EntityTypeConfiguration<PlanItemEntity>
+    {
+
+        public PlanItemEntityConfiguration()
+            : base()
+        {
+            HasKey(p => p.PlanItemId);
+            Property(p => p.SolarSystem).HasColumnType("varchar").HasMaxLength(256).IsRequired();
+            Property(p => p.Index).HasColumnType("varchar").HasMaxLength(256).IsRequired();
+            Property(p => p.SequenceNumber).HasColumnType("int").IsRequired();
+            Property(p => p.IsPlanet).IsRequired();
+            HasRequired(p => p.PathPlanEntity).WithMany(p => p.Items).HasForeignKey(p => p.PathPlanId);
+            Ignore(p => p.Place);
+
+            ToTable("PlanItem");
+        }
+    }
+
+
+    public class PlanActionConfiguration : EntityTypeConfiguration<PlanAction>
+    {
+
+        public PlanActionConfiguration()
+            : base()
+        {
+            HasKey(p => p.PlanActionId);
+            Property(p => p.ActionType).HasColumnType("varchar").HasMaxLength(1024).IsRequired();
+            Property(p => p.GameAction).HasColumnType("varbinary(max)").IsRequired();
+            Property(p => p.SequenceNumber).HasColumnType("int").IsRequired();
+            HasRequired(p => p.PlanItem).WithMany(p => p.Actions).HasForeignKey(p => p.PlanItemId);
+
+            ToTable("PlanAction");
         }
     }
 

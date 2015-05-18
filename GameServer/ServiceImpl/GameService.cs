@@ -30,11 +30,10 @@ using SpaceTraffic.Dao;
 using SpaceTraffic.Game.Planner;
 using SpaceTraffic.Game.Navigation;
 using SpaceTraffic.Game;
-using SpaceTraffic.Game.Actions.Ships;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
 {
-	public class GameService :IGameService
+	public class GameService : IGameService
 	{
 		private Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -179,105 +178,86 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			}
 		}
 
-		
-
 		public object GetActionResult(int playerId, int actionCode)
 		{
 			throw new NotImplementedException();
 		}
 
-
-        public bool TestPlanner()
+        public int CreatePathPlan(int playerId, int spaceShipId)
         {
-            PathPlan plan = new PathPlan(1);
-            PlanItem item1 = new PlanItem();
-            
-            NavPoint firstPoint = new NavPoint();
-            firstPoint.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].Planets["Proxima Centauri 1"];
+            IPathPlanEntityDAO pped = GameServer.CurrentInstance.Persistence.GetPathPlanEntityDAO();
 
-            item1.Place = firstPoint;
-            CargoBuy cba = new CargoBuy();
+            PathPlanEntity plan = new PathPlanEntity();
+            plan.PlayerId = playerId;
+            plan.SpaceShipId = spaceShipId;
 
-            cba.PlayerId = 1;
-            cba.ActionArgs = new object[]{
-                    "Proxima Centauri",
-                    "Proxima Centauri 1",
-                    1,
-                    10,
-                    "TraderCargoDAO",
-                    1
-            };
+            return pped.InsertPathPlan(plan);
+        }
 
-            item1.Actions.Add(cba);
+        public int AddPlanItem(int pathPlanId, string solarSystem, bool isPlanet, string index, int sequenceNumber)
+        {
+            IPlanItemEntityDAO pied = GameServer.CurrentInstance.Persistence.GetPlanItemEntityDAO();
 
-            ShipRepair srpa = new ShipRepair();
+            PlanItemEntity item = new PlanItemEntity();
+            item.PathPlanId = pathPlanId;
+            item.SolarSystem = solarSystem;
+            item.IsPlanet = isPlanet;
+            item.Index = index;
+            item.SequenceNumber = sequenceNumber;
 
-            srpa.PlayerId = 1;
-            srpa.ActionArgs = new object[]{
-                   "Proxima Centauri",
-                    "Proxima Centauri 1",
-                    1,
-                    30,
-                    1
-            };
-            item1.Actions.Add(srpa);
+            return pied.InsertPlanItem(item);
+        }
 
+        public bool AddPlanAction(int planItemId, int sequenceNumber, int playerId, string actionName, params object[] actionArgs)
+        {
+            IPlanActionDAO pad = GameServer.CurrentInstance.Persistence.GetPlanActionDAO();
+            PlanAction pa = new PlanAction() { PlanItemId = planItemId, SequenceNumber = sequenceNumber };
 
-            NavPoint hole = new NavPoint();
-            hole.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].WormholeEndpoints[0];
+            try
+            {
+                IPlannableAction action = Activator.CreateInstance(Type.GetType("SpaceTraffic.Game.Actions." + actionName)) as IPlannableAction;
+                
+                if (action == null)
+                    throw new ActionNotFoundException(
+                        String.Format("Action class with name: {0} does not implements IGameAction.",
+                        actionName));
 
-            PlanItem holik = new PlanItem();
-            holik.Place = hole;
+                action.ActionArgs = actionArgs;
+                action.PlayerId = playerId;
+                
+                pa.ActionType = action.GetType().ToString();
+                pa.GameAction = PlannerConverter.convertPlannableAction(action);
 
-           
+                if(pad.InsertPlanAction(pa))
+                    return true;
 
-            NavPoint secondPoint = new NavPoint();
-            secondPoint.Location = GameServer.CurrentInstance.World.Map["Solar system"].Planets["Sol 1"];
+                return false;
+            }
+            catch (System.IO.FileNotFoundException e)
+            {
+                Console.WriteLine("Action file with name " + actionName + " was not found in SpaceTraffic.Game.Actions namespace.");
+                throw;
+            } 
+        }
 
-            PlanItem item2 = new PlanItem();
+        public bool StartPathPlan(int pathPlanId)
+        {
+            IPathPlanEntityDAO pped = GameServer.CurrentInstance.Persistence.GetPathPlanEntityDAO();
+            PathPlanEntity plan = pped.GetPathPlanById(pathPlanId);
 
-            item2.Place = secondPoint;
-            
-            ShipRefuel sra = new ShipRefuel();
+            if (plan != null) {
+                PlannerConverter converter = new PlannerConverter();
+                IPathPlan pathPlan = converter.createPathPlan(plan);
 
-            sra.PlayerId = 1;
-            sra.ActionArgs = new object[]{
-                    "Solar system",
-                    "Sol 1",
-                    1,
-                    200,
-                    1
-            };
+                pathPlan.PlanFirstItem(GameServer.CurrentInstance);
 
-            item2.Actions.Add(sra);
+                plan.IsPlanned = true;
+                pped.UpdatePathPlanById(plan);
 
-            CargoSell csa = new CargoSell();
+                return true;
+            }
 
-            csa.PlayerId = 1;
-            csa.ActionArgs = new object[]{
-                    "Solar system",
-                    "Sol 1",
-                    1,
-                    10,
-                    "TraderCargoDAO",
-                    1,
-                    1
-            };
-
-            item2.Actions.Add(csa);
-            //item2.Actions.Add(sra);
-
-            plan.Add(item1);
-            plan.Add(holik);
-            plan.Add(item2);
-
-            Spaceship sh = new Spaceship(1, "Ship de la Test");
-
-            sh.MaxSpeed = 20;
-
-            plan.PlanFirstItem(GameServer.CurrentInstance, sh);
-
-            return true;
+            return false;
         }
     }
 }

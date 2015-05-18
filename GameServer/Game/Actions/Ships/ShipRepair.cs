@@ -23,6 +23,7 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
+    [Serializable]
     class ShipRepair: IPlannableAction
     {
         private static readonly int PERCENT_REPAIR_TIME = 3;

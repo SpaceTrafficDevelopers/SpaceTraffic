@@ -83,6 +83,9 @@
     <Compile Include="Dao\IBaseDAO.cs" />
     <Compile Include="Dao\IGameEventDAO.cs" />
     <Compile Include="Dao\IGameActionDAO.cs" />
+    <Compile Include="Dao\IPathPlanEntityDAO.cs" />
+    <Compile Include="Dao\IPlanActionDAO.cs" />
+    <Compile Include="Dao\IPlanItemEntityDAO.cs" />
     <Compile Include="Dao\ISpaceShipCargoDAO.cs" />
     <Compile Include="Dao\ISpaceShipDAO.cs" />
     <Compile Include="Dao\ITraderCargoDAO.cs" />
@@ -90,6 +93,9 @@
     <Compile Include="Dao\MessageDAO.cs" />
     <Compile Include="Dao\IMessageDAO.cs" />
     <Compile Include="Dao\IPlayerDAO.cs" />
+    <Compile Include="Dao\PathPlanEntityDAO.cs" />
+    <Compile Include="Dao\PlanActionDAO.cs" />
+    <Compile Include="Dao\PlanItemEntityDAO.cs" />
     <Compile Include="Dao\PlayerDAO.cs" />
     <Compile Include="Dao\SpaceShipCargoDAO.cs" />
     <Compile Include="Dao\SpaceShipDAO.cs" />
@@ -140,6 +146,7 @@
     <Compile Include="Game\Planner\IPathPlan.cs" />
     <Compile Include="Game\Planner\PathPlan.cs" />
     <Compile Include="Game\Planner\PlanItem.cs" />
+    <Compile Include="Game\Planner\PlannerConverter.cs" />
     <Compile Include="Persistence\SpaceTrafficCreateDatabaseIfNotExists.cs" />
     <Compile Include="Persistence\SpaceTrafficCustomInitializer.cs" />
     <Compile Include="Persistence\SpaceTrafficContext.cs" />
