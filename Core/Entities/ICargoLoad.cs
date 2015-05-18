@@ -5,6 +5,9 @@ using System.Text;
 
 namespace SpaceTraffic.Entities
 {
+    /// <summary>
+    /// Interface for returning dao class name
+    /// </summary>
     public interface ICargoLoad
     {
         /// <summary>

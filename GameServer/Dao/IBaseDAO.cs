@@ -22,6 +22,9 @@ using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Dao
 {
+    /// <summary>
+    /// Interface for Base DAO
+    /// </summary>
     public interface IBaseDAO
     {
         /// <summary>
