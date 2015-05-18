@@ -23,6 +23,9 @@ using System.Text;
 
 namespace SpaceTraffic.Game
 {
+    /// <summary>
+    /// Interface for planet
+    /// </summary>
     interface IPlanet
     {
         /// <summary>

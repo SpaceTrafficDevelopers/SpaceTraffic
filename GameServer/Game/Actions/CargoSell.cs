@@ -24,16 +24,25 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
+    /// <summary>
+    /// Action for selling cargo.
+    /// </summary>
     [Serializable]
     class CargoSell : IPlannableAction
     {
         private string result = "Provádí se prodej zboží.";
 
+        /// <summary>
+        /// Result of action.
+        /// </summary>
         public object Result
         {
             get { return new { result = this.result }; }
         }
 
+        /// <summary>
+        /// Duration of action.
+        /// </summary>
         public double Duration
         {
             get { return 1; }
@@ -60,14 +69,29 @@ namespace SpaceTraffic.Game.Actions
         /// </summary>
         public int Count { get; set; }
 
+        /// <summary>
+        /// Star system name
+        /// </summary>
         public String StarSystemName { get; set; }
 
+        /// <summary>
+        /// Planet name
+        /// </summary>
         public String PlanetName { get; set; }
 
+        /// <summary>
+        /// Loading place
+        /// </summary>
         public ICargoLoadDao LoadingPlace { get; set; }
 
+        /// <summary>
+        /// Seller ship identification number
+        /// </summary>
         public int SellerShipId { get; set; }
 
+        /// <summary>
+        /// Buyer ship identification number
+        /// </summary>
         public int BuyerID { get; set; }
 
         public void Perform(IGameServer gameServer)
@@ -121,6 +145,10 @@ namespace SpaceTraffic.Game.Actions
             State = GameActionState.FINISHED;
         }
 
+        /// <summary>
+        /// Get all arguments to properties from action args.
+        /// </summary>
+        /// <param name="gameServer">Instance of game server</param>
         private void getArgumentsFromActionArgs(IGameServer gameServer)
         {
             StarSystemName = ActionArgs[0].ToString();
@@ -128,7 +156,6 @@ namespace SpaceTraffic.Game.Actions
             CargoLoadEntityID = Convert.ToInt32(ActionArgs[2].ToString());
             Count = Convert.ToInt32(ActionArgs[3].ToString());
             LoadingPlace = gameServer.Persistence.GetCargoLoadDao(ActionArgs[4].ToString()) ;
-            //LoadingPlace = (ICargoLoadDao)(ActionArgs[5]);
             BuyerID = Convert.ToInt32(ActionArgs[5].ToString());
             SellerShipId = Convert.ToInt32(ActionArgs[6].ToString());
         }

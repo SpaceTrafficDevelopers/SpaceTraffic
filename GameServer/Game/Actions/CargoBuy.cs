@@ -27,16 +27,25 @@ using System.Runtime.Serialization;
 
 namespace SpaceTraffic.Game.Actions
 {
+    /// <summary>
+    /// Action for buying cargo.
+    /// </summary>
     [Serializable]
     public class CargoBuy : IPlannableAction
     {
         private string result = "Provádí se nákup zboží.";
 
+        /// <summary>
+        /// Result of action.
+        /// </summary>
         public object Result
         {
             get { return new { result = this.result }; }
         }
 
+        /// <summary>
+        /// Duration of action.
+        /// </summary>
         public double Duration
         {
             get { return 1; }
@@ -45,13 +54,13 @@ namespace SpaceTraffic.Game.Actions
         public GameActionState State { get; set; }
 
         /// <summary>
-        /// Vrací ID hráče, který tuto akci vyžádal.
+        /// Player identification number who wats this action.
         /// </summary>
         public int PlayerId { get; set; }
 
         /// <summary>
-        /// Vrací kód akce.
-        /// Kód akce je číslo, které jednoznačně identifikuje akci v hráčově seznamu vykonávaných akcí.
+        /// Return action code.
+        /// Action code is number which positively identificates action in player list of actions.
         /// </summary>
         public int ActionCode { get; set; }
 
@@ -71,18 +80,25 @@ namespace SpaceTraffic.Game.Actions
         /// </summary>
         public int Count { get; set; }
 
+        /// <summary>
+        /// Buyer ship identification number
+        /// </summary>
         public int BuyerShipID { get; set; }
 
+        /// <summary>
+        /// Buying place
+        /// </summary>
         public ICargoLoadDao BuyingPlace { get; set; }
 
+        /// <summary>
+        /// Star system name
+        /// </summary>
         public String StarSystemName { get; set; }
 
+        /// <summary>
+        /// Planet name
+        /// </summary>
         public String PlanetName { get; set; }
-
-
-       /* private string where { get; set; }
-        private string from { get; set; }*/
-
 
         public void Perform(IGameServer gameServer)
         {
@@ -146,6 +162,10 @@ namespace SpaceTraffic.Game.Actions
             State = GameActionState.FINISHED;
         }
 
+        /// <summary>
+        /// Get all arguments to properties from action args.
+        /// </summary>
+        /// <param name="gameServer">Instance of game server</param>
         private void getArgumentsFromActionArgs(IGameServer gameServer)
         {
             StarSystemName = ActionArgs[0].ToString();

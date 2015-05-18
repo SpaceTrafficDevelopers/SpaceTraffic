@@ -22,28 +22,64 @@ using System.Text;
 
 namespace SpaceTraffic.Entities
 {
+    /// <summary>
+    /// Class representing cargo in database
+    /// </summary>
     public class Cargo
     {
+        /// <summary>
+        /// Identification number
+        /// </summary>
         public int CargoId { get; set; }
 
+        /// <summary>
+        /// Default price of goods
+        /// </summary>
         public int DefaultPrice { get; set; }
 
+        /// <summary>
+        /// Name of goods
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Category of goods
+        /// </summary>
         public string Category { get; set; }
 
+        /// <summary>
+        /// Short description of goods
+        /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Type of goods - mainstream or special
+        /// </summary>
         public string Type { get; set; }
 
+        /// <summary>
+        /// Player level to buy this goods
+        /// </summary>
         public int LevelToBuy { get; set; }
 
+        /// <summary>
+        /// Volume of goods
+        /// </summary>
         public int Volume { get; set; }
 
+        /// <summary>
+        /// Collection of factories
+        /// </summary>
         public virtual ICollection<Factory> Factories { get; set; }
 
+        /// <summary>
+        /// Collection of spaceship cargos
+        /// </summary>
         public virtual ICollection<SpaceShipCargo> SpaceShipsCargos { get; set; }
 
+        /// <summary>
+        /// Collection of trader cargos
+        /// </summary>
         public virtual ICollection<TraderCargo> TraderCargos { get; set; }
     }
 }

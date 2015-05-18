@@ -22,6 +22,9 @@ using SpaceTraffic.Entities.Goods;
 
 namespace SpaceTraffic.Data
 {
+    /// <summary>
+    /// Class for parsing XML from XML file
+    /// </summary>
     public static class GoodsXmlHelper
     {
         /// <summary>
@@ -103,7 +106,7 @@ namespace SpaceTraffic.Data
                     product.LevelToBuy = productNode.IntValue();
                     break;
 
-                case "category": /* Používá se k určení do které třídy zboží patří. Využíváno výše. */ 
+                case "category": /* Use for identify goods class. Use on the top. */ 
                     break;
 
                 default:
