@@ -35,6 +35,13 @@ namespace SpaceTraffic.Dao
 		/// <param name="playerId">Identificator of player</param>
 		/// <returns>Return object of player by id</returns>
 		Player GetPlayerById(int playerId);
+
+		/// <summary>
+		/// Get player from database by id including all lists
+		/// </summary>
+		/// <param name="playerId">Identificator of player</param>
+		/// <returns>Return player entity with filled lists</returns>
+		Player GetPlayerWithIncludes(int playerId);
 		/// <summary>
 		/// Get player from database by player name
 		/// </summary>

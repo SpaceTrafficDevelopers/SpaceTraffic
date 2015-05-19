@@ -72,6 +72,10 @@
     <Compile Include="Configuration\GameServerConfiguration.cs" />
     <Compile Include="Configuration\GameServerConfigurationSection.cs" />
     <Compile Include="Dao\AbstractDAO.cs" />
+    <Compile Include="Dao\Achievements\EarnedAchievementDAO.cs" />
+    <Compile Include="Dao\Achievements\IEarnedAchievementDAO.cs" />
+    <Compile Include="Dao\Achievements\IStatisticDAO.cs" />
+    <Compile Include="Dao\Achievements\StatisticDAO.cs" />
     <Compile Include="Dao\BaseDAO.cs" />
     <Compile Include="Dao\CargoDAO.cs" />
     <Compile Include="Dao\GameEventDAO.cs" />
@@ -111,12 +115,14 @@
     <Compile Include="Engine\IScriptManager.cs" />
     <Compile Include="Engine\IGameManager.cs" />
     <Compile Include="Engine\IServiceManager.cs" />
+    <Compile Include="Engine\IStatisticsManager.cs" />
     <Compile Include="Engine\IWorldManager.cs" />
     <Compile Include="GameServer\EventQueue.cs" />
     <Compile Include="GameServer\GameManager.cs" />
     <Compile Include="GameServer\GameStateManager.cs" />
     <Compile Include="GameServer\ScriptManager.cs" />
     <Compile Include="GameServer\GoodsManager.cs" />
+    <Compile Include="GameServer\StatisticsManager.cs" />
     <Compile Include="GameServer\WorldManager.cs" />
     <Compile Include="Game\Actions\CargoSell.cs" />
     <Compile Include="Game\Actions\CargoBuy.cs" />

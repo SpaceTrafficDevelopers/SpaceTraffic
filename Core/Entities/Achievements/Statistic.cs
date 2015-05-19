@@ -18,22 +18,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SpaceTraffic.Game;
+using System.Runtime.Serialization;
+using NLog;
 
-namespace SpaceTraffic.Engine
+
+namespace SpaceTraffic.Entities
 {
-    public interface IGameServer
+    [DataContract(Name = "Statistics")]
+    public class Statistic
     {
-        IPersistenceManager Persistence { get; }
+        [DataMember]
+        public int StatisticsId { get; set; }
 
-        IAssetManager Assets { get; }
-        
-        IScriptManager Scripts { get; }
+        [DataMember]
+        public String StatName { get; set; }
 
-        IWorldManager World { get; }
+        [DataMember]
+        public int StatValue { get; set; }
 
-        IGameManager Game { get; }
+        // Player ID
+        [DataMember]
+        public int PlayerId { get; set; }
 
-		IStatisticsManager Statistics { get; }
+        public virtual Player Player { get; set; }
+       
     }
 }
+

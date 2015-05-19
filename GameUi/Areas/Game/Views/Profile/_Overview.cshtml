@@ -1,5 +1,12 @@
 ﻿@{
     ViewBag.Title = "_Overview";
+	var userName = Context.User.Identity.Name;
+
+	SpaceTraffic.GameUi.GameServerClient.IGameServerClient Client = SpaceTraffic.GameUi.GameServerClient.GameServerClientFactory.GetClientInstance();
+
+	SpaceTraffic.Entities.ExperienceLevels globalExpiriencesLevels = Client.GameService.GetExperienceLevels();
+
+	//SpaceTraffic.Entities.Player actualPlayer = Client.GameService.GetPlayer(userName);
 }
 
 <h2>Account overview</h2>
@@ -12,4 +19,36 @@
             | 
             <a class="profile_deleteButton" href="#" title="Delete account">Delete account</a></td></tr>
 		</table>
+
+	<h2>Experience</h2>
+	<div class="profile_category">Experience</div>
+
+
+	@{
+		//SpaceTraffic.Entities.TLevel currentLevel = globalExpiriencesLevels.GetLevel(actualPlayer.ExperienceLevel);
+
+		//SpaceTraffic.Entities.TLevel nextLevel = globalExpiriencesLevels.GetLevel(currentLevel.LevelID + 1);
+		//var nextLevelExp = "-";
+		//if (nextLevel != null)
+		//{
+		//	nextLevelExp = "" + nextLevel.RequiredXP;
+		//}
+
+	}
+
+	<div class="experience">
+		<table class="experiencetable">
+			<tr>
+				<td class="levelText">Level</td>
+				<td class="level">@*currentLevel.LevelID*@</td>
+				<td class="dash">-</td>
+				<td class="levelName">@*currentLevel.Name*@</td>
+			</tr>
+			<tr>
+				<td class="currentExp" colspan="2">@*actualPlayer.Experiences*@</td>
+				<td class="slash">/</td>
+				<td class="nextExp">@*nextLevelExp*@</td>
+			</tr>
+		</table>
+	</div> 
 </div>

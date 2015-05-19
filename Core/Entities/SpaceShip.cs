@@ -43,7 +43,6 @@ namespace SpaceTraffic.Entities
 
 		public bool IsFlying { get; set; }
 
-       
         public int? DockedAtBaseId { get; set; }
 
 		public virtual Base Base { get; set; }

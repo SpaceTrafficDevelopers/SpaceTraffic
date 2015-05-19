@@ -135,6 +135,21 @@ var SvgStarSystemMap = {
         	console.debug('Revive on: ', this.svgItems[i])
         	this.svgItems[i].revive();
         }
+
+        $.getJSON('/' + 'Achievement/GetEarnedAchievements', function (unviewedAchievements) {
+        	if (jQuery.isEmptyObject(unviewedAchievements)) {
+        		return;
+        	}
+
+        	$.each(unviewedAchievements, function (index, achievement) {
+        		var achvPopup = $("#achievement");
+        		achvPopup.queue(function () {
+        			$(".name").text(achievement.Name);
+        			$(".icon img").attr("src", achievement.Image);
+        			$(this).dequeue();
+        		}).slideDown(400).delay(2000).slideUp(400);
+        	});
+        });
         
         this.updateObjectList();
         console.groupEnd();
@@ -195,8 +210,10 @@ var SvgStarSystemMap = {
             //'<li><a href="/Game/Cargo/LoadCargo?cargoId=1&objectId=2">LoadCargo</a></li>' +
             //'<li><a href="/Game/Cargo/UnloadCargo">UnloadCargo</a></li>' +
             '<li><a href="/Game/Cargo/SellCargo?starSystemName=Proxima Centauri&planetName=Proxima Centauri 1&cargoLoadEntityId=1&count=1&loadingPlace=TraderCargoDAO&buyerId=1&sellerShipId=1">SellCargo</a></li>' +
-			'<li><a href="/Game/Ships?baseId=2&starSystemName=Proxima Centauri#Buy_new_ship">BuyShip</a></li>' +
-            '<li><a href="/Game/Planner/TestPlanner">TestPlanner</a></li>' + //TODO: delete after test
+
+			'<li><a href="/Game/Ships?baseId=1&starSystemName=Solar System#Buy_new_ship">BuyShip</a></li>' +
+			'<li><a href="/Game/Ships?baseId=2&starSystemName=Proxima Centauri#Buy_new_ship">BuyShipOnProxima</a></li>' +
+            '<li><a href="/Game/Planner/TestPlanner">TestPlanner</a></li>' + 
             '</ul>';
 	    $("#contextPanel").html(buffer);
 	    buffer = null;

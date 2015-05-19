@@ -42,6 +42,16 @@ namespace SpaceTraffic.Dao
 			}
 		}
 
+
+
+		public Player GetPlayerWithIncludes(int playerId)
+		{
+			using (var contextDB = CreateContext())
+			{
+				return contextDB.Players.Include("SpaceShips").Include("Statistics").Include("EarnedAchievements").FirstOrDefault(x => x.PlayerId.Equals(playerId));
+			}
+		}
+
 		public Player GetPlayerByName(string playerName)
 		{
 			using (var contextDB = CreateContext())
@@ -120,6 +130,8 @@ namespace SpaceTraffic.Dao
 					playerTab.OrionEmail = player.OrionEmail;                   
 					player.PsswdHash = player.PsswdHash;
 					player.PsswdSalt = player.PsswdSalt;
+					playerTab.ExperienceLevel = player.ExperienceLevel;
+					playerTab.Experiences = player.Experiences;
 					// save context to database
 					contextDB.SaveChanges();
 					return true;

@@ -42,6 +42,12 @@ namespace SpaceTraffic.Services.Contracts
 		[OperationContract]
 		bool PlayerHasEnaughCredits(int playerId, long amount);
 
+		[OperationContract]
+		Entities.Achievements GetAchievements();
+
+		[OperationContract]
+		Entities.ExperienceLevels GetExperienceLevels();
+
         [OperationContract]
         bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count);
         
@@ -63,7 +69,10 @@ namespace SpaceTraffic.Services.Contracts
         [OperationContract]
         bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount);
 
-        [OperationContract]
+        
+		[OperationContract]
+		List<TAchievement> GetEarnedAchievements(int playerId);
+
         int CreatePathPlan(int playerId, int spaceShipId);
 
         [OperationContract]

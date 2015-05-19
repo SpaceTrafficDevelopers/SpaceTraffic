@@ -49,6 +49,7 @@ namespace SpaceTraffic.GameServer
         private GameStateManager gameStateManager;
         private GameManager gameManager;
         private GoodsManager goodsManager;
+		private StatisticsManager statisticsManager;
         public volatile bool run = false;
 
         public volatile GameTime currentGameTime;
@@ -82,6 +83,14 @@ namespace SpaceTraffic.GameServer
                 return this.scriptManager;
             }
         }
+
+		public IStatisticsManager Statistics
+		{
+			get
+			{
+				return this.statisticsManager;
+			}
+		}
         #endregion
 
         //TODO: Thread-safe state indication of GameServer instance.
@@ -127,7 +136,9 @@ namespace SpaceTraffic.GameServer
                 throw;
             }
 
-            
+			this.statisticsManager = new StatisticsManager(this);
+			logger.Info("Initializing Statistics.");
+			          
             
             scriptManager.RunScript("SpaceTraffic.Scripts.Testing.TestDataGenerator");
 
@@ -135,6 +146,8 @@ namespace SpaceTraffic.GameServer
             this.worldManager = new WorldManager(this);
             GalaxyMap galaxyMap = this.assetManager.LoadGalaxyMap(galaxyMapName);
             this.worldManager.Map = galaxyMap;
+			this.worldManager.Achievements = this.assetManager.LoadAchievements();
+			this.worldManager.ExperienceLevels = this.assetManager.LoadExperienceLevels();
 
             this.worldManager.GenerateBasesAndTraders();
 

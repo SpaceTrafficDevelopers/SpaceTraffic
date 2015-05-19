@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,37 +23,41 @@ using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Engine
 {
-    public interface IPersistenceManager : IDisposable
-    {
-        //void Initialize();
+	public interface IPersistenceManager : IDisposable
+	{
+		//void Initialize();
 
-        //void TestDbConnection();
+		//void TestDbConnection();
 
-        IPlayerDAO GetPlayerDAO();
+		IPlayerDAO GetPlayerDAO();
 
-        IMessageDAO GetMessageDAO();
+		IMessageDAO GetMessageDAO();
 
-        ICargoDAO GetCargoDAO();
+		ICargoDAO GetCargoDAO();
 
-        IFactoryDAO GetFactoryDAO();
+		IFactoryDAO GetFactoryDAO();
 
-        ISpaceShipDAO GetSpaceShipDAO();
+		ISpaceShipDAO GetSpaceShipDAO();
 
-        ISpaceShipCargoDAO GetSpaceShipCargoDAO();
+		ISpaceShipCargoDAO GetSpaceShipCargoDAO();
 
-        IBaseDAO GetBaseDAO();
+		IBaseDAO GetBaseDAO();
 
 
-        ITraderCargoDAO GetTraderCargoDAO();
+		ITraderCargoDAO GetTraderCargoDAO();
 
-        ITraderDAO GetTraderDAO();
-        
-        /// <summary>
-        /// Return ICargoLoadDao by cargoLoad.
-        /// </summary>
-        /// <param name="cargoLoad">instance ICargoLoad</param>
-        /// <returns>ICargoLoadDao</returns>
-        ICargoLoadDao GetCargoLoadDao(string cargoLoadName);
+		ITraderDAO GetTraderDAO();
+		
+		/// <summary>
+		/// Return ICargoLoadDao by cargoLoad.
+		/// </summary>
+		/// <param name="cargoLoad">instance ICargoLoad</param>
+		/// <returns>ICargoLoadDao</returns>
+		ICargoLoadDao GetCargoLoadDao(string cargoLoadName);
+
+		IEarnedAchievementDAO GetEarnedAchievementDAO();
+
+		IStatisticDAO GetStatisticsDAO();
 
         IPlanActionDAO GetPlanActionDAO();
 

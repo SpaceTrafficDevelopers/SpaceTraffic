@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,6 +26,7 @@ using SpaceTraffic.Entities;
 
  namespace SpaceTraffic.Persistence
 {
+	
     public class SpaceTrafficContext : DbContext
     {
         public DbSet<Player> Players { get; set; }
@@ -50,6 +51,10 @@ using SpaceTraffic.Entities;
 
         public DbSet<GameEvent> GameEvents { get; set; }
 
+		public DbSet<EarnedAchievement> EarnedAchievements { get; set; }
+
+		public DbSet<Statistic> Statistics { get; set; }
+
         public DbSet<PathPlanEntity> PathPlan { get; set; }
 
         public DbSet<PlanItemEntity> PlanItem { get; set; }
@@ -69,12 +74,16 @@ using SpaceTraffic.Entities;
             modelBuilder.Configurations.Add(new TraderCargoConfiguration());
             modelBuilder.Configurations.Add(new GameActionConfiguration());
             modelBuilder.Configurations.Add(new GameEventConfiguration());
+			modelBuilder.Configurations.Add(new StatisticsConfiguration());
+			modelBuilder.Configurations.Add(new EarnedAchievementsConfiguration());
             modelBuilder.Configurations.Add(new PathPlanEntityConfiguration());
             modelBuilder.Configurations.Add(new PlanItemEntityConfiguration());
             modelBuilder.Configurations.Add(new PlanActionConfiguration());
             base.OnModelCreating(modelBuilder); 
             
         }
+
+
     }
 
     //TODO: UniqueConstraint http://stackoverflow.com/questions/9363967/trying-to-create-a-hasunique-on-entitytypeconfiguration-in-entity-framework-gen
@@ -111,6 +120,45 @@ using SpaceTraffic.Entities;
         }
 
     }
+
+     public class EarnedAchievementsConfiguration : EntityTypeConfiguration<EarnedAchievement>
+	{
+		/// <summary>
+		/// Statistics configuration of persistent layer
+		/// </summary>
+		public EarnedAchievementsConfiguration()
+			: base()
+		{
+			HasKey(l => l.EarnedAchievementsId);
+			Property(l => l.AchievementId).HasColumnType("int").IsRequired();
+			Property(l => l.UnlockedAt).HasColumnType("datetime").IsRequired();
+			Property(l => l.IsJustEarned).HasColumnType("bit").IsRequired();
+
+			HasRequired(l => l.Player).WithMany(p => p.EarnedAchievements).HasForeignKey(l => l.PlayerId).WillCascadeOnDelete();
+
+			ToTable("EarnedAchievements");
+		}
+	}
+
+     public class StatisticsConfiguration : EntityTypeConfiguration<Statistic>
+	{
+		/// <summary>
+		/// Statistics configuration of persistent layer
+		/// </summary>
+		public StatisticsConfiguration()
+			: base()
+		{
+			HasKey(l => l.StatisticsId);
+			Property(l => l.StatName).HasColumnType("varchar").HasMaxLength(50).IsRequired();
+			Property(l => l.StatValue).HasColumnType("int").IsRequired();
+
+			HasRequired(l => l.Player).WithMany(p => p.Statistics).HasForeignKey(l => l.PlayerId).WillCascadeOnDelete();
+
+			ToTable("Statistics");
+		}
+	}
+
+	//TODO: UniqueConstraint http://stackoverflow.com/questions/9363967/trying-to-create-a-hasunique-on-entitytypeconfiguration-in-entity-framework-gen
 
     public class SpaceShipConfiguration : EntityTypeConfiguration<SpaceShip>
     {

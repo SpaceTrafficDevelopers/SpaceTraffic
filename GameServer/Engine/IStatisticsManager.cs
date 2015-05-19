@@ -18,22 +18,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SpaceTraffic.Game;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Engine
 {
-    public interface IGameServer
-    {
-        IPersistenceManager Persistence { get; }
+	public interface IStatisticsManager
+	{
+		void IncrementStatisticItem(Player player, string statisticName, int riseBy);
 
-        IAssetManager Assets { get; }
-        
-        IScriptManager Scripts { get; }
+		void DecrementStatisticItem(Player player, string statisticName, int declineBy);
 
-        IWorldManager World { get; }
+		void SetStatisticItemTo(Player player, string statisticName, int value);
 
-        IGameManager Game { get; }
-
-		IStatisticsManager Statistics { get; }
-    }
+		void IncrementExperiences(Player player, int riseBy);
+	}
 }
