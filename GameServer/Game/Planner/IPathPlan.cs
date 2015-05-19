@@ -15,7 +15,7 @@ namespace SpaceTraffic.Game.Planner
         List<IGameEvent> getEventsFromPath();
         void planEventsForNextItem(PlanItem item, IGameServer gameServer);
         void PlanFirstItem(IGameServer gameServer);
-        void PlanFlightBetweenPoints(PlanItem depart, PlanItem dest, IGameServer gameServer, Spaceship ship);
+        bool PlanFlightBetweenPoints(PlanItem depart, PlanItem dest, IGameServer gameServer, Spaceship ship);
 
 
     }
