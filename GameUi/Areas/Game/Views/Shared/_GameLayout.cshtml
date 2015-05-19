@@ -14,7 +14,7 @@
 	
 	<title>Space Traffic</title>
 	
-	<link href="@Url.Content("~/Content/Game.less")" rel="stylesheet" type="text/css" />
+  	<link href="@Url.Content("~/Content/Game.less")" rel="stylesheet" type="text/css" />
 	<link href="@Url.Content("~/Content/themes/base/jquery.ui.base.css")" rel="stylesheet" type="text/css" />
 	@*<link rel="shortcut icon" href="~/Content/spacetraffic.ico" type="image/x-icon">*@
 
@@ -62,17 +62,7 @@
 
 		</div>
 		
-		<div id="achievement">
-			<table id="achievementtable">
-				<tr>
-					<td class="icon" rowspan="2"><img src="fac1complete.png" alt="foto" width="64px" height="64px" /></td>
-					<td class="unlocked">Achievement Unlocked!</td>
-				</tr>
-				<tr>
-					<td class="name"></td>
-				</tr>
-			</table>
-		</div>
+		@Html.Partial("_Achievements")
 
 	  </div>
 	  <div id="footer">
