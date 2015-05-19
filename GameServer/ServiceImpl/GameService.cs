@@ -155,6 +155,14 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return GameServer.CurrentInstance.World.ExperienceLevels;
 		}
 
+		/// <summary>
+		/// Returns player from database.
+		/// </summary>
+		/// <param name="playerId">The player identifier.</param>
+		/// <returns></returns>
+		public Player GetPlayer(int playerId) {
+			return GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(playerId);
+		}
 
 		public List<TAchievement> GetEarnedAchievements(int playerId)
 		{

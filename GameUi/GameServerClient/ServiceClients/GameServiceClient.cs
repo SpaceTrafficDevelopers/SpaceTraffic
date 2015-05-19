@@ -90,6 +90,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			}
 		}
 
+		public Player GetPlayer(int playerId)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).GetPlayer(playerId);
+			}
+		}
+
         public bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count)
         {
             using (var channel = this.GetClientChannel())

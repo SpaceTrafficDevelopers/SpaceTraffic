@@ -73,6 +73,9 @@ namespace SpaceTraffic.Services.Contracts
 		[OperationContract]
 		List<TAchievement> GetEarnedAchievements(int playerId);
 
+		[OperationContract]
+		Player GetPlayer(int playerId);
+
         int CreatePathPlan(int playerId, int spaceShipId);
 
         [OperationContract]
