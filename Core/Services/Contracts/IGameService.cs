@@ -70,7 +70,13 @@ namespace SpaceTraffic.Services.Contracts
         bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount);
         
 		[OperationContract]
-		List<TAchievement> GetEarnedAchievements(int playerId);
+		List<TAchievement> GetUnviewedAchievements(int playerId);
+
+		[OperationContract]
+		List<EarnedAchievement> GetEarnedAchievements(int playerId);
+
+		[OperationContract]
+		Player GetPlayer(int playerId);
 
         [OperationContract]
         int CreatePathPlan(int playerId, int spaceShipId);

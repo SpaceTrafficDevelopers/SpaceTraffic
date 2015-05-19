@@ -38,7 +38,7 @@ namespace SpaceTraffic.GameUi.Controllers
         [HttpGet]
         public JsonResult GetEarnedAchievements()
         {
-			JsonResult result = Json(GSClient.GameService.GetEarnedAchievements(getCurrentPlayer().PlayerId), JsonRequestBehavior.AllowGet);
+			JsonResult result = Json(GSClient.GameService.GetUnviewedAchievements(getCurrentPlayer().PlayerId), JsonRequestBehavior.AllowGet);
             return result;
         }
 

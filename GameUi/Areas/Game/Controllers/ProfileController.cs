@@ -20,6 +20,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SpaceTraffic.GameUi.Models.Ui;
+using SpaceTraffic.Entities;
+using System.Collections;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
@@ -31,7 +33,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             this.Tabs.AddTab("Overview", "Profile", "Profile overview", "_Overview");
             this.Tabs.AddTab("Personal", title: "Personal informations.", partialViewName: "_Personal");
             this.Tabs.AddTab("Settings", title: "Profile settings.", partialViewName: "_Settings");
-            this.Tabs.AddTab("Achievements", title: "Achievements", partialViewName: "_Achievements");
+            this.Tabs.AddTab("Achievements", title: "Achievements", partialViewName: "_AchievementsList");
         }
 
         public ActionResult Index()
@@ -41,7 +43,19 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 
         public PartialViewResult Overview()
         {
-            return GetTabView("Overview");
+			Player player = GSClient.GameService.GetPlayer(getCurrentPlayer().PlayerId);
+			ExperienceLevels globalExpiriencesLevels = GSClient.GameService.GetExperienceLevels();
+			TLevel currentLevel = globalExpiriencesLevels.GetLevel(player.ExperienceLevel);
+			TLevel nextLevel = globalExpiriencesLevels.GetLevel(currentLevel.LevelID + 1);
+			String nextLevelExp = (nextLevel == null) ? "-" : "" + nextLevel.RequiredXP;
+			
+			
+			var tabView = GetTabView("Overview");
+			tabView.ViewBag.player = player;
+			tabView.ViewBag.currentLevel = currentLevel;
+			tabView.ViewBag.nextLevel = nextLevel;
+			tabView.ViewBag.nextLevelExp = nextLevelExp;
+			return tabView;
         }
 
         public PartialViewResult Personal()
@@ -56,7 +70,23 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 
         public PartialViewResult Achievements()
         {
-            return GetTabView("Achievements");
+			Player player = GSClient.GameService.GetPlayer(getCurrentPlayer().PlayerId);
+			Achievements allAchievements = GSClient.GameService.GetAchievements();
+			List<EarnedAchievement> earnedAchievements = GSClient.GameService.GetEarnedAchievements(player.PlayerId);
+			List<TAchievement> earnedDefinition = new List<TAchievement>();//earned achievemenets from xml
+			foreach (EarnedAchievement earnedAchv in earnedAchievements)
+			{
+				earnedDefinition.Add(allAchievements.GetAchievement(earnedAchv.AchievementId));
+			}
+			List<TAchievement> lockedAchievements = allAchievements.Items.Except(earnedDefinition).ToList();
+
+			var tabView = GetTabView("Achievements");
+			tabView.ViewBag.player = player;
+			tabView.ViewBag.earnedAchievements = earnedAchievements;
+			tabView.ViewBag.allAchievements = allAchievements;
+			tabView.ViewBag.lockedAchievements = lockedAchievements;
+			return tabView;
+
         }
     }
 }
