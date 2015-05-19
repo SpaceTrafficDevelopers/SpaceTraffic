@@ -20,7 +20,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
         public ActionResult TestPlanner()
         {
 
-            int pathPlanID = GSClient.GameService.CreatePathPlan(1, 1, false);
+            int pathPlanID = GSClient.GameService.CreatePathPlan(1, 1, true);
 
             if(pathPlanID == -1)
                 return RedirectToAction("").Error("Vytváření plánu se nepovedlo. Máš loď?");
@@ -46,11 +46,25 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
                     1
             };
 
-            bool shipRepairResult = GSClient.GameService.AddPlanAction(firstItemID,2,1,"ShipRepair",args);
+            //bool shipRepairResult = GSClient.GameService.AddPlanAction(firstItemID,2,1,"ShipRepair",args);
 
             int secondItemID = GSClient.GameService.AddPlanItem(pathPlanID, "Proxima Centauri", false, "0", 2);
 
             int thirdItemID = GSClient.GameService.AddPlanItem(pathPlanID, "Solar system", true, "Sol 1", 3);
+
+            int fourthItemID = GSClient.GameService.AddPlanItem(pathPlanID, "Proxima Centauri", false, "0", 4);
+
+            int fifthItemID = GSClient.GameService.AddPlanItem(pathPlanID, "Proxima Centauri", true, "Proxima Centauri 1", 5);
+
+            args = new object[]{
+                   "Proxima Centauri",
+                    "Proxima Centauri 1",
+                    1,
+                    30,
+                    1
+            };
+
+            //bool shipRepairResult1 = GSClient.GameService.AddPlanAction(fifthItemID, 1, 1, "ShipRepair", args);
             
             args = new object[]{
                     "Solar system",

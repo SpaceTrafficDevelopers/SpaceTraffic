@@ -97,6 +97,8 @@ namespace SpaceTraffic.Game.Planner
 
                 gameServer.Game.PlanEvent(eventsPlan, nextItem.Place.TimeOfArrival.AddSeconds(actionStartDelay));
             }
+            else if (IsCycled && this.ElementAt(0).Place.Location.Equals(this.ElementAt(this.Count-1).Place.Location))
+                PlanFirstItem(gameServer);
 
         }
 
