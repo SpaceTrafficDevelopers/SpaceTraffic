@@ -178,48 +178,73 @@ namespace SpaceTraffic.GameServer
 			Entities.Achievements globalAchievements = gameServer.World.Achievements;
 
 			// filter only achievements which haven't been unlocked yet
-			IEnumerable<TAchievement> achievementsToCheck =
-			from a in globalAchievements.Items
-			where player.EarnedAchievements.FirstOrDefault(x => x.AchievementId.Equals(a.AchievementID)) == null
-			select a;
+			IEnumerable<TAchievement> achievementsToCheck = getAchievementsToCheck(player, globalAchievements);
 
 			// all relevant achievements
 			foreach (TAchievement achievement in achievementsToCheck)
 			{
-				bool shouldSkip = false;
-
-				// all conditions of each achievement
-				foreach (TCondition condition in achievement.Conditions.AchievementConditions)
-				{
-					Statistic statToCheck = player.Statistics.FirstOrDefault(x => x.StatName.Equals(condition.CondName));
-
-					// condition is not met by current statistic value
-					if (statToCheck == null || statToCheck.StatValue < condition.CondValue)
-					{
-						shouldSkip = true;
-						break;
-					}
-				}
-
 				// achievement should be unlocked
-				if (!shouldSkip)
+				if (isAchievementUnlocked(achievement, player))
 				{
-					EarnedAchievement newlyEarnedAchievement = new EarnedAchievement();
-					newlyEarnedAchievement.IsJustEarned = true;
-					newlyEarnedAchievement.PlayerId = player.PlayerId;
-					newlyEarnedAchievement.UnlockedAt = gameServer.Game.currentGameTime.Value;
-					newlyEarnedAchievement.AchievementId = achievement.AchievementID;
-
-					// add the earned achievement to DB
-					IEarnedAchievementDAO earnedDao = gameServer.Persistence.GetEarnedAchievementDAO();
-					earnedDao.InsertEarnedAchievement(newlyEarnedAchievement);
-
-					player.EarnedAchievements.Add(newlyEarnedAchievement);
-
-					// reward player with some experiences 
-					gameServer.Statistics.IncrementExperiences(player, ExperienceLevels.XP_FOR_ACHIEVEMENT_GET);
+					unlockAchievement(achievement, player);
 				}
 			}
+		}
+
+		/// <summary>
+		/// Filters only achievements which haven't been unlocked yet
+		/// </summary>
+		/// <param name="player">The player.</param>
+		/// <param name="globalAchievements">The global achievements.</param>
+		/// <returns></returns>
+		private IEnumerable<TAchievement> getAchievementsToCheck(Player player, Achievements globalAchievements)
+		{
+			return from a in globalAchievements.Items
+				where player.EarnedAchievements.FirstOrDefault(x => x.AchievementId.Equals(a.AchievementID)) == null
+				select a;
+		}
+
+		/// <summary>
+		/// Checks if achievements conditions are met.
+		/// </summary>
+		/// <param name="achievement">The achievement.</param>
+		/// <param name="player">The player.</param>
+		/// <returns></returns>
+		private bool isAchievementUnlocked(TAchievement achievement, Player player) {
+			foreach (TCondition condition in achievement.Conditions.AchievementConditions)
+			{
+				Statistic statToCheck = player.Statistics.FirstOrDefault(x => x.StatName.Equals(condition.CondName));
+
+				// condition is not met by current statistic value
+				if (statToCheck == null || statToCheck.StatValue < condition.CondValue)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+
+		/// <summary>
+		/// Unlocks the achievement by adding it into earnedAchievements table.
+		/// </summary>
+		/// <param name="achievement">The achievement.</param>
+		/// <param name="player">The player.</param>
+		private void unlockAchievement(TAchievement achievement, Player player) {
+			EarnedAchievement newlyEarnedAchievement = new EarnedAchievement();
+			newlyEarnedAchievement.IsJustEarned = true;
+			newlyEarnedAchievement.PlayerId = player.PlayerId;
+			newlyEarnedAchievement.UnlockedAt = gameServer.Game.currentGameTime.Value;
+			newlyEarnedAchievement.AchievementId = achievement.AchievementID;
+
+			// add the earned achievement to DB
+			IEarnedAchievementDAO earnedDao = gameServer.Persistence.GetEarnedAchievementDAO();
+			earnedDao.InsertEarnedAchievement(newlyEarnedAchievement);
+
+			player.EarnedAchievements.Add(newlyEarnedAchievement);
+
+			// reward player with some experiences 
+			gameServer.Statistics.IncrementExperiences(player, ExperienceLevels.XP_FOR_ACHIEVEMENT_GET);
 		}
 
 	}
