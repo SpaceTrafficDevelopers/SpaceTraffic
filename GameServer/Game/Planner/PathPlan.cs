@@ -6,6 +6,7 @@ using SpaceTraffic.Game.Navigation;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Game.Events;
 using SpaceTraffic.Game.Actions;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Game.Planner
 {
@@ -69,6 +70,9 @@ namespace SpaceTraffic.Game.Planner
 
         public void planEventsForNextItem(PlanItem item, IGameServer gameServer)
         {
+            if (!isShipOnItem(item, gameServer))
+                return;
+
             PlanItem nextItem = this.getNextBusyItem(item);
             if (nextItem != null)
             {
@@ -94,6 +98,9 @@ namespace SpaceTraffic.Game.Planner
         public void PlanFirstItem(IGameServer gameServer)
         {
             PlanItem item = this.ElementAt(0);
+
+            if (!isShipOnItem(item, gameServer))
+                return;
 
             double actionStartDelay = TIME_BETWEEN_EVENTS;
             foreach (IPlannableAction action in item.Actions)
@@ -184,6 +191,16 @@ namespace SpaceTraffic.Game.Planner
 
                 eventList.Add(shipEvent);
             }
+        }
+
+        private bool isShipOnItem(PlanItem item, IGameServer gameServer)
+        {
+            SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ship.Id);
+            Planet itemPlanet = item.Place.Location as Planet;
+
+            if (itemPlanet != null && spaceShip.DockedAtBaseId != null && spaceShip.DockedAtBaseId == itemPlanet.Base.BaseId)
+                return true;
+            return false;
         }
 
         #region IList implementation
