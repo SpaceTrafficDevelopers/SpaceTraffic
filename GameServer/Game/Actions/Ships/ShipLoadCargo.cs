@@ -49,7 +49,7 @@ namespace SpaceTraffic.Game.Actions
             Result = "Náklad se nakládá.";
             getArgumentsFromActionArgs(gameServer);
 
-            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
+            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerWithIncludes(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SpaceShipID);
             ICargoLoadEntity cargo = BuyingPlace.GetCargoByID(CargoLoadEntityId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];

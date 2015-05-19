@@ -47,7 +47,7 @@ namespace SpaceTraffic.Game.Actions
             Result = "Loď odlétá z planety";
             getArgumentsFromActionArgs();
 
-            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
+            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerWithIncludes(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ShipID);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
 

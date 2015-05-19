@@ -66,7 +66,7 @@ namespace SpaceTraffic.Game.Actions
             Result = "Loď je v opravě";
             getArgumentsFromActionArgs();
 
-            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
+            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerWithIncludes(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ShipID);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
 
@@ -84,7 +84,8 @@ namespace SpaceTraffic.Game.Actions
             if (RepairFinished)
             {
 				spaceShip.DamagePercent = Math.Max(0, spaceShip.DamagePercent - RepairPercentage);// log the ship buy action to statistics
-				gameServer.Statistics.IncrementStatisticItem(player, "percentageRepaired", RepairPercentage);
+                
+                gameServer.Statistics.IncrementStatisticItem(player, "percentageRepaired", RepairPercentage);
 
                 if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, RepairPercentage * PercentRepairTax))
                 {

@@ -102,7 +102,7 @@ namespace SpaceTraffic.Game.Actions
             Result = "Provádí se nákup zboží.";
             getArgumentsFromActionArgs(gameServer);
 
-            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
+            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerWithIncludes(PlayerId);
             ICargoLoadEntity cargo = BuyingPlace.GetCargoByID(CargoLoadEntityID);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(BuyerShipID);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];

@@ -45,7 +45,7 @@ namespace SpaceTraffic.Game.Actions
             Result = "Loď prolétá červí dírou";
             getArgumentsFromActionArgs();
 
-            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
+            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerWithIncludes(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ShipID);
 
             if (!ActionControls.checkObjects(this, new Object[] { player, spaceShip }))
