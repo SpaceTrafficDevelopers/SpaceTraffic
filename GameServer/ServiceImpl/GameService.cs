@@ -70,6 +70,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return actualMoney >= amount;
 		}
 
+
 		public bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count)
 		{
 			
@@ -110,6 +111,12 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 				return false;
 		}
 
+        /// <summary>
+        /// Control if spaceship belong to player.
+        /// </summary>
+        /// <param name="playerId">Identification number of player.</param>
+        /// <param name="spaceShipId">Identification number of spaceship.</param>
+        /// <returns></returns>
 		public bool PlayerHasSpaceShip(int playerId, int spaceShipId) 
 		{
 			SpaceShip spaceShip = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
@@ -118,6 +125,13 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return spaceShip.PlayerId == playerId;
 		}
 
+        /// <summary>
+        /// Control if player has cargo on loading place for buy or unload.
+        /// </summary>
+        /// <param name="loadingPlace">Loading place.</param>
+        /// <param name="cargoLoadEntityId">Identification number of cargo load entity.</param>
+        /// <param name="cargoCount">Count of cargo.</param>
+        /// <returns>Value if player has cargo on loading place.</returns>
 		public bool PlayerHasEnoughCargo(string loadingPlace, int cargoLoadEntityId, int cargoCount) 
 		{
 			ICargoLoadDao loading = GS.CurrentInstance.Persistence.GetCargoLoadDao(loadingPlace);
@@ -128,6 +142,13 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return count >= cargoCount;
 		}
 
+        /// <summary>
+        /// Control if player has cargo on spaceship for buy or unload.
+        /// </summary>
+        /// <param name="spaceShipId">Identification number of spaceship.</param>
+        /// <param name="cargoLoadEntityId">Identification number of cargo load entity.</param>
+        /// <param name="cargoCount">Count of cargo.</param>
+        /// <returns>Value if player has cargo on spaceship</returns>
 		public bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount)
 		{
 			SpaceShip spaceShip = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
@@ -223,6 +244,13 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return result;
 		}
 
+        /// <summary>
+        /// Control if trader has cargo for sell.
+        /// </summary>
+        /// <param name="traderId">Identification number of trader.</param>
+        /// <param name="cargoLoadEntityId">Identification number of cargo load entity.</param>
+        /// <param name="cargoCount">Count of cargo.</param>
+        /// <returns>Value if trader has enough cargo for selling or not.</returns>
 		public bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount) 
 		{
 			TraderCargo tc = (TraderCargo) GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);
@@ -266,6 +294,13 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			throw new NotImplementedException();
 		}
 
+        /// <summary>
+        /// Create path plan and insert to database.
+        /// </summary>
+        /// <param name="playerId">Identification number of player.</param>
+        /// <param name="spaceShipId">Identification number of spaceship.</param>
+        /// <param name="isCycled">Cycled of plan.</param>
+        /// <returns>Value of inserting to database.</returns>
         public int CreatePathPlan(int playerId, int spaceShipId, bool isCycled)
         {
             IPathPlanEntityDAO pped = GameServer.CurrentInstance.Persistence.GetPathPlanEntityDAO();
@@ -278,6 +313,15 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             return pped.InsertPathPlan(plan);
         }
 
+        /// <summary>
+        /// Add plan item entity to database.
+        /// </summary>
+        /// <param name="pathPlanId"></Identification number of path plan.</param>
+        /// <param name="solarSystem">Solar system.</param>
+        /// <param name="isPlanet">Value if item is planet or not.</param>
+        /// <param name="index">Index of item.</param>
+        /// <param name="sequenceNumber">Sequence number of item.</param>
+        /// <returns>Result of inserting to database.</returns>
         public int AddPlanItem(int pathPlanId, string solarSystem, bool isPlanet, string index, int sequenceNumber)
         {
             IPlanItemEntityDAO pied = GameServer.CurrentInstance.Persistence.GetPlanItemEntityDAO();
@@ -292,6 +336,15 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             return pied.InsertPlanItem(item);
         }
 
+        /// <summary>
+        /// Add plan action to database.
+        /// </summary>
+        /// <param name="planItemId">Identification number of path plan.</param>
+        /// <param name="sequenceNumber">Sequence number of action.</param>
+        /// <param name="playerId">Identification number of player.</param>
+        /// <param name="actionName">Name of action.</param>
+        /// <param name="actionArgs">Arguments of action.</param>
+        /// <returns>Result of inserting to database.</returns>
         public bool AddPlanAction(int planItemId, int sequenceNumber, int playerId, string actionName, params object[] actionArgs)
         {
             IPlanActionDAO pad = GameServer.CurrentInstance.Persistence.GetPlanActionDAO();
@@ -324,6 +377,11 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             } 
         }
 
+        /// <summary>
+        /// Start path plan. Update path plan to planned to database.
+        /// </summary>
+        /// <param name="pathPlanId">Identification number of path plan.</param>
+        /// <returns>Result of updating in database.</returns>
         public bool StartPathPlan(int pathPlanId)
         {
             IPathPlanEntityDAO pped = GameServer.CurrentInstance.Persistence.GetPathPlanEntityDAO();

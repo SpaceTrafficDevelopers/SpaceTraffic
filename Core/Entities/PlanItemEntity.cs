@@ -22,24 +22,54 @@ using System.Text;
 
 namespace SpaceTraffic.Entities
 {
+    /// <summary>
+    /// Class representing one item of plan
+    /// </summary>
     public class PlanItemEntity
     {
+        /// <summary>
+        /// Identification number of plan item
+        /// </summary>
         public int PlanItemId { get; set; }
 
+        /// <summary>
+        /// Solar system, where item is planned
+        /// </summary>
         public string SolarSystem { get; set; }
 
+        /// <summary>
+        /// Index of item
+        /// </summary>
         public string Index { get; set; }
 
+        /// <summary>
+        /// Value if item is a planet
+        /// </summary>
         public bool IsPlanet { get; set; }
 
+        /// <summary>
+        /// Sequence number for order of elements in path plan
+        /// </summary>
         public int SequenceNumber { get; set; }
 
+        /// <summary>
+        /// Place where item is planned
+        /// </summary>
         public virtual NavPoint Place { get; set; }
 
+        /// <summary>
+        /// Identification number of path plan
+        /// </summary>
         public int PathPlanId { get; set; }
 
+        /// <summary>
+        /// Instane of path plan entity
+        /// </summary>
         public virtual PathPlanEntity PathPlanEntity { get; set; }
 
+        /// <summary>
+        /// List of planned actions
+        /// </summary>
         public virtual List<PlanAction> Actions { get; set; }
     }
 }

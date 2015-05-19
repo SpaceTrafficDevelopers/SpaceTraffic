@@ -11,10 +11,21 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Planner
 {
+    /// <summary>
+    /// Class is used for serializable, deserializable action and creating all path plan.
+    /// </summary>
     public class PlannerConverter
     {
+        /// <summary>
+        /// Instance of binary formatter for serializable and deserializable actions.
+        /// </summary>
         private static BinaryFormatter bf = new BinaryFormatter();
 
+        /// <summary>
+        /// Create path plan from path plan entity.
+        /// </summary>
+        /// <param name="entity">Instance of path plan entity which want to convert.</param>
+        /// <returns>Path plan.</returns>
         public IPathPlan createPathPlan(PathPlanEntity entity)
         {
             Spaceship ship = getShip(entity);
@@ -25,6 +36,11 @@ namespace SpaceTraffic.Game.Planner
             return plan;
         }
 
+        /// <summary>
+        /// Get spaceship from path plan entity.
+        /// </summary>
+        /// <param name="entity">Instance of path plan entity.</param>
+        /// <returns>Instance of spaceship.</returns>
         private Spaceship getShip(PathPlanEntity entity)
         {
             SpaceShip shipEntity = 
@@ -36,6 +52,11 @@ namespace SpaceTraffic.Game.Planner
             return ship;
         }
 
+        /// <summary>
+        /// Create list of plan item from path plan.
+        /// </summary>
+        /// <param name="plan">Path plan.</param>
+        /// <param name="entity">Path plan entity.</param>
         private void createPlanItem(IPathPlan plan, PathPlanEntity entity)
         {
             IPlanItemEntityDAO pped = GameServer.GameServer.CurrentInstance.Persistence.GetPlanItemEntityDAO();
@@ -55,7 +76,11 @@ namespace SpaceTraffic.Game.Planner
             }
         }
 
-
+        /// <summary>
+        /// Get place where you was in plan item entity.
+        /// </summary>
+        /// <param name="entity">Plan item entity.</param>
+        /// <returns>Place representing by NavPoint.</returns>
         private NavPoint getPlace(PlanItemEntity entity)
         {
             NavPoint point = new NavPoint();
@@ -68,6 +93,11 @@ namespace SpaceTraffic.Game.Planner
             return point;
         }
 
+        /// <summary>
+        /// Create list of all plannable actions from plan item entity.
+        /// </summary>
+        /// <param name="entity">Instance of path plan entity.</param>
+        /// <returns>List of plannable actions.</returns>
         private List<IPlannableAction> createPlanActions(PlanItemEntity entity)
         {
             IPlanActionDAO pad = GameServer.GameServer.CurrentInstance.Persistence.GetPlanActionDAO();
@@ -88,6 +118,11 @@ namespace SpaceTraffic.Game.Planner
             return list;
         }
 
+        /// <summary>
+        /// Convert plan action to instance of plannable action (Deserialization).
+        /// </summary>
+        /// <param name="action">Instance of plan action.</param>
+        /// <returns>Plannable action.</returns>
         public static IPlannableAction convertPlanActions(PlanAction action)
         {
             IPlannableAction pa;
@@ -100,6 +135,11 @@ namespace SpaceTraffic.Game.Planner
             return pa;
         }
 
+        /// <summary>
+        /// Convert plannable action to byte array (Serialization).
+        /// </summary>
+        /// <param name="action">Plannable action.</param>
+        /// <returns>Serializate action.</returns>
         public static byte[] convertPlannableAction(IPlannableAction action)
         {
             byte [] array;

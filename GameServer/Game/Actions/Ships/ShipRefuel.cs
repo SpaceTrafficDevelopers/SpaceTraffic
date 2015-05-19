@@ -24,9 +24,15 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
+    /// <summary>
+    /// Action for refuel a fuel to spaceship.
+    /// </summary>
     [Serializable]
     class ShipRefuel : IPlannableAction
     {
+        /// <summary>
+        /// Time of refuel one liter of fuel.
+        /// </summary>
         private static readonly double LITER_REFUEL_TIME = 0.2;
 
         public object Result { get; set; }
@@ -38,18 +44,39 @@ namespace SpaceTraffic.Game.Actions
 
         public object[] ActionArgs { get; set; }
 
+        /// <summary>
+        /// Star system name
+        /// </summary>
         public String StarSystemName { get; set; }
 
+        /// <summary>
+        /// Planet name
+        /// </summary>
         public String PlanetName { get; set; }
 
+        /// <summary>
+        /// Identification number of spaceship
+        /// </summary>
         public int ShipID { get; set; }
 
+        /// <summary>
+        /// Number of liters to refuel
+        /// </summary>
         public int Liters { get; set; }
 
+        /// <summary>
+        /// Price of one liter of fuel
+        /// </summary>
         public int PricePerLiter { get; set; }
 
+        /// <summary>
+        /// Value if refueling is finished or not
+        /// </summary>
         private bool RefuelingFinished { get; set; }
 
+        /// <summary>
+        /// Duration of action.
+        /// </summary>
         public double Duration
         {
             get

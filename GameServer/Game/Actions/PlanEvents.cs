@@ -24,9 +24,19 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
+    /// <summary>
+    /// Action for planning events from actions
+    /// </summary>
     class PlanEvents : IGameAction
     {
+        /// <summary>
+        /// Time of replan
+        /// </summary>
         private static readonly int REPLAN_TIME = 30;
+
+        /// <summary>
+        /// Number of tries. If the number of attempts is exceeded, action will not try it again.
+        /// </summary>
         private int numberOfTries = 10;
 
         public object Result { get; set; }
@@ -35,10 +45,19 @@ namespace SpaceTraffic.Game.Actions
 
         public int PlayerId { get; set; }
 
+        /// <summary>
+        /// Plan for planning
+        /// </summary>
         public IPathPlan plan { get; set; }
 
+        /// <summary>
+        /// Actual item of plan
+        /// </summary>
         public PlanItem actualItem { get; set; }
 
+        /// <summary>
+        /// Action code
+        /// </summary>
         public int ActionCode { get; set; }
 
         public object[] ActionArgs { get; set; }
@@ -67,12 +86,21 @@ namespace SpaceTraffic.Game.Actions
             State = GameActionState.FINISHED;
         }
 
+        /// <summary>
+        /// Replan action and decrase number of tries.
+        /// </summary>
+        /// <param name="gameServer">Instance of game server.</param>
         private void replanAction(IGameServer gameServer)
         {
             numberOfTries--;
             gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddSeconds(REPLAN_TIME));
         }
 
+        /// <summary>
+        /// Check state of action.
+        /// </summary>
+        /// <param name="item">Instance of plan item</param>
+        /// <returns>Value if actions is finished or not.</returns>
         private bool checkActions(PlanItem item)
         {
             foreach(IGameAction action in item.Actions)

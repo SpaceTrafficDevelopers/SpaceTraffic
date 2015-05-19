@@ -24,9 +24,15 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
+    /// <summary>
+    /// Action for repairing spaceship if spaceship is damaged.
+    /// </summary>
     [Serializable]
     class ShipRepair: IPlannableAction
     {
+        /// <summary>
+        /// Percent repair time
+        /// </summary>
         private static readonly int PERCENT_REPAIR_TIME = 3;
 
         public object Result{ get; set; }
@@ -39,18 +45,39 @@ namespace SpaceTraffic.Game.Actions
 
         public object[] ActionArgs { get; set; }
 
+        /// <summary>
+        /// Star system name
+        /// </summary>
         public String StarSystemName { get; set; }
 
+        /// <summary>
+        /// Planet name
+        /// </summary>
         public String PlanetName { get; set; }
 
+        /// <summary>
+        /// Identification number of spaceship
+        /// </summary>
         public int ShipID { get; set; }
 
+        /// <summary>
+        /// Percentage of repair.
+        /// </summary>
         public int RepairPercentage { get; set; }
 
+        /// <summary>
+        /// Tax of percent of repair.
+        /// </summary>
         public int PercentRepairTax {get; set; }
 
+        /// <summary>
+        /// Value if repair is finished or not.
+        /// </summary>
         private bool RepairFinished { get; set; }
 
+        /// <summary>
+        /// Deuration of action.
+        /// </summary>
         public double Duration
         {
             get
@@ -83,7 +110,8 @@ namespace SpaceTraffic.Game.Actions
 
             if (RepairFinished)
             {
-				spaceShip.DamagePercent = Math.Max(0, spaceShip.DamagePercent - RepairPercentage);// log the ship buy action to statistics
+				spaceShip.DamagePercent = Math.Max(0, spaceShip.DamagePercent - RepairPercentage);
+                // log the ship buy action to statistics
                 
                 gameServer.Statistics.IncrementStatisticItem(player, "percentageRepaired", RepairPercentage);
 

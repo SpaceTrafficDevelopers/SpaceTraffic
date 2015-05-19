@@ -24,19 +24,34 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
+    /// <summary>
+    /// Action for fly through wormhole with spaceship.
+    /// </summary>
     class ShipFlyThroughWormHole : IGameAction
     {
+        /// <summary>
+        /// Result of action
+        /// </summary>
         public object Result { get; set; }
         public GameActionState State { get; set; }
 
+        /// <summary>
+        /// Player identification number
+        /// </summary>
        public int PlayerId { get; set; }
 
         public int ActionCode { get; set; }
 
         public object[] ActionArgs { get; set; }
 
+        /// <summary>
+        /// Identification number of wormhole
+        /// </summary>
         public int WormHoleId { get; set; }
 
+        /// <summary>
+        /// Identification number of spaceship
+        /// </summary>
         public int ShipID { get; set; }
 
         public void Perform(IGameServer gameServer)
@@ -78,6 +93,9 @@ namespace SpaceTraffic.Game.Actions
             State = GameActionState.FINISHED;
         }
 
+        /// <summary>
+        /// Get argument from action args by converting to datatypes.
+        /// </summary>
         private void getArgumentsFromActionArgs()
         {
             WormHoleId = Convert.ToInt32(ActionArgs[0].ToString());

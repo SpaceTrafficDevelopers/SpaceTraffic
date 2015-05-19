@@ -21,8 +21,14 @@ using System.Text;
 
 namespace SpaceTraffic.Engine
 {
+    /// <summary>
+    /// Intefrace of plannable action. All plannable actions must implements this interface.
+    /// </summary>
     public interface IPlannableAction : IGameAction
     {
+        /// <summary>
+        /// Duration of action.
+        /// </summary>
         double Duration { get; }
     }
 }

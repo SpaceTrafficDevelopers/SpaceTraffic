@@ -24,23 +24,38 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
+    /// <summary>
+    /// Action for land with spaceship on planet.
+    /// </summary>
     class ShipLand : IGameAction
     {
         public object Result { get; set; }
         public GameActionState State { get; set; }
 
-       public int PlayerId { get; set; }
+        public int PlayerId { get; set; }
 
         public int ActionCode { get; set; }
 
         public object[] ActionArgs { get; set; }
 
+        /// <summary>
+        /// Star system name
+        /// </summary>
         public String StarSystemName { get; set; }
 
+        /// <summary>
+        /// Planet name
+        /// </summary>
         public String PlanetName { get; set; }
 
+        /// <summary>
+        /// Identification number of spaceship
+        /// </summary>
         public int ShipID { get; set; }
 
+        /// <summary>
+        /// Time how long ship fly
+        /// </summary>
         public double FlightTime { get; set; }
 
         public void Perform(IGameServer gameServer)
@@ -85,6 +100,9 @@ namespace SpaceTraffic.Game.Actions
             State = GameActionState.FINISHED;
         }
 
+        /// <summary>
+        /// Get arcguments from action args by converting on datatypes.
+        /// </summary>
         private void getArgumentsFromActionArgs()
         {
             StarSystemName = ActionArgs[0].ToString();
