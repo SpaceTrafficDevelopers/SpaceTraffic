@@ -1,57 +1,57 @@
 <?xml version="1.0"?>
 <Levels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="SpaceTrafficData">
 	<Level levelID="0">
-		<Name>Homeless</Name>
+		<Name>Stopař</Name>
 		<RequiredXP>0</RequiredXP>
 	</Level>
 	<Level levelID="1">
-		<Name>Investor</Name>
-		<RequiredXP>0</RequiredXP>
-	</Level>
-
-	<Level levelID="2">
-		<Name>Entrepreneur</Name>
+		<Name>Garážový obchodník</Name>
 		<RequiredXP>500</RequiredXP>
 	</Level>
 
-	<Level levelID="3">
-		<Name>Financier</Name>
+	<Level levelID="2">
+		<Name>Dovozce</Name>
 		<RequiredXP>1000</RequiredXP>
 	</Level>
-	
-	<Level levelID="4">
-		<Name>Industrialist</Name>
+
+	<Level levelID="3">
+		<Name>Investor</Name>
 		<RequiredXP>2000</RequiredXP>
 	</Level>
 	
-	<Level levelID="5">
-		<Name>Captain of Industry</Name>
+	<Level levelID="4">
+		<Name>Zazobanec</Name>
 		<RequiredXP>4000</RequiredXP>
 	</Level>
 	
-	<Level levelID="6">
-		<Name>Business Man</Name>
+	<Level levelID="5">
+		<Name>Průmyslový náčelník</Name>
 		<RequiredXP>8000</RequiredXP>
 	</Level>
 	
-	<Level levelID="7">
-		<Name>Mogul</Name>
+	<Level levelID="6">
+		<Name>Magnát</Name>
 		<RequiredXP>16000</RequiredXP>
 	</Level>
 	
-	<Level levelID="8">
-		<Name>Tycoon</Name>
+	<Level levelID="7">
+		<Name>Pán obchodníků</Name>
 		<RequiredXP>32000</RequiredXP>
 	</Level>
 	
-	<Level levelID="9">
-		<Name>Business Magnate</Name>
+	<Level levelID="8">
+		<Name>Obchodní admirál</Name>
 		<RequiredXP>64000</RequiredXP>
+	</Level>
+	
+	<Level levelID="9">
+		<Name>Ďáblův prodejce</Name>
+		<RequiredXP>128000</RequiredXP>
 	</Level>
 
 	<Level levelID="10">
-		<Name>President of Universe</Name>
-		<RequiredXP>128000</RequiredXP>
+		<Name>Prezident vesmíru</Name>
+		<RequiredXP>256000</RequiredXP>
 	</Level>
 
 </Levels>
