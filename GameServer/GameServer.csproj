@@ -124,7 +124,6 @@
     <Compile Include="Game\Actions\PlanEvents.cs" />
     <Compile Include="Game\Actions\Ships\ShipBuy.cs" />
     <Compile Include="Game\Actions\Ships\ShipFlyThroughWormHole.cs" />
-    <Compile Include="Game\Actions\Ships\ShipFlyTo.cs" />
     <Compile Include="Game\Actions\Ships\ShipLand.cs" />
     <Compile Include="Game\Actions\Ships\ShipLoadCargo.cs" />
     <Compile Include="Game\Actions\Ships\ShipRefuel.cs" />

@@ -29,12 +29,8 @@ namespace SpaceTraffic.Game.Actions
         private static readonly int REPLAN_TIME = 30;
         private int numberOfTries = 10;
 
-        private string result = "Plánují se akce";
+        public object Result { get; set; }
 
-        public object Result
-        {
-            get { return new { result = this.result }; }
-        }
         public GameActionState State { get; set; }
 
         public int PlayerId { get; set; }
@@ -50,6 +46,7 @@ namespace SpaceTraffic.Game.Actions
         public void Perform(IGameServer gameServer)
         {
             State = GameActionState.PLANNED;
+            Result = "Plánují se akce";
             getArgumentsFromActionArgs();
 
             if (plan == null || plan.Count == 0 || actualItem == null || !plan.Contains(actualItem))

@@ -1,6 +1,7 @@
 ﻿using SpaceTraffic.Dao;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Game.Utils;
 /**
 Copyright 2010 FAV ZCU
 
@@ -29,15 +30,10 @@ namespace SpaceTraffic.Game.Actions
     /// </summary>
     public class ShipLoadCargo : IPlannableAction
     {
-        private string result = "Náklad se nakládá.";
-
         /// <summary>
         /// Result of action
         /// </summary>
-        public object Result
-        {
-            get { return new { result = this.result }; }
-        }
+        public object Result { get; set;}
 
         /// <summary>
         /// Duration of action
@@ -49,53 +45,32 @@ namespace SpaceTraffic.Game.Actions
 
         void IGameAction.Perform(IGameServer gameServer)
         {
+            State = GameActionState.PLANNED;
+            Result = "Náklad se nakládá.";
             getArgumentsFromActionArgs(gameServer);
 
+            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SpaceShipID);
             ICargoLoadEntity cargo = BuyingPlace.GetCargoByID(CargoLoadEntityId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
-            Entities.Base dockedBase = null;
-
-            if (spaceShip.DockedAtBaseId != null)
-                dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById((int)spaceShip.DockedAtBaseId);
-
-            // control if spaceship is docked on same planet where want to load cargo
-            if (dockedBase == null || !dockedBase.Planet.Equals(planet.Location))
-            {
-                result = String.Format("Loď {0} není zadokována na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
-                State = GameActionState.FAILED;
+            
+            if (!ActionControls.checkObjects(this, new Object[] { player, spaceShip, planet }))
                 return;
-            }
 
-            // control if spaceship belong to player
-            if (spaceShip.PlayerId != PlayerId)
-            {
-                result = String.Format("Loď {0} Vám nepatří, nemůžete na ní naložit náklad.", spaceShip.SpaceShipName);
-                State = GameActionState.FAILED;
-                return;
-            }
+            ActionControls.shipDockedAtBase(this, spaceShip, planet);
+            ActionControls.shipOwnerControl(this, spaceShip, player);
+            ActionControls.hasShipEnoughCargoSpace(this, spaceShip, cargo);
+            ActionControls.checkCargoCount(this, cargo, Count);
 
-            // control if spaceship has space for load cargo
-            if(!checkSpaceShipCargos(gameServer,spaceShip, cargo)){
-                
-                result = String.Format("Loď {0} nemá dostatek místa na naložení nákladu.", spaceShip.SpaceShipName);
-                State = GameActionState.FAILED;
+            if (State == GameActionState.FAILED)
                 return;
-            }
-
-            // control if trader has required count of goods
-            if (cargo.CargoCount < Count)
-            {
-                result = String.Format("U obchodníka id={0} není požadovaných {1} jednotek zboží id={2}.", cargo.CargoOwnerId, Count, cargo.CargoId);
-                State = GameActionState.FAILED;
-                return;
-            }
+            
 
             cargo.CargoCount = Count;
 
             if (!BuyingPlace.UpdateOrRemoveCargo(cargo))
             {
-                result = String.Format("Změny se nepovedlo zapsat do databáze");
+                Result = String.Format("Změny se nepovedlo zapsat do databáze");
                 State = GameActionState.FAILED;
                 return;
             }
@@ -103,7 +78,7 @@ namespace SpaceTraffic.Game.Actions
             cargo.CargoOwnerId = PlayerId;
 
             gameServer.Persistence.GetSpaceShipCargoDAO().InsertOrUpdateCargo(cargo);
-            result = String.Format("Náklad byl úspěšně naložen na loď s {0}.", spaceShip.SpaceShipName);
+            Result = String.Format("Náklad byl úspěšně naložen na loď s {0}.", spaceShip.SpaceShipName);
             State = GameActionState.FINISHED;
         }
 
@@ -121,27 +96,7 @@ namespace SpaceTraffic.Game.Actions
                 BuyingPlace = gameServer.Persistence.GetCargoLoadDao(ActionArgs[5].ToString());
         }
 
-        /// <summary>
-        /// Check space for cargo in space ship.
-        /// </summary>
-        /// <param name="gameServer">game server</param>
-        /// <param name="spaceShip">space ship</param>
-        /// <returns>true when ship has space for cargo, otherwise fale</returns>
-        private bool checkSpaceShipCargos(IGameServer gameServer, SpaceShip spaceShip, ICargoLoadEntity cargo)
-        {
-            List<ICargoLoadEntity> cargoList = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoListByOwnerId(spaceShip.SpaceShipId);
-
-            int freeSpace = spaceShip.CargoSpace;
-
-            foreach (SpaceShipCargo ssc in cargoList)
-            {
-                freeSpace -= ssc.CargoCount * gameServer.Persistence.GetCargoDAO().GetCargoById(cargo.CargoId).Volume;
-            }
-
-            int demandedSpace = gameServer.Persistence.GetCargoDAO().GetCargoById(cargo.CargoId).Volume * cargo.CargoCount;
-            
-            return demandedSpace < freeSpace;
-        }
+        
 
         public GameActionState State
         {

@@ -1,5 +1,6 @@
 ﻿using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Game.Utils;
 /**
 Copyright 2010 FAV ZCU
 
@@ -27,12 +28,9 @@ namespace SpaceTraffic.Game.Actions
     class ShipRepair: IPlannableAction
     {
         private static readonly int PERCENT_REPAIR_TIME = 3;
-        private string result = "Loď je v opravě";
 
-        public object Result
-        {
-            get { return new { result = this.result }; }
-        }
+        public object Result{ get; set; }
+      
         public GameActionState State { get; set; }
 
        public int PlayerId { get; set; }
@@ -51,7 +49,7 @@ namespace SpaceTraffic.Game.Actions
 
         public int PercentRepairTax {get; set; }
 
-        public bool RepairFinished { get; set; }
+        private bool RepairFinished { get; set; }
 
         public double Duration
         {
@@ -65,59 +63,38 @@ namespace SpaceTraffic.Game.Actions
         public void Perform(IGameServer gameServer)
         {
             State = GameActionState.PLANNED;
-
+            Result = "Loď je v opravě";
             getArgumentsFromActionArgs();
+
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ShipID);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
-            Entities.Base dockedBase = null;
 
-            if (player == null || spaceShip == null)
-            {
-                result = String.Format("Nastala chyba při vyhledávání položek");
-                State = GameActionState.FAILED;
+            if(!ActionControls.checkObjects(this, new object[] { player, spaceShip, planet }))
                 return;
-            }
 
-            if (spaceShip.DockedAtBaseId != null)
-                dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById((int)spaceShip.DockedAtBaseId);
+            ActionControls.shipDockedAtBase(this, spaceShip, planet);
+            ActionControls.checkPlayersCredit(this, player, RepairPercentage * PercentRepairTax);
+            ActionControls.shipOwnerControl(this, spaceShip, player);
 
-            if(player.Credit < RepairPercentage * PercentRepairTax)
-            {
-                result = String.Format("Hráč {0} nemá dostatek peněz na opravu", player.PlayerName);
-                State = GameActionState.FAILED;
+            if (State == GameActionState.FAILED)
                 return;
-            }
-
-            if(spaceShip.PlayerId != PlayerId)
-            {
-                result = String.Format("Loď {0} nepatří hráči {1}", spaceShip.SpaceShipName, player.PlayerName);
-                State = GameActionState.FAILED;
-                return;
-            }
-
-            if (dockedBase == null || !dockedBase.Planet.Equals(planet.Location))
-            {
-                result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, planet.Name);
-                State = GameActionState.FAILED;
-                return;
-            }
-
+           
 
             if (RepairFinished)
             {
                 spaceShip.DamagePercent = Math.Max(0, spaceShip.DamagePercent - RepairPercentage);
 
-                if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, -RepairPercentage * PercentRepairTax))
+                if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, RepairPercentage * PercentRepairTax))
                 {
-                    result = String.Format("Změny se nepovedlo zapsat do databáze");
+                    Result = String.Format("Změny se nepovedlo zapsat do databáze");
                     State = GameActionState.FAILED;
                     return;
                 }
                 
                 if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
                 {
-                    result = String.Format("Změny se nepovedlo zapsat do databáze");
+                    Result = String.Format("Změny se nepovedlo zapsat do databáze");
                     State = GameActionState.FAILED;
                     return;
                 }
@@ -128,9 +105,7 @@ namespace SpaceTraffic.Game.Actions
             {
                 RepairFinished = true;
                 gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddSeconds(Duration));
-            }
-
-           
+            }          
         }
 
         private void getArgumentsFromActionArgs()

@@ -57,7 +57,7 @@ namespace SpaceTraffic.Engine
         /// </summary>
         int ActionCode { get; set; }
 
-        object Result { get; }
+        object Result { get; set; }
 
         /// <summary>
         /// arguments connected with concreate action
