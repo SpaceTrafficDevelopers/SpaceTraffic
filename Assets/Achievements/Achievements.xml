@@ -1,118 +1,9 @@
 <?xml version="1.0"?>
 <Achievements xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="SpaceTrafficData">
+	
 	<Achievement achievementID="1">
-		<Name>Factory Investor</Name>
-		<Description>Build your first factory</Description>
-		<Image>/Content/images/Achievements/FactoryInvestorComplete.jpg</Image>
-		<Conditions>
-			<Condition>
-				<CondName>factoryCount</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-		</Conditions>
-	</Achievement>
-	 
-
-	<Achievement achievementID="2">
-		<Name>Dug Too Greedily and Too Deep</Name>
-		<Description>Build all types of mines on planet Terra</Description>
-		<Image>/Content/images/Achievements/DugTooGreedilyandTooDeepComplete.jpg</Image>
-		<Conditions>
-			<Condition>
-				<CondName>terraOreMine</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>terraSiliconMine</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>terraIceMine</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>terraGoldMine</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-		</Conditions>
-	</Achievement>
-
-
-	<Achievement achievementID="3">
-		<Name>Old McDonald Had A Farm</Name>
-		<Description>Build all types of farms on planet Terra</Description>
-		<Image>/Content/images/Achievements/OldMcDonaldHadAFarmComplete.jpg</Image>
-		<Conditions>
-			<Condition>
-				<CondName>terraWheatFarm</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>terraPlanktonFarm</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>terraFlowerFarm</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>terraFruitsFarm</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>terraMeatFarm</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-		</Conditions>
-	</Achievement>
-
-	<Achievement achievementID="4">
-		<Name>Industry Magnate</Name>
-		<Description>Build all types of factories with size 3x3</Description>
-		<Image>/Content/images/Achievements/IndustryMagnateComplete.jpg</Image>
-		<Conditions>
-			<Condition>
-				<CondName>soilFactory3x3</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>bioGasFactory3x3</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>spicesFactory3x3</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>jewleryFactory3x3</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>crystalFactory3x3</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>pcbFactory3x3</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>weaponsFactory3x3</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>satelliteFactory3x3</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-			<Condition>
-				<CondName>droneFactory3x3</CondName>
-				<CondValue>1</CondValue>
-			</Condition>
-		</Conditions>
-	</Achievement>
-
-	<Achievement achievementID="5">
-		<Name>Lieutenant Commander</Name>
-		<Description>Buy your first ship</Description>
+		<Name>Lodní kapitán</Name>
+		<Description>Pořiď si svou první loď</Description>
 		<Image>/Content/images/Achievements/LieutenantCommanderComplete.jpg</Image>
 		<Conditions>
 			<Condition>
@@ -122,16 +13,173 @@
 		</Conditions>
 	</Achievement>
 
-	<Achievement achievementID="6">
-		<Name>Rear Admiral Lieutenant General Rimmer</Name>
-		<Description>Have a fleet of 10 ships</Description>
-		<Image>/Content/images/Achievements/RearAdmiralLieutenantGeneralRimmerComplete.jpg</Image>
+	<Achievement achievementID="2">
+		<Name>Vesmírný admirál</Name>
+		<Description>Pořiď si letku deseti lodí</Description>
+		<Image>/Content/images/Achievements/SpaceAdmiralComplete.jpg</Image>
 		<Conditions>
 			<Condition>
 				<CondName>shipFleet</CondName>
 				<CondValue>10</CondValue>
-			</Condition>			
+			</Condition>
 		</Conditions>
 	</Achievement>
+
+	<Achievement achievementID="3">
+		<Name>Vrchní admirál generálporučík Rimmer</Name>
+		<Description>Buď hrdým vlastníkem stovky lodí</Description>
+		<Image>/Content/images/Achievements/RearAdmiralLieutenantGeneralRimmerComplete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>shipFleet</CondName>
+				<CondValue>100</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="4">
+		<Name>Želva!</Name>
+		<Description>Spatřil jsi želvu!</Description>
+		<Image>/Content/images/Achievements/TurtleComplete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>turtle</CondName>
+				<CondValue>1</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="5">
+		<Name>Zážeh!</Name>
+		<Description>Odstartuj se svou lodí</Description>
+		<Image>/Content/images/Achievements/takeOff1Complete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>takeOff</CondName>
+				<CondValue>1</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="6">
+		<Name>Zážeh! II</Name>
+		<Description>Odstartuj stokrát se svými loděmi</Description>
+		<Image>/Content/images/Achievements/takeOff2Complete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>takeOff</CondName>
+				<CondValue>100</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="7">
+		<Name>Zážeh! III</Name>
+		<Description>Prožij tisíc startů svých lodí</Description>
+		<Image>/Content/images/Achievements/takeOff3Complete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>takeOff</CondName>
+				<CondValue>1000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="8">
+		<Name>Zážeh! IV</Name>
+		<Description>Nech své lodě se 10000x odlepit od země</Description>
+		<Image>/Content/images/Achievements/takeOff4Complete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>takeOff</CondName>
+				<CondValue>10000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="9">
+		<Name>Zážeh! V</Name>
+		<Description>Sto tisíc startů lodí! Ať žije ekologie!</Description>
+		<Image>/Content/images/Achievements/takeOff5Complete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>takeOff</CondName>
+				<CondValue>100000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="10">
+		<Name>Nalejvák</Name>
+		<Description>Natankuj 1000 litrů paliva</Description>
+		<Image>/Content/images/Achievements/fuelTank1Complete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>fuelTank</CondName>
+				<CondValue>1000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="11">
+		<Name>Palivožrout</Name>
+		<Description>Natankuj 10000 litrů paliva</Description>
+		<Image>/Content/images/Achievements/fuelTank2Complete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>fuelTank</CondName>
+				<CondValue>10000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="12">
+		<Name>Chlastometr</Name>
+		<Description>Natankuj milion litrů paliva</Description>
+		<Image>/Content/images/Achievements/fuelTank3Complete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>fuelTank</CondName>
+				<CondValue>1000000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="13">
+		<Name>Opravář</Name>
+		<Description>Sprav 100 procent poškození</Description>
+		<Image>/Content/images/Achievements/percentageRepaired1Complete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>percentageRepaired</CondName>
+				<CondValue>100</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="14">
+		<Name>Šikovný soused</Name>
+		<Description>Sprav 1000 procent poškození svých lodí</Description>
+		<Image>/Content/images/Achievements/percentageRepaired2Complete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>percentageRepaired</CondName>
+				<CondValue>1000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="15">
+		<Name>Bořek opravář</Name>
+		<Description>Sprav 10000 procent poškození svých lodí</Description>
+		<Image>/Content/images/Achievements/percentageRepaired3Complete.jpg</Image>
+		<Conditions>
+			<Condition>
+				<CondName>percentageRepaired</CondName>
+				<CondValue>10000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+	
 
 </Achievements>

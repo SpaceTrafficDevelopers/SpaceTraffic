@@ -106,7 +106,8 @@ namespace SpaceTraffic.Game.Actions
 
             if (RepairFinished)
             {
-                spaceShip.DamagePercent = Math.Max(0, spaceShip.DamagePercent - RepairPercentage);
+				spaceShip.DamagePercent = Math.Max(0, spaceShip.DamagePercent - RepairPercentage);// log the ship buy action to statistics
+				gameServer.Statistics.IncrementStatisticItem(player, "percentageRepaired", RepairPercentage);
 
                 if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, -RepairPercentage * PercentRepairTax))
                 {

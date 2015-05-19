@@ -94,7 +94,8 @@ namespace SpaceTraffic.Game.Actions
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
                 State = GameActionState.FAILED;
                 return;
-            }
+			}
+			gameServer.Statistics.IncrementStatisticItem(player, "takeOff", 1);
 
             State = GameActionState.FINISHED;
         }
