@@ -21,22 +21,49 @@ using System.Text;
 
 namespace SpaceTraffic.Entities
 {
+    /// <summary>
+    /// Class representing path plan in DB
+    /// </summary>
     public class PathPlanEntity
     {
+        /// <summary>
+        /// Identification number of path plan
+        /// </summary>
         public int PathPlanId { get; set; }
 
+        /// <summary>
+        /// Identification number of player, who creates path plan
+        /// </summary>
         public int PlayerId { get; set; }
 
+        /// <summary>
+        /// Instance of player, who creates path plan
+        /// </summary>
         public virtual Player Player { get; set; }
 
+        /// <summary>
+        /// Indentification number of players spaceship
+        /// </summary>
         public int SpaceShipId { get; set; }
 
+        /// <summary>
+        /// Instance of players spaceship
+        /// </summary>
         public virtual SpaceShip SpaceShip { get; set; }
 
+        /// <summary>
+        /// Value if path plan is planned or not
+        /// </summary>
         public bool IsPlanned { get; set; }
 
+        /// <summary>
+        /// Value if path plan is cycled. Plan muset ended where started.
+        /// </summary>
         public bool IsCycled { get; set; } 
 
+        /// <summary>
+        /// Items of path plan.
+        /// </summary>
         public virtual List<PlanItemEntity> Items { get; set; }
     }
 }

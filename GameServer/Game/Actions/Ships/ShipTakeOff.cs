@@ -24,6 +24,9 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Actions
 {
+    /// <summary>
+    /// Action for taking off from planet with spaceship
+    /// </summary>
     class ShipTakeOff : IGameAction
     {
         public object Result { get; set; }
@@ -35,10 +38,19 @@ namespace SpaceTraffic.Game.Actions
 
         public object[] ActionArgs { get; set; }
 
+        /// <summary>
+        /// Star system name
+        /// </summary>
         public String StarSystemName { get; set; }
 
+        /// <summary>
+        /// Planet name
+        /// </summary>
         public String PlanetName { get; set; }
 
+        /// <summary>
+        /// Identification number of spaceship
+        /// </summary>
         public int ShipID { get; set; }
 
         public void Perform(IGameServer gameServer)
