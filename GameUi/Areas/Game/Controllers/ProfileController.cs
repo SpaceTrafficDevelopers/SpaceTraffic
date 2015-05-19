@@ -21,6 +21,7 @@ using System.Web;
 using System.Web.Mvc;
 using SpaceTraffic.GameUi.Models.Ui;
 using SpaceTraffic.Entities;
+using System.Collections;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
@@ -69,7 +70,23 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 
         public PartialViewResult Achievements()
         {
-            return GetTabView("Achievements");
+			Player player = GSClient.GameService.GetPlayer(getCurrentPlayer().PlayerId);
+			Achievements allAchievements = GSClient.GameService.GetAchievements();
+			List<EarnedAchievement> earnedAchievements = GSClient.GameService.GetEarnedAchievements(player.PlayerId);
+			List<TAchievement> earnedDefinition = new List<TAchievement>();//earned achievemenets from xml
+			foreach (EarnedAchievement earnedAchv in earnedAchievements)
+			{
+				earnedDefinition.Add(allAchievements.GetAchievement(earnedAchv.AchievementId));
+			}
+			List<TAchievement> lockedAchievements = allAchievements.Items.Except(earnedDefinition).ToList();
+
+			var tabView = GetTabView("Achievements");
+			tabView.ViewBag.player = player;
+			tabView.ViewBag.earnedAchievements = earnedAchievements;
+			tabView.ViewBag.allAchievements = allAchievements;
+			tabView.ViewBag.lockedAchievements = lockedAchievements;
+			return tabView;
+
         }
     }
 }

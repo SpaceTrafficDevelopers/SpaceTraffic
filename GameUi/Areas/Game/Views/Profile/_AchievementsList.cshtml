@@ -1,186 +1,47 @@
 ﻿@{
-	//ViewBag.Title = "profile_achievements";
-	var userName = Context.User.Identity.Name;
-
-	SpaceTraffic.GameUi.GameServerClient.IGameServerClient Client = SpaceTraffic.GameUi.GameServerClient.GameServerClientFactory.GetClientInstance();
-
-	SpaceTraffic.Entities.Achievements profileAchievements = Client.GameService.GetAchievements();
-
-	//SpaceTraffic.Entities.Player actualPlayer = Client.GameService.GetPlayer(userName);
+	ViewBag.Title = "profile_achievements";
+	
 }
 
 <h2>Achievements</h2>
 <div class="profile">
 
-
-	@for (int i = 1; i <= profileAchievements.Items.Count; i++)
+	@foreach (var achievement in ViewBag.earnedAchievements)
 	{
-		SpaceTraffic.Entities.TAchievement achievement = profileAchievements.GetAchievement(i);
-		SpaceTraffic.Entities.EarnedAchievement earnedAchievement = null;
-		string unlockedLabel = "";
-
-		if (achievement != null)
-		{
-			// non-null if earned achievements contain achivement with corresponding id
-			/*earnedAchievement = actualPlayer.EarnedAchievements.FirstOrDefault(a => a.AchievementId.Equals(achievement.AchievementID));
-
-
-			if (earnedAchievement != null)
-			{
-				unlockedLabel = earnedAchievement.UnlockedAt.ToString();
-			}
-			else
-			{
-				// replace the completed image to not completed
-				achievement.Image = achievement.Image.Replace("Complete", string.Empty);
-			}*/
-		}
-
-		// print earned achievements first
-		if (achievement != null && earnedAchievement != null)
-		{
-			<div class="profile_achievement">
-				<table class="profile_achievementtable">
-					<tr>
-						<td class="profile_achievementicon" rowspan="2">
-							<img src="@achievement.Image" alt="
+		var defAchievement = ViewBag.allAchievements.GetAchievement(achievement.AchievementId);
+		<div class="profile_achievement">
+			<table class="profile_achievementtable">
+				<tr>
+					<td class="profile_achievementicon" rowspan="2">
+						<img src="@defAchievement.Image" alt="
 						foto" />
-						</td>
-						<td class="profile_achievementname">@achievement.Name</td>
-						<td class="profile_achievementdate" rowspan="2">@unlockedLabel</td>
-					</tr>
-					<tr>
-						<td class="profile_achievementdescription">@achievement.Description</td>
-					</tr>
-				</table>
-			</div>
-		}
+					</td>
+					<td class="profile_achievementname">@defAchievement.Name</td>
+					<td class="profile_achievementdate" rowspan="2">@achievement.UnlockedAt.ToString()</td>
+				</tr>
+				<tr>
+					<td class="profile_achievementdescription">@defAchievement.Description</td>
+				</tr>
+			</table>
+		</div>
 	}
 
-	<br /><br />
-
-	@for (int i = 1; i <= profileAchievements.Items.Count; i++)
+	@foreach (var achievement in ViewBag.lockedAchievements)
 	{
-		SpaceTraffic.Entities.TAchievement achievement = profileAchievements.GetAchievement(i);
-		SpaceTraffic.Entities.EarnedAchievement earnedAchievement = null;
-		string unlockedLabel = "";
-
-		if (achievement != null)
-		{
-			// non-null if earned achievements contain achivement with corresponding id
-			//earnedAchievement = actualPlayer.EarnedAchievements.FirstOrDefault(a => a.AchievementId.Equals(achievement.AchievementID));
-
-		}
-
-		// print non earned achievements second
-		if (achievement != null && earnedAchievement == null)
-		{
-			<div class="profile_achievement">
-				<table class="profile_achievementtable">
-					<tr>
-						<td class="profile_achievementicon" rowspan="2">
-							<img src="@achievement.Image" alt="
+		<div class="profile_achievement">
+			<table class="profile_achievementtable">
+				<tr>
+					<td class="profile_achievementicon" rowspan="2">
+						<img src="@achievement.Image.Replace("Complete", string.Empty)" alt="
 						foto" />
-						</td>
-						<td class="profile_achievementname">@achievement.Name</td>
-						<td class="profile_achievementdate" rowspan="2">@unlockedLabel</td>
-					</tr>
-					<tr>
-						<td class="profile_achievementdescription">@achievement.Description</td>
-					</tr>
-				</table>
-			</div>
-		}
+					</td>
+					<td class="profile_achievementname">@achievement.Name</td>
+					<td class="profile_achievementdate" rowspan="2"></td>
+				</tr>
+				<tr>
+					<td class="profile_achievementdescription">@achievement.Description</td>
+				</tr>
+			</table>
+		</div>
 	}
-
-
 </div>
-
-
-
-
-@*
-	<h2>Achievements</h2>
-	<div class="profile">
-			<div class="profile_achievement">
-				<table class="profile_achievementtable">
-				  <tr>
-					<td class="profile_achievementicon" rowspan="2"><img src="/Content/images/Achievements/FactoryInvestorComplete.jpg" alt="
-					foto"     width="64px" height="64px" /></td>
-					<td class="profile_achievementname">Factory Investor</td>
-					<td class="profile_achievementdate" rowspan="2">Unlocked: 13. 3. 2013, 13:45</td>
-				  </tr>
-				  <tr>
-					<td class="profile_achievementdescription">Build your first factory</td>
-				  </tr>
-				</table>
-			</div>
-			<div class="profile_achievement">
-				<table class="profile_achievementtable">
-				  <tr>
-					<td class="profile_achievementicon" rowspan="2"><img src="/Content/images/Achievements/LieutenantCommanderComplete.jpg" alt="
-					foto"     width="64px" height="64px" /></td>
-					<td class="profile_achievementname">Lieutenant Commander</td>
-					<td class="profile_achievementdate" rowspan="2">Unlocked: 13. 3. 2013, 13:59</td>
-				  </tr>
-				  <tr>
-					<td class="profile_achievementdescription">Buy your first ship</td>
-				  </tr>
-				</table>
-			</div>
-			<div class="profile_achievement">
-			  <div class="profile_tableleft">
-				<table class="profile_achievementtable">
-				  <tr>
-					<td class="profile_achievementicon" rowspan="2"><img src="/Content/images/Achievements/DugTooGreedilyandTooDeepComplete.jpg" alt="
-					foto"     width="64px" height="64px" /></td>
-					<td class="profile_achievementname">Dug Too Greedily and Too Deep</td>
-					<td class="profile_achievementdate" rowspan="2">Unlocked: 15. 3. 2013, 22:28</td>
-				  </tr>
-				  <tr>
-					<td class="profile_achievementdescription">Build all types of mines on 1 planet</td>
-				  </tr>
-				</table>
-			  </div>
-			</div>
-			<div class="profile_achievement">
-				<table class="profile_achievementtable">
-				  <tr>
-					<td class="profile_achievementicon" rowspan="2"><img src="/Content/images/Achievements/OldMcDonaldHadAFarm.jpg" alt="
-					foto"     width="64px" height="64px" /></td>
-					<td class="profile_achievementname">Old McDonald Had A Farm</td>
-					<td class="profile_achievementdate" rowspan="2"></td>
-				  </tr>
-				  <tr>
-					<td class="profile_achievementdescription">Build all types of farms on 1 planet</td>
-				  </tr>
-				</table>
-			</div>
-			<div class="profile_achievement">
-				<table class="profile_achievementtable">
-				  <tr>
-					<td class="profile_achievementicon" rowspan="2"><img src="/Content/images/Achievements/IndustryMagnate.jpg" alt="
-					foto"     width="64px" height="64px" /></td>
-					<td class="profile_achievementname">Industry Magnate</td>
-					<td class="profile_achievementdate" rowspan="2"></td>
-				  </tr>
-				  <tr>
-					<td class="profile_achievementdescription">Build all types of factories with size 3x3</td>
-				  </tr>
-				</table>
-			</div>
-			<div class="profile_achievement">
-				<table class="profile_achievementtable">
-				  <tr>
-					<td class="profile_achievementicon" rowspan="2"><img src="/Content/images/Achievements/RearAdmiralLieutenantGeneralRimmer.jpg" alt="
-					foto"     width="64px" height="64px" /></td>
-					<td class="profile_achievementname">Rear Admiral Lieutenant General Rimmer</td>
-					<td class="profile_achievementdate" rowspan="2"></td>
-				  </tr>
-				  <tr>
-					<td class="profile_achievementdescription">Have fleet of 10 ships</td>
-				  </tr>
-				</table>
-			</div>
-	</div>
-*@ 

@@ -164,7 +164,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(playerId);
 		}
 
-		public List<TAchievement> GetEarnedAchievements(int playerId)
+		public List<TAchievement> GetUnviewedAchievements(int playerId)
 		{
 
 			List<TAchievement> result = new List<TAchievement>();
@@ -186,6 +186,18 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			}
 
 			return result;
+		}
+
+		/// <summary>
+		/// Gets the earned achievements of specified player.
+		/// </summary>
+		/// <param name="playerId">The player identifier.</param>
+		/// <returns></returns>
+		public List<EarnedAchievement> GetEarnedAchievements(int playerId)
+		{
+
+			EarnedAchievementDAO earnedDao = (EarnedAchievementDAO)GameServer.CurrentInstance.Persistence.GetEarnedAchievementDAO();
+			return earnedDao.GetEarnedAchievementsByPlayerId(playerId);
 		}
 
 		public List<int> GetAllEarnedAchievementsIndexes(string playerName)

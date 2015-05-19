@@ -71,7 +71,10 @@ namespace SpaceTraffic.Services.Contracts
 
         
 		[OperationContract]
-		List<TAchievement> GetEarnedAchievements(int playerId);
+		List<TAchievement> GetUnviewedAchievements(int playerId);
+
+		[OperationContract]
+		List<EarnedAchievement> GetEarnedAchievements(int playerId);
 
 		[OperationContract]
 		Player GetPlayer(int playerId);
