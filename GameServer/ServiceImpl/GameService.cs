@@ -33,7 +33,7 @@ using SpaceTraffic.Game;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
 {
-	public class GameService :IGameService
+	public class GameService : IGameService
 	{
 		private Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -241,71 +241,87 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			}
 		}
 
-		
-
 		public object GetActionResult(int playerId, int actionCode)
 		{
 			throw new NotImplementedException();
 		}
 
 
-		public bool TestPlanner()
-		{
+        public int CreatePathPlan(int playerId, int spaceShipId)
+        {
+            IPathPlanEntityDAO pped = GameServer.CurrentInstance.Persistence.GetPathPlanEntityDAO();
 
-			PathPlan plan = new PathPlan(1);
-			PlanItem item1 = new PlanItem();
-			
-			NavPoint firstPoint = new NavPoint();
-			firstPoint.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].Planets["Proxima Centauri 1"];
+            PathPlanEntity plan = new PathPlanEntity();
+            plan.PlayerId = playerId;
+            plan.SpaceShipId = spaceShipId;
 
-			item1.Place = firstPoint;
-			CargoBuy cba = new CargoBuy();
+            return pped.InsertPathPlan(plan);
+        }
 
-			cba.PlayerId = 1;
-			cba.ActionArgs = new object[]{
-					"Proxima Centauri",
-					"Proxima Centauri 1",
-					1,
-					10,
-					"TraderCargoDAO",
-					1
-			};
+        public int AddPlanItem(int pathPlanId, string solarSystem, bool isPlanet, string index, int sequenceNumber)
+        {
+            IPlanItemEntityDAO pied = GameServer.CurrentInstance.Persistence.GetPlanItemEntityDAO();
 
-			item1.Actions.Add(cba);
+            PlanItemEntity item = new PlanItemEntity();
+            item.PathPlanId = pathPlanId;
+            item.SolarSystem = solarSystem;
+            item.IsPlanet = isPlanet;
+            item.Index = index;
+            item.SequenceNumber = sequenceNumber;
 
+            return pied.InsertPlanItem(item);
+        }
 
-			NavPoint secondPoint = new NavPoint();
-			secondPoint.Location = GameServer.CurrentInstance.World.Map["Proxima Centauri"].Planets["Proxima Centauri 2"];
+        public bool AddPlanAction(int planItemId, int sequenceNumber, int playerId, string actionName, params object[] actionArgs)
+        {
+            IPlanActionDAO pad = GameServer.CurrentInstance.Persistence.GetPlanActionDAO();
+            PlanAction pa = new PlanAction() { PlanItemId = planItemId, SequenceNumber = sequenceNumber };
 
-			PlanItem item2 = new PlanItem();
+            try
+            {
+                IPlannableAction action = Activator.CreateInstance(Type.GetType("SpaceTraffic.Game.Actions." + actionName)) as IPlannableAction;
+                
+                if (action == null)
+                    throw new ActionNotFoundException(
+                        String.Format("Action class with name: {0} does not implements IGameAction.",
+                        actionName));
 
-			item2.Place = secondPoint;
+                action.ActionArgs = actionArgs;
+                action.PlayerId = playerId;
+                
+                pa.ActionType = action.GetType().ToString();
+                pa.GameAction = PlannerConverter.convertPlannableAction(action);
 
-			CargoSell csa = new CargoSell();
+                if(pad.InsertPlanAction(pa))
+                    return true;
 
-			csa.PlayerId = 1;
-			csa.ActionArgs = new object[]{
-					"Proxima Centauri",
-					"Proxima Centauri 2",
-					1,
-					10,
-					"TraderCargoDAO",
-					1,
-					1
-			};
+                return false;
+            }
+            catch (System.IO.FileNotFoundException e)
+            {
+                Console.WriteLine("Action file with name " + actionName + " was not found in SpaceTraffic.Game.Actions namespace.");
+                throw;
+            } 
+        }
 
-			item2.Actions.Add(csa);
+        public bool StartPathPlan(int pathPlanId)
+        {
+            IPathPlanEntityDAO pped = GameServer.CurrentInstance.Persistence.GetPathPlanEntityDAO();
+            PathPlanEntity plan = pped.GetPathPlanById(pathPlanId);
 
-			plan.Add(item1);
-			plan.Add(item2);
+            if (plan != null) {
+                PlannerConverter converter = new PlannerConverter();
+                IPathPlan pathPlan = converter.createPathPlan(plan);
 
-			Spaceship sh = new Spaceship(1, "pussywagon");
+                pathPlan.PlanFirstItem(GameServer.CurrentInstance);
 
-			sh.MaxSpeed = 1;
+                plan.IsPlanned = true;
+                pped.UpdatePathPlanById(plan);
 
-			plan.PlanFirstItem(GameServer.CurrentInstance, sh);
+                return true;
+            }
 
-			return true;
-		}
-	}
+            return false;
+        }
+    }
 }

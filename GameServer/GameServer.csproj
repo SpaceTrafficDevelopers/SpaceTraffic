@@ -87,6 +87,9 @@
     <Compile Include="Dao\IBaseDAO.cs" />
     <Compile Include="Dao\IGameEventDAO.cs" />
     <Compile Include="Dao\IGameActionDAO.cs" />
+    <Compile Include="Dao\IPathPlanEntityDAO.cs" />
+    <Compile Include="Dao\IPlanActionDAO.cs" />
+    <Compile Include="Dao\IPlanItemEntityDAO.cs" />
     <Compile Include="Dao\ISpaceShipCargoDAO.cs" />
     <Compile Include="Dao\ISpaceShipDAO.cs" />
     <Compile Include="Dao\ITraderCargoDAO.cs" />
@@ -94,6 +97,9 @@
     <Compile Include="Dao\MessageDAO.cs" />
     <Compile Include="Dao\IMessageDAO.cs" />
     <Compile Include="Dao\IPlayerDAO.cs" />
+    <Compile Include="Dao\PathPlanEntityDAO.cs" />
+    <Compile Include="Dao\PlanActionDAO.cs" />
+    <Compile Include="Dao\PlanItemEntityDAO.cs" />
     <Compile Include="Dao\PlayerDAO.cs" />
     <Compile Include="Dao\SpaceShipCargoDAO.cs" />
     <Compile Include="Dao\SpaceShipDAO.cs" />
@@ -104,6 +110,7 @@
     <Compile Include="Engine\IGameSimulation.cs" />
     <Compile Include="Engine\IGameStateManager.cs" />
     <Compile Include="Engine\IGoodsManager.cs" />
+    <Compile Include="Engine\IPlannableAction.cs" />
     <Compile Include="Engine\IRunnableScript.cs" />
     <Compile Include="Engine\IScriptManager.cs" />
     <Compile Include="Engine\IGameManager.cs" />
@@ -126,9 +133,11 @@
     <Compile Include="Game\Actions\Ships\ShipFlyTo.cs" />
     <Compile Include="Game\Actions\Ships\ShipLand.cs" />
     <Compile Include="Game\Actions\Ships\ShipLoadCargo.cs" />
+    <Compile Include="Game\Actions\Ships\ShipRefuel.cs" />
     <Compile Include="Game\Actions\Ships\ShipRepair.cs" />
     <Compile Include="Game\Actions\Ships\ShipTakeOff.cs" />
     <Compile Include="Game\Actions\Ships\ShipUnloadCargo.cs" />
+    <Compile Include="Game\Events\GeneralEvent.cs" />
     <Compile Include="Game\Events\HelloWorldRepeat.cs" />
     <Compile Include="Game\Events\ShipEvent.cs" />
     <Compile Include="Game\GamePlayer.cs" />
@@ -143,6 +152,7 @@
     <Compile Include="Game\Planner\IPathPlan.cs" />
     <Compile Include="Game\Planner\PathPlan.cs" />
     <Compile Include="Game\Planner\PlanItem.cs" />
+    <Compile Include="Game\Planner\PlannerConverter.cs" />
     <Compile Include="Persistence\SpaceTrafficCreateDatabaseIfNotExists.cs" />
     <Compile Include="Persistence\SpaceTrafficCustomInitializer.cs" />
     <Compile Include="Persistence\SpaceTrafficContext.cs" />

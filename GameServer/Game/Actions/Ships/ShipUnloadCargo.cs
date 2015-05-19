@@ -25,7 +25,10 @@ using SpaceTraffic.Dao;
 
 namespace SpaceTraffic.Game.Actions
 {
-    public class ShipUnloadCargo : IGameAction
+    /// <summary>
+    /// Action for unload cargo from spaceship
+    /// </summary>
+    public class ShipUnloadCargo : IPlannableAction
     {
         private string result = "Náklad se vykládá.";
 
@@ -56,21 +59,55 @@ namespace SpaceTraffic.Game.Actions
          * 0: starSystemName
          * 1: planetName
          * 2: spaceshipID
-         * 3: cargoID
-         * 4: count
+         * 3: buyerID
+         * 4: cargoLoadEntityID
+         * 5: count
+         * 6: loadingPlace
          */
         public object[] ActionArgs { get; set; }
 
+        /// <summary>
+        /// Star system name
+        /// </summary>
         public String StarSystemName { get; set; }
 
+        /// <summary>
+        /// Planet name
+        /// </summary>
         public String PlanetName { get; set; }
 
+        /// <summary>
+        /// Spaceship identification number
+        /// </summary>
         public int SpaceShipID { get; set; }
+
+        /// <summary>
+        /// Buyer identification number
+        /// </summary>
         public int BuyerID { get; set; }
 
+        /// <summary>
+        /// Cargo load entity identification number
+        /// </summary>
         public int CargoLoadEntityID { get; set; }
+
+        /// <summary>
+        /// Count of cargo
+        /// </summary>
         public int Count { get; set; }
+
+        /// <summary>
+        /// Loading place for cargo
+        /// </summary>
         public ICargoLoadDao LoadingPlace { get; set; }
+
+        /// <summary>
+        /// Duration of action
+        /// </summary>
+        public double Duration
+        {
+            get { return 1; }
+        }
 
 
         public void Perform(IGameServer gameServer)
@@ -84,21 +121,27 @@ namespace SpaceTraffic.Game.Actions
             if (spaceShip.DockedAtBaseId != null)
                 dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById((int)spaceShip.DockedAtBaseId);
 
+            // control if spaceship is docked on same place 
             if (dockedBase == null || !dockedBase.Planet.Equals(planet.Location))
             {
                 result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
+                State = GameActionState.FAILED;
                 return;
             }
 
+            //control if is anything to unload
             if (cargo == null)
             {
                 result = String.Format("Neni co vykladat");
+                State = GameActionState.FAILED;
                 return;
             }
 
+            //control if spaceship has goods count to unload
             if(cargo.CargoCount < Count)
             {
                 result = String.Format("Loď {0} nemá naloženo {1} jednotek zboží id={1}.", spaceShip.SpaceShipName, Count, cargo.CargoId);
+                State = GameActionState.FAILED;
                 return;
             }
 
@@ -107,6 +150,7 @@ namespace SpaceTraffic.Game.Actions
             if (!gameServer.Persistence.GetSpaceShipCargoDAO().UpdateOrRemoveCargo(cargo))
             {
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
+                State = GameActionState.FAILED;
                 return;
             }
 
@@ -114,8 +158,13 @@ namespace SpaceTraffic.Game.Actions
             LoadingPlace.InsertOrUpdateCargo(cargo);
             
             result = String.Format("Náklad {0} byl vyložen.", cargo.CargoId);
+            State = GameActionState.FINISHED;
         }
 
+        /// <summary>
+        /// Get all arguments to properties from action args.
+        /// </summary>
+        /// <param name="gameServer">Instance of game server</param>
         private void getArgumentsFromActionArgs(IGameServer gameServer)
         {
             StarSystemName = ActionArgs[0].ToString();
@@ -124,30 +173,8 @@ namespace SpaceTraffic.Game.Actions
             CargoLoadEntityID = Convert.ToInt32(ActionArgs[3]);
             Count = Convert.ToInt32(ActionArgs[4]);
             LoadingPlace = gameServer.Persistence.GetCargoLoadDao(ActionArgs[5].ToString());
-            //LoadingPlace = (ICargoLoadDao)ActionArgs[5];
             BuyerID = Convert.ToInt32(ActionArgs[6].ToString());
         }
-
-      /*  /// <summary>
-        /// Return SpaceShipCargo from SpaceShipCargos which contains cargo instance.
-        /// Or return null when space ship not contains cargo instance.
-        /// </summary>
-        /// <param name="gs">game server</param>
-        /// <param name="ship">ship</param>
-        /// <param name="cargo">cargo</param>
-        /// <returns>SpaceShipCargo instace or null</returns>
-        private SpaceShipCargo getSpaceShipCargoFromShip(IGameServer gs,SpaceShip ship, Cargo cargo)
-        {
-            List<SpaceShipCargo> cargoList = gs.Persistence.GetSpaceShipCargoDAO().GetSpaceShipCargoBySpaceShipId(ship.SpaceShipId);
-
-            foreach (SpaceShipCargo ssc in cargoList)
-            {
-                if (ssc.CargoId == cargo.CargoId)
-                    return ssc;
-            }
-
-            return null;
-        }*/
         
     }
 }

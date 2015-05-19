@@ -69,13 +69,20 @@ namespace SpaceTraffic.Services.Contracts
         [OperationContract]
         bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount);
 
-        [OperationContract]
-        bool TestPlanner();
-
+        
 		[OperationContract]
 		List<TAchievement> GetEarnedAchievements(int playerId);
 
-        
+        int CreatePathPlan(int playerId, int spaceShipId);
+
+        [OperationContract]
+        int AddPlanItem(int pathPlanId, string solarSystem, bool isPlanet, string index, int sequenceNumber);
+    
+        [OperationContract]
+        bool AddPlanAction(int planItemId, int sequenceNumber, int playerId, string actionName, params object[] actionArgs);
+
+        [OperationContract]
+        bool StartPathPlan(int pathPlanId);
 	}
 
 	[Serializable]

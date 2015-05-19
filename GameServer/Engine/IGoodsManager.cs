@@ -25,7 +25,7 @@ using System.Text;
 namespace SpaceTraffic.Engine
 {
     /// <summary>
-    /// Rozhraní GoodsManager pro přidávání a správu zboží na planetách.
+    /// Interface GoodsManager for inserting and management goods on planets.
     /// </summary>
     public interface IGoodsManager
     {
@@ -35,19 +35,18 @@ namespace SpaceTraffic.Engine
         IList<IGoods> GoodsList { get; set; }
 
         /// <summary>
-        /// Generuje zboží na planetách. Využívá 50% šanci na přidání příslušného zboží
-        /// na planetu. Zároveň generuje množství zboží z intervalu 0-100.
+        /// Generates goods on planets. 50% chance on adding of one goods on planet. 
+        /// Generates goods count in interval from 0 to 100.
         /// </summary>
-        /// <param name="goodsList">seznam zboží</param>
-        /// <param name="planets">seznam planet pro generování</param>
+        /// <param name="goodsList">Goods list</param>
+        /// <param name="planets">Planets list for generating.</param>
         void GenerateGoodsOnPlanets(IList<Planet> planets);
 
         /// <summary>
-        /// Generuje zboží na všech planetách přes celou mapu galaxie. Využívá 
-        /// GenerateGoodsOnPlanets.
+        /// Generates goods on all planets over the galaxy map. Uses GenerateGoodsOnPlanets.
         /// </summary>
-        /// <param name="goodsList">seznam zboží</param>
-        /// <param name="map">mapa galaxie</param>
+        /// <param name="goodsList">Goods list</param>
+        /// <param name="map">Galaxy map</param>
         void GenerateGoodsOverGalaxyMap(GalaxyMap map);
 
         /// <summary>

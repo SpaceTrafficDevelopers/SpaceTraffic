@@ -22,17 +22,60 @@ using System.Text;
 
 namespace SpaceTraffic.Dao
 {
+    /// <summary>
+    /// Interface for cargo load DAO
+    /// </summary>
     public interface ICargoLoadDao
     {
+        /// <summary>
+        /// Insert cargo load entity to DB.
+        /// </summary>
+        /// <param name="cargoLoadEntity">Instance of cargo load entity</param>
+        /// <returns>Return true if operation of insert is successful.</returns>
         bool InsertCargo(ICargoLoadEntity cargoLoadEntity);
 
+        /// <summary>
+        /// Remove cargo load entity from DB. 
+        /// </summary>
+        /// <param name="cargoLoadEntityId">Instance of cargo load entity</param>
+        /// <returns>Return true if operation of remove is successful.</returns>
         bool RemoveCargoById(int cargoLoadEntityId);
 
+        /// <summary>
+        /// Update cargo load entity in DB.
+        /// </summary>
+        /// <param name="cargoLoadEntity">Instace of cargo load entity</param>
+        /// <returns>Return true if operation of update is successful.</returns>
         bool UpdateCargo(ICargoLoadEntity cargoLoadEntity);
 
+        /// <summary>
+        /// Get cargo load entity by identification number.
+        /// </summary>
+        /// <param name="cargoLoadEntityId">Identification number of cargo load entity</param>
+        /// <returns>Cargo load entity.</returns>
         ICargoLoadEntity GetCargoByID(int cargoLoadEntityId);
+
+        /// <summary>
+        /// Insert cargo load entity to DB if it is not in DB.
+        /// Update cargo load entity count if it is in DB.
+        /// </summary>
+        /// <param name="cargo">Cargo load entity</param>
+        /// <returns>Return true if operation of insert is successful.</returns>
         bool InsertOrUpdateCargo(ICargoLoadEntity cargo);
+
+        /// <summary>
+        /// Update cargo load entity count if count in DB is bigger then param count.
+        /// Remove cargo load entity if count in DB is same as param count.
+        /// </summary>
+        /// <param name="cargo">Cargo load entity</param>
+        /// <returns>Return true if operation of insert is successful.</returns>
         bool UpdateOrRemoveCargo(ICargoLoadEntity cargo);
+
+        /// <summary>
+        /// Get list of cargo load entities by owner identification number.
+        /// </summary>
+        /// <param name="ownerID">Owner identification number</param>
+        /// <returns>List of cargo load entities.</returns>
         List<ICargoLoadEntity> GetCargoListByOwnerId(int ownerID);
 
     }

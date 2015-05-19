@@ -21,6 +21,9 @@ using System.Text;
 
 namespace SpaceTraffic.Entities.Goods
 {
+    /// <summary>
+    /// Abstract class from which is extends goods category class
+    /// </summary>
     public abstract class AGoods : IGoods
     {
         public int ID { get; set; }

@@ -30,6 +30,9 @@ namespace SpaceTraffic.Game
     {
         public Entities.Base Base { get; set; }
 
+        /// <summary>
+        /// Planet location
+        /// </summary>
         public string Location
         {
             get

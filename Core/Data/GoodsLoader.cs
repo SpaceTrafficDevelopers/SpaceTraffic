@@ -82,7 +82,7 @@ namespace SpaceTraffic.Data
         /// </summary>
         /// <param name="goodsFileName">Name of the goods file.</param>
         /// <param name="dataService">The data service, providig access to data stream.</param>
-        /// <returns></returns>
+        /// <returns>Goods list</returns>
         public IList<IGoods> LoadGoods(string goodsFileName, IGoodsDataStreamProvider dataService)
         {
             logger.Info("Loading goods: {0}", goodsFileName);

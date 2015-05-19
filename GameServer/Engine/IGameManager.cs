@@ -49,5 +49,7 @@ namespace SpaceTraffic.Engine
 
         void PlanEvent(IGameEvent gameEvent);
 
+        void PlanEvent(IGameAction action, DateTime when);
+
     }
 }

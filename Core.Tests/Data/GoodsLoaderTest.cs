@@ -17,9 +17,14 @@ namespace Core.Tests.Data
     [TestClass]
     public class GoodsLoaderTest
     {
-
+        /// <summary>
+        /// List of goods
+        /// </summary>
         private IList<IGoods> listGoods;
 
+        /// <summary>
+        /// Test of goods loader
+        /// </summary>
         public GoodsLoaderTest()
         {
             AssetManager instance = new AssetManager("./../../../Assets");
@@ -31,8 +36,7 @@ namespace Core.Tests.Data
         private TestContext testContextInstance;
 
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
+        ///Gets or sets the test context which provides information about and functionality for the current test run.
         ///</summary>
         public TestContext TestContext
         {

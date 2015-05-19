@@ -109,16 +109,14 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             //Response.Redirect(Request.Headers.Get("Referer"));
             return RedirectToAction("").Success(String.Format("Prodej proběhl v pořádku"));
             
-            
-            
             //return null;
         }
 
 
-        public ActionResult Planner()
+        /*public ActionResult Planner()
         {
             GSClient.GameService.TestPlanner();
             return RedirectToAction("").Success("Možná se to naplánovalo :D");
-        }
+        }*/
     }
 }

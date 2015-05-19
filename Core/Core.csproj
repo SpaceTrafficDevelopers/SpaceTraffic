@@ -93,6 +93,9 @@
     <Compile Include="Entities\ICargoLoad.cs" />
     <Compile Include="Entities\ICargoLoadEntity.cs" />
     <Compile Include="Entities\Message.cs" />
+    <Compile Include="Entities\PathPlanEntity.cs" />
+    <Compile Include="Entities\PlanAction.cs" />
+    <Compile Include="Entities\PlanItemEntity.cs" />
     <Compile Include="Entities\SpaceShipCargo.cs" />
     <Compile Include="Entities\PublicEntities\WormholeEndpointDestination.cs" />
     <Compile Include="Entities\SpaceShip.cs" />

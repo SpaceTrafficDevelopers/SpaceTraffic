@@ -24,10 +24,10 @@ using System.Text;
 namespace SpaceTraffic.Game.Actions
 {
     [Serializable]
-    class ShipRepair: IPlannableAction
+    class ShipRefuel : IPlannableAction
     {
-        private static readonly int PERCENT_REPAIR_TIME = 3;
-        private string result = "Loď je v opravě";
+        private static readonly double LITER_REFUEL_TIME = 0.2;
+        private string result = "Loď tankuje";
 
         public object Result
         {
@@ -35,7 +35,7 @@ namespace SpaceTraffic.Game.Actions
         }
         public GameActionState State { get; set; }
 
-       public int PlayerId { get; set; }
+        public int PlayerId { get; set; }
 
         public int ActionCode { get; set; }
 
@@ -47,18 +47,18 @@ namespace SpaceTraffic.Game.Actions
 
         public int ShipID { get; set; }
 
-        public int RepairPercentage { get; set; }
+        public int Liters { get; set; }
 
-        public int PercentRepairTax {get; set; }
+        public int PricePerLiter { get; set; }
 
-        public bool RepairFinished { get; set; }
+        public bool RefuelingFinished { get; set; }
 
         public double Duration
         {
             get
             {
                 getArgumentsFromActionArgs();
-                return RepairPercentage * PERCENT_REPAIR_TIME;
+                return Liters * LITER_REFUEL_TIME;
             }
         }
 
@@ -82,14 +82,14 @@ namespace SpaceTraffic.Game.Actions
             if (spaceShip.DockedAtBaseId != null)
                 dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById((int)spaceShip.DockedAtBaseId);
 
-            if(player.Credit < RepairPercentage * PercentRepairTax)
+            if (player.Credit < Liters * PricePerLiter)
             {
-                result = String.Format("Hráč {0} nemá dostatek peněz na opravu", player.PlayerName);
+                result = String.Format("Hráč {0} nemá dostatek peněz na natankování {1} litrů paliva", player.PlayerName, Liters);
                 State = GameActionState.FAILED;
                 return;
             }
 
-            if(spaceShip.PlayerId != PlayerId)
+            if (spaceShip.PlayerId != PlayerId)
             {
                 result = String.Format("Loď {0} nepatří hráči {1}", spaceShip.SpaceShipName, player.PlayerName);
                 State = GameActionState.FAILED;
@@ -104,17 +104,17 @@ namespace SpaceTraffic.Game.Actions
             }
 
 
-            if (RepairFinished)
+            if (RefuelingFinished)
             {
-                spaceShip.DamagePercent = Math.Max(0, spaceShip.DamagePercent - RepairPercentage);
+                spaceShip.CurrentFuelTank = Math.Min(spaceShip.FuelTank, spaceShip.CurrentFuelTank + Liters);
 
-                if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, -RepairPercentage * PercentRepairTax))
+                if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, -Liters * PricePerLiter))
                 {
                     result = String.Format("Změny se nepovedlo zapsat do databáze");
                     State = GameActionState.FAILED;
                     return;
                 }
-                
+
                 if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
                 {
                     result = String.Format("Změny se nepovedlo zapsat do databáze");
@@ -126,11 +126,10 @@ namespace SpaceTraffic.Game.Actions
             }
             else
             {
-                RepairFinished = true;
+                RefuelingFinished = true;
                 gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddSeconds(Duration));
             }
 
-           
         }
 
         private void getArgumentsFromActionArgs()
@@ -140,8 +139,8 @@ namespace SpaceTraffic.Game.Actions
                 StarSystemName = ActionArgs[0].ToString();
                 PlanetName = ActionArgs[1].ToString();
                 ShipID = Convert.ToInt32(ActionArgs[2]);
-                RepairPercentage = Math.Abs(Convert.ToInt32(ActionArgs[3]));
-                PercentRepairTax = Math.Abs(Convert.ToInt32(ActionArgs[4]));
+                Liters = Math.Abs(Convert.ToInt32(ActionArgs[3]));
+                PricePerLiter = Math.Abs(Convert.ToInt32(ActionArgs[4]));
             }
         }
     }

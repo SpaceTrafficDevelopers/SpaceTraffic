@@ -1,6 +1,4 @@
-﻿using SpaceTraffic.Entities;
-using SpaceTraffic.Entities.Goods;
-/**
+﻿/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,16 +19,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SpaceTraffic.Game
+namespace SpaceTraffic.Entities
 {
-    /// <summary>
-    /// Interface for planet
-    /// </summary>
-    interface IPlanet
+    public class PathPlanEntity
     {
-        /// <summary>
-        /// Base property.
-        /// </summary>
-        Entities.Base Base { get; set; }
+        public int PathPlanId { get; set; }
+
+        public int PlayerId { get; set; }
+
+        public virtual Player Player { get; set; }
+
+        public int SpaceShipId { get; set; }
+
+        public virtual SpaceShip SpaceShip { get; set; }
+
+        public bool IsPlanned { get; set; }
+
+        public virtual List<PlanItemEntity> Items { get; set; }
     }
 }

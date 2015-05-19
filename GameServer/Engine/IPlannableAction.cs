@@ -1,6 +1,4 @@
-﻿using SpaceTraffic.Entities;
-using SpaceTraffic.Entities.Goods;
-/**
+﻿/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,16 +19,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SpaceTraffic.Game
+namespace SpaceTraffic.Engine
 {
-    /// <summary>
-    /// Interface for planet
-    /// </summary>
-    interface IPlanet
+    public interface IPlannableAction : IGameAction
     {
-        /// <summary>
-        /// Base property.
-        /// </summary>
-        Entities.Base Base { get; set; }
+        double Duration { get; }
     }
 }

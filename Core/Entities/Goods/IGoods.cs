@@ -21,6 +21,9 @@ using System.Text;
 
 namespace SpaceTraffic.Entities.Goods
 {
+    /// <summary>
+    /// Interface for goods categories
+    /// </summary>
     public interface IGoods
     {
         /// <summary>
@@ -34,7 +37,7 @@ namespace SpaceTraffic.Entities.Goods
         string Name { get; set; }
         
         /// <summary>
-        /// Short descritption
+        /// Short description
         /// </summary>
         string Description { get; set; }
         
@@ -60,4 +63,7 @@ namespace SpaceTraffic.Entities.Goods
     }
 }
 
+/// <summary>
+/// Enum for goods type (mainstream and special goods)
+/// </summary>
 public enum GoodsType { Mainstream, Special }

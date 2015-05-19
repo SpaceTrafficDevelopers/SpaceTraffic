@@ -26,6 +26,9 @@ namespace SpaceTraffic.Game.Actions
 {
     class PlanEvents : IGameAction
     {
+        private static readonly int REPLAN_TIME = 30;
+        private int numberOfTries = 10;
+
         private string result = "Plánují se akce";
 
         public object Result
@@ -36,11 +39,9 @@ namespace SpaceTraffic.Game.Actions
 
         public int PlayerId { get; set; }
 
-        public PathPlan plan { get; set; }
+        public IPathPlan plan { get; set; }
 
         public PlanItem actualItem { get; set; }
-
-        public Spaceship ship { get; set; }
 
         public int ActionCode { get; set; }
 
@@ -48,31 +49,31 @@ namespace SpaceTraffic.Game.Actions
 
         public void Perform(IGameServer gameServer)
         {
+            State = GameActionState.PLANNED;
             getArgumentsFromActionArgs();
 
-            if (plan == null || plan.Count == 0 || actualItem == null || !plan.Contains(actualItem) || ship == null)
-                return;
-
-            if(!checkActions(actualItem))
+            if (plan == null || plan.Count == 0 || actualItem == null || !plan.Contains(actualItem))
             {
-                replanAction(gameServer);
+                State = GameActionState.FINISHED;
                 return;
             }
 
-            plan.planEventsForNextItem(actualItem, gameServer,ship);
+            if(!checkActions(actualItem) && numberOfTries > 0)
+            {
+                replanAction(gameServer);
+                State = GameActionState.PREPARED;
+                return;
+            }
 
+            plan.planEventsForNextItem(actualItem, gameServer);
+            
+            State = GameActionState.FINISHED;
         }
 
         private void replanAction(IGameServer gameServer)
         {
-            ShipEvent newPlanEvent = new ShipEvent();
-                newPlanEvent.BoundAction = this;
-                GameTime eventTime = new GameTime();
-                eventTime.Value =  gameServer.Game.currentGameTime.Value;
-                eventTime.Value = eventTime.Value.AddSeconds(10);
-                newPlanEvent.PlannedTime = eventTime;
-
-                gameServer.Game.PlanEvent(newPlanEvent);
+            numberOfTries--;
+            gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddSeconds(REPLAN_TIME));
         }
 
         private bool checkActions(PlanItem item)
@@ -87,9 +88,8 @@ namespace SpaceTraffic.Game.Actions
 
         private void getArgumentsFromActionArgs()
         {
-            plan = (PathPlan)ActionArgs[0];
+            plan = (IPathPlan)ActionArgs[0];
             actualItem = (PlanItem)ActionArgs[1];
-            ship = (Spaceship)ActionArgs[2];
         }
     }
 }

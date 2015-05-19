@@ -58,8 +58,7 @@ namespace SpaceTraffic.Entities
 
 		public virtual ICollection<SpaceShipCargo> SpaceShipsCargos { get; set; }
 
-		//public List<SpaceShipCargo> SpaceShipsCargo { get; set; }
-
+        public int MaxSpeed { get; set; }
 
 		/// <value>
 		/// Amount of gas needed for length unit (or time) of travel

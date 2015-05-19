@@ -24,7 +24,7 @@ using NLog;
 
 namespace SpaceTraffic.Game.Actions
 {
-	public class ShipBuy : IGameAction
+	public class ShipBuy : IPlannableAction
 	{
 		private Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -36,7 +36,11 @@ namespace SpaceTraffic.Game.Actions
 			get { return new { result = this.result }; }
 		}
 
-		
+        public double Duration
+        {
+            get { return 1; }
+        }
+        
 
 
 		void IGameAction.Perform(IGameServer gameServer)
@@ -75,9 +79,11 @@ namespace SpaceTraffic.Game.Actions
 				SpaceShipName = this.ActionArgs.ElementAt(6).ToString(),
 				Consumption = Convert.ToDouble(this.ActionArgs.ElementAt(8)),
 				WearRate = Convert.ToDouble(this.ActionArgs.ElementAt(9)),
-				UserCode = "",
+				MaxSpeed = Convert.ToInt32(this.ActionArgs.ElementAt(10)),
+                UserCode = "",
 				TimeOfArrival = "",
 				CargoSpace = 100    //TODO: je potřeba přidat ještě maximální množství nákladu lodě 
+                
 			};
 			return spaceShip;
 		}

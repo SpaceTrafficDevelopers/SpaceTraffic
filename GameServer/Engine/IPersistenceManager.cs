@@ -59,5 +59,11 @@ namespace SpaceTraffic.Engine
 
 		IStatisticDAO GetStatisticsDAO();
 
-	}
+        IPlanActionDAO GetPlanActionDAO();
+
+        IPathPlanEntityDAO GetPathPlanEntityDAO();
+
+        IPlanItemEntityDAO GetPlanItemEntityDAO();
+
+    }
 }

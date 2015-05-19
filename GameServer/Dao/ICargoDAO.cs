@@ -22,6 +22,9 @@ using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Dao
 {
+    /// <summary>
+    /// Interface for cargo DAO
+    /// </summary>
     public interface ICargoDAO
     {
         /// <summary>
