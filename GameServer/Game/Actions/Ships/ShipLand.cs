@@ -45,6 +45,8 @@ namespace SpaceTraffic.Game.Actions
 
         public int ShipID { get; set; }
 
+        public double FlightTime { get; set; }
+
         public void Perform(IGameServer gameServer)
         {
             State = GameActionState.PLANNED;
@@ -83,9 +85,18 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
+            spaceShip.CurrentFuelTank -= (int)(spaceShip.Consumption * FlightTime);
+            spaceShip.DamagePercent += (int)(spaceShip.WearRate * FlightTime);
             spaceShip.DockedAtBaseId = dockedBase.BaseId;
             spaceShip.IsFlying = false;
             
+            if(spaceShip.CurrentFuelTank < 0 || spaceShip.DamagePercent > 100)
+            {
+                result = String.Format("Lodi {1} došlo palivo nebo je zničená a nemůže přistát", spaceShip.SpaceShipName);
+                State = GameActionState.FAILED;
+                return;
+            }
+
             if(!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
             {
                 result = String.Format("Změny se nepovedlo zapsat do databáze");
@@ -101,6 +112,7 @@ namespace SpaceTraffic.Game.Actions
             StarSystemName = ActionArgs[0].ToString();
             PlanetName = ActionArgs[1].ToString();
             ShipID = Convert.ToInt32(ActionArgs[2]);
+            FlightTime = Convert.ToDouble(ActionArgs[3]);
         }
     }
 }

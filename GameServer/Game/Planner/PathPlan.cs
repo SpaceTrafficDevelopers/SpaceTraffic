@@ -148,9 +148,10 @@ namespace SpaceTraffic.Game.Planner
             if (dest.Place.Location is Planet)
             {
                 Planet actualPlanet = dest.Place.Location as Planet;
+                TimeSpan flightTime = dest.Place.TimeOfArrival.Subtract(depart.Place.TimeOfArrival);
                 gameAction = new ShipLand();
 
-                gameAction.ActionArgs = new object[] { actualPlanet.StarSystem.Name, actualPlanet.Name, ship.Id };
+                gameAction.ActionArgs = new object[] { actualPlanet.StarSystem.Name, actualPlanet.Name, ship.Id,  flightTime.TotalSeconds};
                 gameAction.PlayerId = PlayerID;
 
                 gameServer.Game.PlanEvent(gameAction, dest.Place.TimeOfArrival);
