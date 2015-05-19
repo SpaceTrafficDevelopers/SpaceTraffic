@@ -83,6 +83,8 @@
     <Compile Include="Dao\TraderDAOTest.cs" />
     <Compile Include="Dao\TraderCargoDAOTest.cs" />
     <Compile Include="Dao\PathPlanEntityDAOTest.cs" />
+    <Compile Include="Dao\PlanItemEntiyDAOTest.cs" />
+    <Compile Include="Dao\PlanActionDAOTest.cs" />
     <Compile Include="GameServer\GameStateManagerTest.cs" />
     <Compile Include="ServiceImpl\AccountServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

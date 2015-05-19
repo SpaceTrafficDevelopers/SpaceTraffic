@@ -23,11 +23,12 @@ using System.Collections.Generic;
 namespace SpaceTraffic.GameServerTests.Dao
 {
     [TestClass]
-    public class PathPlanEntityDAOTest
+    public class PlanItemEntiyDAOTest
     {
         private PathPlanEntity plan;
         private SpaceShip ship;
         private Player player;
+        private PlanItemEntity planItem;
 
         [TestInitialize]
         public void Initialize()
@@ -41,16 +42,24 @@ namespace SpaceTraffic.GameServerTests.Dao
 
             SpaceShipDAO ssd = new SpaceShipDAO();
             ssd.InsertSpaceShip(ship);
+
+            plan = CreatePathPlanEntity();
+
+            PathPlanEntityDAO pped = new PathPlanEntityDAO();
+            pped.InsertPathPlan(plan);
         }
 
         [TestCleanup]
         public void CleanUp()
         {
-            if (plan != null)
+            if (planItem != null)
             {
-                PathPlanEntityDAO pped = new PathPlanEntityDAO();
-                pped.RemovePathPlan(plan.PathPlanId);
+                PlanItemEntityDAO pied = new PlanItemEntityDAO();
+                pied.RemovePlanItem(planItem.PlanItemId);
             }
+
+            PathPlanEntityDAO pped = new PathPlanEntityDAO();
+            pped.RemovePathPlan(plan.PathPlanId);
 
             SpaceShipDAO ssd = new SpaceShipDAO();
             ssd.RemoveSpaceShipById(ship.SpaceShipId);
@@ -60,81 +69,104 @@ namespace SpaceTraffic.GameServerTests.Dao
         }
 
         [TestMethod()]
-        public void GetPathPlansTest()
+        public void GetPlanItemsByPathPlanIdTest()
         {
-            PathPlanEntityDAO target = new PathPlanEntityDAO();
-            plan = CreatePathPlanEntity();
+            PlanItemEntityDAO target = new PlanItemEntityDAO();
+            planItem = CreatePlanItemEntity();
 
-            target.InsertPathPlan(plan);
-            target.InsertPathPlan(plan);
+            target.InsertPlanItem(planItem);
 
-            List<PathPlanEntity> list = target.GetPathPlans();
+            PathPlanEntity pathPlan = CreatePathPlanEntity();
+            PathPlanEntityDAO pped = new PathPlanEntityDAO();
+            
+            pped.InsertPathPlan(pathPlan);
+            
+            PlanItemEntity pie = CreatePlanItemEntity();
+            pie.PathPlanId = pathPlan.PathPlanId;
+
+            target.InsertPlanItem(pie);
+
+            List<PlanItemEntity> list = target.GetPlanItemsByPathPlanId(plan.PathPlanId);
 
             Assert.IsNotNull(list);
-            Assert.IsTrue(list.Count == 2, "GetPathPlansTest: List of PathPlanEntity does not have expected number of items.");     
-        }
-
-
-        [TestMethod()]
-        public void GetPathPlanByIdTest()
-        {
-            PathPlanEntityDAO target = new PathPlanEntityDAO();
-            plan = CreatePathPlanEntity();
-
-            target.InsertPathPlan(plan);
-            PathPlanEntity ppe = target.GetPathPlanById(plan.PathPlanId);
-
-            PathPlanEntityTest(ppe);
+            Assert.IsTrue(list.Count == 1, "GetPlanItemsByPathPlanIdTest: List of PlanItemEntity does not have expected number of items.");
         }
 
         [TestMethod()]
-        public void PathPlanEntityConstructorTest()
+        public void GetPlanItemByIdTest()
         {
-            PathPlanEntityDAO target = new PathPlanEntityDAO();
+            PlanItemEntityDAO target = new PlanItemEntityDAO();
+            planItem = CreatePlanItemEntity();
+
+            target.InsertPlanItem(planItem);
+            PlanItemEntity pie = target.GetPlanItemById(planItem.PlanItemId);
+
+            PlanItemEntityTest(pie);
+        }
+
+        [TestMethod()]
+        public void PlanItemConstructorTest()
+        {
+            PlanItemEntityDAO target = new PlanItemEntityDAO();
             Assert.IsNotNull(target);
         }
 
 
         [TestMethod()]
-        public void InsertPathPlanTest()
+        public void InsertPlanItemTest()
         {
-            PathPlanEntityDAO target = new PathPlanEntityDAO();
-            plan = CreatePathPlanEntity();
+            PlanItemEntityDAO target = new PlanItemEntityDAO();
+            planItem = CreatePlanItemEntity();
 
-            int result = target.InsertPathPlan(plan);
+            int result = target.InsertPlanItem(planItem);
 
-            Assert.IsTrue(result != -1, "Insert PathPlanEntity was failed.");
+            Assert.IsTrue(result != -1, "Insert PlanItemEntity was failed.");
         }
 
 
         [TestMethod()]
-        public void RemovePathPlanEntityByIdTest()
+        public void RemovePlanItemTest()
         {
-            PathPlanEntityDAO target = new PathPlanEntityDAO();
-            plan = CreatePathPlanEntity();
+            PlanItemEntityDAO target = new PlanItemEntityDAO();
+            planItem = CreatePlanItemEntity();
 
-            target.InsertPathPlan(plan);
-            bool result = target.RemovePathPlan(plan.PathPlanId);
+            target.InsertPlanItem(planItem);
+            bool result = target.RemovePlanItem(planItem.PlanItemId);
 
             Assert.IsTrue(result);
-            plan = null;
+            planItem = null;
         }
 
         [TestMethod()]
-        public void UpdatePathPlanEntityTest()
+        public void UpdatePlanItemByIdTest()
         {
-            PathPlanEntityDAO target = new PathPlanEntityDAO();
-            plan = CreatePathPlanEntity();
+            PlanItemEntityDAO target = new PlanItemEntityDAO();
+            planItem = CreatePlanItemEntity();
 
-            target.InsertPathPlan(plan);
+            target.InsertPlanItem(planItem);
 
-            plan.IsCycled = true;
-            plan.IsPlanned = true;
+            planItem.SolarSystem = "Kalimdor";
+            planItem.IsPlanet = false;
+            planItem.Index = "0";
+            planItem.SequenceNumber = 2;
 
-            target.UpdatePathPlanById(plan);
+            target.UpdatePlanItemById(planItem);
 
-            PathPlanEntity ppe = target.GetPathPlanById(plan.PathPlanId);
-            PathPlanEntityTest(ppe);
+            PlanItemEntity pie = target.GetPlanItemById(planItem.PlanItemId);
+            PlanItemEntityTest(pie);
+        }
+
+        private PlanItemEntity CreatePlanItemEntity()
+        {
+            PlanItemEntity item = new PlanItemEntity();
+
+            item.SolarSystem = "Eastern Kingdoms";
+            item.Index = "Azeroth";
+            item.IsPlanet = true;
+            item.SequenceNumber = 1;
+            item.PathPlanId = plan.PathPlanId;
+
+            return item;
         }
 
         private PathPlanEntity CreatePathPlanEntity()
@@ -152,7 +184,7 @@ namespace SpaceTraffic.GameServerTests.Dao
         private SpaceShip CreateSpaceShip()
         {
             SpaceShip ship = new SpaceShip();
-            
+
             ship.SpaceShipId = 1;
             ship.CurrentStarSystem = "Star Wars";
             ship.SpaceShipName = "Autokár";
@@ -165,14 +197,14 @@ namespace SpaceTraffic.GameServerTests.Dao
             ship.PlayerId = player.PlayerId;
             ship.IsFlying = true;
             ship.DockedAtBaseId = null;
-           
+
             return ship;
         }
 
         private Player CreatePlayer()
         {
             Player newPlayer = new Player();
-           
+
             newPlayer.FirstName = "Michel";
             newPlayer.LastName = "Párek";
             newPlayer.PlayerName = "UplneNejvicNejbozesjiJmeno";
@@ -185,17 +217,18 @@ namespace SpaceTraffic.GameServerTests.Dao
             newPlayer.OrionEmail = "párek@students.zcu.cz";
             newPlayer.AddedDate = DateTime.Now;
             newPlayer.LastVisitedDate = DateTime.Now;
-           
+
             return newPlayer;
         }
 
-        private void PathPlanEntityTest(PathPlanEntity ppe)
+        private void PlanItemEntityTest(PlanItemEntity pie)
         {
-            Assert.IsNotNull(ppe);
-            Assert.AreEqual(plan.IsPlanned, ppe.IsPlanned, "IsPlanned attributes are not equal.");
-            Assert.AreEqual(plan.IsCycled, ppe.IsCycled, "IsCycled attributes are not equal.");
+            Assert.IsNotNull(pie);
+            Assert.AreEqual(planItem.SolarSystem, pie.SolarSystem, "SolarSystems are not equal.");
+            Assert.AreEqual(planItem.Index, pie.Index, "Index attributes are not equal.");
+            Assert.AreEqual(planItem.IsPlanet, pie.IsPlanet, "IsPlanet attributes are not equal.");
+            Assert.AreEqual(planItem.SequenceNumber, pie.SequenceNumber, "SequenceNumbers are not equal.");
         }
-
 
         [ClassCleanup()]
         public static void DropDatabase()
