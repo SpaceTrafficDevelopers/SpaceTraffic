@@ -77,6 +77,7 @@ namespace SpaceTraffic.GameServer
 				IStatisticDAO statisticDao = gameServer.Persistence.GetStatisticsDAO();
 				statisticDao.InsertStatistic(new Statistic() { StatName = statisticName, PlayerId = player.PlayerId, StatValue = 0 });
 				statToUpdate = statisticDao.GetStatisticsByPlayerId(player.PlayerId).FirstOrDefault(x => x.StatName.Equals(statisticName));
+				player.Statistics.Add(statToUpdate);
 			}
 			return statToUpdate;
 		}
@@ -192,13 +193,8 @@ namespace SpaceTraffic.GameServer
 				{
 					Statistic statToCheck = player.Statistics.FirstOrDefault(x => x.StatName.Equals(condition.CondName));
 
-					if (statToCheck == null)
-					{
-						continue; //statistic was never used or changed (is not in DB)
-					}
-
 					// condition is not met by current statistic value
-					if (statToCheck.StatValue < condition.CondValue)
+					if (statToCheck == null || statToCheck.StatValue < condition.CondValue)
 					{
 						shouldSkip = true;
 						break;
