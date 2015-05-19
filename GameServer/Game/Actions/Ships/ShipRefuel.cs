@@ -107,6 +107,8 @@ namespace SpaceTraffic.Game.Actions
             if (RefuelingFinished)
             {
                 spaceShip.CurrentFuelTank = Math.Min(spaceShip.FuelTank, spaceShip.CurrentFuelTank + Liters);
+				// log the ship buy action to statistics
+				gameServer.Statistics.IncrementStatisticItem(player, "fuelTank", Liters);
 
                 if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, -Liters * PricePerLiter))
                 {
