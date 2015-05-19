@@ -27,13 +27,10 @@ namespace SpaceTraffic.Game.Actions
 	public class ShipBuy : IPlannableAction
 	{
 		private Logger logger = LogManager.GetCurrentClassLogger();
-
-		private string result = "Nákup je ve vyřizování.";
-
 		
 		public object Result
 		{
-			get { return new { result = this.result }; }
+			get ; set; 
 		}
 
         public double Duration
@@ -45,16 +42,18 @@ namespace SpaceTraffic.Game.Actions
 
 		void IGameAction.Perform(IGameServer gameServer)
 		{
+            Result = "Nákup je ve vyřizování.";
 			SpaceShip ship = getSpaceShipFromArgs(gameServer);
 			int price = Convert.ToInt32(this.ActionArgs.ElementAt(7));
 			if (gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(this.PlayerId, price)) {
 				gameServer.Persistence.GetSpaceShipDAO().InsertSpaceShip(ship);
+
 				Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerWithIncludes(this.PlayerId);
 				// log the ship buy action to statistics
 				gameServer.Statistics.SetStatisticItemTo(player, "shipFleet", player.SpaceShips.Count);
 				// increase player experiences by a fraction of ship price 
 				gameServer.Statistics.IncrementExperiences(player, price / ExperienceLevels.FRACTION_OF_SHIP_PRICE);
-				result = String.Format("Loď {0} zakoupena.", ship.SpaceShipName);
+                Result = String.Format("Loď {0} zakoupena.", ship.SpaceShipName);
 			}			
 		}
 

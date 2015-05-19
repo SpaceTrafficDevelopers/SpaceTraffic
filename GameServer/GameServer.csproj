@@ -130,7 +130,6 @@
     <Compile Include="Game\Actions\PlanEvents.cs" />
     <Compile Include="Game\Actions\Ships\ShipBuy.cs" />
     <Compile Include="Game\Actions\Ships\ShipFlyThroughWormHole.cs" />
-    <Compile Include="Game\Actions\Ships\ShipFlyTo.cs" />
     <Compile Include="Game\Actions\Ships\ShipLand.cs" />
     <Compile Include="Game\Actions\Ships\ShipLoadCargo.cs" />
     <Compile Include="Game\Actions\Ships\ShipRefuel.cs" />
@@ -153,6 +152,7 @@
     <Compile Include="Game\Planner\PathPlan.cs" />
     <Compile Include="Game\Planner\PlanItem.cs" />
     <Compile Include="Game\Planner\PlannerConverter.cs" />
+    <Compile Include="Game\Utils\ActionControls.cs" />
     <Compile Include="Persistence\SpaceTrafficCreateDatabaseIfNotExists.cs" />
     <Compile Include="Persistence\SpaceTrafficCustomInitializer.cs" />
     <Compile Include="Persistence\SpaceTrafficContext.cs" />

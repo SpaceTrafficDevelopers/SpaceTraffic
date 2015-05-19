@@ -1,5 +1,6 @@
 ﻿using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Game.Utils;
 /**
 Copyright 2010 FAV ZCU
 
@@ -25,12 +26,7 @@ namespace SpaceTraffic.Game.Actions
 {
     class ShipLand : IGameAction
     {
-        private string result = "Loď přilétá na planetu";
-
-        public object Result
-        {
-            get { return new { result = this.result }; }
-        }
+        public object Result { get; set; }
         public GameActionState State { get; set; }
 
        public int PlayerId { get; set; }
@@ -45,50 +41,43 @@ namespace SpaceTraffic.Game.Actions
 
         public int ShipID { get; set; }
 
+        public double FlightTime { get; set; }
+
         public void Perform(IGameServer gameServer)
         {
             State = GameActionState.PLANNED;
+            Result = "Loď přilétá na planetu";
             getArgumentsFromActionArgs();
+
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ShipID);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
 
-            if (player == null || spaceShip == null)
-            {
-                result = String.Format("Nastala chyba při vyhledávání položek");
-                State = GameActionState.FAILED;
+            if (!ActionControls.checkObjects(this, new Object[] { player, spaceShip, planet }))
                 return;
-            }
 
-            if (spaceShip.PlayerId != PlayerId)
-            {
-                result = String.Format("Loď {0} nepatří hráči {1}", spaceShip.SpaceShipName, player.PlayerName);
-                State = GameActionState.FAILED;
+            ActionControls.shipOwnerControl(this, spaceShip, player);
+            ActionControls.isShipFlying(this, spaceShip, true);
+            int baseID = ActionControls.checkBaseAtPlanet(this, planet);
+
+            if (State == GameActionState.FAILED)
                 return;
-            }
-
-            if(!spaceShip.IsFlying)
-            {
-                result = String.Format("Loď {0} neletí a nemůže tedy ani přistát", spaceShip.SpaceShipName);
-                State = GameActionState.FAILED;
-                return;
-            }
-
-            Entities.Base dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseByPlanetFullName(planet.Location);
-
-            if (dockedBase == null)
-            {
-                result = String.Format("Na planetě {0} není žádná základna.", planet.Name);
-                State = GameActionState.FAILED;
-                return;
-            }
-
-            spaceShip.DockedAtBaseId = dockedBase.BaseId;
+            
+            spaceShip.CurrentFuelTank -= (int)(spaceShip.Consumption * FlightTime);
+            spaceShip.DamagePercent += (int)(spaceShip.WearRate * FlightTime);
+            spaceShip.DockedAtBaseId = baseID;
             spaceShip.IsFlying = false;
             
+            if(spaceShip.CurrentFuelTank < 0 || spaceShip.DamagePercent > 100)
+            {
+                Result = String.Format("Lodi {1} došlo palivo nebo je zničená a nemůže přistát", spaceShip.SpaceShipName);
+                State = GameActionState.FAILED;
+                return;
+            }
+
             if(!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
             {
-                result = String.Format("Změny se nepovedlo zapsat do databáze");
+                Result = String.Format("Změny se nepovedlo zapsat do databáze");
                 State = GameActionState.FAILED;
                 return;
             }
@@ -101,6 +90,7 @@ namespace SpaceTraffic.Game.Actions
             StarSystemName = ActionArgs[0].ToString();
             PlanetName = ActionArgs[1].ToString();
             ShipID = Convert.ToInt32(ActionArgs[2]);
+            FlightTime = Convert.ToDouble(ActionArgs[3]);
         }
     }
 }

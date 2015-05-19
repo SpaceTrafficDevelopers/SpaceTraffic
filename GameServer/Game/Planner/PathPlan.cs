@@ -6,6 +6,8 @@ using SpaceTraffic.Game.Navigation;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Game.Events;
 using SpaceTraffic.Game.Actions;
+using SpaceTraffic.Entities;
+using SpaceTraffic.Game.Utils;
 
 namespace SpaceTraffic.Game.Planner
 {
@@ -72,10 +74,14 @@ namespace SpaceTraffic.Game.Planner
 
         public void planEventsForNextItem(PlanItem item, IGameServer gameServer)
         {
+            if (!isShipOnItem(item, gameServer))
+                return;
+
             PlanItem nextItem = this.getNextBusyItem(item);
             if (nextItem != null)
             {
-                PlanFlightBetweenPoints(item, nextItem, gameServer, ship);
+                if (!PlanFlightBetweenPoints(item, nextItem, gameServer, ship))
+                    return;
 
                 double actionStartDelay = TIME_BETWEEN_EVENTS;
                 foreach (IPlannableAction action in nextItem.Actions)
@@ -98,6 +104,9 @@ namespace SpaceTraffic.Game.Planner
         {
             PlanItem item = this.ElementAt(0);
 
+            if (!isShipOnItem(item, gameServer))
+                return;
+
             double actionStartDelay = TIME_BETWEEN_EVENTS;
             foreach (IPlannableAction action in item.Actions)
             {
@@ -117,12 +126,16 @@ namespace SpaceTraffic.Game.Planner
             }
         }
 
-        public void PlanFlightBetweenPoints(PlanItem depart, PlanItem dest, IGameServer gameServer, Spaceship ship)
+        public bool PlanFlightBetweenPoints(PlanItem depart, PlanItem dest, IGameServer gameServer, Spaceship ship)
         {
             NavPath path = getPathBetweenTwoItems(depart, dest);
             PathPlanner.SolvePath(path, ship, gameServer.Game.currentGameTime.ValueInSeconds);
             GameTime time = new GameTime();
             IGameAction gameAction;
+            Double flightTime = (dest.Place.TimeOfArrival.Subtract(depart.Place.TimeOfArrival)).TotalSeconds;
+
+            if (!ActionControls.isShipReadyForTravel(ship.Id, flightTime) || !isShipOnItem(depart, gameServer))
+                return false;
 
             if (depart.Place.Location is Planet)
             {
@@ -153,11 +166,13 @@ namespace SpaceTraffic.Game.Planner
                 Planet actualPlanet = dest.Place.Location as Planet;
                 gameAction = new ShipLand();
 
-                gameAction.ActionArgs = new object[] { actualPlanet.StarSystem.Name, actualPlanet.Name, ship.Id };
+                gameAction.ActionArgs = new object[] { actualPlanet.StarSystem.Name, actualPlanet.Name, ship.Id,  flightTime};
                 gameAction.PlayerId = PlayerID;
 
                 gameServer.Game.PlanEvent(gameAction, dest.Place.TimeOfArrival);
             }
+
+            return true;
         }
 
         private PlanItem getNextBusyItem(PlanItem item)
@@ -186,6 +201,14 @@ namespace SpaceTraffic.Game.Planner
 
                 eventList.Add(shipEvent);
             }
+        }
+
+        private bool isShipOnItem(PlanItem item, IGameServer gameServer)
+        {
+            SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ship.Id);
+            Planet itemPlanet = item.Place.Location as Planet;
+
+            return itemPlanet != null && spaceShip.DockedAtBaseId != null && spaceShip.DockedAtBaseId == itemPlanet.Base.BaseId;
         }
 
         #region IList implementation

@@ -1,5 +1,6 @@
 ﻿using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Game.Utils;
 /**
 Copyright 2010 FAV ZCU
 
@@ -25,13 +26,7 @@ namespace SpaceTraffic.Game.Actions
 {
     class ShipFlyThroughWormHole : IGameAction
     {
-
-        private string result = "Loď prolétá červí dírou";
-
-        public object Result
-        {
-            get { return new { result = this.result }; }
-        }
+        public object Result { get; set; }
         public GameActionState State { get; set; }
 
        public int PlayerId { get; set; }
@@ -47,36 +42,26 @@ namespace SpaceTraffic.Game.Actions
         public void Perform(IGameServer gameServer)
         {
             State = GameActionState.PLANNED;
+            Result = "Loď prolétá červí dírou";
             getArgumentsFromActionArgs();
+
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ShipID);
-            
-            if (player == null || spaceShip == null)
-            {
-                result = String.Format("Nastala chyba při vyhledávání položek");
-                State = GameActionState.FAILED;
-                return;
-            }
 
-            if(spaceShip.PlayerId != PlayerId)
-            {
-                result = String.Format("Loď {0} nepatří hráči {1}", spaceShip.SpaceShipName, player.PlayerName);
-                State = GameActionState.FAILED;
+            if (!ActionControls.checkObjects(this, new Object[] { player, spaceShip }))
                 return;
-            }
 
-            if(!spaceShip.IsFlying)
-            {
-                result = String.Format("Loď {0} nemůže proletět červí dírou, protože neletí", spaceShip.SpaceShipName);
-                State = GameActionState.FAILED;
+            ActionControls.shipOwnerControl(this, spaceShip, player);
+            ActionControls.isShipFlying(this, spaceShip, true);
+
+            if(State == GameActionState.FAILED)
                 return;
-            }
 
             WormholeEndpoint wormHole = gameServer.World.Map[spaceShip.CurrentStarSystem].WormholeEndpoints[WormHoleId];
 
             if (wormHole == null)
             {
-                result = String.Format("V systému {0} není červí díra {1}.", spaceShip.CurrentStarSystem, WormHoleId);
+                Result = String.Format("V systému {0} není červí díra {1}.", spaceShip.CurrentStarSystem, WormHoleId);
                 State = GameActionState.FAILED;
                 return;
             }
@@ -85,7 +70,7 @@ namespace SpaceTraffic.Game.Actions
 
             if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
             {
-                result = String.Format("Změny se nepovedlo zapsat do databáze");
+                Result = String.Format("Změny se nepovedlo zapsat do databáze");
                 State = GameActionState.FAILED;
                 return;
             }

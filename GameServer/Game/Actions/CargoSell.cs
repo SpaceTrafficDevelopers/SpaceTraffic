@@ -1,6 +1,7 @@
 ﻿using SpaceTraffic.Dao;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Game.Utils;
 /**
 Copyright 2010 FAV ZCU
 
@@ -30,15 +31,10 @@ namespace SpaceTraffic.Game.Actions
     [Serializable]
     class CargoSell : IPlannableAction
     {
-        private string result = "Provádí se prodej zboží.";
-
         /// <summary>
         /// Result of action.
         /// </summary>
-        public object Result
-        {
-            get { return new { result = this.result }; }
-        }
+        public object Result { get; set;}
 
         /// <summary>
         /// Duration of action.
@@ -97,41 +93,26 @@ namespace SpaceTraffic.Game.Actions
         public void Perform(IGameServer gameServer)
         {
             State = GameActionState.PLANNED;
+            Result = "Provádí se prodej zboží.";
             getArgumentsFromActionArgs(gameServer);
+
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SellerShipId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
             ICargoLoadEntity cargo = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoByID(CargoLoadEntityID);
-            Entities.Base dockedBase = null;
             
-            if(spaceShip.DockedAtBaseId != null)
-                dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById((int)spaceShip.DockedAtBaseId);         
-
-            if (cargo == null)
-            {
-                result = String.Format("Hráč {0} nemá zboží s ID = {1}.", player.PlayerId, CargoLoadEntityID);
-                State = GameActionState.FAILED;
+            if (!ActionControls.checkObjects(this, new object[] { player, spaceShip, planet, cargo }))
                 return;
-            }
 
-            if (dockedBase == null || !dockedBase.Planet.Equals(planet.Location))
-            {
-                result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, PlanetName);
-                State = GameActionState.FAILED;
+            ActionControls.shipDockedAtBase(this, spaceShip, planet);
+            ActionControls.checkCargoCount(this, cargo, Count);
+
+            if (State == GameActionState.FAILED)
                 return;
-            }
-
-            if(cargo.CargoCount < Count)
-            {
-                result = String.Format("Hráč {0} nemá požadovaných {1} jednotek zboží s ID = {1}.", player.PlayerId, Count, CargoLoadEntityID);
-                State = GameActionState.FAILED;
-                return;
-            }
-
-
+            
             if (!gameServer.Persistence.GetPlayerDAO().IncrasePlayersCredits(player.PlayerId,(int)(cargo.CargoPrice*Count)))
             {
-                result = String.Format("Změny se nepovedlo zapsat do databáze");
+                Result = String.Format("Změny se nepovedlo zapsat do databáze");
                 State = GameActionState.FAILED;
                 return;
             }

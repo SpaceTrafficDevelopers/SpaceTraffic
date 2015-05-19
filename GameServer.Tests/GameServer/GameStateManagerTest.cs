@@ -337,7 +337,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
 
             public object Result
             {
-                get { return ""; }
+                get; set; 
             }
 
             public object[] ActionArgs { get; set; }
@@ -358,7 +358,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
 
             public object Result
             {
-                get { return ""; }
+                get; set;
             }
 
             public object[] ActionArgs { get; set; }

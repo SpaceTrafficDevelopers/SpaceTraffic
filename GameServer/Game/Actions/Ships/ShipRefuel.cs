@@ -1,5 +1,6 @@
 ﻿using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Game.Utils;
 /**
 Copyright 2010 FAV ZCU
 
@@ -27,12 +28,8 @@ namespace SpaceTraffic.Game.Actions
     class ShipRefuel : IPlannableAction
     {
         private static readonly double LITER_REFUEL_TIME = 0.2;
-        private string result = "Loď tankuje";
 
-        public object Result
-        {
-            get { return new { result = this.result }; }
-        }
+        public object Result { get; set; }
         public GameActionState State { get; set; }
 
         public int PlayerId { get; set; }
@@ -51,7 +48,7 @@ namespace SpaceTraffic.Game.Actions
 
         public int PricePerLiter { get; set; }
 
-        public bool RefuelingFinished { get; set; }
+        private bool RefuelingFinished { get; set; }
 
         public double Duration
         {
@@ -65,43 +62,24 @@ namespace SpaceTraffic.Game.Actions
         public void Perform(IGameServer gameServer)
         {
             State = GameActionState.PLANNED;
+            Result = "Loď tankuje";
 
             getArgumentsFromActionArgs();
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(PlayerId);
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(ShipID);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
-            Entities.Base dockedBase = null;
 
-            if (player == null || spaceShip == null)
-            {
-                result = String.Format("Nastala chyba při vyhledávání položek");
-                State = GameActionState.FAILED;
+            if (!ActionControls.checkObjects(this, new Object[] { player, spaceShip, planet}))
                 return;
-            }
 
-            if (spaceShip.DockedAtBaseId != null)
-                dockedBase = gameServer.Persistence.GetBaseDAO().GetBaseById((int)spaceShip.DockedAtBaseId);
+            ActionControls.shipDockedAtBase(this, spaceShip, planet);
+            ActionControls.shipOwnerControl(this, spaceShip, player);
+            ActionControls.checkPlayersCredit(this, player, Liters * PricePerLiter);
 
-            if (player.Credit < Liters * PricePerLiter)
-            {
-                result = String.Format("Hráč {0} nemá dostatek peněz na natankování {1} litrů paliva", player.PlayerName, Liters);
-                State = GameActionState.FAILED;
+            if (State == GameActionState.FAILED)
                 return;
-            }
 
-            if (spaceShip.PlayerId != PlayerId)
-            {
-                result = String.Format("Loď {0} nepatří hráči {1}", spaceShip.SpaceShipName, player.PlayerName);
-                State = GameActionState.FAILED;
-                return;
-            }
-
-            if (dockedBase == null || !dockedBase.Planet.Equals(planet.Location))
-            {
-                result = String.Format("Loď {0} neni zadokovana na planetě {1}.", spaceShip.SpaceShipName, planet.Name);
-                State = GameActionState.FAILED;
-                return;
-            }
+       
 
 
             if (RefuelingFinished)
@@ -112,14 +90,14 @@ namespace SpaceTraffic.Game.Actions
 
                 if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, Liters * PricePerLiter))
                 {
-                    result = String.Format("Změny se nepovedlo zapsat do databáze");
+                    Result = String.Format("Změny se nepovedlo zapsat do databáze");
                     State = GameActionState.FAILED;
                     return;
                 }
 
                 if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
                 {
-                    result = String.Format("Změny se nepovedlo zapsat do databáze");
+                    Result = String.Format("Změny se nepovedlo zapsat do databáze");
                     State = GameActionState.FAILED;
                     return;
                 }
@@ -142,7 +120,7 @@ namespace SpaceTraffic.Game.Actions
                 PlanetName = ActionArgs[1].ToString();
                 ShipID = Convert.ToInt32(ActionArgs[2]);
                 Liters = Math.Abs(Convert.ToInt32(ActionArgs[3]));
-                PricePerLiter = Math.Abs(Convert.ToInt32(ActionArgs[4]));
+                PricePerLiter = Math.Abs(Convert.ToInt32(ActionArgs[4]));                
             }
         }
     }
