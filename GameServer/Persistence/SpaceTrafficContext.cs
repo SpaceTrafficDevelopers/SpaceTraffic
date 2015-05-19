@@ -379,8 +379,10 @@ using SpaceTraffic.Entities;
         {
             HasKey(p => p.PathPlanId);
             Property(p => p.IsPlanned).IsRequired();
+            Property(p => p.IsCycled).IsRequired();
             HasRequired(p => p.Player).WithMany().HasForeignKey(p => p.PlayerId).WillCascadeOnDelete(true);
             HasRequired(p => p.SpaceShip).WithMany().HasForeignKey(p => p.SpaceShipId).WillCascadeOnDelete(false);
+
 
             ToTable("PathPlan");
         }

@@ -18,7 +18,7 @@ namespace SpaceTraffic.Game.Planner
         public IPathPlan createPathPlan(PathPlanEntity entity)
         {
             Spaceship ship = getShip(entity);
-            IPathPlan plan = new PathPlan(entity.PlayerId, ship);
+            IPathPlan plan = new PathPlan(entity.PlayerId, ship, entity.IsCycled);
 
             createPlanItem(plan, entity);
 

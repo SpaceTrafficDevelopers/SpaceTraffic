@@ -35,6 +35,8 @@ namespace SpaceTraffic.Entities
 
         public bool IsPlanned { get; set; }
 
+        public bool IsCycled { get; set; } 
+
         public virtual List<PlanItemEntity> Items { get; set; }
     }
 }

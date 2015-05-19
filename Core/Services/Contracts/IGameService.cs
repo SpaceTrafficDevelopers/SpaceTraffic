@@ -79,7 +79,7 @@ namespace SpaceTraffic.Services.Contracts
 		Player GetPlayer(int playerId);
 
         [OperationContract]
-        int CreatePathPlan(int playerId, int spaceShipId);
+        int CreatePathPlan(int playerId, int spaceShipId, bool isCycled);
 
         [OperationContract]
         int AddPlanItem(int pathPlanId, string solarSystem, bool isPlanet, string index, int sequenceNumber);

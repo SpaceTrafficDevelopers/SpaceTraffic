@@ -110,7 +110,7 @@ namespace SpaceTraffic.Game.Actions
 				// log the ship buy action to statistics
 				gameServer.Statistics.IncrementStatisticItem(player, "fuelTank", Liters);
 
-                if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, -Liters * PricePerLiter))
+                if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(PlayerId, Liters * PricePerLiter))
                 {
                     result = String.Format("Změny se nepovedlo zapsat do databáze");
                     State = GameActionState.FAILED;
