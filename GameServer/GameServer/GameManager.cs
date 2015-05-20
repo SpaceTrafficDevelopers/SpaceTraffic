@@ -105,7 +105,6 @@ namespace SpaceTraffic.GameServer
                 gameEvent = this.gameEventQueue.Dequeue(currentGameTime);
                 if (gameEvent != null)
                 {
-                    Console.WriteLine("Jdu na to " + gameEvent.BoundAction.ToString() + " " + currentGameTime);
                     gameEvent.BoundAction.Perform(this.gameServer);
                 } else {//events are sorted, so there is not any older event in queue
                     break;
@@ -145,7 +144,6 @@ namespace SpaceTraffic.GameServer
         {
             mutex.WaitOne();
 
-            Console.WriteLine("Planuju " + gameEvent.BoundAction.ToString() +" "+gameEvent.PlannedTime.Value);
             this.gameEventQueue.Enqueue(gameEvent);
 
             mutex.ReleaseMutex();
