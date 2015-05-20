@@ -55,7 +55,6 @@
   <ItemGroup>
     <Compile Include="Data\GoodsLoaderTest.cs" />
     <Compile Include="Data\OrbitTests.cs" />
-    <Compile Include="Data\PathPlannerTests.cs" />
     <Compile Include="Data\TestGalaxyMapDataStreamProvider.cs" />
     <Compile Include="Data\GalaxyMapLoaderTests.cs" />
     <Compile Include="Data\StarSystemXmlHelperTests.cs">
