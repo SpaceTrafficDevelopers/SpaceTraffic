@@ -124,9 +124,12 @@
     <Compile Include="GameServer\GoodsManager.cs" />
     <Compile Include="GameServer\StatisticsManager.cs" />
     <Compile Include="GameServer\WorldManager.cs" />
+    <Compile Include="Game\Actions\BuildingBuy.cs" />
+    <Compile Include="Game\Actions\BuildingDemolish.cs" />
     <Compile Include="Game\Actions\CargoSell.cs" />
     <Compile Include="Game\Actions\CargoBuy.cs" />
     <Compile Include="Game\Actions\HelloWorld.cs" />
+    <Compile Include="Game\Actions\LandBuySell.cs" />
     <Compile Include="Game\Actions\PlanEvents.cs" />
     <Compile Include="Game\Actions\Ships\ShipBuy.cs" />
     <Compile Include="Game\Actions\Ships\ShipFlyThroughWormHole.cs" />
@@ -212,6 +215,7 @@
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>"$(SolutionDir)scripts\copyconfig" ConnectionStrings "$(ProjectDir)" "$(TargetDir)"</PostBuildEvent>

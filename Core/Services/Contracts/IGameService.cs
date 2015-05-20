@@ -27,6 +27,9 @@ namespace SpaceTraffic.Services.Contracts
 	[ServiceContract]
 	public interface IGameService
 	{
+        [OperationContract]
+        Player GetPlayerByName(String userName);
+
 		[OperationContract]
 		IList<SpaceShip> GetPlayersShips(int playerId);
 

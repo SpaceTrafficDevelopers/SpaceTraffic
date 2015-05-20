@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Game\Controllers\CargoController.cs" />
+    <Compile Include="Areas\Game\Controllers\LandController.cs" />
     <Compile Include="Areas\Game\Controllers\PlannerController.cs" />
     <Compile Include="Controllers\AbstractController.cs" />
     <Compile Include="Areas\Game\Controllers\TabsControllerBase.cs" />
@@ -167,6 +168,10 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Areas\Game\Views\Land\_Buildings.cshtml" />
+    <Content Include="Areas\Game\Views\Land\_Demolish.cshtml" />
+    <Content Include="Areas\Game\Views\Land\_Land.cshtml" />
+    <Content Include="Areas\Game\Views\Land\_Overview.cshtml" />
     <None Include="Views\Shared\_Achievements.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -199,6 +199,7 @@ var SvgStarSystemMap = {
 			'<li><a href="/Game/Ships?baseId=1&starSystemName=Solar System#Buy_new_ship">BuyShip</a></li>' +
 			'<li><a href="/Game/Ships?baseId=2&starSystemName=Proxima Centauri#Buy_new_ship">BuyShipOnProxima</a></li>' +
             '<li><a href="/Game/Planner/TestPlanner">TestPlanner</a></li>' + 
+            '<li><a href="/Game/?baseId=1&starSystemName=Solar System#Buy_building">BuyBuilding</a></li>' +
             '</ul>';
 	    $("#contextPanel").html(buffer);
 	    buffer = null;

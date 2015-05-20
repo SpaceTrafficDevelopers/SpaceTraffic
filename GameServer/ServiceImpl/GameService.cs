@@ -164,6 +164,15 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(playerId);
 		}
 
+        /// <summary>
+        /// Returns player from database.
+        /// </summary>
+        /// <param name="userName">The players name.</param>
+        /// <returns></returns>
+        public Player GetPlayerByName(String userName) {
+            return GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByName(userName);
+        }
+
 		public List<TAchievement> GetUnviewedAchievements(int playerId)
 		{
 

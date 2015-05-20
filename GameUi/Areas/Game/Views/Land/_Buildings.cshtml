@@ -1,0 +1,90 @@
+﻿@{    
+    ViewBag.Title = "_Buildings";
+    SpaceTraffic.GameUi.GameServerClient.IGameServerClient Client = SpaceTraffic.GameUi.GameServerClient.GameServerClientFactory.GetClientInstance();
+    SpaceTraffic.Entities.Player player = Client.GameService.GetPlayerByName(Context.User.Identity.Name);
+    SpaceTraffic.Game.Land land = null;
+    if (!(player.Lands != null)) { land = new SpaceTraffic.Game.Land(); }
+    else
+    {
+        foreach (SpaceTraffic.Game.Land temp in player.Lands)
+        {
+            if (temp.LandDAO.BaseId == player.currentBase.BaseId) { land = temp; }
+        }
+    }
+    int num = 8;
+    int w = 30;
+    int h = 20;
+    int s = 10;
+    int bh = 20;
+    int margin = 20;
+}
+
+<svg height="200" width="350">
+    @{
+        for (int i = 0; i < num * num; i++)
+        {
+            SpaceTraffic.Entities.Tile tile = land.LandDAO.Tiles.ElementAt(i);
+            string tileColor = tile.purchased ? "120,120,120" : "50,50,50";
+            int x = w * (i % num) + s * (num - i / num);
+            int y = margin + h * (i / num);
+            <polygon points="@(x + s),@y,@(x + s + w),@(y),@(x + w),@(y + h),@(x),@(y + h)"
+            style="fill:rgb(@tileColor); stroke:rgb(0,0,0); stroke-width:1" />
+        }
+    }
+    @{
+        foreach (SpaceTraffic.Game.Building build in land.LandDAO.Buildings)
+        {
+            for (int i = 0; i < build.BuildingDAO.Size[0]; i++)
+            {
+                for (int j = 0; j < build.BuildingDAO.Size[1]; j++)
+                {
+                    int x = (build.BuildingDAO.Location[0] + i) * w + s * (num - (build.BuildingDAO.Location[1] + j));
+                    int y = margin + (build.BuildingDAO.Location[1] + j) * h;
+                    string url = j == 0 ? "~/Content/images/buildings/" + build.BuildingDAO.Type + "_0" + i + ".png" : "~/Content/images/buildings/" + build.BuildingDAO.Type + "_" + i + ".png"; ;
+                    <image x="@(x)" y="@(y - bh)" width="@(w + s)" height="@(h + bh)"
+                    xlink:href="@(Url.Content(url))" />
+                }
+
+            }
+        }
+      }
+</svg>
+@using (Html.BeginForm(""))
+{
+<input type="hidden" name="playerId" value="@player.PlayerId" />
+<input type="hidden" name="landId" value="@land.LandDAO.LandId" />
+<br /><input type="radio" name="type" value="Dock" checked/>@("Dock")
+<input type="radio" name="type" value="Factory" />@("Factory")
+<input type="radio" name="type" value="Warehouse" />@("Warehouse")
+<br />@("Width: ")<input name="width" type="range" min="1" max="3" value="1" />
+<br />@("Height: ")<input name="height" type="range" min="1" max="3" value="1" />
+<br />@("X-coordinate: ")<input name="x" type="range" min="0" max="7" value="0" />
+<br />@("Y-coordinate: ")<input name="y" type="range" min="0" max="7" value="0" />
+<br /><input class="tiny button" type="submit" value="Build" />
+}
+<table class="itemtable shipsview">
+<thead>
+<tr><th>Icon</th><th>Type</th><th>Name</th><th colspan="3">Size</th></tr>
+</thead>
+<tbody>
+        @foreach (SpaceTraffic.Game.Building build in land.LandDAO.Buildings)
+        {
+        <tr>
+            <td>
+                @{
+            string url = "";
+            if (build.BuildingDAO.Type == "Factory") { url = "~/Content/images/placeholderFactory.png"; }
+            else { url = build.BuildingDAO.Type == "Warehouse" ? "~/Content/images/placeholder.png" : "~/Content/images/ships_button_icon.png"; }
+                }
+                <img src="@(Url.Content(url))" width="32" height="32" alt="" />
+            </td>
+            <td>@build.BuildingDAO.Type</td>
+            @{String temp = build.BuildingDAO.Type + " at " + build.BuildingDAO.Location[0] + ", " + build.BuildingDAO.Location[1];}
+            <td>@temp</td>
+            <td>@build.BuildingDAO.Size[0]</td>
+            <td>x</td>
+            <td>@build.BuildingDAO.Size[1]</td>
+        </tr>
+        }
+</tbody>
+</table>

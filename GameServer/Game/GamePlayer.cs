@@ -28,6 +28,8 @@ namespace SpaceTraffic.Game
 
         string PlayerName { get;}
 
+        Player PlayerDao { get; set; }
+
         StarSystem CurrentStarSystem { get; }
     }
 
@@ -36,6 +38,8 @@ namespace SpaceTraffic.Game
         public int PlayerId { get; set; }
 
         public string PlayerName { get; set; }
+
+        public Player PlayerDao { get; set; }
 
         public StarSystem CurrentStarSystem { get; set; }
 

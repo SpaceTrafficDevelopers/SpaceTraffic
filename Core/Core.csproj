@@ -79,6 +79,7 @@
     <Compile Include="Entities\Achievements\ExperienceLevels.cs" />
     <Compile Include="Entities\Achievements\Statistic.cs" />
     <Compile Include="Entities\Base.cs" />
+    <Compile Include="Entities\Building.cs" />
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\Factory.cs" />
     <Compile Include="Entities\GameAction.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Entities\Goods\Textile.cs" />
     <Compile Include="Entities\ICargoLoad.cs" />
     <Compile Include="Entities\ICargoLoadEntity.cs" />
+    <Compile Include="Entities\Land.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\PathPlanEntity.cs" />
     <Compile Include="Entities\PlanAction.cs" />
@@ -99,14 +101,17 @@
     <Compile Include="Entities\SpaceShipCargo.cs" />
     <Compile Include="Entities\PublicEntities\WormholeEndpointDestination.cs" />
     <Compile Include="Entities\SpaceShip.cs" />
+    <Compile Include="Entities\Tile.cs" />
     <Compile Include="Entities\Trader.cs" />
     <Compile Include="Entities\TraderCargo.cs" />
     <Compile Include="Game\Base.cs" />
+    <Compile Include="Game\Building.cs" />
     <Compile Include="Game\CelestialObjectInfo.cs" />
     <Compile Include="Game\CelestialObject.cs" />
     <Compile Include="Game\Geometry\Stacionary.cs" />
     <Compile Include="Game\IGameObject.cs" />
     <Compile Include="Game\IPlanet.cs" />
+    <Compile Include="Game\Land.cs" />
     <Compile Include="Game\VisibleObject.cs" />
     <Compile Include="Game\Geometry\CircularOrbit.cs" />
     <Compile Include="Game\Geometry\Direction.cs" />

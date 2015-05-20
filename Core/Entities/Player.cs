@@ -70,6 +70,12 @@ namespace SpaceTraffic.Entities
 
 		public virtual ICollection<SpaceShip> SpaceShips { get; set; }
 
+        [DataMember]
+        public virtual ICollection<SpaceTraffic.Game.Land> Lands { get; set; }
+
+        [DataMember]
+        public Base currentBase { get; set; }
+
 		[DataMember]
 		public int ExperienceLevel { get; set; }
 

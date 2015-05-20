@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "_Land";
+    SpaceTraffic.GameUi.GameServerClient.IGameServerClient Client = SpaceTraffic.GameUi.GameServerClient.GameServerClientFactory.GetClientInstance();
+    SpaceTraffic.Entities.Player player = Client.GameService.GetPlayerByName(Context.User.Identity.Name);
+    SpaceTraffic.Game.Land land = null;
+    if (!(player.Lands != null)){land = new SpaceTraffic.Game.Land();}
+    else
+    {
+        foreach (SpaceTraffic.Game.Land temp in player.Lands)
+        {
+            if (temp.LandDAO.BaseId == player.currentBase.BaseId) { land = temp; }
+        }
+    }
+    int num = 8;
+    int w = 30;
+    int h = 20;
+    int s = 10;
+}
+
+<svg height="200" width="350">
+    @{
+        int maxX = 0;
+        int maxY = 0;
+        for (int i = 0; i < 64; i++)
+        {
+            SpaceTraffic.Entities.Tile tile = land.LandDAO.Tiles.ElementAt(i);
+            if (maxX == 0 && !tile.purchased) { maxX = i; }
+            if (i % 8 == 0 && maxY == 0 && !tile.purchased) { maxY = i / 8; }
+            string tileColor = tile.purchased ? "120,120,120" : "50,50,50";
+            int x = w * (i % num) + s * (num - i / num);
+            int y = h * (i / num);
+            <polygon points="@(x + s),@y,@(x + s + w),@(y),@(x + w),@(y + h),@(x),@(y + h)"
+            style="fill:rgb(@tileColor); stroke:rgb(0,0,0); stroke-width:1" />
+        }
+    }
+    @{
+        foreach (SpaceTraffic.Game.Building build in land.LandDAO.Buildings)
+        {
+            string tileColor = "";
+            if (build.BuildingDAO.Type == "Warehouse") { tileColor = "0,60,0"; }
+            else { tileColor = build.BuildingDAO.Type == "Dock" ? "0,0,150" : "60,20,20"; }
+            for (int i = 0; i < build.BuildingDAO.Size[0]; i++)
+            {
+                for (int j = 0; j < build.BuildingDAO.Size[1]; j++)
+                {
+                    int x = (build.BuildingDAO.Location[0] + i) * w + s * (num - (build.BuildingDAO.Location[1] + j));
+                    int y = (build.BuildingDAO.Location[1] + j) * h;
+                    <polygon points="@(x + s),@y,@(x + s + w),@(y),@(x + w),@(y + h),@(x),@(y + h)"
+                    style="fill:rgb(@tileColor);stroke:rgb(0,0,0);stroke-width:1"/>
+                }
+            }
+
+        }
+    }
+
+</svg>
+@using (Html.BeginForm(""))
+{
+<input type="hidden" name="playerId" value="@player.PlayerId" />
+<input type="hidden" name="landId" value="@land.LandDAO.LandId"
+<br />@("Width: ")<input name="width" type="range" min="0" max="@num" value="@maxX" />
+<br />@("Height:")<input name="height" type="range" min="0" max="@num" value="@maxY" />
+<br /><input class="tiny button" type="submit" value="Change Size" />
+}
