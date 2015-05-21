@@ -106,96 +106,96 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			}
 		}
 
-        public bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IGameService).PlayerHasEnaughCreditsForCargo(playerId, cargoLoadEntityId, count);
-            }
-        }
+		public bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).PlayerHasEnaughCreditsForCargo(playerId, cargoLoadEntityId, count);
+			}
+		}
 
-        public bool SpaceShipHasCargoSpace(int spaceShipId, int cargoLoadEntityId, int count)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IGameService).SpaceShipHasCargoSpace(spaceShipId, cargoLoadEntityId, count);
-            }
-        }
+		public bool SpaceShipHasCargoSpace(int spaceShipId, int cargoLoadEntityId, int count)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).SpaceShipHasCargoSpace(spaceShipId, cargoLoadEntityId, count);
+			}
+		}
 
-        public bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IGameService).SpaceShipDockedAtBase(spaceShipId, starSystemName, planetName);
-            }
-        }
+		public bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).SpaceShipDockedAtBase(spaceShipId, starSystemName, planetName);
+			}
+		}
 
-        public bool PlayerHasSpaceShip(int playerId, int spaceShipId)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IGameService).PlayerHasSpaceShip(playerId, spaceShipId);
-            }
-        }
+		public bool PlayerHasSpaceShip(int playerId, int spaceShipId)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).PlayerHasSpaceShip(playerId, spaceShipId);
+			}
+		}
 
-        public bool PlayerHasEnoughCargo(string buyingPlace, int cargoLoadEntityId, int cargoCount)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IGameService).PlayerHasEnoughCargo(buyingPlace, cargoLoadEntityId, cargoCount);
-            }
-        }
+		public bool PlayerHasEnoughCargo(string buyingPlace, int cargoLoadEntityId, int cargoCount)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).PlayerHasEnoughCargo(buyingPlace, cargoLoadEntityId, cargoCount);
+			}
+		}
 
-        public bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IGameService).PlayerHasEnoughCargoOnSpaceShip(spaceShipId, cargoLoadEntityId, cargoCount);
-            }
-        }
+		public bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).PlayerHasEnoughCargoOnSpaceShip(spaceShipId, cargoLoadEntityId, cargoCount);
+			}
+		}
 
-        public bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IGameService).TraderHasEnoughCargo(traderId, cargoLoadEntityId, cargoCount);
-            }
-        }
+		public bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).TraderHasEnoughCargo(traderId, cargoLoadEntityId, cargoCount);
+			}
+		}
 
-        public int CreatePathPlan(int playerId, int spaceShipId, bool isCycled)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                ((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
-                return (channel as IGameService).CreatePathPlan(playerId, spaceShipId, isCycled);
-            }
-        }
+		public int CreatePathPlan(int playerId, int spaceShipId, bool isCycled)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
+				return (channel as IGameService).CreatePathPlan(playerId, spaceShipId, isCycled);
+			}
+		}
 
-        public int AddPlanItem(int pathPlanId, string solarSystem, bool isPlanet, string index, int sequenceNumber)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                ((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
-                return (channel as IGameService).AddPlanItem(pathPlanId, solarSystem, isPlanet, index, sequenceNumber);
-            }
-        }
+		public int AddPlanItem(int pathPlanId, string solarSystem, bool isPlanet, string index, int sequenceNumber)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
+				return (channel as IGameService).AddPlanItem(pathPlanId, solarSystem, isPlanet, index, sequenceNumber);
+			}
+		}
 
-        public bool AddPlanAction(int planItemId, int sequenceNumber, int playerId, string actionName, params object[] actionArgs)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                ((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
-                return (channel as IGameService).AddPlanAction(planItemId, sequenceNumber, playerId, actionName, actionArgs);
-            }
-        }
+		public bool AddPlanAction(int planItemId, int sequenceNumber, int playerId, string actionName, params object[] actionArgs)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
+				return (channel as IGameService).AddPlanAction(planItemId, sequenceNumber, playerId, actionName, actionArgs);
+			}
+		}
 
-        public bool StartPathPlan(int pathPlanId)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                ((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
-                return (channel as IGameService).StartPathPlan(pathPlanId);
-            }
-        }
-    }
+		public bool StartPathPlan(int pathPlanId)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
+				return (channel as IGameService).StartPathPlan(pathPlanId);
+			}
+		}
+	}
 }

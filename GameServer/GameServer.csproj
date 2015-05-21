@@ -161,6 +161,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceImpl\AccountService.cs" />
+    <Compile Include="ServiceImpl\ShipsService.cs" />
+    <Compile Include="ServiceImpl\PlayerService.cs" />
+    <Compile Include="ServiceImpl\PlanningService.cs" />
+    <Compile Include="ServiceImpl\CargoService.cs" />
+    <Compile Include="ServiceImpl\AchievementsService.cs" />
     <Compile Include="ServiceImpl\GameService.cs" />
     <Compile Include="ServiceImpl\HelloWorldService.cs" />
   </ItemGroup>

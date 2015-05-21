@@ -14,33 +14,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 **/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using SpaceTraffic.Services.Contracts;
+using SpaceTraffic.Entities.PublicEntities;
+using SpaceTraffic.Entities;
+using System.ServiceModel;
 
-namespace SpaceTraffic.GameUi.GameServerClient
+namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 {
-	/// <summary>
-	/// Client interface for GameServer.
-	/// Implementations of this interface must be thread-safe.
-	/// </summary>
-	public interface IGameServerClient
+	public class ShipsServiceClient : ServiceClientBase<IShipsService>, IShipsService
 	{
-		/// <summary>
-		/// Gets the account service of GameServer.
-		/// </summary>
-		IAccountService AccountService { get; }
 
-		IGameService GameService { get; }
-
-		IAchievementsService AchievementsService { get; }
-
-		ICargoService CargoService { get; }
-		IPlayerService PlayerService { get; }
-		IPlanningService PlanningService { get; }
-		IShipsService ShipsService { get; }
-		
+		public bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).SpaceShipDockedAtBase(spaceShipId, starSystemName, planetName);
+			}
+		}
 	}
 }
