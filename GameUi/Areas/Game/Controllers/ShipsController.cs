@@ -62,9 +62,10 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		public ActionResult BuyModel(int baseId, string starSystemName, string model)
 		{
 			ShipModel shipModel = getAllShips().Where(shipType => shipType.Model == model).First();
-			if (shipModel != null){			
-				if (GSClient.GameService.PlayerHasEnaughCredits(getCurrentPlayer().PlayerId, shipModel.Price)){
-					GSClient.GameService.PerformAction(getCurrentPlayer().PlayerId, "ShipBuy", getCurrentPlayer().PlayerId, starSystemName, baseId, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price, shipModel.Consumption, shipModel.WearRate, shipModel.MaxSpeed);
+			if (shipModel != null){
+				if (GSClient.GameService.PlayerHasEnaughCredits(getCurrentPlayerId(), shipModel.Price))
+				{
+					GSClient.GameService.PerformAction(getCurrentPlayerId(), "ShipBuy", getCurrentPlayerId(), starSystemName, baseId, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price, shipModel.Consumption, shipModel.WearRate, shipModel.MaxSpeed);
 				} else {
 					return RedirectToAction("").Warning(String.Format("Nemáš dostatek kreditů na koupi lodě {0}.", shipModel.Model));
 				}
@@ -82,7 +83,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		public PartialViewResult ShipList()
 		{
 			// získání lodí uživatele
-			IList<SpaceShip> ships = GSClient.GameService.GetPlayersShips(getCurrentPlayer().PlayerId);
+			IList<SpaceShip> ships = GSClient.GameService.GetPlayersShips(getCurrentPlayerId());
 
 			var tabView = GetTabView("ShipList");
 			tabView.ViewBag.Ships = ships;
