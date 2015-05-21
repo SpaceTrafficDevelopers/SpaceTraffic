@@ -25,8 +25,6 @@ namespace SpaceTraffic.GameUi.Controllers
 {
     public class AchievementController : AbstractController
     {
-        private readonly IGameServerClient GSClient = GameServerClientFactory.GetClientInstance();
-
         //
         // GET: /GameServer/
 
