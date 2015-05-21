@@ -27,6 +27,7 @@ using System.Xml.Linq;
 using SpaceTraffic.GameUi.GameServerClient;
 using SpaceTraffic.Entities.PublicEntities;
 using SpaceTraffic.GameUi.Extensions;
+using System.Web.Security;
 
 namespace SpaceTraffic.GameUi.Controllers
 {
@@ -57,12 +58,21 @@ namespace SpaceTraffic.GameUi.Controllers
 		}
 
 		/// <summary>
-		/// Returns player who is currently signed in.
+		/// Returns id of player who is currently signed in.
 		/// </summary>
 		/// <returns></returns>
-		public AccountInfo getCurrentPlayer()
+		public int getCurrentPlayerId()
 		{
-			return GSClient.AccountService.GetAccountInfoByUserName(HttpContext.User.Identity.Name);
+			return (int)Membership.GetUser().ProviderUserKey;
+		}
+
+		/// <summary>
+		/// Returns username of player who is currently signed in.
+		/// </summary>
+		/// <returns></returns>
+		public string getCurrentPlayerName()
+		{
+			return HttpContext.User.Identity.Name;
 		}
 
 	}
