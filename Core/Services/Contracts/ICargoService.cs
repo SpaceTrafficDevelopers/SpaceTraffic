@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 **/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,30 +26,26 @@ using SpaceTraffic.Entities;
 namespace SpaceTraffic.Services.Contracts
 {
 	[ServiceContract]
-	public interface IGameService
+	public interface ICargoService
 	{
-		[OperationContract]
-		IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem);
 
 		[OperationContract]
-		int PerformAction(int playerId, string actionName, params object[] actionArgs);
+		bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count);
+		
+		[OperationContract]
+		bool SpaceShipHasCargoSpace(int spaceShipId, int cargoLoadEntityID, int count);
+		
+		
+		[OperationContract]
+		bool PlayerHasEnoughCargo(string buyingPlace, int cargoLoadEntityId, int cargoCount);
 
 		[OperationContract]
-		object GetActionResult(int playerId, int actionCode);
+		bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount);
 
-
-	}
-
-	[Serializable]
-	public class ActionNotFoundException : Exception
-	{
-		public ActionNotFoundException() { }
-		public ActionNotFoundException(string message) : base(message) { }
-		public ActionNotFoundException(string message, Exception inner) : base(message, inner) { }
-		protected ActionNotFoundException(
-		  System.Runtime.Serialization.SerializationInfo info,
-		  System.Runtime.Serialization.StreamingContext context)
-			: base(info, context) { }
+		[OperationContract]
+		bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount);
+		
+		
 	}
 
 }

@@ -169,7 +169,7 @@ namespace SpaceTraffic.GameServer
             
             serviceManager = new ServiceManager();
             //Načíst servisy z konfigurace
-            serviceManager.ServiceList = new List<Type>(new Type[] { typeof(AccountService), typeof(GameService), typeof(HelloWorldService) });
+			serviceManager.ServiceList = new List<Type>(new Type[] { typeof(AccountService), typeof(GameService), typeof(HelloWorldService), typeof(AchievementsService), typeof(CargoService), typeof(ShipsService), typeof(PlanningService), typeof(PlayerService) });
             serviceManager.Initialize();
         }
 

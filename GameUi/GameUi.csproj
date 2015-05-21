@@ -127,6 +127,11 @@
     <Compile Include="GameServerClient\GameServerClientFactory.cs" />
     <Compile Include="GameServerClient\IGameServerClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\AccountServiceClient.cs" />
+    <Compile Include="GameServerClient\ServiceClients\CargoServiceClient.cs" />
+    <Compile Include="GameServerClient\ServiceClients\PlanningServiceClient.cs" />
+    <Compile Include="GameServerClient\ServiceClients\ShipsServiceClient.cs" />
+    <Compile Include="GameServerClient\ServiceClients\PlayerServiceClient.cs" />
+    <Compile Include="GameServerClient\ServiceClients\AchievementsServiceClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\GameServiceClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\ServiceChannelFactory.cs" />
     <Compile Include="GameServerClient\ServiceClients\ServiceClientBase.cs" />

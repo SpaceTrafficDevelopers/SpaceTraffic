@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 **/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,30 +26,38 @@ using System.ServiceModel;
 
 namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 {
-	public class GameServiceClient : ServiceClientBase<IGameService>, IGameService
+	public class PlayerServiceClient : ServiceClientBase<IPlayerService>, IPlayerService
 	{
-		public IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem)
+
+		public bool PlayerHasEnaughCredits(int playerId, long amount)
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetStarSystemConnections(starSystem);
+				return (channel as IPlayerService).PlayerHasEnaughCredits(playerId, amount);
 			}
 		}
 
-
-		public int PerformAction(int playerId, string actionName, params object[] actionArgs)
+		public Player GetPlayer(int playerId)
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).PerformAction(playerId, actionName, actionArgs);
+				return (channel as IPlayerService).GetPlayer(playerId);
 			}
 		}
 
-		public object GetActionResult(int playerId, int actionCode)
+		public bool PlayerHasSpaceShip(int playerId, int spaceShipId)
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetActionResult(playerId, actionCode);
+				return (channel as IPlayerService).PlayerHasSpaceShip(playerId, spaceShipId);
+			}
+		}
+
+		public IList<SpaceShip> GetPlayersShips(int playerId)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IPlayerService).GetPlayersShips(playerId);
 			}
 		}
 	}

@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 **/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,30 +26,19 @@ using SpaceTraffic.Entities;
 namespace SpaceTraffic.Services.Contracts
 {
 	[ServiceContract]
-	public interface IGameService
+	public interface IPlanningService
 	{
-		[OperationContract]
-		IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem);
 
 		[OperationContract]
-		int PerformAction(int playerId, string actionName, params object[] actionArgs);
+		int CreatePathPlan(int playerId, int spaceShipId, bool isCycled);
 
 		[OperationContract]
-		object GetActionResult(int playerId, int actionCode);
+		int AddPlanItem(int pathPlanId, string solarSystem, bool isPlanet, string index, int sequenceNumber);
+	
+		[OperationContract]
+		bool AddPlanAction(int planItemId, int sequenceNumber, int playerId, string actionName, params object[] actionArgs);
 
-
+		[OperationContract]
+		bool StartPathPlan(int pathPlanId);
 	}
-
-	[Serializable]
-	public class ActionNotFoundException : Exception
-	{
-		public ActionNotFoundException() { }
-		public ActionNotFoundException(string message) : base(message) { }
-		public ActionNotFoundException(string message, Exception inner) : base(message, inner) { }
-		protected ActionNotFoundException(
-		  System.Runtime.Serialization.SerializationInfo info,
-		  System.Runtime.Serialization.StreamingContext context)
-			: base(info, context) { }
-	}
-
 }

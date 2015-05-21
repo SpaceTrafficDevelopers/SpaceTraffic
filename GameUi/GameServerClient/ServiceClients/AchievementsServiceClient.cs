@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 **/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,30 +26,38 @@ using System.ServiceModel;
 
 namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 {
-	public class GameServiceClient : ServiceClientBase<IGameService>, IGameService
+	public class AchievementsServiceClient : ServiceClientBase<IAchievementsService>, IAchievementsService
 	{
-		public IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem)
+
+		public Entities.Achievements GetAchievements()
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetStarSystemConnections(starSystem);
+				return (channel as IAchievementsService).GetAchievements();
 			}
 		}
 
-
-		public int PerformAction(int playerId, string actionName, params object[] actionArgs)
+		public List<TAchievement> GetUnviewedAchievements(int playerId)
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).PerformAction(playerId, actionName, actionArgs);
+				return (channel as IAchievementsService).GetUnviewedAchievements(playerId);
 			}
 		}
 
-		public object GetActionResult(int playerId, int actionCode)
+		public List<EarnedAchievement> GetEarnedAchievements(int playerId)
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetActionResult(playerId, actionCode);
+				return (channel as IAchievementsService).GetEarnedAchievements(playerId);
+			}
+		}
+
+		public Entities.ExperienceLevels GetExperienceLevels()
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IAchievementsService).GetExperienceLevels();
 			}
 		}
 	}

@@ -125,6 +125,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Contracts\IAchievementsService.cs" />
+    <Compile Include="Services\Contracts\ICargoService.cs" />
+    <Compile Include="Services\Contracts\IShipsService.cs" />
+    <Compile Include="Services\Contracts\IPlanningService.cs" />
+    <Compile Include="Services\Contracts\IPlayerService.cs" />
     <Compile Include="Services\Contracts\IGameService.cs" />
     <Compile Include="Utils\Collections\CollectionToString.cs" />
     <Compile Include="Utils\Debugging\DebugEx.cs" />

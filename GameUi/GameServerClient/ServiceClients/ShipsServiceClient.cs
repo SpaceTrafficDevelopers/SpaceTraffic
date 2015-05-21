@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 **/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,30 +26,14 @@ using System.ServiceModel;
 
 namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 {
-	public class GameServiceClient : ServiceClientBase<IGameService>, IGameService
+	public class ShipsServiceClient : ServiceClientBase<IShipsService>, IShipsService
 	{
-		public IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem)
+
+		public bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName)
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetStarSystemConnections(starSystem);
-			}
-		}
-
-
-		public int PerformAction(int playerId, string actionName, params object[] actionArgs)
-		{
-			using (var channel = this.GetClientChannel())
-			{
-				return (channel as IGameService).PerformAction(playerId, actionName, actionArgs);
-			}
-		}
-
-		public object GetActionResult(int playerId, int actionCode)
-		{
-			using (var channel = this.GetClientChannel())
-			{
-				return (channel as IGameService).GetActionResult(playerId, actionCode);
+				return (channel as IShipsService).SpaceShipDockedAtBase(spaceShipId, starSystemName, planetName);
 			}
 		}
 	}
