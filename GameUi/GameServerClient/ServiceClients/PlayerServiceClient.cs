@@ -33,7 +33,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).PlayerHasEnaughCredits(playerId, amount);
+				return (channel as IPlayerService).PlayerHasEnaughCredits(playerId, amount);
 			}
 		}
 
@@ -41,7 +41,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetPlayer(playerId);
+				return (channel as IPlayerService).GetPlayer(playerId);
 			}
 		}
 
@@ -49,7 +49,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).PlayerHasSpaceShip(playerId, spaceShipId);
+				return (channel as IPlayerService).PlayerHasSpaceShip(playerId, spaceShipId);
 			}
 		}
 
@@ -57,7 +57,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetPlayersShips(playerId);
+				return (channel as IPlayerService).GetPlayersShips(playerId);
 			}
 		}
 	}

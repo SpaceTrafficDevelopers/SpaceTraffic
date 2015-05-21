@@ -33,7 +33,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetAchievements();
+				return (channel as IAchievementsService).GetAchievements();
 			}
 		}
 
@@ -41,7 +41,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetUnviewedAchievements(playerId);
+				return (channel as IAchievementsService).GetUnviewedAchievements(playerId);
 			}
 		}
 
@@ -49,7 +49,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetEarnedAchievements(playerId);
+				return (channel as IAchievementsService).GetEarnedAchievements(playerId);
 			}
 		}
 
@@ -57,7 +57,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).GetExperienceLevels();
+				return (channel as IAchievementsService).GetExperienceLevels();
 			}
 		}
 	}

@@ -33,7 +33,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).SpaceShipDockedAtBase(spaceShipId, starSystemName, planetName);
+				return (channel as IShipsService).SpaceShipDockedAtBase(spaceShipId, starSystemName, planetName);
 			}
 		}
 	}

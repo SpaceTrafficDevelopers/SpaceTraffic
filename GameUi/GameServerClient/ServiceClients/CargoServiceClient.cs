@@ -32,7 +32,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).PlayerHasEnaughCreditsForCargo(playerId, cargoLoadEntityId, count);
+				return (channel as ICargoService).PlayerHasEnaughCreditsForCargo(playerId, cargoLoadEntityId, count);
 			}
 		}
 
@@ -40,7 +40,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).SpaceShipHasCargoSpace(spaceShipId, cargoLoadEntityId, count);
+				return (channel as ICargoService).SpaceShipHasCargoSpace(spaceShipId, cargoLoadEntityId, count);
 			}
 		}
 
@@ -48,7 +48,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).PlayerHasEnoughCargo(buyingPlace, cargoLoadEntityId, cargoCount);
+				return (channel as ICargoService).PlayerHasEnoughCargo(buyingPlace, cargoLoadEntityId, cargoCount);
 			}
 		}
 
@@ -56,7 +56,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).PlayerHasEnoughCargoOnSpaceShip(spaceShipId, cargoLoadEntityId, cargoCount);
+				return (channel as ICargoService).PlayerHasEnoughCargoOnSpaceShip(spaceShipId, cargoLoadEntityId, cargoCount);
 			}
 		}
 
@@ -64,7 +64,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 		{
 			using (var channel = this.GetClientChannel())
 			{
-				return (channel as IGameService).TraderHasEnoughCargo(traderId, cargoLoadEntityId, cargoCount);
+				return (channel as ICargoService).TraderHasEnoughCargo(traderId, cargoLoadEntityId, cargoCount);
 			}
 		}
 	}

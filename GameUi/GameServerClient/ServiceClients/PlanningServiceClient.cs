@@ -33,7 +33,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			using (var channel = this.GetClientChannel())
 			{
 				((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
-				return (channel as IGameService).CreatePathPlan(playerId, spaceShipId, isCycled);
+				return (channel as IPlanningService).CreatePathPlan(playerId, spaceShipId, isCycled);
 			}
 		}
 
@@ -42,7 +42,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			using (var channel = this.GetClientChannel())
 			{
 				((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
-				return (channel as IGameService).AddPlanItem(pathPlanId, solarSystem, isPlanet, index, sequenceNumber);
+				return (channel as IPlanningService).AddPlanItem(pathPlanId, solarSystem, isPlanet, index, sequenceNumber);
 			}
 		}
 
@@ -51,7 +51,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			using (var channel = this.GetClientChannel())
 			{
 				((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
-				return (channel as IGameService).AddPlanAction(planItemId, sequenceNumber, playerId, actionName, actionArgs);
+				return (channel as IPlanningService).AddPlanAction(planItemId, sequenceNumber, playerId, actionName, actionArgs);
 			}
 		}
 
@@ -60,7 +60,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			using (var channel = this.GetClientChannel())
 			{
 				((IContextChannel)channel).OperationTimeout = new TimeSpan(0, 20, 0); //testing timeout
-				return (channel as IGameService).StartPathPlan(pathPlanId);
+				return (channel as IPlanningService).StartPathPlan(pathPlanId);
 			}
 		}
 	}
