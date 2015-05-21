@@ -32,19 +32,19 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             {
                 return RedirectToAction("").Warning(String.Format("Loď není zadokována na stejné planetě jako obchodník"));
             }*/
-			if (!GSClient.GameService.PlayerHasSpaceShip(getCurrentPlayerId(), buyerShipId))
+			if (!GSClient.PlayerService.PlayerHasSpaceShip(getCurrentPlayerId(), buyerShipId))
             {
                 return RedirectToAction("").Warning(String.Format("Hráč nemá zakoupenou tuto loď"));
             }
-			if (!GSClient.GameService.PlayerHasEnaughCreditsForCargo(getCurrentPlayerId(), cargoLoadEntityId, count))
+			if (!GSClient.CargoService.PlayerHasEnaughCreditsForCargo(getCurrentPlayerId(), cargoLoadEntityId, count))
             {
                 return RedirectToAction("").Warning(String.Format("Nemáš dostatek kreditů na koupi zboží."));
             }
-            if(!GSClient.GameService.SpaceShipHasCargoSpace(buyerShipId, cargoLoadEntityId, count)) 
+            if(!GSClient.CargoService.SpaceShipHasCargoSpace(buyerShipId, cargoLoadEntityId, count)) 
             {
                 return RedirectToAction("").Warning(String.Format("Nemáš dostatek místa na lodi."));
             }
-            if (!GSClient.GameService.TraderHasEnoughCargo(traderId, cargoLoadEntityId, count))
+            if (!GSClient.CargoService.TraderHasEnoughCargo(traderId, cargoLoadEntityId, count))
             {
                 return RedirectToAction("").Warning(String.Format("Obchodník nemá tolik zboží na nákup."));
             }
@@ -55,15 +55,15 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 
         public ActionResult LoadCargo(string starSystemName, string planetName, int cargoLoadEntityId, int count, string buyingPlace, int buyerShipId, int traderId)
         {
-			if (!GSClient.GameService.PlayerHasSpaceShip(getCurrentPlayerId(), buyerShipId))
+			if (!GSClient.PlayerService.PlayerHasSpaceShip(getCurrentPlayerId(), buyerShipId))
             {
                 return RedirectToAction("").Warning(String.Format("Hráč nemá zakoupenou tuto loď"));
             }
-            if (!GSClient.GameService.SpaceShipDockedAtBase(buyerShipId, starSystemName, planetName))
+            if (!GSClient.ShipsService.SpaceShipDockedAtBase(buyerShipId, starSystemName, planetName))
             {
                 return RedirectToAction("").Warning(String.Format("Loď není zadokována na stejné planetě jako obchodník"));
             }
-            if (!GSClient.GameService.SpaceShipHasCargoSpace(buyerShipId, cargoLoadEntityId, count))
+            if (!GSClient.CargoService.SpaceShipHasCargoSpace(buyerShipId, cargoLoadEntityId, count))
             {
                 return RedirectToAction("").Warning(String.Format("Nemáš dostatek místa na lodi."));
             }
@@ -79,11 +79,11 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             {
                 return RedirectToAction("").Warning(String.Format("Loď není zadokována na stejné planetě jako obchodník"));
             }*/
-			if (!GSClient.GameService.PlayerHasSpaceShip(getCurrentPlayerId(), spaceShipId))
+			if (!GSClient.PlayerService.PlayerHasSpaceShip(getCurrentPlayerId(), spaceShipId))
             {
                 return RedirectToAction("").Warning(String.Format("Hráč nemá zakoupenou tuto loď"));
             }
-            if(!GSClient.GameService.PlayerHasEnoughCargoOnSpaceShip(spaceShipId, cargoLoadEntityId, count)) {
+            if(!GSClient.CargoService.PlayerHasEnoughCargoOnSpaceShip(spaceShipId, cargoLoadEntityId, count)) {
                 return RedirectToAction("").Warning(String.Format("Nemáš tolik zboží, abys ho mohl prodat"));
             }
 			GSClient.GameService.PerformAction(getCurrentPlayerId(), "ShipUnloadCargo", starSystemName, planetName, spaceShipId, cargoLoadEntityId, count, loadingPlace, buyerId);
@@ -96,11 +96,11 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             {
                 return RedirectToAction("").Warning(String.Format("Loď není zadokována na stejné planetě jako obchodník"));
             }*/
-			if (!GSClient.GameService.PlayerHasSpaceShip(getCurrentPlayerId(), sellerShipId))
+			if (!GSClient.PlayerService.PlayerHasSpaceShip(getCurrentPlayerId(), sellerShipId))
             {
                 return RedirectToAction("").Warning(String.Format("Hráč nemá zakoupenou tuto loď"));
             }
-            if (!GSClient.GameService.PlayerHasEnoughCargoOnSpaceShip(sellerShipId, cargoLoadEntityId, count))
+            if (!GSClient.CargoService.PlayerHasEnoughCargoOnSpaceShip(sellerShipId, cargoLoadEntityId, count))
             {
                 return RedirectToAction("").Warning(String.Format("Nemáš tolik zboží, abys ho mohl prodat"));
             }

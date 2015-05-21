@@ -28,9 +28,6 @@ namespace SpaceTraffic.Services.Contracts
 	public interface IGameService
 	{
 		[OperationContract]
-		IList<SpaceShip> GetPlayersShips(int playerId);
-
-		[OperationContract]
 		IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem);
 
 		[OperationContract]
@@ -39,56 +36,7 @@ namespace SpaceTraffic.Services.Contracts
 		[OperationContract]
 		object GetActionResult(int playerId, int actionCode);
 
-		[OperationContract]
-		bool PlayerHasEnaughCredits(int playerId, long amount);
 
-		[OperationContract]
-		Entities.Achievements GetAchievements();
-
-		[OperationContract]
-		Entities.ExperienceLevels GetExperienceLevels();
-
-        [OperationContract]
-        bool PlayerHasEnaughCreditsForCargo(int playerId, int cargoLoadEntityId, int count);
-        
-        [OperationContract]
-        bool SpaceShipHasCargoSpace(int spaceShipId, int cargoLoadEntityID, int count);
-
-        [OperationContract]
-        bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName);
-
-        [OperationContract]
-        bool PlayerHasSpaceShip(int playerId, int spaceShipId);
-        
-        [OperationContract]
-        bool PlayerHasEnoughCargo(string buyingPlace, int cargoLoadEntityId, int cargoCount);
-
-        [OperationContract]
-        bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount);
-
-        [OperationContract]
-        bool PlayerHasEnoughCargoOnSpaceShip(int spaceShipId, int cargoLoadEntityId, int cargoCount);
-        
-		[OperationContract]
-		List<TAchievement> GetUnviewedAchievements(int playerId);
-
-		[OperationContract]
-		List<EarnedAchievement> GetEarnedAchievements(int playerId);
-
-		[OperationContract]
-		Player GetPlayer(int playerId);
-
-        [OperationContract]
-        int CreatePathPlan(int playerId, int spaceShipId, bool isCycled);
-
-        [OperationContract]
-        int AddPlanItem(int pathPlanId, string solarSystem, bool isPlanet, string index, int sequenceNumber);
-    
-        [OperationContract]
-        bool AddPlanAction(int planItemId, int sequenceNumber, int playerId, string actionName, params object[] actionArgs);
-
-        [OperationContract]
-        bool StartPathPlan(int pathPlanId);
 	}
 
 	[Serializable]

@@ -43,8 +43,8 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 
         public PartialViewResult Overview()
         {
-			Player player = GSClient.GameService.GetPlayer(getCurrentPlayerId());
-			ExperienceLevels globalExpiriencesLevels = GSClient.GameService.GetExperienceLevels();
+			Player player = GSClient.PlayerService.GetPlayer(getCurrentPlayerId());
+			ExperienceLevels globalExpiriencesLevels = GSClient.AchievementsService.GetExperienceLevels();
 			TLevel currentLevel = globalExpiriencesLevels.GetLevel(player.ExperienceLevel);
 			TLevel nextLevel = globalExpiriencesLevels.GetLevel(currentLevel.LevelID + 1);
 			String nextLevelExp = (nextLevel == null) ? "-" : "" + nextLevel.RequiredXP;
@@ -70,9 +70,9 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 
         public PartialViewResult Achievements()
         {
-			Player player = GSClient.GameService.GetPlayer(getCurrentPlayerId());
-			Achievements allAchievements = GSClient.GameService.GetAchievements();
-			List<EarnedAchievement> earnedAchievements = GSClient.GameService.GetEarnedAchievements(player.PlayerId);
+			Player player = GSClient.PlayerService.GetPlayer(getCurrentPlayerId());
+			Achievements allAchievements = GSClient.AchievementsService.GetAchievements();
+			List<EarnedAchievement> earnedAchievements = GSClient.AchievementsService.GetEarnedAchievements(player.PlayerId);
 			List<TAchievement> earnedDefinition = new List<TAchievement>();//earned achievemenets from xml
 			foreach (EarnedAchievement earnedAchv in earnedAchievements)
 			{

@@ -63,7 +63,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		{
 			ShipModel shipModel = getAllShips().Where(shipType => shipType.Model == model).First();
 			if (shipModel != null){
-				if (GSClient.GameService.PlayerHasEnaughCredits(getCurrentPlayerId(), shipModel.Price))
+				if (GSClient.PlayerService.PlayerHasEnaughCredits(getCurrentPlayerId(), shipModel.Price))
 				{
 					GSClient.GameService.PerformAction(getCurrentPlayerId(), "ShipBuy", getCurrentPlayerId(), starSystemName, baseId, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price, shipModel.Consumption, shipModel.WearRate, shipModel.MaxSpeed);
 				} else {
@@ -83,7 +83,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		public PartialViewResult ShipList()
 		{
 			// získání lodí uživatele
-			IList<SpaceShip> ships = GSClient.GameService.GetPlayersShips(getCurrentPlayerId());
+			IList<SpaceShip> ships = GSClient.PlayerService.GetPlayersShips(getCurrentPlayerId());
 
 			var tabView = GetTabView("ShipList");
 			tabView.ViewBag.Ships = ships;
