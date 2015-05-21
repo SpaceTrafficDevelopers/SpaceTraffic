@@ -41,7 +41,7 @@ namespace SpaceTraffic.Scripts.Testing
 			Player newPlayer = new Player();
 			newPlayer.FirstName = "Test";
 			newPlayer.LastName = "User";
-			newPlayer.PlayerName = "tester1";
+			newPlayer.PlayerName = "user";
 			newPlayer.CorporationName = "STTeam";
 			newPlayer.Credit = 120000000;
 		    newPlayer.DateOfBirth = new DateTime(2000, 1, 1, 0, 58, 0);
