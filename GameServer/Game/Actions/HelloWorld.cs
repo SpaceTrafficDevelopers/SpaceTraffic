@@ -31,7 +31,7 @@ namespace SpaceTraffic.Game.Actions
 
         public object Result
         {
-            get { return new { result = "Done." }; }
+            get ; set;
         }
 
         void IGameAction.Perform(IGameServer gameServer)

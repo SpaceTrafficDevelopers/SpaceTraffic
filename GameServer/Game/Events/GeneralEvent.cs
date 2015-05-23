@@ -1,4 +1,5 @@
-﻿/**
+﻿using SpaceTraffic.Engine;
+/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,9 +20,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SpaceTraffic.Game.Actions
+namespace SpaceTraffic.Game.Events
 {
-    class ShipUnloadCargo
+    class GeneralEvent: IGameEvent
     {
+        public GameTime PlannedTime { get; set; }
+
+        public IGameAction BoundAction { get; set; }
     }
 }

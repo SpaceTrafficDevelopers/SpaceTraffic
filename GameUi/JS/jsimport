@@ -23,5 +23,6 @@
  map/svg/SvgPlanet.js
  map/svg/SvgWormholeEndpoint.js
  map/svg/SvgOrbitFactory.js
+ game/Achievements.js
  core/init.js
  

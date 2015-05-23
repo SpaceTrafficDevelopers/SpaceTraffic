@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,17 +22,25 @@ using SpaceTraffic.Services.Contracts;
 
 namespace SpaceTraffic.GameUi.GameServerClient
 {
-    /// <summary>
-    /// Client interface for GameServer.
-    /// Implementations of this interface must be thread-safe.
-    /// </summary>
-    public interface IGameServerClient
-    {
-        /// <summary>
-        /// Gets the account service of GameServer.
-        /// </summary>
-        IAccountService AccountService { get; }
+	/// <summary>
+	/// Client interface for GameServer.
+	/// Implementations of this interface must be thread-safe.
+	/// </summary>
+	public interface IGameServerClient
+	{
+		/// <summary>
+		/// Gets the account service of GameServer.
+		/// </summary>
+		IAccountService AccountService { get; }
 
-        IGameService GameService { get; }
-    }
+		IGameService GameService { get; }
+
+		IAchievementsService AchievementsService { get; }
+
+		ICargoService CargoService { get; }
+		IPlayerService PlayerService { get; }
+		IPlanningService PlanningService { get; }
+		IShipsService ShipsService { get; }
+		
+	}
 }

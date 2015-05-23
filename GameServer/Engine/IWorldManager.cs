@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using SpaceTraffic.Game;
 using SpaceTraffic.Game.Navigation;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Engine
 {
@@ -48,5 +49,16 @@ namespace SpaceTraffic.Engine
         void ShipTakeoff(int spaceshipId, NavPath path, GameTime gameTime);
 
         void ShipUpdateLocation(int spaceshipId, GameTime gameTime);
+
+        /// <summary>
+        /// Generate bases and traders and insert into db.
+        /// </summary>
+        void GenerateBasesAndTraders();
+
+		Achievements Achievements { get; set; }
+
+		ExperienceLevels ExperienceLevels { get; set; }
+
+		TAchievement GetAchievementById(int id);
     }
 }

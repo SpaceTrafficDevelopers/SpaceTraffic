@@ -1,0 +1,47 @@
+﻿@{
+	ViewBag.Title = "profile_achievements";
+	
+}
+
+<h2>Achievements</h2>
+<div class="profile">
+
+	@foreach (var achievement in ViewBag.earnedAchievements)
+	{
+		var defAchievement = ViewBag.allAchievements.GetAchievement(achievement.AchievementId);
+		<div class="profile_achievement">
+			<table class="profile_achievementtable">
+				<tr>
+					<td class="profile_achievementicon" rowspan="2">
+						<img src="@defAchievement.Image" alt="
+						foto" />
+					</td>
+					<td class="profile_achievementname">@defAchievement.Name</td>
+					<td class="profile_achievementdate" rowspan="2">@achievement.UnlockedAt.ToString()</td>
+				</tr>
+				<tr>
+					<td class="profile_achievementdescription">@defAchievement.Description</td>
+				</tr>
+			</table>
+		</div>
+	}
+
+	@foreach (var achievement in ViewBag.lockedAchievements)
+	{
+		<div class="profile_achievement">
+			<table class="profile_achievementtable">
+				<tr>
+					<td class="profile_achievementicon" rowspan="2">
+						<img src="@achievement.Image.Replace("Complete", string.Empty)" alt="
+						foto" />
+					</td>
+					<td class="profile_achievementname">@achievement.Name</td>
+					<td class="profile_achievementdate" rowspan="2"></td>
+				</tr>
+				<tr>
+					<td class="profile_achievementdescription">@achievement.Description</td>
+				</tr>
+			</table>
+		</div>
+	}
+</div>

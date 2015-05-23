@@ -33,5 +33,7 @@ namespace SpaceTraffic.Engine
         IWorldManager World { get; }
 
         IGameManager Game { get; }
+
+		IStatisticsManager Statistics { get; }
     }
 }

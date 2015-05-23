@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,33 +24,34 @@ using SpaceTraffic.Dao;
 
 namespace SpaceTraffic.Scripts.Testing
 {
-    public class TestDataGenerator : IRunnableScript
-    {
-        public object Run(IGameServer gameServer, params object[] args)
-        {
-            IPlayerDAO dao = gameServer.Persistence.GetPlayerDAO();
-            Player player = CreatePlayer();
-            dao.InsertPlayer(player);
-            return true;
-        }
+	public class TestDataGenerator : IRunnableScript
+	{
+		public object Run(IGameServer gameServer, params object[] args)
+		{
+			IPlayerDAO dao = gameServer.Persistence.GetPlayerDAO();
+			Player player = CreatePlayer();
+			dao.InsertPlayer(player);
+			gameServer.Persistence.GetBaseDAO().InsertBase(new Base() { BaseId = 1, Planet = "Terra" });
+			return true;
+		}
 
 
-        private Player CreatePlayer()
-        {
-            Player newPlayer = new Player();
-            newPlayer.FirstName = "Test";
-            newPlayer.LastName = "User";
-            newPlayer.PlayerName = "tester1";
-            newPlayer.CorporationName = "STTeam";
-            newPlayer.Credit = 0;
-            newPlayer.DateOfBirth = DateTime.Parse("01/01/2000 00:58:00");
-            newPlayer.Email = "nobody@nowhere.local";
-            newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
-            newPlayer.PsswdSalt = "cbOpKKxb";
-            newPlayer.AddedDate = DateTime.Now;
-            newPlayer.LastVisitedDate = DateTime.Now;
-            return newPlayer;
-        }
-    }
+		private Player CreatePlayer()
+		{
+			Player newPlayer = new Player();
+			newPlayer.FirstName = "Test";
+			newPlayer.LastName = "User";
+			newPlayer.PlayerName = "user";
+			newPlayer.CorporationName = "STTeam";
+			newPlayer.Credit = 120000000;
+		    newPlayer.DateOfBirth = new DateTime(2000, 1, 1, 0, 58, 0);
+			newPlayer.Email = "nobody@nowhere.local";
+			newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
+			newPlayer.PsswdSalt = "cbOpeeeb";
+			newPlayer.AddedDate = DateTime.Now;
+			newPlayer.LastVisitedDate = DateTime.Now;
+			return newPlayer;
+		}
+	}
 
 }

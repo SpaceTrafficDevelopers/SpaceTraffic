@@ -27,7 +27,7 @@ using SpaceTraffic.Utils.Debugging;
 namespace SpaceTraffic.GameUi.Controllers
 {
     //RequireHttps]
-    public class AccountController : Controller
+    public class AccountController : AbstractController
     {
 
         //
@@ -61,7 +61,7 @@ namespace SpaceTraffic.GameUi.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    ModelState.AddModelError("", "Špatné uživatelské jméno nebo heslo.");
                 }
             }
 

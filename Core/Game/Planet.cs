@@ -15,14 +15,24 @@ limitations under the License.
 
 **/
 using SpaceTraffic.Game.Geometry;
+using System.Collections.Generic;
+using SpaceTraffic.Entities.Goods;
+using NLog;
+using SpaceTraffic.Entities;
+
 namespace SpaceTraffic.Game
 {
 
     /// <summary>
     /// This class represents planet.
     /// </summary>
-    public class Planet : CelestialObject, ILocation
+    public class Planet : CelestialObject, ILocation, IPlanet
     {
+        public Entities.Base Base { get; set; }
+
+        /// <summary>
+        /// Planet location
+        /// </summary>
         public string Location
         {
             get
@@ -57,6 +67,6 @@ namespace SpaceTraffic.Game
             : base(name, altName, details, starSystem, trajectory)
         {
         }
-        #endregion
+        #endregion  
     }
 }

@@ -41,7 +41,10 @@ namespace SpaceTraffic.GameServer
         public void Enqueue(IGameEvent gameEvent)
         {
             this.queue.Add(gameEvent);
-            this.queue.Sort((a, b) => a.PlannedTime.CompareTo(b.PlannedTime));
+
+            if(this.queue.Count > 1)
+                this.queue.Sort((a, b) => a.PlannedTime.CompareTo(b.PlannedTime));
+
             //TODO: optimalizace přidávání do fronty
         }
 
@@ -56,6 +59,18 @@ namespace SpaceTraffic.GameServer
                 return null;
             }
             //TODO: optimalizace přidávání do fronty
+        }
+
+        /// <summary>
+        /// Gets ordered list of items in the queue.
+        /// </summary>
+        /// <returns>Collection of items from the queue.</returns>
+        public IEnumerable<IGameEvent> GetItems()
+        {
+            // It would be better to clone the queue for safety reasons,
+            // but since the implementation is quite internal, it is better to
+            // use the more performant approach.
+            return queue;
         }
     }
 }

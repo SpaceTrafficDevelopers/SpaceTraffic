@@ -25,13 +25,16 @@ using SpaceTraffic.Game;
 using SpaceTraffic.Data;
 using System.Xml;
 using SpaceTraffic.Engine;
+using SpaceTraffic.Entities.Goods;
 
 namespace SpaceTraffic.GameServer
 {
-    class AssetManager : IAssetManager
+    public class AssetManager : IAssetManager
     {
-        public const string MAP_FILE_EXTENSION = ".xml";
-        private string _mapDirecoryPath = ".\\";
+        public const string FILE_EXTENSION = ".xml";
+        private string _mapDirectoryPath = ".\\";
+
+        private string _goodsDirectoryPath = ".\\";
 
         private Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -44,12 +47,26 @@ namespace SpaceTraffic.GameServer
             get
             {
                 Debug.Assert(this.IsInitialized, "Not initialized");
-                return this._mapDirecoryPath;
+                return this._mapDirectoryPath;
             }
             private set
             {
                 Debug.Assert(!String.IsNullOrWhiteSpace(value), "MapDirectoryPath cannot be null, empty or whitespace");
-                this._mapDirecoryPath = value;
+                this._mapDirectoryPath = value;
+            }
+        }
+
+        public string GoodsDirectoryPath
+        {
+            get
+            {
+                Debug.Assert(this.IsInitialized, "Not initialized");
+                return this._goodsDirectoryPath;
+            }
+            private set
+            {
+                Debug.Assert(!String.IsNullOrWhiteSpace(value), "GoodsDirectoryPath cannot be null, empty or whitespace");
+                this._goodsDirectoryPath = value;
             }
         }
 
@@ -74,6 +91,7 @@ namespace SpaceTraffic.GameServer
             logger.Info("Assets root directory path: {0}", this.AssetRootPath);
 
             this.SetMapPath();
+            this.SetGoodsPath();
 
             this.IsInitialized = true;
         }
@@ -89,6 +107,21 @@ namespace SpaceTraffic.GameServer
             logger.Info("Assets Map directory path: {0}", path);
         }
 
+        /// <summary>
+        /// Sets goods path to Goods directory.
+        /// Throws DirectoryNotFoundException when Goods directory isn't found.
+        /// </summary>
+        private void SetGoodsPath()
+        {
+            string path = Path.Combine(this.AssetRootPath, "Goods");
+            if (!Directory.Exists(path))
+            {
+                throw new DirectoryNotFoundException("Assets directory 'Goods' not found: " + path);
+            }
+            this.GoodsDirectoryPath = path;
+            logger.Info("Assets Goods directory path: {0}", path);
+        }
+
         public string GetMapFilePath(string filename)
         {
             Debug.Assert(this.IsInitialized, "Not initialized");
@@ -101,6 +134,7 @@ namespace SpaceTraffic.GameServer
             string path = Path.Combine(this.MapDirectoryPath, filename);
             return path;
         }
+
         public void Dispose()
         {
             // Nothing to do yet.
@@ -118,7 +152,7 @@ namespace SpaceTraffic.GameServer
 
         private Stream GetMapDataStream(string filenameWithoutExtension)
         {
-            string filename = this.GetMapFilePath(filenameWithoutExtension + MAP_FILE_EXTENSION);
+            string filename = this.GetMapFilePath(filenameWithoutExtension + FILE_EXTENSION);
 
             logger.Debug("Creating file stream: {0}", filename);
 
@@ -126,6 +160,28 @@ namespace SpaceTraffic.GameServer
             return stream;
         }
 
+        /// <summary>
+        /// Gets the data stream for goods file specified by file name (without extension).
+        /// Throws ArgumentNullException when the goodsFileName is null or empty.
+        /// </summary>
+        /// <param name="goodsFileName">Name of the goods file (without extension).</param>
+        /// <returns>Stream with goods file.</returns>
+        public Stream GetGoodsStream(string goodsFileName)
+        {
+            Debug.Assert(this.IsInitialized, "Not initialized");
+
+            if (String.IsNullOrWhiteSpace(goodsFileName))
+                throw new ArgumentNullException("Name cannot be null or empty string.");
+
+            Debug.Assert(goodsFileName.Contains('\\') == false, "Name contains \\");
+
+            string filename = Path.Combine(this.GoodsDirectoryPath, goodsFileName + FILE_EXTENSION); 
+
+            logger.Debug("Creating file stream: {0}", filename);
+
+            FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            return stream;
+        }
 
         public GalaxyMap LoadGalaxyMap(string galaxyMapName)
         {
@@ -149,5 +205,40 @@ namespace SpaceTraffic.GameServer
             }
             return galaxyMap;
         }
+
+        /// <summary>
+        /// Loading goods from goods file by file name.
+        /// </summary>
+        /// <param name="goodsFileName">Goods file name (without extension).</param>
+        /// <returns>List of goods.</returns>
+        public IList<IGoods> LoadGoods(string goodsFileName)
+        {
+            GoodsLoader goodsLoader = new GoodsLoader();
+
+            return goodsLoader.LoadGoods(goodsFileName, this);
+        }
+
+		/// <summary>
+		/// Loads the achievements from xml.
+		/// </summary>
+		public Entities.Achievements LoadAchievements()
+		{
+			string fileName = Path.Combine(this.AssetRootPath, "Achievements", "Achievements.xml");
+			logger.Info("Loading achievements: {0}", fileName);
+
+			Entities.Achievements achievements = AchievementsLoader.LoadAchievements(fileName);
+
+			return achievements;
+		}
+
+		public Entities.ExperienceLevels LoadExperienceLevels()
+		{
+			string fileName = Path.Combine(this.AssetRootPath, "Achievements", "Levels.xml");
+			logger.Info("Loading experience levels: {0}", fileName);
+
+			Entities.ExperienceLevels experienceLevels = ExperienceLevelsLoader.LoadExperienceLevels(fileName);
+
+			return experienceLevels;
+		}
     }
 }

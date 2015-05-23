@@ -26,6 +26,7 @@ using SpaceTraffic.Game;
 using SpaceTraffic.Data;
 using System.Xml;
 using SpaceTraffic.Engine;
+using SpaceTraffic.Entities.Goods;
 
 namespace SpaceTraffic.GameServer
 {
@@ -45,7 +46,10 @@ namespace SpaceTraffic.GameServer
         private PersistenceManager persistenceManager;
         private ScriptManager scriptManager;
         private WorldManager worldManager;
+        private GameStateManager gameStateManager;
         private GameManager gameManager;
+        private GoodsManager goodsManager;
+		private StatisticsManager statisticsManager;
         public volatile bool run = false;
 
         public volatile GameTime currentGameTime;
@@ -79,6 +83,14 @@ namespace SpaceTraffic.GameServer
                 return this.scriptManager;
             }
         }
+
+		public IStatisticsManager Statistics
+		{
+			get
+			{
+				return this.statisticsManager;
+			}
+		}
         #endregion
 
         //TODO: Thread-safe state indication of GameServer instance.
@@ -94,6 +106,8 @@ namespace SpaceTraffic.GameServer
 
             string assetsPath = GameServerConfiguration.GameServerConfig.Assets.Path;
             string galaxyMapName = GameServerConfiguration.GameServerConfig.Map.Name;
+            string goodsFileName = GameServerConfiguration.GameServerConfig.Goods.Name;
+
 
             logger.Info("Compiling scripts:");
             ScriptManager scriptManager = new ScriptManager();
@@ -101,6 +115,8 @@ namespace SpaceTraffic.GameServer
             
             logger.Debug("CONFIG: Assets path: {0}", assetsPath);
             logger.Debug("CONFIG: Map name: {0}", galaxyMapName);
+            logger.Debug("CONFIG: Goods filename: {0}", goodsFileName);
+
 
             logger.Info("Initializing Asset Manager.");
 
@@ -120,23 +136,40 @@ namespace SpaceTraffic.GameServer
                 throw;
             }
 
-            
+			this.statisticsManager = new StatisticsManager(this);
+			logger.Info("Initializing Statistics.");
+			          
             
             scriptManager.RunScript("SpaceTraffic.Scripts.Testing.TestDataGenerator");
 
             logger.Info("Restoring game world.");
-            this.worldManager = new WorldManager();
+            this.worldManager = new WorldManager(this);
             GalaxyMap galaxyMap = this.assetManager.LoadGalaxyMap(galaxyMapName);
             this.worldManager.Map = galaxyMap;
+			this.worldManager.Achievements = this.assetManager.LoadAchievements();
+			this.worldManager.ExperienceLevels = this.assetManager.LoadExperienceLevels();
+
+            this.worldManager.GenerateBasesAndTraders();
+
+            this.goodsManager = new GoodsManager(this);
+            this.goodsManager.GoodsList = this.assetManager.LoadGoods(goodsFileName);
+            this.goodsManager.InsertCargoIntoDb();
+            this.goodsManager.GenerateGoodsOverGalaxyMap(this.worldManager.Map);
+
+            // Create the GameStateManager used to persist and restore state of GameManager.
+            this.gameStateManager = new GameStateManager(
+                this.persistenceManager.GetGameActionDao(),
+                this.persistenceManager.GetGameEventDao()
+            );
 
             // Inicializace herního světa.
-            this.gameManager = new GameManager(this);
+            this.gameManager = new GameManager(this, this.gameStateManager);
             this.gameManager.RestoreGameState();
 
             
             serviceManager = new ServiceManager();
             //Načíst servisy z konfigurace
-            serviceManager.ServiceList = new List<Type>(new Type[] { typeof(AccountService), typeof(GameService), typeof(HelloWorldService) });
+			serviceManager.ServiceList = new List<Type>(new Type[] { typeof(AccountService), typeof(GameService), typeof(HelloWorldService), typeof(AchievementsService), typeof(CargoService), typeof(ShipsService), typeof(PlanningService), typeof(PlayerService) });
             serviceManager.Initialize();
         }
 

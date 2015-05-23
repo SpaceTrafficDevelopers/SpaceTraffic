@@ -21,14 +21,34 @@ using System.Text;
 
 namespace SpaceTraffic.Entities
 {
+    /// <summary>
+    /// Class representing entity of base on planet
+    /// </summary>
     public class Base
     {
+        /// <summary>
+        /// Identification number
+        /// </summary>
         public int BaseId { get; set; }
 
+        /// <summary>
+        /// Planet on which base is
+        /// </summary>
         public string Planet { get; set; }
 
+        /// <summary>
+        /// Trader which trades on the planet
+        /// </summary>
+        public Trader Trader { get; set; }
+
+        /// <summary>
+        /// Collection of spaceships
+        /// </summary>
         public virtual ICollection<SpaceShip> SpaceShips { get; set; }
 
+        /// <summary>
+        /// Colection of factories
+        /// </summary>
         public virtual ICollection<Factory> Factories { get; set; }  
     }
 }

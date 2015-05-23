@@ -62,25 +62,51 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\AchievementsLoader.cs" />
+    <Compile Include="Data\ExperienceLevelsLoader.cs" />
     <Compile Include="Data\GalaxyMapLoader.cs" />
     <Compile Include="Data\GalaxyMapBuildingException.cs" />
     <Compile Include="Data\GalaxyMapXmlHelper.cs" />
     <Compile Include="Data\GalaxyMapConnection.cs" />
+    <Compile Include="Data\GoodsLoader.cs" />
+    <Compile Include="Data\GoodsXmlHelper.cs" />
     <Compile Include="Data\IGalaxyMapDataStreamProvider.cs" />
+    <Compile Include="Data\IGoodsDataStreamProvider.cs" />
     <Compile Include="Data\StarSystemLoader.cs" />
     <Compile Include="Data\StarSystemXmlHelper.cs" />
+    <Compile Include="Entities\Achievements.cs" />
+    <Compile Include="Entities\Achievements\EarnedAchievement.cs" />
+    <Compile Include="Entities\Achievements\ExperienceLevels.cs" />
+    <Compile Include="Entities\Achievements\Statistic.cs" />
     <Compile Include="Entities\Base.cs" />
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\Factory.cs" />
+    <Compile Include="Entities\GameAction.cs" />
+    <Compile Include="Entities\GameEvent.cs" />
+    <Compile Include="Entities\Goods\AGoods.cs" />
+    <Compile Include="Entities\Goods\Energy.cs" />
+    <Compile Include="Entities\Goods\Food.cs" />
+    <Compile Include="Entities\Goods\IGoods.cs" />
+    <Compile Include="Entities\Goods\ShipComponents.cs" />
+    <Compile Include="Entities\Goods\Technics.cs" />
+    <Compile Include="Entities\Goods\Textile.cs" />
+    <Compile Include="Entities\ICargoLoad.cs" />
+    <Compile Include="Entities\ICargoLoadEntity.cs" />
     <Compile Include="Entities\Message.cs" />
+    <Compile Include="Entities\PathPlanEntity.cs" />
+    <Compile Include="Entities\PlanAction.cs" />
+    <Compile Include="Entities\PlanItemEntity.cs" />
     <Compile Include="Entities\SpaceShipCargo.cs" />
     <Compile Include="Entities\PublicEntities\WormholeEndpointDestination.cs" />
     <Compile Include="Entities\SpaceShip.cs" />
+    <Compile Include="Entities\Trader.cs" />
+    <Compile Include="Entities\TraderCargo.cs" />
     <Compile Include="Game\Base.cs" />
     <Compile Include="Game\CelestialObjectInfo.cs" />
     <Compile Include="Game\CelestialObject.cs" />
     <Compile Include="Game\Geometry\Stacionary.cs" />
     <Compile Include="Game\IGameObject.cs" />
+    <Compile Include="Game\IPlanet.cs" />
     <Compile Include="Game\VisibleObject.cs" />
     <Compile Include="Game\Geometry\CircularOrbit.cs" />
     <Compile Include="Game\Geometry\Direction.cs" />
@@ -99,6 +125,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Contracts\IAchievementsService.cs" />
+    <Compile Include="Services\Contracts\ICargoService.cs" />
+    <Compile Include="Services\Contracts\IShipsService.cs" />
+    <Compile Include="Services\Contracts\IPlanningService.cs" />
+    <Compile Include="Services\Contracts\IPlayerService.cs" />
     <Compile Include="Services\Contracts\IGameService.cs" />
     <Compile Include="Utils\Collections\CollectionToString.cs" />
     <Compile Include="Utils\Debugging\DebugEx.cs" />
@@ -152,6 +183,9 @@
     </None>
     <None Include="packages.config" />
     <None Include="Resources\ComponentsSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\GoodsSchema.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Resources\SpaceShipsSchema.xsd">

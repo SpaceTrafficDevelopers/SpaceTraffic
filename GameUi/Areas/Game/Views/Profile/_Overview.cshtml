@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "_Overview";
+	
 }
 
 <h2>Account overview</h2>
@@ -12,4 +13,22 @@
             | 
             <a class="profile_deleteButton" href="#" title="Delete account">Delete account</a></td></tr>
 		</table>
+
+	<h2>Experience</h2>
+	<div class="profile_category">Experience</div>
+	<div class="experience">
+		<table class="experiencetable">
+			<tr>
+				<td class="levelText">Level</td>
+				<td class="level">@ViewBag.currentLevel.LevelID</td>
+				<td class="dash">-</td>
+				<td class="levelName">@ViewBag.currentLevel.Name</td>
+			</tr>
+			<tr>
+				<td class="currentExp" colspan="2">@ViewBag.player.Experiences</td>
+				<td class="slash">/</td>
+				<td class="nextExp">@ViewBag.nextLevelExp</td>
+			</tr>
+		</table>
+	</div> 
 </div>

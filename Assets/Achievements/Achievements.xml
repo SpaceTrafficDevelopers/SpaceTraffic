@@ -1,0 +1,197 @@
+﻿<?xml version="1.0"?>
+<Achievements xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="SpaceTrafficData">
+	
+	<Achievement achievementID="1">
+		<Name>Lodní kapitán</Name>
+		<Description>Pořiď si svou první loď</Description>
+		<Image>/Content/images/Achievements/ShipFleet1Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>shipFleet</CondName>
+				<CondValue>1</CondValue>
+			</Condition>			
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="2">
+		<Name>Vesmírný admirál</Name>
+		<Description>Pořiď si letku deseti lodí</Description>
+		<Image>/Content/images/Achievements/ShipFleet2Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>shipFleet</CondName>
+				<CondValue>10</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="3">
+		<Name>Vesmírný Ali Baba</Name>
+		<Description>Měj ve své letce čtyřicet lodí</Description>
+		<Image>/Content/images/Achievements/ShipFleet3Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>shipFleet</CondName>
+				<CondValue>40</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="4">
+		<Name>Vrchní admirál generálporučík Rimmer</Name>
+		<Description>Buď hrdým vlastníkem stovky lodí</Description>
+		<Image>/Content/images/Achievements/ShipFleet4Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>shipFleet</CondName>
+				<CondValue>100</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="5">
+		<Name>Želva!</Name>
+		<Description>Spatřil jsi želvu!</Description>
+		<Image>/Content/images/Achievements/TurtleComplete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>turtle</CondName>
+				<CondValue>1</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="6">
+		<Name>Zážeh!</Name>
+		<Description>Odstartuj se svou lodí</Description>
+		<Image>/Content/images/Achievements/takeOff1Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>takeOff</CondName>
+				<CondValue>1</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="7">
+		<Name>Letový plán</Name>
+		<Description>Odstartuj stokrát se svými loděmi</Description>
+		<Image>/Content/images/Achievements/takeOff2Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>takeOff</CondName>
+				<CondValue>100</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="8">
+		<Name>Tisíc sluncí</Name>
+		<Description>Prožij tisíc startů svých lodí</Description>
+		<Image>/Content/images/Achievements/takeOff3Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>takeOff</CondName>
+				<CondValue>1000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="9">
+		<Name>Běžná rutina</Name>
+		<Description>Nech své lodě se 10000x odlepit od země</Description>
+		<Image>/Content/images/Achievements/takeOff4Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>takeOff</CondName>
+				<CondValue>10000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="10">
+		<Name>Stín a prach</Name>
+		<Description>Sto tisíc startů lodí! Ať žije ekologie!</Description>
+		<Image>/Content/images/Achievements/takeOff5Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>takeOff</CondName>
+				<CondValue>100000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="11">
+		<Name>Nalejvák</Name>
+		<Description>Natankuj 1000 litrů paliva</Description>
+		<Image>/Content/images/Achievements/fuelTank1Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>fuelTank</CondName>
+				<CondValue>1000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="12">
+		<Name>Palivožrout</Name>
+		<Description>Natankuj 10000 litrů paliva</Description>
+		<Image>/Content/images/Achievements/fuelTank2Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>fuelTank</CondName>
+				<CondValue>10000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="13">
+		<Name>Chlastometr</Name>
+		<Description>Natankuj milion litrů paliva</Description>
+		<Image>/Content/images/Achievements/fuelTank3Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>fuelTank</CondName>
+				<CondValue>1000000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="14">
+		<Name>Opravář</Name>
+		<Description>Sprav 100 procent poškození</Description>
+		<Image>/Content/images/Achievements/percentageRepaired1Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>percentageRepaired</CondName>
+				<CondValue>100</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="15">
+		<Name>Šikovný soused</Name>
+		<Description>Sprav 1000 procent poškození svých lodí</Description>
+		<Image>/Content/images/Achievements/percentageRepaired2Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>percentageRepaired</CondName>
+				<CondValue>1000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+
+	<Achievement achievementID="16">
+		<Name>Bořek opravář</Name>
+		<Description>Sprav 10000 procent poškození svých lodí</Description>
+		<Image>/Content/images/Achievements/percentageRepaired3Complete.png</Image>
+		<Conditions>
+			<Condition>
+				<CondName>percentageRepaired</CondName>
+				<CondValue>10000</CondValue>
+			</Condition>
+		</Conditions>
+	</Achievement>
+	
+
+</Achievements>

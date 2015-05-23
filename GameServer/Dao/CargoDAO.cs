@@ -40,6 +40,14 @@ namespace SpaceTraffic.Dao
             }
         }
 
+        public Cargo GetCargoByName(string cargoName)
+        {
+            using (var contextDB = CreateContext())
+            {
+                return contextDB.Cargos.FirstOrDefault(x => x.Name.Equals(cargoName));
+            }
+        }
+
         public List<Cargo> GetCargosByType(string type)
         {
             using (var contextDB = CreateContext())
@@ -98,8 +106,14 @@ namespace SpaceTraffic.Dao
                 {
                     var CargoTab = contextDB.Cargos.FirstOrDefault(x => x.CargoId.Equals(Cargo.CargoId));     
                     CargoTab.CargoId = Cargo.CargoId;
+                    CargoTab.Name = Cargo.Name;
+                    CargoTab.Category = Cargo.Category;
+                    CargoTab.Description = Cargo.Description;
                     CargoTab.Type = Cargo.Type;
-                    CargoTab.Price = Cargo.Price;                   
+                    CargoTab.LevelToBuy = Cargo.LevelToBuy;
+                    CargoTab.DefaultPrice = Cargo.DefaultPrice;
+                    CargoTab.Volume = Cargo.Volume;
+
                     // save context to database
                     contextDB.SaveChanges();
                     return true;
@@ -113,6 +127,15 @@ namespace SpaceTraffic.Dao
         }
 
 
-      
+
+
+
+        public List<Cargo> GetCargosByCategory(string category)
+        {
+            using (var contextDB = CreateContext())
+            {
+                return contextDB.Cargos.Where(x => x.Category.Equals(category)).ToList<Cargo>();
+            }
+        }
     }
 }

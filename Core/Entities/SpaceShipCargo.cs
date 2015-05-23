@@ -21,11 +21,13 @@ using System.Text;
 
 namespace SpaceTraffic.Entities
 {
-    public class SpaceShipCargo
+    public class SpaceShipCargo : ICargoLoadEntity
     {
+        public int SpaceShipCargoId { get; set; }
+
         public int SpaceShipId { get; set; }
 
-        public virtual SpaceShip SpaceShip { get; set; } 
+        public virtual SpaceShip SpaceShip { get; set; }
 
         public int CargoId { get; set; }
 
@@ -33,8 +35,34 @@ namespace SpaceTraffic.Entities
 
         public int CargoCount { get; set; }
 
-       
+        public int CargoPrice { get; set; }
 
-          
+        //public List<Cargo> Cargos { get; set; }
+
+        //public double PriceCargo { get; set; }
+
+        public int CargoOwnerId
+        {
+            get
+            {
+                return SpaceShipId;
+            }
+            set
+            {
+                SpaceShipId = value;
+            }
+        }
+
+        public int CargoLoadEntityId
+        {
+            get
+            {
+                return SpaceShipCargoId;
+            }
+            set
+            {
+                SpaceShipCargoId = value;
+            }
+        }
     }
 }

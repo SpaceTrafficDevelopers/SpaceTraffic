@@ -8,11 +8,13 @@
 			<manufacturer>United Space Ships</manufacturer>
 			<power>200</power>
 			<consumption>0.8</consumption>
+			<wearRate>0.3</wearRate>
 			<fuelCapacity>40</fuelCapacity>
 			<carryingCapacity>1000</carryingCapacity>
 			<image>shipunto.png</image>
 			<price>150000</price>
 			<description>Poslední verze populární lodi od koncernu United Space Ships. Kvalita za dobrou cenu.</description>
+      <maxSpeed>20</maxSpeed>
 
 			<!-- Example for latest versions - not implemented yet -->
 			<slots>
@@ -46,22 +48,26 @@
 			<manufacturer>China Red Sun Corp.</manufacturer>
 			<power>88</power>
 			<consumption>0.4</consumption>
+			<wearRate>1</wearRate>
 			<fuelCapacity>30</fuelCapacity>
 			<carryingCapacity>400</carryingCapacity>
 			<image>madeinchina.png</image>
 			<price>99999</price>
 			<description>Model od čínského výrobce, úspěšný především pro svou lidovou cenu. Zkrácená doba záruky.</description>
-		</ship>
+      <maxSpeed>10</maxSpeed>
+    </ship>
 		<ship>
 			<model>Bumper</model>
 			<manufacturer>Cargo Holding</manufacturer>
 			<power>350</power>
 			<consumption>1.5</consumption>
+			<wearRate>0.6</wearRate>
 			<fuelCapacity>90</fuelCapacity>
 			<carryingCapacity>3000</carryingCapacity>
 			<image>bumper.png</image>
 			<price>250000</price>
 			<description>Loď typu Bumper, oblíbená především mezi středními dopravci pro její velkou kapacitu.</description>
+      <maxSpeed>30</maxSpeed>
 		</ship>
 	</ships>
 </st:stdata>

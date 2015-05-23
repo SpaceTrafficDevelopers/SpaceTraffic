@@ -24,8 +24,6 @@ using System.Text;
 namespace SpaceTraffic.GameServerTests.Dao
 {
 
-
-
     /// <summary>
     ///This is a test class for CargoDAOTest and is intended
     ///to contain all CargoDAOTest Unit Tests
@@ -35,9 +33,7 @@ namespace SpaceTraffic.GameServerTests.Dao
     public class CargoDAOTest
     {
 
-        private Cargo cargo;
-
-        private int oldId;
+        private Cargo cargoTest;
 
         private TestContext testContextInstance;
 
@@ -95,13 +91,11 @@ namespace SpaceTraffic.GameServerTests.Dao
 
         [TestCleanup()]
         public void CleanUp()
-        {        
-
-            if (cargo != null)
+        {       
+            if (cargoTest != null)
             {
                 CargoDAO cargoDao = new CargoDAO();
-                cargoDao.RemoveCargoById(cargo.CargoId);
-                cargoDao.RemoveCargoById(oldId);
+                cargoDao.RemoveCargoById(cargoTest.CargoId);
             }
         }
 
@@ -122,11 +116,11 @@ namespace SpaceTraffic.GameServerTests.Dao
         public void GetCargoByIdTest()
         {
             CargoDAO target = new CargoDAO();
-            cargo = CreateCargo();
-            target.InsertCargo(cargo);
-            Cargo newCargo = target.GetCargoById(cargo.CargoId);
-            Assert.IsTrue(newCargo.CargoId == cargo.CargoId && newCargo.Type == cargo.Type &&
-                cargo.Price == cargo.Price);
+            cargoTest = CreateCargo();
+            target.InsertCargo(cargoTest);
+            Cargo newCargo = target.GetCargoById(cargoTest.CargoId);
+
+            CargoTest(newCargo);
         }
 
         /// <summary>
@@ -136,13 +130,14 @@ namespace SpaceTraffic.GameServerTests.Dao
         public void GetCargosTest()
         {
             CargoDAO target = new CargoDAO();
-            cargo = CreateCargo();
-            target.InsertCargo(cargo);
-            oldId = cargo.CargoId;
-            cargo.Type = "newType";
-            target.InsertCargo(cargo);
+            cargoTest = CreateCargo();
+            target.InsertCargo(cargoTest);
+            cargoTest.Name = "Testovací zboží";
+            target.InsertCargo(cargoTest);
             List<Cargo> cargos = target.GetCargos();
+            
             Assert.IsNotNull(cargos);
+            Assert.IsTrue(cargos.Count == 2, "GetCargosTest: List of cargo does not have expected number of items.");
         }
 
         
@@ -153,14 +148,31 @@ namespace SpaceTraffic.GameServerTests.Dao
         public void GetCargosByTypeTest()
         {
             CargoDAO target = new CargoDAO();
-            cargo = CreateCargo();
-            target.InsertCargo(cargo);
-            oldId = cargo.CargoId;
-            string type = RandomString(6);
-            cargo.Type = type;
-            target.InsertCargo(cargo);
-            List<Cargo> cargos = target.GetCargosByType(type);
-            Assert.IsTrue(cargos.Count == 1);
+            cargoTest = CreateCargo();
+            target.InsertCargo(cargoTest);
+            cargoTest.Type = GoodsType.Special.ToString();
+            target.InsertCargo(cargoTest);
+            
+            List<Cargo> cargos = target.GetCargosByType(GoodsType.Special.ToString());
+            Assert.IsNotNull(cargos);
+            Assert.IsTrue(cargos.Count == 1, "GetCargosByTypeTest: List of cargo does not have expected number of items.");
+        }
+
+        /// <summary>
+        ///A test for GetCargosByCategory
+        ///</summary>
+        [TestMethod()]
+        public void GetCargosByCategoryTest()
+        {
+            CargoDAO target = new CargoDAO();
+            cargoTest = CreateCargo();
+            target.InsertCargo(cargoTest);
+            cargoTest.Category = "Další kategorie";
+            target.InsertCargo(cargoTest);
+
+            List<Cargo> cargos = target.GetCargosByCategory(cargoTest.Category);
+            Assert.IsNotNull(cargos);
+            Assert.IsTrue(cargos.Count == 1, "GetCargosByCategoryTest: List of cargo does not have expected number of items.");
         }
 
         /// <summary>
@@ -170,8 +182,8 @@ namespace SpaceTraffic.GameServerTests.Dao
         public void InsertCargoTest()
         {
             CargoDAO target = new CargoDAO();
-            cargo = CreateCargo();
-            bool insert = target.InsertCargo(cargo);
+            cargoTest = CreateCargo();
+            bool insert = target.InsertCargo(cargoTest);
             Assert.IsTrue(insert);
         }
 
@@ -182,11 +194,13 @@ namespace SpaceTraffic.GameServerTests.Dao
         public void RemoveCargoByIdTest()
         {
             CargoDAO target = new CargoDAO();
-            cargo = CreateCargo();
-            target.InsertCargo(cargo);            
-            bool remove = target.RemoveCargoById(cargo.CargoId);
+            cargoTest = CreateCargo();
+            target.InsertCargo(cargoTest);            
+            bool remove = target.RemoveCargoById(cargoTest.CargoId);
+
             Assert.IsTrue(remove);
-            cargo = null;
+            
+            cargoTest = null;
         }
 
         /// <summary>
@@ -196,25 +210,49 @@ namespace SpaceTraffic.GameServerTests.Dao
         public void UpdateCargoByIdTest()
         {
             CargoDAO target = new CargoDAO();
-            cargo = CreateCargo();
-            target.InsertCargo(cargo);
-            cargo.Price = 500;
-            string type = RandomString(6);
-            cargo.Type = type;
-            target.UpdateCargoById(cargo);
-            Cargo newCargo = target.GetCargoById(cargo.CargoId);
-            Assert.IsTrue(newCargo.CargoId == cargo.CargoId && newCargo.Type == type &&
-                cargo.Price == 500);
+            cargoTest = CreateCargo();
+            target.InsertCargo(cargoTest);
+
+            cargoTest.DefaultPrice = 600;
+            cargoTest.Description = "Nový popisek.";
+            cargoTest.LevelToBuy = 5;
+            cargoTest.Volume = 100;
+            cargoTest.Name = "Nová baterie.";
+            cargoTest.Type = GoodsType.Special.ToString();
+            cargoTest.Category = "Jiná kategorie.";
+
+            target.UpdateCargoById(cargoTest);
+
+            Cargo newCargo = target.GetCargoById(cargoTest.CargoId);
+            CargoTest(newCargo);
         }
 
         private Cargo CreateCargo()
         {
             Cargo cargo = new Cargo();
-            cargo.Price = 200;
-            cargo.Type = "nářadí";
+            cargo.CargoId = 1;
+            cargo.Category = "Energy";
+            cargo.DefaultPrice = 100;
+            cargo.LevelToBuy = 1;
+            cargo.Name = "Baterie";
+            cargo.Description = "Toto je baterie.";
+            cargo.Type = GoodsType.Mainstream.ToString();
+            cargo.Volume = 68;
+            
             return cargo;
         }
 
+        private void CargoTest(Cargo cargo)
+        {   
+            Assert.IsNotNull(cargo, "Cargo cannot be null.");
+            Assert.AreEqual(this.cargoTest.CargoId, cargo.CargoId, "Cargo ID are not equal.");
+            Assert.AreEqual(this.cargoTest.Name, cargo.Name, "Cargo Name are not equal.");
+            Assert.AreEqual(this.cargoTest.Description, cargo.Description, "Cargo Descriptio;n are not equal.");
+            Assert.AreEqual(this.cargoTest.Category, cargo.Category, "Cargo Category are not equal.");
+            Assert.AreEqual(this.cargoTest.DefaultPrice, cargo.DefaultPrice, "Cargo DefaultPrice are not equal.");
+            Assert.AreEqual(this.cargoTest.LevelToBuy, cargo.LevelToBuy, "Cargo LevelToBuy are not equal.");
+            Assert.AreEqual(this.cargoTest.Type, cargo.Type, "Cargo Type are not equal.");
+        }
 
         /// <summary>
         /// Generate random player name

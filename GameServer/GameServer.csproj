@@ -72,38 +72,73 @@
     <Compile Include="Configuration\GameServerConfiguration.cs" />
     <Compile Include="Configuration\GameServerConfigurationSection.cs" />
     <Compile Include="Dao\AbstractDAO.cs" />
+    <Compile Include="Dao\Achievements\EarnedAchievementDAO.cs" />
+    <Compile Include="Dao\Achievements\IEarnedAchievementDAO.cs" />
+    <Compile Include="Dao\Achievements\IStatisticDAO.cs" />
+    <Compile Include="Dao\Achievements\StatisticDAO.cs" />
     <Compile Include="Dao\BaseDAO.cs" />
     <Compile Include="Dao\CargoDAO.cs" />
+    <Compile Include="Dao\GameEventDAO.cs" />
+    <Compile Include="Dao\GameActionDAO.cs" />
     <Compile Include="Dao\ICargoDAO.cs" />
+    <Compile Include="Dao\ICargoLoadDao.cs" />
     <Compile Include="Dao\IFactoryDAO.cs" />
     <Compile Include="Dao\FactoryDAO.cs" />
     <Compile Include="Dao\IBaseDAO.cs" />
+    <Compile Include="Dao\IGameEventDAO.cs" />
+    <Compile Include="Dao\IGameActionDAO.cs" />
+    <Compile Include="Dao\IPathPlanEntityDAO.cs" />
+    <Compile Include="Dao\IPlanActionDAO.cs" />
+    <Compile Include="Dao\IPlanItemEntityDAO.cs" />
     <Compile Include="Dao\ISpaceShipCargoDAO.cs" />
     <Compile Include="Dao\ISpaceShipDAO.cs" />
+    <Compile Include="Dao\ITraderCargoDAO.cs" />
+    <Compile Include="Dao\ITraderDAO.cs" />
     <Compile Include="Dao\MessageDAO.cs" />
     <Compile Include="Dao\IMessageDAO.cs" />
     <Compile Include="Dao\IPlayerDAO.cs" />
+    <Compile Include="Dao\PathPlanEntityDAO.cs" />
+    <Compile Include="Dao\PlanActionDAO.cs" />
+    <Compile Include="Dao\PlanItemEntityDAO.cs" />
     <Compile Include="Dao\PlayerDAO.cs" />
     <Compile Include="Dao\SpaceShipCargoDAO.cs" />
     <Compile Include="Dao\SpaceShipDAO.cs" />
+    <Compile Include="Dao\TraderCargoDAO.cs" />
+    <Compile Include="Dao\TraderDAO.cs" />
     <Compile Include="Engine\GameTime.cs" />
     <Compile Include="Engine\IGameEvent.cs" />
     <Compile Include="Engine\IGameSimulation.cs" />
+    <Compile Include="Engine\IGameStateManager.cs" />
+    <Compile Include="Engine\IGoodsManager.cs" />
+    <Compile Include="Engine\IPlannableAction.cs" />
     <Compile Include="Engine\IRunnableScript.cs" />
     <Compile Include="Engine\IScriptManager.cs" />
     <Compile Include="Engine\IGameManager.cs" />
     <Compile Include="Engine\IServiceManager.cs" />
+    <Compile Include="Engine\IStatisticsManager.cs" />
     <Compile Include="Engine\IWorldManager.cs" />
     <Compile Include="GameServer\EventQueue.cs" />
     <Compile Include="GameServer\GameManager.cs" />
+    <Compile Include="GameServer\GameStateManager.cs" />
     <Compile Include="GameServer\ScriptManager.cs" />
+    <Compile Include="GameServer\GoodsManager.cs" />
+    <Compile Include="GameServer\StatisticsManager.cs" />
     <Compile Include="GameServer\WorldManager.cs" />
+    <Compile Include="Game\Actions\CargoSell.cs" />
+    <Compile Include="Game\Actions\CargoBuy.cs" />
     <Compile Include="Game\Actions\HelloWorld.cs" />
-    <Compile Include="Game\Actions\Ships\ShipFlyTo.cs" />
+    <Compile Include="Game\Actions\PlanEvents.cs" />
+    <Compile Include="Game\Actions\Ships\ShipBuy.cs" />
+    <Compile Include="Game\Actions\Ships\ShipFlyThroughWormHole.cs" />
+    <Compile Include="Game\Actions\Ships\ShipLand.cs" />
     <Compile Include="Game\Actions\Ships\ShipLoadCargo.cs" />
+    <Compile Include="Game\Actions\Ships\ShipRefuel.cs" />
     <Compile Include="Game\Actions\Ships\ShipRepair.cs" />
-    <Compile Include="Game\Actions\ShipUnloadCargo.cs" />
+    <Compile Include="Game\Actions\Ships\ShipTakeOff.cs" />
+    <Compile Include="Game\Actions\Ships\ShipUnloadCargo.cs" />
+    <Compile Include="Game\Events\GeneralEvent.cs" />
     <Compile Include="Game\Events\HelloWorldRepeat.cs" />
+    <Compile Include="Game\Events\ShipEvent.cs" />
     <Compile Include="Game\GamePlayer.cs" />
     <Compile Include="GameServer\AssetManager.cs" />
     <Compile Include="GameServer\GameServer.cs" />
@@ -113,6 +148,11 @@
     <Compile Include="GameServer\ServiceManager.cs" />
     <Compile Include="Engine\IGameAction.cs" />
     <Compile Include="GameServer\PersistenceManager.cs" />
+    <Compile Include="Game\Planner\IPathPlan.cs" />
+    <Compile Include="Game\Planner\PathPlan.cs" />
+    <Compile Include="Game\Planner\PlanItem.cs" />
+    <Compile Include="Game\Planner\PlannerConverter.cs" />
+    <Compile Include="Game\Utils\ActionControls.cs" />
     <Compile Include="Persistence\SpaceTrafficCreateDatabaseIfNotExists.cs" />
     <Compile Include="Persistence\SpaceTrafficCustomInitializer.cs" />
     <Compile Include="Persistence\SpaceTrafficContext.cs" />
@@ -121,10 +161,19 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceImpl\AccountService.cs" />
+    <Compile Include="ServiceImpl\ShipsService.cs" />
+    <Compile Include="ServiceImpl\PlayerService.cs" />
+    <Compile Include="ServiceImpl\PlanningService.cs" />
+    <Compile Include="ServiceImpl\CargoService.cs" />
+    <Compile Include="ServiceImpl\AchievementsService.cs" />
     <Compile Include="ServiceImpl\GameService.cs" />
     <Compile Include="ServiceImpl\HelloWorldService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="startup.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>

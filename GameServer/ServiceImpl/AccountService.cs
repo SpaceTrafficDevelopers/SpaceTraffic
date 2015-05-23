@@ -22,6 +22,7 @@ using System.ServiceModel;
 using SpaceTraffic.Services.Contracts;
 using SpaceTraffic.Entities.PublicEntities;
 using NLog;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
 {
@@ -33,21 +34,22 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         {
             Logger.Info("AccountService: Authenticate {0}", userName);
 
-            return (userName==password);// ? new AccountInfo { PlayerName = "Tester", PlayerId = "0" }: null;
+            return (userName==password);
         }
 
 
         public AccountInfo GetAccountInfoByUserName(string userName)
         {
             Logger.Info("AccountService: GetAccountInfoByUserName {0}", userName);
-
-            return new AccountInfo { PlayerName = "Tester", PlayerId = "0" };
+			Player player = GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByName(userName);
+            return new AccountInfo { PlayerName = player.PlayerName, PlayerId = player.PlayerId };
         }
 
         public AccountInfo GetAccountInfoByAccountId(int accountId)
         {
             Logger.Info("AccountService: GetAccountInfoByAccountId {0}", accountId);
-            return new AccountInfo { PlayerName = "Tester", PlayerId = "0" };
+			Player player = GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(accountId);
+			return new AccountInfo { PlayerName = player.PlayerName, PlayerId = player.PlayerId };
         }
 
 

@@ -50,3 +50,6 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+// Set visibility of internal classes to the test suite.
+[assembly: InternalsVisibleTo("GameServer.Tests")]

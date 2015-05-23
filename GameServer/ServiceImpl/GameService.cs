@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,62 +25,61 @@ using GS = SpaceTraffic.GameServer.GameServer;
 using SpaceTraffic.Entities.PublicEntities;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Game.Actions;
+using SpaceTraffic.Entities;
+using SpaceTraffic.Dao;
+using SpaceTraffic.Game.Planner;
+using SpaceTraffic.Game.Navigation;
+using SpaceTraffic.Game;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
 {
-    public class GameService :IGameService
-    {
-        private Logger logger = LogManager.GetCurrentClassLogger();
-        
-
-        public IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem)
-        {
-            DebugEx.Entry(starSystem);
-
-            IList<WormholeEndpointDestination> result = GS.CurrentInstance.World.Map.GetStarSystemConnections(starSystem);
-
-            DebugEx.Exit(result);
-            return result;
-        }
+	public class GameService : IGameService
+	{
+		private Logger logger = LogManager.GetCurrentClassLogger();
 
 
+		public IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem)
+		{
+			DebugEx.Entry(starSystem);
 
+			IList<WormholeEndpointDestination> result = GS.CurrentInstance.World.Map.GetStarSystemConnections(starSystem);
 
-        /// <summary>
-        /// Finds action in SpaceTraffic.Game.Actions namespace and performs it with its arguments.
-        /// </summary>
-        /// <param name="playerId">The player identifier.</param>
-        /// <param name="actionName">Name of the action (and class in Actions namespace).</param>
-        /// <param name="actionArgs">The action arguments.</param>
-        /// <returns>ActionCode of created action.</returns>
-        /// <exception cref="SpaceTraffic.Services.Contracts.ActionNotFoundException"></exception>
-        public int PerformAction(int playerId, string actionName, params object[] actionArgs)
-        {
-            try { 
-                IGameAction action = Activator.CreateInstance(Type.GetType("SpaceTraffic.Game.Actions." + actionName)) as IGameAction;
-                if (action == null)
-                {//if action does not implemented action
-                    throw new ActionNotFoundException(String.Format(
-                        "Action class with name: {0} does not implements IGameAction.",
-                        actionName
-                    ));
-                }
-                action.ActionArgs = actionArgs;
-                action.PlayerId = playerId;
-                action.State = GameActionState.PLANNED;
-                GameServer.CurrentInstance.Game.PerformAction(action);
-                return action.ActionCode;
-            } catch(System.IO.FileNotFoundException e){
-                Console.WriteLine("Action file with name " + actionName + " was not found in SpaceTraffic.Game.Actions namespace.");
-                throw;
-            }
-        }
+			DebugEx.Exit(result);
+			return result;
+		}
 
-        
+		/// <summary>
+		/// Finds action in SpaceTraffic.Game.Actions namespace and performs it with its arguments.
+		/// </summary>
+		/// <param name="playerId">The player identifier.</param>
+		/// <param name="actionName">Name of the action (and class in Actions namespace).</param>
+		/// <param name="actionArgs">The action arguments.</param>
+		/// <returns>ActionCode of created action.</returns>
+		/// <exception cref="SpaceTraffic.Services.Contracts.ActionNotFoundException"></exception>
+		public int PerformAction(int playerId, string actionName, params object[] actionArgs)
+		{
+			try { 
+				IGameAction action = Activator.CreateInstance(Type.GetType("SpaceTraffic.Game.Actions." + actionName)) as IGameAction;
+				if (action == null)
+				{//if action does not implemented action
+					throw new ActionNotFoundException(String.Format(
+						"Action class with name: {0} does not implements IGameAction.",
+						actionName
+					));
+				}
+				action.ActionArgs = actionArgs;
+				action.PlayerId = playerId;
+				GameServer.CurrentInstance.Game.PerformAction(action);
+				return action.ActionCode;
+			} catch(System.IO.FileNotFoundException e){
+				Console.WriteLine("Action file with name " + actionName + " was not found in SpaceTraffic.Game.Actions namespace.");
+				throw;
+			}
+		}
 
-        public object GetActionResult(int playerId, int actionCode)
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public object GetActionResult(int playerId, int actionCode)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

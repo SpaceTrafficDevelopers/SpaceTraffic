@@ -40,6 +40,10 @@ namespace SpaceTraffic.GameUi.Areas.Game.Models
 		public double Consumption { get; set; }
 
 		[Required]
+		[Display(Name = "Rychlost opotřebování")]
+		public double WearRate { get; set; }
+
+		[Required]
 		[Display(Name = "Výkon")]
 		public int Power { get; set; }
 
@@ -61,6 +65,10 @@ namespace SpaceTraffic.GameUi.Areas.Game.Models
 		public string Image { get; set; }
 
 		[Display(Name = "Popis")]
-		public string Description { get; set; }  
+		public string Description { get; set; }
+
+        [Required]
+        [Display(Name = "Maximální rychlost")]
+        public int MaxSpeed { get; set; }
 	}
 }

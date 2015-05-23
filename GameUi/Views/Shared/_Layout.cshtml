@@ -1,40 +1,47 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title</title>
-    <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
-    
-    <!--jinak mi nešlo nalinkovat CSSko-->
-    <link href="@Url.Content("~/Content/less/Account.less")" rel="stylesheet" type="text/css" />
+	<title>@ViewBag.Title</title>
+	<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+	
+	<!--jinak mi nešlo nalinkovat CSSko-->
+	<link href="@Url.Content("~/Content/less/Account.less")" rel="stylesheet" type="text/css" />
 
 
-    @RenderSection("LinkStyles", false)
-    <style type="text/css">
-    @RenderSection("Styles", false)
-    </style>
+	@RenderSection("LinkStyles", false)
+	<style type="text/css">
+	@RenderSection("Styles", false)
+	</style>
 </head>
 
 <body>
-    @RenderBody()
-    @Content.Script("jquery-1.6.4.js", Url)
-    @Content.Script("jquery.unobtrusive-ajax.js", Url)
-    @Content.Script("jquery-ui-1.8.16.js", Url)
-    @Content.Script("jquery.svg.js", Url)
-    @Content.Script("jquery.svgdom.js", Url)
-    @Content.Script("mootools-core-1.4.1.js", Url)
+	@Html.Partial("_Flash")
+	@RenderBody()
+	@Content.Script("jquery-1.6.4.js", Url)
+	@Content.Script("jquery.unobtrusive-ajax.js", Url)
+	@Content.Script("jquery-ui-1.8.16.js", Url)
+	@Content.Script("jquery.svg.js", Url)
+	@Content.Script("jquery.svgdom.js", Url)
+	@Content.Script("jquery.cookie.js", Url)
+	@Content.Script("mootools-core-1.4.1.js", Url)
 
 
-    @Content.Script("jquery.tools.min-tips.js", Url)
-    @Content.Script("register-tooltips.js", Url)
-    
-    
-    @*@Content.Script("ui/GameWindowTabs.js", Url)
-    @Content.Script("steg2d/StarSystemObjects.js", Url)
-    @Content.Script("steg2d/StarSystemLoader.js", Url)
-    @Content.Script("steg2d/SvgStarSystemMap.js", Url)*@
-    @*Content.Script("steg2d/Renderer.js", Url)*@
+	@Content.Script("jquery.tools.min-tips.js", Url)
+	@Content.Script("register-tooltips.js", Url)
 
-    
-    @RenderSection("Scripts", false)
+	@Content.Script("jquery.flash-message.js", Url)
+
+	@Content.JSImport("~/JS/layoutImport", Url)
+
+	
+	
+	@*@Content.Script("ui/GameWindowTabs.js", Url)
+	@Content.Script("steg2d/StarSystemObjects.js", Url)
+	@Content.Script("steg2d/StarSystemLoader.js", Url)
+	@Content.Script("steg2d/SvgStarSystemMap.js", Url)*@
+	@*Content.Script("steg2d/Renderer.js", Url)*@
+
+	
+	@RenderSection("Scripts", false)
 </body>
 </html>

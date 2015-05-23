@@ -14,7 +14,7 @@
 	
 	<title>Space Traffic</title>
 	
-	<link href="@Url.Content("~/Content/Game.less")" rel="stylesheet" type="text/css" />
+  	<link href="@Url.Content("~/Content/Game.less")" rel="stylesheet" type="text/css" />
 	<link href="@Url.Content("~/Content/themes/base/jquery.ui.base.css")" rel="stylesheet" type="text/css" />
 	@*<link rel="shortcut icon" href="~/Content/spacetraffic.ico" type="image/x-icon">*@
 
@@ -54,6 +54,7 @@
 		<div id="contextPanel">
 			@RenderSection("ContextPanel", false)
 		</div>
+		@Html.Partial("_Flash")
 		<div id="mainPanel">
 			@RenderBody()
 		</div>
@@ -61,6 +62,8 @@
 
 		</div>
 		
+		@Html.Partial("_Achievements")
+
 	  </div>
 	  <div id="footer">
 		<p>&copy; Space Traffic Team | <span lang="cs">ZČU</span> | <span lang="cs">FAV</span> | <span lang="cs">KIV</span></p>
@@ -74,7 +77,9 @@
 	@Content.Script("jquery.svgdom.js", Url)
 	@Content.Script("jquery.cookie.js", Url)
 	@Content.Script("mootools-core-1.4.1.js", Url)
+	@Content.Script("jquery.flash-message.js", Url)
 	@Content.JSImport("~/JS/jsimport", Url)
+	@Content.JSImport("~/JS/layoutImport", Url)
 	@RenderSection("Scripts", false)
   </body>
 </html>

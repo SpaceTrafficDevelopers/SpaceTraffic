@@ -22,6 +22,9 @@ using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Dao
 {
+    /// <summary>
+    /// Interface for Base DAO
+    /// </summary>
     public interface IBaseDAO
     {
         /// <summary>
@@ -35,6 +38,15 @@ namespace SpaceTraffic.Dao
         /// <param name="baseId">The base id.</param>
         /// <returns>Base.</returns>
         Base GetBaseById(int baseId);
+
+        /// <summary>
+        /// Get Base by full planet name. 
+        /// Full planet name (location) = "StarSystem.Name\Planet.Name"
+        /// </summary>
+        /// <param name="planetFullName">full planet name (location)</param>
+        /// <returns>Base</returns>
+        Base GetBaseByPlanetFullName(string planetFullName);
+
         /// <summary>
         /// Inserts the base to DB.
         /// </summary>

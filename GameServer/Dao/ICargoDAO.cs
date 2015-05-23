@@ -22,6 +22,9 @@ using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Dao
 {
+    /// <summary>
+    /// Interface for cargo DAO
+    /// </summary>
     public interface ICargoDAO
     {
         /// <summary>
@@ -37,7 +40,13 @@ namespace SpaceTraffic.Dao
         /// <returns>Cargo</returns>
         Cargo GetCargoById(int CargoId);
 
-    
+
+        /// <summary>
+        /// Return Cargo by name
+        /// </summary>
+        /// <param name="CargoId">Cargo name</param>
+        /// <returns>Cargo</returns>
+        Cargo GetCargoByName(string CargoName);
 
         /// <summary>
         /// Return list of Cargos by type
@@ -45,6 +54,13 @@ namespace SpaceTraffic.Dao
         /// <param name="type">Type of Cargo</param>
         /// <returns>List of Cargo</returns>
         List<Cargo> GetCargosByType(string type);
+
+        /// <summary>
+        /// Return list of Cargos by category
+        /// </summary>
+        /// <param name="type">Category of Cargo</param>
+        /// <returns>List of Cargo</returns>
+        List<Cargo> GetCargosByCategory(string category);
 
         /// <summary>
         /// Insert Cargo to database

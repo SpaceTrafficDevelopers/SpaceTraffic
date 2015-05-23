@@ -20,6 +20,9 @@ using System.Linq;
 using System.Text;
 using SpaceTraffic.Engine;
 using System.Collections.Concurrent;
+using SpaceTraffic.Game.Actions;
+using SpaceTraffic.Game.Events;
+using System.Threading;
 
 namespace SpaceTraffic.GameServer
 {
@@ -29,23 +32,29 @@ namespace SpaceTraffic.GameServer
         public const int MAX_ACTIONS_PER_UPDATE = 100;
 
         private IGameServer gameServer;
+        /// <summary>
+        /// Manager used to persist and restore game state.
+        /// </summary>
+        private IGameStateManager gameStateManager;
         private Random rand = new System.Random();
 
         public GameTime currentGameTime { get; private set; }
         private EventQueue gameEventQueue = new EventQueue();
-        private ConcurrentQueue<IGameAction> gameActionQueue = new ConcurrentQueue<IGameAction>();        
+        private ConcurrentQueue<IGameAction> gameActionQueue = new ConcurrentQueue<IGameAction>();
 
+        private readonly Mutex mutex = new Mutex();
 
         private Dictionary<string, IGameSimulation> simulations = new Dictionary<string, IGameSimulation>();
-        
+
         public IDictionary<string, IGameSimulation> Simulations
         {
             get { return this.simulations; }
         }
 
-        public GameManager(IGameServer gameServer)
+        public GameManager(IGameServer gameServer, IGameStateManager gameStateManager)
         {
             this.gameServer = gameServer;
+            this.gameStateManager = gameStateManager;
         }
 
         public void Update(GameTime gameTime)
@@ -55,18 +64,40 @@ namespace SpaceTraffic.GameServer
             this.DoActions();
         }
 
+        /// <summary>
+        /// Restores previously stored state of the game.
+        /// 
+        /// Only list of events and actions is restored. Game time is determined by the system time.
+        /// </summary>
         internal void RestoreGameState()
         {
-            //TODO: Obnovení stavu hry
+            IEnumerable<IGameAction> actions = gameStateManager.RestoreActions();
+            foreach (var action in actions)
+            {
+                gameActionQueue.Enqueue(action);
+            }
+            IEnumerable<IGameEvent> events = gameStateManager.RestoreEvents();
+            foreach (var evnt in events)
+            {
+                gameEventQueue.Enqueue(evnt);
+            }
         }
 
+        /// <summary>
+        /// Stores state of the game to the persistence store.
+        /// 
+        /// Only list of events and actions is stored. Game time is determined by the system time.
+        /// </summary>
         internal void PersistGameState()
         {
-            //TODO: Uložení stavu hry
+            gameStateManager.PersistActions(gameActionQueue);
+            gameStateManager.PersistEvents(gameEventQueue.GetItems());
         }
         
         internal void DoEvents()
         {
+            mutex.WaitOne();
+
             IGameEvent gameEvent;
             for (int i = 0; this.gameEventQueue.HasMore && (i < MAX_EVENTS_PER_UPDATE); i++)
             {
@@ -79,6 +110,8 @@ namespace SpaceTraffic.GameServer
                     break;
                 }
             }
+
+            mutex.ReleaseMutex();
         }
 
         internal void DoActions()
@@ -109,7 +142,11 @@ namespace SpaceTraffic.GameServer
 
         public void PlanEvent(IGameEvent gameEvent)
         {
+            mutex.WaitOne();
+
             this.gameEventQueue.Enqueue(gameEvent);
+
+            mutex.ReleaseMutex();
         }
 
         /// <summary>
@@ -140,6 +177,26 @@ namespace SpaceTraffic.GameServer
                 }
             }
             return false;
+        }
+
+        public void PlanEvent(IGameAction action, DateTime when)
+        {
+            if (action != null && when != null)
+            {
+                action.State = GameActionState.PREPARED;
+                GeneralEvent newEvent = new GeneralEvent();
+                GameTime time = new GameTime();
+                time.Value = when;
+
+                newEvent.BoundAction = action;
+                newEvent.PlannedTime = time;
+
+                mutex.WaitOne();
+
+                PlanEvent(newEvent);
+
+                mutex.ReleaseMutex();
+            }
         }
     }
 }

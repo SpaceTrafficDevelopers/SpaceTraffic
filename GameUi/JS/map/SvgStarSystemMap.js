@@ -180,13 +180,24 @@ var SvgStarSystemMap = {
 			this.$svgOverlayLayer.removeClass('fade');
 		}).bind(this));
     },
-    
+
+    //updating star object list (changed for cargo controller tests)
     updateObjectList: function() {
     	var buffer = "<ul>";
 		for (var i = 0; i < this.svgItems.length; i++) {
-	    	buffer += '<li>' + this.svgItems[i].getName() +'</li>\n';
+		    buffer += '<li>' + this.svgItems[i].getName() + '</li>\n';
 	    };
-	    buffer += "</lu>";
+		buffer += "</ul>";
+
+        //links for trading, test link fo planner, test links for buy ship
+		buffer += '<ul>' + 
+            '<li><a href="/Game/Cargo/BuyCargo?starSystemName=Proxima Centauri&planetName=Proxima Centauri 1&cargoLoadEntityId=1&count=1&buyingPlace=TraderCargoDAO&buyerShipId=1&traderId=1">BuyCargo</a></li>' +
+           '<li><a href="/Game/Cargo/SellCargo?starSystemName=Proxima Centauri&planetName=Proxima Centauri 1&cargoLoadEntityId=1&count=1&loadingPlace=TraderCargoDAO&buyerId=1&sellerShipId=1">SellCargo</a></li>' +
+
+			'<li><a href="/Game/Ships?baseId=1&starSystemName=Solar System#Buy_new_ship">BuyShip</a></li>' +
+			'<li><a href="/Game/Ships?baseId=2&starSystemName=Proxima Centauri#Buy_new_ship">BuyShipOnProxima</a></li>' +
+            '<li><a href="/Game/Planner/TestPlanner">TestPlanner</a></li>' + 
+            '</ul>';
 	    $("#contextPanel").html(buffer);
 	    buffer = null;
     }
