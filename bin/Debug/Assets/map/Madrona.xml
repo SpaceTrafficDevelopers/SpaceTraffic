@@ -19,7 +19,7 @@ limitations under the License.
     xmlns:st="SpaceTrafficData"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="1.2">
-    <starsystem name="Madrona">
+    <starsystem name="Madrona" x="170" y="300">
         <star name="Madrona">
             <trajectory>
                 <stacionary x="0" y="0" />

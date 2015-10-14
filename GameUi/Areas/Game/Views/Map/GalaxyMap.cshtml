@@ -1,0 +1,92 @@
+﻿@{
+    //ViewBag.Title = "Galaxy Map";
+
+    SpaceTraffic.GameUi.GameServerClient.IGameServerClient GSClient = SpaceTraffic.GameUi.GameServerClient.GameServerClientFactory.GetClientInstance();
+    IList<SpaceTraffic.Game.StarSystem> starSystems = GSClient.GameService.GetGalaxyMap("GalaxyMap");
+
+    int scale = 1;
+    string destination = "Solar System";
+}
+<h2>Galaxy Map</h2> 
+<script type="text/javascript">
+     changeSystem: function changeSystem(evt) {
+
+     $.getScript("../JS/map/StarSystemLoader.js", function () {
+         console.debug("event");
+         console.debug("this", this);
+         var target = evt.target;
+         var id = target.id;
+         StarSystemLoader.loadStarSystem(id, function (starSystem) {
+             SvgStarSystemMap.currentStarSystem = starSystem;
+             // Sets currentStarSystem cookie
+             $.cookie("currentStarSystem", starSystem.name, { path: '/' });
+             console.debug("currentStarSystem: ", SvgStarSystemMap.currentStarSystem);
+             SvgStarSystemMap.draw();
+             SvgStarSystemMap.startUpdateTimer();
+             window.location.replace('/Game');
+         });
+     });
+}
+
+</script>
+<div class="background" class="border">
+
+
+<svg width="500" height="500" 
+xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink">
+  
+@foreach(SpaceTraffic.Game.StarSystem starSystem in starSystems)
+{
+    var X = starSystem.MapPosition.X * scale;
+    var Y = starSystem.MapPosition.Y * scale;
+       
+    foreach (SpaceTraffic.Game.WormholeEndpoint endpoint in starSystem.WormholeEndpointsList)
+    {
+        if (endpoint.Destination == null)
+        {
+            continue;
+        }
+        destination = endpoint.Destination.StarSystem.Name;
+        var X2 = endpoint.Destination.StarSystem.MapPosition.X * scale;
+        var Y2 = endpoint.Destination.StarSystem.MapPosition.Y * scale;
+       <line x1="@X" y1="@Y" x2="@X2" y2="@Y2" style="stroke:lightblue;stroke-width:2" />
+    }
+}    
+
+@foreach (SpaceTraffic.Game.StarSystem starSystem in starSystems)
+{
+    
+    var X = starSystem.MapPosition.X * scale;
+    var Y = starSystem.MapPosition.Y * scale;
+    
+    <circle id="@starSystem.Name" cx="@X" cy="@Y" r="20" stroke="grey" stroke-width="4" fill="yellow" onclick="changeSystem(evt)">
+   <!--  <set attributeName="fill" to="blue" begin="click"/> -->
+    </circle>
+}
+
+<!-- kazdy foreach zvlast kvuli tomu ze SVG nema layering, text musi byt nad starsystemy, a starsystemy nad carami-->
+@foreach (SpaceTraffic.Game.StarSystem starSystem in starSystems)
+{
+    var length = starSystem.Name.Length;
+    var X = starSystem.MapPosition.X * scale - length * 6 / 2;
+    var Y = starSystem.MapPosition.Y * scale - 20;
+    
+    <text>
+    <text x="@X" y="@Y" fill="whitesmoke" >@starSystem.Name</text>
+    </text>
+}
+
+</svg>
+</div>
+
+<style type="text/css">
+.background{
+  background-image: url("/Content/images/stars.gif");
+  /*background-image: */
+}
+.border
+{
+    border: 2px solid blue;
+}
+</style>

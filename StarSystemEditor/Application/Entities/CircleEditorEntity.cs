@@ -20,59 +20,107 @@ using System.Linq;
 using System.Text;
 
 using SpaceTraffic.Game.Geometry;
+using SpaceTraffic.Utils;
 
 namespace SpaceTraffic.Tools.StarSystemEditor.Entities
 {
     /// <summary>
-    /// Editor spravujici kruhove orbity
+    /// Editor for circular orbits
     /// </summary>
     public class CircleEditorEntity : OrbitEditorEntity
     {
         /// <summary>
-        /// Prepsana metoda z EditableEntity.cs, provadi typovou kontrolu a nacita objekt k editaci
+        /// Override from EditableEntity.cs, loads object to LoadedObject
         /// </summary>
-        /// <param name="editableObject">upravovany objekt, kruhova orbita</param>
+        /// <param name="editableObject">edited object - CircularOrbit</param>
         public override void LoadObject(object editableObject)
         {
-            TryToLoad();
-            //TODO: Datatype security
-            LoadedObject = (CircularOrbit)editableObject;
+            if (editableObject is CircularOrbit)
+            {
+                LoadedObject = editableObject;
+            }
         }
 
         /// <summary>
-        /// Prepsana metoda z EditableEntity.cs, v Iteraci 2 provede kontrolu objektu a pak ho ulozi do XML souboru s mapou
+        /// Method changing width of orbit, but not changing any other parameters
         /// </summary>
-        public override void SaveObject()
+        /// <param name="newWidth">New width - major axis</param>
+        public override void PreviewSetWidth(int newWidth)
         {
-            if (EditFlag == false) Editor.Log("Byl zde pokus ulozit nezmeneny objekt");
-            else
+            SetWidth(newWidth);
+        }
+
+        /// <summary>
+        /// Method changing height of orbit, but not changing any other parameters
+        /// </summary>
+        /// <param name="newHeight">new height, minor axis</param>
+        public override void PreviewSetHeight(int newHeight)
+        {
+            SetHeight(newHeight);
+        }
+
+        /// <summary>
+        /// Method changing width of orbit
+        /// </summary>
+        /// <param name="newWidth">New width - major axis</param>
+        public override void SetWidth(int newWidth)
+        {
+            if (newWidth <= 0) throw new ArgumentOutOfRangeException("new width must not be negative or 0");
+            TryToSet();
+            CircularOrbit curOrbit = (CircularOrbit)LoadedObject;
+            if (newWidth != curOrbit.Radius)
             {
-                EditFlag = false;
-                //TODO: Pokrocila implementace v iteraci 2
+                if (newWidth > curOrbit.Radius)
+                {
+                    double angleindegree = MathUtil.RadianToDegree(curOrbit.InitialAngleRad);
+                    EllipticOrbit newOrbit = new EllipticOrbit(new Point2d(0, 0), newWidth, curOrbit.Radius, 0, (int)curOrbit.PeriodInSec, curOrbit.Direction, angleindegree);
+                    LoadedObject = newOrbit;
+                }
+                else if (newWidth < curOrbit.Radius)
+                {
+                    this.SetRadius(newWidth);
+                }
+            }
+
+        }
+
+
+        /// <summary>
+        /// Method changing height of orbit
+        /// </summary>
+        /// <param name="newHeight">new height, minor axis</param>
+        public override void SetHeight(int newHeight)
+        {
+            if (newHeight <= 0) throw new ArgumentOutOfRangeException("new height must not be negative or 0");
+            TryToSet();
+            CircularOrbit curOrbit = (CircularOrbit)LoadedObject;
+            if (newHeight != curOrbit.Radius)
+            {
+                if (newHeight < curOrbit.Radius)
+                {
+                    EllipticOrbit newOrbit = new EllipticOrbit(new Point2d(0, 0), curOrbit.Radius, newHeight, 0,
+                        (int)curOrbit.PeriodInSec, curOrbit.Direction, curOrbit.InitialAngleRad);
+                    LoadedObject = newOrbit;
+                }
+                else if (newHeight > curOrbit.Radius)
+                {
+                    this.SetRadius(newHeight);
+                }
             }
         }
         
         /// <summary>
-        /// Metoda menici velikost cele orbity pomoci pomeru
+        /// Method changing radius of orbit
         /// </summary>
-        /// <param name="newRatio">Novy pomer orbity</param>
-        public void Resize(double newRatio)
-        {
-            if (newRatio <= 0) throw new ArgumentOutOfRangeException("Pomer zvetseni/zmenseni velikosti nesmi byt mensi roven 0");
-            TryToSet();
-            //Orbita ma ve vlastnostech polomer, proto se musi ratio vydelit 2 aby byl aplikovatelny na celkovou velikost
-            ((CircularOrbit)LoadedObject).Radius = (int)(Math.Floor(((CircularOrbit)LoadedObject).Radius * (newRatio/2.0)));
-        }
-        
-        /// <summary>
-        /// Metoda nastavuje novy polomer orbity
-        /// </summary>
-        /// <param name="newRadius">Novy polomer</param>
+        /// <param name="newRadius">new radius</param>
         public void SetRadius(int newRadius)
         {
-            if (newRadius <= 0) throw new ArgumentOutOfRangeException("Polomer kruhu musi byt vetsi nez 0");
+            // forbid seting trajectory into star
+            if (newRadius <= 20)
+                return;
             TryToSet();
             ((CircularOrbit)LoadedObject).Radius = newRadius;
         }
+
     }
 }

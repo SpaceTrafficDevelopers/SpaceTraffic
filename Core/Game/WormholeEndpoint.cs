@@ -19,18 +19,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SpaceTraffic.Game.Geometry;
+using System.Runtime.Serialization;
 
 namespace SpaceTraffic.Game
 {
     /// <summary>
     /// Represents wormhole endpoint in the star system.
     /// </summary>
+    [DataContract(Name="WormholeEndpoint", IsReference=true)]
     public class WormholeEndpoint: VisibleObject
     {
+
         #region Properties
         /// <summary>
         /// This is a local index within a system
         /// </summary>
+        [DataMember]
         public int Id { get; set; }
 
         /// <summary>
@@ -40,10 +44,11 @@ namespace SpaceTraffic.Game
         {
             get { return this.Destination != null; }
         }
-
+       
         /// <summary>
         /// Property OtherSide points to the other endpoint in the wormhole
         /// </summary>
+        [DataMember]
         public WormholeEndpoint Destination { get; set; }
         #endregion
 
@@ -60,6 +65,17 @@ namespace SpaceTraffic.Game
             this.Id = id;
             this.Destination = null;
         }
+
+        /// <summary>
+        /// pro serializaci
+        /// </summary>
+        public WormholeEndpoint()
+        {
+            this.Id = 0;
+            this.Destination = null;
+            this.StarSystem = null;
+        }
+
         #endregion
 
         public void ConnectTo(WormholeEndpoint targetEndpoint)

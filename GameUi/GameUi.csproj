@@ -321,7 +321,7 @@
     <Content Include="Areas\Game\Views\Help\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Game\Views\Map\Index.cshtml" />
+    <Content Include="Areas\Game\Views\Map\GalaxyMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\Register.resx" />

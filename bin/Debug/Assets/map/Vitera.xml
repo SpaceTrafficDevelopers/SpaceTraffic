@@ -20,7 +20,7 @@ limitations under the License.
     xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="1.2">
-    <starsystem name="Vitera">
+    <starsystem name="Vitera" x="78" y="378">
         <star name="Vitera">
             <trajectory>
                 <stacionary x="0" y="0" />

@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
 
 namespace SpaceTraffic.Game.Geometry
 {
@@ -25,9 +26,12 @@ namespace SpaceTraffic.Game.Geometry
     /// Class which defines point in 2D space
     /// Version 1.0
     /// </summary>
+    [DataContract(Name="Point2d")]
     public struct Point2d
     {
+        
         private double _x;
+        
         private double _y;
 
         #region Properties
@@ -38,6 +42,7 @@ namespace SpaceTraffic.Game.Geometry
         /// <value>
         /// The coordinate axes X.
         /// </value>
+        [DataMember]
         public double X
         {
             get { return _x; }
@@ -50,6 +55,7 @@ namespace SpaceTraffic.Game.Geometry
         /// <value>
         /// The coordinate axes Y.
         /// </value>
+        [DataMember]
         public double Y
         {
             get { return _y; }

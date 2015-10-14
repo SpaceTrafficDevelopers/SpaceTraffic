@@ -95,8 +95,8 @@ namespace Core.Tests
             Debug.Assert((loadedSS.Name.Equals("Solar system", StringComparison.CurrentCultureIgnoreCase)), "Solar system load failed!");
             Debug.Assert((loadedSS.Star != null), "Solar system star load failed!");
             Debug.Assert((loadedSS.Planets.Count > 0), "Solar system planets load failed!");
-            Debug.Assert((loadedSS.WormholeEndpoints.Count > 0), "Solar system wormholeendpoints load failed!");
-            Debug.Assert((loadedSS.WormholeEndpoints.Count <= 6), "Solar system contains more then 6 allowed wormoleendpoints!");
+            Debug.Assert((loadedSS.WormholeEndpointsList.Count > 0), "Solar system wormholeendpoints load failed!");
+            Debug.Assert((loadedSS.WormholeEndpointsList.Count <= 6), "Solar system contains more then 6 allowed wormoleendpoints!");
         }
     }
 }

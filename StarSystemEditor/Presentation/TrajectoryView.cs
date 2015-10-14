@@ -142,6 +142,34 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         {
             return Trajectory.GetType().Name;
         }
+
+        /// <summary>
+        /// Getter pro stred trajektorie
+        /// </summary>
+        /// <returns>Souradnice stredu trajektorie</returns>
+        public Point2d GetCenter()
+        {
+            Point2d point = new Point2d();
+            if (Trajectory is CircularOrbit)
+            {
+                CircularOrbit orbit = (CircularOrbit)Trajectory;
+                point.X = orbit.Radius * Editor.dataPresenter.ObjectSizeRatio;
+                point.Y = point.X;
+            }
+            else if (Trajectory is EllipticOrbit)
+            {
+            EllipticOrbit orbit = (EllipticOrbit)Trajectory;
+            point.X = (orbit.A - orbit.OrbitalEccentricity) * Editor.dataPresenter.ObjectSizeRatio;
+            point.Y = (orbit.B) * Editor.dataPresenter.ObjectSizeRatio;
+            }
+            else
+            {
+                throw new ArgumentException("Invalid trajectory");
+            }
+
+            return point;
+        }
+        
         /// <summary>
         /// Getter pro velikost grafiky
         /// </summary>
@@ -160,6 +188,15 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
                 size.Height = ((EllipticOrbit)this.Trajectory).B * 2;
             }
             return size;
+        }
+        
+        /// <summary>
+        /// sets trajectory
+        /// </summary>
+        /// <param name="trajectory"></param>
+        public void SetTrajectory(Trajectory trajectory)
+        {
+            this.Trajectory = trajectory;
         }
     }
 }

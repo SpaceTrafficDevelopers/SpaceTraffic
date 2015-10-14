@@ -65,7 +65,7 @@ namespace SpaceTraffic.Game.Geometry
         /// <summary>
         /// This property is used for theta calculation.
         /// </summary>
-        public double Sqrt1PlusESlash1MinusE { get; private set; }
+        public double Sqrt1PlusESlash1MinusE { get; set; }
 
         /// <summary>
         /// Distance from focus to center in X-coord

@@ -19,7 +19,7 @@ limitations under the License.
     xmlns:st="SpaceTrafficData"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="1.2">
-    <starsystem name="Solar system">
+    <starsystem name="Solar system" x="156" y="419">
         <star name="Sol">
             <trajectory>
                 <stacionary x="0" y="0" />
@@ -81,7 +81,7 @@ limitations under the License.
                     </description>
                 </details>
             </planet>
-            <planet altName="Jupiter 0" name="Sol 5">
+            <planet altName="Jupiter" name="Sol 5">
                 <trajectory>
                     <ellipticOrbit direction="clockwise" period="4435" a="82" b="81" angle="6" initialAngle="0.0" />
                 </trajectory>
@@ -93,7 +93,7 @@ limitations under the License.
                     </description>
                 </details>
             </planet>
-            <planet altName="Saturnus 0" name="Sol 6">
+            <planet altName="Saturnus" name="Sol 6">
                 <trajectory>
                     <circularOrbit direction="clockwise" period="10758" initialAngle="0.0" radius="110"/>
                 </trajectory>
@@ -105,7 +105,7 @@ limitations under the License.
                     </description>
                 </details>
             </planet>
-            <planet altName="Uranus 90" name="Sol 7">
+            <planet altName="Uranus" name="Sol 7">
                 <trajectory>
                     <circularOrbit direction="clockwise" period="30708" initialAngle="90.0" radius="175"/>
                 </trajectory>
@@ -117,7 +117,7 @@ limitations under the License.
                     </description>
                 </details>
             </planet>
-            <planet altName="Neptunus 90" name="Sol 8">
+            <planet altName="Neptunus" name="Sol 8">
                 <trajectory>
                     <ellipticOrbit direction="clockwise" period="60190" a="200" b="199" angle="6" initialAngle="90.0" />
                 </trajectory>

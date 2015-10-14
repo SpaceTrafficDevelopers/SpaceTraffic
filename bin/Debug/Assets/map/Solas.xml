@@ -19,7 +19,7 @@ limitations under the License.
     xmlns:st="SpaceTrafficData"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="1.2">
-    <starsystem name="Solas">
+    <starsystem name="Solas" x="347" y="70">
         <star name="Solas">
             <trajectory>
                 <stacionary x="0" y="0" />

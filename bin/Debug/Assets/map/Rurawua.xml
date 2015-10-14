@@ -19,7 +19,7 @@ limitations under the License.
     xmlns:st="SpaceTrafficData"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="1.2">
-    <starsystem name="Rurawua">
+    <starsystem name="Rurawua" x="49" y="82">
         <star name="Rurawua">
             <trajectory>
                 <stacionary x="0" y="0" />

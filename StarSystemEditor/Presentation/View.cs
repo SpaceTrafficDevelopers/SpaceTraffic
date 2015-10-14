@@ -27,7 +27,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
     /// <summary>
     /// Abstraktni trida pouzivana pro ostatni zobrazovace
     /// </summary>
-    public abstract class View
+    public abstract class View 
     {
         /// <summary>
         /// Abstraktni metoda pro navrat grafiky ke kresleni

@@ -54,13 +54,28 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Microsoft Visual Studio 11.0\Common7\IDE\ReferenceAssemblies\v4.0\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL" />
     <Reference Include="SpaceTraffic.Core">
       <HintPath>Libraries\SpaceTraffic.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -72,7 +87,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFToolkit.Extended, Version=1.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+    <Reference Include="WPFToolkit.Extended">
       <HintPath>packages\Extended.Wpf.Toolkit.1.6.0\lib\net40\WPFToolkit.Extended.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -89,19 +104,25 @@
     <Compile Include="Application\Entities\ObjectEditorEntity.cs" />
     <Compile Include="Application\Entities\OrbitEditorEntity.cs" />
     <Compile Include="Application\Entities\PlanetEditorEntity.cs" />
-    <Compile Include="Application\Entities\StacionaryEditorEntity.cs" />
+    <Compile Include="Data\ObjectData.cs" />
+    <Compile Include="Data\PlanetType.cs" />
     <Compile Include="Application\Entities\StarEditorEntity.cs" />
+    <Compile Include="Data\StarSystemCreator.cs" />
     <Compile Include="Application\Entities\StarSystemEditorEntity.cs" />
     <Compile Include="Application\Entities\WormholeEditorEntity.cs" />
     <Compile Include="Application\Exceptions\MapFilesCannotBeLoaded.cs" />
     <Compile Include="Application\Exceptions\NoObjectLoaded.cs" />
-    <Compile Include="Data\InternalGalaxyMap.cs" />
+    <Compile Include="Assets\schemas\InternalGalaxyMap.cs" />
     <Compile Include="Data\Names.cs" />
     <Compile Include="Data\StreamDataProvider.cs" />
+    <Compile Include="Data\WormholeData.cs" />
     <Compile Include="Data\XmlSaver.cs" />
+    <Compile Include="Presentation\CelestialObjectView.cs" />
     <Compile Include="Presentation\DataPresenter.cs" />
     <Compile Include="Presentation\DrawingArea.cs" />
     <Compile Include="Presentation\EndpointView.cs" />
+    <Compile Include="Presentation\SelectedPointView.cs" />
+    <Compile Include="Presentation\StarSystemView.cs" />
     <Compile Include="Presentation\View.cs" />
     <Compile Include="Presentation\PlanetView.cs" />
     <Compile Include="Presentation\StarView.cs" />
@@ -109,6 +130,12 @@
     <Compile Include="Tests\Tests.cs" />
     <Compile Include="StarSystemSelector.xaml.cs">
       <DependentUpon>StarSystemSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewStarSystem.xaml.cs">
+      <DependentUpon>NewStarSystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RenameSystem.xaml.cs">
+      <DependentUpon>RenameSystem.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -123,6 +150,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="StarSystemSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewStarSystem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RenameSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,6 +190,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -173,6 +209,7 @@
     </Content>
     <Content Include="Assets\map\GalaxyMap2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Assets\map\Granari.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -182,6 +219,7 @@
     </Content>
     <Content Include="Assets\map\Lervos2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Assets\map\Madrona.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

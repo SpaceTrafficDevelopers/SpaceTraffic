@@ -24,33 +24,28 @@ using SpaceTraffic.Tools.StarSystemEditor.Exceptions;
 namespace SpaceTraffic.Tools.StarSystemEditor.Entities
 {
     /// <summary>
-    /// Abstraktni trida zdedena ve vsech editorech
+    /// Abstract class inherited by all editor entities
     /// </summary>
     public abstract class EditableEntity
     {
         /// <summary>
-        /// Abstraktni metoda slouzici pro nacteni objektu
+        /// Abstract method for loading edited object
         /// </summary>
         /// <param name="editableObject"></param>
         public abstract void LoadObject(Object editableObject);
 
         /// <summary>
-        /// Abstraktni metoda slouzici pro ulozeni objektu, implementace je soucasti iterace 2, jelikoz zde bude prace s XML soubory
-        /// </summary>
-        public abstract void SaveObject();
-
-        /// <summary>
-        /// Property objektu udrzovaneho v pameti editoru
+        /// Edited Object loaded in editor entity
         /// </summary>
         public Object LoadedObject { get; protected set; }
 
         /// <summary>
-        /// Tato property oznacuje stav objektu, v pripade ze byl zmenen je nastavena na true
+        /// Flag determining wheter object was edited or not
         /// </summary>
         public bool EditFlag { get; protected set; }
 
         /// <summary>
-        /// Konstruktor ktery nastavy zakladni property
+        /// Constructor
         /// </summary>
         public EditableEntity()
         {
@@ -59,20 +54,12 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Entities
         }
 
         /// <summary>
-        /// Tato metoda zjisti zda byl jiz nacten nejaky objekt, je volana pri vsech editacich, pokud byl objekt jiz nacten pak nastavi EditFlag na true
+        /// Checks if there is anything loaded in editor, and sets edit flag true
         /// </summary>
         public void TryToSet()
         {
             if (LoadedObject == null) throw new NoObjectLoaded(this.GetType().Name);
             EditFlag = true;
-        }
-
-        /// <summary>
-        /// Tato metoda je volana pri vsech load akcich, kdy upozorni uzivatele ze puvodni objekt nebyl pred nactenim noveho ulozen
-        /// </summary>
-        public void TryToLoad()
-        {
-            if (EditFlag == true) Editor.Log("Puvodni objekt nebyl pred nactenim noveho ulozen: " + this.GetType().Name + "->" + LoadedObject.GetType().ToString());
         }
 
     }

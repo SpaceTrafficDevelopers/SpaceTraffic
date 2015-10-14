@@ -3,7 +3,7 @@
 		xmlns:st="SpaceTrafficData"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		version="1.2">
-		<starsystem name="Solar system">
+		<starsystem name="Solar system" x="400" y="350">
 				<star name="Sol">
 						<trajectory>
 								<stacionary x="0" y="0" />

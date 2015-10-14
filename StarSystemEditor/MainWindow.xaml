@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:p="clr-namespace:SpaceTraffic.Tools.StarSystemEditor"
-        Title="Editor" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="768" d:DesignWidth="1024" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" MinWidth="1024" ResizeMode="CanResize" MinHeight="650">
+        Title="Editor" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="768" d:DesignWidth="1024" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" MinWidth="1024" ResizeMode="CanResize" MinHeight="650" PreviewMouseLeftButtonUp="window_mouseUp" PreviewKeyDown="canvas_keyModifierDown" KeyUp="canvas_keyModifierUp">
     <Window.Resources>
         <Style x:Key="button" TargetType="Button">
             <Setter Property="Height" Value="25" />
@@ -22,41 +22,37 @@
         </StatusBar>
         <Menu Width="Auto" Height="25" DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <!--<MenuItem Header="New"></MenuItem>-->
-                <MenuItem Header="Load" Click="MenuLoad_Click"></MenuItem>
-                <MenuItem Header="Save" Click="MenuSave_Click"></MenuItem>
-                <!--<Separator></Separator>
-                <MenuItem Header="Import"></MenuItem>-->
+                <MenuItem Header="New System" Click="MenuNew_Click"></MenuItem>
+                <MenuItem Header="Load Galaxy" Click="MenuLoad_Click"></MenuItem>
+                <MenuItem Header="Save Galaxy" Click="MenuSave_Click"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="Quit" Click="QuitProgram"></MenuItem>
             </MenuItem>
-            <!--<MenuItem Header="Edit">
-                <MenuItem Header="Undo"></MenuItem>
-                <MenuItem Header="Redo"></MenuItem>
-                <Separator></Separator>
-                <MenuItem Header="Copy"></MenuItem>
-                <MenuItem Header="Paste"></MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Rename star system" Click="RenameStarSystem_Click"></MenuItem>
+                <MenuItem Header="Add planet" Click="NewPlanet_Click"></MenuItem>
+                <MenuItem Header="Add wormhole" Click="NewWormhole_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="Simulation">
-                <MenuItem Name="SimulationPauseButton" Header="Run"></MenuItem>
-                <MenuItem Header="Reset"></MenuItem>
-            </MenuItem>-->
-            <!--<MenuItem Header="Add">
-                <MenuItem Header="New star"></MenuItem>
-                <MenuItem Header="New planet"></MenuItem>
-                <MenuItem Header="New wormhole"></MenuItem>
-            </MenuItem>-->
+               <MenuItem Name="SimulationRunItem" Header="Run" Click="SimulationRunButton_Click"></MenuItem>
+               <MenuItem Name="SimulationPauseItem" Header="Pause" Click="SimulationPauseButton_Click"></MenuItem>
+               <MenuItem Name="ResetButton" Header="Reset" Click="buttonTimeReset_Click"></MenuItem>
+            </MenuItem>  
         </Menu>
         <ToolBar DockPanel.Dock="Top" Height="26" Width="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Header="Controls">
+            <Button Content="Galaxy Map" Height="23" Name="buttonGalaxyMap" Width="75" Click="buttonGalaxyMap_Click" />
+            <Separator></Separator>
             <Button Content="Zoom in" Height="23" Name="buttonZoomIn" Width="75" Click="buttonZoomIn_Click" />
             <Button Content="Zoom out" Height="23" Name="buttonZoomOut" Width="75" Click="buttonZoomOut_Click" />
             <Separator></Separator>
+            <Button Name="SimulationRunButton" Height="23" Width="55" Content="Run" Click="SimulationRunButton_Click"></Button>
+            <Button Name="SimulationPauseButton" Height="23" Width="55" Content="Pause" Click="SimulationPauseButton_Click"></Button>
             <Button Content="Reset time" Height="23" Width="75" Click="buttonTimeReset_Click" />
             <Button Content="Add 10s" Height="23" Width="75" Click="buttonTime10_Click" />
             <Button Content="Add 50s" Height="23" Width="75" Click="buttonTime50_Click" />
             <Button Content="Add 200s" Height="23" Width="75" Click="buttonTime200_Click" />
         </ToolBar>
-        <StackPanel DockPanel.Dock="Left" Name="leftMenu" MinWidth="200">
+        <StackPanel DockPanel.Dock="Left" Name="leftMenu" MinWidth="200" Height="655">
             <StackPanel DockPanel.Dock="Left" Margin="2">
                 <GroupBox Header="Galaxy info" Visibility="Collapsed">
                     <GroupItem Name="galaxyInfoGroup" Loaded="galaxyInfoGroup_Loaded">
@@ -70,22 +66,26 @@
         </StackPanel>
         
         <TabControl DockPanel.Dock="Right" Name="rightMenu" MinWidth="275">
-            <TabItem Header="Editor">
+            <TabItem Header="Planet Editor">
                 <StackPanel>
-                    <GroupBox Name="loadedObjectData"  Header="Object info" Margin="2" Loaded="loadedObjectData_Loaded">
+                    <GroupBox Name="loadedObjectData" Header="Object info" Margin="2" Loaded="loadedObjectData_Loaded">
                     </GroupBox>
-                    <!--<xctk:PropertyGrid>
-                    </xctk:PropertyGrid>-->
                 </StackPanel>
             </TabItem>
             <TabItem Header="Connections">
                 <GroupBox Name="connectionListBox" Header="Wormhole connection list" Margin="2" Loaded="connectionListBox_Loaded">
                 </GroupBox>
             </TabItem>
+            <TabItem Header="Wormhole Editor">
+                <StackPanel>
+                    <GroupBox Name="loadedWormholeData" Header="Object info" Margin="2" Loaded="loadedWormholeData_Loaded">
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
         </TabControl>
-        <ScrollViewer Name="drawingAreaScrollViewew" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Loaded="ScrollViewer_Loaded">
-
+        <ScrollViewer Name="drawingAreaScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top" 
+                      VerticalContentAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                      Loaded="ScrollViewer_Loaded" PreviewMouseLeftButtonDown="canvas_mouseDown" PreviewMouseMove="window_mouseMove">
         </ScrollViewer>
-       
     </DockPanel>
 </Window>

@@ -20,9 +20,11 @@ using System.Linq;
 using System.Text;
 using SpaceTraffic.Utils.Collections;
 using SpaceTraffic.Game.Geometry;
+using System.Runtime.Serialization;
 
 namespace SpaceTraffic.Game
-{
+{   
+    [DataContract(Name="StarSystem")]
     public class StarSystem : IVersionedObject
     {
         #region Properties
@@ -32,6 +34,7 @@ namespace SpaceTraffic.Game
         /// <value>
         /// The name.
         /// </value>
+        [DataMember]
         public string Name { get; set; }
 
         /// <summary>
@@ -40,6 +43,7 @@ namespace SpaceTraffic.Game
         /// <value>
         /// The map position.
         /// </value>
+        [DataMember]
         public Point2d MapPosition { get; set; }
 
         /// <summary>
@@ -64,7 +68,11 @@ namespace SpaceTraffic.Game
         /// <value>
         /// The wormhole endpoints.
         /// </value>
+
         public IKeyAccessibleList<int, WormholeEndpoint> WormholeEndpoints { get; set; }
+
+        [DataMember]
+        public IList<WormholeEndpoint> WormholeEndpointsList { get; set; }
 
         public DateTime LastUpdate { get; set; }
         #endregion
@@ -88,7 +96,7 @@ namespace SpaceTraffic.Game
                 return item.Name;
             }
         }
-
+        [DataContract(Name="WormholeEndpoints")]
         private class WormholeEndpointList : KeyAccessibleSortedList<int, WormholeEndpoint>
         {
             public override int GetKeyForValue(WormholeEndpoint item)

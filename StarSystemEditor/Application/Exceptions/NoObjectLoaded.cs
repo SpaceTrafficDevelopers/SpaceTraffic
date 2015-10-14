@@ -20,48 +20,48 @@ using System.Runtime.Serialization;
 namespace SpaceTraffic.Tools.StarSystemEditor.Exceptions
 {
     /// <summary>
-    /// Vlastni vyjimka vyhozenu pokud nebyl nacten zadny objekt pred zahajenim editace
+    /// Exception thrown when no object was loaded before editing
     /// </summary>
     [Serializable]
     public class NoObjectLoaded : System.NullReferenceException
     {
         /// <summary>
-        /// Konstruktor chyby
+        /// Construktor
         /// </summary>
 		public NoObjectLoaded()
 		{
 		}
 
         /// <summary>
-        /// Pretizeni konstruktoru ktere doda chybovou hlasku
+        /// Overloaded constructor that displays excepation message
         /// </summary>
-        /// <param name="message">Zprava chyby</param>
-		public NoObjectLoaded(string message): base("Zadny objekt nebyl nacten do pameti! Editor: " + message)
+        /// <param name="message">error message</param>
+		public NoObjectLoaded(string message): base("No object loaded to memory! Editor: " + message)
 		{
 		}
 
         /// <summary>
-        /// Pretizeni konstruktoru
+        /// Overloaded constructor
         /// </summary>
-        /// <param name="message">Zprava</param>
-        /// <param name="innerException">Vnitrni vyjimka</param>
+        /// <param name="message">Message</param>
+        /// <param name="innerException">inner exception</param>
 		public NoObjectLoaded(string message,
 			Exception innerException): base(message, innerException)
 		{
 		}
 
         /// <summary>
-        /// Pretizeni konstruktoru
+        /// Overloaded constructor
         /// </summary>
         /// <param name="info">info</param>
-        /// <param name="context">kontext</param>
+        /// <param name="context">context</param>
         protected NoObjectLoaded(SerializationInfo info,
 			StreamingContext context): base(info, context)
 		{
 		}
 
         /// <summary>
-        /// Vrati data objektu
+        ///returns object data
         /// </summary>
         /// <param name="info">info</param>
         /// <param name="context">context</param>
