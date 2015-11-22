@@ -14,36 +14,25 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 **/
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.ServiceModel;
-using SpaceTraffic.Entities.PublicEntities;
-using SpaceTraffic.Entities;
+using System.Web;
 
-namespace SpaceTraffic.Services.Contracts
+namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
 {
-	[ServiceContract]
-	public interface IPlayerService
+	public class EarnedAchievements : IAjaxHandleable
 	{
 
-		[OperationContract]
-		bool PlayerHasEnaughCredits(int playerId, long amount);
-
-		[OperationContract]
-		int GetPlayersCredits(int playerId);
-
-		[OperationContract]
-		Player GetPlayer(int playerId);
-
-		[OperationContract]
-		bool PlayerHasSpaceShip(int playerId, int spaceShipId);
-
-		[OperationContract]
-		IList<SpaceShip> GetPlayersShips(int playerId);
-		
+		/// <summary>
+		/// Returns achievements just got by player
+		/// </summary>
+		/// <param name="data">The data (empty)</param>
+		/// <param name="controller">The controller.</param>
+		/// <returns></returns>
+		public object handleRequest(dynamic data, AbstractController controller)
+		{
+			return controller.GSClient.AchievementsService.GetUnviewedAchievements(controller.getCurrentPlayerId());
+		}
 	}
-
 }

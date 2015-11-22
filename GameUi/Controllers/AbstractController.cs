@@ -36,7 +36,7 @@ namespace SpaceTraffic.GameUi.Controllers
 	/// </summary>
 	public abstract class AbstractController : Controller
 	{
-		protected readonly IGameServerClient GSClient = GameServerClientFactory.GetClientInstance();
+		public readonly IGameServerClient GSClient = GameServerClientFactory.GetClientInstance();
 
 		/// <summary>
 		/// Loads the XML assembly from assembly folder
