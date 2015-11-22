@@ -60,5 +60,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 				return (channel as IPlayerService).GetPlayersShips(playerId);
 			}
 		}
+
+
+		public int GetPlayersCredits(int playerId)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IPlayerService).GetPlayersCredits(playerId);
+			}
+		}
 	}
 }

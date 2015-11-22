@@ -2,7 +2,7 @@
  util/MathUtils.js
  util/Queue.js
  ui/ViewportManager.js
- ui/GameWindowTabs.js 
+ ui/GameWindowTabs.js
  game/geometry/Trajectory.js
  game/geometry/Point.js
  game/geometry/Orbit.js
@@ -24,5 +24,6 @@
  map/svg/SvgWormholeEndpoint.js
  map/svg/SvgOrbitFactory.js
  game/Achievements.js
+ game/Credits.js
  core/init.js
  
