@@ -116,7 +116,11 @@
     <Compile Include="Areas\Game\Models\ShipModel.cs" />
     <Compile Include="Configuration\GameUiConfiguration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AchievementController.cs" />
+    <Compile Include="Controllers\AjaxHandlers\CreditsAmount.cs" />
+    <Compile Include="Controllers\AjaxHandlers\EarnedAchievements.cs" />
+    <Compile Include="Controllers\AjaxHandlers\IAjaxHandleable.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Game\Controllers\MapController.cs" />
     <Compile Include="Areas\Game\Controllers\MessagesController.cs" />
