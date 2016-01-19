@@ -1,10 +1,7 @@
-
+@import "Variables/colors.less";
 // Color schema
 @spaceColor: #000000;
-@normalTextColor: #ffffff;
 @panelBorderColor: #151515;
-@headerBgColor: #111111;
-@footerBgColor: @headerBgColor;
 @footerBorderColor: #222222;
 @panelBgColor: #060525;
 
@@ -14,7 +11,7 @@
 body{
 	background-image: url('../images/stars.gif');
 	background-color: @spaceColor;
-	color: @normalTextColor;
+	color: @textColor;
 }
 
 
@@ -87,7 +84,7 @@ body{
 	padding: 10px 15px;
 	width: 350px;
 	display: none;
-	color: @normalTextColor;
+	color: @textColor;
 	text-align: left;
 
 	/* outline radius for mozilla/firefox only */

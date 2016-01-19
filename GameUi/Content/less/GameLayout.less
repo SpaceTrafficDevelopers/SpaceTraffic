@@ -1,85 +1,181 @@
-
-
-* {
-	margin: 0;
-	padding: 0;	
-}
-
-html {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	font-size: 10pt;
-}
-
-body {
-	background-color: @spaceColor;
-	width: 100%;
-	min-height: 100%;
-	height: 100%;
-	font: @normalTextFont;
-	
-	background-color: black;
-	background-image: ~"url('images/content_stars_bg.png')";
-	background-repeat: repeat;
-	
-	color: @normalTextColor;
-}
-
-h1, h2, h3 {
-	color: white;
-	font-family: "Myriad Pro", Arial, sans-serif;
-}
+@import "Variables/colors.less";
+@import "Variables/fonts.less";
+@import "Parts/icons.less";
+@import "defaults.less";
 
 #envelope {
-
 	height: 100%;
 	width: 100%;
 }
-
-#logo 
-{
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	width: 200px;
-	height: 100px;
-	z-index: 50;
+#debugOverlay{
+	display: none;
 }
 
-
-/*** HEADER ***/
-#header {
-	/*border-bottom: 2px solid;*/
-	background-color: @headerBgColor;
-	text-align: right;
-	
-	h1 {
-		text-indent: -9999px;
-		text-align: left;
-		display: block;
-		width: 0;
-		height: 0;
-	}
-	
-	margin-left: 0px;
-	/*padding-bottom: 40px;*/
-	position: absolute;
-	top:0;
-	left:0;
+@appPanelHeight: 20px;
+#applicationPanel{
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
 	width: 100%;
-	height: 30px;
-	z-index: 50;
+	height: @appPanelHeight;
+	background: @gamePanelBgColor;
+	z-index: 10;
+
+	.leftPart, .middlePart, .rightPart{
+		float: left;
+		height: @appPanelHeight;
+	}
+	.leftPart, .rightPart{
+		width: 40%;
+	}
+	.middlePart{
+		width: 20%;
+		overflow: visible;
+	}
+	.rightPart{
+		text-align: right;
+	}
+	.brick{
+		display: inline-block;
+		height: @appPanelHeight - 4;
+		line-height: @appPanelHeight - 4;
+		padding: 2px 4px;
+		border-right: 1px solid rgba(255,255,255, 0.1);
+	}
 }
 
-#header { /*border-bottom-color: #222222;*/ }
-/*#header { background-color: black; }*/
+@gameTopHeight: 40px;
+#gameTopPanel{
+	position: fixed;
+	left: 0;
+	top: @appPanelHeight;
+	width: 100%;
+	z-index: 9;
+
+	height: @gameTopHeight;
+	.leftPart, .middlePart, .rightPart{
+		position: relative;
+		z-index: 100;
+		float: left;
+		height: @gameTopHeight;
+	}
+	.leftPart{
+		width: 19%;
+		padding-left: 1%;
+	}
+	.middlePart{
+		z-index: 5;
+		width: 50%;
+	}
+	.rightPart{
+		width: 29%;
+		padding-right: 1%;
+		text-align: right;
+	}
+	.leftPart, .rightPart{
+		background: @gamePanelBgColor;
+		border-bottom: 2px solid @gamePanelBorderColor;
+	}
+
+	.brick{
+		display: inline-block;
+		height: @gameTopHeight - 10;/* for top and bot padding*/
+		line-height: @gameTopHeight - 4;
+		padding: 8px 6px 2px 6px;
+		vertical-align: middle;
+		text-align: center;
+		&.minwidth{
+			min-width: 80px;
+		}
+	}
+	.middlePart{/* used for make /'''''''\ shape on the top panel*/
+		position: relative;
+
+		.middleShape{
+			position: relative;
+			width: 100%;
+			background: @gamePanelBgColor;
+			border-bottom: 2px solid @gamePanelBorderColor;
+			height: 16px;
+			z-index: 9;
+		}
+		.leftShape, .rightShape{
+			position: absolute;
+			top: -22px;
+			height: @gameTopHeight;
+			background: @gamePanelBgColor;
+			border-bottom: 2px solid @gamePanelBorderColor;
+			width: 80px;
+			z-index: 2;
+		}
+		.leftOverlay, .rightOverlay{
+			position: absolute;
+			background: @gamePanelBgColor;
+			top: 3px;
+			z-index: 20;
+			width: 40px;
+			height: 20px;
+		}
+		.leftShape{
+			left: -26px;
+			transform: rotate(-45deg);
+		}
+		.leftOverlay{
+			left: -8px;			
+			transform: rotate(-45deg);
+		}
+		.rightShape{
+			right: -26px;
+			transform: rotate(45deg);
+		}
+		.rightOverlay{
+			right: -8px;			
+			transform: rotate(45deg);
+		}
+
+	}
+}
+
 
 #logo {
-	background-image:~"url('images/logo_small.png')";
-	background-repeat: no-repeat; 
-	background-position: 10px 10px;
+	position: relative;
+	text-decoration: none;
+	font-family: @titleFont;
+	color: @titleTextColor;
+
+	h1{
+		color: @textColor;
+		text-align: center;
+	}	
+	
 }
+
+#content {
+	position:absolute;
+	top: 30px;
+	left: 0;
+	width: 100%;
+	height: 100%;	
+	z-index: 1;	
+}
+
+#gameBottomPanel{
+
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: 10;
+	/*border-top: 2px solid @gamePanelBorderColor;*/
+
+	#infoStream{
+		background: @gamePanelBgColor;
+		height: 30px;
+		width: auto;
+	}
+}
+
 
 .mainWindow {
 	.panel;
@@ -90,16 +186,7 @@ ul.mainmenu {
 	list-style: none;
 }
 
-#content {
-	position:absolute;
-	top: 30px;
-	left: 0;
-	/*clear: both;*/
-	width: 100%;
-	height: 500px;
-	
-	z-index: 0;	
-}
+
 
 /*** CONTENT PANELS ***/
 .panel {
@@ -132,25 +219,11 @@ ul.mainmenu {
 
 #topPanel {
 	.panel;
-	
-	background-position: 250px -350px;
-	height: 60px;
-	margin-bottom: 5px;
-	margin-left: 200px;
-	margin-right: 10px;
-	padding-left: 20px;
-	z-index: 100;
-	vertical-aligh: top;
-	/*box-shadow: 0 0 20px rgba(58, 58, 58 , 1);*/
-	/*-webkit-box-shadow: 0 0 20px rgba(58, 58, 58, 1); 
-	-moz-box-shadow: 0 0 10px white, inset 0 0 10px #304035;*/
-	/*background-color: rgba(54,80,71,0.5);*/
-	border: 1px solid;
-	/*-moz-border-radius: 5px;*/
-	/*border-radius: 5px;*/
+	display: none;
 }
 
 #menuPanel {
+	display: none;
 	.panel;
 	
 	
@@ -188,7 +261,7 @@ ul.mainmenu {
 	
 	a {
 		color: @menuLinkColor;
-		font: @menuFont;
+		font: @titleFont;
 		letter-spacing: 1px;
 		text-transform: uppercase;
 		text-shadow: 0 1px 0 #FFFFFF;
@@ -223,45 +296,12 @@ ul.mainmenu {
 }
 
 #contextPanel {
-	.panel;
-	background-position: -200px 0px;
-	border: 1px solid;
-	
-	.border-radius(8px, 8px, 8px,8px);
-	position: relative;
-	right: 5px;
-	float: right;
-	width: 280px; /* 300px effectively, padding */
-	height: 400px;
-	padding: 10px;
-	margin-top: 20px;
-	margin-left: 10px;
-	margin-right: 5px;
-	z-index: 100;
-	
-	
+	display: none;
 }
 
-
-/*** FOOTER ***/
-#footer {
-	text-align: center;
-	vertical-align: bottom;
-	border-top: 2px solid;
-	background-color: @footerBgColor;
-	border-top-color:  @footerBorderColor;
-	clear: both;
-	padding-top: 10px;
-	position: fixed;
-	width: 100%;
-	bottom: 0;
-	left: 0;
-	display: block;
-	z-index: 50;
-	background-color: @spaceColor;
-	border-top: 2px solid #222222;
+#footer{
+	display: none;
 }
-
 
 
 

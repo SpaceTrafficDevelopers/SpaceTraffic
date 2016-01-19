@@ -21,19 +21,42 @@
   </head>
   <body>
 	<div id="envelope">
-	  <div id="header">
-		<h1>Space Traffic</h1>
-		<div>Debug Player&nbsp;<span>Czech | English</span></div>
-	  </div>
-	  <div id="logo">
-	  </div>
-	  <div id="content">
-		<div id="topPanel">
-			<div class="topbrick"><p>5/8</p><p>Ships</p></div>
-			<div class="topbrick"><p>10/8</p><p>Bases</p></div>
-			<div class="topbrick"><p>10/8</p><p>Messages</p></div>
-			<div class="topbrick"><p>Credits</p><p class="creditsAmount"></p></div>
-			<div class="topbrick"><p>&nbsp;@Membership.GetUser().UserName</p></div>
+		<div id="applicationPanel">
+			<div class="leftPart">
+				<div class="brick">Česká verze</div>
+				<div class="brick">
+					<a href="#">Reference</a>
+				</div>
+			</div>
+			<a href="@Url.Action("Index","/")" title="Na hlavní obrazovku" id="logo" class="middlePart">
+				<h1>Space Traffic</h1>
+			</a>
+			<div class="rightPart">
+				<div class="brick">@Membership.GetUser().UserName</div>
+				<div class="brick">
+					<a href="#">Odhlásit se</a>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div id="gameTopPanel">
+			<div class="leftPart">
+				<div class="brick">
+					MENU
+				</div>
+			</div>
+			<div class="middlePart">
+				<div class="leftShape"></div>
+				<div class="leftOverlay"></div>
+				<div class="middleShape"></div>
+				<div class="rightShape"></div>
+				<div class="rightOverlay"></div>
+			</div>
+			<div class="rightPart">
+				<div class="brick minwidth"><span class="shipsIcon mediumIcon"></span><span class="shipsAmount">5</span></div>
+				<div class="brick minwidth"><span class="creditsIcon mediumIcon"></span><span class="creditsAmount"></span></div>
+			</div>
+			<div class="clearfix"></div>
 		</div>
 		<div id="menuPanel">
 			<ul class="mainmenu">
@@ -44,27 +67,32 @@
 							<img src="@Url.Content("~/Content/images/"+menuItem.ToLower()+"_button_icon.png")" width="32" height="32" />
 							@menuItem
 						</a>
-						
+
 					</li>
 				}
 			</ul>
-			
-		</div>
-		<div id="contextPanel">
-			@RenderSection("ContextPanel", false)
-		</div>
-		@Html.Partial("_Flash")
-		<div id="mainPanel">
-			@RenderBody()
-		</div>
-		<div id="viewport">
 
 		</div>
-		
-		@Html.Partial("_Achievements")
+		<div id="gameBottomPanel">
+			<div id="infoStream"></div>
+		</div>
+		<div id="content">
+			<div id="contextPanel">
+				@RenderSection("ContextPanel", false)
+			</div>
+			@Html.Partial("_Flash")
+			<div id="mainPanel">
+				@RenderBody()
+			</div>
+			<div id="viewport">
+				@*SVG starsystem viewport*@
+			</div>
 
-	  </div>
-	  <div id="footer">
+			@Html.Partial("_Achievements")
+
+		</div>
+	  
+	  <div id="references">
 		<p>&copy; Space Traffic Team | <span lang="cs">ZČU</span> | <span lang="cs">FAV</span> | <span lang="cs">KIV</span></p>
 		<p>Sources for background images were taken by Hubble Space Telescope and published by NASA.</p>
 	  </div>
