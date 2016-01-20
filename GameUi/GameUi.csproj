@@ -277,6 +277,8 @@
     <Content Include="Content\less\elements.less" />
     <Content Include="Content\less\GameLayout.less" />
     <Content Include="Content\less\gamewindow.less" />
+    <None Include="Content\less\Game\libs\jquery.marquee.less" />
+    <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\itemtable.less" />
     <Content Include="Content\less\MessagesView.less" />
     <Content Include="Content\less\ProfileView.less" />
@@ -371,6 +373,8 @@
     <Content Include="Content\less\Variables\fonts.less" />
     <Content Include="Content\less\defaults.less" />
     <Content Include="Content\less\Parts\icons.less" />
+    <Content Include="Content\less\Game\buttons.less" />
+    <Content Include="Content\less\Parts\alerts.less" />
     <None Include="Views\Shared\_Achievements.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -400,7 +404,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="App_GlobalResources\" />
     <Folder Include="App_LocalResources\" />
-    <Folder Include="Content\less\Game\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
