@@ -43,7 +43,7 @@ $(document).ready(function(){
 		ok((result instanceof Point), 'Should be Point instance');
 		ok((!isNaN(result.x)), 'x should be number');
 		ok((!isNaN(result.y)), 'y should be number');
-		console.debug('RESULTX:', result.x);
-		console.debug('RESULTY:', result.y);
+		//console.debug('RESULTX:', result.x);
+		//console.debug('RESULTY:', result.y);
 	});	
 });

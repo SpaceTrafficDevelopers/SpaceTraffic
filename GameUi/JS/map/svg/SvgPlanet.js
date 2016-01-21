@@ -12,6 +12,15 @@ var SvgPlanet = new Class({
 		return (this.body.altName ? this.body.altName : this.body.name);
 	},
 	onclickHandler: function (sender) {
-		console.log(sender);
+		this.showPlanetDetails($('#contextPanel'));
+		this.showPlanetInfo($('#infoPanel'));
+	},
+
+	showPlanetInfo: function ($element) {/* info about planet on the left*/
+		$element.html('<h2>' + this.body.altName + '</h2><p>' + this.body.description + '</p>');
+		$element.css('display', 'block');
+	},
+	showPlanetDetails: function ($element) {/* detailed UI of planet on the right */
+
 	}
 });

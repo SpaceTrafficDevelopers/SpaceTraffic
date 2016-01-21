@@ -36,13 +36,13 @@ var SvgWormholeEndpoint = new Class({
     },
 
 	onclickHandler: function(){
-		console.debug("this",this);
+		//console.debug("this",this);
 		
 		StarSystemLoader.loadStarSystem(this.body.destination, function(starSystem){
 	        SvgStarSystemMap.currentStarSystem = starSystem;
 	        // Sets currentStarSystem cookie
 	        $.cookie("currentStarSystem", starSystem.name, { path: '/' });
-	        console.debug("currentStarSystem: ", SvgStarSystemMap.currentStarSystem);
+	        //console.debug("currentStarSystem: ", SvgStarSystemMap.currentStarSystem);
 	        SvgStarSystemMap.draw();
 	        SvgStarSystemMap.startUpdateTimer();
 		});

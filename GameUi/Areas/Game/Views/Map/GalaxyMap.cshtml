@@ -12,15 +12,15 @@
      changeSystem: function changeSystem(evt) {
 
      $.getScript("../JS/map/StarSystemLoader.js", function () {
-         console.debug("event");
-         console.debug("this", this);
+         //console.debug("event");
+         //console.debug("this", this);
          var target = evt.target;
          var id = target.id;
          StarSystemLoader.loadStarSystem(id, function (starSystem) {
              SvgStarSystemMap.currentStarSystem = starSystem;
              // Sets currentStarSystem cookie
              $.cookie("currentStarSystem", starSystem.name, { path: '/' });
-             console.debug("currentStarSystem: ", SvgStarSystemMap.currentStarSystem);
+             //console.debug("currentStarSystem: ", SvgStarSystemMap.currentStarSystem);
              SvgStarSystemMap.draw();
              SvgStarSystemMap.startUpdateTimer();
              window.location.replace('/Game');

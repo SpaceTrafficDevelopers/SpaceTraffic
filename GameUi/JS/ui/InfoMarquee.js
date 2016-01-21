@@ -4,7 +4,6 @@
 
 ; $(function () {
 	$(document).ready(function () {
-		console.log($("#marquee"));
 		$("#infoStream").marquee({
 			yScroll: "bottom",
 			showSpeed: 850,

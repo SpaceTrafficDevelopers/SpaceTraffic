@@ -32,7 +32,7 @@ var SvgStarSystemMap = {
 	* Initializes rendrer
 	*/
 	init: function ($svgViewport) {
-		console.debug("StarSystemRenderer.init()", $svgViewport);
+		//console.debug("StarSystemRenderer.init()", $svgViewport);
 		this.$svgViewport = $svgViewport;
 				
 		// bind function to this instance
@@ -52,7 +52,7 @@ var SvgStarSystemMap = {
 	* Draw scene.
 	*/
 	draw: function () {
-		console.group('SvgStarSystemMap.draw');
+		//console.group('SvgStarSystemMap.draw');
 		//get time in seconds
 		if(this.timer != null)
 		{
@@ -112,9 +112,9 @@ var SvgStarSystemMap = {
 		//preparations
 		var buffer = '<g id="svgViewportGroup" transform="'+this.svgViewportManager.getViewportTransform()+'">'
 					+ backgroundLayerBuff+'</g>'+ objectLayerBuff+'</g>'+ overlayLayerBuff+'</g>'+ '<g id="svgTopLayer"></g>';
-		console.debug('buffer', buffer);
+		//console.debug('buffer', buffer);
 		
-		console.debug('Building viewport, Writing svg');
+		//console.debug('Building viewport, Writing svg');
 		this.svgViewportManager.buildViewport(buffer);
 		
 		buffer = null;
@@ -127,17 +127,17 @@ var SvgStarSystemMap = {
 		this.$svgOverlayLayer = $('#svgOverlayLayer');
 		this.$svgTopLayer = $('#svgTopLayer');
 		
-		console.debug('svgItems:',this.svgItems);
+		//console.debug('svgItems:',this.svgItems);
 		
-		console.debug('svgDynamicItems:',this.svgDynamicItems);
+		//console.debug('svgDynamicItems:',this.svgDynamicItems);
 		
 		for (var i = 0; i < this.svgItems.length; i++) {
-			console.debug('Revive on: ', this.svgItems[i])
+			//console.debug('Revive on: ', this.svgItems[i])
 			this.svgItems[i].revive();
 		}
 		
 		this.updateObjectList();
-		console.groupEnd();
+		//console.groupEnd();
 	},
 
 	// Animation update. Used as staticRenderCallback in SvgRenderer.

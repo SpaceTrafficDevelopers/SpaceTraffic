@@ -39,10 +39,10 @@ var SvgNameplate = new Class({
 		this.$svgNameplate = $('#'+this.getId());
 		this.$svgBackground = $('#'+this.getId(ID_NAMEPLATE_BACKGROUNG_SUFFIX));
 		this.$svgText = $('#'+this.getId(ID_NAMEPLATE_TEXT_SUFFIX));
-		console.debug('$svgNameplate', this.$svgNameplate);
-		console.debug('$svgBackground', this.$svgBackground);
-		console.debug('$svgText', this.$svgText);
-		console.debug('element:', this.$svgText.get(0));
+		//console.debug('$svgNameplate', this.$svgNameplate);
+		//console.debug('$svgBackground', this.$svgBackground);
+		//console.debug('$svgText', this.$svgText);
+		//console.debug('element:', this.$svgText.get(0));
 		
 		// Sets textWidth from rendered element. 
 		this.textWidth=this.$svgText.get(0).getComputedTextLength()+20;

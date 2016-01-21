@@ -25,8 +25,8 @@ var SvgRenderer = new Class({
     */
     initialize: function(staticRenderCallbackFnc, maxFps, debugOutputId) {
     	
-    	console.debug("staticRenderCallbackFnc: ",staticRenderCallbackFnc);
-    	//console.debug("viewportManager: ",viewportManager);
+    	//console.debug("staticRenderCallbackFnc: ",staticRenderCallbackFnc);
+    	////console.debug("viewportManager: ",viewportManager);
         // bind function to this instance
         
         this.maxFps = maxFps;
@@ -101,7 +101,7 @@ var SvgRenderer = new Class({
     
     
     startUpdateTimer: function(){
-    	console.debug("Renderer start");
+    	//console.debug("Renderer start");
     	if(typeof this.timer != "undefined") clearInterval(this.timer);
     	if(this.maxFps > 0)
     	{

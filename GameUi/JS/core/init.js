@@ -45,10 +45,10 @@ $(document).ready(function () {
 		
 	ViewportManager.init();
 	
-    console.debug("Loading star system");
+    //console.debug("Loading star system");
     var storedStarSystem = $.cookie("currentStarSystem");
     
-    console.debug("storedStarSystem:", storedStarSystem);
+    //console.debug("storedStarSystem:", storedStarSystem);
     if(storedStarSystem == null)
     {
     	storedStarSystem = 'Solar System'
@@ -57,7 +57,7 @@ $(document).ready(function () {
         SvgStarSystemMap.currentStarSystem = starSystem;
         SvgStarSystemMap.init($("#viewport"));
         
-        console.debug("currentStarSystem: ", SvgStarSystemMap.currentStarSystem);
+        //console.debug("currentStarSystem: ", SvgStarSystemMap.currentStarSystem);
         SvgStarSystemMap.draw();
         SvgStarSystemMap.startUpdateTimer();
     });

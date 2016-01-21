@@ -1,10 +1,10 @@
 
 
-function Planet(name, altName, trajectory, graphics, details) {
+function Planet(name, altName, trajectory, description, details) {
 	this.name = name;
 	this.altName = altName;
 	this.trajectory = trajectory;
-	this.graphics = graphics;
+	this.description = description;
 	this.details = details;
 	this.size = 5;
 }

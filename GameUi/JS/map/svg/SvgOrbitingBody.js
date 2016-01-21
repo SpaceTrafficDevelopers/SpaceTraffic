@@ -90,10 +90,10 @@ var SvgOrbitingBody = new Class({
 		var $svgNameplate = this.svgNameplate.$svgNameplate;
 		
 		var mouseoverHandler = function(){
-			console.debug("SvgPlanet.mouseoverHandler");
+			//console.debug("SvgPlanet.mouseoverHandler");
 			if(!$svgIcon.hasClass('hover'))
 			{
-				console.debug("Reordering svg");
+				//console.debug("Reordering svg");
 				$svgBody.addClass('hover');
 				SvgStarSystemMap.$svgTopLayer.append($svgBody);
 				SvgStarSystemMap.setFade();

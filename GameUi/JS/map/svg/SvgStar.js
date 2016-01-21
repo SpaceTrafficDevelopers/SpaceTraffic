@@ -40,9 +40,9 @@ var SvgStar = new Class({
 		var $svgStar = $('#'+this.getId(ID_OBJECT_SUFFIX)+', #'+this.getId('N'));
 		
 		var mouseoverHandler = function(){
-			console.debug("mouseoverHandler");
-			console.debug("$svgIcon:",$svgIcon);
-			console.debug("$svgNameplate:",$svgNameplate);
+			//console.debug("mouseoverHandler");
+			//console.debug("$svgIcon:",$svgIcon);
+			//console.debug("$svgNameplate:",$svgNameplate);
 			$svgStar.addClass('starHover');
 		
 		};
