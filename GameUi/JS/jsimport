@@ -1,6 +1,7 @@
  util/TimeUtils.js
  util/MathUtils.js
  util/Queue.js
+ util/UIUtils.js
  ui/ViewportManager.js
  ui/GameWindowTabs.js
  game/geometry/Trajectory.js
@@ -26,7 +27,8 @@
  game/Achievements.js
  game/Credits.js
  ui/Menus.js
- ui/libs/jquery.marquee.min.js
+ libs/marquee/jquery.marquee.min.js
+ libs/mousewheel/jquery.mousewheel.min.js
  ui/InfoMarquee.js
  core/init.js
  

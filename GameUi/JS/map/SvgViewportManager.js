@@ -3,7 +3,7 @@ var SvgViewportManager = new Class({
 	$svgViewport: null,
 	offsetX: 0,
 	offsetY: 0,
-	zoom: 1.0,
+	zoom: 1,
 	mouseMove: false,
 	$debugOutput: null,
 	viewportTX: 0,
@@ -79,6 +79,19 @@ var SvgViewportManager = new Class({
 		this.$svgViewport.mouseleave(endDrag);
 		
 		//console.groupEnd();
+		/* zooming with mousewheel */
+		var parent = this;
+		this.$svgViewport.mousewheel(function (e) {
+			if (e.wheelDelta > 0) {/* zoom in */
+				parent.zoom *= Math.abs(e.wheelDelta * MOUSEWHEEL_ZOOM_MODIFIER);
+			} else {/* zoom out */
+				parent.zoom /= Math.abs(e.wheelDelta * MOUSEWHEEL_ZOOM_MODIFIER);
+			}
+			console.log(parent.zoom);
+			parent.$svgViewport.find('#svgViewportGroup').attr('transform', parent.getViewportTransform());
+			parent.updateDebugInfo();
+		});
+
 	},
 	
 	updateDebugInfo: function(){
