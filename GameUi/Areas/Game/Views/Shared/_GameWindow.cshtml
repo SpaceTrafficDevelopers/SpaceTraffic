@@ -5,7 +5,7 @@
 	Tabs tabs = ViewBag.Tabs;
 }
 
-@Html.ActionLink("[X]", "Index", new { Controller = "Default", Area = "Game" }, new { @class = "closebutton" })	
+@Html.ActionLink(HttpUtility.HtmlDecode("&#x2716;"), "Index", new { Controller = "Default", Area = "Game" }, new { @class = "closebutton" })	
 <div class="mainWindow" data-tabs="true">
 	
 	<ul class="gamewindow_tabs">
