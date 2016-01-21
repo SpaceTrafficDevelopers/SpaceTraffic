@@ -8,9 +8,6 @@
 	height: 100%;
 	width: 100%;
 }
-#debugOverlay{
-	display: none;
-}
 
 @appPanelHeight: 20px;
 #applicationPanel{
@@ -187,6 +184,7 @@
 			min-width: 100%;
 			text-align: center;
 			color: @textColor;
+			font-family: @textFont;
 			font-size: 18px;
 			padding: 0;
 		}
@@ -318,6 +316,7 @@ ul.mainmenu {
 }
 
 #contextPanel {
+	display: none;
 	position: fixed;
 	width: @rightSize - 1;
 	padding-right: 1%;
@@ -325,6 +324,9 @@ ul.mainmenu {
 	right: 0;
 	top: @appPanelHeight + 50px;
 	z-index: 11;
+}
+.closebutton{
+	text-decoration: none;
 }
 
 

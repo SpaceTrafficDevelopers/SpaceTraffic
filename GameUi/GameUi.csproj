@@ -104,6 +104,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Game\Controllers\ReferencesController.cs" />
     <Compile Include="Areas\Game\Controllers\CargoController.cs" />
     <Compile Include="Areas\Game\Controllers\PlannerController.cs" />
     <Compile Include="Controllers\AbstractController.cs" />
@@ -277,6 +278,7 @@
     <Content Include="Content\less\elements.less" />
     <Content Include="Content\less\GameLayout.less" />
     <Content Include="Content\less\gamewindow.less" />
+    <Content Include="Areas\Game\Views\References\Index.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\itemtable.less" />

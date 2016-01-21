@@ -34,7 +34,7 @@
 				<div class="leftPart">
 					<div class="brick">Česká verze</div>
 					<div class="brick">
-						<a href="@Url.Action("References","/")" title="O autorech a použitých knihovnách">Reference</a>
+						<a href="@Url.Action("Index", "References", new { Area = "Game" }, null)" title="O autorech a použitých knihovnách">Reference</a>
 					</div>
 				</div>
 				<a href="@Url.Action("Index","/")" title="Na hlavní obrazovku" id="logo" class="middlePart">
@@ -83,6 +83,7 @@
 		<div id="content">
 			@Html.Partial("_Flash")
 			<div id="contextPanel">
+				<span class="closebutton">&#x2716;</span>
 				@RenderSection("ContextPanel", false)
 			</div>
 			<div id="mainPanel">
@@ -95,12 +96,6 @@
 			@Html.Partial("_Achievements")
 
 		</div>
-		@*<div id="references">
-		<p>&copy; Space Traffic Team | <span lang="cs">ZČU</span> | <span lang="cs">FAV</span> | <span lang="cs">KIV</span></p>
-		<p>Sources for background images were taken by Hubble Space Telescope and published by NASA.</p>
-		marquee plugin
-		http://www.givainc.com/labs/marquee_jquery_plugin.cfm
-	</div>*@
 		<div id="gameBottomPanel">
 			<ul id="infoStream" class="marquee">
 				<li>Země se potýká s kritickým nedostatkem gumových medvídků. Vláda slibuje nápravu.</li>

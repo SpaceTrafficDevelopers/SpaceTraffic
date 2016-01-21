@@ -43,6 +43,11 @@ var ViewportManager = {
 			this.$contextPanel._hide();
 			this.doLayout();
 		}).bind(ViewportManager);
+
+		this.$contextPanel.find('.closeButton').click(function () {
+			this.$contextPanel.css('display', 'none');
+		});
+
 	},
 
 	doLayout: function () {

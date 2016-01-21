@@ -10,5 +10,8 @@ var SvgPlanet = new Class({
 	},
 	getName: function(){
 		return (this.body.altName ? this.body.altName : this.body.name);
+	},
+	onclickHandler: function (sender) {
+		console.log(sender);
 	}
 });
