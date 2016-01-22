@@ -82,12 +82,36 @@ var SvgViewportManager = new Class({
 		/* zooming with mousewheel */
 		var parent = this;
 		this.$svgViewport.mousewheel(function (e) {
+			var oldZoom = parent.zoom;
+
 			if (e.wheelDelta > 0) {/* zoom in */
 				parent.zoom *= Math.abs(e.wheelDelta * MOUSEWHEEL_ZOOM_MODIFIER);
+
+
 			} else {/* zoom out */
 				parent.zoom /= Math.abs(e.wheelDelta * MOUSEWHEEL_ZOOM_MODIFIER);
 			}
-			console.log(parent.zoom);
+
+			/* cursor position on viewport */
+			var cursorX = e.pageX - parent.$svgViewport.offset().left;
+			var cursorY = e.pageY - parent.$svgViewport.offset().top;
+
+			var zoomDiff = Math.abs(parent.zoom - oldZoom);
+			/* cursor position in svg coordinates */
+			var svgCursorX = (cursorX - parent.viewportTX) / oldZoom;
+			var svgCursorY = (cursorY - parent.viewportTY) / oldZoom;
+
+			var correctionX = svgCursorX - (svgCursorX * (1 + zoomDiff));
+			var correctionY = svgCursorY - (svgCursorY * (1 + zoomDiff));
+			
+			if (e.wheelDelta > 0) {/* zoom in */
+				parent.viewportTX += correctionX;
+				parent.viewportTY += correctionY;
+			} else {/* zoom out */
+				parent.viewportTX -= correctionX;
+				parent.viewportTY -= correctionY;
+			}
+
 			parent.$svgViewport.find('#svgViewportGroup').attr('transform', parent.getViewportTransform());
 			parent.updateDebugInfo();
 		});
@@ -118,8 +142,8 @@ var SvgViewportManager = new Class({
 		this.$debugOutput = $('#debugOutput');
 	},
 	
-	getViewportTransform: function() {
-		return 'scale('+this.zoom+'),translate(' + this.viewportTX/this.zoom + ',' + this.viewportTY/this.zoom + ')';
+	getViewportTransform: function () {
+		return 'scale(' + this.zoom + '),translate(' + this.viewportTX / this.zoom + ',' + this.viewportTY / this.zoom  + ')';
 	}
 	
 })
