@@ -51,10 +51,21 @@ var SvgStar = new Class({
 		};
 		
 		$svgIcon.mouseover(mouseoverHandler).mouseleave(mouseleaveHandler);
+		var boundCallbackHandler = this.onclickHandler.bind(this);
+
+		$svgIcon.click(boundCallbackHandler);
 		$svgNameplate.mouseover(mouseoverHandler).mouseleave(mouseleaveHandler);
 	},
 	
 	getName: function() {
 		return this.star.name;
+	},
+	onclickHandler: function (sender) {
+		this.showStarInfo($('#infoPanel'));
+	},
+
+	showStarInfo: function ($element) {/* info about star on the left*/
+		$element.html('<h2>' + this.getName() + '</h2><p>' + this.star.description + '</p>');
+		$element.css('display', 'block');
 	}
 });

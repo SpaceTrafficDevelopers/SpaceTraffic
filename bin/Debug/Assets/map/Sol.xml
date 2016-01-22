@@ -3,8 +3,8 @@
 		xmlns:st="SpaceTrafficData"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		version="1.2">
-		<starsystem altName="Sluneční soustava" name="Solar system" x="400" y="350">
-				<star name="Slunce">
+		<starsystem name="Solar system">
+				<star name="Sol">
 						<trajectory>
 								<stacionary x="0" y="0" />
 						</trajectory>

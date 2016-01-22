@@ -54,7 +54,8 @@ var StarSystemLoader = {
 		//console.debug("ENTRY parseStar()", $star);
 		var name = $star.attr('name');
 		var trajectory = StarSystemLoader.parseTrajectory($star.find('trajectory').first());
-		return new Star(name, trajectory, null);
+		var description = $star.find('details').find('description').text();
+		return new Star(name, trajectory, null, description);
 	},
 
 	parsePlanet: function ($planet) {
