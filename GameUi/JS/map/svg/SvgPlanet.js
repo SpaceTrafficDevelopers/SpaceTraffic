@@ -22,5 +22,14 @@ var SvgPlanet = new Class({
 	},
 	showPlanetDetails: function ($element) {/* detailed UI of planet on the right */
 
-	}
+	},
+	/* override */
+	buildObject: function (t) {
+		this.setT(t);
+		var point = this.body.trajectory.calculatePosition(this.getT());
+		var transform = SvgOrbitFactory.getTransformationForPointOnOrbit(point, this.body.trajectory);
+		//TODO: Parametrize
+		return '<circle id="' + this.getId(ID_OBJECT_SUFFIX) + '" cx="0" cy="0" r="' + this.body.size +
+			'"class="' + this.cssClassPrefix + '" transform="' + transform + '"/>';
+	},
 });

@@ -14,12 +14,19 @@
 										<description>
 											Slunce, hvězda lidstvem dlouho obdivovaná a idealizovaná. Srdce Sluneční soustavy, která se stala domovem pro vzkvétající lidskou rasu, složené ze tří čtvrtin z vodíku a ze čtvrtiny z hélia poskytuje svým planetám teplo, světlo a dobré téma k bezcílnému tlachání.
 										</description>
+										<appearance>
+											<size>30</size>
+											<type>gas</type>
+											<colorPrimary>yellow</colorPrimary>
+											<colorSecondary>yellow</colorSecondary>
+											<colorOptional>yellow</colorOptional>
+										</appearance>
 						</details>
 				</star>
 				<planets>
 						<planet altName="Merkur" name="Sol 1">
 								<trajectory>
-										<ellipticOrbit period="88" a="51" b="50" angle="3" initialAngle="10.0" />
+										<ellipticOrbit period="88" a="51" b="50.7" angle="3" initialAngle="10.0" />
 								</trajectory>
 								<details>
 										<gravity>0</gravity>
@@ -27,6 +34,13 @@
 										<description>
 												První z planet Sluneční soustavy. Zpravidla poněkud připálený a neobyvatelný, nicméně sem v průběhu času bylo vysláno hned několik sond, aby bylo nade vší pochybnost jasné, že se zde nenachází nic, co by se dalo výhodně prodat.
 										</description>
+										<appearance>
+											<size>1</size>
+											<type>gas</type>
+											<colorPrimary>yellow</colorPrimary>
+											<colorSecondary>yellow</colorSecondary>
+											<colorOptional>yellow</colorOptional>
+										</appearance>
 								</details>
 						</planet>
 						<planet altName="Venuše" name="Sol 2">
@@ -40,6 +54,13 @@
 												Její hustá atmosféra, sirné deště a vysoký atmosférický tlak vypadaly na první pohled jako jasná překážka pro jakoukoli kolonizaci planety. Jednoho dne však jistého Australana omrzelo věčné vyklepávání pavouků z bot a přestěhoval se na Venuši, kde založil klidné letovisko, hojně využívané jeho krajany a lidmi, kteří se potřebovali schovat někam, kde je nikdo nebude hledat.
 												Tak vznikla první venušanská kolonie.
 										</description>
+									<appearance>
+										<size>3</size>
+										<type>gas</type>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
 								</details>
 						</planet>
 						<planet altName="Země" name="Sol 3">
@@ -52,11 +73,18 @@
 										<description>
 												Země, jinak známá také jako Planeta opic, je rodištěm lidské rasy, mnoha zvířecích druhů, nespočtu rostlin a z neznámého důvodu se zde daří také programátorům. Vyváží zejména jídlo, umění a babičiny sušenky.
 										</description>
+									<appearance>
+										<size>3</size>
+										<type>gas</type>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
 								</details>
 						</planet>
 						<planet altName="Mars" name="Sol 4">
 								<trajectory>
-									<ellipticOrbit period="687" a="120" b="119" angle="6" initialAngle="200.0" />
+									<ellipticOrbit period="687" a="125" b="125" angle="6" initialAngle="200.0" />
 								</trajectory>
 								<details>
 										<gravity>0</gravity>
@@ -64,11 +92,18 @@
 										<description>
 												Kolonizovaný ve Třetím vesmírném věku. Zdejší prostředí bylo ideální pro pokusy terraformovat celou planetu. Všechny zkrachovaly. Místní obrovské biodómy však poskytují prostor pro miliony lidí a navíc se ukázalo, že je Mars ideální pro provozování fúzních elektráren a výrobu energie obecně.
 										</description>
+									<appearance>
+										<size>2</size>
+										<type>gas</type>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
 								</details>
 						</planet>
 						<planet altName="Jupiter" name="Sol 5">
 								<trajectory>
-										<ellipticOrbit period="4435" a="220" b="216" angle="6" initialAngle="0.0" />
+										<ellipticOrbit period="4435" a="220" b="218" angle="6" initialAngle="0.0" />
 								</trajectory>
 								<details>
 										<gravity>0</gravity>
@@ -78,6 +113,13 @@
 												Podle místní pověsti žije jeden zvláště odolný poustevník v malé žáruvzdorné kapsli na sopečném měsíci Io, ale prozatím se nikomu nechtělo zajít k němu na návštěvu.
 												Turisté také často obdivují podivný černý kvádr, klidně plující vesmírem po Jupiterově oběžné dráze.
 										</description>
+									<appearance>
+										<size>20</size>
+										<type>gas</type>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
 								</details>
 						</planet>
 						<planet altName="Saturn" name="Sol 6">
@@ -89,8 +131,16 @@
 										<mass>5.66037527242517e+026</mass>
 										<description>
 												Jediným dosud obývaným světem v blízkosti Saturna je jeho měsíc Titan. Pro získání životně důležitých zásob na takto odlehlé planetě je potřeba tavit místní horniny, z nichž je však možné získat všechny potřebné prvky. Díky neskutečně krásnému výhledu na Saturn a jeho prstence je Titan velmi oblíbenou turistickou destinací.
-												<strong>Poznámka:</strong> Nejčastější příčinou úmrtí turisty je zde procházka v dešti. Mísní samospráva upozorňuje návštěvníky, že vesmírný skafandr ani deštník vám nestačí. Protože víte co...prší metan.
+												Poznámka: Nejčastější příčinou úmrtí turisty je zde procházka v dešti. Mísní samospráva upozorňuje návštěvníky, že vesmírný skafandr ani deštník vám nestačí. Protože víte co...prší metan.
 										</description>
+									<appearance>
+										<size>18</size>
+										<type>gas</type>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+										<ring color="yellow" />
+									</appearance>
 								</details>
 						</planet>
 						<planet altName="Uran" name="Sol 7">
@@ -104,6 +154,13 @@
 											Jediná planeta Sluneční soustavy, která vypadá, jako kdyby se kutálela. Sklon jeho rovníku k rovině jeho dráhy je totiž celých 97,86°.
 											Sjednocená vláda Země vydala v roce 2069 poučnou brožurku, která vysvětluje anglicky mluvícím obyvatelům, že vtipy související se jménem této planety jsou jednou provždy ohrané a nevtipné.
 										</description>
+									<appearance>
+										<size>8</size>
+										<type>gas</type>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
 								</details>
 						</planet>
 						<planet altName="Neptun" name="Sol 8">
@@ -116,6 +173,13 @@
 										<description>
 												Vodíkový krasavec s příchutí metanu. Tato velká modrá planeta byla lidstvem stovky let přehlížena, protože "jednu modrou planetu už přece máme". Neptun tudíž lidi rovněž vytrvale ignoruje a všichni jsou tak spokojení.
 										</description>
+									<appearance>
+										<size>8</size>
+										<type>gas</type>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
 								</details>
 						</planet>
 				</planets>

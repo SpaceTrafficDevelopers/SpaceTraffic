@@ -55,7 +55,8 @@ var StarSystemLoader = {
 		var name = $star.attr('name');
 		var trajectory = StarSystemLoader.parseTrajectory($star.find('trajectory').first());
 		var description = $star.find('details').find('description').text();
-		return new Star(name, trajectory, null, description);
+		var appearance = $star.find('details').find('appearance');
+		return new Star(name, trajectory, null, description, appearance);
 	},
 
 	parsePlanet: function ($planet) {
@@ -64,7 +65,8 @@ var StarSystemLoader = {
 		var planetAltName = $planet.attr('altName');
 		var trajectory = StarSystemLoader.parseTrajectory($planet.find('trajectory').first());
 		var description = $planet.find('details').find('description').text();
-		return new Planet(planetName, planetAltName, trajectory, description, null);
+		var appearance = $planet.find('details').find('appearance');
+		return new Planet(planetName, planetAltName, trajectory, description, null, appearance);
 	},
 
 	parseWormholeEndpoint: function ($wormholeEndpoint) {

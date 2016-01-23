@@ -22,11 +22,11 @@ var SvgStar = new Class({
 	},
 	buildObject : function(t) {
 		this.setT(t);
-		return '<circle id="'+this.getId(ID_OBJECT_SUFFIX)+'" cx="0" cy="0" r="20" class="star" />';
+		return '<circle id="'+this.getId(ID_OBJECT_SUFFIX)+'" cx="0" cy="0" r="' + this.star.size + '" class="star" />';
 	},
 	buildOverlay : function(t) {
 		this.setT(t);
-		return '<text id="'+this.idPrefix+'N" x="0" y="' + (20 + 18) + '" class="planetName">' + this.star.name + '</text>';
+		return '<text id="'+this.idPrefix+'N" x="0" y="' + (20 + 18) + '" class="starName">' + this.star.name + '</text>';
 	},
 	// Prepares for updating related elements. All calculations must be done here. Returns false, if there is currently nothing to update.
 	prepareUpdate : function(t) {

@@ -59,7 +59,7 @@ var SvgOrbitingBody = new Class({
 	buildOverlay : function(t) {
 		this.setT(t);
 		var point = this.body.trajectory.calculatePosition(this.getT());
-		this.svgNameplate = new SvgNameplate(this.getId(ID_NAMEPLATE_SUFFIX), this.getName(), 0, this.iconSize, '');
+		this.svgNameplate = new SvgNameplate(this.getId(ID_NAMEPLATE_SUFFIX), this.getName(), 0, this.iconSize, '', this.body);
 		var pointTansformation = SvgOrbitFactory.getTransformationForPointOnOrbit(point, this.body.trajectory);
 		return this.svgNameplate.buildOverlayAt(pointTansformation);
 	},
