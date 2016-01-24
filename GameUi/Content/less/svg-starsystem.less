@@ -54,9 +54,6 @@
 
 circle.star{
 	fill:yellow;
-	stroke:#ffffff;
-	stroke-width:12;
-	stroke-opacity:0.6;
 }
 	
 circle.star.starHover {
@@ -119,6 +116,7 @@ line.tagLine{
 }
 
 .wormholeEndpoint {
+	overflow: visible;
 	
 	.center {
 		fill:white;
@@ -141,12 +139,6 @@ line.tagLine{
 }
 
 .nameplate {
-	/*  */
-	rect {
-		/*  */
-		fill: #222222;
-		fill-opacity:1;
-	  }
 
 	text {/* has to be same with #testText, otherwise text size will be wrongly calculated */
 		fill: @titleTextColor;
@@ -158,17 +150,16 @@ line.tagLine{
 		overflow:visible;
 		visibility:visible;
 		opacity:1;
-		fill:#444;
+		fill: @gamePanelBgColor;
 		fill-opacity:0.8;
 		fill-rule:evenodd;
-		stroke: @infoIconColor;
+		stroke: @gamePanelBorderColor;
 		stroke-width:2;
 		stroke-linecap:butt;
 		stroke-linejoin:round;
 		stroke-miterlimit:4;
 		stroke-dasharray:none;
 		stroke-dashoffset:0;
-		stroke-opacity:0.4;
 		marker:none;
 		enable-background:accumulate;
 	}
@@ -186,27 +177,30 @@ line.tagLine{
 .nameplate.hover {
 	.nameplateBg {
 		stroke: lighten(@infoIconColor, 0%) !important;
+		stroke-opacity: 0.4;
 	}
 	text {
-		fill: lighten(@infoIconColor, 0%) !important;
 	}
 }
 
 .wormholeEndpoint.hover {
 	cursor: pointer;
 	
-	.center {
-		stroke-width:0px;
-	}
-	
-	.outer-rings {
-		webkit-transition:opacity 0.5s linear;
-		-moz-transition:opacity 0.5s linear;
-		-o-transition:opacity 0.5s linear;
-		-ms-transition:opacity 0.5s linear; 
-		transition:opacity 0.5s linear;
-	}
-	
-	.curves {
+	.hovering {
+		fill-opacity: 0.5 !important;
 	}
 }
+
+.wormholeGroup{
+	fill:#15c6e5;
+	fill-opacity:0.6;
+	overflow: visible;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+@-moz-keyframes counterspin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes counterspin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes counterspin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

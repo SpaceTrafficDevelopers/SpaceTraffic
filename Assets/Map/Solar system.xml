@@ -17,16 +17,17 @@
 										<appearance>
 											<size>30</size>
 											<type>gas</type>
-											<colorPrimary>yellow</colorPrimary>
-											<colorSecondary>yellow</colorSecondary>
-											<colorOptional>yellow</colorOptional>
+											<randomSeed>123abc</randomSeed>
+											<colorPrimary>#faf040</colorPrimary>
+											<colorSecondary>#f6bd6a</colorSecondary>
+											<colorOptional>#fa7c06</colorOptional>
 										</appearance>
 						</details>
 				</star>
 				<planets>
 						<planet altName="Merkur" name="Sol 1">
 								<trajectory>
-										<ellipticOrbit period="88" a="51" b="50.7" angle="3" initialAngle="10.0" />
+										<ellipticOrbit period="88" a="51" b="50" angle="3" initialAngle="10.0" />
 								</trajectory>
 								<details>
 										<gravity>0</gravity>
@@ -34,9 +35,10 @@
 										<description>
 												První z planet Sluneční soustavy. Zpravidla poněkud připálený a neobyvatelný, nicméně sem v průběhu času bylo vysláno hned několik sond, aby bylo nade vší pochybnost jasné, že se zde nenachází nic, co by se dalo výhodně prodat.
 										</description>
-										<appearance>
+									<appearance>
 											<size>1</size>
 											<type>gas</type>
+											<randomSeed>123abc</randomSeed>
 											<colorPrimary>yellow</colorPrimary>
 											<colorSecondary>yellow</colorSecondary>
 											<colorOptional>yellow</colorOptional>
@@ -57,6 +59,7 @@
 									<appearance>
 										<size>3</size>
 										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
 										<colorPrimary>yellow</colorPrimary>
 										<colorSecondary>yellow</colorSecondary>
 										<colorOptional>yellow</colorOptional>
@@ -76,6 +79,7 @@
 									<appearance>
 										<size>3</size>
 										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
 										<colorPrimary>yellow</colorPrimary>
 										<colorSecondary>yellow</colorSecondary>
 										<colorOptional>yellow</colorOptional>
@@ -95,6 +99,7 @@
 									<appearance>
 										<size>2</size>
 										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
 										<colorPrimary>yellow</colorPrimary>
 										<colorSecondary>yellow</colorSecondary>
 										<colorOptional>yellow</colorOptional>
@@ -114,8 +119,9 @@
 												Turisté také často obdivují podivný černý kvádr, klidně plující vesmírem po Jupiterově oběžné dráze.
 										</description>
 									<appearance>
-										<size>20</size>
+										<size>15</size>
 										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
 										<colorPrimary>yellow</colorPrimary>
 										<colorSecondary>yellow</colorSecondary>
 										<colorOptional>yellow</colorOptional>
@@ -134,12 +140,13 @@
 												Poznámka: Nejčastější příčinou úmrtí turisty je zde procházka v dešti. Mísní samospráva upozorňuje návštěvníky, že vesmírný skafandr ani deštník vám nestačí. Protože víte co...prší metan.
 										</description>
 									<appearance>
-										<size>18</size>
+										<size>14</size>
 										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
 										<colorPrimary>yellow</colorPrimary>
 										<colorSecondary>yellow</colorSecondary>
 										<colorOptional>yellow</colorOptional>
-										<ring color="yellow" />
+										<ringColor>white</ringColor>
 									</appearance>
 								</details>
 						</planet>
@@ -157,6 +164,7 @@
 									<appearance>
 										<size>8</size>
 										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
 										<colorPrimary>yellow</colorPrimary>
 										<colorSecondary>yellow</colorSecondary>
 										<colorOptional>yellow</colorOptional>
@@ -176,6 +184,7 @@
 									<appearance>
 										<size>8</size>
 										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
 										<colorPrimary>yellow</colorPrimary>
 										<colorSecondary>yellow</colorSecondary>
 										<colorOptional>yellow</colorOptional>

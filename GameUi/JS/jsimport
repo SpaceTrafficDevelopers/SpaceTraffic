@@ -29,6 +29,7 @@
  ui/Menus.js
  libs/marquee/jquery.marquee.min.js
  libs/mousewheel/jquery.mousewheel.min.js
+ libs/random/seedrandom.js
  ui/InfoMarquee.js
  core/init.js
  

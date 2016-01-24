@@ -13,6 +13,14 @@
                 <gravity>0.0</gravity>
                 <mass>0.0</mass>
                 <description> Star of Proxima Centauri system. </description>
+							<appearance>
+								<size>30</size>
+								<type>gas</type>
+								<randomSeed>123abc</randomSeed>
+								<colorPrimary>yellow</colorPrimary>
+								<colorSecondary>yellow</colorSecondary>
+								<colorOptional>yellow</colorOptional>
+							</appearance>
             </details>
         </star>
         <planets>
@@ -26,6 +34,14 @@
                     <description>
                         Description of Praklarush Theonas placeholder.
                     </description>
+									<appearance>
+										<size>30</size>
+										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
                 </details>
             </planet>
             <planet altName="Prima" name="Proxima Centauri 2">
@@ -38,6 +54,14 @@
                     <description>
                         Description of Prima placeholder.
                     </description>
+									<appearance>
+										<size>30</size>
+										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
                 </details>
             </planet>
             <planet altName="Alternus" name="Proxima Centauri 3">
@@ -50,6 +74,14 @@
                     <description>
                         Description of Alternus placeholder.
                     </description>
+									<appearance>
+										<size>30</size>
+										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
                 </details>
             </planet>
             <planet altName="Tertia" name="Proxima Centauri 4">
@@ -62,6 +94,14 @@
                     <description>
                         Description of Tertia placeholder.
                     </description>
+										<appearance>
+											<size>30</size>
+											<type>gas</type>
+											<randomSeed>123abc</randomSeed>
+											<colorPrimary>yellow</colorPrimary>
+											<colorSecondary>yellow</colorSecondary>
+											<colorOptional>yellow</colorOptional>
+										</appearance>
                 </details>
             </planet>
             <planet altName="Qaurtus" name="Proxima Centauri 5">
@@ -74,6 +114,14 @@
                     <description>
                         Description of Qaurtus placeholder.
                     </description>
+									<appearance>
+										<size>30</size>
+										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
                 </details>
             </planet>
             <planet altName="Quinto" name="Proxima Centauri 6">
@@ -86,6 +134,14 @@
                     <description>
                         Description of Quinto placeholder.
                     </description>
+									<appearance>
+										<size>30</size>
+										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
                 </details>
             </planet>
         </planets>

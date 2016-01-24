@@ -14,6 +14,14 @@
 										<description>
 											Star of Solar system.
 										</description>
+							<appearance>
+								<size>30</size>
+								<type>gas</type>
+								<randomSeed>123abc</randomSeed>
+								<colorPrimary>yellow</colorPrimary>
+								<colorSecondary>yellow</colorSecondary>
+								<colorOptional>yellow</colorOptional>
+							</appearance>
 						</details>
 				</star>
 				<planets>
@@ -27,6 +35,14 @@
 										<description>
 												Description of Mercurius placeholder.
 										</description>
+									<appearance>
+										<size>30</size>
+										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
 								</details>
 						</planet>
 						<planet altName="Zemtest" name="test 2">
@@ -39,6 +55,14 @@
 										<description>
 												Description of Terra placeholder.
 										</description>
+									<appearance>
+										<size>30</size>
+										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
 								</details>
 						</planet>
 						<planet altName="Juptest" name="test 5">
@@ -51,6 +75,14 @@
 										<description>
 												Description of Jupiter placeholder.
 										</description>
+									<appearance>
+										<size>30</size>
+										<type>gas</type>
+										<randomSeed>123abc</randomSeed>
+										<colorPrimary>yellow</colorPrimary>
+										<colorSecondary>yellow</colorSecondary>
+										<colorOptional>yellow</colorOptional>
+									</appearance>
 								</details>
 						</planet>
 				</planets>

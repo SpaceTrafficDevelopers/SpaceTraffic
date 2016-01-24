@@ -49,11 +49,23 @@ var SvgMapItem = new Class({
 	// Builds background for this object, like trajectory.
 	buildBackground : function(t) {
 	},
+	//builds definitions for object graphics (like gradients or clips)
+	buildDefs: function (t) {
+		return '';
+	},
 	// Builds this object graphics.
 	buildObject : function(t) {
 	},
 	// Builds nameplate and overlay icons.
-	buildOverlay : function(t) {
+	buildOverlay: function (t) {
+	},
+	//adds animation definition to style tag
+	addAnimation: function (animationName, animationBody) {
+		$('head').append('<style>'
+			+ '@-moz-keyframes ' + animationName + ' ' + animationBody
+			+ ' @-webkit-keyframes ' + animationName + ' ' + animationBody
+			+ ' @keyframes ' + animationName + ' ' + animationBody
+			+ '</style>');
 	},
 	
 	buildOverlayAt: function(groupTransform) {

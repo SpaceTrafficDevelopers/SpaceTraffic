@@ -63,6 +63,7 @@ var SvgStarSystemMap = {
 		var backgroundLayerBuff = '<g id="svgBackgroundLayer">';
 		var objectLayerBuff ='<g id="svgObjectLayer">';
 		var overlayLayerBuff = '<g id="svgOverlayLayer">';
+		var defsBuff = '';
 		
 		var t = TimeUtils.getCurrentTimeInS();
 		
@@ -70,6 +71,7 @@ var SvgStarSystemMap = {
 		
 		backgroundLayerBuff += svgStar.buildBackground(t);
 		objectLayerBuff += svgStar.buildObject();
+		defsBuff += svgStar.buildDefs();
 		overlayLayerBuff += svgStar.buildOverlay();
 		
 		this.svgItems.length=0;
@@ -85,6 +87,7 @@ var SvgStarSystemMap = {
 			svgPlanet = new SvgPlanet(i, this.currentStarSystem.planets[i]);
 			backgroundLayerBuff += svgPlanet.buildBackground(t);
 			objectLayerBuff += svgPlanet.buildObject();
+			defsBuff += svgPlanet.buildDefs();
 			overlayLayerBuff += svgPlanet.buildOverlay();
 			
 			this.svgItems.push(svgPlanet);
@@ -100,6 +103,7 @@ var SvgStarSystemMap = {
 				svgWormholeEndpoint = new SvgWormholeEndpoint(this.currentStarSystem.wormholeEndpoints[i]);
 				backgroundLayerBuff += svgWormholeEndpoint.buildBackground(t);
 				objectLayerBuff += svgWormholeEndpoint.buildObject();
+				defsBuff += svgWormholeEndpoint.buildDefs();
 				overlayLayerBuff += svgWormholeEndpoint.buildOverlay();
 				
 				this.svgItems.push(svgWormholeEndpoint);
@@ -110,7 +114,8 @@ var SvgStarSystemMap = {
 		}
 		
 		//preparations
-		var buffer = '<g id="svgViewportGroup" transform="'+this.svgViewportManager.getViewportTransform()+'">'
+		var buffer = '<defs>' + defsBuff + '</defs>'
+			+ '<g id="svgViewportGroup" transform="' + this.svgViewportManager.getViewportTransform() + '">'
 					+ backgroundLayerBuff+'</g>'+ objectLayerBuff+'</g>'+ overlayLayerBuff+'</g>'+ '<g id="svgTopLayer"></g>';
 		//console.debug('buffer', buffer);
 		
@@ -122,6 +127,7 @@ var SvgStarSystemMap = {
 		$('#svgStarSystemMap').bind('dragstart', function(event) { event.preventDefault(); });
 		
 		this.$svgViewportGroup = $('#svgViewportGroup');
+		this.$svgViewportGroupDefs = $('#svgViewportGroupDefs');
 		this.$svgBackgroundLayer = $('#svgBackgroundLayer');
 		this.$svgObjectLayer = $('#svgObjectLayer');
 		this.$svgOverlayLayer = $('#svgOverlayLayer');
@@ -147,6 +153,7 @@ var SvgStarSystemMap = {
 		};	
 			
 		this.$svgViewportGroup.attr('transform', this.svgViewportManager.getViewportTransform());
+		this.$svgViewportGroupDefs.attr('transform', this.svgViewportManager.getViewportTransform());
 		
 		for (var i = 0; i < this.svgDynamicItems.length; i++) {
 			this.svgDynamicItems[i].performUpdate(t);

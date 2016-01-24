@@ -81,30 +81,23 @@ var SvgViewportManager = new Class({
 		//console.groupEnd();
 		/* zooming with mousewheel */
 		var parent = this;
-		this.$svgViewport.mousewheel(function (e) {
+		this.$svgViewport.mousewheel(function (e, delta) {
 			var oldZoom = parent.zoom;
-
-			if (e.wheelDelta > 0) {/* zoom in */
-				parent.zoom *= Math.abs(e.wheelDelta * MOUSEWHEEL_ZOOM_MODIFIER);
+			if (delta > 0) {/* zoom in */
+				parent.zoom *= MOUSEWHEEL_ZOOM_SPEED;
 
 
 			} else {/* zoom out */
-				parent.zoom /= Math.abs(e.wheelDelta * MOUSEWHEEL_ZOOM_MODIFIER);
+				parent.zoom /= MOUSEWHEEL_ZOOM_SPEED;
 			}
-
-			/* cursor position on viewport */
-			var cursorX = e.pageX - parent.$svgViewport.offset().left;
-			var cursorY = e.pageY - parent.$svgViewport.offset().top;
 
 			var zoomDiff = Math.abs(parent.zoom - oldZoom);
 			/* cursor position in svg coordinates */
-			var svgCursorX = (cursorX - parent.viewportTX) / oldZoom;
-			var svgCursorY = (cursorY - parent.viewportTY) / oldZoom;
-
+			var svgCursorX = (e.offsetX - parent.viewportTX) / oldZoom;
+			var svgCursorY = (e.offsetY - parent.viewportTY) / oldZoom;
 			var correctionX = svgCursorX - (svgCursorX * (1 + zoomDiff));
 			var correctionY = svgCursorY - (svgCursorY * (1 + zoomDiff));
-			
-			if (e.wheelDelta > 0) {/* zoom in */
+			if (delta > 0) {/* zoom in */
 				parent.viewportTX += correctionX;
 				parent.viewportTY += correctionY;
 			} else {/* zoom out */
@@ -125,7 +118,7 @@ var SvgViewportManager = new Class({
 	},
 	
 	buildViewport: function(svgContent){
-		var viewportbuffer = '<svg id="svgCanvas" xmlns="http://www.w3.org/2000/svg" version="1.1">'+svgContent+'</svg>';
+		var viewportbuffer = '<svg id="svgCanvas" xmlns="http://www.w3.org/2000/svg" version="1.1">' + svgContent + '</svg>';
 		if(SPACE_TRAFFIC_DEBUG)
 		{
 			viewportbuffer += '<div id="debugOverlay" class="debugOverlay"><pre id="debugOutput">Debug output...</pre></div>';
