@@ -37,11 +37,12 @@
 										</description>
 									<appearance>
 											<size>1</size>
-											<type>gas</type>
-											<randomSeed>123abc</randomSeed>
-											<colorPrimary>yellow</colorPrimary>
-											<colorSecondary>yellow</colorSecondary>
-											<colorOptional>yellow</colorOptional>
+											<type>terrastrial</type>
+											<randomSeed>d4w41</randomSeed>
+											<rotationPeriod>5</rotationPeriod>
+											<colorPrimary>#f5a033</colorPrimary>
+											<colorSecondary>#af7228</colorSecondary>
+											<colorOptional>transparent</colorOptional>
 										</appearance>
 								</details>
 						</planet>
@@ -58,11 +59,12 @@
 										</description>
 									<appearance>
 										<size>3</size>
-										<type>gas</type>
-										<randomSeed>123abc</randomSeed>
-										<colorPrimary>yellow</colorPrimary>
-										<colorSecondary>yellow</colorSecondary>
-										<colorOptional>yellow</colorOptional>
+										<type>terrastrial</type>
+										<randomSeed>584rs</randomSeed>
+										<rotationPeriod>8</rotationPeriod>
+										<colorPrimary>#f7d050</colorPrimary>
+										<colorSecondary>#dc7619</colorSecondary>
+										<colorOptional>#c8a553</colorOptional>
 									</appearance>
 								</details>
 						</planet>
@@ -78,11 +80,12 @@
 										</description>
 									<appearance>
 										<size>3</size>
-										<type>gas</type>
-										<randomSeed>123abc</randomSeed>
-										<colorPrimary>yellow</colorPrimary>
-										<colorSecondary>yellow</colorSecondary>
-										<colorOptional>yellow</colorOptional>
+										<type>terrastrialT3</type>
+										<randomSeed>rr75bc</randomSeed>
+										<rotationPeriod>10</rotationPeriod>
+										<colorPrimary>#7b97fb</colorPrimary>
+										<colorSecondary>#3ca923</colorSecondary>
+										<colorOptional>#fff</colorOptional>
 									</appearance>
 								</details>
 						</planet>
@@ -98,11 +101,12 @@
 										</description>
 									<appearance>
 										<size>2</size>
-										<type>gas</type>
-										<randomSeed>123abc</randomSeed>
-										<colorPrimary>yellow</colorPrimary>
-										<colorSecondary>yellow</colorSecondary>
-										<colorOptional>yellow</colorOptional>
+										<type>terrastrial</type>
+										<randomSeed>erw555</randomSeed>
+										<rotationPeriod>9</rotationPeriod>
+										<colorPrimary>#c75f2c</colorPrimary>
+										<colorSecondary>#8d5341</colorSecondary>
+										<colorOptional>transparent</colorOptional>
 									</appearance>
 								</details>
 						</planet>
@@ -121,10 +125,11 @@
 									<appearance>
 										<size>15</size>
 										<type>gas</type>
-										<randomSeed>123abc</randomSeed>
-										<colorPrimary>yellow</colorPrimary>
-										<colorSecondary>yellow</colorSecondary>
-										<colorOptional>yellow</colorOptional>
+										<randomSeed>44rsw</randomSeed>
+										<rotationPeriod>50</rotationPeriod>
+										<colorPrimary>#ffb97b</colorPrimary>
+										<colorSecondary>#b68b67</colorSecondary>
+										<colorOptional>#a98a6c</colorOptional>
 									</appearance>
 								</details>
 						</planet>
@@ -142,12 +147,15 @@
 									<appearance>
 										<size>14</size>
 										<type>gas</type>
-										<randomSeed>123abc</randomSeed>
-										<colorPrimary>yellow</colorPrimary>
-										<colorSecondary>yellow</colorSecondary>
-										<colorOptional>yellow</colorOptional>
-										<ringColor>white</ringColor>
-									</appearance>
+										<randomSeed>dsrg</randomSeed>
+										<rotationPeriod>40</rotationPeriod>
+										<colorPrimary>#f0d4a4</colorPrimary>
+										<colorSecondary>#f4ca9a</colorSecondary>
+										<colorOptional>#cfb59b</colorOptional>
+										<ringColorPrimary>#de9649</ringColorPrimary>
+										<ringColorSecondary>#ddbd94</ringColorSecondary>
+									
+								</appearance>
 								</details>
 						</planet>
 						<planet altName="Uran" name="Sol 7">
@@ -164,10 +172,11 @@
 									<appearance>
 										<size>8</size>
 										<type>gas</type>
-										<randomSeed>123abc</randomSeed>
-										<colorPrimary>yellow</colorPrimary>
-										<colorSecondary>yellow</colorSecondary>
-										<colorOptional>yellow</colorOptional>
+										<randomSeed>ewrw5</randomSeed>
+										<rotationPeriod>40</rotationPeriod>
+										<colorPrimary>#3a7294</colorPrimary>
+										<colorSecondary>#53a2c8</colorSecondary>
+										<colorOptional>rgba(0,0,0,0.2)</colorOptional>
 									</appearance>
 								</details>
 						</planet>
@@ -184,10 +193,10 @@
 									<appearance>
 										<size>8</size>
 										<type>gas</type>
-										<randomSeed>123abc</randomSeed>
-										<colorPrimary>yellow</colorPrimary>
-										<colorSecondary>yellow</colorSecondary>
-										<colorOptional>yellow</colorOptional>
+										<randomSeed>srrr</randomSeed>
+										<colorPrimary>#5278d5</colorPrimary>
+										<colorSecondary>#3258b5</colorSecondary>
+										<colorOptional>#3258b5</colorOptional>
 									</appearance>
 								</details>
 						</planet>

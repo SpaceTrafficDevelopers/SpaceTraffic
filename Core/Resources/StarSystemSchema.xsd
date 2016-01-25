@@ -189,10 +189,12 @@ limitations under the License.
 						<xs:element name="size" type="xs:double" minOccurs="1"></xs:element>
 						<xs:element name="type" type="xs:string" minOccurs="1"></xs:element>
 						<xs:element name="randomSeed" type="xs:string" minOccurs="0"></xs:element>
+						<xs:element name="rotationPeriod" type="xs:double" minOccurs="0"></xs:element>
 						<xs:element name="colorPrimary" type="xs:string" minOccurs="1"></xs:element>
 						<xs:element name="colorSecondary" type="xs:string" minOccurs="0"></xs:element>
 						<xs:element name="colorOptional" type="xs:string" minOccurs="0"></xs:element>
-						<xs:element name="ringColor" type="xs:string" minOccurs="0"></xs:element>
+						<xs:element name="ringColorPrimary" type="xs:string" minOccurs="0"></xs:element>
+						<xs:element name="ringColorSecondary" type="xs:string" minOccurs="0"></xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
