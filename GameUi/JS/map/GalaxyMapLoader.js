@@ -11,8 +11,8 @@ var GalaxyMapLoader = {
     /// Loads galaxy of given namefrom xml file on server.
     /// Loaded StarSystem object instance will be passed as parameter to the callback function.
     loadGalaxyMap: function (galaxyMapName, callback) {
-        console.group("GalaxyMapLoader.loadGalaxyMap");
-        console.log("Loading GalaxyMap: " + galaxyMapName);
+        //console.group("GalaxyMapLoader.loadGalaxyMap");
+        //console.log("Loading GalaxyMap: " + galaxyMapName);
         $.ajax({
             type: "GET",
             url: '/GalaxyMap/Get/' + galaxyMapName,
@@ -20,17 +20,17 @@ var GalaxyMapLoader = {
             success: function (xml) {
                 var $galaxyMap = $(xml).find('galaxymap');
                 var galaxyMap = GalaxyMapLoader.parseGalaxyMap($galaxyMap);
-                console.log("GalaxyMap loaded: ", galaxyMap);
+                //console.log("GalaxyMap loaded: ", galaxyMap);
                 callback(galaxyMap);
             }
         });
-        console.groupEnd();
+        //console.groupEnd();
     },
 
     parseGalaxyMap: function ($galaxyMap) {
-        console.debug("parseGalaxyMap()", $galaxyMap);
+        //console.debug("parseGalaxyMap()", $galaxyMap);
         var name = $galaxyMap.attr('name');
-        console.log('GalaxyMap:' + name);
+        //console.log('GalaxyMap:' + name);
         var starSystems = new Array();
         $galaxyMap.find('starsystems').find('starsystem').each(function () {
             starSystems.push(GalaxyMapLoader.parseStarSystem($(this)));
@@ -46,13 +46,13 @@ var GalaxyMapLoader = {
     },
 
     parseStarSystem: function ($starsystem) {
-        console.debug("ENTRY parseStarSystem()", $starsystem);
+        //console.debug("ENTRY parseStarSystem()", $starsystem);
         var starsystemName = $starsystem.attr('name');
         return new StarSystem(starsystemName, null, null, null);
     },
 
     parseWormhole: function ($wormhole) {
-        console.debug("ENTRY parseWormholes()", $wormholeEndpoint);
+        //console.debug("ENTRY parseWormholes()", $wormholeEndpoint);
         var id = parseInt($wormhole.attr('id'));
         var endpoints = new Array();
         $galaxyMap.find('wormholes').find('wormhole').find('endpoint').each(function () {
@@ -64,7 +64,7 @@ var GalaxyMapLoader = {
     },
 
     parseEndpoint: function ($endpoint) {
-        console.debug("ENTRY parseEndpoint()", $planet);
+        //console.debug("ENTRY parseEndpoint()", $planet);
         var endpointSystem = $endpoint.attr('system');
         var id = $endpoint.attr('id');
         return new GalaxyEndpoint(starsystemName, null, id);

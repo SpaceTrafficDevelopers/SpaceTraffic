@@ -32,7 +32,7 @@ var SvgStarSystemMap = {
 	* Initializes rendrer
 	*/
 	init: function ($svgViewport) {
-		console.debug("StarSystemRenderer.init()", $svgViewport);
+		//console.debug("StarSystemRenderer.init()", $svgViewport);
 		this.$svgViewport = $svgViewport;
 				
 		// bind function to this instance
@@ -52,7 +52,7 @@ var SvgStarSystemMap = {
 	* Draw scene.
 	*/
 	draw: function () {
-		console.group('SvgStarSystemMap.draw');
+		//console.group('SvgStarSystemMap.draw');
 		//get time in seconds
 		if(this.timer != null)
 		{
@@ -63,6 +63,7 @@ var SvgStarSystemMap = {
 		var backgroundLayerBuff = '<g id="svgBackgroundLayer">';
 		var objectLayerBuff ='<g id="svgObjectLayer">';
 		var overlayLayerBuff = '<g id="svgOverlayLayer">';
+		var defsBuff = '';
 		
 		var t = TimeUtils.getCurrentTimeInS();
 		
@@ -70,6 +71,7 @@ var SvgStarSystemMap = {
 		
 		backgroundLayerBuff += svgStar.buildBackground(t);
 		objectLayerBuff += svgStar.buildObject();
+		defsBuff += svgStar.buildDefs();
 		overlayLayerBuff += svgStar.buildOverlay();
 		
 		this.svgItems.length=0;
@@ -85,6 +87,7 @@ var SvgStarSystemMap = {
 			svgPlanet = new SvgPlanet(i, this.currentStarSystem.planets[i]);
 			backgroundLayerBuff += svgPlanet.buildBackground(t);
 			objectLayerBuff += svgPlanet.buildObject();
+			defsBuff += svgPlanet.buildDefs();
 			overlayLayerBuff += svgPlanet.buildOverlay();
 			
 			this.svgItems.push(svgPlanet);
@@ -100,6 +103,7 @@ var SvgStarSystemMap = {
 				svgWormholeEndpoint = new SvgWormholeEndpoint(this.currentStarSystem.wormholeEndpoints[i]);
 				backgroundLayerBuff += svgWormholeEndpoint.buildBackground(t);
 				objectLayerBuff += svgWormholeEndpoint.buildObject();
+				defsBuff += svgWormholeEndpoint.buildDefs();
 				overlayLayerBuff += svgWormholeEndpoint.buildOverlay();
 				
 				this.svgItems.push(svgWormholeEndpoint);
@@ -110,11 +114,12 @@ var SvgStarSystemMap = {
 		}
 		
 		//preparations
-		var buffer = '<g id="svgViewportGroup" transform="'+this.svgViewportManager.getViewportTransform()+'">'
+		var buffer = '<defs>' + defsBuff + '</defs>'
+			+ '<g id="svgViewportGroup" transform="' + this.svgViewportManager.getViewportTransform() + '">'
 					+ backgroundLayerBuff+'</g>'+ objectLayerBuff+'</g>'+ overlayLayerBuff+'</g>'+ '<g id="svgTopLayer"></g>';
-		console.debug('buffer', buffer);
+		//console.debug('buffer', buffer);
 		
-		console.debug('Building viewport, Writing svg');
+		//console.debug('Building viewport, Writing svg');
 		this.svgViewportManager.buildViewport(buffer);
 		
 		buffer = null;
@@ -122,22 +127,23 @@ var SvgStarSystemMap = {
 		$('#svgStarSystemMap').bind('dragstart', function(event) { event.preventDefault(); });
 		
 		this.$svgViewportGroup = $('#svgViewportGroup');
+		this.$svgViewportGroupDefs = $('#svgViewportGroupDefs');
 		this.$svgBackgroundLayer = $('#svgBackgroundLayer');
 		this.$svgObjectLayer = $('#svgObjectLayer');
 		this.$svgOverlayLayer = $('#svgOverlayLayer');
 		this.$svgTopLayer = $('#svgTopLayer');
 		
-		console.debug('svgItems:',this.svgItems);
+		//console.debug('svgItems:',this.svgItems);
 		
-		console.debug('svgDynamicItems:',this.svgDynamicItems);
+		//console.debug('svgDynamicItems:',this.svgDynamicItems);
 		
 		for (var i = 0; i < this.svgItems.length; i++) {
-			console.debug('Revive on: ', this.svgItems[i])
+			//console.debug('Revive on: ', this.svgItems[i])
 			this.svgItems[i].revive();
 		}
 		
 		this.updateObjectList();
-		console.groupEnd();
+		//console.groupEnd();
 	},
 
 	// Animation update. Used as staticRenderCallback in SvgRenderer.
@@ -147,6 +153,7 @@ var SvgStarSystemMap = {
 		};	
 			
 		this.$svgViewportGroup.attr('transform', this.svgViewportManager.getViewportTransform());
+		this.$svgViewportGroupDefs.attr('transform', this.svgViewportManager.getViewportTransform());
 		
 		for (var i = 0; i < this.svgDynamicItems.length; i++) {
 			this.svgDynamicItems[i].performUpdate(t);

@@ -11,8 +11,9 @@
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
-@hover-fill-color: cyan;
-@hover-stroke-color: cyan;
+@import "Variables/fonts.less";
+@import "Variables/colors.less";
+
 
 #viewport {
 	background-color: none;
@@ -38,33 +39,33 @@
 	height: 100%;
 	overflow: visible;
 	z-index: 1;
+	font-family: @titleFont;
 }
 
 .orbit{
 	fill:none;
 	fill-opacity:0;
 	fill-rule:evenodd;
-	stroke:#C0C0C0;
-	stroke-width:1.25;
+	stroke: rgba(255,255,255,0.12);
+	stroke-width:2;
 	stroke-miterlimit:4;
 	stroke-opacity:1;
 }
 
 circle.star{
 	fill:yellow;
-	stroke:#ffffff;
-	stroke-width:12;
-	stroke-opacity:0.6;
 }
 	
-circle.starHover {
-	fill: cyan !important;
-	stroke: cyan !important;
+circle.star.starHover {
+}
+.starName{
+	visibility: hidden;
 }
 
-text.starHover {
-	font-weight:bold;
-	fill: cyan !important;
+.starName.starHover {
+	visibility: visible;
+	text-anchor: middle;
+	fill: @textColor !important;
 }
 
 line.tagLine{
@@ -82,18 +83,16 @@ line.tagLine{
 	cursor: pointer;
 }
 
-.hover-default {
-	fill: @hover-fill-color !important;
-	stroke: @hover-fill-color !important;
-	
-}
-
 .planet {
 	fill:#515a73;
 	stroke:#ffffff;
-	stroke-width:1.25;
+	stroke-width:0;
 	stroke-opacity:0.5;
-	z-index: 0;    
+	z-index: 0;
+
+	.nameplate{
+		font-family: @titleFont !important;
+	}
 }
 
 @fade-delay: 5s;
@@ -109,14 +108,15 @@ line.tagLine{
 }
 
 .planet.hover {
-	.hover-default;
+
 }
 
 .orbit.hover {
-	.hover-default;
+	stroke: rgba(255,255,255,0.25) !important;
 }
 
 .wormholeEndpoint {
+	overflow: visible;
 	
 	.center {
 		fill:white;
@@ -139,58 +139,68 @@ line.tagLine{
 }
 
 .nameplate {
-	/*  */
-	rect {
-		/*  */
-		fill: #222222;
-		fill-opacity:1;
-	  }
 
-	text {
-		fill: #ffffff;
-		font-family: Arial;
+	text {/* has to be same with #testText, otherwise text size will be wrongly calculated */
+		fill: @titleTextColor;
+		font-family: @titleFont;
 		font-size: 15px;
-		text-anchor: middle;
+		text-anchor: start;
+	}
+	.nameplateBg{
+		overflow:visible;
+		visibility:visible;
+		opacity:1;
+		fill: @gamePanelBgColor;
+		fill-opacity:0.8;
+		fill-rule:evenodd;
+		stroke: @gamePanelBorderColor;
+		stroke-width:2;
+		stroke-linecap:butt;
+		stroke-linejoin:round;
+		stroke-miterlimit:4;
+		stroke-dasharray:none;
+		stroke-dashoffset:0;
+		marker:none;
+		enable-background:accumulate;
 	}
 }
+ #testText{
+	position: fixed;
+	bottom: -500px;
+	fill: @titleTextColor;
+	font-family: Arial;
+	font-weight: 900;
+	font-size: 15px;
+	text-anchor: start;
+ }
 
 .nameplate.hover {
-	rect {
-		stroke: @hover-fill-color !important;
+	.nameplateBg {
+		stroke: lighten(@infoIconColor, 0%) !important;
+		stroke-opacity: 0.4;
 	}
 	text {
-		fill: @hover-fill-color !important;
 	}
 }
 
 .wormholeEndpoint.hover {
 	cursor: pointer;
 	
-	.center {
-		fill: @hover-fill-color !important;
-		stroke-width:0px;
-	}
-	
-	.outer-rings {
-		stroke: @hover-fill-color !important;
-		webkit-transition:opacity 0.5s linear;
-		-moz-transition:opacity 0.5s linear;
-		-o-transition:opacity 0.5s linear;
-		-ms-transition:opacity 0.5s linear; 
-		transition:opacity 0.5s linear;
-	}
-	
-	.curves {
-		stroke: @hover-fill-color !important;
+	.hovering {
+		fill-opacity: 0.5 !important;
 	}
 }
 
+.wormholeGroup{
+	fill:#15c6e5;
+	fill-opacity:0.6;
+	overflow: visible;
+}
 
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
-/*.middle_circle{ }
-   .outer_circles{fill:none; stroke-width:2px; stroke:white;}
-   .curves{fill:none; stroke:white; stroke-width:3px; }
-*/
- /*
- <div style="width: 28px; height: 28px; -moz-transform: matrix(0.677338, 0.735672, -0.735672, 0.677338, 287.601px, 296.351px);" id="planet3" class="planet"></div>
- */
+@-moz-keyframes counterspin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes counterspin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes counterspin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

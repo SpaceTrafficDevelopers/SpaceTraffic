@@ -179,6 +179,7 @@
 		height: 30px;
 		width: auto;
 		cursor: pointer;
+		border: none;
 		li{
 			line-height: 30px;
 			min-width: 100%;
@@ -325,10 +326,20 @@ ul.mainmenu {
 	top: @appPanelHeight + 50px;
 	z-index: 11;
 }
+
+#infoPanel{
+	display: none;
+	position: fixed;
+	width: @leftSize - 1;
+	left: 1%;
+	bottom: 40px;
+	z-index: 11;
+	min-height: 350px;
+	text-align: justify;
+}
+
 .closebutton{
 	text-decoration: none;
 }
-
-
 
 

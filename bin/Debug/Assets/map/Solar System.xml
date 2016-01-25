@@ -1,156 +1,145 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-Copyright 2010 FAV ZCU
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
--->
 <st:stdata xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
-    xmlns:st="SpaceTrafficData"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    version="1.2">
-    <starsystem name="Solar system" x="156" y="419">
-        <star name="Sol">
-            <trajectory>
-                <stacionary x="0" y="0" />
-            </trajectory>
-            <details>
-	                	<gravity>0.0</gravity>
-	                	<mass>0.0</mass>
-	                	<description>
-	                		Star of Solar system.
-	                	</description>
-            </details>
-        </star>
-        <planets>
-            <planet altName="Mercurius" name="Sol 1">
-                <trajectory>
-                    <ellipticOrbit direction="clockwise" period="88" a="51" b="50" angle="3" initialAngle="10.0" />
-                </trajectory>
-                <details>
-                    <gravity>0</gravity>
-                    <mass>3.02236885577252e+023</mass>
-                    <description>
-                        Description of Mercurius placeholder.
-                    </description>
-                </details>
-            </planet>
-            <planet altName="Venus" name="Sol 2">
-                <trajectory>
-                    <ellipticOrbit direction="clockwise" period="225" a="52" b="51" angle="4" initialAngle="10.0" />
-                </trajectory>
-                <details>
-                    <gravity>0</gravity>
-                    <mass>4.86445024658678e+024</mass>
-                    <description>
-                        Description of Venus placeholder.
-                    </description>
-                </details>
-            </planet>
-            <planet altName="Terra" name="Sol 3">
-                <trajectory>
-                    <circularOrbit  direction="clockwise" period="365" initialAngle="80.0" radius="54"/>
-                </trajectory>
-                <details>
-                    <gravity>0</gravity>
-                    <mass>5.96642929606046e+024</mass>
-                    <description>
-                        Description of Terra placeholder.
-                    </description>
-                </details>
-            </planet>
-            <planet altName="Mars" name="Sol 4">
-                <trajectory>
-                  <ellipticOrbit direction="clockwise" period="687" a="57" b="56" angle="6" initialAngle="200.0" />
-                </trajectory>
-                <details>
-                    <gravity>0</gravity>
-                    <mass>6.40751188553165e+023</mass>
-                    <description>
-                        Description of Mars placeholder.
-                    </description>
-                </details>
-            </planet>
-            <planet altName="Jupiter" name="Sol 5">
-                <trajectory>
-                    <ellipticOrbit direction="clockwise" period="4435" a="82" b="81" angle="6" initialAngle="0.0" />
-                </trajectory>
-                <details>
-                    <gravity>0</gravity>
-                    <mass>1.89181829106998e+027</mass>
-                    <description>
-                        Description of Jupiter placeholder.
-                    </description>
-                </details>
-            </planet>
-            <planet altName="Saturnus" name="Sol 6">
-                <trajectory>
-                    <circularOrbit direction="clockwise" period="10758" initialAngle="0.0" radius="110"/>
-                </trajectory>
-                <details>
-                    <gravity>0</gravity>
-                    <mass>5.66037527242517e+026</mass>
-                    <description>
-                        Description of Saturnus placeholder.
-                    </description>
-                </details>
-            </planet>
-            <planet altName="Uranus" name="Sol 7">
-                <trajectory>
-                    <circularOrbit direction="clockwise" period="30708" initialAngle="90.0" radius="175"/>
-                </trajectory>
-                <details>
-                    <gravity>0</gravity>
-                    <mass>8.67944518531975e+025</mass>
-                    <description>
-                        Description of Uranus placeholder.
-                    </description>
-                </details>
-            </planet>
-            <planet altName="Neptunus" name="Sol 8">
-                <trajectory>
-                    <ellipticOrbit direction="clockwise" period="60190" a="200" b="199" angle="6" initialAngle="90.0" />
-                </trajectory>
-                <details>
-                    <gravity>0</gravity>
-                    <mass>1.02023731672764e+026</mass>
-                    <description>
-                        Description of Neptunus placeholder.
-                    </description>
-                </details>
-            </planet>
-        </planets>
-        <wormholeEndpoints>
-            <wormholeEndpoint id="0">
-                <trajectory>
-                    <circularOrbit direction="clockwise" period="65000" initialAngle="50.0" radius="210"/>
-                </trajectory>
-            </wormholeEndpoint>
-            <wormholeEndpoint id="1">
-                <trajectory>
-                    <circularOrbit direction="clockwise" period="68000" initialAngle="50.0" radius="220"/>
-                </trajectory>
-            </wormholeEndpoint>
-            <wormholeEndpoint id="2">
-                <trajectory>
-                    <circularOrbit direction="clockwise" period="72000" initialAngle="50.0" radius="235"/>
-                </trajectory>
-            </wormholeEndpoint>
-            <wormholeEndpoint id="3">
-                <trajectory>
-                  <circularOrbit direction="clockwise" period="80000" initialAngle="50.0" radius="248"/>
-                </trajectory>
-            </wormholeEndpoint>
-        </wormholeEndpoints>
-    </starsystem>
+		xmlns:st="SpaceTrafficData"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		version="1.2">
+		<starsystem name="Solar system" x="400" y="350">
+				<star name="Slunce">
+						<trajectory>
+								<stacionary x="0" y="0" />
+						</trajectory>
+						<details>
+										<gravity>0.0</gravity>
+										<mass>0.0</mass>
+										<description>
+											Slunce, hvězda lidstvem dlouho obdivovaná a idealizovaná. Srdce Sluneční soustavy, která se stala domovem pro vzkvétající lidskou rasu, složené ze tří čtvrtin z vodíku a ze čtvrtiny z hélia poskytuje svým planetám teplo, světlo a dobré téma k bezcílnému tlachání.
+										</description>
+						</details>
+				</star>
+				<planets>
+						<planet altName="Merkur" name="Sol 1">
+								<trajectory>
+										<ellipticOrbit period="88" a="51" b="50" angle="3" initialAngle="10.0" />
+								</trajectory>
+								<details>
+										<gravity>0</gravity>
+										<mass>3.02236885577252e+023</mass>
+										<description>
+												První z planet Sluneční soustavy. Zpravidla poněkud připálený a neobyvatelný, nicméně sem v průběhu času bylo vysláno hned několik sond, aby bylo nade vší pochybnost jasné, že se zde nenachází nic, co by se dalo výhodně prodat.
+										</description>
+								</details>
+						</planet>
+						<planet altName="Venuše" name="Sol 2">
+								<trajectory>
+										<ellipticOrbit period="225" a="82" b="82" angle="4" initialAngle="10.0" />
+								</trajectory>
+								<details>
+										<gravity>0</gravity>
+										<mass>4.86445024658678e+024</mass>
+										<description>
+												Její hustá atmosféra, sirné deště a vysoký atmosférický tlak vypadaly na první pohled jako jasná překážka pro jakoukoli kolonizaci planety. Jednoho dne však jistého Australana omrzelo věčné vyklepávání pavouků z bot a přestěhoval se na Venuši, kde založil klidné letovisko, hojně využívané jeho krajany a lidmi, kteří se potřebovali schovat někam, kde je nikdo nebude hledat.
+												Tak vznikla první venušanská kolonie.
+										</description>
+								</details>
+						</planet>
+						<planet altName="Země" name="Sol 3">
+								<trajectory>
+										<circularOrbit period="365" initialAngle="80.0" radius="100"/>
+								</trajectory>
+								<details>
+										<gravity>0</gravity>
+										<mass>5.96642929606046e+024</mass>
+										<description>
+												Země, jinak známá také jako Planeta opic, je rodištěm lidské rasy, mnoha zvířecích druhů, nespočtu rostlin a z neznámého důvodu se zde daří také programátorům. Vyváží zejména jídlo, umění a babičiny sušenky.
+										</description>
+								</details>
+						</planet>
+						<planet altName="Mars" name="Sol 4">
+								<trajectory>
+									<ellipticOrbit period="687" a="120" b="119" angle="6" initialAngle="200.0" />
+								</trajectory>
+								<details>
+										<gravity>0</gravity>
+										<mass>6.40751188553165e+023</mass>
+										<description>
+												Kolonizovaný ve Třetím vesmírném věku. Zdejší prostředí bylo ideální pro pokusy terraformovat celou planetu. Všechny zkrachovaly. Místní obrovské biodómy však poskytují prostor pro miliony lidí a navíc se ukázalo, že je Mars ideální pro provozování fúzních elektráren a výrobu energie obecně.
+										</description>
+								</details>
+						</planet>
+						<planet altName="Jupiter" name="Sol 5">
+								<trajectory>
+										<ellipticOrbit period="4435" a="220" b="216" angle="6" initialAngle="0.0" />
+								</trajectory>
+								<details>
+										<gravity>0</gravity>
+										<mass>1.89181829106998e+027</mass>
+										<description>
+												Velkého plynného obra obíhá mnoho zajímavých měsíců, z nichž byly některé kolonizovány a obydleny. Vědecká centra zkoumající život na Europě, těžařské základny na Ganymedu, vesmírné turistické atrakce na Callistu a samozřejmě nespočet malých základen rozesetých po desítkách Jupiterových měsíců.
+												Podle místní pověsti žije jeden zvláště odolný poustevník v malé žáruvzdorné kapsli na sopečném měsíci Io, ale prozatím se nikomu nechtělo zajít k němu na návštěvu.
+												Turisté také často obdivují podivný černý kvádr, klidně plující vesmírem po Jupiterově oběžné dráze.
+										</description>
+								</details>
+						</planet>
+						<planet altName="Saturn" name="Sol 6">
+								<trajectory>
+										<circularOrbit period="10758" initialAngle="0.0" radius="351"/>
+								</trajectory>
+								<details>
+										<gravity>0</gravity>
+										<mass>5.66037527242517e+026</mass>
+										<description>
+												Jediným dosud obývaným světem v blízkosti Saturna je jeho měsíc Titan. Pro získání životně důležitých zásob na takto odlehlé planetě je potřeba tavit místní horniny, z nichž je však možné získat všechny potřebné prvky. Díky neskutečně krásnému výhledu na Saturn a jeho prstence je Titan velmi oblíbenou turistickou destinací.
+												<strong>Poznámka:</strong> Nejčastější příčinou úmrtí turisty je zde procházka v dešti. Mísní samospráva upozorňuje návštěvníky, že vesmírný skafandr ani deštník vám nestačí. Protože víte co...prší metan.
+										</description>
+								</details>
+						</planet>
+						<planet altName="Uran" name="Sol 7">
+								<trajectory>
+										<circularOrbit period="30708" initialAngle="90.0" radius="490"/>
+								</trajectory>
+								<details>
+										<gravity>0</gravity>
+										<mass>8.67944518531975e+025</mass>
+										<description>
+											Jediná planeta Sluneční soustavy, která vypadá, jako kdyby se kutálela. Sklon jeho rovníku k rovině jeho dráhy je totiž celých 97,86°.
+											Sjednocená vláda Země vydala v roce 2069 poučnou brožurku, která vysvětluje anglicky mluvícím obyvatelům, že vtipy související se jménem této planety jsou jednou provždy ohrané a nevtipné.
+										</description>
+								</details>
+						</planet>
+						<planet altName="Neptun" name="Sol 8">
+								<trajectory>
+										<ellipticOrbit period="60190" a="621" b="615" angle="6" initialAngle="90.0" />
+								</trajectory>
+								<details>
+										<gravity>0</gravity>
+										<mass>1.02023731672764e+026</mass>
+										<description>
+												Vodíkový krasavec s příchutí metanu. Tato velká modrá planeta byla lidstvem stovky let přehlížena, protože "jednu modrou planetu už přece máme". Neptun tudíž lidi rovněž vytrvale ignoruje a všichni jsou tak spokojení.
+										</description>
+								</details>
+						</planet>
+				</planets>
+				<wormholeEndpoints>
+						<wormholeEndpoint id="0">
+								<trajectory>
+										<circularOrbit period="65000" initialAngle="50.0" radius="230"/>
+								</trajectory>
+						</wormholeEndpoint>
+						<wormholeEndpoint id="1">
+								<trajectory>
+										<circularOrbit period="68000" initialAngle="50.0" radius="320"/>
+								</trajectory>
+						</wormholeEndpoint>
+						<wormholeEndpoint id="2">
+								<trajectory>
+										<circularOrbit period="72000" initialAngle="50.0" radius="435"/>
+								</trajectory>
+						</wormholeEndpoint>
+						<wormholeEndpoint id="3">
+								<trajectory>
+									<circularOrbit period="80000" initialAngle="50.0" radius="548"/>
+								</trajectory>
+						</wormholeEndpoint>
+				</wormholeEndpoints>
+		</starsystem>
 </st:stdata>
