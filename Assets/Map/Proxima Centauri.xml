@@ -14,19 +14,19 @@
                 <mass>0.0</mass>
                 <description> Star of Proxima Centauri system. </description>
 							<appearance>
-								<size>30</size>
+								<size>10</size>
 								<type>gas</type>
-								<randomSeed>123abc</randomSeed>
-								<colorPrimary>yellow</colorPrimary>
-								<colorSecondary>yellow</colorSecondary>
-								<colorOptional>yellow</colorOptional>
+								<randomSeed>r1r23abc</randomSeed>
+								<colorPrimary>#eee</colorPrimary>
+								<colorSecondary>#aaa</colorSecondary>
+								<colorOptional>#999</colorOptional>
 							</appearance>
             </details>
         </star>
         <planets>
             <planet altName="Praklarush Theonas" name="Proxima Centauri 1">
                 <trajectory>
-                  <ellipticOrbit period="283" a="55" b="53" angle="0" initialAngle="0.0" />
+                  <ellipticOrbit period="283" a="155" b="153" angle="0" initialAngle="0.0" />
                 </trajectory>
                 <details>
                     <gravity>0</gravity>
@@ -35,18 +35,18 @@
                         Description of Praklarush Theonas placeholder.
                     </description>
 									<appearance>
-										<size>30</size>
-										<type>gas</type>
-										<randomSeed>123abc</randomSeed>
-										<colorPrimary>yellow</colorPrimary>
-										<colorSecondary>yellow</colorSecondary>
-										<colorOptional>yellow</colorOptional>
+										<size>3</size>
+										<type>terrastrial</type>
+										<randomSeed>1w5c</randomSeed>
+										<colorPrimary>khaki</colorPrimary>
+										<colorSecondary>green</colorSecondary>
+										<colorOptional>#afa</colorOptional>
 									</appearance>
                 </details>
             </planet>
             <planet altName="Prima" name="Proxima Centauri 2">
                 <trajectory>
-                    <circularOrbit period="2130" initialAngle="344.0" radius="62"/>
+                    <circularOrbit period="2130" initialAngle="344.0" radius="262"/>
                 </trajectory>
                 <details>
                     <gravity>0</gravity>
@@ -55,18 +55,18 @@
                         Description of Prima placeholder.
                     </description>
 									<appearance>
-										<size>30</size>
-										<type>gas</type>
-										<randomSeed>123abc</randomSeed>
-										<colorPrimary>yellow</colorPrimary>
-										<colorSecondary>yellow</colorSecondary>
-										<colorOptional>yellow</colorOptional>
+										<size>5</size>
+										<type>terrastrial</type>
+										<randomSeed>www1c</randomSeed>
+										<colorPrimary>#222</colorPrimary>
+										<colorSecondary>#a00</colorSecondary>
+										<colorOptional>#aa0</colorOptional>
 									</appearance>
                 </details>
             </planet>
             <planet altName="Alternus" name="Proxima Centauri 3">
                 <trajectory>
-                  <ellipticOrbit period="7745" a="79" b="77" angle="0" initialAngle="0" />
+                  <ellipticOrbit period="7745" a="479" b="477" angle="0" initialAngle="0" />
                 </trajectory>
                 <details>
                     <gravity>0</gravity>
@@ -75,16 +75,19 @@
                         Description of Alternus placeholder.
                     </description>
 									<appearance>
-										<size>30</size>
+										<size>15</size>
 										<type>gas</type>
-										<randomSeed>123abc</randomSeed>
-										<colorPrimary>yellow</colorPrimary>
-										<colorSecondary>yellow</colorSecondary>
-										<colorOptional>yellow</colorOptional>
+										<randomSeed>xxxc</randomSeed>
+										<colorPrimary>#a92</colorPrimary>
+										<colorSecondary>#a42</colorSecondary>
+										<colorOptional>#852</colorOptional>
+										<ringColorPrimary>#652</ringColorPrimary>
+										<ringColorSecondary>#874</ringColorSecondary>
+
 									</appearance>
                 </details>
             </planet>
-            <planet altName="Tertia" name="Proxima Centauri 4">
+            <!--planet altName="Tertia" name="Proxima Centauri 4">
                 <trajectory>
                   <ellipticOrbit period="16911" a="99" b="98" angle="21" initialAngle="170.0" />
                 </trajectory>
@@ -143,7 +146,7 @@
 										<colorOptional>yellow</colorOptional>
 									</appearance>
                 </details>
-            </planet>
+            </planet-->
         </planets>
         <wormholeEndpoints>
                 <wormholeEndpoint id="0">
