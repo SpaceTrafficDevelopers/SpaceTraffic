@@ -70,6 +70,9 @@ limitations under the License.
     <handlers>
       <add name="dotless" path="*.less" verb="GET" type="dotless.Core.LessCssHttpHandler,dotless.Core" resourceType="File" preCondition="" />
     </handlers>
+		<staticContent>
+			<mimeMap fileExtension=".svg" mimeType="image/svg+xml" />
+		</staticContent>
     <validation validateIntegratedModeConfiguration="false" />
   </system.webServer>
   <system.serviceModel>
