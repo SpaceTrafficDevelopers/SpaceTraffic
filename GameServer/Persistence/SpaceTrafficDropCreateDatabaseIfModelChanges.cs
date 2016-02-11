@@ -49,6 +49,8 @@ namespace SpaceTraffic.Persistence
                     {
                         context.Database.ExecuteSqlCommand("CREATE UNIQUE INDEX IX_Players_PlayerName ON Players (PlayerName)");
                         context.Database.ExecuteSqlCommand("CREATE UNIQUE INDEX IX_Players_Email ON Players (Email)");
+                        context.Database.ExecuteSqlCommand("CREATE UNIQUE INDEX IX_Minigames_Name ON Minigames (Name)");
+                        context.Database.ExecuteSqlCommand("CREATE UNIQUE INDEX IX_StartActions_ActionName ON StartActions (ActionName)");
                         context.Database.ExecuteSqlCommand(File.ReadAllText(scriptPath));
                     }
                 }               

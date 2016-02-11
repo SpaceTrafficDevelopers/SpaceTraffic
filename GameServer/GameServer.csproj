@@ -87,6 +87,7 @@
     <Compile Include="Dao\IBaseDAO.cs" />
     <Compile Include="Dao\IGameEventDAO.cs" />
     <Compile Include="Dao\IGameActionDAO.cs" />
+    <Compile Include="Dao\Minigames\IMinigameDescriptorDAO.cs" />
     <Compile Include="Dao\IPathPlanEntityDAO.cs" />
     <Compile Include="Dao\IPlanActionDAO.cs" />
     <Compile Include="Dao\IPlanItemEntityDAO.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="Dao\MessageDAO.cs" />
     <Compile Include="Dao\IMessageDAO.cs" />
     <Compile Include="Dao\IPlayerDAO.cs" />
+    <Compile Include="Dao\Minigames\IStartActionDAO.cs" />
+    <Compile Include="Dao\Minigames\MinigameDescriptorDAO.cs" />
+    <Compile Include="Dao\Minigames\StartActionDAO.cs" />
     <Compile Include="Dao\PathPlanEntityDAO.cs" />
     <Compile Include="Dao\PlanActionDAO.cs" />
     <Compile Include="Dao\PlanItemEntityDAO.cs" />
@@ -216,6 +220,9 @@
       <Project>{9A3A1688-A41C-4F56-8450-43FB64F60C1F}</Project>
       <Name>Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Game\Minigame\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

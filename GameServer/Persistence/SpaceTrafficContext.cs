@@ -23,6 +23,8 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using SpaceTraffic.Dao;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Entities.Minigames;
+using System.Linq.Expressions;
 
  namespace SpaceTraffic.Persistence
 {
@@ -61,6 +63,10 @@ using SpaceTraffic.Entities;
 
         public DbSet<PlanAction> PlanAction { get; set; }
 
+        public DbSet<MinigameDescriptor> Minigames { get; set; }
+
+        public DbSet<StartAction> StartActions { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new MessageConfiguration());
@@ -79,6 +85,9 @@ using SpaceTraffic.Entities;
             modelBuilder.Configurations.Add(new PathPlanEntityConfiguration());
             modelBuilder.Configurations.Add(new PlanItemEntityConfiguration());
             modelBuilder.Configurations.Add(new PlanActionConfiguration());
+            modelBuilder.Configurations.Add(new MinigameConfiguration());
+            modelBuilder.Configurations.Add(new StartActionConfiguration());
+
             base.OnModelCreating(modelBuilder); 
             
         }
@@ -423,5 +432,45 @@ using SpaceTraffic.Entities;
         }
     }
 
+    public class MinigameConfiguration : EntityTypeConfiguration<MinigameDescriptor>
+    {
+
+        public MinigameConfiguration()
+            : base()
+        {
+            HasKey(p => p.MinigameId);
+            Property(p => p.Name).HasColumnType("varchar").HasMaxLength(256).IsRequired();
+            Property(p => p.Description).HasColumnType("varchar").HasMaxLength(2048).IsRequired();
+            Property(p => p.PlayerCount).HasColumnType("int").IsRequired();
+            Property(p => p.RewardTypeInt).HasColumnType("int").IsRequired();
+            Ignore(p => p.RewardType);
+            Property(p => p.SpecificReward).HasColumnType("varchar").HasMaxLength(128).IsRequired();
+            Property(p => p.RewardAmount).IsRequired();
+            Property(p => p.ConditionTypeInt).HasColumnType("int").IsRequired();
+            Ignore(p => p.ConditionType);
+            Property(p => p.ConditionArgs).HasColumnType("varchar").HasMaxLength(1048).IsOptional();
+            Property(p => p.ExternalClient).HasColumnType("bit").IsRequired();
+            Property(p => p.ClientURL).HasColumnType("varchar").HasMaxLength(1024).IsOptional();           
+
+            HasMany(p => p.StartActions).WithMany(c => c.Minigames);
+
+            ToTable("Minigames");
+        }
+    }
+
+
+    public class StartActionConfiguration : EntityTypeConfiguration<StartAction>
+    {
+
+        public StartActionConfiguration()
+            : base()
+        {
+            HasKey(p => p.StartActionID);
+            Property(p => p.ActionName).HasColumnType("varchar").HasMaxLength(128).IsRequired();
+            HasMany(p => p.Minigames).WithMany(c => c.StartActions);
+
+            ToTable("StartActions");
+        }
+    }
 #endregion
 }
