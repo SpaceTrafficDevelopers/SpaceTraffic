@@ -56,7 +56,8 @@ namespace SpaceTraffic.GameUi.Controllers
 	 */
 	public class AjaxController : AbstractController
 	{
-		
+
+		private Dictionary<String, IAjaxHandleable> handlers = new Dictionary<String, IAjaxHandleable>();
 
 		//
 		// POST: /Ajax/
@@ -87,18 +88,21 @@ namespace SpaceTraffic.GameUi.Controllers
 		{
 			try
 			{
-				Type handleType = Type.GetType("SpaceTraffic.GameUi.Controllers.AjaxHandlers." + requestObject.relatedObject);
-				if (handleType == null){/* if error */
-					throw new FileNotFoundException();
-				}
-				IAjaxHandleable handler = Activator.CreateInstance(handleType) as IAjaxHandleable;/* creates object with given class name */
-				if (handler == null)
-				{/* if error */
-					return createErrorObject(requestObject.requestId, String.Format(
-						"ERROR: AjaxHandler class with name: {0} does not implements IAjaxHandleable.",
-						requestObject.relatedObject
-					));
-				}
+				IAjaxHandleable handler;
+				if (handlers.ContainsKey(requestObject.relatedObject)) {
+					handler = handlers[requestObject.relatedObject];
+				}else{/* is not in list - we have to create it */
+					handler = createHandleObject(requestObject);
+					if (handler == null)
+					{/* if error */
+						return createErrorObject(requestObject.requestId, String.Format(
+							"ERROR: AjaxHandler class with name: {0} does not implements IAjaxHandleable.",
+							requestObject.relatedObject
+						));
+					}
+					handlers[requestObject.relatedObject] = handler;
+				}				
+				
 				DataResponse response = new DataResponse();
 				response.requestId = requestObject.requestId;
 				response.data = handler.handleRequest(requestObject.data, this);
@@ -116,6 +120,24 @@ namespace SpaceTraffic.GameUi.Controllers
 			{
 				return createErrorObject(requestObject.requestId, "ERROR: Thrown exception during creating handling object:" + e.Message);
 			}
+		}
+
+
+		/// <summary>
+		/// Creates the object which can handle specific request.
+		/// </summary>
+		/// <param name="requestObject">The request object.</param>
+		/// <returns></returns>
+		/// <exception cref="System.IO.FileNotFoundException"></exception>
+		private IAjaxHandleable createHandleObject(RequestObject requestObject)
+		{
+			Type handleType = Type.GetType("SpaceTraffic.GameUi.Controllers.AjaxHandlers." + requestObject.relatedObject);
+			if (handleType == null)
+			{/* if error */
+				throw new FileNotFoundException();
+			}
+			IAjaxHandleable handler = Activator.CreateInstance(handleType) as IAjaxHandleable;/* creates object with given class name */
+			return handler;
 		}
 
 		private ErrorResponse createErrorObject(string requestId, string errorMessage) {
