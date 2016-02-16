@@ -7,7 +7,6 @@
 /// Object for loading star systems into an object.
 /// Use loadStarSystem async function.
 var StarSystemLoader = {
-
 	/// Loads star system of given name from xml file on server.
 	/// Loaded StarSystem object instance will be passed as parameter to the callback function.
 	loadStarSystem: function (starSystemName, callback) {
@@ -15,14 +14,14 @@ var StarSystemLoader = {
 		//console.log("Loading StarSystem: "+starSystemName);
 		$.ajax({
 			type: "GET",
-			url: '/StarSystem/Get/' + starSystemName,
+			url: baseUrl + 'StarSystem/Get/' + starSystemName,
 			dataType: "xml",
 			success: function (xml) {
 				var $starSystem = $(xml).find('starsystem');
 				var starSystem = StarSystemLoader.parseStarSystem($starSystem);
 				//console.log("StarSystem loaded: ", starSystem);
 				//console.log("Loading connections of "+starSystemName);
-				$.getJSON('/StarSystem/GetConnections/'+ starSystemName, function (connections){
+				$.getJSON(baseUrl + 'StarSystem/GetConnections/' + starSystemName, function (connections) {
 					for (var i = 0; i < connections.length; i++) {
 						starSystem.wormholeEndpoints[connections[i].EndpointId].destination = connections[i].DestinationStarSystemName
 					}

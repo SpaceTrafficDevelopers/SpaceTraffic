@@ -94,7 +94,7 @@
 	/* Sends complete request on server. Do not use without validating request first.*/
 	function sendRequest(data) {
 		$.fn.ajaxRequester.ajaxLock = true;
-		$.post('/Ajax', JSON.stringify(data), function (data, textStatus) {
+		$.post(baseUrl + 'Ajax', JSON.stringify(data), function (data, textStatus) {
 			$.each(data, function (key, objectData) {
 				handleSingleResponse(objectData);
 			});
