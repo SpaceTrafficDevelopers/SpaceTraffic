@@ -271,6 +271,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             minigame.ConditionArgs = "Watto";
             minigame.ExternalClient = false;
             minigame.ClientURL = null;
+            minigame.MinigameClassFullName = "SpaceTraffic.Pokus";
 
             bool update = target.UpdateMinigameById(minigame);
 
@@ -293,6 +294,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             md.ConditionArgs = "Zeme";
             md.ExternalClient = true;
             md.ClientURL = "kiv.zcu.cz";
+            md.MinigameClassFullName = "SpaceTraffic.Minigame.GTA";
 
             md.StartActions = new List<StartAction>();
             md.StartActions.Add(startAction);

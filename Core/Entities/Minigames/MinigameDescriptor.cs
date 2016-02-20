@@ -85,6 +85,8 @@ namespace SpaceTraffic.Entities.Minigames
         [DataMember]
         public string ClientURL { get; set; }
 
+        [DataMember]
+        public string MinigameClassFullName { get; set; }
     }
 
 }

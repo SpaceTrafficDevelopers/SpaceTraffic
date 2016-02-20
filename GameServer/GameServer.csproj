@@ -114,6 +114,7 @@
     <Compile Include="Engine\IGameSimulation.cs" />
     <Compile Include="Engine\IGameStateManager.cs" />
     <Compile Include="Engine\IGoodsManager.cs" />
+    <Compile Include="Engine\IMinigameManager.cs" />
     <Compile Include="Engine\IPlannableAction.cs" />
     <Compile Include="Engine\IRunnableScript.cs" />
     <Compile Include="Engine\IScriptManager.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="GameServer\EventQueue.cs" />
     <Compile Include="GameServer\GameManager.cs" />
     <Compile Include="GameServer\GameStateManager.cs" />
+    <Compile Include="GameServer\MinigameManager.cs" />
     <Compile Include="GameServer\ScriptManager.cs" />
     <Compile Include="GameServer\GoodsManager.cs" />
     <Compile Include="GameServer\StatisticsManager.cs" />
@@ -152,6 +154,9 @@
     <Compile Include="GameServer\ServiceManager.cs" />
     <Compile Include="Engine\IGameAction.cs" />
     <Compile Include="GameServer\PersistenceManager.cs" />
+    <Compile Include="Game\Minigame\ConditionSolver.cs" />
+    <Compile Include="Game\Minigame\MinigameControls.cs" />
+    <Compile Include="Game\Minigame\Rewarder.cs" />
     <Compile Include="Game\Planner\IPathPlan.cs" />
     <Compile Include="Game\Planner\PathPlan.cs" />
     <Compile Include="Game\Planner\PlanItem.cs" />
@@ -221,9 +226,7 @@
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Game\Minigame\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>"$(SolutionDir)scripts\copyconfig" ConnectionStrings "$(ProjectDir)" "$(TargetDir)"</PostBuildEvent>

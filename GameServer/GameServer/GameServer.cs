@@ -50,6 +50,8 @@ namespace SpaceTraffic.GameServer
         private GameManager gameManager;
         private GoodsManager goodsManager;
 		private StatisticsManager statisticsManager;
+        private MinigameManager minigameManager;
+
         public volatile bool run = false;
 
         public volatile GameTime currentGameTime;
@@ -91,6 +93,15 @@ namespace SpaceTraffic.GameServer
 				return this.statisticsManager;
 			}
 		}
+
+        public IMinigameManager Minigame
+        {
+            get
+            {
+                return this.minigameManager;
+            }
+        }
+
         #endregion
 
         //TODO: Thread-safe state indication of GameServer instance.
@@ -161,6 +172,8 @@ namespace SpaceTraffic.GameServer
                 this.persistenceManager.GetGameActionDao(),
                 this.persistenceManager.GetGameEventDao()
             );
+
+            this.minigameManager = new MinigameManager(this);
 
             // Inicializace herního světa.
             this.gameManager = new GameManager(this, this.gameStateManager);

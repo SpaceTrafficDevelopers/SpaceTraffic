@@ -162,5 +162,14 @@ namespace SpaceTraffic.GameServer
         {
             return new PlanItemEntityDAO();
         }
+
+        public IMinigameDescriptorDAO GetMinigameDescriptorDAO()
+        {
+            return new MinigameDescriptorDAO();
+        }
+        public IStartActionDAO GetStartActionDAO()
+        {
+            return new StartActionDAO();
+        }
     }
 }

@@ -50,6 +50,8 @@ namespace SpaceTraffic.Entities.Minigames
         bool ExternalClient { get; set; }
 
         string ClientURL { get; set; }
+
+        string MinigameClassFullName { get; set; }
     }
 
 }

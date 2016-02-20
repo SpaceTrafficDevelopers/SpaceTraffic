@@ -192,6 +192,7 @@ namespace SpaceTraffic.Dao
                     mg.ConditionArgs = minigame.ConditionArgs;
                     mg.ExternalClient = minigame.ExternalClient;
                     mg.ClientURL = minigame.ClientURL;
+                    mg.MinigameClassFullName = minigame.MinigameClassFullName;
 
                     // save context to database
                     contextDB.SaveChanges();
