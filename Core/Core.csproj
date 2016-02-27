@@ -135,6 +135,7 @@
     </Compile>
     <Compile Include="Services\Contracts\IAchievementsService.cs" />
     <Compile Include="Services\Contracts\ICargoService.cs" />
+    <Compile Include="Services\Contracts\IMinigameService.cs" />
     <Compile Include="Services\Contracts\IShipsService.cs" />
     <Compile Include="Services\Contracts\IPlanningService.cs" />
     <Compile Include="Services\Contracts\IPlayerService.cs" />

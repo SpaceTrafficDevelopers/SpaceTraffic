@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace SpaceTraffic.Game.Minigame
 {
+    [DataContract]
     public class Result
     {
+        [DataMember]
         public ResultState State { get; set; }
 
+        [DataMember]
         public string Message { get; set; }
 
+        [DataMember]
         public object ReturnValue { get; set; }
 
         public static Result createSuccessResult(string message, object returnValue)
@@ -54,10 +59,13 @@ namespace SpaceTraffic.Game.Minigame
         }
     }
 
+    [DataContract]
     public enum ResultState
     {
+        [EnumMember]
         SUCCESS,
 
+        [EnumMember]
         FAILURE
     }
 }

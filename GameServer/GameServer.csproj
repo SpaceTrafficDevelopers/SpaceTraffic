@@ -154,8 +154,10 @@
     <Compile Include="GameServer\ServiceManager.cs" />
     <Compile Include="Engine\IGameAction.cs" />
     <Compile Include="GameServer\PersistenceManager.cs" />
+    <Compile Include="Game\Minigame\ConditionChecker.cs" />
     <Compile Include="Game\Minigame\ConditionSolver.cs" />
     <Compile Include="Game\Minigame\MinigameControls.cs" />
+    <Compile Include="Game\Minigame\RewardChecker.cs" />
     <Compile Include="Game\Minigame\Rewarder.cs" />
     <Compile Include="Game\Planner\IPathPlan.cs" />
     <Compile Include="Game\Planner\PathPlan.cs" />
@@ -170,6 +172,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceImpl\AccountService.cs" />
+    <Compile Include="ServiceImpl\MinigameService.cs" />
     <Compile Include="ServiceImpl\ShipsService.cs" />
     <Compile Include="ServiceImpl\PlayerService.cs" />
     <Compile Include="ServiceImpl\PlanningService.cs" />

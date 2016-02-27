@@ -20,24 +20,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace SpaceTraffic.Game.Minigame
 {
+    [DataContract]
     public class Minigame : IMinigame
     {
+        [DataMember]
         public int ID { get; set; }
 
+        [DataMember]
         public IDictionary<int, Player> Players { get; set; }
 
+        [DataMember]
         public IMinigameDescriptor Descriptor { get; set; }
 
+        [DataMember]
         public MinigameState State { get; set; }
 
+        [DataMember]
         public bool FreeGame { get; set; }
 
+        [DataMember]
         public DateTime CreateTime { get; set; }
 
+        [DataMember]
         public DateTime LastRequestTime { get; set; }
 
         private object lockObj = new object();

@@ -15,6 +15,7 @@ limitations under the License.
 
 **/
 using SpaceTraffic.Engine;
+using SpaceTraffic.Entities.Minigames;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,11 +27,16 @@ namespace SpaceTraffic.Game.Minigame
     {
         private IGameServer gameServer;
 
+        private RewardChecker rewardChecker;
+
+        private ConditionChecker conditionChecker;
+
         public MinigameControls(IGameServer gameServer)
         {
             this.gameServer = gameServer;
+            this.rewardChecker = new RewardChecker();
+            this.conditionChecker = new ConditionChecker();
         }
-
 
         public bool checkNumberOfPlayers(IMinigame minigame)
         {
@@ -47,5 +53,26 @@ namespace SpaceTraffic.Game.Minigame
             return minigame.State == state;
         }
 
+        public bool checkMinigameDescriptor(IMinigameDescriptor minigame)
+        {
+            if (minigame.PlayerCount < 1) 
+                return false;
+
+            if(!this.rewardChecker.checkReward(minigame)) 
+                return false;
+
+            if(!string.IsNullOrEmpty(minigame.MinigameClassFullName) && Type.GetType(minigame.MinigameClassFullName) == null)
+                return false;
+
+            if (!conditionChecker.checkCondition(minigame))
+                return false;
+
+            if(minigame.ExternalClient){
+                if(minigame.ClientURL == null || !Uri.IsWellFormedUriString(minigame.ClientURL, UriKind.RelativeOrAbsolute))
+                    return false;
+            }
+
+            return true;
+        }
     }
 }

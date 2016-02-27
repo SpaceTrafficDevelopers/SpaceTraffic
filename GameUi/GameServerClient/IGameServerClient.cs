@@ -41,6 +41,8 @@ namespace SpaceTraffic.GameUi.GameServerClient
 		IPlayerService PlayerService { get; }
 		IPlanningService PlanningService { get; }
 		IShipsService ShipsService { get; }
+
+        IMinigameService MinigameService { get; }
 		
 	}
 }

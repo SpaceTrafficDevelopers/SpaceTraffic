@@ -72,6 +72,11 @@ namespace SpaceTraffic.GameServer
 
         public bool registerMinigame(MinigameDescriptor minigame)
         {
+            bool correct = minigameControls.checkMinigameDescriptor(minigame);
+
+            if(!correct)
+                return false;
+
             bool insert = this.minigameDescriptorDAO.InsertMinigame(minigame);
 
             if (insert)
@@ -343,12 +348,38 @@ namespace SpaceTraffic.GameServer
             return null;
         }
 
-        public int getNewMinigameId()
+        private int getNewMinigameId()
         {
             lock (counterLock)
             {
                 return minigameCounter++;
             }
+        }
+
+        public List<StartAction> getStartActions()
+        {
+            return startActionDAO.GetStartActions();
+        }
+
+        public bool addRelationshipWithStartActions(string minigameName, string startActionName){
+            MinigameDescriptor descriptor = this.minigameDescriptorDAO.GetMinigameByName(minigameName);
+            StartAction action = this.startActionDAO.GetStartActionByName(startActionName);
+
+            if (action != null && descriptor != null)
+                return this.minigameDescriptorDAO.InsertRelationshipWithStartActions(descriptor.MinigameId, action.StartActionID);
+            
+            return false;
+        }
+
+        public bool removeRelationshipWithStartActions(string minigameName, string startActionName)
+        {
+            MinigameDescriptor descriptor = this.minigameDescriptorDAO.GetMinigameByName(minigameName);
+            StartAction action = this.startActionDAO.GetStartActionByName(startActionName);
+
+            if (action != null && descriptor != null)
+                return this.minigameDescriptorDAO.RemoveRelationshipWithStartActions(descriptor.MinigameId, action.StartActionID);
+
+            return false;
         }
     }
 }
