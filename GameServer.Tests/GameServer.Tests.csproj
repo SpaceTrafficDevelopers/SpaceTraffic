@@ -80,6 +80,8 @@
     <Compile Include="Dao\PlayerDAOTest.cs" />
     <Compile Include="Dao\MessageDAOTest.cs" />
     <Compile Include="Dao\BaseDAOTest.cs" />
+    <Compile Include="Dao\MinigameDescriptorDAOTest.cs" />
+    <Compile Include="Dao\StartActionDAOTest.cs" />
     <Compile Include="Dao\TraderDAOTest.cs" />
     <Compile Include="Dao\TraderCargoDAOTest.cs" />
     <Compile Include="Dao\PathPlanEntityDAOTest.cs" />

@@ -34,6 +34,7 @@ namespace SpaceTraffic.GameUi.GameServerClient
 		private PlayerServiceClient _PlayerService = new PlayerServiceClient();
 		private PlanningServiceClient _PlanningService = new PlanningServiceClient();
 		private ShipsServiceClient _ShipsService = new ShipsServiceClient();
+        private MinigameServiceClient _MinigameService = new MinigameServiceClient();
 
 		/// <summary>
 		/// Gets the account service of GameServer.
@@ -73,5 +74,10 @@ namespace SpaceTraffic.GameUi.GameServerClient
 		{
 			get { return _ShipsService; }
 		}
+
+        public Services.Contracts.IMinigameService MinigameService
+        {
+            get { return _MinigameService; }
+        }
 	}
 }

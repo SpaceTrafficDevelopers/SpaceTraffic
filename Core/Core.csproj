@@ -93,6 +93,11 @@
     <Compile Include="Entities\ICargoLoad.cs" />
     <Compile Include="Entities\ICargoLoadEntity.cs" />
     <Compile Include="Entities\Message.cs" />
+    <Compile Include="Entities\Minigames\ConditionType.cs" />
+    <Compile Include="Entities\Minigames\IMinigameDescriptor.cs" />
+    <Compile Include="Entities\Minigames\MinigameDescriptor.cs" />
+    <Compile Include="Entities\Minigames\RewardType.cs" />
+    <Compile Include="Entities\Minigames\StartAction.cs" />
     <Compile Include="Entities\PathPlanEntity.cs" />
     <Compile Include="Entities\PlanAction.cs" />
     <Compile Include="Entities\PlanItemEntity.cs" />
@@ -107,6 +112,9 @@
     <Compile Include="Game\Geometry\Stacionary.cs" />
     <Compile Include="Game\IGameObject.cs" />
     <Compile Include="Game\IPlanet.cs" />
+    <Compile Include="Game\Minigame\IMinigame.cs" />
+    <Compile Include="Game\Minigame\Minigame.cs" />
+    <Compile Include="Game\Minigame\Result.cs" />
     <Compile Include="Game\VisibleObject.cs" />
     <Compile Include="Game\Geometry\CircularOrbit.cs" />
     <Compile Include="Game\Geometry\Direction.cs" />
@@ -127,6 +135,7 @@
     </Compile>
     <Compile Include="Services\Contracts\IAchievementsService.cs" />
     <Compile Include="Services\Contracts\ICargoService.cs" />
+    <Compile Include="Services\Contracts\IMinigameService.cs" />
     <Compile Include="Services\Contracts\IShipsService.cs" />
     <Compile Include="Services\Contracts\IPlanningService.cs" />
     <Compile Include="Services\Contracts\IPlayerService.cs" />
