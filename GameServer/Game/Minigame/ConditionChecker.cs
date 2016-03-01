@@ -22,12 +22,26 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Minigame
 {
+    /// <summary>
+    /// Condition checker servant.
+    /// </summary>
     public class ConditionChecker
     {
+        /// <summary>
+        /// Check function delegate.
+        /// </summary>
+        /// <param name="conditionArgs">condition arguments</param>
+        /// <returns>true, if control was successfull, otherwise false</returns>
         private delegate bool checkFunction(string conditionArgs);
 
+        /// <summary>
+        /// Check function dictionary. K - condition type, V - check function
+        /// </summary>
         private Dictionary<ConditionType, checkFunction> checkFunctions;
 
+        /// <summary>
+        /// Condition checker constructor.
+        /// </summary>
         public ConditionChecker()
         {
             this.checkFunctions = new Dictionary<ConditionType, checkFunction>(){
@@ -37,11 +51,21 @@ namespace SpaceTraffic.Game.Minigame
             };
         }
 
+        /// <summary>
+        /// Method for checking condtition.
+        /// </summary>
+        /// <param name="minigame">minigame descriptor</param>
+        /// <returns>true, if control was successfull, otherwise false</returns>
         public bool checkCondition(IMinigameDescriptor minigame)
         {
             return this.checkFunctions[minigame.ConditionType](minigame.ConditionArgs);
         }
 
+        /// <summary>
+        /// Method for checking credit type condition.
+        /// </summary>
+        /// <param name="conditionArgs">condition arguments</param>
+        /// <returns>true, if control was successfull, otherwise false</returns>
         private bool creditCheckFunction(string conditionArgs)
         {
             int? value = parseArgumentInt(conditionArgs);
@@ -49,6 +73,11 @@ namespace SpaceTraffic.Game.Minigame
             return value > 0;
         }
 
+        /// <summary>
+        /// Method for checking level type condition.
+        /// </summary>
+        /// <param name="conditionArgs">condition arguments</param>
+        /// <returns>true, if control was successfull, otherwise false</returns>
         private bool levelCheckFunction(string conditionArgs)
         {
             int? value = parseArgumentInt(conditionArgs);
@@ -56,6 +85,11 @@ namespace SpaceTraffic.Game.Minigame
             return value > 0;
         }
 
+        /// <summary>
+        /// Method for parsing string to int.
+        /// </summary>
+        /// <param name="args">parsing value</param>
+        /// <returns>parsed int or null</returns>
         private int? parseArgumentInt(string args)
         {
             int value = 0;

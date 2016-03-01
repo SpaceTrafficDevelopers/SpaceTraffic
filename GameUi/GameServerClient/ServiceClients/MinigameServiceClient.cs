@@ -131,5 +131,22 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
                 return (channel as IMinigameService).removeRelationshipWithStartActions(minigameName, startActionName);
             }
         }
+
+
+        public List<int> getMinigameList(string actionName, int playerId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IMinigameService).getMinigameList(actionName, playerId);
+            }
+        }
+
+        public int getMinigame(string actionName, int playerId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IMinigameService).getMinigame(actionName, playerId);
+            }
+        }
     }
 }

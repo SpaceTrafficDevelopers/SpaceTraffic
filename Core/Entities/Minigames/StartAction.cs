@@ -22,15 +22,27 @@ using System.Text;
 
 namespace SpaceTraffic.Entities.Minigames
 {
+    /// <summary>
+    /// Minigame start action. Actions which starts minigame.
+    /// </summary>
     [DataContract]
     public class StartAction
     {
+        /// <summary>
+        /// Start action ID.
+        /// </summary>
         [DataMember]
         public int StartActionID { get; set; }
 
+        /// <summary>
+        /// Action name.
+        /// </summary>
         [DataMember]
         public string ActionName { get; set; }
 
+        /// <summary>
+        /// Minigames for start action.
+        /// </summary>
         public virtual ICollection<MinigameDescriptor> Minigames { get; set; }
     }
 }

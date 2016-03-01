@@ -28,30 +28,70 @@ using System.Threading;
 
 namespace SpaceTraffic.GameServer
 {
+    /// <summary>
+    /// Minigame manager class.
+    /// </summary>
     public class MinigameManager : IMinigameManager
     {
+        /// <summary>
+        /// Minigames by start action name. K - start action name, V - StartAction with minigames collection
+        /// </summary>
         private Dictionary<string, StartAction> minigamesByStartAction;
 
+        /// <summary>
+        /// Activce minigames. K - minigame id, V - minigame
+        /// </summary>
         private ConcurrentDictionary<int, IMinigame> activeMinigames = new ConcurrentDictionary<int, IMinigame>();
 
+        /// <summary>
+        /// Game server instance.
+        /// </summary>
         private IGameServer gameServer;
 
+        /// <summary>
+        /// Minigame descriptor dao.
+        /// </summary>
         private IMinigameDescriptorDAO minigameDescriptorDAO;
 
+        /// <summary>
+        /// Start action dao.
+        /// </summary>
         private IStartActionDAO startActionDAO;
 
+        /// <summary>
+        /// Lock object for minigame id counter.
+        /// </summary>
         private object counterLock;
 
+        /// <summary>
+        /// Lock objeckt for minigames by start action name dictionary.
+        /// </summary>
         private object minigamesByStartActionLock;
 
+        /// <summary>
+        /// Static minigame id counter.
+        /// </summary>
         private static int minigameCounter = 0;
 
+        /// <summary>
+        /// Rewarder servant.
+        /// </summary>
         private Rewarder rewarder;
 
+        /// <summary>
+        /// ConditionSolwer servant.
+        /// </summary>
         private ConditionSolver coditionSolver;
 
+        /// <summary>
+        /// MinigameControls servent.
+        /// </summary>
         private MinigameControls minigameControls;
 
+        /// <summary>
+        /// Minigame manager constructor.
+        /// </summary>
+        /// <param name="gameServer">game server instance</param>
         public MinigameManager(IGameServer gameServer)
         {
             this.gameServer = gameServer;
@@ -62,6 +102,9 @@ namespace SpaceTraffic.GameServer
             this.rewarder = new Rewarder(gameServer);
         }
 
+        /// <summary>
+        /// Method for loading minigames from database into minigames by start action dictionary.
+        /// </summary>
         public void loadMinigames()
         {
             lock (minigamesByStartActionLock)
@@ -117,6 +160,12 @@ namespace SpaceTraffic.GameServer
             return -1;
         }
 
+        /// <summary>
+        /// Method for create minigame instance by class full name.
+        /// </summary>
+        /// <param name="descriptor">minigame descriptor</param>
+        /// <param name="freeGame">indication, if game has to create as free game</param>
+        /// <returns>return minigame instance or null</returns>
         private IMinigame createMinigameByFullName(IMinigameDescriptor descriptor, bool freeGame)
         {
             try
@@ -251,6 +300,12 @@ namespace SpaceTraffic.GameServer
             return coditionSolver.getMinigame(minigames, player);
         }
 
+        /// <summary>
+        /// Method for getting minigame collection by start action name.
+        /// </summary>
+        /// <param name="actionName">start action name</param>
+        /// <param name="playerId">player id</param>
+        /// <returns>return minigames collection or null</returns>
         private ICollection<MinigameDescriptor> getMinigameCollection(string actionName, int playerId)
         {
             ICollection<MinigameDescriptor> minigames;
@@ -333,6 +388,11 @@ namespace SpaceTraffic.GameServer
             return performAction(minigameId, actionName, actionArgs, false);
         }
 
+        /// <summary>
+        /// Method for getting minigame by ID from active games.
+        /// </summary>
+        /// <param name="minigameId">minigame id</param>
+        /// <returns>return instance of minigame or null</returns>
         private IMinigame getActiveGameById(int minigameId)
         {
             try
@@ -348,6 +408,10 @@ namespace SpaceTraffic.GameServer
             return null;
         }
 
+        /// <summary>
+        /// Method for getting new (unique) minigame ID.
+        /// </summary>
+        /// <returns>return new minigame ID</returns>
         private int getNewMinigameId()
         {
             lock (counterLock)

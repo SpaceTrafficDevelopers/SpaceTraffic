@@ -24,16 +24,32 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Minigame
 {
+    /// <summary>
+    /// Rewarder servant.
+    /// </summary>
     public class Rewarder
     {
+        /// <summary>
+        /// Game server instance.
+        /// </summary>
         private IGameServer gameServer;
 
-        private IMinigameDescriptor descriptor;
-
+        /// <summary>
+        /// Reward function delegate.
+        /// </summary>
+        /// <param name="player">player</param>
+        /// <param name="descriptor">minigame descriptor</param>
         private delegate void rewardFunction(Player player, IMinigameDescriptor descriptor);
 
+        /// <summary>
+        /// Reward function ditionary. K - reward type, V - reward function
+        /// </summary>
         private Dictionary<RewardType, rewardFunction> rewardFunctions;
 
+        /// <summary>
+        /// Rewarder constructor.
+        /// </summary>
+        /// <param name="gameServer">game server instance</param>
         public Rewarder(IGameServer gameServer)
         {
             this.gameServer = gameServer;
@@ -44,16 +60,31 @@ namespace SpaceTraffic.Game.Minigame
             };
         }
 
+        /// <summary>
+        /// Method for reward player.
+        /// </summary>
+        /// <param name="player">player</param>
+        /// <param name="descriptor">minigame descriptor</param>
         public void rewardPlayer(Player player, IMinigameDescriptor descriptor)
         {
             this.rewardFunctions[descriptor.RewardType](player, descriptor);
         }
 
+        /// <summary>
+        /// Method for experience reward.
+        /// </summary>
+        /// <param name="player">player</param>
+        /// <param name="descriptor">minigame descriptor</param>
         private void experienceReward(Player player, IMinigameDescriptor descriptor)
         {
-            this.gameServer.Statistics.IncrementExperiences(player, (int)this.descriptor.RewardAmount);
+            this.gameServer.Statistics.IncrementExperiences(player, (int)descriptor.RewardAmount);
         }
 
+        /// <summary>
+        /// Method for credit reward.
+        /// </summary>
+        /// <param name="player">player</param>
+        /// <param name="descriptor">minigame descriptor</param>
         private void creditReward(Player player, IMinigameDescriptor descriptor)
         {
             this.gameServer.Persistence.GetPlayerDAO().IncrasePlayersCredits(player.PlayerId, (int) descriptor.RewardAmount);

@@ -22,34 +22,63 @@ using System.Text;
 
 namespace SpaceTraffic.Entities.Minigames
 {
-
+    /// <summary>
+    /// Reward type enum.
+    /// </summary>
     [DataContract]
     public enum RewardType
     {
+        /// <summary>
+        /// Goods reward.
+        /// </summary>
         [EnumMember]
         GOODS,
-
+        
+        /// <summary>
+        /// Credit reward.
+        /// </summary>
         [EnumMember]
         CREDIT,
 
+        /// <summary>
+        /// Achievement reward.
+        /// </summary>
         [EnumMember]
         ACHIEVEMENT,
 
+        /// <summary>
+        /// Experience reward.
+        /// </summary>
         [EnumMember]
         EXPERIENCE,
 
+        /// <summary>
+        /// Rank reward.
+        /// </summary>
         [EnumMember]
         RANK,
 
+        /// <summary>
+        /// Ship reward.
+        /// </summary>
         [EnumMember]
         SHIP,
 
+        /// <summary>
+        /// Ship part reward.
+        /// </summary>
         [EnumMember]
         SHIP_PART,
 
+        /// <summary>
+        /// Land reward.
+        /// </summary>
         [EnumMember]
         LAND,
 
+        /// <summary>
+        /// Nothing reward.
+        /// </summary>
         [EnumMember]
         NOTHING
     }

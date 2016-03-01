@@ -22,39 +22,75 @@ using System.Text;
 
 namespace SpaceTraffic.Entities.Minigames
 {
+    /// <summary>
+    /// Codition type enum.
+    /// </summary>
     [DataContract]
     public enum ConditionType
     {
+        /// <summary>
+        /// Nothing condition.
+        /// </summary>
         [EnumMember]
         NOTHING,
 
+        /// <summary>
+        /// Level condition.
+        /// </summary>
         [EnumMember]
         LEVEL,
 
+        /// <summary>
+        /// Rank condition.
+        /// </summary>
         [EnumMember]
         RANK,
 
+        /// <summary>
+        /// Credit condition.
+        /// </summary>
         [EnumMember]
         CREDIT,
 
+        /// <summary>
+        /// Achievement condition.
+        /// </summary>
         [EnumMember]
         ACHIEVEMENT,
 
+        /// <summary>
+        /// Planet condition.
+        /// </summary>
         [EnumMember]
         PLANET,
 
+        /// <summary>
+        /// Star system condition.
+        /// </summary>
         [EnumMember]
         STAR_SYTEM,
 
+        /// <summary>
+        /// Trader condition.
+        /// </summary>
         [EnumMember]
         TRADER,
 
+        /// <summary>
+        /// Factory condition.
+        /// </summary>
         [EnumMember]
         FACTORY,
 
+        /// <summary>
+        /// Cargo condition.
+        /// </summary>
         [EnumMember]
         CARGO,
 
+        /// <summary>
+        /// Ship condition.
+        /// </summary>
         [EnumMember]
         SHIP
     }

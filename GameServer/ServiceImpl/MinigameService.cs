@@ -25,9 +25,14 @@ using System.Text;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
 {
+    /// <summary>
+    /// Minigame service.
+    /// </summary>
     public class MinigameService : IMinigameService
     {
-
+        /// <summary>
+        /// Minigame manager instance.
+        /// </summary>
         private IMinigameManager manager = GameServer.CurrentInstance.Minigame;
 
         public bool registerMinigame(MinigameDescriptor minigame)
@@ -93,6 +98,16 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         public bool removeRelationshipWithStartActions(string minigameName, string startActionName)
         {
             return manager.removeRelationshipWithStartActions(minigameName, startActionName);
+        }
+
+        public List<int> getMinigameList(string actionName, int playerId)
+        {
+            return manager.getMinigameList(actionName, playerId);
+        }
+
+        public int getMinigame(string actionName, int playerId)
+        {
+            return manager.getMinigame(actionName, playerId);
         }
     }
 }

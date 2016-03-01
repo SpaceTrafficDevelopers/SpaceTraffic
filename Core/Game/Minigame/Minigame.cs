@@ -51,8 +51,18 @@ namespace SpaceTraffic.Game.Minigame
 
         private object lockObj = new object();
 
+        /// <summary>
+        /// Minigame constructor without parameters for serialization.
+        /// </summary>
         public Minigame() { }
 
+        /// <summary>
+        /// Minigame constructor.
+        /// </summary>
+        /// <param name="id">minigame id (has to be unique)</param>
+        /// <param name="descriptor">minigame descriptor</param>
+        /// <param name="createTime">time when the game was created</param>
+        /// <param name="freeGame">indication, if the game has to be played as free game</param>
         public Minigame(int id, IMinigameDescriptor descriptor, DateTime createTime, bool freeGame)
         {
             this.ID = id;

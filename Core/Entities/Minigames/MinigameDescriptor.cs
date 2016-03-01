@@ -40,6 +40,7 @@ namespace SpaceTraffic.Entities.Minigames
         [DataMember]
         public virtual ICollection<StartAction> StartActions { get; set; }
 
+        //Mapping on RewardType enum.
         public int RewardTypeInt
         {
             get { return (int)RewardType; }
@@ -61,6 +62,7 @@ namespace SpaceTraffic.Entities.Minigames
         [DataMember]
         public double RewardAmount { get; set; }
 
+        //Mapping on ConditionType enum.
         public int ConditionTypeInt
         {
             get { return (int)ConditionType; }

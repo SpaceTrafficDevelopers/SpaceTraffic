@@ -21,36 +21,86 @@ using System.Text;
 
 namespace SpaceTraffic.Entities.Minigames
 {
+    /// <summary>
+    /// Interface for Minigame descriptor
+    /// </summary>
     public interface IMinigameDescriptor
     {
+        /// <summary>
+        /// Minigame id.
+        /// </summary>
         int MinigameId { get; set; }
 
+        /// <summary>
+        /// Name.
+        /// </summary>
         string Name { get; set; }
 
+        /// <summary>
+        /// Number of players.
+        /// </summary>
         int PlayerCount { get; set; }
 
+        /// <summary>
+        /// Description.
+        /// </summary>
         string Description { get; set; }
 
+        /// <summary>
+        /// Start actions for minigame.
+        /// </summary>
         ICollection<StartAction> StartActions { get; set; }
 
+        /// <summary>
+        /// Reward type as integer. This is enum mapping because 
+        /// entity framework 4 does not support enum maping.
+        /// </summary>
         int RewardTypeInt { get; set; }
 
+        /// <summary>
+        /// Reward type.
+        /// </summary>
         RewardType RewardType { get; set; }
-
+        
+        /// <summary>
+        /// Specific reward.
+        /// </summary>
         string SpecificReward { get; set; }
 
+        /// <summary>
+        /// Reward amount.
+        /// </summary>
         double RewardAmount { get; set; }
-
+        
+        /// <summary>
+        /// Start condition type as integer. This is enum mapping because 
+        /// entity framework 4 does not support enum maping.
+        /// </summary>
         int ConditionTypeInt { get; set; }
 
+        /// <summary>
+        /// Start condition type.
+        /// </summary>
         ConditionType ConditionType { get; set; }
 
+        /// <summary>
+        /// Start codition arguments.
+        /// </summary>
         string ConditionArgs { get; set; }
 
+        /// <summary>
+        /// External client indication.
+        /// </summary>
         bool ExternalClient { get; set; }
 
+        /// <summary>
+        /// Client URL.
+        /// </summary>
         string ClientURL { get; set; }
 
+        /// <summary>
+        /// Class full name for create minigame instance.
+        /// </summary>
         string MinigameClassFullName { get; set; }
     }
 
