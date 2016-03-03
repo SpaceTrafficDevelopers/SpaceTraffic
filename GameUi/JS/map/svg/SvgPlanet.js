@@ -85,11 +85,16 @@ var SvgPlanet = new Class({
 	},
 	buildTerrastrialDefs: function(point, transform) {
 		var planetSize = this.body.size * 2;
+		var animationName = 'animPlanet' + this.getId(ID_OBJECT_SUFFIX);
+		var animateDur = this.body.rotationPeriod;
+		this.addAnimation(animationName, '{ 0%{ cx: ' + (planetSize * 1.5) + ';}, 100% { cx:' + -(planetSize * 1.5) + '; } }');
 		var buff = '<pattern id="pattern' + this.getId(ID_OBJECT_SUFFIX) + '" x="' + this.body.size + '" y="' + this.body.size + '" width="' + planetSize + '" height="' + planetSize + '" patternUnits="userSpaceOnUse" >'
 			+ ' <rect x="0" y="0" width="' + planetSize + '" height="' + planetSize + '" style="fill: ' + this.body.colorPrimary + '" />';
 		for (var i = 0; i < ((Math.random() * 100 % 10) + 2) ; i++) {/* 2 - 12 times*/
-			buff = buff + ' <circle cx="' + -this.body.size + '" cy="' + (0.1 + Math.random()) * planetSize + '" r="' + Math.random() * 0.25 * planetSize + '" style="stroke: none; fill: ' + this.body.colorSecondary + '; fill-opacity: ' + Math.min(1, Math.random() + 0.5) + ';" >'
-				+ '<animate attributeName="cx" from="' + (planetSize * 1.5) + '" to="' + -(planetSize * 1.5) + '" dur="' + this.body.rotationPeriod + '" begin="' + -(Math.random() * this.body.rotationPeriod) + '" repeatCount="indefinite" /></circle>';
+			var animateBegin = -(Math.random() * this.body.rotationPeriod);
+			buff = buff + ' <circle cx="' + -(this.body.size) + '" cy="' + (0.1 + Math.random()) * planetSize + '" r="' + Math.random() * 0.25 * planetSize + '" style="stroke: none; fill: ' + this.body.colorSecondary + '; fill-opacity: ' + Math.min(1, Math.random() + 0.5) + '; animation: ' + animationName + ' ' + animateDur + 's ' + animateBegin + 's linear infinite;-webkit-animation: ' + animationName + ' ' + animateDur + 's ' + animateBegin + 's linear infinite;-moz-animation: ' + animationName + ' ' + animateDur + 's ' + animateBegin + 's linear infinite;" >'
+				+ '<animate attributeName="cx" from="' + (planetSize * 1.5) + '" to="' + -(planetSize * 1.5) + '" dur="' + animateDur + '" begin="' + animateBegin + '" repeatCount="indefinite" />'
+				+ '</circle>';
 		}
 		buff = buff
 			//+ '<path transform="scale(' + this.body.size + ', 1) translate(0, ' + this.body.size / 2 + ')" style="fill: ' + this.body.colorOptional + ';fill-opacity: 0.8;" d="m 0.38476562,0.0099925 a 0.27027029,0.15624849 0 0 0 -0.26953124,0.1563 0.27027029,0.15624849 0 0 0 0.23046874,0.1562 0.3466005,0.1400649 0 0 0 -0.0800781,0.09 0.3466005,0.1400649 0 0 0 0,0.014 A 0.33108109,0.20089091 0 0 0 0,0.6232925 a 0.33108109,0.20089091 0 0 0 0.33203125,0.1992 0.33108109,0.20089091 0 0 0 0.33007813,-0.1992 0.33108109,0.20089091 0 0 0 -0.0195313,-0.07 0.3466005,0.1400649 0 0 0 0.31640626,-0.1406 0.3466005,0.1400649 0 0 0 -0.34765626,-0.1407 0.3466005,0.1400649 0 0 0 -0.0292969,0 0.27027029,0.15624849 0 0 0 0.0742188,-0.1074 0.27027029,0.15624849 0 0 0 -0.27148438,-0.1563 z m 0.91601558,0 a 0.32284629,0.18303396 0 0 0 -0.32226558,0.1836 0.32284629,0.18303396 0 0 0 0.32226558,0.1836 0.32284629,0.18303396 0 0 0 0.3222657,-0.1836 0.32284629,0.18303396 0 0 0 -0.3222657,-0.1836 z m 0.4902344,0.4297 a 0.17905407,0.07142788 0 0 0 -0.1484375,0.07 0.17905407,0.07142788 0 0 0 0.1777344,0.072 A 0.17905407,0.07142788 0 0 0 2,0.5099925 a 0.17905407,0.07142788 0 0 0 -0.1796875,-0.07 0.17905407,0.07142788 0 0 0 -0.029297,0 z m -0.5546875,0.1074 a 0.37837839,0.16406038 0 0 0 -0.37890622,0.1641 0.37837839,0.16406038 0 0 0 0.37890622,0.1641 0.37837839,0.16406038 0 0 0 0.3789063,-0.1641 0.37837839,0.16406038 0 0 0 -0.3789063,-0.1641 z m -0.5722656,0.3125 a 0.125,0.07589213 0 0 0 -0.10351562,0.076 0.125,0.07589213 0 0 0 0.125,0.074 0.125,0.07589213 0 0 0 0.125,-0.074 0.125,0.07589213 0 0 0 -0.125,-0.076 0.125,0.07589213 0 0 0 -0.0214844,0 z">'
@@ -102,12 +107,17 @@ var SvgPlanet = new Class({
 	},
 	buildGasDefs: function(point, transform){
 		var planetSize = this.body.size * 2;
+		var animationName = 'animPlanet' + this.getId(ID_OBJECT_SUFFIX);
+		var animateDur = this.body.rotationPeriod;
+		this.addAnimation(animationName, '{ 0%{ cx: ' + (planetSize * 2) + ';}, 100% { cx:' + -(planetSize * 2) + '; } }');
 		var buff = '<pattern id="pattern' + this.getId(ID_OBJECT_SUFFIX) + '" x="' + this.body.size + '" y="' + this.body.size + '" width="' + planetSize + '" height="' + planetSize + '" patternUnits="userSpaceOnUse" >'
 			+ ' <rect x="0" y="0" width="' + planetSize + '" height="' + planetSize + '" style="fill: ' + this.body.colorPrimary + '" />';
 		for (var i = 0; i < ((Math.random() * 100 % 10) + 5) ; i++) {/* 5 - 15 times*/
 			var rx = Math.random() * planetSize;
-			buff = buff + '<ellipse cx="' + -(this.body.size) + '" cy="' + ((0.1 + Math.random()) * planetSize) + '" rx="' + rx + '" ry="' + (rx * 0.2) + '" style="stroke: none; fill: ' + ((Math.random() < 0.7) ? this.body.colorSecondary : this.body.colorOptional) + '; fill-opacity: ' + Math.random() + ';" >'
-				+ '<animate attributeName="cx" from="' + (planetSize * 1.5) + '" to="' + -(planetSize * 1.5) + '" dur="' + this.body.rotationPeriod + '" begin="' + -(Math.random() * this.body.rotationPeriod) + '" repeatCount="indefinite" /></ellipse>';
+			var animateBegin = -(Math.random() * this.body.rotationPeriod);
+			buff = buff + '<ellipse cx="' + -(this.body.size) + '" cy="' + ((0.1 + Math.random()) * planetSize) + '" rx="' + rx + '" ry="' + (rx * 0.2) + '" style="stroke: none; fill: ' + ((Math.random() < 0.7) ? this.body.colorSecondary : this.body.colorOptional) + '; fill-opacity: ' + Math.random() + '; animation: ' + animationName + ' ' + animateDur + 's ' + animateBegin + 's linear infinite;-webkit-animation: ' + animationName + ' ' + animateDur + 's ' + animateBegin + 's linear infinite;-moz-animation: ' + animationName + ' ' + animateDur + 's ' + animateBegin + 's linear infinite;" >'
+				+ '<animate attributeName="cx" from="' + (planetSize * 2) + '" to="' + -(planetSize * 2) + '" dur="' + animateDur + '" begin="' + animateBegin + '" repeatCount="indefinite" />'
+				+ '</ellipse>';
 		}
 		buff = buff
 			+ '</pattern>';

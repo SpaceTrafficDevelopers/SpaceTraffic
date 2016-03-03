@@ -95,16 +95,12 @@ var SvgOrbitingBody = new Class({
 			{
 				//console.debug("Reordering svg");
 				$svgBody.addClass('hover');
-				SvgStarSystemMap.$svgTopLayer.append($svgBody);
-				SvgStarSystemMap.setFade();
+				SvgStarSystemMap.$svgTopLayer.append($svgNameplate);
 			}
 		};
 		var mouseleaveHandler = function(){
 			$svgBody.removeClass('hover');
-			SvgStarSystemMap.$svgBackgroundLayer.append($svgOrbit);
-			SvgStarSystemMap.$svgObjectLayer.append($svgIcon);
 			SvgStarSystemMap.$svgOverlayLayer.append($svgNameplate);
-			SvgStarSystemMap.unsetFade();
 		};
 		
 		$svgIcon.mouseenter(mouseoverHandler).mouseleave(mouseleaveHandler);
