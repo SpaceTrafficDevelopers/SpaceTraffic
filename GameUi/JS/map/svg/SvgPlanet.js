@@ -93,7 +93,7 @@ var SvgPlanet = new Class({
 		for (var i = 0; i < ((Math.random() * 100 % 10) + 2) ; i++) {/* 2 - 12 times*/
 			var animateBegin = -(Math.random() * this.body.rotationPeriod);
 			buff = buff + ' <circle cx="' + -(this.body.size) + '" cy="' + (0.1 + Math.random()) * planetSize + '" r="' + Math.random() * 0.25 * planetSize + '" style="stroke: none; fill: ' + this.body.colorSecondary + '; fill-opacity: ' + Math.min(1, Math.random() + 0.5) + '; animation: ' + animationName + ' ' + animateDur + 's ' + animateBegin + 's linear infinite;-webkit-animation: ' + animationName + ' ' + animateDur + 's ' + animateBegin + 's linear infinite;-moz-animation: ' + animationName + ' ' + animateDur + 's ' + animateBegin + 's linear infinite;" >'
-				//+ '<animate attributeName="cx" from="' + (planetSize * 1.5) + '" to="' + -(planetSize * 1.5) + '" dur="' + animateDur + '" begin="' + animateBegin + '" repeatCount="indefinite" />'
+				+ '<animate attributeName="cx" from="' + (planetSize * 1.5) + '" to="' + -(planetSize * 1.5) + '" dur="' + animateDur + '" begin="' + animateBegin + '" repeatCount="indefinite" />'
 				+ '</circle>';
 		}
 		buff = buff
@@ -116,7 +116,7 @@ var SvgPlanet = new Class({
 			var rx = Math.random() * planetSize;
 			var animateBegin = -(Math.random() * this.body.rotationPeriod);
 			buff = buff + '<ellipse cx="' + -(this.body.size) + '" cy="' + ((0.1 + Math.random()) * planetSize) + '" rx="' + rx + '" ry="' + (rx * 0.2) + '" style="stroke: none; fill: ' + ((Math.random() < 0.7) ? this.body.colorSecondary : this.body.colorOptional) + '; fill-opacity: ' + Math.random() + '; animation: ' + animationName + ' ' + animateDur + 's ' + animateBegin + 's linear infinite;-webkit-animation: ' + animationName + ' ' + animateDur + 's ' + animateBegin + 's linear infinite;-moz-animation: ' + animationName + ' ' + animateDur + 's ' + animateBegin + 's linear infinite;" >'
-				//+ '<animate attributeName="cx" from="' + (planetSize * 2) + '" to="' + -(planetSize * 2) + '" dur="' + animateDur + '" begin="' + animateBegin + '" repeatCount="indefinite" />'
+				+ '<animate attributeName="cx" from="' + (planetSize * 2) + '" to="' + -(planetSize * 2) + '" dur="' + animateDur + '" begin="' + animateBegin + '" repeatCount="indefinite" />'
 				+ '</ellipse>';
 		}
 		buff = buff

@@ -48,47 +48,47 @@ var SvgStar = new Class({
 
 			+ ' <circle cx="' + squareMiddle + '" cy="' + 1.5 * squareMiddle + '" r="' + squareMiddle * 0.6 + '" style="stroke: none; fill: ' + this.star.colorSecondary + '; fill-opacity: 0;'
 			+ 'animation: ' + animationNameR1 + ' 17s 3s linear infinite";  -moz-animation: ' + animationNameR1 + ' 17s 3s linear infinite; -webkit-animation: ' + animationNameR1 + ' 17s 3s linear infinite;" > '
-			//+'<animate attributeName="r" from="0" to="' + squareMiddle * 0.6 + '" dur="17s" begin="3s" repeatCount="indefinite" />'
+			+'<animate attributeName="r" from="0" to="' + squareMiddle * 0.6 + '" dur="17s" begin="3s" repeatCount="indefinite" />'
 			+ '</circle>'
 
 			+ ' <circle cx="0" cy="' + squareMiddle + '" r="' + squareMiddle + '" style="stroke: none; fill: ' + this.star.colorOptional + '; fill-opacity: 0;' +
 			+ 'animation: ' + animationNameR2 + ' 12s 2s linear infinite; -moz-animation: ' + animationNameR2 + ' 12s 2s linear infinite; -webkit-animation: ' + animationNameR2 + ' 12s 2s linear infinite;">'
-			//+'<animate attributeName="r" from="0" to="' + squareMiddle + '" dur="12s" begin="2s" repeatCount="indefinite" />'
+			+'<animate attributeName="r" from="0" to="' + squareMiddle + '" dur="12s" begin="2s" repeatCount="indefinite" />'
 			+ '</circle>'
 
 			+ ' <circle cx="' + squareSize + '" cy="' + squareMiddle + '" r="' + squareMiddle + '" style="stroke: none; fill: ' + this.star.colorOptional + '; fill-opacity: 0;'
 			+ 'animation: ' + animationNameR2 + ' 12s 2s linear infinite; -moz-animation: ' + animationNameR2 + ' 12s 2s linear infinite; -webkit-animation: ' + animationNameR2 + ' 12s 2s linear infinite;">'
-			//+'<animate attributeName="r" from="0" to="' + squareMiddle + '" dur="12s" begin="2s" repeatCount="indefinite" />'
+			+'<animate attributeName="r" from="0" to="' + squareMiddle + '" dur="12s" begin="2s" repeatCount="indefinite" />'
 			+ '</circle>'
 
 			+ ' <circle cx="' + squareMiddle + '" cy="' + 0.75 * squareMiddle + '" r="' + squareMiddle * 0.6 + '" style="stroke: none; fill: ' + this.star.colorOptional + '; fill-opacity: 0;'
 			+ 'animation: ' + animationNameR1 + ' 5s -3s linear infinite; -moz-animation: ' + animationNameR1 + ' 5s -3s linear infinite; -webkit-animation: ' + animationNameR1 + ' 5s -3s linear infinite;">'
-			//+'<animate attributeName="r" from="0" to="' + squareMiddle * 0.6 + '" dur="5s" begin="-3s" repeatCount="indefinite" />'
+			+'<animate attributeName="r" from="0" to="' + squareMiddle * 0.6 + '" dur="5s" begin="-3s" repeatCount="indefinite" />'
 			+ '</circle>'
 
 			+ ' <ellipse  cx="' + squareMiddle + '" cy="' + 0.75 * squareMiddle + '" rx="' + squareMiddle * 0.8 + '" ry="' + squareMiddle * 0.6 + '" style="stroke: none; fill: ' + this.star.colorSecondary + '; fill-opacity: 0;'
 			+ 'animation: ' + animationNameE1 + ' 11s -1s linear infinite; -moz-animation: ' + animationNameE1 + ' 11s -1s linear infinite; -webkit-animation: ' + animationNameE1 + ' 11s -1s linear infinite;">'
-			//+'<animate attributeName="rx" from="0" to="' + squareMiddle * 0.8 + '" dur="11s" begin="-1s" repeatCount="indefinite" /><animate attributeName="ry" from="0" to="' + squareMiddle * 0.6 + '" dur="11s" begin="-1s" repeatCount="indefinite" />'
+			+'<animate attributeName="rx" from="0" to="' + squareMiddle * 0.8 + '" dur="11s" begin="-1s" repeatCount="indefinite" /><animate attributeName="ry" from="0" to="' + squareMiddle * 0.6 + '" dur="11s" begin="-1s" repeatCount="indefinite" />'
 			+ '</ellipse>'
 
 			+ ' <ellipse  cx="' + 0.4 * squareMiddle + '" cy="' + 0.27 * squareMiddle + '" rx="' + squareMiddle * 0.25 + '" ry="' + squareMiddle * 0.2 + '" style="stroke: none; fill: ' + this.star.colorSecondary + '; fill-opacity: 0;'
 			+ 'animation: ' + animationNameE2 + ' 4s 0s linear infinite; -moz-animation: ' + animationNameE2 + ' 4s 0s linear infinite; -webkit-animation: ' + animationNameE2 + ' 4s 0s linear infinite;">'
-			//+'<animate attributeName="rx" from="0" to="' + squareMiddle * 0.25 + '" dur="4s" begin="0s" repeatCount="indefinite" /><animate attributeName="ry" from="0" to="' + squareMiddle * 0.2 + '" dur="4s" begin="0s" repeatCount="indefinite" />'
+			+'<animate attributeName="rx" from="0" to="' + squareMiddle * 0.25 + '" dur="4s" begin="0s" repeatCount="indefinite" /><animate attributeName="ry" from="0" to="' + squareMiddle * 0.2 + '" dur="4s" begin="0s" repeatCount="indefinite" />'
 			+ '</ellipse>'
 
 			+ ' <ellipse  cx="' + 0.7 * squareMiddle + '" cy="' + 0.44 * squareMiddle + '" rx="' + squareMiddle * 0.15 + '" ry="' + squareMiddle * 0.1 + '" style="stroke: none; fill: ' + this.star.colorSecondary + '; fill-opacity: 0;'
 			+ 'animation: ' + animationNameE3 + ' 4s 0s linear infinite; -moz-animation: ' + animationNameE3 + ' 4s 0s linear infinite; -webkit-animation: ' + animationNameE3 + ' 4s 0s linear infinite;">'
-			//+'<animate attributeName="rx" from="0" to="' + squareMiddle * 0.15 + '" dur="4s" begin="0s" repeatCount="indefinite" /><animate attributeName="ry" from="0" to="' + squareMiddle * 0.1 + '" dur="4s" begin="0s" repeatCount="indefinite" />'
+			+'<animate attributeName="rx" from="0" to="' + squareMiddle * 0.15 + '" dur="4s" begin="0s" repeatCount="indefinite" /><animate attributeName="ry" from="0" to="' + squareMiddle * 0.1 + '" dur="4s" begin="0s" repeatCount="indefinite" />'
 			+ '</ellipse>'
 
 			+ ' <circle cx="' + squareMiddle + '" cy="0" r="' + squareMiddle * 0.75 + '" style="stroke: none; fill: ' + this.star.colorSecondary + '; fill-opacity: 0;'
 			+ 'animation: ' + animationNameR3 + ' 30s ease infinite; -moz-animation: ' + animationNameR3 + ' 30s ease infinite; -webkit-animation: ' + animationNameR3 + ' 30s ease infinite;">'
-			//+'<animate attributeName="r" from="0" to="' + squareMiddle * 0.75 + '" dur="30s" begin="0" repeatCount="indefinite" />'
+			+'<animate attributeName="r" from="0" to="' + squareMiddle * 0.75 + '" dur="30s" begin="0" repeatCount="indefinite" />'
 			+ '</circle>'
 
 			+ ' <circle cx="' + squareMiddle + '" cy="' + squareSize + '" r="' + squareMiddle * 0.75 + '" style="stroke: none; fill: ' + this.star.colorSecondary + '; fill-opacity: 0;'
 			+ 'animation: ' + animationNameR3 + ' 30s ease infinite; -moz-animation: ' + animationNameR3 + ' 30s ease infinite; -webkit-animation: ' + animationNameR3 + ' 30s ease infinite;">'
-			//+'<animate attributeName="r" from="0" to="' + squareMiddle * 0.75 + '" dur="30s" begin="0" repeatCount="indefinite" />'
+			+'<animate attributeName="r" from="0" to="' + squareMiddle * 0.75 + '" dur="30s" begin="0" repeatCount="indefinite" />'
 			+ '</circle>'
 			+ '</pattern>';
 	},
