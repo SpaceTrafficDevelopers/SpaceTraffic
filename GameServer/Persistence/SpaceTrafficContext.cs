@@ -444,14 +444,14 @@ using System.Linq.Expressions;
             Property(p => p.PlayerCount).HasColumnType("int").IsRequired();
             Property(p => p.RewardTypeInt).HasColumnType("int").IsRequired();
             Ignore(p => p.RewardType);
-            Property(p => p.SpecificReward).HasColumnType("varchar").HasMaxLength(128).IsRequired();
+            Property(p => p.SpecificReward).HasColumnType("varchar").HasMaxLength(128).IsOptional();
             Property(p => p.RewardAmount).IsRequired();
             Property(p => p.ConditionTypeInt).HasColumnType("int").IsRequired();
             Ignore(p => p.ConditionType);
-            Property(p => p.ConditionArgs).HasColumnType("varchar").HasMaxLength(1048).IsOptional();
+            Property(p => p.ConditionArgs).HasColumnType("varchar").HasMaxLength(2048).IsOptional();
             Property(p => p.ExternalClient).HasColumnType("bit").IsRequired();
             Property(p => p.ClientURL).HasColumnType("varchar").HasMaxLength(1024).IsOptional();
-            Property(p => p.MinigameClassFullName).HasColumnType("varchar").HasMaxLength(256).IsOptional();
+            Property(p => p.MinigameClassFullName).HasColumnType("varchar").HasMaxLength(1024).IsOptional();
 
             HasMany(p => p.StartActions).WithMany(c => c.Minigames);
 

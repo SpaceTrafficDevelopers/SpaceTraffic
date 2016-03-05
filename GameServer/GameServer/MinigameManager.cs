@@ -61,12 +61,12 @@ namespace SpaceTraffic.GameServer
         /// <summary>
         /// Lock object for minigame id counter.
         /// </summary>
-        private object counterLock;
+        private object counterLock = new object();
 
         /// <summary>
         /// Lock objeckt for minigames by start action name dictionary.
         /// </summary>
-        private object minigamesByStartActionLock;
+        private object minigamesByStartActionLock = new object();
 
         /// <summary>
         /// Static minigame id counter.
@@ -105,7 +105,7 @@ namespace SpaceTraffic.GameServer
         /// <summary>
         /// Method for loading minigames from database into minigames by start action dictionary.
         /// </summary>
-        public void loadMinigames()
+        private void loadMinigames()
         {
             lock (minigamesByStartActionLock)
             {
@@ -143,7 +143,7 @@ namespace SpaceTraffic.GameServer
             MinigameDescriptor descriptor = this.minigameDescriptorDAO.GetMinigameById(minigameDescriptorId);
             IMinigame minigame = null;
 
-            if (descriptor == null)
+            if (descriptor != null)
             {
                 if (string.IsNullOrEmpty(descriptor.MinigameClassFullName))
                     minigame = new Minigame(getNewMinigameId(), descriptor, gameServer.Game.currentGameTime.Value, freeGame);
@@ -214,6 +214,9 @@ namespace SpaceTraffic.GameServer
 
             if (minigame != null)
             {
+                if(minigame.FreeGame)
+                    return Result.createFailureResult("Hra byla rozehrána jako volná hra.");
+
                 Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(playerId);
 
                 if (player == null)
@@ -354,7 +357,7 @@ namespace SpaceTraffic.GameServer
                     return Result.createSuccessResult("Hráč s id " + playerId + "byl úspěšně přidán do hry s id "
                         + minigameId + ".");
                 }
-                return Result.createFailureResult("Hra již byla rozehrána nebo ukončena.");
+                return Result.createFailureResult("Hra čeká na zahájení nebo již byla rozehrána či ukončena.");
             }
 
             return Result.createFailureResult("Hra s id " + minigameId + " neexistuje.");
@@ -370,7 +373,7 @@ namespace SpaceTraffic.GameServer
                 try
                 {
                     returnValue = lockAction ? minigame.performActionWithLock(actionName, actionArgs) 
-                        : minigame.performActionWithLock(actionName, actionArgs);
+                        : minigame.performAction(actionName, actionArgs);
 
                     return Result.createSuccessResult("Akce " + actionName + " byla provedena úspěšně.", returnValue);
                 }
@@ -429,9 +432,15 @@ namespace SpaceTraffic.GameServer
             MinigameDescriptor descriptor = this.minigameDescriptorDAO.GetMinigameByName(minigameName);
             StartAction action = this.startActionDAO.GetStartActionByName(startActionName);
 
-            if (action != null && descriptor != null)
-                return this.minigameDescriptorDAO.InsertRelationshipWithStartActions(descriptor.MinigameId, action.StartActionID);
-            
+            if (action != null && descriptor != null) { 
+                bool result = this.minigameDescriptorDAO.InsertRelationshipWithStartActions(descriptor.MinigameId, action.StartActionID);
+
+                if (result) { 
+                    loadMinigames();
+
+                    return true;
+                }
+            }
             return false;
         }
 
@@ -440,10 +449,39 @@ namespace SpaceTraffic.GameServer
             MinigameDescriptor descriptor = this.minigameDescriptorDAO.GetMinigameByName(minigameName);
             StartAction action = this.startActionDAO.GetStartActionByName(startActionName);
 
-            if (action != null && descriptor != null)
-                return this.minigameDescriptorDAO.RemoveRelationshipWithStartActions(descriptor.MinigameId, action.StartActionID);
+            if (action != null && descriptor != null){
+                bool result = this.minigameDescriptorDAO.RemoveRelationshipWithStartActions(descriptor.MinigameId, action.StartActionID);
 
+                if (result){
+                    loadMinigames();
+
+                    return true;
+                }
+            }
             return false;
+        }
+
+        public Result removeGame(int minigameId)
+        {
+            IMinigame minigame = getActiveGameById(minigameId);
+
+            if(minigame != null){
+
+                if(minigameControls.checkState(minigame, MinigameState.FINISHED) || minigameControls.checkState(minigame, MinigameState.FAILED)){
+                    
+                    try{
+                        this.activeMinigames[minigameId] = null;
+                        return Result.createSuccessResult("Hra s id " + minigameId + " byla úspěšně odstraněna.");
+                    }
+                    catch (KeyNotFoundException) {
+                        Console.WriteLine("Minigame with ID " + minigameId + " was not found in ActiveMinigames.");
+                    }
+                    
+                    return Result.createFailureResult("Hra již byla pravděpodobně odstraněna.");
+                }
+                return Result.createFailureResult("Hra ještě nebyla ukončena.");
+            }
+            return Result.createFailureResult("Hra s id " + minigameId + " neexistuje.");
         }
     }
 }

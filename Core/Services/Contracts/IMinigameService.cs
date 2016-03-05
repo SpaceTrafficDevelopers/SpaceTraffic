@@ -159,5 +159,12 @@ namespace SpaceTraffic.Services.Contracts
         /// <param name="playerId">player id</param>
         /// <returns>return minigame id or -1</returns>
         int getMinigame(string actionName, int playerId);
+
+        /// <summary>
+        /// Method for remove minigame instace from minigame manager.
+        /// </summary>
+        /// <param name="minigameId">minigame id</param>
+        /// <returns>success or failure result</returns>
+        Result removeGame(int minigameId);
     }
 }

@@ -109,5 +109,10 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         {
             return manager.getMinigame(actionName, playerId);
         }
+
+        public Result removeGame(int minigameId)
+        {
+            return manager.removeGame(minigameId);
+        }
     }
 }
