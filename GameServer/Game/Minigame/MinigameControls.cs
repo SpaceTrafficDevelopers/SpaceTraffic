@@ -61,7 +61,7 @@ namespace SpaceTraffic.Game.Minigame
         /// <returns>true, if minigame has maximum number of players, otherwise false</returns>
         public bool checkNumberOfPlayers(IMinigame minigame)
         {
-            return minigame.Players.Count == minigame.Descriptor.PlayerCount && checkState(minigame, MinigameState.PLAYED);
+            return minigame.Players.Count == minigame.Descriptor.PlayerCount;
         }
 
         /// <summary>

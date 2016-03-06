@@ -144,5 +144,12 @@ namespace SpaceTraffic.Engine
         /// <param name="startActionName">start action name</param>
         /// <returns>true if removing was successfull</returns>
         bool removeRelationshipWithStartActions(string minigameName, string startActionName);
+
+        /// <summary>
+        /// Method for remove minigame instace from minigame manager.
+        /// </summary>
+        /// <param name="minigameId">minigame id</param>
+        /// <returns>success or failure result</returns>
+        Result removeGame(int minigameId);
     }
 }
