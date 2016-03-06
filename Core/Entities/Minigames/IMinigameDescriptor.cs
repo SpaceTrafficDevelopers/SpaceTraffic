@@ -99,7 +99,7 @@ namespace SpaceTraffic.Entities.Minigames
         string ClientURL { get; set; }
 
         /// <summary>
-        /// Class full name for create minigame instance.
+        /// Assembly qualified name for create minigame instance.
         /// </summary>
         string MinigameClassFullName { get; set; }
     }
