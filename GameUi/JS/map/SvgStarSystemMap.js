@@ -114,7 +114,7 @@ var SvgStarSystemMap = {
 		}
 		
 		//preparations
-		var buffer = '<defs>' + defsBuff + '</defs>'
+		var buffer = '<defs>' + defsBuff + this.createBackgroundDefs() + '</defs>' + this.createBackgrounds()
 			+ '<g id="svgViewportGroup" transform="' + this.svgViewportManager.getViewportTransform() + '">'
 					+ backgroundLayerBuff+'</g>'+ objectLayerBuff+'</g>'+ overlayLayerBuff+'</g>'+ '<g id="svgTopLayer"></g>';
 		//console.debug('buffer', buffer);
@@ -146,6 +146,42 @@ var SvgStarSystemMap = {
 		//console.groupEnd();
 	},
 
+	createBackgroundDefs: function () {
+		var patternSize = 200;
+		var distantStars = '<pattern id="bgDistantStars" x="0" y="0" width="' + patternSize + '" height="' + patternSize + '" patternTransform="rotate(-32)" patternUnits="userSpaceOnUse"><g id="distantStars">';
+		distantStars = distantStars + this.createStarsObjects(50, patternSize, BG_FAR_SEED, 1.0, 1.2, 'distantStar');
+		distantStars = distantStars + '</g></pattern>';
+
+		var closerStars = '<pattern id="bgCloserStars" x="0" y="0" width="' + patternSize + '" height="' + patternSize + '" patternTransform="" patternUnits="userSpaceOnUse"><g id="closerStars">';
+		closerStars = closerStars + this.createStarsObjects(15, patternSize, BG_MIDDLE_SEED, 1.2, 2.2, 'closerStar');
+		closerStars = closerStars + '</g></pattern>';
+
+		var middleDistanceStars = '<pattern id="bgMiddleDistanceStars" x="0" y="0" width="' + patternSize + '" height="' + patternSize + '" patternTransform="" patternUnits="userSpaceOnUse"><g id="middleDistanceStars">';
+		middleDistanceStars = middleDistanceStars + this.createStarsObjects(20, patternSize, BG_CLOSE_SEED, 1.0, 2.0, 'middleDistanceStar');
+		middleDistanceStars = middleDistanceStars + '</g></pattern>';
+
+		return distantStars + closerStars + middleDistanceStars;
+	},
+	/* creates objects (stars) for background pattern */
+	createStarsObjects: function (numberOfStars, patternSize, seed, minSize, maxSize, className) {
+		var buff = '';
+		Math.seedrandom(seed);
+		var cx = 0;
+		var cy = 0;
+		for(var stars = 0; stars < numberOfStars; stars++){
+			curCx = Math.random() * patternSize;
+			curCy = Math.random() * patternSize;
+			buff = buff + '<circle r="' + (minSize + (Math.random() * (minSize - maxSize))) + '" cy="' + curCy + '" cx="' + curCx + '" class="' + className + '" />';
+		}
+		Math.seedrandom();
+		return buff;
+	},
+	createBackgrounds: function () {
+		return '<rect x="0" y="0" width="100%" height="100%" id="distantStarsRect" style="fill: url(#bgDistantStars);" />'
+			+ '<rect x="0" y="0" width="100%" height="100%" id="middleDistanceStarsRect" style="fill: url(#bgMiddleDistanceStars);" />'
+			+ '<rect x="0" y="0" width="100%" height="100%" id="closerStarsRect" style="fill: url(#bgCloserStars);" />';
+	},
+
 	// Animation update. Used as staticRenderCallback in SvgRenderer.
 	update: function (renderer, t) {
 		for (var i = 0; i < this.svgDynamicItems.length; i++) {
@@ -154,6 +190,8 @@ var SvgStarSystemMap = {
 			
 		this.$svgViewportGroup.attr('transform', this.svgViewportManager.getViewportTransform());
 		this.$svgViewportGroupDefs.attr('transform', this.svgViewportManager.getViewportTransform());
+		this.$svgViewport.find('#bgCloserStars').attr('patternTransform', this.svgViewportManager.getDynamicBackgroundTransform());
+		this.$svgViewport.find('#bgMiddleDistanceStars').attr('patternTransform', this.svgViewportManager.getSecondDynamicBackgroundTransform());
 		
 		for (var i = 0; i < this.svgDynamicItems.length; i++) {
 			this.svgDynamicItems[i].performUpdate(t);
