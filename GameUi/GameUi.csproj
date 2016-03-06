@@ -376,7 +376,6 @@
     <Content Include="Content\less\Variables\fonts.less" />
     <Content Include="Content\less\defaults.less" />
     <Content Include="Content\less\Parts\icons.less" />
-    <Content Include="Content\less\Game\buttons.less" />
     <Content Include="Content\less\Parts\alerts.less" />
     <None Include="Views\Shared\_Achievements.cshtml" />
     <Content Include="Web.config">
