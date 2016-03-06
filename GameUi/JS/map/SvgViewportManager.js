@@ -8,6 +8,16 @@ var SvgViewportManager = new Class({
 	$debugOutput: null,
 	viewportTX: 0,
 	viewportTY: 0,
+	bgZoom: 1,
+	bgViewportTX: 0,
+	bgViewportTY: 0,
+	bgOffsetX: 0,
+	bgOffsetY: 0,
+	bg2Zoom: 1,
+	bg2ViewportTX: 0,
+	bg2ViewportTY: 0,
+	bg2OffsetX: 0,
+	bg2OffsetY: 0,
 	rendrer: null,
 	lastMouseMoveT: 0,
 	initialize: function($svgViewport, renderer){
@@ -27,6 +37,10 @@ var SvgViewportManager = new Class({
 			this.$svgViewport.css('cursor', 'pointer');
 			this.offsetX = this.viewportTX - e.pageX;
 			this.offsetY = this.viewportTY - e.pageY;
+			this.bgOffsetX = this.bgViewportTX - (e.pageX * BG_MOVING_CORRECTION);
+			this.bgOffsetY = this.bgViewportTY - (e.pageY * BG_MOVING_CORRECTION);
+			this.bg2OffsetX = this.bg2ViewportTX - (e.pageX * BG_MOVING_CORRECTION2);
+			this.bg2OffsetY = this.bg2ViewportTY - (e.pageY * BG_MOVING_CORRECTION2);
 			this.lastMouseMoveT = TimeUtils.getCurrentTimeInS();
 			if (e.which == 1) this.mouseMove = true;
 		}).bind(this));
@@ -42,19 +56,30 @@ var SvgViewportManager = new Class({
 					
 					var newX = e.pageX + this.offsetX
 					var newY = e.pageY + this.offsetY;
-					
-					if((Math.abs(newX/this.zoom) > 1) || (Math.abs(newY/this.zoom) > 1))
-					{
+					var newBgX = e.pageX * BG_MOVING_CORRECTION + this.bgOffsetX;
+					var newBgY = e.pageY * BG_MOVING_CORRECTION + this.bgOffsetY;
+					var newBg2X = e.pageX * BG_MOVING_CORRECTION2 + this.bg2OffsetX;
+					var newBg2Y = e.pageY * BG_MOVING_CORRECTION2 + this.bg2OffsetY;
+					var redraw = false;
+					if ((Math.abs(newX / this.zoom) > 1) || (Math.abs(newY / this.zoom) > 1)) {
 						this.viewportTX = newX;
 						this.viewportTY = newY;
-						
-						
-						if(this.renderer.forceRedraw())
-						{
-							this.lastMouseMoveT = t;
-							this.updateDebugInfo();
-						}
-				   }
+						redraw = true;
+					}
+					if ((Math.abs(newX / this.bgZoom) > 1) || (Math.abs(newY / this.bgZoom) > 1)) {
+						this.bgViewportTX = newBgX;
+						this.bgViewportTY = newBgY;
+						redraw = true;
+					}
+					if ((Math.abs(newX / this.bgZoom) > 1) || (Math.abs(newY / this.bgZoom) > 1)) {
+						this.bg2ViewportTX = newBg2X;
+						this.bg2ViewportTY = newBg2Y;
+						redraw = true;
+					}
+					if (redraw && this.renderer.forceRedraw()) {
+						this.lastMouseMoveT = t;
+						this.updateDebugInfo();
+					}
 				}
 			}
 		}).bind(this));
@@ -67,6 +92,10 @@ var SvgViewportManager = new Class({
 				this.mouseMove = false;
 				this.viewportTX = e.pageX + this.offsetX;
 				this.viewportTY = e.pageY + this.offsetY;
+				this.bgViewportTX = e.pageX * BG_MOVING_CORRECTION + this.bgOffsetX;
+				this.bgViewportTY = e.pageY * BG_MOVING_CORRECTION + this.bgOffsetY;
+				this.bg2ViewportTX = e.pageX * BG_MOVING_CORRECTION2 + this.bg2OffsetX;
+				this.bg2ViewportTY = e.pageY * BG_MOVING_CORRECTION2 + this.bg2OffsetY;
 				this.offsetX = 0;
 				this.offsetY = 0;
 				this.$svgViewport.css('cursor', 'auto');
@@ -83,34 +112,42 @@ var SvgViewportManager = new Class({
 		var parent = this;
 		this.$svgViewport.mousewheel(function (e, delta) {
 			var oldZoom = parent.zoom;
+			var oldBgZoom = parent.bgZoom;
+			var oldBg2Zoom = parent.bg2Zoom;
 			if (delta > 0) {/* zoom in */
 				parent.zoom *= MOUSEWHEEL_ZOOM_SPEED;
-
+				parent.bgZoom *= BG_MOUSEWHEEL_ZOOM_SPEED;
 
 			} else {/* zoom out */
 				parent.zoom /= MOUSEWHEEL_ZOOM_SPEED;
+				parent.bgZoom /= BG_MOUSEWHEEL_ZOOM_SPEED;
 			}
+	
+			parent.viewportTX = parent.getCoordinateCorrection(parent.zoom, oldZoom, e.offsetX, parent.viewportTX, delta);
+			parent.viewportTY = parent.getCoordinateCorrection(parent.zoom, oldZoom, e.offsetY, parent.viewportTY, delta);
 
-			var zoomDiff = Math.abs(parent.zoom - oldZoom);
-			/* cursor position in svg coordinates */
-			var svgCursorX = (e.offsetX - parent.viewportTX) / oldZoom;
-			var svgCursorY = (e.offsetY - parent.viewportTY) / oldZoom;
-			var correctionX = svgCursorX - (svgCursorX * (1 + zoomDiff));
-			var correctionY = svgCursorY - (svgCursorY * (1 + zoomDiff));
-			if (delta > 0) {/* zoom in */
-				parent.viewportTX += correctionX;
-				parent.viewportTY += correctionY;
-			} else {/* zoom out */
-				parent.viewportTX -= correctionX;
-				parent.viewportTY -= correctionY;
-			}
+			parent.bgViewportTX = parent.getCoordinateCorrection(parent.bgZoom, oldBgZoom, e.offsetX, parent.bgViewportTX, delta);
+			parent.bgViewportTY = parent.getCoordinateCorrection(parent.bgZoom, oldBgZoom, e.offsetY, parent.bgViewportTY, delta);
 
-			parent.$svgViewport.find('#svgViewportGroup').attr('transform', parent.getViewportTransform());
+			parent.bg2ViewportTX = parent.getCoordinateCorrection(parent.bg2Zoom, oldBg2Zoom, e.offsetX, parent.bg2ViewportTX, delta);
+			parent.bg2ViewportTY = parent.getCoordinateCorrection(parent.bg2Zoom, oldBg2Zoom, e.offsetY, parent.bg2ViewportTY, delta);
+			
 			parent.updateDebugInfo();
 		});
 
 	},
-	
+	/* calculates translate correction when is zoomed */
+	getCoordinateCorrection: function (zoom, oldZoom, eOffset, viewportT, delta) {
+		var zoomDiff = Math.abs(zoom - oldZoom);
+		/* cursor position in svg coordinates */
+		var svgCursor = (eOffset - viewportT) / oldZoom;
+		var correction = svgCursor - (svgCursor * (1 + zoomDiff));
+		if (delta > 0) {/* zoom in */
+			return viewportT + correction;
+		} else {/* zoom out */
+			return viewportT - correction;
+		}
+	},	
 	updateDebugInfo: function(){
 		this.renderer.debugInfo.viewportTX = this.viewportTX;
 		this.renderer.debugInfo.viewportTY = this.viewportTY;
@@ -136,7 +173,14 @@ var SvgViewportManager = new Class({
 	},
 	
 	getViewportTransform: function () {
-		return 'scale(' + this.zoom + '),translate(' + this.viewportTX / this.zoom + ',' + this.viewportTY / this.zoom  + ')';
+		return 'scale(' + this.zoom + '),translate(' + this.viewportTX / this.zoom + ',' + this.viewportTY / this.zoom + ')';
+	},
+	/* similar as getViewportTransform but it is counted for background of closerStars (background moving while viewport moving)*/
+	getDynamicBackgroundTransform: function () {
+		return 'scale(' + this.bgZoom + '),translate(' + this.bgViewportTX / this.bgZoom + ',' + this.bgViewportTY / this.bgZoom + ') rotate(32)';
+	},
+	getSecondDynamicBackgroundTransform: function () {
+		return 'scale(' + this.bg2Zoom + '),translate(' + this.bg2ViewportTX / this.bg2Zoom + ',' + this.bg2ViewportTY / this.bg2Zoom + ') rotate(45)';
 	}
 	
 })

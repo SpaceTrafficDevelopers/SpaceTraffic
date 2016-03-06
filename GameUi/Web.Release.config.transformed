@@ -7,7 +7,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+		http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,59 +17,59 @@ limitations under the License.
 -->
 
 <!--
-  For more information on how to configure your ASP.NET application, please visit
-  http://go.microsoft.com/fwlink/?LinkId=152368
-  -->
+	For more information on how to configure your ASP.NET application, please visit
+	http://go.microsoft.com/fwlink/?LinkId=152368
+	-->
 <configuration>
-  <configSections>
-    <section name="dotless" type="dotless.Core.configuration.DotlessConfigurationSectionHandler, dotless.Core" />
-    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  </configSections>
-  <appSettings>
-    <add key="webpages:Version" value="1.0.0.0" />
-    <add key="ClientValidationEnabled" value="true" />
-    <add key="UnobtrusiveJavaScriptEnabled" value="true" />
-    <add key="microsoft.visualstudio.teamsystems.backupinfo" value="1;web.config.backup" />
-    <add key="assetPath" value="..\Assets" />
-  </appSettings>
-  <system.web>
-    <compilation targetFramework="4.0">
-      <assemblies>
-        <add assembly="System.Web.Abstractions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
-        <add assembly="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
-        <add assembly="System.Web.Routing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
-        <add assembly="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
-        <add assembly="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
-      </assemblies>
-    </compilation>
-    <authentication mode="Forms">
-      <forms loginUrl="~/Account/LogOn" timeout="2880" />
-    </authentication>
-    <membership defaultProvider="SpaceTrafficMembershipProvider">
-      <providers>
-        <clear />
-        <add name="SpaceTrafficMembershipProvider" type="SpaceTraffic.GameUi.Security.SpaceTrafficMembershipProvider" applicationName="/" />
-      </providers>
-    </membership>
-    <pages>
-      <namespaces>
-        <add namespace="System.Web.Helpers" />
-        <add namespace="System.Web.Mvc" />
-        <add namespace="System.Web.Mvc.Ajax" />
-        <add namespace="System.Web.Mvc.Html" />
-        <add namespace="System.Web.Routing" />
-        <add namespace="System.Web.WebPages" />
-      </namespaces>
-    </pages>
-    <httpHandlers>
-      <add path="*.less" verb="GET" type="dotless.Core.LessCssHttpHandler, dotless.Core" />
-    </httpHandlers>
-  </system.web>
-  <system.webServer>
-    <modules runAllManagedModulesForAllRequests="true" />
-    <handlers>
-      <add name="dotless" path="*.less" verb="GET" type="dotless.Core.LessCssHttpHandler,dotless.Core" resourceType="File" preCondition="" />
-    </handlers>
+	<configSections>
+		<section name="dotless" type="dotless.Core.configuration.DotlessConfigurationSectionHandler, dotless.Core" />
+		<section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+	</configSections>
+	<appSettings>
+		<add key="webpages:Version" value="1.0.0.0" />
+		<add key="ClientValidationEnabled" value="true" />
+		<add key="UnobtrusiveJavaScriptEnabled" value="true" />
+		<add key="microsoft.visualstudio.teamsystems.backupinfo" value="1;web.config.backup" />
+		<add key="assetPath" value="..\Assets" />
+	</appSettings>
+	<system.web>
+		<compilation targetFramework="4.0">
+			<assemblies>
+				<add assembly="System.Web.Abstractions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
+				<add assembly="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
+				<add assembly="System.Web.Routing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
+				<add assembly="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
+				<add assembly="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
+			</assemblies>
+		</compilation>
+		<authentication mode="Forms">
+			<forms loginUrl="~/Account/LogOn" timeout="2880" />
+		</authentication>
+		<membership defaultProvider="SpaceTrafficMembershipProvider">
+			<providers>
+				<clear />
+				<add name="SpaceTrafficMembershipProvider" type="SpaceTraffic.GameUi.Security.SpaceTrafficMembershipProvider" applicationName="/" />
+			</providers>
+		</membership>
+		<pages>
+			<namespaces>
+				<add namespace="System.Web.Helpers" />
+				<add namespace="System.Web.Mvc" />
+				<add namespace="System.Web.Mvc.Ajax" />
+				<add namespace="System.Web.Mvc.Html" />
+				<add namespace="System.Web.Routing" />
+				<add namespace="System.Web.WebPages" />
+			</namespaces>
+		</pages>
+		<httpHandlers>
+			<add path="*.less" verb="GET" type="dotless.Core.LessCssHttpHandler, dotless.Core" />
+		</httpHandlers>
+	</system.web>
+	<system.webServer>
+		<modules runAllManagedModulesForAllRequests="true" />
+		<handlers>
+			<add name="dotless" path="*.less" verb="GET" type="dotless.Core.LessCssHttpHandler,dotless.Core" resourceType="File" preCondition="" />
+		</handlers>
 		<staticContent>
 			<remove fileExtension=".mp4" />
 			<mimeMap fileExtension=".mp4" mimeType="video/mp4" />
@@ -99,26 +99,26 @@ limitations under the License.
 			<remove fileExtension=".woff" />
 			<mimeMap fileExtension=".woff" mimeType="font/x-woff" />
 		</staticContent>
-    <validation validateIntegratedModeConfiguration="false" />
-  </system.webServer>
-  <system.serviceModel>
-    <client>
-      <endpoint name="AccountService" address="net.pipe://localhost/SpaceTraffic/Account" binding="netNamedPipeBinding" contract="SpaceTraffic.Services.Contracts.IAccountService" />
+		<validation validateIntegratedModeConfiguration="false" />
+	</system.webServer>
+	<system.serviceModel>
+		<client>
+			<endpoint name="AccountService" address="net.pipe://localhost/SpaceTraffic/Account" binding="netNamedPipeBinding" contract="SpaceTraffic.Services.Contracts.IAccountService" />
 			<endpoint name="GameService" address="net.pipe://localhost/SpaceTraffic/Game" binding="netNamedPipeBinding" contract="SpaceTraffic.Services.Contracts.IGameService" />
 			<endpoint name="PlayerService" address="net.pipe://localhost/SpaceTraffic/Player" binding="netNamedPipeBinding" contract="SpaceTraffic.Services.Contracts.IPlayerService" />
 			<endpoint name="ShipsService" address="net.pipe://localhost/SpaceTraffic/Ships" binding="netNamedPipeBinding" contract="SpaceTraffic.Services.Contracts.IShipsService" />
 			<endpoint name="PlanningService" address="net.pipe://localhost/SpaceTraffic/Planning" binding="netNamedPipeBinding" contract="SpaceTraffic.Services.Contracts.IPlanningService" />
 			<endpoint name="CargoService" address="net.pipe://localhost/SpaceTraffic/Cargo" binding="netNamedPipeBinding" contract="SpaceTraffic.Services.Contracts.ICargoService" />
 			<endpoint name="AchievementsService" address="net.pipe://localhost/SpaceTraffic/Achievements" binding="netNamedPipeBinding" contract="SpaceTraffic.Services.Contracts.IAchievementsService" />
-    </client>
-  </system.serviceModel>
-  <runtime>
-    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-      <dependentAssembly>
-        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
-        <bindingRedirect oldVersion="1.0.0.0-2.0.0.0" newVersion="3.0.0.0" />
-      </dependentAssembly>
-    </assemblyBinding>
-  </runtime>
-  <dotless minifyCss="false" cache="false" web="false" />
+		</client>
+	</system.serviceModel>
+	<runtime>
+		<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+			<dependentAssembly>
+				<assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+				<bindingRedirect oldVersion="1.0.0.0-2.0.0.0" newVersion="3.0.0.0" />
+			</dependentAssembly>
+		</assemblyBinding>
+	</runtime>
+	<dotless minifyCss="false" cache="false" web="false" />
 </configuration>
