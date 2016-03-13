@@ -158,3 +158,30 @@
 })(jQuery);
 
 var ajax = $('body').ajaxRequester();
+
+/* AJAX links*/
+
+var ajaxClick = function (e, $linkElement) {
+	e.preventDefault();
+	$.ajax({
+		url: $linkElement.attr('href'),
+		success: function (data) {
+			var $relatedElement = $('#' + $linkElement.data('related-element-id'));
+			if ($relatedElement.length > 0) {
+				$relatedElement.html(data);
+				$relatedElement.find('a.ajax').click(function (e) {
+					ajaxClick(e, $(this));
+				});
+			}
+		},
+		error: function (err) {
+			console.log(err);
+		}
+	});
+};
+
+$(document).ready(function () {
+	$('a.ajax').click(function (e) {
+		ajaxClick(e, $(this));
+	});
+});

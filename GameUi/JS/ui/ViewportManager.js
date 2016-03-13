@@ -44,8 +44,10 @@ var ViewportManager = {
 			this.doLayout();
 		}).bind(ViewportManager);
 
-		this.$contextPanel.find('.closeButton').click(function () {
-			this.$contextPanel.css('display', 'none');
+		var parent = this;
+		this.$contextPanel.find('.closebutton').click(function () {
+			$('#gameTopPanel .rightPart').removeClass('contextOpen');
+			parent.$contextPanel.css('display', 'none');
 		});
 
 	},
