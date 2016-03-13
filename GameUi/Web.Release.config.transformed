@@ -64,6 +64,7 @@ limitations under the License.
 		<httpHandlers>
 			<add path="*.less" verb="GET" type="dotless.Core.LessCssHttpHandler, dotless.Core" />
 		</httpHandlers>
+		<!--customErrors mode="Off"/--><!--uncomment if you want to see errors -->
 	</system.web>
 	<system.webServer>
 		<modules runAllManagedModulesForAllRequests="true" />
@@ -98,6 +99,9 @@ limitations under the License.
 			<mimeMap fileExtension=".otf" mimeType="font/otf" />
 			<remove fileExtension=".woff" />
 			<mimeMap fileExtension=".woff" mimeType="font/x-woff" />
+
+			<remove fileExtension=".xml" />
+			<mimeMap fileExtension=".xml" mimeType="text/xml" />
 		</staticContent>
 		<validation validateIntegratedModeConfiguration="false" />
 	</system.webServer>

@@ -6,6 +6,8 @@ function Planet(name, altName, trajectory, description, details, appearance) {
 	this.trajectory = trajectory;
 	this.description = description;
 	this.details = details;
+	var hasBaseEl = details.find('inhabited');
+	this.hasBase = (hasBaseEl.length !== 0 && hasBaseEl.text().trim().toLowerCase().indexOf('false') < 0);
 	this.type = appearance.find('type').text();
 
 	var rotPerEl = appearance.find('rotationPeriod');

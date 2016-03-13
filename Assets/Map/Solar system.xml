@@ -57,6 +57,7 @@
 												Její hustá atmosféra, sirné deště a vysoký atmosférický tlak vypadaly na první pohled jako jasná překážka pro jakoukoli kolonizaci planety. Jednoho dne však jistého Australana omrzelo věčné vyklepávání pavouků z bot a přestěhoval se na Venuši, kde založil klidné letovisko, hojně využívané jeho krajany a lidmi, kteří se potřebovali schovat někam, kde je nikdo nebude hledat.
 												Tak vznikla první venušanská kolonie.
 										</description>
+									<inhabited>true</inhabited>
 									<appearance>
 										<size>3</size>
 										<type>terrastrial</type>
@@ -78,6 +79,7 @@
 										<description>
 												Země, jinak známá také jako Planeta opic, je rodištěm lidské rasy, mnoha zvířecích druhů, nespočtu rostlin a z neznámého důvodu se zde daří také programátorům. Vyváží zejména jídlo, umění a babičiny sušenky.
 										</description>
+										<inhabited>true</inhabited>
 									<appearance>
 										<size>3</size>
 										<type>terrastrialT3</type>
@@ -97,8 +99,9 @@
 										<gravity>0</gravity>
 										<mass>6.40751188553165e+023</mass>
 										<description>
-												Kolonizovaný ve Třetím vesmírném věku. Zdejší prostředí bylo ideální pro pokusy terraformovat celou planetu. Všechny zkrachovaly. Místní obrovské biodómy však poskytují prostor pro miliony lidí a navíc se ukázalo, že je Mars ideální pro provozování fúzních elektráren a výrobu energie obecně.
+												Kolonizovaný ve Třetím vesmírném věku. Zdejší prostředí bylo ideální pro pokusy terraformovat celou planetu. Všechny krachly. Místní obrovské biodómy však poskytují prostor pro miliony lidí a navíc se ukázalo, že je Mars ideální pro provozování fúzních elektráren a výrobu energie obecně.
 										</description>
+									<inhabited>true</inhabited>
 									<appearance>
 										<size>2</size>
 										<type>terrastrial</type>
@@ -122,6 +125,7 @@
 												Podle místní pověsti žije jeden zvláště odolný poustevník v malé žáruvzdorné kapsli na sopečném měsíci Io, ale prozatím se nikomu nechtělo zajít k němu na návštěvu.
 												Turisté také často obdivují podivný černý kvádr, klidně plující vesmírem po Jupiterově oběžné dráze.
 										</description>
+										<inhabited>true</inhabited>
 									<appearance>
 										<size>15</size>
 										<type>gas</type>
@@ -144,6 +148,7 @@
 												Jediným dosud obývaným světem v blízkosti Saturna je jeho měsíc Titan. Pro získání životně důležitých zásob na takto odlehlé planetě je potřeba tavit místní horniny, z nichž je však možné získat všechny potřebné prvky. Díky neskutečně krásnému výhledu na Saturn a jeho prstence je Titan velmi oblíbenou turistickou destinací.
 												Poznámka: Nejčastější příčinou úmrtí turisty je zde procházka v dešti. Mísní samospráva upozorňuje návštěvníky, že vesmírný skafandr ani deštník vám nestačí. Protože víte co...prší metan.
 										</description>
+										<inhabited>true</inhabited>
 									<appearance>
 										<size>14</size>
 										<type>gas</type>

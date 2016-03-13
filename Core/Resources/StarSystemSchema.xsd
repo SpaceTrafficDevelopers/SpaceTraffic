@@ -183,6 +183,11 @@ limitations under the License.
 					<xs:documentation>Additional descrtiption of the object</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="inhabited" type="xs:boolean" minOccurs="0" maxOccurs="1" >
+				<xs:annotation>
+					<xs:documentation>Has this planet a base?</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element minOccurs="1" name="appearance">
 				<xs:complexType>
 					<xs:sequence>

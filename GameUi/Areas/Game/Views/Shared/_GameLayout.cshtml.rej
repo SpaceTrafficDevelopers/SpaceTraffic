@@ -1,0 +1,9 @@
+diff a/GameUi/Areas/Game/Views/Shared/_GameLayout.cshtml b/GameUi/Areas/Game/Views/Shared/_GameLayout.cshtml	(rejected hunks)
+@@ -88,7 +88,6 @@
+ 		<div id="content">
+ 			@Html.Partial("_Flash")
+ 			<div id="contextPanel">
+-				<span class="closebutton">&#x2716;</span>
+ 				@RenderSection("ContextPanel", false)
+ 			</div>
+ 			<div id="mainPanel">

@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿/* loading of amout of players credits */
+$(document).ready(function () {
 		ajax.send({
 			requestId: 'CreditsAmount',
 			relatedObject: 'CreditsAmount',

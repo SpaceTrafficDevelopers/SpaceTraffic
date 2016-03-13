@@ -45,15 +45,18 @@ namespace SpaceTraffic.GameServer
             Random r = new Random();
             foreach (Planet planet in planets)
             {
-                List<TraderCargo> list = new List<TraderCargo>();
-                foreach (IGoods goods in GoodsList)
-                {
-                    if (r.Next(0, 2) == 1) // 50% sance, ze se zbozi prida na planetu 
-                    {
-                        TraderCargo traderCargo = generateTraderCargo(planet, goods);
-                        InsertTraderCargo(traderCargo);
-                    }
-                }     
+				if (planet.Details.hasBase)
+				{
+					List<TraderCargo> list = new List<TraderCargo>();
+					foreach (IGoods goods in GoodsList)
+					{
+						if (r.Next(0, 2) == 1) // 50% sance, ze se zbozi prida na planetu 
+						{
+							TraderCargo traderCargo = generateTraderCargo(planet, goods);
+							InsertTraderCargo(traderCargo);
+						}
+					}
+				}
             }
         }
 

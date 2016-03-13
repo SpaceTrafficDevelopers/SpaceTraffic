@@ -4,7 +4,9 @@
 
 var SvgPlanet = new Class({
 	Extends: SvgOrbitingBody,
-	initialize: function(id, planet){
+	planetName: '',
+	initialize: function (id, planet) {
+		this.planetName = planet.name;
 		this.parent('planet'+id, planet);
 		this.cssClassPrefix = "planet";
 	},
@@ -12,7 +14,7 @@ var SvgPlanet = new Class({
 		return (this.body.altName ? this.body.altName : this.body.name);
 	},
 	onclickHandler: function (sender) {
-		this.showPlanetDetails($('#contextPanel'));
+		this.showPlanetDetails($('#contextPanelContent'));
 		this.showPlanetInfo($('#infoPanel'));
 	},
 
@@ -21,7 +23,18 @@ var SvgPlanet = new Class({
 		$element.css('display', 'block');
 	},
 	showPlanetDetails: function ($element) {/* detailed UI of planet on the right */
-
+		$.ajax({
+			url: baseUrl + 'Game/Bases/Info',
+			data: { planetName: this.planetName },
+			success: function (data) {
+				$element.html(data);
+				$element.find('a.ajax').click(function (e) {
+					ajaxClick(e, $(this));
+				});
+				$('#gameTopPanel .rightPart').addClass('contextOpen');
+				$element.parent().css('display', 'block');
+			}
+		});
 	},
 	/* override */
 	buildObject: function (t) {

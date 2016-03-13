@@ -26,6 +26,7 @@
  map/svg/SvgOrbitFactory.js
  game/Achievements.js
  game/Credits.js
+ game/ShipsInterfaces.js
  ui/Menus.js
  libs/marquee/jquery.marquee.min.js
  libs/mousewheel/jquery.mousewheel.min.js

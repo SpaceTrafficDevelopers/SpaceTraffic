@@ -65,7 +65,7 @@ var StarSystemLoader = {
 		var trajectory = StarSystemLoader.parseTrajectory($planet.find('trajectory').first());
 		var description = $planet.find('details').find('description').text();
 		var appearance = $planet.find('details').find('appearance');
-		return new Planet(planetName, planetAltName, trajectory, description, null, appearance);
+		return new Planet(planetName, planetAltName, trajectory, description, $planet.find('details'), appearance);
 	},
 
 	parseWormholeEndpoint: function ($wormholeEndpoint) {

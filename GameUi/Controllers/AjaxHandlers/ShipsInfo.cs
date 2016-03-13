@@ -1,5 +1,4 @@
-﻿using SpaceTraffic.GameUi.Controllers;
-/**
+﻿/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,33 +14,30 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 **/
+
+using SpaceTraffic.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 
-namespace SpaceTraffic.GameUi.Areas.Game.Controllers
+namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
 {
-	[Authorize]
-	public class BasesController : AbstractController
+	public class ShipsInfo : IAjaxHandleable
 	{
-		//
-		// GET: /Bases/
-				
-		public ActionResult Index()
-		{
-			return View();
-		}
 
-		//
-		// GET: /Bases/Info
-		public PartialViewResult Info(string planetName)
+		/// <summary>
+		/// Returns achievements just got by player
+		/// </summary>
+		/// <param name="data">The data (empty)</param>
+		/// <param name="controller">The controller.</param>
+		/// <returns></returns>
+		public object handleRequest(dynamic data, AbstractController controller)
 		{
-			var partialView = PartialView("_Info");
-			partialView.ViewBag.planetName = planetName;
-			return partialView;
+			IList<SpaceShip> ships = controller.GSClient.PlayerService.GetPlayersShips(controller.getCurrentPlayerId());
+			return new {
+				amount = ships.Count
+			};
 		}
-
 	}
 }

@@ -51,7 +51,7 @@ var SvgOrbitingBody = new Class({
 		var point = this.body.trajectory.calculatePosition(this.getT());
 		
 		var transform = SvgOrbitFactory.getTransformationForPointOnOrbit(point, this.body.trajectory);
-		//TODO: Parametrize
+		
 		return '<circle id="'+this.getId(ID_OBJECT_SUFFIX)+'" cx="0" cy="0" r="' + this.iconSize + 
 			'"class="'+this.cssClassPrefix+'" transform="' + transform + '"/>';
 	},

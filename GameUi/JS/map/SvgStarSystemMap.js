@@ -141,8 +141,6 @@ var SvgStarSystemMap = {
 			//console.debug('Revive on: ', this.svgItems[i])
 			this.svgItems[i].revive();
 		}
-		
-		this.updateObjectList();
 		//console.groupEnd();
 	},
 
@@ -228,11 +226,6 @@ var SvgStarSystemMap = {
 
 	//updating star object list (changed for cargo controller tests)
 	updateObjectList: function() {
-		var buffer = "<ul>";
-		for (var i = 0; i < this.svgItems.length; i++) {
-			buffer += '<li>' + this.svgItems[i].getName() + '</li>\n';
-		};
-		buffer += "</ul>";
 
 		//links for trading, test link fo planner, test links for buy ship
 		buffer += '<ul>' + 
@@ -243,7 +236,7 @@ var SvgStarSystemMap = {
 			'<li><a href="/Game/Ships?baseId=2&starSystemName=Proxima Centauri#Buy_new_ship">BuyShipOnProxima</a></li>' +
 			'<li><a href="/Game/Planner/TestPlanner">TestPlanner</a></li>' + 
 			'</ul>';
-		$("#contextPanel").html(buffer);
+		$("#contextPanelContent").html(buffer);
 		buffer = null;
 	}
 };

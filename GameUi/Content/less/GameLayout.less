@@ -21,6 +21,7 @@
 	z-index: 10;
 
 	.leftPart, .middlePart, .rightPart{
+		position: relative;
 		float: left;
 		height: @appPanelHeight;
 	}
@@ -317,14 +318,19 @@ ul.mainmenu {
 }
 
 #contextPanel {
+	.panel;
 	display: none;
-	position: fixed;
-	width: @rightSize - 1;
+	width: @rightSize - 1 - 1%;
 	padding-right: 1%;
+	padding-left: 1%;
 	border-right: none;
+	border-top: none;
 	right: 0;
-	top: @appPanelHeight + 50px;
-	z-index: 11;
+	top: @appPanelHeight + @gameTopHeight;
+}
+
+#gameTopPanel .rightPart.contextOpen{
+	border-bottom-width: 0;
 }
 
 #infoPanel{
@@ -340,6 +346,7 @@ ul.mainmenu {
 
 .closebutton{
 	text-decoration: none;
+	cursor: pointer;
 }
 
 

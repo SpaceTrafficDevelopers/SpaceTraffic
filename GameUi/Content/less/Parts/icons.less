@@ -1,8 +1,11 @@
-﻿.icon{
+﻿@import "../Variables/colors.less";
+
+.icon{
 	display: inline-block;	
 	vertical-align: middle;
 	margin-right: 5px;
 	background-size: contain;
+	background-repeat: no-repeat;
 }
 
 .smallIcon{
@@ -30,4 +33,14 @@
 }
 .creditsIcon{
 	background-image: ~"url('images/icons/credits.svg')"
+}
+
+.baseIconSVG{
+	path{
+		fill:@infoIconColor;
+	}
+	.iconBg{
+		fill:@infoIconColor;fill-opacity:0.2;
+	}
+
 }

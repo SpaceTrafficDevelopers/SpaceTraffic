@@ -136,11 +136,14 @@ namespace SpaceTraffic.GameServer
 
                 foreach (Planet planet in starSys.Planets)
                 {
-                    Entities.Base planetBase = CreateBase(planet);
-                    planet.Base = planetBase;
+					if (planet.Details.hasBase)
+					{
+						Entities.Base planetBase = CreateBase(planet);
+						planet.Base = planetBase;
 
-                    Trader trader = CreateTrader(planet);
-                    planetBase.Trader = trader;
+						Trader trader = CreateTrader(planet);
+						planetBase.Trader = trader;
+					}
                 }
             }   
         }
