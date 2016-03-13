@@ -31,7 +31,6 @@ namespace SpaceTraffic.Scripts.Testing
 			IPlayerDAO dao = gameServer.Persistence.GetPlayerDAO();
 			Player player = CreatePlayer();
 			dao.InsertPlayer(player);
-			gameServer.Persistence.GetBaseDAO().InsertBase(new Base() { BaseId = 1, Planet = "Terra" });
 			return true;
 		}
 

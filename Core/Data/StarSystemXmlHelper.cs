@@ -185,6 +185,7 @@ namespace SpaceTraffic.Data
 		public static CelestialObjectInfo ParseDetails(this XmlNode detailsNode)
 		{
 			CelestialObjectInfo details = new CelestialObjectInfo();
+			details.hasBase = false;
 
 			foreach (XmlNode childNode in detailsNode.ChildNodes)
 			{
@@ -205,6 +206,9 @@ namespace SpaceTraffic.Data
 						break;
 					case "appearance":
 						//no need to save it on server
+						break;
+					case "inhabited":
+						details.hasBase = (childNode.InnerText.Trim().ToLower() != "false");
 						break;
 					default:
 						throw new XmlException("Unexpected detail of celestial object.");
