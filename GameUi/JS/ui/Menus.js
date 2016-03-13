@@ -10,15 +10,15 @@
 		$menuButton.toggle(function () {
 			$menuPanel.css('display', 'block');
 			$menuButton.addClass('active');
-			$.cookie('isMenuOpen', true);
+			$.cookie('isMenuOpen', 1, { expires: 2 });
 			$toTrigger.trigger('changed');
 		}, function () {
 			$menuPanel.css('display', 'none');
 			$menuButton.removeClass('active');
-			$.cookie('isMenuOpen', false);
+			$.cookie('isMenuOpen', 0, { expires: 2 });
 			$toTrigger.trigger('changed');
 		});
-		if ($.cookie('isMenuOpen') == 'true') {
+		if ($.cookie('isMenuOpen') == 1) {
 			$menuButton.trigger('click');
 		}
 	
