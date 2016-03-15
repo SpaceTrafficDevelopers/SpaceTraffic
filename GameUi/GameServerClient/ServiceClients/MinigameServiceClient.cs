@@ -156,5 +156,22 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
                 return (channel as IMinigameService).removeGame(minigameId);
             }
         }
+
+
+        public List<MinigameDescriptor> getMinigameDescriptorListByActionName(string actionName, int playerId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IMinigameService).getMinigameDescriptorListByActionName(actionName, playerId);
+            }
+        }
+
+        public IMinigameDescriptor getMinigameDescriptorByActionName(string actionName, int playerId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IMinigameService).getMinigameDescriptorByActionName(actionName, playerId);
+            }
+        }
     }
 }

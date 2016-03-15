@@ -27,6 +27,7 @@ using SpaceTraffic.Data;
 using System.Xml;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Entities.Goods;
+using SpaceTraffic.Entities.Minigames;
 
 namespace SpaceTraffic.GameServer
 {
@@ -174,6 +175,33 @@ namespace SpaceTraffic.GameServer
             );
 
             this.minigameManager = new MinigameManager(this);
+            
+            //testing minigames and start action data
+            #region minigame test data
+
+            StartAction startAction = new StartAction { ActionName = "TestAction" };
+            this.persistenceManager.GetStartActionDAO().InsertStartAction(startAction);
+
+            MinigameDescriptor md = new MinigameDescriptor
+            {
+                Name = "TestGame",
+                PlayerCount = 1,
+                Description = "Minihra",
+                StartActions = new List<StartAction>() { startAction },
+                RewardType = RewardType.CREDIT,
+                SpecificReward = null,
+                RewardAmount = 100,
+                ConditionType = ConditionType.CREDIT,
+                ConditionArgs = "100",
+                ExternalClient = false,
+                MinigameClassFullName = null,
+                ClientURL = "/TestGame"
+            };
+
+            this.minigameManager.registerMinigame(md);
+            md.Name = "TestGame2";
+            this.minigameManager.registerMinigame(md);
+            #endregion
 
             // Inicializace herního světa.
             this.gameManager = new GameManager(this, this.gameStateManager);

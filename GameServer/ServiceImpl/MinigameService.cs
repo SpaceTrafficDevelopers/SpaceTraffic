@@ -114,5 +114,15 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         {
             return manager.removeGame(minigameId);
         }
+
+        public List<MinigameDescriptor> getMinigameDescriptorListByActionName(string actionName, int playerId)
+        {
+            return manager.getMinigameDescriptorListByActionName(actionName, playerId);
+        }
+
+        public IMinigameDescriptor getMinigameDescriptorByActionName(string actionName, int playerId)
+        {
+            return manager.getMinigameDescriptorByActionName(actionName, playerId);
+        }
     }
 }

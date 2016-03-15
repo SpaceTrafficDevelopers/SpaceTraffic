@@ -25,11 +25,17 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
     {
         public object handleRequest(dynamic data, AbstractController controller)
         {
-            if (controller.Session["minigameId"] != null)
+            if (controller.Session["minigame"] != null)
             {
-                var minigameId = controller.Session["minigameId"];
-                controller.Session.Remove("minigameId");
-                return new List<int>() { 1, 2, 3 };//minigameId;
+                var minigame = controller.Session["minigame"];
+
+                if (minigame != null) { 
+                    controller.Session.Remove("minigame");
+
+                    return minigame;
+                }
+
+                return null;
             }
 
             return 0;

@@ -4,21 +4,25 @@
         relatedObject: 'MinigameStarter',
         data: {},
         repeatEvery: 2,
-        callback: function (minigameId) {
+        callback: function (minigames) {
 
-            if (minigameId != 0) {
-               // alert(minigameId[0] + " " + minigameId[1] + " " + minigameId[2]);
+            if (minigames) {
+                var dialogElement = prepareDialogElement(minigames);
 
-                var $dialog = $('<div><select name="pokus"><option value="item1">item1</option></select></div>').dialog({
-                    title: '',
+                var $dialog = $(dialogElement).dialog({
+                    title: 'Minihry',
                     modal: true,   //dims screen to bring dialog to the front
                     closeOnEscape: false,
                     buttons: {
                         'Ok': function () {
-                            alert($('select[name="pokus"]').val());
+                            if (Array.isArray(minigames))
+                                alert($('select[name="minigames"]').val());
+
                             $(this).dialog('close');
+
                             var myWin = window.open("about:blank", 'name', 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
-                            showWindow(myWin, "http://localhost:2457/Game");
+                            alert(window.location.host + minigames.ClientURL);
+                            showWindow(myWin, window.location.host + minigames.ClientURL);
                             
                         },
                         'Storno': function () {
@@ -40,18 +44,18 @@ function showWindow(win, url) {
     win.open(url, 'name', 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
 }
 
-function prepareDialogElement(minigameNames) {
+function prepareDialogElement(minigames) {
     var dialogElement = '<div>'
 
-    if (!Array.isArray(minigameNames)) {
-        dialogElement += 'Chcete si zahrat minihru ' + minigameName + '?';
+    if (!Array.isArray(minigames)) {
+        dialogElement += 'Chcete si zahrat minihru ' + minigames.Name + '?';
     }
     else{
         dialogElement += 'Kterou minihru si chcete zahrát?';
         dialogElement += '<select name="minigames">';
         
-        for (var i = 0; i < minigameNames.lenght; i++) {
-            dialogElement += '<option value="' + minigameNames[i] +'">' + minigameNames[i] + '</option>'    
+        for (var i = 0; i < minigames.lenght; i++) {
+            dialogElement += '<option value="' + minigames[i].MinigameId +'">' + minigames[i].Name + '</option>'    
         }
 
         dialogElement += '</select>';

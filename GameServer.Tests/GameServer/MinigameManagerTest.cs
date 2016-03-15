@@ -181,6 +181,32 @@ namespace SpaceTraffic.GameServerTests.GameServer
         }
 
         /// <summary>
+        /// Test for get minigame descriptor.
+        /// </summary>
+        [TestMethod()]
+        public void GetMinigameDescriptorTest()
+        {
+            manager.registerMinigame(this.minigameDescriptor);
+            IMinigameDescriptor minigameDescriptor = manager.getMinigameDescriptorByActionName(startAction1.ActionName, player1.PlayerId);
+
+            minigameDescriptorAssert(minigameDescriptor as MinigameDescriptor);
+        }
+
+        /// <summary>
+        /// Test for get list of minigame descriptor id.
+        /// </summary>
+        [TestMethod()]
+        public void GetMinigameDescriptorListTest()
+        {
+            manager.registerMinigame(this.minigameDescriptor);
+            ICollection<MinigameDescriptor> minigames = manager.getMinigameDescriptorListByActionName(startAction1.ActionName, player1.PlayerId);
+
+            Assert.IsNotNull(minigames);
+            Assert.AreEqual(minigames.Count, 1, "GetMinigameListTest: Unexpected number of minigames in list.");
+            minigameDescriptorAssert(minigames.FirstOrDefault());
+        }
+
+        /// <summary>
         /// Test for adding relationship between minigame descriptor and start action.
         /// </summary>
         [TestMethod()]
@@ -339,6 +365,26 @@ namespace SpaceTraffic.GameServerTests.GameServer
             Result result = manager.removeGame(minigameId);
 
             Assert.IsTrue(result.State == ResultState.SUCCESS, "RemoveGameTest: " + result.Message);
+        }
+
+        /// <summary>
+        /// Assert method for minigame descriptor.
+        /// </summary>
+        /// <param name="descriptor">minigame descriptor</param>
+        private void minigameDescriptorAssert(MinigameDescriptor descriptor)
+        {
+            Assert.AreEqual(this.minigameDescriptor.MinigameId, descriptor.MinigameId);
+            Assert.AreEqual(this.minigameDescriptor.Name, descriptor.Name);
+            Assert.AreEqual(this.minigameDescriptor.PlayerCount, descriptor.PlayerCount);
+            Assert.AreEqual(this.minigameDescriptor.MinigameClassFullName, descriptor.MinigameClassFullName);
+            Assert.AreEqual(this.minigameDescriptor.RewardAmount, descriptor.RewardAmount);
+            Assert.AreEqual(this.minigameDescriptor.RewardType, descriptor.RewardType);
+            Assert.AreEqual(this.minigameDescriptor.SpecificReward, descriptor.SpecificReward);
+            Assert.AreEqual(this.minigameDescriptor.ExternalClient, descriptor.ExternalClient);
+            Assert.AreEqual(this.minigameDescriptor.Description, descriptor.Description);
+            Assert.AreEqual(this.minigameDescriptor.ConditionType, descriptor.ConditionType);
+            Assert.AreEqual(this.minigameDescriptor.ConditionArgs, descriptor.ConditionArgs);
+            Assert.AreEqual(this.minigameDescriptor.ClientURL, descriptor.ClientURL);
         }
 
         /// <summary>
