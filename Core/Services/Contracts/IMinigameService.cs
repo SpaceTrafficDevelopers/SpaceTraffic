@@ -150,6 +150,7 @@ namespace SpaceTraffic.Services.Contracts
         /// <param name="actionName">start action name</param>
         /// <param name="playerId">player id</param>
         /// <returns>return list of minigame descriptors ids or null</returns>
+        [OperationContract]
         List<int> getMinigameList(string actionName, int playerId);
 
         /// <summary>
@@ -158,6 +159,7 @@ namespace SpaceTraffic.Services.Contracts
         /// <param name="actionName">start action name</param>
         /// <param name="playerId">player id</param>
         /// <returns>return minigame id or -1</returns>
+        [OperationContract]
         int getMinigame(string actionName, int playerId);
 
         /// <summary>
@@ -165,6 +167,7 @@ namespace SpaceTraffic.Services.Contracts
         /// </summary>
         /// <param name="minigameId">minigame id</param>
         /// <returns>success or failure result</returns>
+        [OperationContract]
         Result removeGame(int minigameId);
     }
 }
