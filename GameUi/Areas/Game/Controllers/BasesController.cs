@@ -43,5 +43,23 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			return partialView;
 		}
 
+		//
+		// GET: /Bases/Info/Ships
+		public PartialViewResult Ships(string planetName)
+		{
+			var partialView = PartialView("_Ships");
+			partialView.ViewBag.planetName = planetName;
+			return partialView;
+		}
+
+		//
+		// GET: /Bases/Info/Goods
+		public PartialViewResult Goods(string planetName)
+		{
+			var partialView = PartialView("_Goods");
+			partialView.ViewBag.planetName = planetName;
+			return partialView;
+		}
+
 	}
 }
