@@ -34,6 +34,14 @@ namespace SpaceTraffic.Dao
         /// </summary>
         /// <returns>List of space ships.</returns>
         List<SpaceShip> GetSpaceShipsByPlayer(int playerId);
+		
+		/// <summary>
+		/// Gets the players ships at specific base.
+		/// </summary>
+		/// <param name="playerId">The player identifier.</param>
+		/// <param name="baseId">The base identifier.</param>
+		/// <returns></returns>
+		IList<SpaceShip> GetPlayersShipsAtBase(int playerId, int baseId);
         /// <summary>
         /// Gets space ship by id.
         /// </summary>
@@ -64,5 +72,7 @@ namespace SpaceTraffic.Dao
         /// <exception cref="OptimisticConcurrencyException">The exception that is thrown when an optimistic concurrency violation occurs.</exception>
         /// <exception cref="UpdateException" >The exception that is thrown when modifications to object instances cannot be persisted to the data store.</exception>
         bool UpdateSpaceShipById(SpaceShip spaceShip);
-    }
+
+		
+	}
 }

@@ -74,6 +74,18 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         }
 
 		/// <summary>
+		/// Returns base by full planet name (name param)
+		/// Full planet name (location) = "StarSystem.Name\Planet.Name"
+		/// </summary>
+		/// <param name="planetName">
+		/// Full planet name (location) = "StarSystem.Name\Planet.Name"
+		/// Name (not altName) of the planet</param>
+		/// <returns></returns>
+	public SpaceTraffic.Entities.Base GetBaseByName(string planetName) {
+			return GS.CurrentInstance.Persistence.GetBaseDAO().GetBaseByPlanetFullName(planetName);
+		}
+
+		/// <summary>
 		/// Finds action in SpaceTraffic.Game.Actions namespace and performs it with its arguments.
 		/// </summary>
 		/// <param name="playerId">The player identifier.</param>

@@ -43,7 +43,9 @@ namespace SpaceTraffic.Services.Contracts
 
 		[OperationContract]
 		IList<SpaceShip> GetPlayersShips(int playerId);
-		
+
+		[OperationContract]
+		IList<SpaceShip> GetPlayersShipsAtBase(int playerId, int baseId);
 	}
 
 }

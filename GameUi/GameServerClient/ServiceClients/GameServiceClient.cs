@@ -38,6 +38,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			}
 		}
 
+		public SpaceTraffic.Entities.Base GetBaseByName(string planetName)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).GetBaseByName(planetName);
+			}
+		}
+
 
 		public int PerformAction(int playerId, string actionName, params object[] actionArgs)
 		{
