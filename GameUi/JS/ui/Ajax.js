@@ -166,6 +166,7 @@ var ajaxClick = function (e, $linkElement) {
 	$.ajax({
 		url: $linkElement.attr('href'),
 		success: function (data) {
+			renderFlashMessage();
 			var $relatedElement = $('#' + $linkElement.data('related-element-id'));
 			if ($relatedElement.length > 0) {
 				$relatedElement.html(data);
