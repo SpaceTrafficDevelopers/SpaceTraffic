@@ -37,7 +37,7 @@
 				<div class="leftPart">
 					<div class="brick">Česká verze</div>
 					<div class="brick">
-						<a href="@Url.Action("Index", "References", new { Area = "Game" }, null)" title="O autorech a použitých knihovnách">Reference</a>
+						<a href="@Url.Action("Index", "References", new { Area = "Game" }, null)" title="O autorech a použitých knihovnách" class="ajax" data-related-element-id="contextPanelContent">Reference</a>
 					</div>
 				</div>
 				<a href="@Url.Action("Index","/")" title="Na hlavní obrazovku" id="logo" class="middlePart">
@@ -65,8 +65,8 @@
 					<div class="rightOverlay"></div>
 				</div>
 				<div class="rightPart">
-					<div class="brick minwidth"><span class="icon shipsIcon mediumIcon"></span><span class="shipsAmount">5</span></div>
-					<div class="brick minwidth"><span class="icon creditsIcon mediumIcon"></span><span class="creditsAmount"></span></div>
+					<a href="@Url.Action("ShipList", "Ships")" class="ajax brick minwidth" data-related-element-id="contextPanelContent"><span class="icon shipsIcon mediumIcon"></span><span class="shipsAmount">-</span></a>
+					<div class="brick minwidth"><span class="icon creditsIcon mediumIcon"></span><span class="creditsAmount">-</span></div>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -74,10 +74,10 @@
 			<nav class="mainmenu">
 				@foreach (dynamic menuItem in menu)
 				{
-						<a href="@Url.Action("Index", menuItem.Id, new { Area = "Game" }, null)">
-							<img src="@Url.Content("~/Content/images/icons/menu/"+menuItem.Id.ToLower()+"_button_icon.png")" width="32" height="32" />
-							@menuItem.Name
-						</a>
+					<a href="@Url.Action("Index", menuItem.Id, new { Area = "Game" }, null)" class="ajax" data-related-element-id="mainPanelContent">
+						<img src="@Url.Content("~/Content/images/icons/menu/"+menuItem.Id.ToLower()+"_button_icon.png")" width="32" height="32" />
+						@menuItem.Name
+					</a>
 				}
 				<div class="clearfix"></div>
 			</nav>
@@ -94,7 +94,10 @@
 					</div>
 			</div>
 			<div id="mainPanel">
-				@RenderBody()
+				<span class="closebutton">&#x2716;</span>
+				<div id="mainPanelContent">
+					@RenderBody()
+				</div>
 			</div>
 			<div id="viewport">
 				@*SVG starsystem viewport*@
