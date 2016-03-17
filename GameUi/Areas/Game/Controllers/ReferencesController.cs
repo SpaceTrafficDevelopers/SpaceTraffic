@@ -45,9 +45,9 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
         //
         // GET: /References/
                 
-        public ActionResult Index()
+        public PartialViewResult Index()
         {
-            return View();
+            return PartialView("Index");
         }
 
     }

@@ -61,6 +61,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			}
 		}
 
+		public IList<SpaceShip> GetPlayersShipsAtBase(int playerId, int baseId)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IPlayerService).GetPlayersShipsAtBase(playerId, baseId);
+			}
+		}
+
 
 		public int GetPlayersCredits(int playerId)
 		{

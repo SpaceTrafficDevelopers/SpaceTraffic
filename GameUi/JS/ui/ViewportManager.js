@@ -47,21 +47,33 @@ var ViewportManager = {
 		var parent = this;
 		this.$contextPanel.find('.closebutton').click(function () {
 			$('#gameTopPanel .rightPart').removeClass('contextOpen');
-			parent.$contextPanel.css('display', 'none');
+			parent.$contextPanel.removeClass('open');
+			parent.doLayout();
+		});
+		this.$mainPanel.find('.closebutton').click(function () {
+			parent.$mainPanel.removeClass('open');
+			parent.doLayout();
 		});
 
+	},
+	closeMainPanel: function () {
+		this.$mainPanel.find('.closebutton').trigger('click');
+	},
+	closeContextPanel: function () {
+		this.$contextPanel.find('.closebutton').trigger('click');
 	},
 
 	doLayout: function () {
 		this.$viewport.height($('#envelope').outerHeight() - this.$topPanel.outerHeight() - $('#gameBottomPanel').outerHeight() - 10);
-
-		var menuPanelWidth = ($.cookie('isMenuOpen') == 'true') ? this.$menuPanel.outerWidth(true) + menuWidthBugCorrection : 0;
+		var menuPanelWidth = (this.$menuPanel.is(':visible')) ? this.$menuPanel.outerWidth(true) + menuWidthBugCorrection : 0;
 		menuPanelWidth += sideMargin;
 		var contextPanelEffectiveWidth = this.$contextPanel.is(':hidden') ? parseInt(ViewportManager.$contextPanel.css('margin-right').replace('px', '')) : this.$contextPanel.outerWidth(true) + contextPanelWidthBugCorrection;
 		this.$mainPanel.css('left', menuPanelWidth);
 		this.$mainPanel.css('top', this.$topPanel.outerHeight(true) + topMarginBugCorrection);
 		this.$mainPanel.outerWidth(this.$viewport.width() - menuPanelWidth - contextPanelEffectiveWidth - sideMargin);
-		this.$mainPanel.css('display', 'block');
+
+		if (this.$contextPanel.is(':visible')) {
+			$('#gameTopPanel .rightPart').addClass('contextOpen');
+		}
 	}
 }
-

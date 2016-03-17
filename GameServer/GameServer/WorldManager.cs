@@ -157,6 +157,7 @@ namespace SpaceTraffic.GameServer
         {
             Entities.Base planetBase = new Entities.Base();
             planetBase.Planet = planet.Location;
+			planetBase.BaseName = planet.AlternativeName;
 
             this.gameServer.Persistence.GetBaseDAO().InsertBase(planetBase);
 

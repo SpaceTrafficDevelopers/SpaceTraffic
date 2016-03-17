@@ -282,6 +282,9 @@
     <Content Include="Content\less\gamewindow.less" />
     <Content Include="Areas\Game\Views\References\Index.cshtml" />
     <Content Include="Areas\Game\Views\Bases\_Info.cshtml" />
+    <Content Include="Areas\Game\Views\Bases\_Header.cshtml" />
+    <Content Include="Areas\Game\Views\Bases\_Ships.cshtml" />
+    <Content Include="Areas\Game\Views\Bases\_Goods.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\itemtable.less" />
@@ -428,18 +431,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Game\Views\Ships\_BuyShip.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Ships\_ContextShipDetails.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Ships\_FleetList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Ships\_NaviComp.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Ships\_Overview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Game\Views\Ships\_ShipList.cshtml" />

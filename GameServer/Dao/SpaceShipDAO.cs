@@ -42,6 +42,17 @@ namespace SpaceTraffic.Dao
 			}
 		}
 
+		public IList<SpaceShip> GetPlayersShipsAtBase(int playerId, int baseId) {
+			using (var contextDB = CreateContext())
+			{
+				return (from x in contextDB.SpaceShips
+						where x.PlayerId.Equals(playerId)
+						where x.DockedAtBaseId != null
+						where x.DockedAtBaseId == baseId
+						select x).ToList<SpaceShip>();
+			}
+		}
+
 		public SpaceShip GetSpaceShipById(int spaceShipId)
 		{
 			using (var contextDB = CreateContext())

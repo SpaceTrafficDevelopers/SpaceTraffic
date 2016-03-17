@@ -1,0 +1,9 @@
+﻿
+@Html.Partial("_Header")
+
+<a href="@Url.Action("Ships", "Bases", new { planetName = ViewBag.planetName })" class="ajax" data-related-element-id="contextPanelContent">Obnovit</a>
+
+@foreach (var ship in @ViewBag.Ships)
+{
+<div>@ship.SpaceShipName<br />@ship.SpaceShipModel</div>
+}

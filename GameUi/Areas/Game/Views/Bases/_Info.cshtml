@@ -1,3 +1,4 @@
 ﻿
-<h2>@ViewBag.planetName</h2>
-<a href="@Url.Content("~/Game/Bases/Ships/")" class="ajax" data-related-element-id="contextPanelContent">kliksem</a>
+@Html.Partial("_Header")
+
+<a href="@Url.Action("Info", "Bases", new { planetName = ViewBag.planetName })" class="ajax" data-related-element-id="contextPanelContent">Obnovit</a>

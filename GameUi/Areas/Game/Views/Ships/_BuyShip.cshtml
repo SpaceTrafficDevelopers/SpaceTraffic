@@ -19,9 +19,9 @@
 		<tr class="tline">
 			<td>
 				<img src="@Url.Content("~/Content/images/Ships/" + @ship.Image)" style="float:left; height:80px;" /> <br />
-				<a href="#">
+				<span>
 					@ship.Model
-				</a>
+				</span>
 				@ship.Manufacturer
 			</td>
 			<td style="text-align: left; width: 170px;">
@@ -41,7 +41,7 @@
 				@ship.Description
 			</td>
 			<td>
-				<a href="@Url.Action("BuyModel", "Ships", new { baseId = ViewBag.baseId, starSystemName = ViewBag.starSystemName, model = ship.Model })">Koupit</a>
+				<a href="@Url.Action("BuyModel", "Ships", new { baseId = ViewBag.baseId, starSystemName = ViewBag.starSystemName, model = ship.Model })" class="ajax" onclick="ViewportManager.closeMainPanel()">Koupit</a>
 			</td>
 		</tr>
 	}

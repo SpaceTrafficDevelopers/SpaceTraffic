@@ -158,6 +158,6 @@ var SvgStar = new Class({
 
 	showStarInfo: function ($element) {/* info about star on the left*/
 		$element.html('<h2>' + this.getName() + '</h2><p>' + this.star.description + '</p>');
-		$element.css('display', 'block');
+		$element.addClass('open');
 	}
 });

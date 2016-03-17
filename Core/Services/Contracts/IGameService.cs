@@ -34,6 +34,9 @@ namespace SpaceTraffic.Services.Contracts
         [OperationContract]
         IList<StarSystem> GetGalaxyMap(string galaxyMap);
 
+		[OperationContract]
+		SpaceTraffic.Entities.Base GetBaseByName(string planetName);
+
         [OperationContract]
         int PerformAction(int playerId, string actionName, params object[] actionArgs);
 

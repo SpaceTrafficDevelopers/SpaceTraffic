@@ -166,9 +166,13 @@ var ajaxClick = function (e, $linkElement) {
 	$.ajax({
 		url: $linkElement.attr('href'),
 		success: function (data) {
+			renderFlashMessage();
 			var $relatedElement = $('#' + $linkElement.data('related-element-id'));
 			if ($relatedElement.length > 0) {
 				$relatedElement.html(data);
+				$relatedElement.parent().addClass('open');
+				$relatedElement.addClass('open');
+				ViewportManager.doLayout();
 				$relatedElement.find('a.ajax').click(function (e) {
 					ajaxClick(e, $(this));
 				});

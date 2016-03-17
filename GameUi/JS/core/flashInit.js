@@ -1,9 +1,13 @@
 ﻿
 //init of flash messages
 ;
-$(document).ready(function () {
+
+var renderFlashMessage = function () {
 	$("#alert_placeholder").flashMessage({
-		timeout: -1,//it never fades out automaticly
+		timeout: 8000,//it never fades out automaticly
 		fadeout: 300 //speed of removing even with clicking on cross
 	});
+};
+$(document).ready(function () {
+	renderFlashMessage();
 });
