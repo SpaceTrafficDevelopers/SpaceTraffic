@@ -433,18 +433,6 @@
     <Content Include="Areas\Game\Views\Ships\_BuyShip.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Game\Views\Ships\_ContextShipDetails.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Ships\_FleetList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Ships\_NaviComp.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Ships\_Overview.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Game\Views\Ships\_ShipList.cshtml" />
   </ItemGroup>
   <ItemGroup>

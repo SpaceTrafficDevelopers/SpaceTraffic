@@ -75,5 +75,15 @@ namespace SpaceTraffic.GameUi.Controllers
 			return HttpContext.User.Identity.Name;
 		}
 
+		/// <summary>
+		/// Returns name of the starsystem player is currently in
+		/// </summary>
+		/// <returns></returns>
+		public string getCurrentStarSystem()
+		{
+			string cookieValue = Request.Cookies.Get("currentStarSystem").Value;
+			return cookieValue.Replace("%20", " ");
+		}
+
 	}
 }

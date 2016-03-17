@@ -39,24 +39,43 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		public PartialViewResult Info(string planetName)
 		{
 			var partialView = PartialView("_Info");
-			partialView.ViewBag.planetName = planetName;
+			partialView = addHeaderViewBag(partialView, planetName);
 			return partialView;
 		}
 
+		
+
 		//
-		// GET: /Bases/Info/Ships
+		// GET: /Bases/Ships
 		public PartialViewResult Ships(string planetName)
 		{
 			var partialView = PartialView("_Ships");
-			partialView.ViewBag.planetName = planetName;
+			partialView = addHeaderViewBag(partialView, planetName);
+			partialView.ViewBag.ships = GSClient.PlayerService.GetPlayersShipsAtBase(getCurrentPlayerId(), partialView.ViewBag.currentBase.BaseId);
 			return partialView;
 		}
 
 		//
-		// GET: /Bases/Info/Goods
+		// GET: /Bases/Goods
 		public PartialViewResult Goods(string planetName)
 		{
 			var partialView = PartialView("_Goods");
+			partialView = addHeaderViewBag(partialView, planetName);
+			return partialView;
+		}
+
+
+		/// <summary>
+		/// Creates parameters for header partial view
+		/// Full planet name (location) = "StarSystem.Name\Planet.Name"
+		/// </summary>
+		/// <param name="partialView">Partial view to modify.</param>
+		/// <param name="planetName">Name of the planet.</param>
+		/// <returns></returns>
+		private PartialViewResult addHeaderViewBag(PartialViewResult partialView, string planetName)
+		{
+			var currentBase = GSClient.GameService.GetBaseByName(getCurrentStarSystem() + "\\" + planetName);
+			partialView.ViewBag.currentBase = currentBase;
 			partialView.ViewBag.planetName = planetName;
 			return partialView;
 		}

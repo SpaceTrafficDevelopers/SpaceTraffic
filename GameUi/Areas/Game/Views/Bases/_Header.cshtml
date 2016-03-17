@@ -1,4 +1,5 @@
-﻿
-<a href="@Url.Content("~/Game/Bases/Info/")" class="ajax" data-related-element-id="contextPanelContent">Souhrn</a>
-<a href="@Url.Content("~/Game/Bases/Ships/")" class="ajax" data-related-element-id="contextPanelContent">Lodě</a>
-<a href="@Url.Content("~/Game/Bases/Goods/")" class="ajax" data-related-element-id="contextPanelContent">Zboží</a>
+﻿<h2>@ViewBag.currentBase.BaseName</h2>
+<a href="@Url.Action("Info", "Bases", new { planetName = ViewBag.planetName })" class="ajax" data-related-element-id="contextPanelContent">Souhrn</a>
+<a href="@Url.Action("Ships", "Bases", new { planetName = ViewBag.planetName })" class="ajax" data-related-element-id="contextPanelContent">Lodě</a>
+<a href="@Url.Action("Goods", "Bases", new { planetName = ViewBag.planetName })" class="ajax" data-related-element-id="contextPanelContent">Zboží</a>
+<a href="@Url.Action("BuyShip", "Ships", new { baseId = ViewBag.currentBase.BaseId })" class="ajax" data-related-element-id="mainPanelContent">Koupit loď</a>
