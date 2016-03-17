@@ -20,21 +20,24 @@ var SvgPlanet = new Class({
 
 	showPlanetInfo: function ($element) {/* info about planet on the left*/
 		$element.html('<h2>' + this.body.altName + '</h2><p>' + this.body.description + '</p>');
-		$element.css('display', 'block');
+		$element.addClass('open');
 	},
 	showPlanetDetails: function ($element) {/* detailed UI of planet on the right */
-		$.ajax({
-			url: baseUrl + 'Game/Bases/Info',
-			data: { planetName: this.planetName },
-			success: function (data) {
-				$element.html(data);
-				$element.find('a.ajax').click(function (e) {
-					ajaxClick(e, $(this));
-				});
-				$('#gameTopPanel .rightPart').addClass('contextOpen');
-				$element.parent().css('display', 'block');
+		var hasBase = (typeof (this.body.hasBase) != "undefined" && this.body.hasBase !== null && this.body.hasBase);
+		if(hasBase){
+			$.ajax({
+				url: baseUrl + 'Game/Bases/Info',
+				data: { planetName: this.planetName },
+				success: function (data) {
+					$element.html(data);
+					$element.find('a.ajax').click(function (e) {
+						ajaxClick(e, $(this));
+			});
+					$element.parent().addClass('open');
+					ViewportManager.doLayout();
 			}
-		});
+			});
+		}
 	},
 	/* override */
 	buildObject: function (t) {
