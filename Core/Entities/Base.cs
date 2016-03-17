@@ -31,10 +31,16 @@ namespace SpaceTraffic.Entities
         /// </summary>
         public int BaseId { get; set; }
 
-        /// <summary>
-        /// Planet on which base is
-        /// </summary>
-        public string Planet { get; set; }
+		/// <summary>
+		/// Name of the base
+		/// </summary>
+		public string BaseName { get; set; }
+
+		/// <summary>
+		/// Planet on which base is
+		/// </summary>
+		public string Planet { get; set; }
+
 
         /// <summary>
         /// Trader which trades on the planet
