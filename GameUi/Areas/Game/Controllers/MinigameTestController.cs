@@ -37,13 +37,17 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             return View();
         }
 
-        public ActionResult GameRequest()
+        public ActionResult GameRequest(bool list)
         {
-            IMinigameDescriptor md = GSClient.MinigameService.getMinigameDescriptorByActionName("TestAction", getCurrentPlayerId());
+            object minigames = null;
+            if (list)
+                 minigames = GSClient.MinigameService.getMinigameDescriptorListByActionName("TestAction", getCurrentPlayerId());
+            else
+                minigames = GSClient.MinigameService.getMinigameDescriptorByActionName("TestAction", getCurrentPlayerId());
 
-            if (md != null)
-                Session["minigame"] = md;
-            
+            if (minigames != null)
+                Session["minigame"] = minigames;
+
             return RedirectToAction("");
         }
     }

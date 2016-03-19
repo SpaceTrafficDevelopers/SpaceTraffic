@@ -30,15 +30,13 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
                 var minigame = controller.Session["minigame"];
 
                 if (minigame != null) { 
-                    controller.Session.Remove("minigame");
+                    //controller.Session.Remove("minigame");
 
                     return minigame;
                 }
-
-                return null;
             }
 
-            return 0;
+            return null;
         }
     }
 }
