@@ -8,11 +8,10 @@
 
             if (minigames) {
                 var dial = $('#dialog');
-                //var dialogElement = prepareDialogElement(minigames);
+
                 if (dial.is(':empty'))
                     dial.append(prepareDialogElement(minigames));
 
-                //var $dialog = $(dialogElement).dialog({
                 var $dialog = $(dial).dialog({
                     autoOpen: false,
                     title: 'Minihry',
@@ -24,11 +23,9 @@
                                 alert($('select[name="minigames"]').val());
 
                             $(this).dialog('close');
-
-                            var myWin = window.open("about:blank", 'name', 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
-                            alert(window.location.host + minigames.ClientURL);
-                            showWindow(myWin, window.location.host + minigames.ClientURL);
                             $(this).empty();
+                            
+                            showWindow();
                         },
                         'Storno': function () {
                             $(this).dialog('close');
@@ -50,12 +47,16 @@
     });
 });
 
-function showWindow(win, url) {
-    win.open(url, 'name', 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
+function showWindow() {
+    var myWin = window.open("about:blank", 'name', 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
+    //alert(window.location.host + minigames.ClientURL);
+ //   showWindow(myWin, window.location.host + minigames.ClientURL);
+
+   // win.open(url, 'name', 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
+    return myWin;
 }
 
 function prepareDialogElement(minigames) {
-    //var dialogElement = '<div>'
     var dialogElement = ''
 
     if (!Array.isArray(minigames)) {
