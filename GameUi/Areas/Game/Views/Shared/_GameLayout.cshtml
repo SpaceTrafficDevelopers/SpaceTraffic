@@ -30,6 +30,46 @@
   	<script type="text/javascript">
 		var baseUrl = "@Url.Content("~")";
   	</script>
+
+    <style>
+        .ui-widget-content {
+	        border: 1px solid #969696;
+	        background: #111111;
+	        color: #ffffff;
+        }
+
+        .ui-dialog-titlebar-close {
+          visibility: hidden;
+        }
+
+        .ui-widget-header {
+	        border-bottom: 1px solid #969696;
+	        color: #ffffff;
+	        font-weight: bold;
+        }
+
+        .ui-button {
+            outline: 0;
+            color: #ffffff;
+            font-weight: bold;
+            text-shadow: 1px 1px #1f272b;
+            border: 1px solid #969696;
+            border-radius: 3px;
+            background: #222222; 
+        }
+
+        .ui-button:hover {
+            color: #ffffff;
+            background: #444444; 
+        }
+
+        .dropdown-dark {
+            background: #222222;
+            border-color: #969696;
+            font-size: inherit;
+            font-family: inherit;
+        }
+    </style>
   </head>
   <body>
 	<div id="envelope">
@@ -116,6 +156,7 @@
 			</ul>
 		</div>
 	</div>
+    <div id="dialog"></div>
 	@Content.Script("jquery-1.6.4.js",Url)
 	@Content.Script("jquery.unobtrusive-ajax.js", Url)
 	@Content.Script("jquery-ui-1.8.16.js", Url)

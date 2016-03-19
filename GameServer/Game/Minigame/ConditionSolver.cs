@@ -84,6 +84,26 @@ namespace SpaceTraffic.Game.Minigame
         }
 
         /// <summary>
+        /// Method for getting minigameDescriptor based on the condition evaluation.
+        /// </summary>
+        /// <param name="minigames">collection of minigame descriptor</param>
+        /// <param name="player">player</param>
+        /// <returns>minigame descriptor or null</returns>
+        public IMinigameDescriptor getMinigameDescriptor(ICollection<MinigameDescriptor> minigames, Player player)
+        {
+            int id = -1;
+            foreach (MinigameDescriptor md in minigames)
+            {
+                id = solverFunctions[md.ConditionType](md, player);
+
+                if (id != -1)
+                    return md;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Method for getting list of minigame ids based on the condition evaluation.
         /// </summary>
         /// <param name="minigames">collection of minigame descriptor</param>
@@ -102,6 +122,27 @@ namespace SpaceTraffic.Game.Minigame
             }
 
             return ids;
+        }
+
+        /// <summary>
+        /// Method for getting list of minigame descriptors based on the condition evaluation.
+        /// </summary>
+        /// <param name="minigames">collection of minigame descriptor</param>
+        /// <param name="player">player</param>
+        /// <returns>list of minigame descriptors or empty list</returns>
+        public List<MinigameDescriptor> getMinigameDescriptorList(ICollection<MinigameDescriptor> minigames, Player player)
+        {
+            List<MinigameDescriptor> list = new List<MinigameDescriptor>();
+
+            foreach (MinigameDescriptor md in minigames)
+            {
+                int id = solverFunctions[md.ConditionType](md, player);
+
+                if (id != -1)
+                    list.Add(md);
+            }
+
+            return list;
         }
 
         /// <summary>

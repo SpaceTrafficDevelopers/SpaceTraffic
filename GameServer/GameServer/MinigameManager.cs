@@ -275,12 +275,8 @@ namespace SpaceTraffic.GameServer
 
         public List<int> getMinigameList(string actionName, int playerId)
         {
-            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(playerId);
-
-            if (player == null)
-                return null;
-
-            ICollection<MinigameDescriptor> minigames = getMinigameCollection(actionName, playerId);
+            Player player;
+            ICollection<MinigameDescriptor> minigames = getMinigameDescriptorCollectionByActionName(actionName, playerId, out player);
 
             if (minigames == null)
                 return null;
@@ -288,19 +284,57 @@ namespace SpaceTraffic.GameServer
             return coditionSolver.getMinigames(minigames, player);
         }
 
+        public List<MinigameDescriptor> getMinigameDescriptorListByActionName(string actionName, int playerId)
+        {
+            Player player;
+            ICollection<MinigameDescriptor> minigames = getMinigameDescriptorCollectionByActionName(actionName, playerId, out player);
+
+            if (minigames == null)
+                return null;
+
+            return coditionSolver.getMinigameDescriptorList(minigames, player);
+        }
+
+        public IMinigameDescriptor getMinigameDescriptorByActionName(string actionName, int playerId)
+        {
+            Player player;
+            ICollection<MinigameDescriptor> minigames = getMinigameDescriptorCollectionByActionName(actionName, playerId, out player);
+
+            if (minigames == null)
+                return null;
+
+            return coditionSolver.getMinigameDescriptor(minigames, player);
+        }
+
         public int getMinigame(string actionName, int playerId)
         {
-            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(playerId);
-
-            if (player == null)
-                return -1;
-
-            ICollection<MinigameDescriptor> minigames = getMinigameCollection(actionName, playerId);
+            Player player;
+            ICollection<MinigameDescriptor> minigames = getMinigameDescriptorCollectionByActionName(actionName, playerId, out player);
 
             if (minigames == null)
                 return -1;
-
+    
             return coditionSolver.getMinigame(minigames, player);
+            
+        }
+
+        /// <summary>
+        /// Method for getting collection of MinigameDescriptors by action name.
+        /// </summary>
+        /// <param name="actionName">action name</param>
+        /// <param name="playerId">player id</param>
+        /// <param name="player">out instance player</param>
+        /// <returns>returns collection of minigame descriptor by action name or null</returns>
+        private ICollection<MinigameDescriptor> getMinigameDescriptorCollectionByActionName(string actionName, int playerId, out Player player)
+        {
+            player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(playerId);
+
+            if (player == null)
+                return null;
+
+            ICollection<MinigameDescriptor> minigames = getMinigameCollection(actionName, playerId);
+
+            return minigames;
         }
 
         /// <summary>

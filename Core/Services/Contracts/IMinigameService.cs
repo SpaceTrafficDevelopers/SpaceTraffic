@@ -21,6 +21,7 @@ using System.ServiceModel;
 using System.Text;
 using SpaceTraffic.Entities.Minigames;
 using SpaceTraffic.Game.Minigame;
+using System.Reflection;
 
 namespace SpaceTraffic.Services.Contracts
 {
@@ -28,6 +29,7 @@ namespace SpaceTraffic.Services.Contracts
     /// Minigame service contract interface.
     /// </summary>
     [ServiceContract]
+    [ServiceKnownType("GetKnownTypes", typeof(MinigameDescriptorHelper))]
     public interface IMinigameService
     {
         /// <summary>
@@ -154,6 +156,24 @@ namespace SpaceTraffic.Services.Contracts
         List<int> getMinigameList(string actionName, int playerId);
 
         /// <summary>
+        /// Method for getting minigames by start action name for player.
+        /// </summary>
+        /// <param name="actionName">start action name</param>
+        /// <param name="playerId">player id</param>
+        /// <returns>return list of minigame descriptors or null</returns>
+        [OperationContract]
+        List<MinigameDescriptor> getMinigameDescriptorListByActionName(string actionName, int playerId);
+
+        /// <summary>
+        /// Method for getting minigame descriptor by start action name for player.
+        /// </summary>
+        /// <param name="actionName">start action name</param>
+        /// <param name="playerId">player id</param>
+        /// <returns>return minigame descriptor or null</returns>
+        [OperationContract]
+        IMinigameDescriptor getMinigameDescriptorByActionName(string actionName, int playerId);
+
+        /// <summary>
         /// Method for getting minigame by start action name for player.
         /// </summary>
         /// <param name="actionName">start action name</param>
@@ -169,5 +189,24 @@ namespace SpaceTraffic.Services.Contracts
         /// <returns>success or failure result</returns>
         [OperationContract]
         Result removeGame(int minigameId);
+    }
+
+    /// <summary>
+    /// MinigameDescriptorHelper class. Contains method which returns KnowTypes for IMinigameDescriptor.
+    /// </summary>
+    static class MinigameDescriptorHelper
+    {
+        /// <summary>
+        /// Method for getting known types of IMinigameDescriptor
+        /// </summary>
+        /// <param name="provider">provider</param>
+        /// <returns>return list of know types</returns>
+        public static IEnumerable<Type> GetKnownTypes(ICustomAttributeProvider provider)
+        {
+            List<Type> knownTypes = new List<Type>();
+
+            knownTypes.Add(typeof(MinigameDescriptor));
+            return knownTypes;
+        }
     }
 }

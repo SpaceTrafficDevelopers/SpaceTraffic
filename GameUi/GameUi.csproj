@@ -104,6 +104,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Game\Controllers\MinigameTestController.cs" />
     <Compile Include="Areas\Game\Controllers\ReferencesController.cs" />
     <Compile Include="Areas\Game\Controllers\CargoController.cs" />
     <Compile Include="Areas\Game\Controllers\PlannerController.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Controllers\AjaxHandlers\CreditsAmount.cs" />
     <Compile Include="Controllers\AjaxHandlers\EarnedAchievements.cs" />
     <Compile Include="Controllers\AjaxHandlers\IAjaxHandleable.cs" />
+    <Compile Include="Controllers\AjaxHandlers\MinigameStarter.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Game\Controllers\MapController.cs" />
     <Compile Include="Areas\Game\Controllers\MessagesController.cs" />
@@ -281,6 +283,7 @@
     <Content Include="Content\less\GameLayout.less" />
     <Content Include="Content\less\gamewindow.less" />
     <Content Include="Areas\Game\Views\References\Index.cshtml" />
+    <Content Include="Areas\Game\Views\MinigameTest\Index.cshtml" />
     <Content Include="Areas\Game\Views\Bases\_Info.cshtml" />
     <Content Include="Areas\Game\Views\Bases\_Header.cshtml" />
     <Content Include="Areas\Game\Views\Bases\_Ships.cshtml" />

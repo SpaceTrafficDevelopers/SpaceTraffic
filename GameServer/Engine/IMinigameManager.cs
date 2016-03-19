@@ -97,6 +97,22 @@ namespace SpaceTraffic.Engine
         List<int> getMinigameList(string actionName, int playerId);
 
         /// <summary>
+        /// Method for getting minigames by start action name for player.
+        /// </summary>
+        /// <param name="actionName">start action name</param>
+        /// <param name="playerId">player id</param>
+        /// <returns>return list of minigame descriptors or null</returns>
+        List<MinigameDescriptor> getMinigameDescriptorListByActionName(string actionName, int playerId);
+
+        /// <summary>
+        /// Method for getting minigame descriptor by start action name for player.
+        /// </summary>
+        /// <param name="actionName">start action name</param>
+        /// <param name="playerId">player id</param>
+        /// <returns>return minigame descriptor or null</returns>
+        IMinigameDescriptor getMinigameDescriptorByActionName(string actionName, int playerId);
+
+        /// <summary>
         /// Method for adding player into game.
         /// </summary>
         /// <param name="minigameId">minigame id</param>

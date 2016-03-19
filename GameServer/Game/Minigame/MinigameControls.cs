@@ -105,10 +105,8 @@ namespace SpaceTraffic.Game.Minigame
             if (!conditionChecker.checkCondition(minigame))
                 return false;
 
-            if(minigame.ExternalClient){
-                if(minigame.ClientURL == null || !Uri.IsWellFormedUriString(minigame.ClientURL, UriKind.RelativeOrAbsolute))
-                    return false;
-            }
+            if(minigame.ClientURL == null || !Uri.IsWellFormedUriString(minigame.ClientURL, UriKind.RelativeOrAbsolute))
+                return false;
 
             return true;
         }

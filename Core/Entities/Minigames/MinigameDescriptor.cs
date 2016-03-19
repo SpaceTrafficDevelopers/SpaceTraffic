@@ -23,6 +23,7 @@ using System.Text;
 namespace SpaceTraffic.Entities.Minigames
 {
     [DataContract]
+    //[KnownType(typeof(IMinigameDescriptor))]
     public class MinigameDescriptor : IMinigameDescriptor
     {
         [DataMember]

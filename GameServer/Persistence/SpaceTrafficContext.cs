@@ -450,7 +450,7 @@ using System.Linq.Expressions;
             Ignore(p => p.ConditionType);
             Property(p => p.ConditionArgs).HasColumnType("varchar").HasMaxLength(2048).IsOptional();
             Property(p => p.ExternalClient).HasColumnType("bit").IsRequired();
-            Property(p => p.ClientURL).HasColumnType("varchar").HasMaxLength(1024).IsOptional();
+            Property(p => p.ClientURL).HasColumnType("varchar").HasMaxLength(1024).IsRequired();
             Property(p => p.MinigameClassFullName).HasColumnType("varchar").HasMaxLength(1024).IsOptional();
 
             HasMany(p => p.StartActions).WithMany(c => c.Minigames);
