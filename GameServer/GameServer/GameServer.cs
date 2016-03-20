@@ -200,6 +200,9 @@ namespace SpaceTraffic.GameServer
 
             this.minigameManager.registerMinigame(md);
             md.Name = "TestGame2";
+            md.ExternalClient = true;
+            md.ClientURL = "http://www.google.com";
+
             this.minigameManager.registerMinigame(md);
             #endregion
 

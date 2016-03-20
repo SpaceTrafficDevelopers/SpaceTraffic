@@ -453,7 +453,7 @@ namespace SpaceTraffic.GameServer
         {
             lock (counterLock)
             {
-                return minigameCounter++;
+                return ++minigameCounter;
             }
         }
 
