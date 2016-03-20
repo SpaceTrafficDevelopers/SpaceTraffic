@@ -114,7 +114,7 @@
 			<nav class="mainmenu">
 				@foreach (dynamic menuItem in menu)
 				{
-					<a href="@Url.Action("Index", menuItem.Id, new { Area = "Game" }, null)" class="ajax" data-related-element-id="mainPanelContent">
+					<a href="@Url.Action("Index", menuItem.Id, new { Area = "Game" }, null)" @* class="ajax" data-related-element-id="mainPanelContent"*@>
 						<img src="@Url.Content("~/Content/images/icons/menu/"+menuItem.Id.ToLower()+"_button_icon.png")" width="32" height="32" />
 						@menuItem.Name
 					</a>
