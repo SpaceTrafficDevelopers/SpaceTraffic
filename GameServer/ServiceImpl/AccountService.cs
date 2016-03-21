@@ -33,8 +33,9 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         public bool Authenticate(string userName, string password)
         {
             Logger.Info("AccountService: Authenticate {0}", userName);
-
-            return (userName==password);
+            Player player = GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByName(userName);
+            
+            return (player != null && player.PlayerName == userName && player.PsswdHash == password);
         }
 
 
