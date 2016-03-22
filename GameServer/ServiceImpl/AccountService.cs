@@ -59,5 +59,16 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
             throw new NotImplementedException();
         }
+
+        public bool AddPlayerIntoActivePlayers(int playerId)
+        {
+            return GameServer.CurrentInstance.World.AddPlayer(playerId);
+        }
+
+        public void RemovePlayerFromActivePlayers(int playerId)
+        {
+            GameServer.CurrentInstance.World.RemovePlayer(playerId);
+        }
+
     }
 }

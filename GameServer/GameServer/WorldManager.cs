@@ -32,18 +32,13 @@ namespace SpaceTraffic.GameServer
 
         private IGameServer gameServer;
 
-        public IList<Game.IGamePlayer> ActivePlayers
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        private IDictionary<int, IGamePlayer> activePlayers;
 
+        public IDictionary<int, IGamePlayer> ActivePlayers
+        {
+            get { return this.activePlayers; }
+            private set { this.activePlayers = value; }
+        }
         
         public Game.GalaxyMap Map
         {
@@ -54,16 +49,40 @@ namespace SpaceTraffic.GameServer
         public WorldManager(IGameServer gameServer)
         {
             this.gameServer = gameServer;
+            this.activePlayers = new Dictionary<int, IGamePlayer>();
         }
 
-        IGamePlayer PlayerLoad(int playerId)
+        public IGamePlayer PlayerLoad(int playerId)
         {
             Player player = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(playerId);
 
             GamePlayer gamePlayer = new GamePlayer(player);
             gamePlayer.CurrentStarSystem = Map[0];
-            //this.ActivePlayers.Add(gamePlayer);
+            //this.ActivePlayers.Add(playerId, gamePlayer);
+            
             return gamePlayer;
+        }
+
+        public bool AddPlayer(int playerId)
+        {
+            Player player = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(playerId);
+
+            if (player != null) {
+                if (this.ActivePlayers.ContainsKey(playerId))
+                    return true;
+
+                GamePlayer gamePlayer = new GamePlayer(player);
+                gamePlayer.CurrentStarSystem = Map[0];
+                this.ActivePlayers.Add(playerId, gamePlayer);
+
+                return true;
+            }
+            return false;
+        }
+
+        public void RemovePlayer(int playerId)
+        {
+            this.ActivePlayers.Remove(playerId);
         }
 
         void ShipDock(int spaceshipId)
@@ -87,7 +106,7 @@ namespace SpaceTraffic.GameServer
 
         public IList<IGamePlayer> GetActivePlayers()
         {
-            throw new NotImplementedException();
+            return this.activePlayers.Values.ToList<IGamePlayer>();
         }
 
 		/// <summary>
@@ -107,7 +126,10 @@ namespace SpaceTraffic.GameServer
 
         public IGamePlayer GetPlayer(int playerId)
         {
-            throw new NotImplementedException();
+            if (this.activePlayers.ContainsKey(playerId))
+                return this.activePlayers[playerId];
+            else
+                return null;
         }
 
         void IWorldManager.ShipDock(int spaceshipId)

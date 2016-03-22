@@ -167,5 +167,12 @@ namespace SpaceTraffic.Engine
         /// <param name="minigameId">minigame id</param>
         /// <returns>success or failure result</returns>
         Result removeGame(int minigameId);
+
+        /// <summary>
+        /// Method for check if player is playing any minigame.
+        /// </summary>
+        /// <param name="playerId">player id</param>
+        /// <returns>true if player is playing</returns>
+        bool isPlayerInGame(int playerId);
     }
 }

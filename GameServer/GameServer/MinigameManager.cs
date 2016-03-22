@@ -18,6 +18,7 @@ using SpaceTraffic.Dao;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
 using SpaceTraffic.Entities.Minigames;
+using SpaceTraffic.Game;
 using SpaceTraffic.Game.Minigame;
 using System;
 using System.Collections.Concurrent;
@@ -516,6 +517,16 @@ namespace SpaceTraffic.GameServer
                 return Result.createFailureResult("Hra ještě nebyla ukončena.");
             }
             return Result.createFailureResult("Hra s id " + minigameId + " neexistuje.");
+        }
+        
+        public bool isPlayerInGame(int playerId)
+        {
+            IGamePlayer player = this.gameServer.World.GetPlayer(playerId);
+
+            if (player != null)
+                return player.IsPlayingMinigame;
+
+            return false;
         }
     }
 }
