@@ -32,7 +32,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+			return PartialView();
         }
 
         /// <summary>
