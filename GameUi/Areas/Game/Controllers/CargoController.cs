@@ -24,7 +24,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 
         public ActionResult Index()
         {
-            return View();
+			return PartialView();
         }
         public ActionResult BuyCargo(string starSystemName, string planetName, int cargoLoadEntityId, int count, string buyingPlace, int buyerShipId, int traderId)
         {
