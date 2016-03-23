@@ -176,6 +176,7 @@ var ajaxClick = function (e, $linkElement) {
 				$relatedElement.find('a.ajax').click(function (e) {
 					ajaxClick(e, $(this));
 				});
+				$relatedElement.trigger('load');
 			}
 		},
 		error: function (err) {

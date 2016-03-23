@@ -363,12 +363,16 @@
     <Content Include="Libs\System.Web.WebPages.dll" />
     <Content Include="Libs\System.Web.WebPages.Razor.dll" />
     <Content Include="README.jQuery.vsdoc.txt" />
+    <Content Include="Scripts\jquery-2.2.2.min.js" />
+    <Content Include="Scripts\jquery-migrate-1.4.0.js" />
+    <Content Include="Scripts\jquery-migrate-1.4.0.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
     <Content Include="Scripts\jquery.flash-message.js" />
-    <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.6.4.js" />
-    <Content Include="Scripts\jquery-1.6.4.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.16.js" />
-    <Content Include="Scripts\jquery-ui-1.8.16.min.js" />
+    <Content Include="Scripts\jquery.svg-1.5.js" />
+    <Content Include="Scripts\jquery.svg-1.5.min.js" />
+    <Content Include="Scripts\jquery.svgdom-1.5.js" />
+    <Content Include="Scripts\jquery.svgdom-1.5.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -395,8 +399,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\MicrosoftAjax.js" />
@@ -442,9 +444,6 @@
     <Content Include="Areas\Game\Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Shared\_GameWindowLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\Content.cshtml" />
