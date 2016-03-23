@@ -15,6 +15,7 @@
 						requestObject.lastSentAt = -1;
 						$.fn.ajaxRequester.registeredRepeatedRequests.push(requestObject);
 					} else {
+						$.fn.ajaxRequester.registeredSingleRequests.push(requestObject);
 						sendRequest(getCombinedRequestObjects(requestObject));
 					}
 				}
@@ -108,11 +109,23 @@
 		if (responseObject.error && responseObject.error !== 'undefined') {
 			alert('Object ' + responseObject.requestId + ' ' + responseObject.error);
 		} else {
-			var registeredObjects = $.grep($.fn.ajaxRequester.registeredRepeatedRequests, function (e) { return e.requestId == responseObject.requestId; });
-			if (registeredObjects.length > 0) {
-				registeredObjects[0].callback(responseObject.data);
-			}
+			doCallback($.fn.ajaxRequester.registeredRepeatedRequests, responseObject, false);
+			doCallback($.fn.ajaxRequester.registeredSingleRequests, responseObject, true);
 		}
+	}
+
+	/** searches for callback in given register and call it. returns false if callback does not exist. Callback can be removed after call if removeAfter is set	*/
+	function doCallback(registerArray, responseObject, removeAfter) {
+		var registeredObjects = $.grep(registerArray, function (e) { return e.requestId == responseObject.requestId; });
+		if (registeredObjects.length > 0) {
+			registeredObjects[0].callback(responseObject.data);
+			if (removeAfter) {
+				var index = registerArray.indexOf(registeredObjects[0]);
+				registerArray.splice(index, 1);
+			}
+			return true;
+		}
+		return false;
 	}
 
 	/* builds data for request - it combines every repeatitive request that should be send now and if there is some it sends additional request also */
@@ -147,6 +160,9 @@
 
 	/* every request registered by register function (every request what needs repeatitive calls)*/
 	$.fn.ajaxRequester.registeredRepeatedRequests = [];
+
+	/* every single request registered. request is deleted right after calling its callback */
+	$.fn.ajaxRequester.registeredSingleRequests = [];
 
 	/* clock for requests, is incrased every second by 1 */
 	$.fn.ajaxRequester.clock = 0;
