@@ -189,6 +189,21 @@ namespace SpaceTraffic.Services.Contracts
         /// <returns>success or failure result</returns>
         [OperationContract]
         Result removeGame(int minigameId);
+
+        /// <summary>
+        /// Method for check if player is playing any minigame.
+        /// </summary>
+        /// <param name="playerId">player id</param>
+        /// <returns>return true if player is playing any minigame, otherwise false</returns>
+        [OperationContract]
+        bool isPlayerPlaying(int playerId);
+
+        /// <summary>
+        /// Method for updating minigame last time request
+        /// </summary>
+        /// <param name="minigameId">minigame id</param>
+        [OperationContract]
+        void updateLastRequestTime(int minigameId);
     }
 
     /// <summary>

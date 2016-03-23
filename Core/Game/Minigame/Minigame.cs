@@ -28,6 +28,11 @@ namespace SpaceTraffic.Game.Minigame
     [DataContract]
     public class Minigame : IMinigame
     {
+        /// <summary>
+        /// Max request time in milisecond (1 minute).
+        /// </summary>
+        private const long MAX_REQUEST_TIME = 60000;
+
         [DataMember]
         public int ID { get; set; }
 
@@ -95,6 +100,16 @@ namespace SpaceTraffic.Game.Minigame
             lock (lockObj)
             {
                 return performAction(actionName, actionArgs);
+            }
+        }
+
+        public bool isAlive(DateTime currentTime)
+        {
+            lock (lockObj) { 
+                if ((currentTime - this.LastRequestTime).TotalMilliseconds <= MAX_REQUEST_TIME)
+                    return true;
+                else
+                    return false;
             }
         }
     }

@@ -25,6 +25,7 @@ using SpaceTraffic.Entities.Minigames;
 using SpaceTraffic.GameServer;
 using SpaceTraffic.Game.Minigame;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Game;
 
 namespace SpaceTraffic.GameServerTests.GameServer
 {
@@ -82,6 +83,9 @@ namespace SpaceTraffic.GameServerTests.GameServer
             PlayerDAO playerDao = new PlayerDAO();
             playerDao.InsertPlayer(player1);
             playerDao.InsertPlayer(player2);
+
+            this.gameServer.World.AddPlayer(player1.PlayerId);
+            this.gameServer.World.AddPlayer(player2.PlayerId);
 
             minigameDescriptor = CreateMinigameDescriptor();
 
@@ -476,6 +480,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
     {
         private IPersistenceManager persistenceManager;
         private IGameManager gameManager;
+        private IWorldManager worldManager;
 
         public IPersistenceManager Persistence
         {
@@ -501,7 +506,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
 
         public IWorldManager World
         {
-            get { throw new NotImplementedException(); }
+            get { return worldManager; }
         }
 
         public IStatisticsManager Statistics
@@ -520,6 +525,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
         {
             this.persistenceManager = new PersitanceManagerMock();
             this.gameManager = new GameManagerMock();
+            this.worldManager = new WorldManagerMock(this);
         }
     }
 
@@ -662,5 +668,117 @@ namespace SpaceTraffic.GameServerTests.GameServer
         }
 
         #endregion Not Implemented Method
+    }
+
+        /// <summary>
+    /// Mock for world manager
+    /// </summary>
+    internal class WorldManagerMock : IWorldManager
+    {
+        private IGameServer gameServer;
+        private IDictionary<int, Game.IGamePlayer> activePlayers;
+
+        
+
+        public IDictionary<int, Game.IGamePlayer> ActivePlayers
+        {
+            get { return activePlayers; }
+        }
+
+        public WorldManagerMock(IGameServer gameServer)
+        {
+            this.gameServer = gameServer;
+            this.activePlayers = new Dictionary<int, Game.IGamePlayer>();
+        }
+
+        #region Not Implemented Method
+
+        public Game.GalaxyMap Map
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IList<Game.IGamePlayer> GetActivePlayers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Game.IGamePlayer GetPlayer(int playerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShipDock(int spaceshipId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShipTakeoff(int spaceshipId, Game.Navigation.NavPath path, GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShipUpdateLocation(int spaceshipId, GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GenerateBasesAndTraders()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Achievements Achievements
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public ExperienceLevels ExperienceLevels
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public TAchievement GetAchievementById(int id)
+        {
+            throw new NotImplementedException();
+        }
+    
+        #endregion Not Implemented Method
+
+        public bool AddPlayer(int playerId)
+        {
+            Player player = this.gameServer.Persistence.GetPlayerDAO().GetPlayerById(playerId);
+
+            if (player != null)
+            {
+                if (this.ActivePlayers.ContainsKey(playerId))
+                    return true;
+
+                GamePlayer gamePlayer = new GamePlayer(player);
+                this.ActivePlayers.Add(playerId, gamePlayer);
+
+                return true;
+            }
+            return false;
+        }
+
+        public void RemovePlayer(int playerId)
+        {
+            this.activePlayers.Remove(playerId);
+        }
     }
 }

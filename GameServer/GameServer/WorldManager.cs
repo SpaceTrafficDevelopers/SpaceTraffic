@@ -72,7 +72,7 @@ namespace SpaceTraffic.GameServer
                     return true;
 
                 GamePlayer gamePlayer = new GamePlayer(player);
-                gamePlayer.CurrentStarSystem = Map[0];
+                //TODO: this will be adding current system into game player, probably in the future
                 this.ActivePlayers.Add(playerId, gamePlayer);
 
                 return true;

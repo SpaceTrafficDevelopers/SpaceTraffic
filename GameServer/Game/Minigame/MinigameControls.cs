@@ -110,5 +110,20 @@ namespace SpaceTraffic.Game.Minigame
 
             return true;
         }
+
+        /// <summary>
+        /// Method for check if player is playing any minigame.
+        /// </summary>
+        /// <param name="playerId">player id</param>
+        /// <returns>return true if player is playing any minigame</returns>
+        public bool isPlayerPlaying(int playerId)
+        {
+            IGamePlayer player = this.gameServer.World.GetPlayer(playerId);
+
+            if (player != null)
+                return player.IsPlayingMinigame;
+
+            return false;
+        }
     }
 }

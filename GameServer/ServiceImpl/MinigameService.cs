@@ -124,5 +124,16 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         {
             return manager.getMinigameDescriptorByActionName(actionName, playerId);
         }
+
+
+        public bool isPlayerPlaying(int playerId)
+        {
+            return manager.isPlayerPlaying(playerId);
+        }
+
+        public void updateLastRequestTime(int minigameId)
+        {
+            manager.updateLastRequestTime(minigameId);
+        }
     }
 }
