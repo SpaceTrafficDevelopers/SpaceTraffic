@@ -112,5 +112,13 @@ namespace SpaceTraffic.Game.Minigame
                     return false;
             }
         }
+
+        public void updateLastRequestTime(DateTime currentTime)
+        {
+            lock (lockObj)
+            {
+                this.LastRequestTime = currentTime;
+            }
+        }
     }
 }

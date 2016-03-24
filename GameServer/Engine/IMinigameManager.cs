@@ -182,8 +182,7 @@ namespace SpaceTraffic.Engine
         void updateLastRequestTime(int minigameId);
 
         /// <summary>
-        /// Method for checking minigame life. When minigame is not alive, it is removed.
-        /// When minigame is alive check action is planned.
+        /// Method for checking minigame life.
         /// </summary>
         /// <param name="minigameId">minigame id</param>
         /// <returns>return true if minigame is alive, otherwise false</returns>

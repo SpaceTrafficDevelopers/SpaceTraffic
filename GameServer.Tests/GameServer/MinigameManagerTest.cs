@@ -372,6 +372,32 @@ namespace SpaceTraffic.GameServerTests.GameServer
         }
 
         /// <summary>
+        /// Test for checking if player is playing any minigame.
+        /// </summary>
+        [TestMethod()]
+        public void IsPlayerPlayingTest()
+        {
+            this.gameServer.World.GetPlayer(this.player1.PlayerId).IsPlayingMinigame = true;
+
+            bool result = manager.isPlayerPlaying(this.player1.PlayerId);
+            Assert.IsTrue(result, "IsPlayerPlayigTest: Unxpected result. Player has to be in playing state.");
+        }
+
+        /// <summary>
+        /// Test for checking minigame life.
+        /// </summary>
+        [TestMethod()]
+        public void CheckMinigameLifeTest()
+        {
+            manager.registerMinigame(this.minigameDescriptor);
+            int minigameId = manager.createGame(this.minigameDescriptor.MinigameId, true);
+
+            bool result = manager.checkMinigameLife(minigameId);
+
+            Assert.IsTrue(result, "CheckMinigameLifeTest: Unxpected result. Minigame has to be alive.");
+        }
+
+        /// <summary>
         /// Assert method for minigame descriptor.
         /// </summary>
         /// <param name="descriptor">minigame descriptor</param>
@@ -705,7 +731,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
 
         public Game.IGamePlayer GetPlayer(int playerId)
         {
-            throw new NotImplementedException();
+            return this.activePlayers[playerId];
         }
 
         public void ShipDock(int spaceshipId)

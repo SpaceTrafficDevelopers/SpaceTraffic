@@ -12,7 +12,7 @@
                 if (dialogElement.is(':empty'))
                     dialogElement.append(prepareDialogElement(minigames));
 
-                prepareMinigameStartDialog(dialogElement, minigames);
+                prepareMinigameStarterDialog(dialogElement, minigames);
 
                 if (dialogElement.dialog('isOpen') === false)
                     dialogElement.dialog('open');
@@ -21,7 +21,7 @@
     });
 });
 
-function prepareMinigameStartDialog(dialogElement, minigames) {
+function prepareMinigameStarterDialog(dialogElement, minigames) {
     $(dialogElement).dialog({
         autoOpen: false,
         title: 'Minihry',
@@ -36,7 +36,7 @@ function prepareMinigameStartDialog(dialogElement, minigames) {
                 else
                     selectedGame = minigames.MinigameId;
 
-                closeDialog(this);
+                closeMinigameStarterDialog(this);
 
                 createGame(minigames, selectedGame);
 
@@ -48,7 +48,7 @@ function prepareMinigameStartDialog(dialogElement, minigames) {
     });
 }
 
-function prepareDialogElement(minigames) {
+function prepareMinigameStarterDialogElement(minigames) {
     var dialogElement = '';
 
     if (!Array.isArray(minigames)) {
@@ -68,7 +68,7 @@ function prepareDialogElement(minigames) {
     return dialogElement;
 }
 
-function closeDialog(dialog) {
+function closeMinigameStarterDialog(dialog) {
     $(dialog).dialog('close');
     $(dialog).empty();
 

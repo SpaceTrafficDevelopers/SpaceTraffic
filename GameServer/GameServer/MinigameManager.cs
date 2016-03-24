@@ -539,7 +539,7 @@ namespace SpaceTraffic.GameServer
             IMinigame minigame = getActiveGameById(minigameId);
 
             if (minigame != null)
-                minigame.LastRequestTime = this.gameServer.Game.currentGameTime.Value;
+                minigame.updateLastRequestTime(this.gameServer.Game.currentGameTime.Value);
         }
 
         public bool checkMinigameLife(int minigameId)

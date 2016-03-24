@@ -204,6 +204,14 @@ namespace SpaceTraffic.Services.Contracts
         /// <param name="minigameId">minigame id</param>
         [OperationContract]
         void updateLastRequestTime(int minigameId);
+
+        /// <summary>
+        /// Method for checking minigame life.
+        /// </summary>
+        /// <param name="minigameId">minigame id</param>
+        /// <returns>return true if minigame is alive, otherwise false</returns>
+        [OperationContract]
+        bool checkMinigameLife(int minigameId);
     }
 
     /// <summary>

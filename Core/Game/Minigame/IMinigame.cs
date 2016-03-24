@@ -86,6 +86,12 @@ namespace SpaceTraffic.Game.Minigame
         /// <param name="currentTime">current time</param>
         /// <returns>returns true if minigame is alive</returns>
         bool isAlive(DateTime currentTime);
+
+        /// <summary>
+        /// Method for updating last request time.
+        /// </summary>
+        /// <param name="currentTime">current time</param>
+        void updateLastRequestTime(DateTime currentTime);
     }
 
     /// <summary>

@@ -190,5 +190,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
                 (channel as IMinigameService).updateLastRequestTime(minigameId);
             }
         }
+
+
+        public bool checkMinigameLife(int minigameId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IMinigameService).checkMinigameLife(minigameId);
+            }
+        }
     }
 }
