@@ -32,7 +32,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
         /// <summary>
         /// Page which should be displayed for Index action.
         /// </summary>
-        protected const string INDEX_VIEW = "~/Areas/Game/Views/Shared/_GameWindowLayout.cshtml";
+        protected const string INDEX_VIEW = "~/Areas/Game/Views/Shared/_GameWindow.cshtml";
 
         /// <summary>
         /// Gets the tabs.

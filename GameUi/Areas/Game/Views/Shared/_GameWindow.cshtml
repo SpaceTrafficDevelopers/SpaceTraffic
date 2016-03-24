@@ -5,10 +5,8 @@
 	Tabs tabs = ViewBag.Tabs;
 }
 
-@Html.ActionLink(HttpUtility.HtmlDecode("&#x2716;"), "Index", new { Controller = "Default", Area = "Game" }, new { @class = "closebutton" })	
-<div class="mainWindow" data-tabs="true">
 	
-	<ul class="gamewindow_tabs">
+	<ul id="tabsInterface" class="gamewindow_tabs">
 	@if (tabs.Items.Count <= 0)
 	{
 		throw new ApplicationException("No tabs");
@@ -17,11 +15,18 @@
 	@foreach (SpaceTraffic.GameUi.Models.Ui.TabItem tabItem in tabs.Items)
 	{
 		<li>
-			<a href="@Url.Action(tabItem.Action, tabItem.PartialViewModel)" title="@tabItem.Title"><span>@tabItem.Text</span></a>
-			
+			<a href="@Url.Action(tabItem.Action, tabItem.PartialViewModel)" title="@tabItem.Title" class="ajax tabButton" data-related-element-id="tabsContent"><span>@tabItem.Text</span></a>
 		</li>
 	}
 	
 	</ul>
-</div>
+
+<div id="tabsContent" class="mainWindow" data-tabs="true"></div>
+<script>
+	$('#mainPanelContent').bind('load', function () {
+		if ($('#tabsContent').is(':empty')) {
+			$('#tabsInterface .tabButton').first().trigger('click');/* clicking on first tab for load content */
+		}
+	});
+</script>
 
