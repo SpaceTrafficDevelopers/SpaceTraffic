@@ -10,7 +10,7 @@
                 var dialogElement = $('#dialog');
 
                 if (dialogElement.is(':empty'))
-                    dialogElement.append(prepareDialogElement(minigames));
+                    dialogElement.append(prepareMinigameStarterDialogElement(minigames));
 
                 prepareMinigameStarterDialog(dialogElement, minigames);
 
@@ -42,7 +42,7 @@ function prepareMinigameStarterDialog(dialogElement, minigames) {
 
             },
             'Storno': function () {
-                closeDialog(this);
+                closeMinigameStarterDialog(this);
             }
         }
     });
