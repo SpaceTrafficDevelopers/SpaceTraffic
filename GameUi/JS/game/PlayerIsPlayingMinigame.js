@@ -49,7 +49,7 @@ function PlayerIsPlayingMinigameDialog() {
     //method for close dialog on ending playing minigame
     this.closeOpenedDialog = function () {
 
-        if(this.dialogElement.dialog('isOpen') === true){
+        if (this.dialogElement.hasClass("ui-dialog-content") && this.dialogElement.dialog('isOpen') === true) {
             closeDialog(false);
         }
     };
