@@ -377,7 +377,10 @@ namespace SpaceTraffic.GameServerTests.GameServer
         [TestMethod()]
         public void IsPlayerPlayingTest()
         {
-            this.gameServer.World.GetPlayer(this.player1.PlayerId).IsPlayingMinigame = true;
+            manager.registerMinigame(this.minigameDescriptor);
+            int minigameId = prepareMinigame();
+
+            //this.gameServer.World.GetPlayer(this.player1.PlayerId).MinigameId = 1;
 
             bool result = manager.isPlayerPlaying(this.player1.PlayerId);
             Assert.IsTrue(result, "IsPlayerPlayigTest: Unxpected result. Player has to be in playing state.");
@@ -395,6 +398,20 @@ namespace SpaceTraffic.GameServerTests.GameServer
             bool result = manager.checkMinigameLife(minigameId);
 
             Assert.IsTrue(result, "CheckMinigameLifeTest: Unxpected result. Minigame has to be alive.");
+        }
+
+        /// <summary>
+        /// Test for checking actual playing minigame id.
+        /// </summary>
+        [TestMethod()]
+        public void ActualPlayingMinigameIdTest()
+        {
+            manager.registerMinigame(this.minigameDescriptor);
+            int minigameId = prepareMinigame();
+
+            int resultId = manager.actualPlayingMinigameId(this.player1.PlayerId);
+
+            Assert.AreEqual(minigameId, resultId, "ActualPlayingMinigameIdTest: Unxpected actual playing minigame id.");
         }
 
         /// <summary>

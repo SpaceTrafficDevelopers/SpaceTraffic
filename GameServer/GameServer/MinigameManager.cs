@@ -333,7 +333,8 @@ namespace SpaceTraffic.GameServer
         }
 
         /// <summary>
-        /// Method for getting collection of MinigameDescriptors by action name.
+        /// Method for getting collection of MinigameDescriptors by action name. If player is playing minigame
+        /// method return null.
         /// </summary>
         /// <param name="actionName">action name</param>
         /// <param name="playerId">player id</param>
@@ -344,6 +345,11 @@ namespace SpaceTraffic.GameServer
             player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(playerId);
 
             if (player == null)
+                return null;
+
+            IGamePlayer gamePlayer = this.gameServer.World.GetPlayer(playerId);
+
+            if (gamePlayer != null && gamePlayer.IsPlayingMinigame)
                 return null;
 
             ICollection<MinigameDescriptor> minigames = getMinigameCollection(actionName, playerId);
@@ -515,11 +521,12 @@ namespace SpaceTraffic.GameServer
             IMinigame minigame = getActiveGameById(minigameId);
 
             if(minigame != null){
-
                 if(minigameControls.checkState(minigame, MinigameState.FINISHED) || minigameControls.checkState(minigame, MinigameState.FAILED)){
                     
                     try{
-                        this.activeMinigames[minigameId] = null;
+                        IMinigame ignore;
+                        this.activeMinigames.TryRemove(minigameId, out ignore);
+
                         return Result.createSuccessResult("Hra s id " + minigameId + " byla úspěšně odstraněna.");
                     }
                     catch (KeyNotFoundException) {

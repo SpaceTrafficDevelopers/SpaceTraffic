@@ -1,4 +1,5 @@
-﻿var playerIsPlayingDialog = new PlayerIsPlayingMinigameDialog();
+﻿//PlayerIsPlayingDialog object
+var playerIsPlayingDialog = new PlayerIsPlayingMinigameDialog();
 
 $(document).ready(function () {
     ajax.send({
@@ -23,11 +24,15 @@ $(document).ready(function () {
     });
 });
 
+//PlayerIsPlayingMinigame dialog class
 function PlayerIsPlayingMinigameDialog() {
+    //dialog element
     this.dialogElement;
     
+    //this for private methods
     var that = this;
 
+    //method for prepare dialog
     this.prepareDialog = function () {
         if (this.dialogElement.is(':empty'))
             this.dialogElement.append(prepareDialogElement());
@@ -35,11 +40,13 @@ function PlayerIsPlayingMinigameDialog() {
         preparePlayerIsPlayingMinigameDialog();
     };
 
+    //method for open dialog
     this.open = function () {
         if (this.dialogElement.dialog('isOpen') === false)
             this.dialogElement.dialog('open');
     };
 
+    //method for close dialog on ending playing minigame
     this.closeOpenedDialog = function () {
 
         if(this.dialogElement.dialog('isOpen') === true){
@@ -47,6 +54,8 @@ function PlayerIsPlayingMinigameDialog() {
         }
     };
 
+    //method for close dialog
+    //sendMessage - true for send ajax message to handler for forced finish minigame
     function closeDialog(sendMessage){
         that.dialogElement.empty();
         that.dialogElement.dialog('close');
@@ -55,6 +64,7 @@ function PlayerIsPlayingMinigameDialog() {
             sendAjaxMessage('PlayerIsPlayingMinigameCloseDialog', 'PlayerIsPlayingMinigame', { close: true }, function () { });
     };
 
+    //method for send ajax message
     function sendAjaxMessage(id, object, data, callbackFunction) {
         ajax.send({
             requestId: id,
@@ -64,6 +74,7 @@ function PlayerIsPlayingMinigameDialog() {
         });
     };
 
+    //method for prepare jQuery dialog
     function preparePlayerIsPlayingMinigameDialog() {
         that.dialogElement.dialog({
             autoOpen: false,
@@ -78,6 +89,7 @@ function PlayerIsPlayingMinigameDialog() {
         });
     };
 
+    //method for prepare dialog element
     function prepareDialogElement() {
         var dialogElement = 'Během hraní miniher není možné ovládat hru. ';
         dialogElement += 'Dialog se automaticky zavře po ukončení aktuálně rozehrané minihry. ';

@@ -23,6 +23,13 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
 {
     public class PlayerIsPlayingMinigame : IAjaxHandleable
     {
+        /// <summary>
+        /// Method for handlig PlayerIsPlayingMinigame request. When data contains close attribute (true)
+        /// then minigame is force finished. Otherwise is return isPlayingState (true/false).
+        /// </summary>
+        /// <param name="data">data</param>
+        /// <param name="controller">controller</param>
+        /// <returns></returns>
         public object handleRequest(dynamic data, AbstractController controller)
         {
             if (data.Count != 0)
@@ -31,6 +38,7 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
                 {
                     int minigameId = controller.GSClient.MinigameService.actualPlayingMinigameId(controller.getCurrentPlayerId());
                     controller.GSClient.MinigameService.endGame(minigameId);
+                    controller.GSClient.MinigameService.removeGame(minigameId);
 
                     return null;
                 }

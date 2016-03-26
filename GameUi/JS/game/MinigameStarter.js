@@ -1,4 +1,5 @@
-﻿var minigameStarterDialog = new MinigameStarterDialog();
+﻿//Minigame starter dialog object
+var minigameStarterDialog = new MinigameStarterDialog();
 
 $(document).ready(function () {
     ajax.send({
@@ -18,14 +19,17 @@ $(document).ready(function () {
     });
 });
 
-
+//Minigame starter dialog class
 function MinigameStarterDialog() {
+    //dialog element
     this.dialogElement;
+    //minigames (minigame descriptor or list of minigame descriptors)
     this.minigames;
 
     //this for private method
     var that = this;
 
+    //method for prepare dialog
     this.prepareDialog = function () {
         if (this.dialogElement.attr('canbedisplayed') == 'true') {
             if (this.dialogElement.is(':empty'))
@@ -35,12 +39,14 @@ function MinigameStarterDialog() {
         }
     };
 
+    //method for open dialog when it is not opened
     this.open = function () {
 
         if (this.dialogElement.dialog('isOpen') === false && this.dialogElement.attr('canbedisplayed') == 'true')
             this.dialogElement.dialog('open');
     };
 
+    //method for prepare jQuery dialog
     function prepareMinigameStarterDialog() {
         that.dialogElement.dialog({
             autoOpen: false,
@@ -67,6 +73,7 @@ function MinigameStarterDialog() {
         });
     }
 
+    //method for prepare dialog element
     function prepareDialogElement() {
         var dialogElement = '';
 
@@ -87,6 +94,7 @@ function MinigameStarterDialog() {
         return dialogElement;
     };
 
+    //method for close dialog
     function closeDialog() {
         var closeCallback = function () {
 
@@ -106,6 +114,7 @@ function MinigameStarterDialog() {
         sendAjaxMessage('MinigameStarterCloseDialog', 'MinigameStarter', { close: true }, closeCallback);
     };
 
+    //method for send ajax message
     function sendAjaxMessage(id, object, data, callbackFunction) {
         ajax.send({
             requestId: id,
@@ -115,6 +124,7 @@ function MinigameStarterDialog() {
         });
     };
 
+    ///method for get minigame descriptor by selected id
     function getDescriptorById(selectedId) {
         if (Array.isArray(that.minigames)) {
             for (var i = 0; i < that.minigames.length; i++) {
@@ -127,6 +137,7 @@ function MinigameStarterDialog() {
             return that.minigames;
     };
 
+    //method for create game and open game window or show external minigame dialog
     function createGame(selectedGame) {
         var startGameCallback = function (gameId) {
 
@@ -150,6 +161,7 @@ function MinigameStarterDialog() {
         sendAjaxMessage('MinigameStarterCreateGame', 'MinigameStarter', { selectedGameId: selectedGame }, startGameCallback);
     };
 
+    //method for show external minigame info dialog
     function showInfoDialog(minigameDescriptor, gameId) {
         var info = '<div>Tuto hru si můžete zahrát pouze v externím klientovi. ID vaší hry je : ' + gameId;
         info += ' Klienta stáhnete <a target="_blank" href="' + minigameDescriptor.ClientURL + '">zde</a>';
@@ -167,6 +179,7 @@ function MinigameStarterDialog() {
         });
     };
 
+    //method for show minigame window
     function showWindow(minigameDescriptor, gameId) {
         var myWin = window.open(minigameDescriptor.ClientURL + '?gameId=' + gameId, minigameDescriptor.Name, 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
 
