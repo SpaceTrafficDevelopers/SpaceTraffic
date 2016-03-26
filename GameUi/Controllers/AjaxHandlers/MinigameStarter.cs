@@ -33,7 +33,7 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
                 }
 
                 if(data.ContainsKey("selectedGameId")){
-                    int gameId = int.Parse(data["selectedGameId"]);
+                    int gameId = int.Parse(data["selectedGameId"].ToString());
                     return controller.GSClient.MinigameService.createGame(gameId, false);
                 }
             }

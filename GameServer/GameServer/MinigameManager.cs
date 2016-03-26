@@ -260,11 +260,15 @@ namespace SpaceTraffic.GameServer
             return Result.createFailureResult("Hra s id " + minigameId + " neexistuje.");
         }
 
-        private void setFalseIsPlayingState(IMinigame minigame)
+        /// <summary>
+        /// Method for setting false (minigame id -1) for each players in game.
+        /// </summary>
+        /// <param name="minigame">minigame</param>
+        private void setFalseToIsPlayingMinigame(IMinigame minigame)
         {
             foreach (int playerId in minigame.Players.Keys)
             {
-                this.gameServer.World.ActivePlayers[playerId].IsPlayingMinigame = false;
+                this.gameServer.World.ActivePlayers[playerId].MinigameId = -1;
             }
         }
 
@@ -274,10 +278,10 @@ namespace SpaceTraffic.GameServer
 
             if (minigame != null)
             {
-                setFalseIsPlayingState(minigame);
+                setFalseToIsPlayingMinigame(minigame);
                 minigame.State = MinigameState.FINISHED;
                 
-                return Result.createSuccessResult("Hra byla úspěšně ukončena.");
+                return Result.createSuccessResult("Hra byla ukončena.");
             }
 
             return Result.createFailureResult("Hra s id " + minigameId + " neexistuje.");
@@ -394,7 +398,7 @@ namespace SpaceTraffic.GameServer
                     || minigameControls.checkState(minigame, MinigameState.WAITING_FOR_PLAYERS))
                 {
                     minigame.Players[player.PlayerId] = player;
-                    this.gameServer.World.ActivePlayers[playerId].IsPlayingMinigame = true;
+                    this.gameServer.World.ActivePlayers[playerId].MinigameId = minigameId;
 
                     minigame.State = minigame.Players.Count == minigame.Descriptor.PlayerCount
                         ? MinigameState.PREPARED : MinigameState.WAITING_FOR_PLAYERS;
@@ -532,6 +536,16 @@ namespace SpaceTraffic.GameServer
         public bool isPlayerPlaying(int playerId)
         {
             return this.minigameControls.isPlayerPlaying(playerId);
+        }
+
+        public int actualPlayingMinigameId(int playerId)
+        {
+            IGamePlayer player = this.gameServer.World.GetPlayer(playerId);
+
+            if (player != null)
+                return player.MinigameId;
+
+            return -1;
         }
 
         public void updateLastRequestTime(int minigameId)

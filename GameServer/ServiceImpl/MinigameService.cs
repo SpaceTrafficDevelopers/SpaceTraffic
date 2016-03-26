@@ -140,5 +140,10 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         {
             return manager.checkMinigameLife(minigameId);
         }
+
+        public int actualPlayingMinigameId(int playerId)
+        {
+            return manager.actualPlayingMinigameId(playerId);
+        }
     }
 }

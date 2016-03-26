@@ -1,48 +1,92 @@
-﻿$(document).ready(function () {
+﻿var playerIsPlayingDialog = new PlayerIsPlayingMinigameDialog();
+
+$(document).ready(function () {
     ajax.send({
         requestId: 'PlayerIsPlayingMinigame',
         relatedObject: 'PlayerIsPlayingMinigame',
         data: {},
         repeatEvery: 2,
         callback: function (isPlaying) {
+            var dialogEle = $('#isPlayingDialog');
 
-            if (isPlaying && isPlaying === true) {
-                var dialogElement = $('#dialog');
-
-                if (dialogElement.is(':empty'))
-                    dialogElement.append(preparePlayerIsPlayingMinigameDialogElement(minigames));
-
-                prepareMinigameStartDialog(dialogElement, minigames);
-
-                if (dialogElement.dialog('isOpen') === false)
-                    dialogElement.dialog('open');
+            if(isPlaying === true){
+                playerIsPlayingDialog.dialogElement = dialogEle;
+                playerIsPlayingDialog.prepareDialog();
+                playerIsPlayingDialog.open();
             }
+            else if(isPlaying === false){
+                playerIsPlayingDialog.dialogElement = dialogEle;
+                playerIsPlayingDialog.closeOpenedDialog();
+            }
+            
         }
     });
 });
 
-function preparePlayerIsPlayingMinigameDialog(dialogElement, minigames) {
-    $(dialogElement).dialog({
-        autoOpen: false,
-        title: 'Minihry',
-        modal: true,
-        closeOnEscape: false, //not work in any browsers
-        buttons: {
-            'Pokračovat do hry': function () {
-                
-                //send message to end minigame
-                closeDialog(this);
+function PlayerIsPlayingMinigameDialog() {
+    this.dialogElement;
+    
+    var that = this;
 
-            }
+    this.prepareDialog = function () {
+        if (this.dialogElement.is(':empty'))
+            this.dialogElement.append(prepareDialogElement());
+
+        preparePlayerIsPlayingMinigameDialog();
+    };
+
+    this.open = function () {
+        if (this.dialogElement.dialog('isOpen') === false)
+            this.dialogElement.dialog('open');
+    };
+
+    this.closeOpenedDialog = function () {
+
+        if(this.dialogElement.dialog('isOpen') === true){
+            closeDialog(false);
         }
-    });
-}
+    };
 
-function preparePlayerIsPlayingMinigameDialogElement() {
-    var dialogElement = 'Během hraní miniher není možné ovládat ovládat hru. ';
-    dialogElement += 'Dialog se automaticky zavře po ukončení aktuálně rozehrané minihry. ';
-    dialogElement += 'Pokud chcete hru ovládat hned, stačí kiknout na tlačítko "Pokračovat do hry". '
-    dialogElement += 'VAROVÁNÍ: V případě kliknutí na tlačítko "Pokračovat do hry" bude aktuálně rozehraná hra ukončena!'
+    function closeDialog(sendMessage){
+        that.dialogElement.empty();
+        that.dialogElement.dialog('close');
 
-    return dialogElement;
-}
+        if(sendMessage)
+            sendAjaxMessage('PlayerIsPlayingMinigameCloseDialog', 'PlayerIsPlayingMinigame', { close: true }, function () { });
+    };
+
+    function sendAjaxMessage(id, object, data, callbackFunction) {
+        ajax.send({
+            requestId: id,
+            relatedObject: object,
+            data: data,
+            callback: callbackFunction
+        });
+    };
+
+    function preparePlayerIsPlayingMinigameDialog() {
+        that.dialogElement.dialog({
+            autoOpen: false,
+            title: 'Máte rozehranou minihru',
+            modal: true,
+            closeOnEscape: false, 
+            buttons: {
+                'Pokračovat do hry': function () {
+                    closeDialog(true);
+                }
+            }
+        });
+    };
+
+    function prepareDialogElement() {
+        var dialogElement = 'Během hraní miniher není možné ovládat hru. ';
+        dialogElement += 'Dialog se automaticky zavře po ukončení aktuálně rozehrané minihry. ';
+        dialogElement += 'Pokud chcete hru ovládat hned, stačí kiknout na tlačítko "Pokračovat do hry". '
+        dialogElement += 'VAROVÁNÍ: V případě kliknutí na tlačítko "Pokračovat do hry" bude aktuálně rozehraná hra ukončena!'
+
+        return dialogElement;
+    };
+};
+
+
+

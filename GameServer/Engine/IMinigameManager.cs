@@ -187,5 +187,12 @@ namespace SpaceTraffic.Engine
         /// <param name="minigameId">minigame id</param>
         /// <returns>return true if minigame is alive, otherwise false</returns>
         bool checkMinigameLife(int minigameId);
+
+        /// <summary>
+        /// Method for getting minigame id for actual playing game by player.
+        /// </summary>
+        /// <param name="playerId">player id</param>
+        /// <returns>returns actual playing minigame id or -1</returns>
+        int actualPlayingMinigameId(int playerId);
     }
 }

@@ -30,7 +30,15 @@ namespace SpaceTraffic.Game
 
         StarSystem CurrentStarSystem { get; }
 
-        bool IsPlayingMinigame { get; set; }
+        /// <summary>
+        /// Indication if player is playing minigame.
+        /// </summary>
+        bool IsPlayingMinigame { get; }
+
+        /// <summary>
+        /// Minigame id for actual playing minigame.
+        /// </summary>
+        int MinigameId { get; set; }
     }
 
     internal class GamePlayer : IGamePlayer
@@ -41,13 +49,18 @@ namespace SpaceTraffic.Game
 
         public StarSystem CurrentStarSystem { get; set; }
 
-        public bool IsPlayingMinigame { get; set; }
+        public bool IsPlayingMinigame { get { return MinigameId > 0; } }
+
+        public int MinigameId { get; set; }
 
         public GamePlayer(Player player)
         {
             this.PlayerId = player.PlayerId;
             this.PlayerName = player.PlayerName;
-            this.IsPlayingMinigame = false;
+            this.MinigameId = -1;
         }
+
+
+        
     }
 }

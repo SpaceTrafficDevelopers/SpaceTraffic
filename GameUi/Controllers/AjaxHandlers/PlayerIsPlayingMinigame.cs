@@ -25,9 +25,18 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
     {
         public object handleRequest(dynamic data, AbstractController controller)
         {
-            bool aaa = controller.GSClient.MinigameService.isPlayerPlaying(controller.getCurrentPlayerId());
+            if (data.Count != 0)
+            {
+                if (data.ContainsKey("close") && data["close"])
+                {
+                    int minigameId = controller.GSClient.MinigameService.actualPlayingMinigameId(controller.getCurrentPlayerId());
+                    controller.GSClient.MinigameService.endGame(minigameId);
 
-            return aaa;
+                    return null;
+                }
+            }
+
+            return controller.GSClient.MinigameService.isPlayerPlaying(controller.getCurrentPlayerId());
         }
 
     }
