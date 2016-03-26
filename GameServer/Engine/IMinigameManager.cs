@@ -167,5 +167,32 @@ namespace SpaceTraffic.Engine
         /// <param name="minigameId">minigame id</param>
         /// <returns>success or failure result</returns>
         Result removeGame(int minigameId);
+
+        /// <summary>
+        /// Method for check if player is playing any minigame.
+        /// </summary>
+        /// <param name="playerId">player id</param>
+        /// <returns>true if player is playing</returns>
+        bool isPlayerPlaying(int playerId);
+
+        /// <summary>
+        /// Method for updating last request time at minigame.
+        /// </summary>
+        /// <param name="minigameId">minigameId</param>
+        void updateLastRequestTime(int minigameId);
+
+        /// <summary>
+        /// Method for checking minigame life.
+        /// </summary>
+        /// <param name="minigameId">minigame id</param>
+        /// <returns>return true if minigame is alive, otherwise false</returns>
+        bool checkMinigameLife(int minigameId);
+
+        /// <summary>
+        /// Method for getting minigame id for actual playing game by player.
+        /// </summary>
+        /// <param name="playerId">player id</param>
+        /// <returns>returns actual playing minigame id or -1</returns>
+        int actualPlayingMinigameId(int playerId);
     }
 }

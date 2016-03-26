@@ -24,22 +24,23 @@
 	<title>Space Traffic</title>
 
 	<link href='https://fonts.googleapis.com/css?family=Exo:400,800|Audiowide&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-	
+   <!-- <link type="text/css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/vader/jquery-ui.min.css">-->
+
 	<link href="@Url.Content("~/Content/Game.less")" rel="stylesheet" type="text/css" />
 	<link href="@Url.Content("~/Content/themes/base/jquery.ui.base.css")" rel="stylesheet" type="text/css" />
-  	<script type="text/javascript">
+      <script type="text/javascript">
 		var baseUrl = "@Url.Content("~")";
   	</script>
 
     <style>
+        .ui-dialog-titlebar-close {
+          visibility: hidden;
+        }
+
         .ui-widget-content {
 	        border: 1px solid #969696;
 	        background: #111111;
 	        color: #ffffff;
-        }
-
-        .ui-dialog-titlebar-close {
-          visibility: hidden;
         }
 
         .ui-widget-header {
@@ -48,6 +49,16 @@
 	        font-weight: bold;
         }
 
+        .ui-widget-overlay{
+            z-index: 100;
+            opacity: .3;
+        }
+
+        .ui-dialog{
+            overflow: hidden;
+            z-index: 101;
+        }
+        
         .ui-button {
             outline: 0;
             color: #ffffff;
@@ -156,7 +167,8 @@
 			</ul>
 		</div>
 	</div>
-    <div id="dialog"></div>
+    <div id="minigameStarterDialog" canbedisplayed="true"></div>
+    <div id="isPlayingDialog"></div>
 	@Content.Script("jquery-2.2.2.min.js", Url)
   	@Content.Script("jquery-migrate-1.4.0.min.js", Url)
 	@Content.Script("jquery.unobtrusive-ajax.js", Url)
@@ -169,5 +181,6 @@
 	@Content.JSImport("~/JS/jsimport", Url)
 	@Content.JSImport("~/JS/layoutImport", Url)
 	@RenderSection("Scripts", false)
+
   </body>
 </html>

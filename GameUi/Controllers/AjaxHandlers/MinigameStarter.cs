@@ -23,8 +23,30 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
 {
     public class MinigameStarter : IAjaxHandleable
     {
+        /// <summary>
+        /// Method for handlig MinigameStarter request. When data contains close attribute (true)
+        /// then minigame session is removed. When data contains selectedId attribute then minigame
+        /// is created and id is returned. When data does not contains any data and when Session contains
+        /// minigame (list or id) than it is returned.
+        /// </summary>
+        /// <param name="data">data</param>
+        /// <param name="controller">controller</param>
+        /// <returns></returns>
         public object handleRequest(dynamic data, AbstractController controller)
         {
+            if (data.Count != 0) {
+                if (data.ContainsKey("close") && data["close"]){
+                    controller.Session.Remove("minigame");
+                    
+                    return null;
+                }
+
+                if(data.ContainsKey("selectedGameId")){
+                    int gameId = int.Parse(data["selectedGameId"].ToString());
+                    return controller.GSClient.MinigameService.createGame(gameId, false);
+                }
+            }
+
             if (controller.Session["minigame"] != null)
             {
                 var minigame = controller.Session["minigame"];

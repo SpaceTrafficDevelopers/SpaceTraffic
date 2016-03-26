@@ -38,5 +38,20 @@ namespace SpaceTraffic.Services.Contracts
 
         [OperationContract]
         void RegisterPlayer(Player player);
+
+        /// <summary>
+        /// Method for adding player into active players.
+        /// </summary>
+        /// <param name="playerId">player id</param>
+        /// <returns>return false when player not exists, otherwise true</returns>
+        [OperationContract]
+        bool AddPlayerIntoActivePlayers(int playerId);
+
+        /// <summary>
+        /// Method for removing player from active players.
+        /// </summary>
+        /// <param name="playerId">player id</param>
+        [OperationContract]
+        void RemovePlayerFromActivePlayers(int playerId);
     }
 }

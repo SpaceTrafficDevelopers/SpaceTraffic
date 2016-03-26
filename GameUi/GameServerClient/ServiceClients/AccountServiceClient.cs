@@ -73,5 +73,23 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
         {
             throw new NotImplementedException();
         }
+
+
+        public bool AddPlayerIntoActivePlayers(int playerId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IAccountService).AddPlayerIntoActivePlayers(playerId);
+            }
+        }
+
+
+        public void RemovePlayerFromActivePlayers(int playerId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                (channel as IAccountService).RemovePlayerFromActivePlayers(playerId);
+            }
+        }
     }
 }

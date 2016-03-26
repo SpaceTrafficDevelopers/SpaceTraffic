@@ -34,6 +34,10 @@ namespace SpaceTraffic.Engine
     {
         GalaxyMap Map { get; }
 
+        /// <summary>
+        /// Property of dictionary with active player indexed by player id.
+        /// </summary>
+        IDictionary<int, IGamePlayer> ActivePlayers { get; }
 
         /// <summary>
         /// Vrací seznam aktivních hráčů.
@@ -42,6 +46,11 @@ namespace SpaceTraffic.Engine
         /// <returns>seznam aktivních hráčů</returns>
         IList<IGamePlayer> GetActivePlayers();
 
+        /// <summary>
+        /// Method for getting active player.
+        /// </summary>
+        /// <param name="playerId">player id</param>
+        /// <returns>returns active player or null</returns>
         IGamePlayer GetPlayer(int playerId);
 
         void ShipDock(int spaceshipId);
@@ -60,5 +69,18 @@ namespace SpaceTraffic.Engine
 		ExperienceLevels ExperienceLevels { get; set; }
 
 		TAchievement GetAchievementById(int id);
+
+        /// <summary>
+        /// Method for adding player into active players.
+        /// </summary>
+        /// <param name="playerId">player id</param>
+        /// <returns>return false when player not exists, otherwise true</returns>
+        bool AddPlayer(int playerId);
+
+        /// <summary>
+        /// Method for removing player from active players.
+        /// </summary>
+        /// <param name="playerId">player id</param>
+        void RemovePlayer(int playerId);
     }
 }

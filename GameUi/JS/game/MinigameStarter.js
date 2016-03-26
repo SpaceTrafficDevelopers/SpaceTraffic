@@ -1,4 +1,7 @@
-﻿$(document).ready(function () {
+﻿//Minigame starter dialog object
+var minigameStarterDialog = new MinigameStarterDialog();
+
+$(document).ready(function () {
     ajax.send({
         requestId: 'MinigameStarter',
         relatedObject: 'MinigameStarter',
@@ -7,71 +10,185 @@
         callback: function (minigames) {
 
             if (minigames) {
-                var dial = $('#dialog');
-
-                if (dial.is(':empty'))
-                    dial.append(prepareDialogElement(minigames));
-
-                var $dialog = $(dial).dialog({
-                    autoOpen: false,
-                    title: 'Minihry',
-                    modal: true,
-                    closeOnEscape: false, //not work in any browsers
-                    buttons: {
-                        'Ok': function () {
-                            if (Array.isArray(minigames))
-                                alert($('select[name="minigames"]').val());
-
-                            $(this).dialog('close');
-                            $(this).empty();
-                            
-                            showWindow();
-                        },
-                        'Storno': function () {
-                            $(this).dialog('close');
-                            $(this).empty();
-                        }
-                    }
-
-                });
-
-                if (dial.dialog('isOpen') === false)
-                    dial.dialog('open');
-
-                //var result = confirm("Blabolik?");
-                //var myWin = window.open("about:blank", 'name', 'height=500,width=550');
-                //parameters toolbar=no,directories=no,status=no,linemenubar=no,scrollbars=no,resizable=no ,modal=yes
-                //showWindow(myWin, "http://google.com");
+                minigameStarterDialog.dialogElement = $('#minigameStarterDialog');
+                minigameStarterDialog.minigames = minigames;
+                minigameStarterDialog.prepareDialog();
+                minigameStarterDialog.open();
             }
         }
     });
 });
 
-function showWindow() {
-    var myWin = window.open("about:blank", 'name', 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
-    //alert(window.location.host + minigames.ClientURL);
- //   showWindow(myWin, window.location.host + minigames.ClientURL);
+//Minigame starter dialog class
+function MinigameStarterDialog() {
+    //dialog element
+    this.dialogElement;
+    //minigames (minigame descriptor or list of minigame descriptors)
+    this.minigames;
 
-   // win.open(url, 'name', 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
-    return myWin;
-}
+    //this for private method
+    var that = this;
 
-function prepareDialogElement(minigames) {
-    var dialogElement = ''
+    //method for prepare dialog
+    this.prepareDialog = function () {
+        if (this.dialogElement.attr('canbedisplayed') == 'true') {
+            if (this.dialogElement.is(':empty'))
+                this.dialogElement.append(prepareDialogElement());
 
-    if (!Array.isArray(minigames)) {
-        dialogElement += 'Chcete si zahrat minihru ' + minigames.Name + '?';
+            prepareMinigameStarterDialog();
+        }
+    };
+
+    //method for open dialog when it is not opened
+    this.open = function () {
+
+        if (this.dialogElement.dialog('isOpen') === false && this.dialogElement.attr('canbedisplayed') == 'true')
+            this.dialogElement.dialog('open');
+    };
+
+    //method for prepare jQuery dialog
+    function prepareMinigameStarterDialog() {
+        that.dialogElement.dialog({
+            autoOpen: false,
+            title: 'Minihry',
+            modal: true,
+            closeOnEscape: false,
+            buttons: {
+                'Ok': function () {
+                    var selectedGame = 0;
+
+                    if (Array.isArray(that.minigames))
+                        selectedGame = $('select[name="minigames"]').val();
+                    else
+                        selectedGame = that.minigames.MinigameId;
+
+                    closeDialog();
+                    createGame(selectedGame);
+
+                },
+                'Storno': function () {
+                    closeDialog();
+                }
+            }
+        });
     }
-    else{
-        dialogElement += 'Kterou minihru si chcete zahrát?';
-        dialogElement += '<select class="dropdown-select dropdown-dark" name="minigames">';
-        
-        for (var i = 0; i < minigames.length; i++) {
-            dialogElement += '<option value="' + minigames[i].MinigameId +'">' + minigames[i].Name + '</option>'    
+
+    //method for prepare dialog element
+    function prepareDialogElement() {
+        var dialogElement = '';
+
+        if (!Array.isArray(that.minigames)) {
+            dialogElement += 'Chcete si zahrat minihru ' + that.minigames.Name + '?';
+        }
+        else {
+            dialogElement += 'Kterou minihru si chcete zahrát?';
+            dialogElement += '<select class="dropdown-select dropdown-dark" name="minigames">';
+
+            for (var i = 0; i < that.minigames.length; i++) {
+                dialogElement += '<option value="' + that.minigames[i].MinigameId + '">' + that.minigames[i].Name + '</option>'
+            }
+
+            dialogElement += '</select>';
         }
 
-        dialogElement += '</select>';
-    }
+        return dialogElement;
+    };
 
-    return dialogElement;
-}
+    //method for close dialog
+    function closeDialog() {
+        var closeCallback = function () {
+
+            that.dialogElement.attr('canbedisplayed', 'true');
+
+            /*if(that.dialogElement.dialog('isOpen') === true)
+                that.dialogElement.dialog('close');
+
+            if (!that.dialogElement.is(':empty'))
+                that.dialogElement.empty();*/
+        };
+
+        that.dialogElement.empty();
+        that.dialogElement.attr('canbedisplayed', 'false');
+        that.dialogElement.dialog('close');
+
+        sendAjaxMessage('MinigameStarterCloseDialog', 'MinigameStarter', { close: true }, closeCallback);
+    };
+
+    //method for send ajax message
+    function sendAjaxMessage(id, object, data, callbackFunction) {
+        ajax.send({
+            requestId: id,
+            relatedObject: object,
+            data: data,
+            callback: callbackFunction
+        });
+    };
+
+    ///method for get minigame descriptor by selected id
+    function getDescriptorById(selectedId) {
+        if (Array.isArray(that.minigames)) {
+            for (var i = 0; i < that.minigames.length; i++) {
+                if (that.minigames[i].MinigameId == selectedId)
+                    return that.minigames[i]
+            }
+            return null;
+        }
+        else
+            return that.minigames;
+    };
+
+    //method for create game and open game window or show external minigame dialog
+    function createGame(selectedGame) {
+        var startGameCallback = function (gameId) {
+
+            if (gameId !== -1) {
+                var minigameDescriptor = getDescriptorById(selectedGame);
+
+                if (minigameDescriptor !== null) {
+
+                    if (minigameDescriptor.ExternalClient)
+                        showInfoDialog(minigameDescriptor, gameId);
+                    else
+                        showWindow(minigameDescriptor, gameId);
+
+                    return;
+                }
+            }
+
+            alert("Hru se nepodařilo vytvořit.");
+        };
+
+        sendAjaxMessage('MinigameStarterCreateGame', 'MinigameStarter', { selectedGameId: selectedGame }, startGameCallback);
+    };
+
+    //method for show external minigame info dialog
+    function showInfoDialog(minigameDescriptor, gameId) {
+        var info = '<div>Tuto hru si můžete zahrát pouze v externím klientovi. ID vaší hry je : ' + gameId;
+        info += ' Klienta stáhnete <a target="_blank" href="' + minigameDescriptor.ClientURL + '">zde</a>';
+        info += '</div>';
+
+        $(info).dialog({
+            title: 'Externí minihra',
+            modal: true,
+            closeOnEscape: false,
+            buttons: {
+                'Ok': function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
+    };
+
+    //method for show minigame window
+    function showWindow(minigameDescriptor, gameId) {
+        var myWin = window.open(minigameDescriptor.ClientURL + '?gameId=' + gameId, minigameDescriptor.Name, 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
+
+        //var myWin = window.open(window.location, minigameDescriptor.Name, 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
+        //'about:blank'
+        //myWin.location = minigameDescriptor.ClientURL;
+        //myWin.location //open(url, 'name', 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
+
+        //return myWin;
+    };
+};
+

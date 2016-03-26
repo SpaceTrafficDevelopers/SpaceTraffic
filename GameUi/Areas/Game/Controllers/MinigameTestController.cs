@@ -21,6 +21,7 @@ using System.Web;
 using System.Web.Mvc;
 using SpaceTraffic.GameUi.Controllers;
 using SpaceTraffic.Entities.Minigames;
+using SpaceTraffic.Game.Minigame;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
@@ -48,6 +49,13 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             if (minigames != null)
                 Session["minigame"] = minigames;
 
+            return RedirectToAction("");
+        }
+
+        public ActionResult AddPlayer(int minigameId)
+        {
+            this.GSClient.MinigameService.addPlayer(minigameId, this.getCurrentPlayerId());
+            
             return RedirectToAction("");
         }
     }

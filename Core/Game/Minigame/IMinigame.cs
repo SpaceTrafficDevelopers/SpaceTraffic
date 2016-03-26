@@ -79,6 +79,19 @@ namespace SpaceTraffic.Game.Minigame
         /// <param name="actionArgs">action arguments</param>
         /// <returns>Return object by performed action.</returns>
         object performActionWithLock(string actionName, object[] actionArgs);
+
+        /// <summary>
+        /// Method for check if minigame is alive.
+        /// </summary>
+        /// <param name="currentTime">current time</param>
+        /// <returns>returns true if minigame is alive</returns>
+        bool isAlive(DateTime currentTime);
+
+        /// <summary>
+        /// Method for updating last request time.
+        /// </summary>
+        /// <param name="currentTime">current time</param>
+        void updateLastRequestTime(DateTime currentTime);
     }
 
     /// <summary>

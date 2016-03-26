@@ -175,8 +175,12 @@ namespace SpaceTraffic.GameServer
             );
 
             this.minigameManager = new MinigameManager(this);
-            
-            //testing minigames and start action data
+
+            //for tests: add "user" player into active players
+            //TODO: add this into log-on and remove into log-off
+            this.worldManager.AddPlayer(1);
+
+            //test minigame and start action data
             #region minigame test data
 
             StartAction startAction = new StartAction { ActionName = "TestAction" };
@@ -200,6 +204,9 @@ namespace SpaceTraffic.GameServer
 
             this.minigameManager.registerMinigame(md);
             md.Name = "TestGame2";
+            md.ExternalClient = true;
+            md.ClientURL = "http://www.google.com";
+
             this.minigameManager.registerMinigame(md);
             #endregion
 
