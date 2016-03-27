@@ -108,6 +108,9 @@
     <Compile Include="Areas\Game\Controllers\ReferencesController.cs" />
     <Compile Include="Areas\Game\Controllers\CargoController.cs" />
     <Compile Include="Areas\Game\Controllers\PlannerController.cs" />
+    <Compile Include="Areas\Minigame\Controllers\DefaultController.cs" />
+    <Compile Include="Areas\Minigame\Controllers\TestGameController.cs" />
+    <Compile Include="Areas\Minigame\MinigameAreaRegistration.cs" />
     <Compile Include="Controllers\AbstractController.cs" />
     <Compile Include="Areas\Game\Controllers\TabsControllerBase.cs" />
     <Compile Include="Areas\Game\GameAreaRegistration.cs" />
@@ -289,6 +292,9 @@
     <Content Include="Areas\Game\Views\Bases\_Header.cshtml" />
     <Content Include="Areas\Game\Views\Bases\_Ships.cshtml" />
     <Content Include="Areas\Game\Views\Bases\_Goods.cshtml" />
+    <Content Include="Areas\Minigame\Views\Default\Index.cshtml" />
+    <Content Include="Areas\Minigame\Views\Web.config" />
+    <Content Include="Areas\Minigame\Views\TestGame\Index.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\itemtable.less" />
@@ -417,6 +423,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="App_GlobalResources\" />
     <Folder Include="App_LocalResources\" />
+    <Folder Include="Areas\Minigame\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
