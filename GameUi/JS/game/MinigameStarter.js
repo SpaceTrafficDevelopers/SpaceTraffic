@@ -138,22 +138,30 @@ function MinigameStarterDialog() {
     };
 
     //method for create game and open game window or show external minigame dialog
+    //window opening is here because browser evaluate new window as user action and  don't block it,
+    //in callback method the window is blocked
     function createGame(selectedGame) {
-        var startGameCallback = function (gameId) {
+        var win;
+        var minigameDescriptor = getDescriptorById(selectedGame);
 
+        if(!minigameDescriptor.ExternalClient)
+            win = window.open('', '', 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
+
+        var startGameCallback = function (gameId) { 
             if (gameId !== -1) {
-                var minigameDescriptor = getDescriptorById(selectedGame);
-
                 if (minigameDescriptor !== null) {
 
                     if (minigameDescriptor.ExternalClient)
                         showInfoDialog(minigameDescriptor, gameId);
                     else
-                        showWindow(minigameDescriptor, gameId);
+                        showWindow(win, minigameDescriptor, gameId);
 
                     return;
                 }
             }
+
+            if(win)
+                win.close();
 
             alert("Hru se nepodařilo vytvořit.");
         };
@@ -179,16 +187,9 @@ function MinigameStarterDialog() {
         });
     };
 
-    //method for show minigame window
-    function showWindow(minigameDescriptor, gameId) {
-        var myWin = window.open(minigameDescriptor.ClientURL + '?gameId=' + gameId, minigameDescriptor.Name, 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
-
-        //var myWin = window.open(window.location, minigameDescriptor.Name, 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
-        //'about:blank'
-        //myWin.location = minigameDescriptor.ClientURL;
-        //myWin.location //open(url, 'name', 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
-
-        //return myWin;
+    //method for redirect minigame window
+    function showWindow(win, minigameDescriptor, gameId) {
+        win.location.href = '/Minigame' + minigameDescriptor.ClientURL + '?gameId=' + gameId;
     };
 };
 
