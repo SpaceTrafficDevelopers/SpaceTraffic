@@ -26,45 +26,25 @@ namespace SpaceTraffic.GameUi.Models
     public class AccountInfoModel
     {
         [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
+        [DataType(DataType.Text)]
+        public string NickName { get; set; }
+
+        [Required]
         [DataType(DataType.EmailAddress)]
-        [Display(Name = "E-mail address")]
         public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "Date of birth")]
-        public DateTime DateOfBirth { get; set; }
-
-        [Display(Name = "I am student of ZČU.")]
-        public bool IsStudent { get; set; }
-
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "School e-mail address")]
-        public string ZcuEmail { get; set; }
-
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
-        [DataType(DataType.Text)]
-        [Display(Name = "First name")]
-        public string FirstName { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
-        [DataType(DataType.Text)]
-        [Display(Name = "Last name")]
-        public string LastName { get; set; }
-
-        [Required]
-        [Display(Name = "I agree with the rules")]
+        [Display(Name = "Souhlasím s podmínkami")]
         public bool Rules { get; set; }
     }
 
