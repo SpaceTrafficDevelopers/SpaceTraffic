@@ -41,7 +41,7 @@ namespace SpaceTraffic.Dao
         public Trader GetTraderByBaseId(int baseId) {
             using (var contextDB = CreateContext())
             {
-                return contextDB.Traders.FirstOrDefault(x => x.BaseId.Equals(baseId));
+                return contextDB.Traders.Include("Base").FirstOrDefault(x => x.BaseId.Equals(baseId));
             }
         }
 

@@ -130,6 +130,8 @@ namespace SpaceTraffic.Dao
 				spaceShipTab.IsFlying = spaceShip.IsFlying;
 				spaceShipTab.SpaceShipName = spaceShip.SpaceShipName;
 				spaceShipTab.SpaceShipModel = spaceShip.SpaceShipModel;
+				spaceShipTab.IsAvailable = spaceShip.IsAvailable;
+				spaceShipTab.StateText = spaceShip.StateText;
 				spaceShipTab.DockedAtBaseId = spaceShip.DockedAtBaseId;
 				spaceShipTab.CurrentStarSystem = spaceShip.CurrentStarSystem;
 				spaceShipTab.FuelTank = spaceShip.FuelTank;

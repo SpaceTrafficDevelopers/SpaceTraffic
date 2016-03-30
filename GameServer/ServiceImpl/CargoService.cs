@@ -118,5 +118,16 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			int count = tc.CargoCount;
 			return count >= cargoCount;
 		}
+
+
+		/// <summary>
+		/// Gets the trader at base.
+		/// </summary>
+		/// <param name="baseId">The base identifier.</param>
+		/// <returns></returns>		
+		public Trader GetTraderAtBase(int baseId)
+		{
+			return GS.CurrentInstance.Persistence.GetTraderDAO().GetTraderByBaseId(baseId);
+		}
 	}
 }

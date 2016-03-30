@@ -84,6 +84,48 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			return viewResult;
 		}
 
+		//
+		// GET: /Ships/Refuel
+		public ActionResult Refuel(int shipId, int baseId)
+		{
+			int curPlayerId = getCurrentPlayerId();
+			if (!GSClient.PlayerService.PlayerHasSpaceShip(curPlayerId, shipId))
+			{
+				return new EmptyResult().Error("Tato loď ti nepatří!");
+			}
+			var partialView = PartialView("_ShipRefuel");
+			int credits = GSClient.PlayerService.GetPlayersCredits(curPlayerId);
+
+			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+			partialView.ViewBag.ship = ship;
+
+			
+			Trader trader = GSClient.CargoService.GetTraderAtBase(baseId);
+			partialView.ViewBag.trader = trader;
+
+			partialView.ViewBag.maxToBuy = Math.Min(ship.FuelTank - ship.CurrentFuelTank, credits / trader.FuelPrice);
+			return partialView;
+		}
+
+		[HttpPost]
+		public ActionResult Refuel(FuelBuyModel values, int shipId, int baseId)
+		{
+			int curPlayerId = getCurrentPlayerId();
+			if (!GSClient.PlayerService.PlayerHasSpaceShip(curPlayerId, shipId))
+			{
+				return new EmptyResult().Error("Tato loď ti nepatří!");
+			}
+			int credits = GSClient.PlayerService.GetPlayersCredits(curPlayerId);
+			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+			Trader trader = GSClient.CargoService.GetTraderAtBase(baseId);
+			int maxAmount = Math.Min(ship.FuelTank - ship.CurrentFuelTank, credits / trader.FuelPrice);
+			int finalAmount = Math.Min(maxAmount, values.Amount);
+			string[] planetString = trader.Base.Planet.Split('\\');
+			GSClient.GameService.PerformAction(curPlayerId, "ShipRefuel", planetString[0], planetString[1], shipId, finalAmount, trader.FuelPrice);
+			
+			return new EmptyResult().Success("Tankuje se " + finalAmount + " jednotek paliva.");
+		}
+
 
 
 		/// <summary>

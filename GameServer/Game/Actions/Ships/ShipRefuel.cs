@@ -102,6 +102,7 @@ namespace SpaceTraffic.Game.Actions
             ActionControls.shipDockedAtBase(this, spaceShip, planet);
             ActionControls.shipOwnerControl(this, spaceShip, player);
             ActionControls.checkPlayersCredit(this, player, Liters * PricePerLiter);
+			
 
             if (State == GameActionState.FAILED)
                 return;
@@ -111,6 +112,8 @@ namespace SpaceTraffic.Game.Actions
 
             if (RefuelingFinished)
             {
+				spaceShip.IsAvailable = true;
+				spaceShip.StateText = SpaceShip.StateTextDefault;
                 spaceShip.CurrentFuelTank = Math.Min(spaceShip.FuelTank, spaceShip.CurrentFuelTank + Liters);
 				// log the ship buy action to statistics
 				gameServer.Statistics.IncrementStatisticItem(player, "fuelTank", Liters);
@@ -122,17 +125,26 @@ namespace SpaceTraffic.Game.Actions
                     return;
                 }
 
-                if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
-                {
-                    Result = String.Format("Změny se nepovedlo zapsat do databáze");
-                    State = GameActionState.FAILED;
-                    return;
-                }
+                //update
+				if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
+				{
+					Result = String.Format("Změny se nepovedlo zapsat do databáze");
+					State = GameActionState.FAILED;
+					return;
+				}
 
                 State = GameActionState.FINISHED;
             }
             else
             {
+				spaceShip.IsAvailable = false;
+				spaceShip.StateText = "Tankuje...";
+				if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
+				{
+					Result = String.Format("Změny se nepovedlo zapsat do databáze");
+					State = GameActionState.FAILED;
+					return;
+				}
                 RefuelingFinished = true;
                 gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddSeconds(Duration));
             }

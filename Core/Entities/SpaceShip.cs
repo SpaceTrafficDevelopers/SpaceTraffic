@@ -43,6 +43,26 @@ namespace SpaceTraffic.Entities
 
 		public bool IsFlying { get; set; }
 
+		/// <summary>
+		/// True if player can interact with ship, false when ship is flying, refueling etc.
+		/// </summary>
+		private bool _IsAvailable;
+		public bool IsAvailable
+		{
+			get {
+				return _IsAvailable && !IsFlying;
+			}
+			set
+			{
+			_IsAvailable = value;
+		} }
+		/// <summary>
+		/// What is ship doing right now
+		/// </summary>
+		public string StateText { get; set; }
+
+		public static string StateTextDefault { get { return "Připravena."; } }
+
         public int? DockedAtBaseId { get; set; }
 
 		public virtual Base Base { get; set; }

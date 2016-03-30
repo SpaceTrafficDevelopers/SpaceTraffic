@@ -67,5 +67,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 				return (channel as ICargoService).TraderHasEnoughCargo(traderId, cargoLoadEntityId, cargoCount);
 			}
 		}
+
+		public Trader GetTraderAtBase(int baseId)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as ICargoService).GetTraderAtBase(baseId);
+			}
+		}
+
 	}
 }

@@ -31,7 +31,7 @@ namespace SpaceTraffic.Scripts.Testing
 			IPlayerDAO dao = gameServer.Persistence.GetPlayerDAO();
 			Player player = CreatePlayer();
 			dao.InsertPlayer(player);
-			return true;
+            return true;
 		}
 
 
@@ -45,12 +45,13 @@ namespace SpaceTraffic.Scripts.Testing
 			newPlayer.Credit = 120000000;
 		    newPlayer.DateOfBirth = new DateTime(2000, 1, 1, 0, 58, 0);
 			newPlayer.Email = "nobody@nowhere.local";
-			newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
+            //newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
+            newPlayer.PsswdHash = "user";
 			newPlayer.PsswdSalt = "cbOpeeeb";
 			newPlayer.AddedDate = DateTime.Now;
 			newPlayer.LastVisitedDate = DateTime.Now;
 			return newPlayer;
 		}
-	}
+    }
 
 }
