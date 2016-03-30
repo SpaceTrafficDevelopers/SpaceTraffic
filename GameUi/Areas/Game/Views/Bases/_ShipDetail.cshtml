@@ -1,0 +1,11 @@
+﻿
+@Html.Partial("_Header")
+
+<a href="@Url.Action("ShipDetail", "Bases", new { shipId = ViewBag.ship.SpaceShipId })" class="ajax refreshButton" data-related-element-id="contextPanelContent">↻</a>
+
+<div>@ViewBag.ship.SpaceShipName<br />@ViewBag.SpaceShipModel</div>
+<button>Leť na planetu</button>
+<button>Nakup zboží</button>
+<button>Prodej zboží</button>
+<button>Natankuj</button>
+<button>Oprav</button>

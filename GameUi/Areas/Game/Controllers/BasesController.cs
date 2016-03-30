@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SpaceTraffic.GameUi.Extensions;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
@@ -52,6 +54,20 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			var partialView = PartialView("_Ships");
 			partialView = addHeaderViewBag(partialView, planetName);
 			partialView.ViewBag.ships = GSClient.PlayerService.GetPlayersShipsAtBase(getCurrentPlayerId(), partialView.ViewBag.currentBase.BaseId);
+			return partialView;
+		}
+
+		//
+		// GET: /Bases/Ships
+		public ActionResult ShipDetail(int shipId)
+		{
+			if(!GSClient.PlayerService.PlayerHasSpaceShip(getCurrentPlayerId(), shipId)){
+				return new EmptyResult().Error("Tato loď ti nepatří!");
+			}
+			var partialView = PartialView("_ShipDetail");
+			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+			partialView.ViewBag.ship = ship;
+			
 			return partialView;
 		}
 

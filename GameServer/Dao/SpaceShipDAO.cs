@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SpaceTraffic.Entities;
+using System.Data.Entity;
 
 namespace SpaceTraffic.Dao
 {
@@ -57,7 +58,8 @@ namespace SpaceTraffic.Dao
 		{
 			using (var contextDB = CreateContext())
 			{
-				return contextDB.SpaceShips.FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipId));
+				var spaceship = contextDB.SpaceShips;
+				return spaceship.FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipId));
 			}
 		}
 
