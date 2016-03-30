@@ -52,5 +52,17 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			}
 			return false;
 		}
+
+		/// <summary>
+		/// Returns single spaceship
+		/// </summary>
+		/// <param name="spaceShipId">The space ship identifier.</param>
+		/// <returns></returns>
+		public SpaceShip GetSpaceShip(int spaceShipId)
+		{
+
+			var ship = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
+			return ship;
+		}
 	}
 }
