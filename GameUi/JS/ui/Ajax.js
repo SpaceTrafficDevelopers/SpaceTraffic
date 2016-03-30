@@ -189,7 +189,7 @@ var ajaxClick = function (e, $linkElement) {
 				$relatedElement.parent().addClass('open');
 				$relatedElement.addClass('open');
 				ViewportManager.doLayout();
-				$relatedElement.find('a.ajax').click(function (e) {
+				$relatedElement.find('a.ajax').click(function (e) {/* reusing click events on loaded content */
 					ajaxClick(e, $(this));
 				});
 				$relatedElement.trigger('load');
@@ -204,5 +204,14 @@ var ajaxClick = function (e, $linkElement) {
 $(document).ready(function () {
 	$('a.ajax').click(function (e) {
 		ajaxClick(e, $(this));
+	});
+	$('body').on('submit', '.ajax form, form.ajax', function (e) {/* ajax for form */
+		e.preventDefault();
+		var form = $(this);
+		form.ajaxSubmit({
+			success: function () {
+				form.trigger('successSend');
+			}
+		});
 	});
 });
