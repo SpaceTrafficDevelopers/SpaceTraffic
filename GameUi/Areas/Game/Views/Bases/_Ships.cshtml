@@ -1,9 +1,11 @@
 ﻿
 @Html.Partial("_Header")
 
-<a href="@Url.Action("Ships", "Bases", new { planetName = ViewBag.planetName })" class="ajax" data-related-element-id="contextPanelContent">Obnovit</a>
+<a href="@Url.Action("Ships", "Bases", new { planetName = ViewBag.planetName })" class="ajax refreshButton" data-related-element-id="contextPanelContent">↻</a>
 
 @foreach (var ship in @ViewBag.Ships)
 {
-<div>@ship.SpaceShipName<br />@ship.SpaceShipModel</div>
+	<a href="@Url.Action("ShipDetail", "Bases", new { shipId = @ship.SpaceShipId })" class="ajax" data-related-element-id="contextPanelContent">
+		<div>@ship.SpaceShipName<br />@ship.SpaceShipModel</div>
+	</a>
 }

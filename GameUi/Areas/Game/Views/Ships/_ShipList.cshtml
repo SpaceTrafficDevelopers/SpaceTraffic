@@ -4,12 +4,11 @@
 
 <h2>Mé lodě</h2>
 
-<table>
-	<tr><th>Loď</th><th>Typ</th><th>Poškození</th></tr>
-@{
+	@{
 	foreach (var ship in @ViewBag.Ships)
 	{
-		<tr><td>@ship.SpaceShipName</td><td>@ship.SpaceShipModel</td><td>@ship.DamagePercent</td></tr>
+		<a href="@Url.Action("ShipDetail", "Bases", new { shipId = @ship.SpaceShipId })" class="ajax" data-related-element-id="contextPanelContent">
+			<div>@ship.SpaceShipName<br />@ship.SpaceShipModel</div>
+		</a>
+		}
 	}
-}
-</table>

@@ -288,6 +288,7 @@
     <Content Include="Areas\Game\Views\Bases\_Header.cshtml" />
     <Content Include="Areas\Game\Views\Bases\_Ships.cshtml" />
     <Content Include="Areas\Game\Views\Bases\_Goods.cshtml" />
+    <Content Include="Areas\Game\Views\Bases\_ShipDetail.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\itemtable.less" />
