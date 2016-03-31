@@ -59,7 +59,7 @@ namespace SpaceTraffic.Game.Actions
 
             ActionControls.shipDockedAtBase(this, spaceShip, planet);
             ActionControls.shipOwnerControl(this, spaceShip, player);
-            ActionControls.hasShipEnoughCargoSpace(this, spaceShip, cargo);
+            ActionControls.hasShipEnoughCargoSpace(this, spaceShip, cargo, Count);
             ActionControls.checkCargoCount(this, cargo, Count);
 
             if (State == GameActionState.FAILED)
