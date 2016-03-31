@@ -28,6 +28,7 @@ using SpaceTraffic.GameUi.GameServerClient;
 using SpaceTraffic.Entities.PublicEntities;
 using SpaceTraffic.GameUi.Extensions;
 using System.Web.Security;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.GameUi.Controllers
 {
@@ -37,6 +38,7 @@ namespace SpaceTraffic.GameUi.Controllers
 	public abstract class AbstractController : Controller
 	{
 		public readonly IGameServerClient GSClient = GameServerClientFactory.GetClientInstance();
+		protected string ErrorMessage = "";
 
 		/// <summary>
 		/// Loads the XML assembly from assembly folder
@@ -83,6 +85,32 @@ namespace SpaceTraffic.GameUi.Controllers
 		{
 			string cookieValue = Request.Cookies.Get("currentStarSystem").Value;
 			return cookieValue.Replace("%20", " ");
+		}
+
+		/// <summary>
+		/// Controls the ship access. Sets ErrorMessage when there is a problem.
+		/// </summary>
+		/// <returns>True when is everything ok</returns>
+
+		protected bool controlShipAccess(SpaceShip ship)
+		{
+			int curPlayerId = getCurrentPlayerId();
+			if (ship == null)
+			{
+				this.ErrorMessage = "Tato loď neexistuje!";
+				return false;
+			}
+			if (ship.PlayerId != curPlayerId)
+			{
+				this.ErrorMessage = "Tato loď ti nepatří!";
+				return false;
+			}
+			if (!ship.IsAvailable)
+			{
+				this.ErrorMessage = "Tato loď je zaneprázdněna činností: " + ship.StateText;
+				return false;
+			}
+			return true;
 		}
 
 	}

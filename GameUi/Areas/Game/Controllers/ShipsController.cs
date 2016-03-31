@@ -34,7 +34,6 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 	{
 
 		const int MAX_DAMAGE = 100;
-		private string ErrorMessage = "";
 
 		public PartialViewResult Index() {
 			return ShipList();
@@ -188,27 +187,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 				return new EmptyResult().Warning("Loď není poškozená.");
 			}
 		}
-		/// <summary>
-		/// Controls the ship access. Sets ErrorMessage when there is a problem.
-		/// </summary>
-		/// <returns>True when is everything ok</returns>
-
-		private bool controlShipAccess(SpaceShip ship) {
-			int curPlayerId = getCurrentPlayerId();
-			if (ship.PlayerId != curPlayerId)
-			{
-				this.ErrorMessage = "Tato loď ti nepatří!";
-				return false;
-			}
-			if (!ship.IsAvailable)
-			{
-				this.ErrorMessage = "Tato loď je zaneprázdněna činností: " + ship.StateText;
-				return false;
-			}
-			return true;
-		}
-
-
+		
 
 		/// <summary>
 		/// Returns the list of all ships defined in SpaceShips.xml
