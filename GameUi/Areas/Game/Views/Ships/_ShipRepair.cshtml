@@ -1,5 +1,5 @@
 ﻿
-<div class="ajax" id="refuelingForm">
+<div class="ajax" id="repairingForm">
 	<h4>Opravit</h4>
 	<strong>Cena opravy: @ViewBag.trader.RepairPrice</strong>
 		@using (Html.BeginForm())
@@ -10,7 +10,7 @@
 	}
 </div>
 <script>
-	$('#refuelingForm').on('successSend', function () {
+	$('#repairingForm').on('successSend', function () {
 		$('.refreshButton').click();
 	});
 </script>

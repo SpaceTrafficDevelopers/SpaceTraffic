@@ -37,11 +37,17 @@ namespace SpaceTraffic.Dao
         /// <returns>Instance of trader</returns>
         Trader GetTraderById(int traderId);
 
-        /// <summary>
-        /// Get trader by base id
-        /// </summary>
-        /// <returns>Trader</returns>
-        Trader GetTraderByBaseId(int baseId);
+		/// <summary>
+		/// Get trader by base id
+		/// </summary>
+		/// <returns>Trader</returns>
+		Trader GetTraderByBaseId(int baseId);
+
+		/// <summary>
+		/// Get trader by base id with full info of his cargo
+		/// </summary>
+		/// <returns>Trader</returns>
+		Trader GetTraderByBaseIdWithCargo(int baseId);
 
         /// <summary>
         /// Insert trader into Traders

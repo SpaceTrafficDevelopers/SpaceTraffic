@@ -1,0 +1,24 @@
+﻿<div class="ajax" id="cargoBuyForm">
+	<h4>Koupit zboží</h4>
+	
+	@foreach(var cargo in ViewBag.trader.TraderCargos){
+		<strong>@cargo.Cargo.Name</strong>
+		<span>@cargo.Cargo.Type</span>
+		<p>@cargo.Cargo.Description</p>
+	<span>Cena: @cargo.CargoPrice</span>
+	<span>Velikost: @cargo.Cargo.Volume</span>
+		<span>K dispozici: @cargo.CargoCount</span>
+
+		using (Html.BeginForm("Buy", "Cargo", new { traderId = ViewBag.trader.TraderId, shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.trader.BaseId, cargoId = cargo.TraderCargoId }, FormMethod.Post, null))
+		{
+			<input type="number" name="Amount" min="0" max="@Math.Min(ViewBag.credits / cargo.CargoPrice, cargo.CargoCount)" value="0" />
+			<input type="submit" value="Koupit" />
+		
+		}
+	}
+</div>
+<script>
+	$('#cargoBuyForm').on('successSend', function () {
+		$('.refreshButton').click();
+	});
+</script>

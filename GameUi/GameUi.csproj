@@ -108,6 +108,8 @@
     <Compile Include="Areas\Game\Controllers\ReferencesController.cs" />
     <Compile Include="Areas\Game\Controllers\CargoController.cs" />
     <Compile Include="Areas\Game\Controllers\PlannerController.cs" />
+    <Compile Include="Areas\Game\Models\CargoSellModel.cs" />
+    <Compile Include="Areas\Game\Models\CargoBuyModel.cs" />
     <Compile Include="Areas\Game\Models\RepairShipModel.cs" />
     <Compile Include="Areas\Game\Models\FuelBuyModel.cs" />
     <Compile Include="Controllers\AbstractController.cs" />
@@ -294,6 +296,7 @@
     <Content Include="Areas\Game\Views\Bases\_ShipDetail.cshtml" />
     <Content Include="Areas\Game\Views\Ships\_ShipRefuel.cshtml" />
     <Content Include="Areas\Game\Views\Ships\_ShipRepair.cshtml" />
+    <Content Include="Areas\Game\Views\Cargo\_CargoBuy.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\itemtable.less" />

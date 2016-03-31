@@ -38,12 +38,30 @@ namespace SpaceTraffic.Dao
             }
         }
 
-        public Trader GetTraderByBaseId(int baseId) {
-            using (var contextDB = CreateContext())
-            {
-                return contextDB.Traders.Include("Base").FirstOrDefault(x => x.BaseId.Equals(baseId));
-            }
-        }
+		public Trader GetTraderByBaseId(int baseId)
+		{
+			using (var contextDB = CreateContext())
+			{
+				Trader trader = contextDB.Traders.Include("Base").FirstOrDefault(x => x.BaseId.Equals(baseId));
+				return trader;
+			}
+		}
+
+		public Trader GetTraderByBaseIdWithCargo(int baseId)
+		{
+			using (var contextDB = CreateContext())
+			{
+				Trader trader = contextDB.Traders.Include("Base").Include("TraderCargos").FirstOrDefault(x => x.BaseId.Equals(baseId));
+				foreach (TraderCargo cargo in trader.TraderCargos)
+				{
+					cargo.Trader = null;
+					cargo.Cargo = contextDB.Cargos.FirstOrDefault(a => a.CargoId.Equals(cargo.CargoId));
+					cargo.Cargo.TraderCargos = null;
+				}
+				return trader;
+			}
+		}
+
 
         public bool InsertTrader(Trader trader) {
             using (var contextDB = CreateContext())

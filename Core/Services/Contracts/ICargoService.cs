@@ -47,6 +47,9 @@ namespace SpaceTraffic.Services.Contracts
 
 		[OperationContract]
 		Trader GetTraderAtBase(int baseId);
+
+		[OperationContract]
+		Trader GetTraderAtBaseWithCargo(int baseId);
 		
 		
 	}
