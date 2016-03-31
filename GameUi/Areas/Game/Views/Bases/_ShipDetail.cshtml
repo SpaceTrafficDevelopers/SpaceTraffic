@@ -5,10 +5,11 @@
 
 <div>@ViewBag.ship.SpaceShipName<br />@ViewBag.SpaceShipModel</div>
 <div>Palivo: @ViewBag.ship.CurrentFuelTank / @ViewBag.ship.FuelTank</div>
+<div>Poškození: @ViewBag.ship.DamagePercent %</div>
 <div>Stav: @ViewBag.ship.StateText</div>
 <button>Leť na planetu</button>
 <button>Nakup zboží</button>
 <button>Prodej zboží</button>
 <a href="@Url.Action("Refuel", "Ships", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax" data-related-element-id="spaceShipDetailContent">Natankuj</a>
-<button>Oprav</button>
+<a href="@Url.Action("Repair", "Ships", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax" data-related-element-id="spaceShipDetailContent">Oprav</a>
 <div id="spaceShipDetailContent"></div>

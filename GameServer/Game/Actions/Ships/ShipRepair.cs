@@ -121,6 +121,8 @@ namespace SpaceTraffic.Game.Actions
                     State = GameActionState.FAILED;
                     return;
                 }
+				spaceShip.IsAvailable = true;
+				spaceShip.StateText = SpaceShip.StateTextDefault;
                 
                 if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
                 {
@@ -133,7 +135,22 @@ namespace SpaceTraffic.Game.Actions
             }
             else
             {
+				if (!spaceShip.IsAvailable)
+				{
+					Result = "Loď nebyla dostupná.";
+					return;
+				}
+				spaceShip.IsAvailable = false;
+				spaceShip.StateText = "Loď se opravuje...";
                 RepairFinished = true;
+
+				if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
+				{
+					Result = String.Format("Změny se nepovedlo zapsat do databáze");
+					State = GameActionState.FAILED;
+					return;
+				}
+
                 gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddSeconds(Duration));
             }          
         }

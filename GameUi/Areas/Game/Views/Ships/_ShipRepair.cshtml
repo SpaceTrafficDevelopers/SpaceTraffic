@@ -1,0 +1,16 @@
+﻿
+<div class="ajax" id="refuelingForm">
+	<h4>Opravit</h4>
+	<strong>Cena opravy: @ViewBag.trader.RepairPrice</strong>
+		@using (Html.BeginForm())
+	{
+			<input type="number" name="Amount" min="1" max="@Math.Max(ViewBag.maxToRepair, 10)" value="@Math.Max(ViewBag.maxToRepair, 1)" />
+			<input type="submit" value="Opravit" />
+		
+	}
+</div>
+<script>
+	$('#refuelingForm').on('successSend', function () {
+		$('.refreshButton').click();
+	});
+</script>

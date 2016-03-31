@@ -197,6 +197,7 @@ namespace SpaceTraffic.GameServer
             trader.BaseId = planet.Base.BaseId;
 			Random rnd = new Random();
 			trader.FuelPrice = rnd.Next(10, 50);
+			trader.RepairPrice = rnd.Next(20, 150);
 
             this.gameServer.Persistence.GetTraderDAO().InsertTrader(trader);
 

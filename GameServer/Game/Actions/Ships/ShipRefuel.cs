@@ -137,6 +137,10 @@ namespace SpaceTraffic.Game.Actions
             }
             else
             {
+				if (!spaceShip.IsAvailable) {
+					Result = "Loď nebyla dostupná.";
+					return;
+				}
 				spaceShip.IsAvailable = false;
 				spaceShip.StateText = "Tankuje...";
 				if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
