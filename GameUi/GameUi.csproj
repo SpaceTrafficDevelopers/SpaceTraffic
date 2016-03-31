@@ -236,6 +236,12 @@
     <Content Include="Content\images\main_menu_item_bg.png" />
     <Content Include="Content\images\map_button_icon.png" />
     <Content Include="Content\images\messages_button_icon.png" />
+    <Content Include="Content\images\Minigame\TestGame\background.png" />
+    <Content Include="Content\images\Minigame\TestGame\cargo.png" />
+    <Content Include="Content\images\Minigame\TestGame\shipDown.png" />
+    <Content Include="Content\images\Minigame\TestGame\shipLeft.png" />
+    <Content Include="Content\images\Minigame\TestGame\shipRight.png" />
+    <Content Include="Content\images\Minigame\TestGame\shipUp.png" />
     <Content Include="Content\images\Pattern_01.png" />
     <Content Include="Content\images\placeholder.png" />
     <Content Include="Content\images\profile_button_icon.png" />

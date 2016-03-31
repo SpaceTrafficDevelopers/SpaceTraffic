@@ -7,7 +7,7 @@
     <meta name="author" xml:lang="cs" content="Space Traffic Team" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
 
-    <title>Space Traffic</title>
+    <title>Space Traffic Minigame</title>
 
     <link href='https://fonts.googleapis.com/css?family=Exo:400,800|Audiowide&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link href="@Url.Content("~/Content/Game.less")" rel="stylesheet" type="text/css" />
@@ -17,277 +17,325 @@
 
 </head>
 <body>
-    <h1>Hadík</h1>
-    <img id="image" src="@Url.Content("~/Content/images/Account/help.png")" style="display:none;" />
-    <!-- Lets make a simple snake game -->
-    <canvas id="canvas" width="500" height="500"></canvas>
-
+    
+    <h1 style="text-align: center;">Spaceship cargo finder</h1>
+    <div style="margin: auto; width: 500px;">
+        <div style="float: right;">Score: <span id="score">0</span></div>
+        <canvas width="500" height="500" />
+    </div>
+        
     @Content.Script("jquery-2.2.2.min.js", Url)
     @Content.Script("jquery-ui-1.11.4.min.js", Url)
     @Content.Script("../JS/ui/Ajax.js", Url)
     @*@Content.JSImport("~/JS/pomImport", Url)*@
     <script type="text/javascript">
-        $(document).ready(function () {
+    $(document).ready(function () {
+
+        var canvas = $("canvas")[0];
+
+        var game = new Game(canvas);
+        game.init(20, 5);
+
+        //dialog a pak start a spustit sender (update request, check snake position)
+        game.start();
+
+    })
+
+    function Game(canvas) {
+        this.gameArea;
+        this.snake;
+        this.food;
+        this.score;
+        this.gameLoop;
+        this.canvas = canvas;
+        this.contex = canvas.getContext("2d");
+
+        var interval = 60;
+        var that = this;
+
+        this.init = function (pieceSize, snakeLength) {
+            this.gameArea = new GameArea(this.canvas.width, this.canvas.height, pieceSize);
+            this.gameArea.init();
+
+            this.snake = new Snake(snakeLength);
+            this.food = new Food();
+
+            this.score = 0;
+            this.snake.createSnake();
+
+            this.food.init();
+            this.food.generateFood(this.gameArea, this.snake);
             
-            var canvas = $("#canvas")[0];
-            
-            var game = new Game(canvas);
-            game.init(20, 5);
-            game.start();
+            keyBinding();
+        }
 
-        })
-        
-        function Game(canvas) {
-            this.gameArea;
-            this.snake;
-            this.food;
-            this.score;
-            this.gameLoop;
-            this.canvas = canvas;
-            this.contex = canvas.getContext("2d");
+        function update() {
 
-            var interval = 60;
-            var that = this;
+            var nextPosition = that.snake.getNextPosition();
 
-            this.init = function (pieceSize, snakeLength) {
-                this.gameArea = new GameArea(this.canvas.width, this.canvas.height, pieceSize);
-                this.snake = new Snake(snakeLength);
-                this.food = new Food();
+            if (that.gameArea.checkCollisionWithSnake(nextPosition) || that.snake.checkCollisoinWithSelf(nextPosition)) {
+                clearInterval(that.gameLoop);
+                return;
+            }
 
-                this.snake.createSnake();
+            that.move(nextPosition);
+
+            that.gameArea.paint(that.contex);
+            that.snake.paint(that.contex, that.gameArea.cellSize);
+            that.food.paint(that.contex, that.gameArea.cellSize);
+
+            that.snake.updated = true;
+            painScore();
+        }
+
+        function painScore() {
+            var scoreElement = $("#score");
+            scoreElement.text(that.score);
+        }
+
+        function keyBinding() {
+
+            $(document).keydown(function (e) {
+                that.snake.changeDirection(e.which);
+            });
+        }
+
+        this.move = function (nextPostion) {
+            if (this.food.position.equal(nextPostion)) {
+                //send score
+                this.score++;
+                this.snake.move(true, nextPostion);
                 this.food.generateFood(this.gameArea, this.snake);
-                this.score = 0;
+            }
+            else
+                this.snake.move(false, nextPostion);
+        }
 
-                keyBinding();
+        this.start = function () {
+            /*if (typeof this.gameLoop != "undefined")
+                clearInterval(gameLoop);*/
+
+            this.gameLoop = setInterval(update, interval);
+        }
+
+    };
+
+    function GameArea(width, height, cellSize) {
+        this.width = width;
+        this.height = height;
+        this.cellSize = cellSize;
+        this.xCellCount = width / cellSize; //maximalni index
+        this.yCellCount = height / cellSize;
+        this.background;
+
+        this.init = function () {
+            this.background = new Image();
+            this.background.src = "@Url.Content("~/Content/images/Minigame/TestGame/background.png")";
+        }
+
+        this.paint = function (context) {
+            context.drawImage(this.background, 0, 0, this.width, this.height);
+            context.strokeStyle = "white";
+            context.strokeRect(0, 0, this.width, this.height);
+        }
+
+        this.checkCollisionWithSnake = function (nextPosition) {
+            if (nextPosition.x < 0 || nextPosition.y < 0
+                || nextPosition.x >= this.xCellCount || nextPosition.y >= this.yCellCount) {
+
+                return true;
             }
 
-            function update() {
-                
-                var nextPosition = that.snake.getNextPosition();
+            return false;
+        }
+    };
 
-                if (that.gameArea.checkCollisionWithSnake(nextPosition) || that.snake.checkCollisoinWithSelf(nextPosition)) {
-                    clearInterval(that.gameLoop);
-                    return;
-                }
+    function Snake(length) {
+        this.head;
+        this.body;
+        this.length = length;
+        this.direction;
+        this.updated = true;
+        this.shipUp;
+        this.shipRight;
+        this.shipLeft;
+        this.shipDown;
+        this.cargo;
 
-                that.move(nextPosition);
-               
-                that.gameArea.paint(that.contex);
-                that.snake.paint(that.contex, that.gameArea.cellSize);
-                that.food.paint(that.contex, that.gameArea.cellSize);
+        var that = this;
 
-                that.snake.updated = true;
-                var score_text = "Score: " + that.score;
-                that.contex.fillText(score_text, 5, that.gameArea.height - 5);
-            }
+        this.createSnake = function () {
+            this.body = [];
+            for (var i = this.length - 1; i >= 0; i--)
+                this.body.push(new Position(i, 0));
 
-            function keyBinding() {
+            this.head = this.body[0];
+            this.direction = Direction.RIGHT;
+            initImages();
+        }
 
-                $(document).keydown(function (e) {
-                    that.snake.changeDirection(e.which);
-                });
-            }
+        function initImages() {
+            that.shipUp = new Image();
+            that.shipUp.src = "@Url.Content("~/Content/images/Minigame/TestGame/shipUp.png")";
 
-            this.move = function (nextPostion) {
-                if (this.food.position.equal(nextPostion)) {
-                    this.score++;
-                    this.snake.move(true, nextPostion);
-                    this.food.generateFood(this.gameArea, this.snake);
-                }
-                else
-                    this.snake.move(false, nextPostion);
-            }
+            that.shipRight = new Image();
+            that.shipRight.src = "@Url.Content("~/Content/images/Minigame/TestGame/shipRight.png")";
 
-            this.start = function () {
-                /*if (typeof this.gameLoop != "undefined")
-                    clearInterval(gameLoop);*/
+            that.shipLeft = new Image();
+            that.shipLeft.src = "@Url.Content("~/Content/images/Minigame/TestGame/shipLeft.png")";
 
-                this.gameLoop = setInterval(update, interval);
-                //this.update();
-            }
+            that.shipDown = new Image();
+            that.shipDown.src = "@Url.Content("~/Content/images/Minigame/TestGame/shipDown.png")";
 
-        };
+            that.cargo = new Image();
+            that.cargo.src = "@Url.Content("~/Content/images/Minigame/TestGame/cargo.png")";
+        }
 
-        function GameArea(width, height, cellSize) {
-            this.width = width;
-            this.height = height;
-            this.cellSize = cellSize;
-            this.xCellCount = width / cellSize; //maximalni index
-            this.yCellCount = height / cellSize;
+        this.paint = function (context, cellSize) {
+            var ship = getShipImageByDirection();
+            context.drawImage(ship, this.head.x * cellSize, this.head.y * cellSize, cellSize, cellSize);
 
-            this.paint = function (context) {
-                context.fillStyle = "black";
-                context.fillRect(0, 0, this.width, this.height);
-                context.strokeStyle = "white";
-                context.strokeRect(0, 0, this.width, this.height);
-            }
+            for (var i = 1; i < this.body.length; i++)
+                context.drawImage(this.cargo, this.body[i].x * cellSize, this.body[i].y * cellSize, cellSize, cellSize);
+        }
 
-            this.checkCollisionWithSnake = function (nextPosition) {
-                if (nextPosition.x < 0 || nextPosition.y < 0
-                    || nextPosition.x >= this.xCellCount || nextPosition.y >= this.yCellCount) {
+        function getShipImageByDirection() {
+            switch (that.direction) {
+                case Direction.UP:
+                    return that.shipUp;
 
-                    return true;
-                }
+                case Direction.LEFT:
+                    return that.shipLeft;
 
-                return false;
-            }
-        };
+                case Direction.RIGHT:
+                    return that.shipRight;
 
-        function Snake(length) {
-            this.head;
-            this.body;
-            this.length = length;
-            this.direction;
-            this.updated = true;
+                case Direction.DOWN:
+                    return that.shipDown;
 
-            var that = this;
-
-            this.createSnake = function () {
-                this.body = [];
-                for (var i = this.length - 1; i >= 0; i--)
-                    this.body.push(new Position(i, 0));
-
-                this.head = this.body[0];
-                this.direction = Direction.RIGHT;
-            }
-
-            this.paint = function (context, cellSize) {
-                for (var i = 0; i < this.body.length; i++) {
-                    var bodyCell = this.body[i];
-
-                    if (bodyCell === this.head){
-                        
-                    //var background = new Image();
-                        //background.src = "~/Content/images/Account/help.png";
-                        var img = document.getElementById("image");
-                        context.drawImage(img, bodyCell.x * cellSize, bodyCell.y * cellSize, cellSize, cellSize);
-                    }
-                    else {
-                        context.fillStyle = "blue";
-                        context.fillRect(bodyCell.x * cellSize, bodyCell.y * cellSize, cellSize, cellSize);
-                        context.strokeStyle = "white";
-                        context.strokeRect(bodyCell.x * cellSize, bodyCell.y * cellSize, cellSize, cellSize);
-                    }
-                    
-                }
-            }
-
-            this.checkCollisoinWithSelf = function (nextPosition) {
-                for (var i = 0; i < this.body.length; i++) {
-                    if (this.body[i].equal(nextPosition)){
-                        alert(this.direction + " " + i + " x: " + nextPosition.x + " y: " + nextPosition.y);
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            this.move = function (eat, nextPostion) {
-                if (!eat)
-                    this.body.pop();
-                
-                this.body.unshift(nextPostion);
-                this.head = this.body[0];
-            }
-
-            this.getNextPosition = function () {
-                var nextPosition = new Position(this.head.x, this.head.y);
-
-                switch (this.direction) {
-                    case Direction.UP:
-                        nextPosition.y--;
-                        break;
-                    case Direction.DOWN:
-                        nextPosition.y++;
-                        break;
-                    case Direction.LEFT:
-                        nextPosition.x--;
-                        break;
-                    case Direction.RIGHT:
-                        nextPosition.x++;
-                        break;
-                }
-
-                return nextPosition;
-            }
-
-            this.changeDirection = function (key) {
-                switch(key) {
-                    case Direction.UP:
-                        setDirection(Direction.UP, Direction.DOWN);
-                        break;
-                    case Direction.DOWN:
-                        setDirection(Direction.DOWN, Direction.UP);
-                        break;
-                    case Direction.LEFT:
-                        setDirection(Direction.LEFT, Direction.RIGHT);
-                        break;
-                    case Direction.RIGHT:
-                        setDirection(Direction.RIGHT, Direction.LEFT);
-                        break;
-                }
-            }
-
-            function setDirection(direction, falseDirection){
-                if(that.direction != direction && that.direction != falseDirection && that.updated){
-                    that.direction = direction;
-                    that.updated = false;
-                }
-            }
-
-            var Direction = {
-                UP: 38,
-                DOWN: 40,
-                LEFT: 37,
-                RIGHT: 39
-            }
-        };
-
-        function Position(x, y) {
-            this.x = x;
-            this.y = y;
-
-            this.equal = function(position){
-                if(this.x == position.x && this.y == position.y)
-                    return true;
-
-                return false;
-            }
-        };
-
-        function Food() {
-            this.position = new Position(-1, -1);
-            var that = this;
-
-            this.generateFood = function (gameArea, snake) {
-                do {
-                    this.position.x = generateCoordinate(gameArea.xCellCount - 1);
-                    this.position.y = generateCoordinate(gameArea.yCellCount - 1);
-                } while (checkCollisionWithSnake(snake))
-            }
-
-            function generateCoordinate(maxCellIndex){
-                return Math.round(maxCellIndex * Math.random());
-            }
-
-            function checkCollisionWithSnake(snake) {
-                for (var i = 0; i < snake.body.length; i++) {
-                    if (that.position.equal(snake.body[i]))
-                        return true;
-                }
-
-                return false;
-            }
-
-            this.paint = function (context, cellSize) {
-                context.fillStyle = "blue";
-                context.fillRect(this.position.x * cellSize, this.position.y * cellSize, cellSize, cellSize);
-                context.strokeStyle = "white";
-                context.strokeRect(this.position.x * cellSize, this.position.y * cellSize, cellSize, cellSize);
+                default:
+                    return that.shipUp;
             }
         }
 
+        this.checkCollisoinWithSelf = function (nextPosition) {
+            for (var i = 0; i < this.body.length; i++) {
+                if (this.body[i].equal(nextPosition))
+                    return true;
+            }
+            return false;
+        }
 
-    </script>
+        this.move = function (eat, nextPostion) {
+            if (!eat)
+                this.body.pop();
+
+            this.body.unshift(nextPostion);
+            this.head = this.body[0];
+        }
+
+        this.getNextPosition = function () {
+            var nextPosition = new Position(this.head.x, this.head.y);
+
+            switch (this.direction) {
+                case Direction.UP:
+                    nextPosition.y--;
+                    break;
+                case Direction.DOWN:
+                    nextPosition.y++;
+                    break;
+                case Direction.LEFT:
+                    nextPosition.x--;
+                    break;
+                case Direction.RIGHT:
+                    nextPosition.x++;
+                    break;
+            }
+
+            return nextPosition;
+        }
+
+        this.changeDirection = function (key) {
+            switch(key) {
+                case Direction.UP:
+                    setDirection(Direction.UP, Direction.DOWN);
+                    break;
+                case Direction.DOWN:
+                    setDirection(Direction.DOWN, Direction.UP);
+                    break;
+                case Direction.LEFT:
+                    setDirection(Direction.LEFT, Direction.RIGHT);
+                    break;
+                case Direction.RIGHT:
+                    setDirection(Direction.RIGHT, Direction.LEFT);
+                    break;
+            }
+        }
+
+        function setDirection(direction, falseDirection){
+            if(that.direction != direction && that.direction != falseDirection && that.updated){
+                that.direction = direction;
+                that.updated = false;
+            }
+        }
+
+        var Direction = {
+            UP: 38,
+            DOWN: 40,
+            LEFT: 37,
+            RIGHT: 39
+        }
+    };
+
+    function Position(x, y) {
+        this.x = x;
+        this.y = y;
+
+        this.equal = function(position){
+            if(this.x == position.x && this.y == position.y)
+                return true;
+
+            return false;
+        }
+    };
+
+    function Food() {
+        this.position = new Position(-1, -1);
+        this.cargo;
+
+        var that = this;
+
+        this.init = function () {
+            this.cargo = new Image();
+            this.cargo.src = "@Url.Content("~/Content/images/Minigame/TestGame/cargo.png")";
+        }
+
+        this.generateFood = function (gameArea, snake) {
+            do {
+                this.position.x = generateCoordinate(gameArea.xCellCount - 1);
+                this.position.y = generateCoordinate(gameArea.yCellCount - 1);
+            } while (checkCollisionWithSnake(snake))
+        }
+
+        function generateCoordinate(maxCellIndex){
+            return Math.round(maxCellIndex * Math.random());
+        }
+
+        function checkCollisionWithSnake(snake) {
+            for (var i = 0; i < snake.body.length; i++) {
+                if (that.position.equal(snake.body[i]))
+                    return true;
+            }
+
+            return false;
+        }
+
+        this.paint = function (context, cellSize) {
+            context.drawImage(this.cargo, this.position.x * cellSize, this.position.y * cellSize, cellSize, cellSize);
+        }
+    }
+
+
+</script>
 </body>
 </html>
