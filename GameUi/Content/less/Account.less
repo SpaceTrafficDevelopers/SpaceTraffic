@@ -6,6 +6,8 @@
 @formBgColor: #131313;
 @formBorderColor: #595959;
 @formTitleColor: #48a2f0;
+@formInputBgColor: #3d3d3d;
+@formFocusColor: #ffffff;
 
 @linkColor: #ffffff;
 @linkHoverColor: #48a2f0;
@@ -41,7 +43,7 @@ body{
     font-size: 90px;
 }
 
-/* FORM */
+/* Form */
 .form-wrapper {
     width: 295px;
     margin: 0 auto;
@@ -69,6 +71,7 @@ body{
 	}
 }
 
+/* Form title*/
 .form h1 {
     font-family: @titleFont;
     text-align: center;
@@ -78,3 +81,30 @@ body{
     color: @formTitleColor;
 }
 
+/*Form input*/
+.form input[type="text"], .form input[type="password"], .form input[type="email"] {
+    width: 100%;
+    text-align: center;
+    background: @formInputBgColor;
+    border: 1px solid transparent;
+    font-size: 1.25em;
+    padding: 5px 0 5px 0;
+    color: @textColor;
+    font-family: @textFont;
+}
+
+/*Form input focus*/
+.form input[type="checkbox"]:focus {
+    outline: 1px solid @formFocusColor;
+}
+
+.form input:focus, .btn-cancel:focus {
+    border-color: @formFocusColor;
+    outline: none;
+}
+
+/*Annoying Mozzila red glow fix*/
+.form input:invalid{
+    outline: none;
+    box-shadow: none;
+}
