@@ -1,92 +1,16 @@
 @import "Variables/colors.less";
+@import "Variables/fonts.less";
+
 // Color schema
-@spaceColor: #000000;
-@panelBorderColor: #151515;
-@footerBorderColor: #222222;
-@panelBgColor: #060525;
+@spaceBgColor: #03101b;
+@formBorderColor: #151515;
+@formBgColor: #131313;
 
 @panelLinkColor: #ffffff;
-@panelLinkHoverColor: #01ffc6;
+@panelLinkHoverColor: #48a2f0;
 
 body{
-	background-color: @spaceColor;
+	background-color: @spaceBgColor;
 	color: @textColor;
 }
 
-
-.account-window {
-	margin: 0 auto;
-	width: 900px;
-	background-color: @panelBgColor;
-	border: 3px solid #FFF;
-	padding: 10px;
-	
-	a {
-		color: @panelLinkColor;
-		&:hover {
-			color: @panelLinkHoverColor;
-		}
-		
-		&:visited {
-			color: @panelLinkColor;
-			&:hover {
-				color: @panelLinkHoverColor;
-			}
-		}
-	}
-
-	p {
-		margin: 10px 4px;	
-	}
-}
-.login-window {
-	.account-window;
-	width: 500px;
-}
-
-.form-fields {
-	width: 50%;
-		.editor-label {
-			text-align: right;
-		}
-		input {
-			margin: 8px 5px;
-		}
-}
-.login-form-fields {
-	.form-fields;
-	width: 100%;
-}
-
-.regist-rules {
-	margin: 15px 8px;
-	height: 100px;
-	overflow: auto;
-	padding-right: 10px;
-	h3 {
-		margin-top: 0;
-	}
-}
-
-.continue-button {
-	clear: both;
-	text-align: right;
-}
-
-.login-button {
-	text-align: center;
-}
-
-.tooltip {
-	background-color: #000;
-	border: 1px solid #fff;
-	padding: 10px 15px;
-	width: 350px;
-	display: none;
-	color: @textColor;
-	text-align: left;
-
-	/* outline radius for mozilla/firefox only */
-	-moz-box-shadow:0 0 10px #000;
-	-webkit-box-shadow:0 0 10px #000;
-}
