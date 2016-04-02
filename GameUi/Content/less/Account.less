@@ -3,11 +3,12 @@
 
 // Color schema
 @spaceBgColor: #03101b;
-@formBorderColor: #151515;
 @formBgColor: #131313;
+@formBorderColor: #595959;
+@formTitleColor: #48a2f0;
 
-@panelLinkColor: #ffffff;
-@panelLinkHoverColor: #48a2f0;
+@linkColor: #ffffff;
+@linkHoverColor: #48a2f0;
 
 html { 
     margin: 0;
@@ -38,5 +39,42 @@ body{
     font-family: @titleFont;
     margin-top: 40px;
     font-size: 90px;
+}
+
+/* FORM */
+.form-wrapper {
+    width: 295px;
+    margin: 0 auto;
+    font-family: @textFont;
+
+    a {
+         text-decoration: none;
+         color: @linkColor;
+
+         &:hover { 
+             color: @linkHoverColor;
+         }
+    }
+}
+
+.form {
+    background-color: @formBgColor;
+    border: 3px solid @formBorderColor;
+	padding: 10px;
+    font-weight: 400;
+
+    p {
+		margin: 0 10px 15px 10px;
+        text-align: center;	
+	}
+}
+
+.form h1 {
+    font-family: @titleFont;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: @formTitleColor;
 }
 
