@@ -36,6 +36,10 @@ body{
 	color: @textColor;
 }
 
+.clear {
+    overflow: auto;
+}
+
 #layout-title {
     text-align: center;
     font-family: @titleFont;
@@ -107,4 +111,43 @@ body{
 .form input:invalid{
     outline: none;
     box-shadow: none;
+}
+
+/* Buttons */
+.button {
+    color: white;
+    font-weight: bold;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.button.login {
+    background: #448ccb;
+    font-size: 1.5em;
+}
+
+.button.ok {
+    background: green;
+    font-family: @textFont;
+    font-weight: 700;
+    font-size: 1.3em;
+    padding: 4px;
+    float: right;
+}
+
+.button.cancel {
+    background: red;
+    font-family: @textFont;
+    font-weight: 700;
+    font-size: 1.3em;
+    padding: 4px;
+    float: left;
+}
+
+a.cancel:hover {
+    color: @textColor;
 }

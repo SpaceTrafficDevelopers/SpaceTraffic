@@ -4,12 +4,8 @@
 }
 
 @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
-<div class="register">
+<div class="form-wrapper">
 <!-- Co s timhle? .....
-<h2>Create a New Account - Step 1</h2>
-<p>
-    Use the form below to create a new account. 
-</p>
 <p>
     Passwords are required to be a minimum of @*Membership.MinRequiredPasswordLength*@ characters in length.
 </p> -->
@@ -38,11 +34,11 @@
         </p>
         <p>
             @Html.CheckBoxFor(m => m.Rules, new { required = ""})
-            @Html.LabelFor(m => m.Rules)
+            <label for="Rules">Souhlasím s <a href="#">podmínkami</a></label>
         </p>        
         <p class="clear">
-            <a href="@Url.Action("LogOn", "Account")" class="btn-cancel">Zrušit</a>
-            <input type="submit" value="Registrovat" class="btn-ok" />
+            <a href="@Url.Action("LogOn", "Account")" class="button cancel">Zrušit</a>
+            <input type="submit" value="Registrovat" class="button ok" />
         </p>
     </div>
 }
