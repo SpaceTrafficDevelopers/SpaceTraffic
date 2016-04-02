@@ -83,6 +83,10 @@ body{
     margin-top: 10px;
     margin-bottom: 10px;
     color: @formTitleColor;
+
+    animation: flash 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 /*Form input*/
@@ -115,19 +119,24 @@ body{
 
 /* Buttons */
 .button {
-    color: white;
+    color: @textColor;
     font-weight: bold;
     border: 1px solid transparent;
     text-transform: uppercase;
 
     &:hover {
         cursor: pointer;
+
+        animation: flash 5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
     }
 }
 
 .button.login {
     background: #448ccb;
     font-size: 1.5em;
+    padding: 1px 5px 1px 5px;
 }
 
 .button.ok {
@@ -150,4 +159,15 @@ body{
 
 a.cancel:hover {
     color: @textColor;
+}
+
+/* Animations */
+
+/* Flash animation */
+@keyframes flash {
+    0% {opacity: 1;}
+    25% {opacity: 0.5;}
+    50% {opacity: 1;}
+    75% {opacity: 0.5;}
+    100% {opacity: 1;}
 }
