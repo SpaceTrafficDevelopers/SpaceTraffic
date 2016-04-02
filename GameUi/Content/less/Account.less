@@ -9,8 +9,27 @@
 @panelLinkColor: #ffffff;
 @panelLinkHoverColor: #48a2f0;
 
+html { 
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 body{
+    margin: 0;
+    position: absolute;
+    top: 0; 
+    bottom: 0; 
+    right: 0; 
+    left: 0;
+
 	background-color: @spaceBgColor;
+    background: 
+        url('../images/Account/bgsprite.png') repeat 35% 35%, url('../images/Account/bgsprite.png') repeat 5% 5%,
+        radial-gradient(circle, rgb(3,16,27), rgb(0,0,0)),
+        #03101b;
+    background-position: 0 0, 0 -500px;
+
 	color: @textColor;
 }
 
