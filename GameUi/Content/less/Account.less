@@ -9,6 +9,9 @@
 @formInputBgColor: #3d3d3d;
 @formFocusColor: #ffffff;
 
+@buttonOkBgColor: #159515;
+@buttonCancelBglColor: #ec3131;
+
 @linkColor: #ffffff;
 @linkHoverColor: #48a2f0;
 
@@ -45,6 +48,11 @@ body{
     font-family: @titleFont;
     margin-top: 40px;
     font-size: 90px;
+}
+
+/* Lost password and register links div */
+#login-links {
+    margin-top: 4px;
 }
 
 /* Form */
@@ -106,7 +114,7 @@ body{
     outline: 1px solid @formFocusColor;
 }
 
-.form input:focus, .btn-cancel:focus {
+.form input:focus, a.cancel:focus {
     border-color: @formFocusColor;
     outline: none;
 }
@@ -115,6 +123,11 @@ body{
 .form input:invalid{
     outline: none;
     box-shadow: none;
+}
+
+/* Form rules link*/
+a.rules {
+    text-decoration: underline;
 }
 
 /* Buttons */
@@ -135,12 +148,13 @@ body{
 
 .button.login {
     background: #448ccb;
+    font-family: @titleFont;
     font-size: 1.5em;
     padding: 1px 5px 1px 5px;
 }
 
 .button.ok {
-    background: green;
+    background: @buttonOkBgColor;
     font-family: @textFont;
     font-weight: 700;
     font-size: 1.3em;
@@ -149,7 +163,7 @@ body{
 }
 
 .button.cancel {
-    background: red;
+    background: @buttonCancelBglColor;
     font-family: @textFont;
     font-weight: 700;
     font-size: 1.3em;

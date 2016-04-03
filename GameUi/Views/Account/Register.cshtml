@@ -34,7 +34,7 @@
         </p>
         <p>
             @Html.CheckBoxFor(m => m.Rules, new { required = ""})
-            <label for="Rules">Souhlasím s <a href="#">podmínkami</a></label>
+            <label for="Rules">Souhlasím s <a href="#" class="rules">podmínkami</a></label>
         </p>        
         <p class="clear">
             <a href="@Url.Action("LogOn", "Account")" class="button cancel">Zrušit</a>
