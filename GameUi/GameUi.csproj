@@ -167,6 +167,7 @@
     <Content Include="Content\fonts\SIL Open Font License 1.1.txt" />
     <Content Include="Content\Game.less" />
     <Content Include="Content\images\75p_honey.png" />
+    <Content Include="Content\images\Account\bgsprite.png" />
     <Content Include="Content\images\Account\help.png" />
     <Content Include="Content\images\Achievements\000SOURCES.svg" />
     <Content Include="Content\images\Achievements\000sourcesURL.txt" />
@@ -391,6 +392,7 @@
     <Content Include="Content\less\defaults.less" />
     <Content Include="Content\less\Parts\icons.less" />
     <Content Include="Content\less\Parts\alerts.less" />
+    <Content Include="Content\less\ModalWindow.less" />
     <None Include="Views\Shared\_Achievements.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

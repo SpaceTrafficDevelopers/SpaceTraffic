@@ -1,92 +1,189 @@
 @import "Variables/colors.less";
-// Color schema
-@spaceColor: #000000;
-@panelBorderColor: #151515;
-@footerBorderColor: #222222;
-@panelBgColor: #060525;
+@import "Variables/fonts.less";
 
-@panelLinkColor: #ffffff;
-@panelLinkHoverColor: #01ffc6;
+// Color schema
+@spaceBgColor: #03101b;
+@formBgColor: #131313;
+@formBorderColor: #595959;
+@formTitleColor: #48a2f0;
+@formInputBgColor: #3d3d3d;
+@formFocusColor: #ffffff;
+
+@buttonOkBgColor: #159515;
+@buttonCancelBglColor: #ec3131;
+
+@linkColor: #ffffff;
+@linkHoverColor: #48a2f0;
+
+html { 
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
 body{
-	background-color: @spaceColor;
+    margin: 0;
+    position: absolute;
+    top: 0; 
+    bottom: 0; 
+    right: 0; 
+    left: 0;
+
+	background-color: @spaceBgColor;
+    background: 
+        url('../images/Account/bgsprite.png') repeat 35% 35%, url('../images/Account/bgsprite.png') repeat 5% 5%,
+        radial-gradient(circle, rgb(3,16,27), rgb(0,0,0)),
+        #03101b;
+    background-position: 0 0, 0 -500px;
+
 	color: @textColor;
 }
 
+.clear {
+    overflow: auto;
+}
 
-.account-window {
-	margin: 0 auto;
-	width: 900px;
-	background-color: @panelBgColor;
-	border: 3px solid #FFF;
+#layout-title {
+    text-align: center;
+    font-family: @titleFont;
+    margin-top: 40px;
+    font-size: 90px;
+}
+
+/* Lost password and register links div */
+#login-links {
+    margin-top: 4px;
+}
+
+/* Form */
+.form-wrapper {
+    width: 295px;
+    margin: 0 auto;
+    font-family: @textFont;
+
+    a {
+         text-decoration: none;
+         color: @linkColor;
+
+         &:hover { 
+             color: @linkHoverColor;
+         }
+    }
+}
+
+.form {
+    background-color: @formBgColor;
+    border: 3px solid @formBorderColor;
 	padding: 10px;
-	
-	a {
-		color: @panelLinkColor;
-		&:hover {
-			color: @panelLinkHoverColor;
-		}
-		
-		&:visited {
-			color: @panelLinkColor;
-			&:hover {
-				color: @panelLinkHoverColor;
-			}
-		}
-	}
+    font-weight: 400;
 
-	p {
-		margin: 10px 4px;	
-	}
-}
-.login-window {
-	.account-window;
-	width: 500px;
-}
-
-.form-fields {
-	width: 50%;
-		.editor-label {
-			text-align: right;
-		}
-		input {
-			margin: 8px 5px;
-		}
-}
-.login-form-fields {
-	.form-fields;
-	width: 100%;
-}
-
-.regist-rules {
-	margin: 15px 8px;
-	height: 100px;
-	overflow: auto;
-	padding-right: 10px;
-	h3 {
-		margin-top: 0;
+    p {
+		margin: 0 10px 15px 10px;
+        text-align: center;	
 	}
 }
 
-.continue-button {
-	clear: both;
-	text-align: right;
+/* Form title*/
+.form h1 {
+    font-family: @titleFont;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: @formTitleColor;
+
+    animation: flash 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
-.login-button {
-	text-align: center;
+/*Form input*/
+.form input[type="text"], .form input[type="password"], .form input[type="email"] {
+    width: 100%;
+    text-align: center;
+    background: @formInputBgColor;
+    border: 1px solid transparent;
+    font-size: 1.25em;
+    padding: 5px 0 5px 0;
+    color: @textColor;
+    font-family: @textFont;
 }
 
-.tooltip {
-	background-color: #000;
-	border: 1px solid #fff;
-	padding: 10px 15px;
-	width: 350px;
-	display: none;
-	color: @textColor;
-	text-align: left;
-
-	/* outline radius for mozilla/firefox only */
-	-moz-box-shadow:0 0 10px #000;
-	-webkit-box-shadow:0 0 10px #000;
+/*Form input focus*/
+.form input[type="checkbox"]:focus {
+    outline: 1px solid @formFocusColor;
 }
+
+.form input:focus, a.cancel:focus {
+    border-color: @formFocusColor;
+    outline: none;
+}
+
+/*Annoying Mozzila red glow fix*/
+.form input:invalid{
+    outline: none;
+    box-shadow: none;
+}
+
+/* Form rules link*/
+a.rules {
+    text-decoration: underline;
+}
+
+/* Buttons */
+.button {
+    color: @textColor;
+    font-weight: bold;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+
+    &:hover {
+        cursor: pointer;
+
+        animation: flash 5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+}
+
+.button.login {
+    background: #448ccb;
+    font-family: @titleFont;
+    font-size: 1.5em;
+    padding: 1px 5px 1px 5px;
+}
+
+.button.ok {
+    background: @buttonOkBgColor;
+    font-family: @textFont;
+    font-weight: 700;
+    font-size: 1.3em;
+    padding: 4px;
+    float: right;
+}
+
+.button.cancel {
+    background: @buttonCancelBglColor;
+    font-family: @textFont;
+    font-weight: 700;
+    font-size: 1.3em;
+    padding: 4px;
+    float: left;
+}
+
+a.cancel:hover {
+    color: @textColor;
+}
+
+/* Animations */
+
+/* Flash animation */
+@keyframes flash {
+    0% {opacity: 1;}
+    25% {opacity: 0.5;}
+    50% {opacity: 1;}
+    75% {opacity: 0.5;}
+    100% {opacity: 1;}
+}
+
+@import "ModalWindow.less";

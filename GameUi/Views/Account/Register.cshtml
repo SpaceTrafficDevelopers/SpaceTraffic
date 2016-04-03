@@ -4,19 +4,15 @@
 }
 
 @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
-<div class="register">
+<div class="form-wrapper">
 <!-- Co s timhle? .....
-<h2>Create a New Account - Step 1</h2>
-<p>
-    Use the form below to create a new account. 
-</p>
 <p>
     Passwords are required to be a minimum of @*Membership.MinRequiredPasswordLength*@ characters in length.
 </p> -->
-
+<!--
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-
+-->
 @using (Html.BeginForm()) {
     <div class="form">
         <h1>Registrace</h1>
@@ -38,12 +34,40 @@
         </p>
         <p>
             @Html.CheckBoxFor(m => m.Rules, new { required = ""})
-            @Html.LabelFor(m => m.Rules)
+            <label for="Rules">Souhlasím s <a href="#rulesmodal" class="rules" data-tog="modal">podmínkami</a></label>
         </p>        
         <p class="clear">
-            <a href="@Url.Action("LogOn", "Account")" class="btn-cancel">Zrušit</a>
-            <input type="submit" value="Registrovat" class="btn-ok" />
+            <a href="@Url.Action("LogOn", "Account")" class="button cancel">Zrušit</a>
+            <input type="submit" value="Registrovat" class="button ok" />
         </p>
     </div>
 }
 </div>
+<div id="rulesmodal" class="modal">
+    <a href="#" class="close">×</a>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Pravidla a podmínky</h2>
+        </div>
+        <div class="modal-body">
+            <p>Lorem ipsum dolor sit amet consectetuer ut laoreet at ligula sagittis. Nunc arcu metus tellus sem hac in cursus tellus interdum lacus. Justo est est congue tristique In Aenean aliquet nulla orci Vestibulum. A neque sociis massa Aenean consequat tincidunt nibh adipiscing at Sed. Nulla metus mollis wisi arcu molestie vel vitae Nam interdum vel. Id tempus.</p>
+            <p>Tincidunt et eu nascetur lacinia id diam at nibh elit Morbi. Euismod nec elit In consequat habitasse morbi habitant enim Aenean iaculis. Nunc elit fringilla odio ac molestie nec Sed morbi tincidunt nunc. Interdum sed urna nibh ut Lorem enim nec nunc Curabitur Aliquam. Dolor convallis faucibus nibh lorem vitae eu amet malesuada mus libero. Scelerisque.</p>
+            <p>Lorem ipsum dolor sit amet consectetuer ut laoreet at ligula sagittis. Nunc arcu metus tellus sem hac in cursus tellus interdum lacus. Justo est est congue tristique In Aenean aliquet nulla orci Vestibulum. A neque sociis massa Aenean consequat tincidunt nibh adipiscing at Sed. Nulla metus mollis wisi arcu molestie vel vitae Nam interdum vel. Id tempus.</p>
+            <p>Tincidunt et eu nascetur lacinia id diam at nibh elit Morbi. Euismod nec elit In consequat habitasse morbi habitant enim Aenean iaculis. Nunc elit fringilla odio ac molestie nec Sed morbi tincidunt nunc. Interdum sed urna nibh ut Lorem enim nec nunc Curabitur Aliquam. Dolor convallis faucibus nibh lorem vitae eu amet malesuada mus libero. Scelerisque.</p>          
+            <p>Lorem ipsum dolor sit amet consectetuer ut laoreet at ligula sagittis. Nunc arcu metus tellus sem hac in cursus tellus interdum lacus. Justo est est congue tristique In Aenean aliquet nulla orci Vestibulum. A neque sociis massa Aenean consequat tincidunt nibh adipiscing at Sed. Nulla metus mollis wisi arcu molestie vel vitae Nam interdum vel. Id tempus.</p>
+            <p>Tincidunt et eu nascetur lacinia id diam at nibh elit Morbi. Euismod nec elit In consequat habitasse morbi habitant enim Aenean iaculis. Nunc elit fringilla odio ac molestie nec Sed morbi tincidunt nunc. Interdum sed urna nibh ut Lorem enim nec nunc Curabitur Aliquam. Dolor convallis faucibus nibh lorem vitae eu amet malesuada mus libero. Scelerisque.</p>       
+            <p>Lorem ipsum dolor sit amet consectetuer ut laoreet at ligula sagittis. Nunc arcu metus tellus sem hac in cursus tellus interdum lacus. Justo est est congue tristique In Aenean aliquet nulla orci Vestibulum. A neque sociis massa Aenean consequat tincidunt nibh adipiscing at Sed. Nulla metus mollis wisi arcu molestie vel vitae Nam interdum vel. Id tempus.</p>
+            <p>Tincidunt et eu nascetur lacinia id diam at nibh elit Morbi. Euismod nec elit In consequat habitasse morbi habitant enim Aenean iaculis. Nunc elit fringilla odio ac molestie nec Sed morbi tincidunt nunc. Interdum sed urna nibh ut Lorem enim nec nunc Curabitur Aliquam. Dolor convallis faucibus nibh lorem vitae eu amet malesuada mus libero. Scelerisque.</p>
+            <p>Lorem ipsum dolor sit amet consectetuer ut laoreet at ligula sagittis. Nunc arcu metus tellus sem hac in cursus tellus interdum lacus. Justo est est congue tristique In Aenean aliquet nulla orci Vestibulum. A neque sociis massa Aenean consequat tincidunt nibh adipiscing at Sed. Nulla metus mollis wisi arcu molestie vel vitae Nam interdum vel. Id tempus.</p>
+            <p>Tincidunt et eu nascetur lacinia id diam at nibh elit Morbi. Euismod nec elit In consequat habitasse morbi habitant enim Aenean iaculis. Nunc elit fringilla odio ac molestie nec Sed morbi tincidunt nunc. Interdum sed urna nibh ut Lorem enim nec nunc Curabitur Aliquam. Dolor convallis faucibus nibh lorem vitae eu amet malesuada mus libero. Scelerisque.</p>
+            <p>Lorem ipsum dolor sit amet consectetuer ut laoreet at ligula sagittis. Nunc arcu metus tellus sem hac in cursus tellus interdum lacus. Justo est est congue tristique In Aenean aliquet nulla orci Vestibulum. A neque sociis massa Aenean consequat tincidunt nibh adipiscing at Sed. Nulla metus mollis wisi arcu molestie vel vitae Nam interdum vel. Id tempus.</p>
+            <p>Tincidunt et eu nascetur lacinia id diam at nibh elit Morbi. Euismod nec elit In consequat habitasse morbi habitant enim Aenean iaculis. Nunc elit fringilla odio ac molestie nec Sed morbi tincidunt nunc. Interdum sed urna nibh ut Lorem enim nec nunc Curabitur Aliquam. Dolor convallis faucibus nibh lorem vitae eu amet malesuada mus libero. Scelerisque.</p>
+            <p>Lorem ipsum dolor sit amet consectetuer ut laoreet at ligula sagittis. Nunc arcu metus tellus sem hac in cursus tellus interdum lacus. Justo est est congue tristique In Aenean aliquet nulla orci Vestibulum. A neque sociis massa Aenean consequat tincidunt nibh adipiscing at Sed. Nulla metus mollis wisi arcu molestie vel vitae Nam interdum vel. Id tempus.</p>
+            <p>Tincidunt et eu nascetur lacinia id diam at nibh elit Morbi. Euismod nec elit In consequat habitasse morbi habitant enim Aenean iaculis. Nunc elit fringilla odio ac molestie nec Sed morbi tincidunt nunc. Interdum sed urna nibh ut Lorem enim nec nunc Curabitur Aliquam. Dolor convallis faucibus nibh lorem vitae eu amet malesuada mus libero. Scelerisque.</p>
+            <p>Lorem ipsum dolor sit amet consectetuer ut laoreet at ligula sagittis. Nunc arcu metus tellus sem hac in cursus tellus interdum lacus. Justo est est congue tristique In Aenean aliquet nulla orci Vestibulum. A neque sociis massa Aenean consequat tincidunt nibh adipiscing at Sed. Nulla metus mollis wisi arcu molestie vel vitae Nam interdum vel. Id tempus.</p>
+            <p>Tincidunt et eu nascetur lacinia id diam at nibh elit Morbi. Euismod nec elit In consequat habitasse morbi habitant enim Aenean iaculis. Nunc elit fringilla odio ac molestie nec Sed morbi tincidunt nunc. Interdum sed urna nibh ut Lorem enim nec nunc Curabitur Aliquam. Dolor convallis faucibus nibh lorem vitae eu amet malesuada mus libero. Scelerisque.</p>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/JS/util/Modal.js")"></script>
