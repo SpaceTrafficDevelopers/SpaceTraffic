@@ -46,7 +46,7 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
             else if (action.CompareTo("checkCollision") == 0)
                 return checkCollision(gameId, data, controller);
             else if (action.CompareTo("updateRequest") == 0)
-                return null;
+                return updateRequest(gameId, controller);
             else
                 return null;
         }
@@ -80,9 +80,9 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
             return handleResult(result, gameId, controller, true);
         }
 
-        private object updateRequest(int gameId, dynamic data, AbstractController controller)
+        private object updateRequest(int gameId, AbstractController controller)
         {
-            controller.GSClient.MinigameService.checkMinigameLifeAndUpdateLastRequestTime(gameId);
+            return controller.GSClient.MinigameService.checkMinigameLifeAndUpdateLastRequestTime(gameId);
         }
 
         private object handleResult(Result result, int gameId, AbstractController controller, bool reward)
