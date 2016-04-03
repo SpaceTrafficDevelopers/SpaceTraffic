@@ -391,6 +391,7 @@
     <Content Include="Content\less\defaults.less" />
     <Content Include="Content\less\Parts\icons.less" />
     <Content Include="Content\less\Parts\alerts.less" />
+    <Content Include="Content\less\ModalWindow.less" />
     <None Include="Views\Shared\_Achievements.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
