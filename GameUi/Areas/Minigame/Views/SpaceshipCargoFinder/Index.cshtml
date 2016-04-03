@@ -1,0 +1,422 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Space Traffic - Space trading multiplayer browser game." />
+    <meta name="author" xml:lang="cs" content="Space Traffic Team" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+
+    <title>Space Traffic Minigame</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Exo:400,800|Audiowide&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href="@Url.Content("~/Content/Game.less")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/base/jquery.ui.base.css")" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript">
+        var baseUrl = "@Url.Content("~")";
+    </script>
+
+</head>
+<body>
+    
+    <h1 style="text-align: center;">Spaceship cargo finder</h1>
+    <div style="margin: auto; width: 500px;">
+        <div style="float: right;">Score: <span id="score">0</span></div>
+        <canvas width="500" height="500" />
+    </div>
+    <div id="startDialog" style="display:none;"></div>
+
+    @Content.Script("jquery-2.2.2.min.js", Url)
+    @Content.Script("jquery-ui-1.11.4.min.js", Url)
+    @Content.Script("../JS/ui/Ajax.js", Url)
+    @*@Content.JSImport("~/JS/pomImport", Url)*@
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        $(window).bind("beforeunload", function () {
+            sendAjaxMessage("EndSpaceshipCargoFinderForce", "EndSpaceshipCargoFinder",
+                { minigameId: @ViewBag.gameId, force: true }, function(){});
+        });
+
+        var canvas = $("canvas")[0];
+
+        var game = new Game(canvas);
+        game.init(25, 5);
+        game.update();
+
+        var startDialog = new StartGameDialog($('#startDialog'), game.start, @ViewBag.gameId);
+            startDialog.init();
+
+            sendAjaxMessage('PerformActionSpaceshipCargoFinder', 'PerformActionSpaceshipCargoFinder', 
+                { minigameId: @ViewBag.gameId, action: 'checkCollision', body: game.snake.body }, function(){})
+            //dialog a pak start a spustit sender (update request, check snake position)
+
+            });
+
+            //method for send ajax message
+            function sendAjaxMessage(id, object, data, callbackFunction) {
+                ajax.send({
+                    requestId: id,
+                    relatedObject: object,
+                    data: data,
+                    callback: callbackFunction
+                });
+            };
+
+            //start game dialog class
+            function StartGameDialog(dialogElement, startGameFce, gameId) {
+                //dialog element
+                this.dialogElement = dialogElement;
+                this.startGameFce = startGameFce;
+                this.gameId = gameId;
+
+                //this for private methods
+                var that = this;
+
+                //method for prepare dialog
+                this.init = function () {
+                    if (this.dialogElement.is(':empty'))
+                        this.dialogElement.append(prepareDialogElement());
+
+                    prepareDialog();
+                };
+
+                //method for prepare jQuery dialog
+                function prepareDialog() {
+                    that.dialogElement.dialog({
+                        autoOpen: true,
+                        title: 'Spaceship cargo finder',
+                        modal: true,
+                        closeOnEscape: false,
+                        buttons: {
+                            'Start': function () {
+                                startGame();
+                            }
+                        }
+                    });
+                };
+
+                function startGame() {
+                    that.dialogElement.empty();
+                    that.dialogElement.dialog('close');
+
+                    sendAjaxMessage('StartSpaceshipCargoFinder', 'StartSpaceshipCargoFinder', { minigameId: that.gameId }, startCallback);
+                }
+
+                function startCallback(result){
+                    if (result.State == 0){
+                        alert(result.Message);
+
+                    }
+                    else
+                        that.startGameFce();
+                }
+
+                //method for prepare dialog element
+                function prepareDialogElement() {
+                    var dialogElement = 'Hru spustíte kliknutím na tlačítko "Start"';
+                    return dialogElement;
+                };
+            };
+
+
+            function Game(canvas) {
+                this.gameArea;
+                this.snake;
+                this.food;
+                this.score;
+                this.gameLoop;
+                this.canvas = canvas;
+                this.contex = canvas.getContext("2d");
+
+                var interval = 60;
+                var that = this;
+
+                this.init = function (pieceSize, snakeLength) {
+                    this.gameArea = new GameArea(this.canvas.width, this.canvas.height, pieceSize);
+                    this.gameArea.init();
+
+                    this.snake = new Snake(snakeLength);
+                    this.food = new Food();
+
+                    this.score = 0;
+                    this.snake.createSnake();
+
+                    this.food.init();
+                    this.food.generateFood(this.gameArea, this.snake);
+
+                    keyBinding();
+                }
+
+                this.update = function() {
+
+                    var nextPosition = that.snake.getNextPosition();
+
+                    if (that.gameArea.checkCollisionWithSnake(nextPosition) || that.snake.checkCollisoinWithSelf(nextPosition)) {
+                        clearInterval(that.gameLoop);
+                        return;
+                    }
+
+                    that.move(nextPosition);
+
+                    that.gameArea.paint(that.contex);
+                    that.snake.paint(that.contex, that.gameArea.cellSize);
+                    that.food.paint(that.contex, that.gameArea.cellSize);
+
+                    that.snake.updated = true;
+                    paintScore();
+                }
+
+                function paintScore() {
+                    var scoreElement = $("#score");
+                    scoreElement.text(that.score);
+                }
+
+                function keyBinding() {
+
+                    $(document).keydown(function (e) {
+                        that.snake.changeDirection(e.which);
+                    });
+                }
+
+                this.move = function (nextPostion) {
+                    if (this.food.position.equal(nextPostion)) {
+                        //send score
+                        this.score++;
+                        this.snake.move(true, nextPostion);
+                        this.food.generateFood(this.gameArea, this.snake);
+                    }
+                    else
+                        this.snake.move(false, nextPostion);
+                }
+
+                this.start = function () {
+                    /*if (typeof this.gameLoop != "undefined")
+                        clearInterval(gameLoop);*/
+
+                    that.gameLoop = setInterval(this.update, interval);
+                    //start sender update
+                }
+
+            };
+
+            function GameArea(width, height, cellSize) {
+                this.width = width;
+                this.height = height;
+                this.cellSize = cellSize;
+                this.xCellCount = width / cellSize; //maximalni index
+                this.yCellCount = height / cellSize;
+                this.background;
+
+                this.init = function () {
+                    this.background = new Image();
+                    this.background.src = "@Url.Content("~/Content/images/Minigame/SpaceshipCargoFinder/background.png")";
+        }
+
+        this.paint = function (context) {
+            context.drawImage(this.background, 0, 0, this.width, this.height);
+            context.strokeStyle = "white";
+            context.strokeRect(0, 0, this.width, this.height);
+        }
+
+        this.checkCollisionWithSnake = function (nextPosition) {
+            if (nextPosition.x < 0 || nextPosition.y < 0
+                || nextPosition.x >= this.xCellCount || nextPosition.y >= this.yCellCount) {
+
+                return true;
+            }
+
+            return false;
+        }
+    };
+
+    function Snake(length) {
+        this.head;
+        this.body;
+        this.length = length;
+        this.direction;
+        this.updated = true;
+        this.shipUp;
+        this.shipRight;
+        this.shipLeft;
+        this.shipDown;
+        this.cargo;
+
+        var that = this;
+
+        this.createSnake = function () {
+            this.body = [];
+            for (var i = this.length - 1; i >= 0; i--)
+                this.body.push(new Position(i, 0));
+
+            this.head = this.body[0];
+            this.direction = Direction.RIGHT;
+            initImages();
+        }
+
+        function initImages() {
+            that.shipUp = new Image();
+            that.shipUp.src = "@Url.Content("~/Content/images/Minigame/SpaceshipCargoFinder/shipUp.png")";
+
+            that.shipRight = new Image();
+            that.shipRight.src = "@Url.Content("~/Content/images/Minigame/SpaceshipCargoFinder/shipRight.png")";
+
+            that.shipLeft = new Image();
+            that.shipLeft.src = "@Url.Content("~/Content/images/Minigame/SpaceshipCargoFinder/shipLeft.png")";
+
+            that.shipDown = new Image();
+            that.shipDown.src = "@Url.Content("~/Content/images/Minigame/SpaceshipCargoFinder/shipDown.png")";
+
+            that.cargo = new Image();
+            that.cargo.src = "@Url.Content("~/Content/images/Minigame/SpaceshipCargoFinder/cargo.png")";
+        }
+
+        this.paint = function (context, cellSize) {
+            var ship = getShipImageByDirection();
+            context.drawImage(ship, this.head.x * cellSize, this.head.y * cellSize, cellSize, cellSize);
+
+            for (var i = 1; i < this.body.length; i++)
+                context.drawImage(this.cargo, this.body[i].x * cellSize, this.body[i].y * cellSize, cellSize, cellSize);
+        }
+
+        function getShipImageByDirection() {
+            switch (that.direction) {
+                case Direction.UP:
+                    return that.shipUp;
+
+                case Direction.LEFT:
+                    return that.shipLeft;
+
+                case Direction.RIGHT:
+                    return that.shipRight;
+
+                case Direction.DOWN:
+                    return that.shipDown;
+
+                default:
+                    return that.shipUp;
+            }
+        }
+
+        this.checkCollisoinWithSelf = function (nextPosition) {
+            for (var i = 0; i < this.body.length; i++) {
+                if (this.body[i].equal(nextPosition))
+                    return true;
+            }
+            return false;
+        }
+
+        this.move = function (eat, nextPostion) {
+            if (!eat)
+                this.body.pop();
+
+            this.body.unshift(nextPostion);
+            this.head = this.body[0];
+        }
+
+        this.getNextPosition = function () {
+            var nextPosition = new Position(this.head.x, this.head.y);
+
+            switch (this.direction) {
+                case Direction.UP:
+                    nextPosition.y--;
+                    break;
+                case Direction.DOWN:
+                    nextPosition.y++;
+                    break;
+                case Direction.LEFT:
+                    nextPosition.x--;
+                    break;
+                case Direction.RIGHT:
+                    nextPosition.x++;
+                    break;
+            }
+
+            return nextPosition;
+        }
+
+        this.changeDirection = function (key) {
+            switch(key) {
+                case Direction.UP:
+                    setDirection(Direction.UP, Direction.DOWN);
+                    break;
+                case Direction.DOWN:
+                    setDirection(Direction.DOWN, Direction.UP);
+                    break;
+                case Direction.LEFT:
+                    setDirection(Direction.LEFT, Direction.RIGHT);
+                    break;
+                case Direction.RIGHT:
+                    setDirection(Direction.RIGHT, Direction.LEFT);
+                    break;
+            }
+        }
+
+        function setDirection(direction, falseDirection){
+            if(that.direction != direction && that.direction != falseDirection && that.updated){
+                that.direction = direction;
+                that.updated = false;
+            }
+        }
+
+        var Direction = {
+            UP: 38,
+            DOWN: 40,
+            LEFT: 37,
+            RIGHT: 39
+        }
+    };
+
+    function Position(x, y) {
+        this.x = x;
+        this.y = y;
+
+        this.equal = function(position){
+            if(this.x == position.x && this.y == position.y)
+                return true;
+
+            return false;
+        }
+    };
+
+    function Food() {
+        this.position = new Position(-1, -1);
+        this.cargo;
+
+        var that = this;
+
+        this.init = function () {
+            this.cargo = new Image();
+            this.cargo.src = "@Url.Content("~/Content/images/Minigame/SpaceshipCargoFinder/cargo.png")";
+        }
+
+        this.generateFood = function (gameArea, snake) {
+            do {
+                this.position.x = generateCoordinate(gameArea.xCellCount - 1);
+                this.position.y = generateCoordinate(gameArea.yCellCount - 1);
+            } while (checkCollisionWithSnake(snake))
+        }
+
+        function generateCoordinate(maxCellIndex){
+            return Math.round(maxCellIndex * Math.random());
+        }
+
+        function checkCollisionWithSnake(snake) {
+            for (var i = 0; i < snake.body.length; i++) {
+                if (that.position.equal(snake.body[i]))
+                    return true;
+            }
+
+            return false;
+        }
+
+        this.paint = function (context, cellSize) {
+            context.drawImage(this.cargo, this.position.x * cellSize, this.position.y * cellSize, cellSize, cellSize);
+        }
+    }
+
+
+    </script>
+</body>
+</html>

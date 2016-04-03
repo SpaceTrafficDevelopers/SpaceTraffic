@@ -115,16 +115,18 @@ namespace SpaceTraffic.Game.Minigame
     [DataContract]
     public enum ResultState
     {
+        //mapping on int is because javascript cannot determine which member is which
+
         /// <summary>
         /// Success type
         /// </summary>
         [EnumMember]
-        SUCCESS,
+        SUCCESS = 1,
 
         /// <summary>
         /// Failure type
         /// </summary>
         [EnumMember]
-        FAILURE
+        FAILURE = 0
     }
 }

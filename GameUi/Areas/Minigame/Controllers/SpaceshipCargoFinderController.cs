@@ -23,11 +23,12 @@ using System.Web.Mvc;
 
 namespace SpaceTraffic.GameUi.Areas.Minigame.Controllers
 {
-    public class TestGameController : AbstractController
+    public class SpaceshipCargoFinderController : AbstractController
     {
-        public ActionResult Index()
+        public ActionResult Index(int gameId)
         {
-            ViewBag.GameName = "TestGame";
+            ViewBag.GameName = "Spaceship cargo finder";
+            ViewBag.gameId = gameId;
             //return HttpNotFound();
             return View();
         }

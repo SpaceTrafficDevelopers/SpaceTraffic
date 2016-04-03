@@ -109,7 +109,7 @@
     <Compile Include="Areas\Game\Controllers\CargoController.cs" />
     <Compile Include="Areas\Game\Controllers\PlannerController.cs" />
     <Compile Include="Areas\Minigame\Controllers\DefaultController.cs" />
-    <Compile Include="Areas\Minigame\Controllers\TestGameController.cs" />
+    <Compile Include="Areas\Minigame\Controllers\SpaceshipCargoFinderController.cs" />
     <Compile Include="Areas\Minigame\MinigameAreaRegistration.cs" />
     <Compile Include="Controllers\AbstractController.cs" />
     <Compile Include="Areas\Game\Controllers\TabsControllerBase.cs" />
@@ -123,6 +123,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AchievementController.cs" />
+    <Compile Include="Controllers\AjaxHandlers\Minigame\SpaceshipCargoFinder\EndSpaceshipCargoFinder.cs" />
+    <Compile Include="Controllers\AjaxHandlers\Minigame\SpaceshipCargoFinder\PerformActionSpaceshipCargoFinder.cs" />
+    <Compile Include="Controllers\AjaxHandlers\Minigame\SpaceshipCargoFinder\StartSpaceshipCargoFinder.cs" />
     <Compile Include="Controllers\AjaxHandlers\PlayerIsPlayingMinigame.cs" />
     <Compile Include="Controllers\AjaxHandlers\ShipsInfo.cs" />
     <Compile Include="Controllers\AjaxHandlers\CreditsAmount.cs" />
@@ -236,12 +239,12 @@
     <Content Include="Content\images\main_menu_item_bg.png" />
     <Content Include="Content\images\map_button_icon.png" />
     <Content Include="Content\images\messages_button_icon.png" />
-    <Content Include="Content\images\Minigame\TestGame\background.png" />
-    <Content Include="Content\images\Minigame\TestGame\cargo.png" />
-    <Content Include="Content\images\Minigame\TestGame\shipDown.png" />
-    <Content Include="Content\images\Minigame\TestGame\shipLeft.png" />
-    <Content Include="Content\images\Minigame\TestGame\shipRight.png" />
-    <Content Include="Content\images\Minigame\TestGame\shipUp.png" />
+    <Content Include="Content\images\Minigame\SpaceshipCargoFinder\background.png" />
+    <Content Include="Content\images\Minigame\SpaceshipCargoFinder\cargo.png" />
+    <Content Include="Content\images\Minigame\SpaceshipCargoFinder\shipDown.png" />
+    <Content Include="Content\images\Minigame\SpaceshipCargoFinder\shipLeft.png" />
+    <Content Include="Content\images\Minigame\SpaceshipCargoFinder\shipRight.png" />
+    <Content Include="Content\images\Minigame\SpaceshipCargoFinder\shipUp.png" />
     <Content Include="Content\images\Pattern_01.png" />
     <Content Include="Content\images\placeholder.png" />
     <Content Include="Content\images\profile_button_icon.png" />
@@ -300,7 +303,8 @@
     <Content Include="Areas\Game\Views\Bases\_Goods.cshtml" />
     <Content Include="Areas\Minigame\Views\Default\Index.cshtml" />
     <Content Include="Areas\Minigame\Views\Web.config" />
-    <Content Include="Areas\Minigame\Views\TestGame\Index.cshtml" />
+    <Content Include="Areas\Minigame\Views\SpaceshipCargoFinder\Index.cshtml" />
+    <Content Include="Content\less\dialog.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\itemtable.less" />
@@ -430,6 +434,7 @@
     <Folder Include="App_GlobalResources\" />
     <Folder Include="App_LocalResources\" />
     <Folder Include="Areas\Minigame\Models\" />
+    <Folder Include="JS\minigame\SpaceshipCargoFinder\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

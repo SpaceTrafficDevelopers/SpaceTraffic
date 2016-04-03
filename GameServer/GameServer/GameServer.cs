@@ -28,6 +28,8 @@ using System.Xml;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Entities.Goods;
 using SpaceTraffic.Entities.Minigames;
+using SpaceTraffic.Game.Actions;
+using SpaceTraffic.Game.Minigame;
 
 namespace SpaceTraffic.GameServer
 {
@@ -180,6 +182,10 @@ namespace SpaceTraffic.GameServer
             //TODO: add this into log-on and remove into log-off
             this.worldManager.AddPlayer(1);
 
+            // Inicializace herního světa.
+            this.gameManager = new GameManager(this, this.gameStateManager);
+            this.gameManager.RestoreGameState();
+
             //test minigame and start action data
             #region minigame test data
 
@@ -198,8 +204,8 @@ namespace SpaceTraffic.GameServer
                 ConditionType = ConditionType.CREDIT,
                 ConditionArgs = "100",
                 ExternalClient = false,
-                MinigameClassFullName = null,
-                ClientURL = "/TestGame"
+                MinigameClassFullName = "SpaceTraffic.Game.Minigame.SpaceshipCargoFinder, SpaceTraffic.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                ClientURL = "/SpaceshipCargoFinder"
             };
 
             this.minigameManager.registerMinigame(md);
@@ -208,13 +214,12 @@ namespace SpaceTraffic.GameServer
             md.ClientURL = "http://www.google.com";
 
             this.minigameManager.registerMinigame(md);
+            IGameAction ga = new MinigameAllGamesLifeAction();
+
+            this.Game.PlanEvent(ga, DateTime.UtcNow);
+
             #endregion
 
-            // Inicializace herního světa.
-            this.gameManager = new GameManager(this, this.gameStateManager);
-            this.gameManager.RestoreGameState();
-
-            
             serviceManager = new ServiceManager();
             //Načíst servisy z konfigurace
 			serviceManager.ServiceList = new List<Type>(new Type[] { typeof(AccountService), typeof(GameService), typeof(HelloWorldService), typeof(AchievementsService), typeof(CargoService), typeof(ShipsService), typeof(PlanningService), typeof(PlayerService), typeof(MinigameService)});

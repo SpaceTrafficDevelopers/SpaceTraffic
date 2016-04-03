@@ -16,7 +16,6 @@ limitations under the License.
 **/
 using SpaceTraffic.Engine;
 using SpaceTraffic.Game.Events;
-using SpaceTraffic.Game.Minigame;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,14 +24,14 @@ using System.Text;
 namespace SpaceTraffic.Game.Actions
 {
     /// <summary>
-    /// Minigame check life action.
+    /// Action for check if all minigames are alive.
     /// </summary>
-    public class MinigameLifeControlAction : IGameAction
+    public class MinigameAllGamesLifeAction : IGameAction
     {
         /// <summary>
         /// Next control time in minutes.
         /// </summary>
-        private const int NEXT_CONTROL_TIME = 1;
+        private const int NEXT_CONTROL_TIME = 30;
 
         public GameActionState State { get; set; }
 
@@ -42,21 +41,12 @@ namespace SpaceTraffic.Game.Actions
 
         public object Result { get; set; }
 
-        //0 -> minigame id
         public object[] ActionArgs { get; set; }
 
         public void Perform(IGameServer gameServer)
         {
-            int minigameId = int.Parse(this.ActionArgs[0].ToString());
-            bool isAlive = gameServer.Minigame.checkMinigameLife(minigameId);
-
-            if (isAlive)
-                gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddMinutes(NEXT_CONTROL_TIME));
-            else
-            {
-                gameServer.Minigame.endGame(minigameId);
-                gameServer.Minigame.removeGame(minigameId);
-            }
+            gameServer.Minigame.checkLifeOfAllMinigames();
+            gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddMinutes(NEXT_CONTROL_TIME));
 
             this.State = GameActionState.FINISHED;
         }

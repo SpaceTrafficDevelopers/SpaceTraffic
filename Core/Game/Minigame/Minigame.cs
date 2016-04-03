@@ -79,7 +79,7 @@ namespace SpaceTraffic.Game.Minigame
             this.LastRequestTime = createTime;
         }
 
-        public object performAction(string actionName, object[] actionArgs)
+        public object performAction(string actionName, params object[] actionArgs)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace SpaceTraffic.Game.Minigame
             }
         }
 
-        public object performActionWithLock(string actionName, object[] actionArgs)
+        public object performActionWithLock(string actionName, params object[] actionArgs)
         {
             lock (lockObj)
             {
