@@ -1,4 +1,5 @@
-﻿/**
+﻿using NLog;
+/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +32,12 @@ namespace SpaceTraffic.Game.Minigame
         /// <summary>
         /// Max request time in milisecond (1 minute).
         /// </summary>
-        private const long MAX_REQUEST_TIME = 60000;
+        protected const long MAX_REQUEST_TIME = 60000;
+
+        /// <summary>
+        /// Logger.
+        /// </summary>
+        private Logger logger = LogManager.GetCurrentClassLogger();
 
         [DataMember]
         public int ID { get; set; }
@@ -54,7 +60,7 @@ namespace SpaceTraffic.Game.Minigame
         [DataMember]
         public DateTime LastRequestTime { get; set; }
 
-        private object lockObj = new object();
+        protected object lockObj = new object();
 
         /// <summary>
         /// Minigame constructor without parameters for serialization.
@@ -90,7 +96,7 @@ namespace SpaceTraffic.Game.Minigame
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                logger.InfoException("Exception during performAction of Minigame.", e);
                 throw e;
             }
         }

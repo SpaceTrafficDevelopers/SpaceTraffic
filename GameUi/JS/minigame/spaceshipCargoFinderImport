@@ -1,0 +1,9 @@
+﻿ ../ui/Ajax.js
+ SpaceshipCargoFinder/Food.js
+ SpaceshipCargoFinder/Game.js
+ SpaceshipCargoFinder/GameArea.js
+ SpaceshipCargoFinder/GameDialog.js
+ SpaceshipCargoFinder/Position.js
+ SpaceshipCargoFinder/SendAjaxMessage.js
+ SpaceshipCargoFinder/Snake.js
+ SpaceshipCargoFinder/StartGameDialog.js

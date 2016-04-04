@@ -43,7 +43,7 @@ namespace SpaceTraffic.Game.Minigame
         public object addScore(){
             this.score++;
 
-            if (this.score >= WIN_SCORE)
+            if (this.score == WIN_SCORE)
                 return true;
             else
                 return false;
@@ -65,6 +65,22 @@ namespace SpaceTraffic.Game.Minigame
 
             return false;
         }
+
+        public SpaceshipCargoFinderGameInfo getGameInfo()
+        {
+            SpaceshipCargoFinderGameInfo info = new SpaceshipCargoFinderGameInfo
+            {
+                ID = this.ID,
+                Width = WIDTH,
+                Height = HEIGHT,
+                CellSize = CELL_SIZE,
+                WinScore = WIN_SCORE,
+                RewardCount = (int)this.Descriptor.RewardAmount,
+                SnakeLenght = 5
+            };
+
+            return info;
+        }
     }
 
     [DataContract]
@@ -75,5 +91,30 @@ namespace SpaceTraffic.Game.Minigame
 
         [DataMember]
         public int Y { get; set; }
+    }
+
+    [DataContract]
+    public class SpaceshipCargoFinderGameInfo
+    {
+        [DataMember]
+        public int ID { get; set; }
+
+        [DataMember]
+        public int Width { get; set; }
+
+        [DataMember]
+        public int Height { get; set; }
+
+        [DataMember]
+        public int CellSize { get; set; }
+
+        [DataMember]
+        public int WinScore { get; set; }
+
+        [DataMember]
+        public int SnakeLenght { get; set; }
+        
+        [DataMember]
+        public int RewardCount { get; set; }
     }
 }

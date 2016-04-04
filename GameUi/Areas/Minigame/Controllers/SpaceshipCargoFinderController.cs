@@ -1,4 +1,5 @@
-﻿/**
+﻿using SpaceTraffic.Game.Minigame;
+/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,10 +28,34 @@ namespace SpaceTraffic.GameUi.Areas.Minigame.Controllers
     {
         public ActionResult Index(int gameId)
         {
+            Result result = GSClient.MinigameService.performAction(gameId, "getGameInfo", null);
+            
+            if (result.State == ResultState.FAILURE){
+                ViewBag.Error = result;
+                
+                return View();
+            }
+
+            SpaceshipCargoFinderGameInfo info = result.ReturnValue as SpaceshipCargoFinderGameInfo;
+
             ViewBag.GameName = "Spaceship cargo finder";
-            ViewBag.gameId = gameId;
-            //return HttpNotFound();
+            ViewBag.GameInfo = result.ReturnValue;
+            ViewBag.StartDescription = string.Format("Kapitánovi se rozsypal náklad. " +
+                    "Pomož mu nasbírat alespoň {0} jednotek nákladu a dostaneš odměnu {1} kreditů.",
+                    info.WinScore, info.RewardCount);
+
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult EndGame(int minigameId)
+        {
+            int gameId = minigameId;
+
+            GSClient.MinigameService.endGame(gameId);
+            GSClient.MinigameService.removeGame(gameId);
+
+            return null;
         }
     }
 }

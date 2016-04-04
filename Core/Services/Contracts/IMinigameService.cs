@@ -248,6 +248,7 @@ namespace SpaceTraffic.Services.Contracts
             knownTypes.Add(typeof(MinigameDescriptor));
             knownTypes.Add(typeof(Position));
             knownTypes.Add(typeof(List<Position>));
+            knownTypes.Add(typeof(SpaceshipCargoFinderGameInfo));
             return knownTypes;
         }
     }

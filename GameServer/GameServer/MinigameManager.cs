@@ -1,4 +1,5 @@
-﻿/**
+﻿using NLog;
+/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -90,6 +91,11 @@ namespace SpaceTraffic.GameServer
         /// MinigameControls servent.
         /// </summary>
         private MinigameControls minigameControls;
+        
+        /// <summary>
+        /// Logger.
+        /// </summary>
+        private Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Minigame manager constructor.
@@ -188,9 +194,9 @@ namespace SpaceTraffic.GameServer
                     return minigame;
                 }
             }
-            catch (System.IO.FileNotFoundException)
+            catch (System.IO.FileNotFoundException e)
             {
-                Console.WriteLine("Minigame file with full name " + descriptor.MinigameClassFullName + " was not found.");
+                logger.ErrorException("Minigame file with assembly qualified name " + descriptor.MinigameClassFullName + " was not found.", e);
             }
 
             return null;
@@ -385,9 +391,9 @@ namespace SpaceTraffic.GameServer
                 {
                     minigames = minigamesByStartAction[actionName].Minigames;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    Console.WriteLine("For start action with " + actionName + " name does not exist any Minigame.");
+                    logger.InfoException("For start action with " + actionName + " name does not exist any Minigame.", e);
                     return null;
                 }
             }
@@ -467,9 +473,9 @@ namespace SpaceTraffic.GameServer
                 IMinigame minigame = this.activeMinigames[minigameId];
                 return minigame;
             }
-            catch (KeyNotFoundException)
+            catch (KeyNotFoundException e)
             {
-                Console.WriteLine("Minigame with ID " + minigameId + " was not found in ActiveMinigames.");
+                logger.InfoException("Minigame with ID " + minigameId + " was not found in ActiveMinigames.", e);
             }
 
             return null;
@@ -540,8 +546,8 @@ namespace SpaceTraffic.GameServer
 
                     return Result.createSuccessResult("Hra s id " + minigameId + " byla úspěšně odstraněna.");
                 }
-                catch (KeyNotFoundException) {
-                    Console.WriteLine("Minigame with ID " + minigameId + " was not found in ActiveMinigames.");
+                catch (KeyNotFoundException e) {
+                    logger.InfoException("Minigame with ID " + minigameId + " was not found in ActiveMinigames.", e);
                 }
                     
                 return Result.createFailureResult("Hra již byla pravděpodobně odstraněna.");
@@ -595,19 +601,20 @@ namespace SpaceTraffic.GameServer
         public bool checkMinigameLife(int minigameId)
         {
             IMinigame minigame = getActiveGameById(minigameId);
-
+            
             if (minigame != null)
                 return minigame.isAlive(this.gameServer.Game.currentGameTime.Value);
             
             return false;
         }
 
-        public void checkLifeOfAllMinigames()
+        public void checkLifeOfAllMinigames(long limitForControl)
         {
             foreach (var item in this.activeMinigames)
             {
                 int id = item.Value.ID;
-                if (this.checkMinigameLife(id))
+                TimeSpan controlLimit = item.Value.CreateTime - this.gameServer.Game.currentGameTime.Value;
+                if (controlLimit.TotalMilliseconds > limitForControl && !this.checkMinigameLife(id))
                 {
                     this.endGame(id);
                     this.removeGame(id);

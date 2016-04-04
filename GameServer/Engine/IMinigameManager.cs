@@ -196,10 +196,11 @@ namespace SpaceTraffic.Engine
         int actualPlayingMinigameId(int playerId);
 
         /// <summary>
-        /// Method for checking all minigames life and when they are not
-        /// alive, than will be removed.
+        /// Method for checking all minigames life and when the minigame 
+        /// was created before minimal limit and is not alive, than will be removed.
         /// </summary>
-        void checkLifeOfAllMinigames();
+        /// <param name="limitForControl">minimal limit in milisecond for control</param>
+        void checkLifeOfAllMinigames(long limitForControl);
 
         /// <summary>
         /// Method for check minigame life and if minigame is alive it is updated last request time.

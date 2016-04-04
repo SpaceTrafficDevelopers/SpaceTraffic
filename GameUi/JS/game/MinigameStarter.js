@@ -144,9 +144,14 @@ function MinigameStarterDialog() {
         var win;
         var minigameDescriptor = getDescriptorById(selectedGame);
 
-        if(!minigameDescriptor.ExternalClient)
-            win = window.open('', '', 'height=500,width=550,menubar=no,location=no,status=no,scrollbars=no,directories=no');
+        if (!minigameDescriptor.ExternalClient) {
+            var width = 550;
+            var height = 500;
+            var x = screen.width / 2 - width / 2;
+            var y = screen.height / 2 - height / 2;
 
+            win = window.open('', '', 'height='+height+', width='+width+', left='+x+',top='+y+', menubar=no, location=no, status=no, scrollbars=no, directories=no');
+        }
         var startGameCallback = function (gameId) { 
             if (gameId !== -1) {
                 if (minigameDescriptor !== null) {

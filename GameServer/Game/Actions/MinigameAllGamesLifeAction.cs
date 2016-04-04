@@ -29,7 +29,7 @@ namespace SpaceTraffic.Game.Actions
     public class MinigameAllGamesLifeAction : IGameAction
     {
         /// <summary>
-        /// Next control time in minutes.
+        /// Next control time in minutes. It is used as minimal limit for check minigame life.
         /// </summary>
         private const int NEXT_CONTROL_TIME = 30;
 
@@ -45,7 +45,8 @@ namespace SpaceTraffic.Game.Actions
 
         public void Perform(IGameServer gameServer)
         {
-            gameServer.Minigame.checkLifeOfAllMinigames();
+            //convert NEXT_CONTROL_TIME from minutes to milisecond
+            gameServer.Minigame.checkLifeOfAllMinigames(30*60*1000);
             gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddMinutes(NEXT_CONTROL_TIME));
 
             this.State = GameActionState.FINISHED;

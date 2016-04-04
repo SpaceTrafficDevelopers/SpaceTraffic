@@ -43,10 +43,16 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
 
             if (action.CompareTo("addScore") == 0)
                 return addScore(gameId, data, controller);
+
             else if (action.CompareTo("checkCollision") == 0)
                 return checkCollision(gameId, data, controller);
+
             else if (action.CompareTo("updateRequest") == 0)
                 return updateRequest(gameId, controller);
+
+            else if (action.CompareTo("removeGame") == 0)
+                return removeGame(gameId, controller);
+
             else
                 return null;
         }
@@ -69,15 +75,17 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
             }
 
             Result result = controller.GSClient.MinigameService.performAction(gameId, "checkCollision", body);
+            handleResult(result, gameId, controller, false);
 
-            return handleResult(result, gameId, controller, false);
+            return result;
         }
 
         private object addScore(int gameId, dynamic data, AbstractController controller)
         {
             Result result = controller.GSClient.MinigameService.performActionLock(gameId, "addScore", true, null);
+            handleResult(result, gameId, controller, true);
 
-            return handleResult(result, gameId, controller, true);
+            return result;
         }
 
         private object updateRequest(int gameId, AbstractController controller)
@@ -85,23 +93,24 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
             return controller.GSClient.MinigameService.checkMinigameLifeAndUpdateLastRequestTime(gameId);
         }
 
-        private object handleResult(Result result, int gameId, AbstractController controller, bool reward)
+        private void handleResult(Result result, int gameId, AbstractController controller, bool reward)
         {
-            if (result.State == ResultState.FAILURE)
-                return result;
-
             if ((bool)result.ReturnValue)
             {
                 controller.GSClient.MinigameService.endGame(gameId);
-                if(reward)
+                
+                if (reward)
                     controller.GSClient.MinigameService.rewardPlayer(gameId, controller.getCurrentPlayerId());
-
-                controller.GSClient.MinigameService.removeGame(gameId);
-
-                return true;
+                else
+                    controller.GSClient.MinigameService.removeGame(gameId);
             }
+        }
 
-            return false;
+        private object removeGame(int gameId, AbstractController controller)
+        {
+            controller.GSClient.MinigameService.removeGame(gameId);
+
+            return null;
         }
     
     }
