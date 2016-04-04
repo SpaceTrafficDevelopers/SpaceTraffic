@@ -71,7 +71,10 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 
         public void RegisterPlayer(Entities.Player player)
         {
-            throw new NotImplementedException();
+            using (var channel = this.GetClientChannel())
+            {
+                (channel as IAccountService).RegisterPlayer(player);
+            }
         }
 
 
@@ -89,6 +92,45 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             using (var channel = this.GetClientChannel())
             {
                 (channel as IAccountService).RemovePlayerFromActivePlayers(playerId);
+            }
+        }
+
+        /// <summary>
+        /// Method check if username exists
+        /// </summary>
+        /// <param name="userName">Player username</param>
+        /// <returns></returns>
+        public bool AccountUsernameExists(string userName)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IAccountService).AccountUsernameExists(userName);
+            }
+        }
+
+        /// <summary>
+        /// Method check if email exists
+        /// </summary>
+        /// <param name="email">Player email</param>
+        /// <returns></returns>
+        public bool AccountEmailExists(string email)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IAccountService).AccountEmailExists(email);
+            }
+        }
+
+        /// <summary>
+        /// Method check if user exists
+        /// </summary>
+        /// <param name="accountId">Player id</param>
+        /// <returns></returns>
+        public bool AccountExists(int accountId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IAccountService).AccountExists(accountId);
             }
         }
     }

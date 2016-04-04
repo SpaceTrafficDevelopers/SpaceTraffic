@@ -218,8 +218,55 @@ namespace SpaceTraffic.GameUi.Security
 
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
-            //todo: CreateUser
-            throw new NotImplementedException();
+            string usernameLower = username.ToLower();
+
+            if (!ValidateUserData(username, password, email, out status))
+                return null;
+            if (AccountDataTaken(usernameLower, email, out status))
+                return null;
+
+            Entities.Player newPlayer = new Entities.Player() { PlayerName = usernameLower, FirstName = username, PsswdHash = password, PsswdSalt="", Email = email, AddedDate = DateTime.Now, DateOfBirth = DateTime.Now, LastVisitedDate = DateTime.Now, LastName = "", ExperienceLevel = 0, Experiences = 0, Credit = 0 };
+            GSClient.AccountService.RegisterPlayer(newPlayer);
+
+            if (!GSClient.AccountService.AccountUsernameExists(usernameLower))
+            {
+                status = MembershipCreateStatus.ProviderError;
+                return null;
+            }
+
+            status = MembershipCreateStatus.Success;
+            return GetUser(username, false);
+        }
+
+        private bool ValidateUserData(string username, string password, string email, out MembershipCreateStatus status)
+        {
+            //TODO: Evaluate if implementation is needed
+            status = MembershipCreateStatus.Success;
+            return true;
+        }
+
+        /// <summary>
+        /// Check if account data are taken by another user
+        /// </summary>
+        /// <param name="username">Player username</param>
+        /// <param name="email">Player email</param>
+        /// <param name="status">Accoun create status</param>
+        /// <returns></returns>
+        private bool AccountDataTaken(string username, string email, out MembershipCreateStatus status)
+        {
+            if (GSClient.AccountService.AccountUsernameExists(username))
+            {
+                status = MembershipCreateStatus.DuplicateUserName;
+                return true;
+            }
+            else if (GSClient.AccountService.AccountUsernameExists(email))
+            {
+                status = MembershipCreateStatus.DuplicateEmail;
+                return true;
+            }
+
+            status = MembershipCreateStatus.Success;
+            return false;
         }
 
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
@@ -324,7 +371,7 @@ namespace SpaceTraffic.GameUi.Security
             //TODO: Exception handling.
             
 
-            return GSClient.AccountService.Authenticate(username, password);
+            return GSClient.AccountService.Authenticate(username.ToLower(), password);
         }
 
         public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
