@@ -38,37 +38,53 @@ namespace SpaceTraffic.Entities
 		[DataMember]
 		public virtual ICollection<EarnedAchievement> EarnedAchievements { get; set; }
 
-		public string Email { get; set; }
+        [DataMember]
+        public string Email { get; set; }
 
-		public string FirstName { get; set; }
+        [DataMember]
+        public string FirstName { get; set; }
 
-		public string LastName { get; set; }
+        [DataMember]
+        public string LastName { get; set; }
 
-		public string PsswdHash { get; set; }
+        [DataMember]
+        public string PsswdHash { get; set; }
 
-		public string PsswdSalt { get; set; }
+        [DataMember]
+        public string PsswdSalt { get; set; }
 
-		public DateTime DateOfBirth { get; set; }
+        [DataMember]
+        public DateTime DateOfBirth { get; set; }
 
-		public string OrionEmail { get; set; }
+        [DataMember]
+        public string OrionEmail { get; set; }
 
-		public bool IsFavStudent { get; set; }
+        [DataMember]
+        public bool IsFavStudent { get; set; }
 
-		public bool IsOrionEmailConfirmed { get; set; }
+        [DataMember]
+        public bool IsOrionEmailConfirmed { get; set; }
 
-		public bool IsEmailConfirmed { get; set; }
+        [DataMember]
+        public bool IsEmailConfirmed { get; set; }
 
-		public bool IsAccountLocked { get; set; }       
+        [DataMember]
+        public bool IsAccountLocked { get; set; }
 
-		public DateTime AddedDate { get; set; }
+        [DataMember]
+        public DateTime AddedDate { get; set; }
 
-		public DateTime LastVisitedDate { get; set; }
+        [DataMember]
+        public DateTime LastVisitedDate { get; set; }
 
-		public string CorporationName { get; set; }
+        [DataMember]
+        public string CorporationName { get; set; }
 
-		public int Credit { get; set; }       
+        [DataMember]
+        public int Credit { get; set; }
 
-		public virtual ICollection<SpaceShip> SpaceShips { get; set; }
+        [DataMember]
+        public virtual ICollection<SpaceShip> SpaceShips { get; set; }
 
 		[DataMember]
 		public int ExperienceLevel { get; set; }
