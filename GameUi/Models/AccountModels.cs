@@ -56,5 +56,11 @@ namespace SpaceTraffic.GameUi.Models
         public bool RememberMe { get; set; }
     }
 
+    public class LostPasswordModel
+    {
+        [DataType(DataType.Text)]
+        public string UserName { get; set; }
+    }
+
     
 }
