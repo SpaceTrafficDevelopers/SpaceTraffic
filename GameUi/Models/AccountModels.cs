@@ -58,9 +58,11 @@ namespace SpaceTraffic.GameUi.Models
 
     public class LostPasswordModel
     {
+        [Required]
         [DataType(DataType.Text)]
         public string UserName { get; set; }
 
+        [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
     }
