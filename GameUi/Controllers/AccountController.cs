@@ -127,7 +127,7 @@ namespace SpaceTraffic.GameUi.Controllers
             {
 
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(null, model.Password, model.Email, null, null, true, null, out createStatus);
+                Membership.CreateUser(model.NickName, model.Password, model.Email, null, null, true, null, out createStatus);
 
                 //if (createStatus == MembershipCreateStatus.Success)
                 //{
@@ -143,7 +143,10 @@ namespace SpaceTraffic.GameUi.Controllers
                 //regModel.WizzardStep = RegistrationWizzardStep.ACCOUNT_INFO;
                 //this.TempData["registration"] = regModel;
 
-                return View("RegisterStep2", new PlayerInfoModel());
+                //return View("RegisterStep2", new PlayerInfoModel());
+                if(createStatus == MembershipCreateStatus.Success)
+                    return RedirectToAction("RegistrationSuccessful", "Account");
+
             }
             return View(model);
         }
