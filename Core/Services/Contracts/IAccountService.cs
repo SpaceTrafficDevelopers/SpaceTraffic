@@ -36,6 +36,30 @@ namespace SpaceTraffic.Services.Contracts
         [OperationContract]
         AccountInfo GetAccountInfoByAccountId(int accountId);
 
+        /// <summary>
+        /// Method check if username exists
+        /// </summary>
+        /// <param name="userName">Player username</param>
+        /// <returns></returns>
+        [OperationContract]
+        bool AccountUsernameExists(string userName);
+
+        /// <summary>
+        /// Method check if email exists
+        /// </summary>
+        /// <param name="email">Player email</param>
+        /// <returns></returns>
+        [OperationContract]
+        bool AccountEmailExists(string email);
+
+        /// <summary>
+        /// Method check if user exists
+        /// </summary>
+        /// <param name="accountId">Player id</param>
+        /// <returns></returns>
+        [OperationContract]
+        bool AccountExists(int accountId);
+        
         [OperationContract]
         void RegisterPlayer(Player player);
 
