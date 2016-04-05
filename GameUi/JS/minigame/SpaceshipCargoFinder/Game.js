@@ -1,4 +1,4 @@
-﻿function Game(canvas, gameId, gameName) {
+﻿function Game(canvas, gameId, gameName, pauseDialog) {
     this.gameArea;
     this.snake;
     this.food;
@@ -8,28 +8,38 @@
     this.contex = canvas.getContext("2d");
     this.gameId = gameId;
     this.gameName = gameName;
+    this.pauseDialog = pauseDialog;
+    this.status;
 
     var interval = 70;
     var that = this;
 
     this.init = function (pieceSize, snakeLength) {
         this.gameArea = new GameArea(this.canvas.width, this.canvas.height, pieceSize);
-        this.gameArea.init();
-
         this.snake = new Snake(snakeLength);
         this.food = new Food();
 
         this.score = 0;
         this.snake.createSnake();
-
-        this.food.init();
         this.food.generateFood(this.gameArea, this.snake);
 
+        var imgLoader = new ImageLoader();
+        imgLoader.createImages(initialPaint);
+
+        this.gameArea.setImage(imgLoader.background);
+        this.food.setImage(imgLoader.cargo);
+        this.snake.setImages(imgLoader.snakeUp, imgLoader.snakeRight, imgLoader.snakeDown, imgLoader.snakeLeft, imgLoader.cargo);
+
+        imgLoader.loadImages();
         keyBinding();
 
-        this.gameArea.paint(that.contex);
-        this.food.paint(that.contex, that.gameArea.cellSize);
-        this.snake.paint(that.contex, that.gameArea.cellSize);
+        this.status = State.PREPARED;
+    }
+
+    function initialPaint() {
+        that.gameArea.paint(that.contex);
+        that.food.paint(that.contex, that.gameArea.cellSize);
+        that.snake.paint(that.contex, that.gameArea.cellSize);
     }
 
     this.update = function () {
@@ -57,6 +67,7 @@
 
     function stopGame() {
         clearInterval(that.gameLoop);
+        that.status = State.STOP;
     }
 
     function paintScore() {
@@ -84,7 +95,12 @@
     }
 
     this.start = function () {
+        preparePauseDialog();
+
         that.gameLoop = setInterval(that.update, interval);
+        that.status = State.RUN;
+
+        initPause()
 
         updateRequestMessage();
         checkCollisionMessage();
@@ -136,4 +152,47 @@
         sendAjaxMessage('PerformActionSpaceshipCargoFinderAddScore', 'PerformActionSpaceshipCargoFinder',
             { minigameId: that.gameId, action: 'addScore' }, addScoreCallback)
     }
+
+    function initPause() {
+        window.onblur = function () {
+            if (that.status == State.RUN && typeof (that.gameLoop) != 'undefined') {
+                clearInterval(that.gameLoop);
+                that.status = State.PAUSE;
+
+                if (that.pauseDialog.dialog('isOpen') == false)
+                    that.pauseDialog.dialog('open');
+            }
+        }
+    }
+
+    function preparePauseDialog() {
+        that.pauseDialog.dialog({
+            autoOpen: false,
+            title: that.gameName,
+            modal: true,
+            closeOnEscape: false,
+            buttons: {
+                'Pokračovat': function () {
+
+                    $(this).dialog('close');
+                    setTimeout(function () {
+
+                        if (that.status == State.PAUSE && typeof (that.gameLoop) != 'undefined') {
+                            that.gameLoop = setInterval(that.update, interval);
+                            that.status = State.RUN;
+                        }
+
+                    }, 500)
+                }
+            }
+        });
+    }
+
+    var State = {
+        PREPARED : 0,
+        RUN: 1,
+        PAUSE: 2,
+        STOP: 3,
+    }
+
 };

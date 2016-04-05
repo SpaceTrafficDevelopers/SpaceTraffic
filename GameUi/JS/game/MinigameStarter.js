@@ -150,7 +150,7 @@ function MinigameStarterDialog() {
             var x = screen.width / 2 - width / 2;
             var y = screen.height / 2 - height / 2;
 
-            win = window.open('', '', 'height='+height+', width='+width+', left='+x+',top='+y+', menubar=no, location=no, status=no, scrollbars=no, directories=no');
+            win = window.open('', '', 'height=' + height + ', width=' + width + ', left=' + x + ',top=' + y + ', menubar=no, location=no, status=no, resizable=yes, scrollbars=no');
         }
         var startGameCallback = function (gameId) { 
             if (gameId !== -1) {

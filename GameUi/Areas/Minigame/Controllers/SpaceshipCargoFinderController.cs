@@ -38,7 +38,6 @@ namespace SpaceTraffic.GameUi.Areas.Minigame.Controllers
 
             SpaceshipCargoFinderGameInfo info = result.ReturnValue as SpaceshipCargoFinderGameInfo;
 
-            ViewBag.GameName = "Spaceship cargo finder";
             ViewBag.GameInfo = result.ReturnValue;
             ViewBag.StartDescription = string.Format("Kapitánovi se rozsypal náklad. " +
                     "Pomož mu nasbírat alespoň {0} jednotek nákladu a dostaneš odměnu {1} kreditů.",

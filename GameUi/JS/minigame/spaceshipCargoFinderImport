@@ -1,5 +1,6 @@
 ﻿ ../ui/Ajax.js
  SpaceshipCargoFinder/Food.js
+ SpaceshipCargoFinder/ImageLoader.js
  SpaceshipCargoFinder/Game.js
  SpaceshipCargoFinder/GameArea.js
  SpaceshipCargoFinder/GameDialog.js

@@ -194,9 +194,9 @@ namespace SpaceTraffic.GameServer
 
             MinigameDescriptor md = new MinigameDescriptor
             {
-                Name = "TestGame",
+                Name = "Spaceship cargo finder",
                 PlayerCount = 1,
-                Description = "Minihra",
+                Description = "Hra na motiva hada, kde je hlavním úkolem nasbírat alespoň 30 jednotek nákladu.",
                 StartActions = new List<StartAction>() { startAction },
                 RewardType = RewardType.CREDIT,
                 SpecificReward = null,

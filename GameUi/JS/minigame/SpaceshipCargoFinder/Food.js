@@ -4,9 +4,8 @@
 
     var that = this;
 
-    this.init = function () {
-        this.cargo = new Image();
-        this.cargo.src = "~/../../Content/images/Minigame/SpaceshipCargoFinder/cargo.png";
+    this.setImage = function (cargoImg) {
+        this.cargo = cargoImg;
     }
 
     this.generateFood = function (gameArea, snake) {

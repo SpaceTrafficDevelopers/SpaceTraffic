@@ -6,9 +6,8 @@
     this.yCellCount = height / cellSize;
     this.background;
 
-    this.init = function () {
-        this.background = new Image();
-        this.background.src = '~/../../Content/images/Minigame/SpaceshipCargoFinder/background.png';
+    this.setImage = function (backgroundImg) {
+        this.background = backgroundImg;
     }
 
     this.paint = function (context) {

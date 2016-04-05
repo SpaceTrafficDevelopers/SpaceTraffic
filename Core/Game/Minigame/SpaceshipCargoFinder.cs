@@ -71,6 +71,7 @@ namespace SpaceTraffic.Game.Minigame
             SpaceshipCargoFinderGameInfo info = new SpaceshipCargoFinderGameInfo
             {
                 ID = this.ID,
+                Name = this.Descriptor.Name,
                 Width = WIDTH,
                 Height = HEIGHT,
                 CellSize = CELL_SIZE,
@@ -98,6 +99,9 @@ namespace SpaceTraffic.Game.Minigame
     {
         [DataMember]
         public int ID { get; set; }
+
+        [DataMember]
+        public string Name { get; set; }
 
         [DataMember]
         public int Width { get; set; }

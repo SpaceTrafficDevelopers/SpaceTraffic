@@ -7,7 +7,7 @@
     <meta name="author" xml:lang="cs" content="Space Traffic Team" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
 
-    <title>@ViewBag.GameName</title>
+    <title>@ViewBag.GameInfo.Name</title>
 
     <link href='https://fonts.googleapis.com/css?family=Exo:400,800|Audiowide&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link href="@Url.Content("~/Content/Game.less")" rel="stylesheet" type="text/css" />
@@ -18,7 +18,7 @@
     </script>
 
 </head>
-<body onblur="self.focus();">
+<body>
     @Content.Script("jquery-2.2.2.min.js", Url)
     @Content.Script("jquery-ui-1.11.4.min.js", Url)
     @Content.JSImport("~/JS/minigame/spaceshipCargoFinderImport", Url)
@@ -32,25 +32,27 @@
     }
     else
     {
-        <h1 style="text-align: center;">@ViewBag.GameName</h1>
+        <h1 style="text-align: center;">@ViewBag.GameInfo.Name</h1>
         <div style="margin: auto; width: @(ViewBag.GameInfo.Width)px;">
             <div style="float: right;">Score: <span id="score">0</span></div>
             <canvas width="@ViewBag.GameInfo.Width" height="@ViewBag.GameInfo.Height" />
         </div>
         <div id="startDialog" style="display:none;"></div>
         <div id="gameDialog" style="display:none;"></div>
+        <div id="pauseDialog" style="display:none;">Hra byla pozastavena.</div>
         
         <script type="text/javascript">
 
             function resizeAndCenterWindow(height, width){
-                window.resizeTo(width, height);
                 var x = screen.width/2 - width/2;
                 var y = screen.height/2 - height/2;
-
                 window.moveTo(x,y);
+
+                window.resizeTo(width, height);
             }
 
             $(document).ready(function () {
+
                 $(window).bind("beforeunload", function() {
                     $.ajax({
                         url: "/Minigame/SpaceshipCargoFinder/EndGame?minigameId=@ViewBag.GameInfo.ID",
@@ -67,10 +69,12 @@
 
                 var canvas = $("canvas")[0];
 
-                var game = new Game(canvas, @ViewBag.GameInfo.ID, '@ViewBag.GameName');
+                var game = new Game(canvas, @ViewBag.GameInfo.ID, '@ViewBag.GameInfo.Name', $('#pauseDialog'));
                 game.init(@ViewBag.GameInfo.CellSize, @ViewBag.GameInfo.SnakeLenght);
 
-                var startDialog = new StartGameDialog($('#startDialog'), game.start, @ViewBag.GameInfo.ID, '@ViewBag.GameName','@ViewBag.StartDescription');
+                var startDialog = new StartGameDialog($('#startDialog'), game.start, @ViewBag.GameInfo.ID,
+                    '@ViewBag.GameInfo.Name', '@ViewBag.StartDescription');
+
                 startDialog.showDialog();
             });
 

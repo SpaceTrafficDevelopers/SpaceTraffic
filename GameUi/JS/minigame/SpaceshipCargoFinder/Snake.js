@@ -19,24 +19,15 @@
 
         this.head = this.body[0];
         this.direction = Direction.RIGHT;
-        initImages();
     }
 
-    function initImages() {
-        that.shipUp = new Image();
-        that.shipUp.src = "~/../../Content/images/Minigame/SpaceshipCargoFinder/shipUp.png";
+    this.setImages = function (snakeUp, snakeRight, snakeDown, snakeLeft, cargo) {
+        this.shipUp = snakeUp;
+        this.shipRight = snakeRight;
+        this.shipLeft = snakeLeft;
+        this.shipDown = snakeDown;
 
-        that.shipRight = new Image();
-        that.shipRight.src = "~/../../Content/images/Minigame/SpaceshipCargoFinder/shipRight.png";
-
-        that.shipLeft = new Image();
-        that.shipLeft.src = "~/../../Content/images/Minigame/SpaceshipCargoFinder/shipLeft.png";
-
-        that.shipDown = new Image();
-        that.shipDown.src = "~/../../Content/images/Minigame/SpaceshipCargoFinder/shipDown.png";
-
-        that.cargo = new Image();
-        that.cargo.src = "~/../../Content/images/Minigame/SpaceshipCargoFinder/cargo.png";
+        this.cargo = cargo;
     }
 
     this.paint = function (context, cellSize) {
