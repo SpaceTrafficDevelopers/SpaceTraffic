@@ -23,6 +23,9 @@ using System.Web.Mvc;
 
 namespace SpaceTraffic.GameUi.Areas.Minigame.Controllers
 {
+    /// <summary>
+    /// Default controller for Minigame.
+    /// </summary>
     public class DefaultController : AbstractController
     {
         //
@@ -30,7 +33,6 @@ namespace SpaceTraffic.GameUi.Areas.Minigame.Controllers
 
         public ActionResult Index()
         {
-            //return HttpNotFound();
             return View();
         }
     }

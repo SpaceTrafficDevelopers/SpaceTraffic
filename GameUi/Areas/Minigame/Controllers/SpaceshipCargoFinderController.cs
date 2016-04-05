@@ -24,8 +24,16 @@ using System.Web.Mvc;
 
 namespace SpaceTraffic.GameUi.Areas.Minigame.Controllers
 {
+    /// <summary>
+    /// Spaceship cargo finder controller.
+    /// </summary>
     public class SpaceshipCargoFinderController : AbstractController
     {
+        /// <summary>
+        /// Index method.
+        /// </summary>
+        /// <param name="gameId">minigame id</param>
+        /// <returns>view</returns>
         public ActionResult Index(int gameId)
         {
             Result result = GSClient.MinigameService.performAction(gameId, "getGameInfo", null);
@@ -46,6 +54,13 @@ namespace SpaceTraffic.GameUi.Areas.Minigame.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Method for ending game. This is because Firefox and IE cannot
+        /// send request throught ajax message system on close window.
+        /// This is called as sychronize ajax request.
+        /// </summary>
+        /// <param name="minigameId">minigame id</param>
+        /// <returns>null</returns>
         [HttpGet]
         public JsonResult EndGame(int minigameId)
         {

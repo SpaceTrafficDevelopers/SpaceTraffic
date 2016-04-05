@@ -1,17 +1,39 @@
-﻿function Snake(length) {
+﻿//Snake class -- representing ship
+function Snake(length) {
+    //snake head
     this.head;
-    this.body;
-    this.length = length;
-    this.direction;
-    this.updated = true;
-    this.shipUp;
-    this.shipRight;
-    this.shipLeft;
-    this.shipDown;
-    this.cargo;
 
+    //snake body (with head) - array
+    this.body;
+
+    //snake length
+    this.length = length;
+
+    //snake directions
+    this.direction;
+
+    //indication if direction was updated or not (this is very fast key pressing)
+    this.updated = true;
+
+    //ship up image
+    this.shipUpImage;
+
+    //ship right image
+    this.shipRightImage;
+
+    //ship left image
+    this.shipLeftImage;
+
+    //ship down image
+    this.shipDownImage;
+
+    //cargo image
+    this.cargoImage;
+
+    //this for private
     var that = this;
 
+    //method for crating snake (starting position is top left corner with right direction)
     this.createSnake = function () {
         this.body = [];
         for (var i = this.length - 1; i >= 0; i--)
@@ -21,42 +43,47 @@
         this.direction = Direction.RIGHT;
     }
 
-    this.setImages = function (snakeUp, snakeRight, snakeDown, snakeLeft, cargo) {
-        this.shipUp = snakeUp;
-        this.shipRight = snakeRight;
-        this.shipLeft = snakeLeft;
-        this.shipDown = snakeDown;
+    //method for setting images
+    this.setImages = function (snakeUpImg, snakeRightImg, snakeDownImg, snakeLeftImg, cargoImg) {
+        this.shipUpImage = snakeUpImg;
+        this.shipRightImage = snakeRightImg;
+        this.shipLeftImage = snakeLeftImg;
+        this.shipDownImage = snakeDownImg;
 
-        this.cargo = cargo;
+        this.cargoImage = cargoImg;
     }
 
+    //method for painting snake
     this.paint = function (context, cellSize) {
         var ship = getShipImageByDirection();
         context.drawImage(ship, this.head.x * cellSize, this.head.y * cellSize, cellSize, cellSize);
 
         for (var i = 1; i < this.body.length; i++)
-            context.drawImage(this.cargo, this.body[i].x * cellSize, this.body[i].y * cellSize, cellSize, cellSize);
+            context.drawImage(this.cargoImage, this.body[i].x * cellSize, this.body[i].y * cellSize, cellSize, cellSize);
     }
 
+    //method for return right head image by direction
     function getShipImageByDirection() {
         switch (that.direction) {
             case Direction.UP:
-                return that.shipUp;
+                return that.shipUpImage;
 
             case Direction.LEFT:
-                return that.shipLeft;
+                return that.shipLeftImage;
 
             case Direction.RIGHT:
-                return that.shipRight;
+                return that.shipRightImage;
 
             case Direction.DOWN:
-                return that.shipDown;
+                return that.shipDownImage;
 
             default:
-                return that.shipUp;
+                return that.shipUpImage;
         }
     }
 
+    //method for checking collision with self
+    //return true if collision is detected
     this.checkCollisoinWithSelf = function (nextPosition) {
         for (var i = 0; i < this.body.length; i++) {
             if (this.body[i].equal(nextPosition))
@@ -65,6 +92,7 @@
         return false;
     }
 
+    //method ofr move snake, if eat == true, snake is extended
     this.move = function (eat, nextPostion) {
         if (!eat)
             this.body.pop();
@@ -73,6 +101,7 @@
         this.head = this.body[0];
     }
 
+    //method for getting next postion by direction
     this.getNextPosition = function () {
         var nextPosition = new Position(this.head.x, this.head.y);
 
@@ -94,6 +123,7 @@
         return nextPosition;
     }
 
+    //method for change direction on key press (key event handler)
     this.changeDirection = function (key) {
         switch(key) {
             case Direction.UP:
@@ -111,6 +141,8 @@
         }
     }
 
+    //method for set snake direction on direction if current direction is not false direction for next direction
+    //updated is for eliminating fast key pressing error
     function setDirection(direction, falseDirection){
         if(that.direction != direction && that.direction != falseDirection && that.updated){
             that.direction = direction;
@@ -118,6 +150,8 @@
         }
     }
 
+    //direction enum
+    //values are key codes
     var Direction = {
         UP: 38,
         DOWN: 40,

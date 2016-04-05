@@ -22,8 +22,17 @@ using System.Web;
 
 namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
 {
+    /// <summary>
+    /// Ajax handler for spaceship cargo finder start dialog.
+    /// </summary>
     public class StartSpaceshipCargoFinder : IAjaxHandleable
     {
+        /// <summary>
+        /// Method for handeling ajax request. This adding player into game and start game.
+        /// </summary>
+        /// <param name="data">data (required minigame id)</param>
+        /// <param name="controller">controller</param>
+        /// <returns>result or null</returns>
         public object handleRequest(dynamic data, AbstractController controller)
         {
             if (data.ContainsKey("minigameId"))

@@ -25,7 +25,7 @@ using System.Text;
 namespace SpaceTraffic.Game.Actions
 {
     /// <summary>
-    /// Minigame check life action.
+    /// Minigame check life action. When minigame is not alive, than it is end and remove.
     /// </summary>
     public class MinigameLifeControlAction : IGameAction
     {

@@ -2,9 +2,17 @@
 function StartGameDialog(dialogElement, startGameFce, gameId, gameName, startDescription) {
     //dialog element
     this.dialogElement = dialogElement;
+
+    //start function
     this.startGameFce = startGameFce;
+
+    //minigame id
     this.gameId = gameId;
+
+    //game name
     this.gameName = gameName;
+
+    //start description
     this.startDescription = startDescription;
 
     //this for private methods
@@ -33,6 +41,7 @@ function StartGameDialog(dialogElement, startGameFce, gameId, gameName, startDes
         });
     };
 
+    //method for start game. it close dialog and send start game request
     function startGame() {
         that.dialogElement.empty();
         that.dialogElement.dialog('close');
@@ -40,7 +49,9 @@ function StartGameDialog(dialogElement, startGameFce, gameId, gameName, startDes
         sendAjaxMessage('StartSpaceshipCargoFinder', 'StartSpaceshipCargoFinder', { minigameId: that.gameId }, startCallback);
     }
 
+    //start callback method
     function startCallback(result) {
+        //if result is failure alert player and close window, otherwise start game
         if (result.State == 0) {
             alert(result.Message);
             window.close();

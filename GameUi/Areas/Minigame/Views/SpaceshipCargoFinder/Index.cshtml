@@ -42,7 +42,7 @@
         <div id="pauseDialog" style="display:none;">Hra byla pozastavena.</div>
         
         <script type="text/javascript">
-
+            //method for centering and resizing window
             function resizeAndCenterWindow(height, width){
                 var x = screen.width/2 - width/2;
                 var y = screen.height/2 - height/2;
@@ -52,7 +52,9 @@
             }
 
             $(document).ready(function () {
-
+                //bind synchronize ajax call for end game on before unload event
+                //this is because Firefox and IE cannot send asynchronous message through ajax message system
+                //in this event
                 $(window).bind("beforeunload", function() {
                     $.ajax({
                         url: "/Minigame/SpaceshipCargoFinder/EndGame?minigameId=@ViewBag.GameInfo.ID",
@@ -69,9 +71,11 @@
 
                 var canvas = $("canvas")[0];
 
+                //initialing game
                 var game = new Game(canvas, @ViewBag.GameInfo.ID, '@ViewBag.GameInfo.Name', $('#pauseDialog'));
                 game.init(@ViewBag.GameInfo.CellSize, @ViewBag.GameInfo.SnakeLenght);
 
+                //create and show start dialog
                 var startDialog = new StartGameDialog($('#startDialog'), game.start, @ViewBag.GameInfo.ID,
                     '@ViewBag.GameInfo.Name', '@ViewBag.StartDescription');
 
