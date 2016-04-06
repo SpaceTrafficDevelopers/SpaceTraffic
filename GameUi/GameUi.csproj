@@ -299,6 +299,7 @@
     <Content Include="Areas\Game\Views\Ships\_ShipRepair.cshtml" />
     <Content Include="Areas\Game\Views\Cargo\_CargoBuy.cshtml" />
     <Content Include="Areas\Game\Views\Cargo\_CargoSell.cshtml" />
+    <Content Include="Areas\Game\Views\Ships\_ShipCargo.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\itemtable.less" />

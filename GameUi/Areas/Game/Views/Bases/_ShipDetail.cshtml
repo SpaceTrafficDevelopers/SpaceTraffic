@@ -8,7 +8,7 @@
 <div>Poškození: @ViewBag.ship.DamagePercent %</div>
 <div>Stav: @ViewBag.ship.StateText</div>
 <button>Leť na planetu</button>
-<button>Náklad</button>
+<a href="@Url.Action("ShipCargo", "Ships", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax" data-related-element-id="spaceShipDetailContent">Náklad</a>
 <a href="@Url.Action("Buy", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax" data-related-element-id="spaceShipDetailContent">Nakup zboží</a>
 <a href="@Url.Action("Sell", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax" data-related-element-id="spaceShipDetailContent">Prodej zboží</a>
 <a href="@Url.Action("Refuel", "Ships", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax" data-related-element-id="spaceShipDetailContent">Natankuj</a>

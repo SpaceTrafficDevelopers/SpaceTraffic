@@ -72,6 +72,19 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			viewResult.ViewBag.Ships = ships;
 			return viewResult;
 		}
+
+		public ActionResult ShipCargo(int shipId, int baseId)
+		{
+			if (!GSClient.PlayerService.PlayerHasSpaceShip(getCurrentPlayerId(), shipId))
+			{
+				return new EmptyResult().Error("Tato loď ti nepatří!");
+			}
+			var partialView = PartialView("_ShipCargo");
+			SpaceShip ship = GSClient.ShipsService.GetDetailedSpaceShip(shipId);
+			partialView.ViewBag.ship = ship;
+
+			return partialView;
+		}
 		
 		
 
