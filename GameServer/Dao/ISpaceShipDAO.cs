@@ -42,12 +42,19 @@ namespace SpaceTraffic.Dao
 		/// <param name="baseId">The base identifier.</param>
 		/// <returns></returns>
 		IList<SpaceShip> GetPlayersShipsAtBase(int playerId, int baseId);
-        /// <summary>
-        /// Gets space ship by id.
-        /// </summary>
-        /// <param name="spaceShipId">The space ship id.</param>
-        /// <returns>Space ship.</returns>
-        SpaceShip GetSpaceShipById(int spaceShipId);        
+		/// <summary>
+		/// Gets space ship by id.
+		/// </summary>
+		/// <param name="spaceShipId">The space ship id.</param>
+		/// <returns>Space ship.</returns>
+		SpaceShip GetSpaceShipById(int spaceShipId);
+
+		/// <summary>
+		/// Gets space ship by id. Contains details of the ship.
+		/// </summary>
+		/// <param name="spaceShipId">The space ship id.</param>
+		/// <returns>Space ship.</returns>
+		SpaceShip GetDetailedSpaceShipById(int spaceShipId);  
         /// <summary>
         /// Inserts the space ship to DB.
         /// </summary>

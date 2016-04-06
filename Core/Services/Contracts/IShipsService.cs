@@ -35,6 +35,9 @@ namespace SpaceTraffic.Services.Contracts
 
 		[OperationContract]
 		SpaceShip GetSpaceShip(int spaceShipId);
+
+		[OperationContract]
+		SpaceShip GetDetailedSpaceShip(int spaceShipId);
 		
 		
 	}

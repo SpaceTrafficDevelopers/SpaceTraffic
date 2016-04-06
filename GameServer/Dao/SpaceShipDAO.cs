@@ -63,6 +63,22 @@ namespace SpaceTraffic.Dao
 			}
 		}
 
+		public SpaceShip GetDetailedSpaceShipById(int spaceShipId)
+		{
+			using (var contextDB = CreateContext())
+			{
+				
+				var spaceship = contextDB.SpaceShips.Include("SpaceShipsCargos").FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipId));
+				foreach (var cargo in spaceship.SpaceShipsCargos)
+				{
+					cargo.SpaceShip = null;
+					cargo.Cargo = contextDB.Cargos.FirstOrDefault(a => a.CargoId.Equals(cargo.CargoId));
+					cargo.Cargo.SpaceShipsCargos = null;
+				}
+				return spaceship;
+			}
+		}
+
 		public bool InsertSpaceShip(SpaceShip spaceShip)
 		{
 			using (var contextDB = CreateContext())

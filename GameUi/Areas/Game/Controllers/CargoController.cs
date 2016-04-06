@@ -10,6 +10,7 @@ using SpaceTraffic.GameUi.Areas.Game.Models;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
+
     /// <summary>
     /// Cargo Controller
     /// 
@@ -36,7 +37,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             }*/
 			if (!GSClient.PlayerService.PlayerHasSpaceShip(getCurrentPlayerId(), buyerShipId))
             {
-                this.ErrorMessage = "Hráč nemá zakoupenou tuto loď";
+                this.ErrorMessage = "Tato loď ti nepatří!";
 				return false;
             }
 			if (!GSClient.CargoService.PlayerHasEnaughCreditsForCargo(getCurrentPlayerId(), cargoLoadEntityId, count))
@@ -62,47 +63,29 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			GSClient.GameService.PerformAction(getCurrentPlayerId(), "CargoBuy", starSystemName, planetName, cargoLoadEntityId, count, buyingPlace, buyerShipId);
 			//GSClient.GameService.PerformAction(getCurrentPlayerId(), "ShipLoadCargo", starSystemName, planetName, buyerShipId, cargoLoadEntityId, count, buyingPlace);
             return true;
-            //Response.Redirect(Request.Headers.Get("Referer"));
         }
 
 
-        public ActionResult UnloadCargo(string starSystemName, string planetName, int cargoLoadEntityId, int count, string loadingPlace, int buyerId, int spaceShipId)
+        
+        public bool SellCargo(string starSystemName, string planetName, int cargoLoadEntityId, int count, string loadingPlace, int buyerId, int sellerShipId)
         {
-            /* if (!GSClient.GameService.SpaceShipDockedAtBase(buyerId, starSystemName, planetName))
-            {
-                return RedirectToAction("").Warning(String.Format("Loď není zadokována na stejné planetě jako obchodník"));
-            }*/
-			if (!GSClient.PlayerService.PlayerHasSpaceShip(getCurrentPlayerId(), spaceShipId))
-            {
-                return RedirectToAction("").Warning(String.Format("Hráč nemá zakoupenou tuto loď"));
-            }
-            if(!GSClient.CargoService.PlayerHasEnoughCargoOnSpaceShip(spaceShipId, cargoLoadEntityId, count)) {
-                return RedirectToAction("").Warning(String.Format("Nemáš tolik zboží, abys ho mohl prodat"));
-            }
-			GSClient.GameService.PerformAction(getCurrentPlayerId(), "ShipUnloadCargo", starSystemName, planetName, spaceShipId, cargoLoadEntityId, count, loadingPlace, buyerId);
-            return RedirectToAction("").Success(String.Format("Výklad proběhl v pořádku"));
-            //Response.Redirect(Request.Headers.Get("Referer"));
-        }
-        public ActionResult SellCargo(string starSystemName, string planetName, int cargoLoadEntityId, int count, string loadingPlace, int buyerId, int sellerShipId)
-        {
-            /* if (!GSClient.GameService.SpaceShipDockedAtBase(buyerId, starSystemName, planetName))
-            {
-                return RedirectToAction("").Warning(String.Format("Loď není zadokována na stejné planetě jako obchodník"));
-            }*/
+           
 			if (!GSClient.PlayerService.PlayerHasSpaceShip(getCurrentPlayerId(), sellerShipId))
             {
-                return RedirectToAction("").Warning(String.Format("Hráč nemá zakoupenou tuto loď"));
+				this.ErrorMessage = "Tato loď ti nepatří!";
+				return false;
             }
             if (!GSClient.CargoService.PlayerHasEnoughCargoOnSpaceShip(sellerShipId, cargoLoadEntityId, count))
             {
-                return RedirectToAction("").Warning(String.Format("Nemáš tolik zboží, abys ho mohl prodat"));
+				this.ErrorMessage = "Nemáš tolik zboží, abys ho mohl prodat";
+				return false;
             }
 
 			GSClient.GameService.PerformAction(getCurrentPlayerId(), "CargoSell", starSystemName, planetName, cargoLoadEntityId, count, loadingPlace, buyerId, sellerShipId);
-            //Response.Redirect(Request.Headers.Get("Referer"));
-            return RedirectToAction("").Success(String.Format("Prodej proběhl v pořádku"));
+			//GSClient.GameService.PerformAction(getCurrentPlayerId(), "ShipUnloadCargo", starSystemName, planetName, spaceShipId, cargoLoadEntityId, count, loadingPlace, buyerId);
             
-            //return null;
+            return true;
+            
         }
 
 		//
@@ -133,8 +116,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			Trader trader = GSClient.CargoService.GetTraderAtBase(baseId);
 			if (values.Amount > 0)
 			{
-				string[] planetString = trader.Base.Planet.Split('\\');
-				if (this.BuyCargo(planetString[0], planetString[1], cargoId, values.Amount, "TraderCargoDAO", shipId, traderId))
+				if (this.BuyCargo(trader.Base.StarSystemName, trader.Base.PlanetName, cargoId, values.Amount, "TraderCargoDAO", shipId, traderId))
 				{
 					return new EmptyResult().Success("Nakoupeno " + values.Amount + " jednotek zboží.");
 				}
@@ -148,11 +130,56 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			
 		}
 
+		//
+		// GET: /Cargo/Sell
+		public ActionResult Sell(int shipId, int baseId)
+		{
+			int curPlayerId = getCurrentPlayerId();
 
-        /*public ActionResult Planner()
-        {
-            GSClient.GameService.TestPlanner();
-            return RedirectToAction("").Success("Možná se to naplánovalo :D");
-        }*/
+			var partialView = PartialView("_CargoSell");
+
+			SpaceShip ship = GSClient.ShipsService.GetDetailedSpaceShip(shipId);
+			partialView.ViewBag.ship = ship;
+			Trader trader = GSClient.CargoService.GetTraderAtBaseWithCargo(baseId);
+			partialView.ViewBag.trader = trader;
+
+			/* cargos to sell */
+			List<CargoPairModel> cargosToSell = new List<CargoPairModel>();
+			foreach(SpaceShipCargo cargo in ship.SpaceShipsCargos){
+				TraderCargo traderCargo = trader.TraderCargos.FirstOrDefault(c => c.CargoId == cargo.CargoId);
+				if (traderCargo != null) {
+					cargosToSell.Add(new CargoPairModel{shipCargo = cargo, traderCargo = traderCargo});
+				}
+			}
+			partialView.ViewBag.cargosToSell = cargosToSell;
+
+			if (!controlShipAccess(ship))
+			{
+				return new EmptyResult().Error(this.ErrorMessage);
+			}
+			return partialView;
+		}
+
+		[HttpPost]
+		public ActionResult Sell(CargoSellModel values, int shipId, int baseId, int cargoId)
+		{
+			Trader trader = GSClient.CargoService.GetTraderAtBase(baseId);
+			if (values.Amount > 0)
+			{
+				if (this.SellCargo(trader.Base.StarSystemName, trader.Base.PlanetName, cargoId, values.Amount, "TraderCargoDAO", trader.TraderId, shipId))
+				{
+					return new EmptyResult().Success("Prodáno " + values.Amount + " jednotek zboží.");
+				}
+				else
+				{
+					return new EmptyResult().Error(this.ErrorMessage);
+				}
+			}
+			else
+			{
+				return new EmptyResult().Warning("Množství musí být větší než 0.");
+			}
+
+		}
     }
 }

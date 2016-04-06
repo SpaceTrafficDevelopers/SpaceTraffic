@@ -41,6 +41,36 @@ namespace SpaceTraffic.Entities
 		/// </summary>
 		public string Planet { get; set; }
 
+		/// <summary>
+		/// Simple name of planet
+		/// </summary>
+		/// <value>
+		/// The name of the planet.
+		/// </value>
+		public string PlanetName
+		{
+			get
+			{
+				string[] planetString = this.Planet.Split('\\');
+				return planetString[1];
+			}
+		}
+
+		/// <summary>
+		/// Simple name of starSystem
+		/// </summary>
+		/// <value>
+		/// The name of the planet.
+		/// </value>
+		public string StarSystemName
+		{
+			get
+			{
+				string[] planetString = this.Planet.Split('\\');
+				return planetString[0];
+			}
+		}
+
 
         /// <summary>
         /// Trader which trades on the planet

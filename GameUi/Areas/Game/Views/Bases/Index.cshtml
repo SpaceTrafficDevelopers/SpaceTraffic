@@ -5,8 +5,7 @@
 @{
 	foreach (var planetBase in @ViewBag.bases)
 	{
-		string[] planetString = planetBase.Planet.Split('\\');
-		<a href="@Url.Action("Info", "Bases", new { planetName = planetString[1] })" class="ajax baseLink" data-related-element-id="contextPanelContent">
+		<a href="@Url.Action("Info", "Bases", new { planetName = planetBase.PlanetName })" class="ajax baseLink" data-related-element-id="contextPanelContent">
 			<strong>@planetBase.BaseName</strong>
 		</a>
 	}
