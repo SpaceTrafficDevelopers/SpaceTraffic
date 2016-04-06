@@ -711,7 +711,13 @@ namespace SpaceTraffic.GameServerTests.GameServer
         }
 
         #endregion Not Implemented Method
-    }
+
+
+		public Services.Contracts.ICargoService GetCargoService()
+		{
+			throw new NotImplementedException();
+		}
+	}
 
         /// <summary>
     /// Mock for world manager

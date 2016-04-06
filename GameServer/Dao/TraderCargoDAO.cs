@@ -182,10 +182,11 @@ namespace SpaceTraffic.Dao
                     return false;
                 }
 
-                if (dbCargo.CargoCount == 0)
+				/* uncomment if you want cargo to disappear instead of set 0 count. It is this way because ship can sell to trader just things he has */
+                /*if (dbCargo.CargoCount == 0)
                 {
                     return RemoveCargoById(dbCargo.CargoLoadEntityId);
-                }
+                }*/
 
                 return true;
             }

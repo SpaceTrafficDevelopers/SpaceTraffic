@@ -14,30 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 **/
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace SpaceTraffic.Entities
+
+
+using SpaceTraffic.Entities;
+namespace SpaceTraffic.GameUi.Areas.Game.Models
 {
-    public class Trader : ICargoLoad
-    {
-        public int TraderId { get; set; }
+	public class CargoPairModel
+	{
+		public SpaceShipCargo shipCargo;
 
-        public int BaseId { get; set; }
-
-        public virtual Base Base { get; set; }
-
-		public int FuelPrice { get; set; }
-
-		public int RepairPrice { get; set; }
-
-        public virtual ICollection<TraderCargo> TraderCargos { get; set; }
-
-        public string CargoLoadDaoName
-        {
-            get { return "TraderCargoDao"; }
-        }
-    }
+		public TraderCargo traderCargo;
+	}
 }

@@ -61,7 +61,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			List<ICargoLoadEntity> cargos = GS.CurrentInstance.Persistence.GetSpaceShipCargoDAO().GetCargoListByOwnerId(spaceShipId);
 			foreach (ICargoLoadEntity cargo in cargos)
 			{
-				actualVolume += GS.CurrentInstance.Persistence.GetCargoDAO().GetCargoById(cargo.CargoId).Volume;
+				actualVolume += (GS.CurrentInstance.Persistence.GetCargoDAO().GetCargoById(cargo.CargoId).Volume) * cargo.CargoCount;
 			}
 			return (spaceCargo - actualVolume) >= (cargoVolume * count);
 		}
@@ -117,6 +117,27 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 				return false;
 			int count = tc.CargoCount;
 			return count >= cargoCount;
+		}
+
+
+		/// <summary>
+		/// Gets the trader at base.
+		/// </summary>
+		/// <param name="baseId">The base identifier.</param>
+		/// <returns></returns>		
+		public Trader GetTraderAtBase(int baseId)
+		{
+			return GS.CurrentInstance.Persistence.GetTraderDAO().GetTraderByBaseId(baseId);
+		}
+
+		/// <summary>
+		/// Gets the trader at base. There is also full info about his cargo.
+		/// </summary>
+		/// <param name="baseId">The base identifier.</param>
+		/// <returns></returns>		
+		public Trader GetTraderAtBaseWithCargo(int baseId)
+		{
+			return GS.CurrentInstance.Persistence.GetTraderDAO().GetTraderByBaseIdWithCargo(baseId);
 		}
 	}
 }

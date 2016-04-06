@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-	http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,29 +17,20 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.ServiceModel;
-using SpaceTraffic.Entities.PublicEntities;
-using SpaceTraffic.Entities;
+using System.Web;
+using System.Globalization;
+using System.Web.Mvc;
+using System.Web.Security;
 
-namespace SpaceTraffic.Services.Contracts
+namespace SpaceTraffic.GameUi.Areas.Game.Models
 {
-	[ServiceContract]
-	public interface IShipsService
+	public class CargoBuyModel
 	{
+		[Required]
+		[Display(Name = "Množství")]
+		public int Amount { get; set; }
 
-
-		[OperationContract]
-		bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName);
-
-		[OperationContract]
-		SpaceShip GetSpaceShip(int spaceShipId);
-
-		[OperationContract]
-		SpaceShip GetDetailedSpaceShip(int spaceShipId);
-		
-		
 	}
-
 }

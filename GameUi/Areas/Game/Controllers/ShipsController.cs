@@ -28,9 +28,12 @@ using SpaceTraffic.GameUi.Controllers;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
+
 	[Authorize]
 	public class ShipsController : AbstractController
 	{
+
+		const int MAX_DAMAGE = 100;
 
 		public PartialViewResult Index() {
 			return ShipList();
@@ -69,6 +72,19 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			viewResult.ViewBag.Ships = ships;
 			return viewResult;
 		}
+
+		public ActionResult ShipCargo(int shipId, int baseId)
+		{
+			if (!GSClient.PlayerService.PlayerHasSpaceShip(getCurrentPlayerId(), shipId))
+			{
+				return new EmptyResult().Error("Tato loď ti nepatří!");
+			}
+			var partialView = PartialView("_ShipCargo");
+			SpaceShip ship = GSClient.ShipsService.GetDetailedSpaceShip(shipId);
+			partialView.ViewBag.ship = ship;
+
+			return partialView;
+		}
 		
 		
 
@@ -84,7 +100,107 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			return viewResult;
 		}
 
+		//
+		// GET: /Ships/Refuel
+		public ActionResult Refuel(int shipId, int baseId)
+		{
+			int curPlayerId = getCurrentPlayerId();
+			
+			var partialView = PartialView("_ShipRefuel");
+			int credits = GSClient.PlayerService.GetPlayersCredits(curPlayerId);
 
+			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+			partialView.ViewBag.ship = ship;
+			if(!controlShipAccess(ship)){
+				return new EmptyResult().Error(this.ErrorMessage);
+			}
+
+			
+			Trader trader = GSClient.CargoService.GetTraderAtBase(baseId);
+			partialView.ViewBag.trader = trader;
+
+			partialView.ViewBag.maxToBuy = Math.Min(ship.FuelTank - ship.CurrentFuelTank, credits / trader.FuelPrice);
+			return partialView;
+		}
+
+		[HttpPost]
+		public ActionResult Refuel(FuelBuyModel values, int shipId, int baseId)
+		{
+			int curPlayerId = getCurrentPlayerId();
+			int credits = GSClient.PlayerService.GetPlayersCredits(curPlayerId);
+			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+			if (!controlShipAccess(ship))
+			{
+				return new EmptyResult().Error(this.ErrorMessage);
+			}
+
+			Trader trader = GSClient.CargoService.GetTraderAtBase(baseId);
+			int maxAmount = Math.Min(ship.FuelTank - ship.CurrentFuelTank, credits / trader.FuelPrice);
+			int finalAmount = Math.Min(maxAmount, values.Amount);
+			if (finalAmount > 0)
+			{
+				string[] planetString = trader.Base.Planet.Split('\\');
+				GSClient.GameService.PerformAction(curPlayerId, "ShipRefuel", planetString[0], planetString[1], shipId, finalAmount, trader.FuelPrice);
+
+				return new EmptyResult().Success("Tankuje se " + finalAmount + " jednotek paliva.");
+			}
+			else {
+				return new EmptyResult().Warning("Nádrž lodi je plná.");
+			}
+		}
+
+
+		//
+		// GET: /Ships/Repair
+		public ActionResult Repair(int shipId, int baseId)
+		{
+			int curPlayerId = getCurrentPlayerId();
+			var partialView = PartialView("_ShipRepair");
+			int credits = GSClient.PlayerService.GetPlayersCredits(curPlayerId);
+
+			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+			partialView.ViewBag.ship = ship;
+			if (!controlShipAccess(ship))
+			{
+				return new EmptyResult().Error(this.ErrorMessage);
+			}
+
+
+			Trader trader = GSClient.CargoService.GetTraderAtBase(baseId);
+			partialView.ViewBag.trader = trader;
+
+			partialView.ViewBag.maxToRepair = Math.Min(ship.DamagePercent, credits / trader.RepairPrice);
+			return partialView;
+		}
+
+		[HttpPost]
+		public ActionResult Repair(RepairShipModel values, int shipId, int baseId)
+		{
+			int curPlayerId = getCurrentPlayerId();
+			
+			int credits = GSClient.PlayerService.GetPlayersCredits(curPlayerId);
+			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+
+			if (!controlShipAccess(ship))
+			{
+				return new EmptyResult().Error(this.ErrorMessage);
+			}
+
+			Trader trader = GSClient.CargoService.GetTraderAtBase(baseId);
+			int maxAmount = Math.Min((int)ship.DamagePercent, credits / trader.RepairPrice);
+			int finalAmount = Math.Min(maxAmount, values.Amount);
+			if (finalAmount > 0)
+			{
+				string[] planetString = trader.Base.Planet.Split('\\');
+				GSClient.GameService.PerformAction(curPlayerId, "ShipRepair", planetString[0], planetString[1], shipId, finalAmount, trader.RepairPrice);
+
+				return new EmptyResult().Success("Opravuje se " + finalAmount + " procent poškození.");
+			}
+			else {
+				return new EmptyResult().Warning("Loď není poškozená.");
+			}
+		}
+		
 
 		/// <summary>
 		/// Returns the list of all ships defined in SpaceShips.xml

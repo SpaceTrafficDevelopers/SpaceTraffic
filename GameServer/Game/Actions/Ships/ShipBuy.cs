@@ -79,6 +79,8 @@ namespace SpaceTraffic.Game.Actions
 				Consumption = Convert.ToDouble(this.ActionArgs.ElementAt(8)),
 				WearRate = Convert.ToDouble(this.ActionArgs.ElementAt(9)),
 				MaxSpeed = Convert.ToInt32(this.ActionArgs.ElementAt(10)),
+				IsAvailable = true,
+				StateText = SpaceShip.StateTextDefault,
                 UserCode = "",
 				TimeOfArrival = "",
 				CargoSpace = 100    //TODO: je potřeba přidat ještě maximální množství nákladu lodě 

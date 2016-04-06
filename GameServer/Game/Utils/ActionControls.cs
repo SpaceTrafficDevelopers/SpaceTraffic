@@ -1,5 +1,6 @@
 ﻿using SpaceTraffic.Engine;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Services.Contracts;
 /**
 Copyright 2010 FAV ZCU
 
@@ -197,9 +198,10 @@ namespace SpaceTraffic.Game.Utils
         /// <param name="action">Action.</param>
         /// <param name="ship">Instance of spaceship.</param>
         /// <param name="cargo">Cargo load entity.</param>
-        public static void hasShipEnoughCargoSpace(IGameAction action, SpaceShip ship, ICargoLoadEntity cargo)
+        public static void hasShipEnoughCargoSpace(IGameAction action, SpaceShip ship, ICargoLoadEntity cargo, int count)
         {
-            if (!checkSpaceShipCargos(ship, cargo))
+			ICargoService cargoService = gameServer.Game.GetCargoService();
+            if (!cargoService.SpaceShipHasCargoSpace(ship.SpaceShipId, cargo.CargoLoadEntityId, count))
             {
 
                 action.Result = String.Format("Loď {0} nemá dostatek místa na naložení nákladu.", ship.SpaceShipName);
@@ -222,28 +224,7 @@ namespace SpaceTraffic.Game.Utils
             }
         }
 
-        /// <summary>
-        /// Check space for cargo in space ship.
-        /// </summary>
-        /// <param name="gameServer">game server</param>
-        /// <param name="spaceShip">space ship</param>
-        /// <returns>true when ship has space for cargo, otherwise fale</returns>
-        public static bool checkSpaceShipCargos(SpaceShip spaceShip, ICargoLoadEntity cargo)
-        {
-            IGameServer gameServer = GameServer.GameServer.CurrentInstance;
-            List<ICargoLoadEntity> cargoList = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoListByOwnerId(spaceShip.SpaceShipId);
-
-            int freeSpace = spaceShip.CargoSpace;
-
-            foreach (SpaceShipCargo ssc in cargoList)
-            {
-                freeSpace -= ssc.CargoCount * gameServer.Persistence.GetCargoDAO().GetCargoById(cargo.CargoId).Volume;
-            }
-
-            int demandedSpace = gameServer.Persistence.GetCargoDAO().GetCargoById(cargo.CargoId).Volume * cargo.CargoCount;
-
-            return demandedSpace < freeSpace;
-        }
+       
 
         /// <summary>
         /// Check player credit for purchase.

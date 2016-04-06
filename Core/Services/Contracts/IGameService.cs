@@ -37,6 +37,9 @@ namespace SpaceTraffic.Services.Contracts
 		[OperationContract]
 		SpaceTraffic.Entities.Base GetBaseByName(string planetName);
 
+		[OperationContract]
+		IList<SpaceTraffic.Entities.Base> GetAllBases();
+
         [OperationContract]
         int PerformAction(int playerId, string actionName, params object[] actionArgs);
 

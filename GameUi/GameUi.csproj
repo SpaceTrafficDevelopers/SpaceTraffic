@@ -108,6 +108,11 @@
     <Compile Include="Areas\Game\Controllers\ReferencesController.cs" />
     <Compile Include="Areas\Game\Controllers\CargoController.cs" />
     <Compile Include="Areas\Game\Controllers\PlannerController.cs" />
+    <Compile Include="Areas\Game\Models\CargoSellModel.cs" />
+    <Compile Include="Areas\Game\Models\CargoBuyModel.cs" />
+    <Compile Include="Areas\Game\Models\RepairShipModel.cs" />
+    <Compile Include="Areas\Game\Models\FuelBuyModel.cs" />
+    <Compile Include="Areas\Game\Models\CargoPairModel.cs" />
     <Compile Include="Controllers\AbstractController.cs" />
     <Compile Include="Areas\Game\Controllers\TabsControllerBase.cs" />
     <Compile Include="Areas\Game\GameAreaRegistration.cs" />
@@ -291,6 +296,11 @@
     <Content Include="Areas\Game\Views\Bases\_Ships.cshtml" />
     <Content Include="Areas\Game\Views\Bases\_Goods.cshtml" />
     <Content Include="Areas\Game\Views\Bases\_ShipDetail.cshtml" />
+    <Content Include="Areas\Game\Views\Ships\_ShipRefuel.cshtml" />
+    <Content Include="Areas\Game\Views\Ships\_ShipRepair.cshtml" />
+    <Content Include="Areas\Game\Views\Cargo\_CargoBuy.cshtml" />
+    <Content Include="Areas\Game\Views\Cargo\_CargoSell.cshtml" />
+    <Content Include="Areas\Game\Views\Ships\_ShipCargo.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\itemtable.less" />

@@ -1,0 +1,14 @@
+﻿
+@{
+	foreach(var cargo in ViewBag.ship.SpaceShipsCargos){
+		var value = cargo.CargoCount * cargo.CargoPrice;
+		var spaceTaken = cargo.CargoCount * @cargo.Cargo.Volume;
+		<div class="cargoItem"><strong>@cargo.Cargo.Name</strong>
+			<p>Množství: @cargo.CargoCount
+				Pořizovací cena: @cargo.CargoPrice za kus,
+			@value celkově,
+			zabírá místa: @spaceTaken</p>
+		</div>
+	}
+	
+}

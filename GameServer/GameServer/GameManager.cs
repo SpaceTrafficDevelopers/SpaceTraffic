@@ -23,6 +23,8 @@ using System.Collections.Concurrent;
 using SpaceTraffic.Game.Actions;
 using SpaceTraffic.Game.Events;
 using System.Threading;
+using NLog;
+using SpaceTraffic.GameServer.ServiceImpl;
 
 namespace SpaceTraffic.GameServer
 {
@@ -32,6 +34,7 @@ namespace SpaceTraffic.GameServer
         public const int MAX_ACTIONS_PER_UPDATE = 100;
 
         private IGameServer gameServer;
+		private Logger logger = LogManager.GetCurrentClassLogger();
         /// <summary>
         /// Manager used to persist and restore game state.
         /// </summary>
@@ -105,7 +108,8 @@ namespace SpaceTraffic.GameServer
                 gameEvent = this.gameEventQueue.Dequeue(currentGameTime);
                 if (gameEvent != null)
                 {
-                    gameEvent.BoundAction.Perform(this.gameServer);
+					gameEvent.BoundAction.Perform(this.gameServer);
+					logger.Info(gameEvent.BoundAction.Result);
                 } else {//events are sorted, so there is not any older event in queue
                     break;
                 }
@@ -122,6 +126,7 @@ namespace SpaceTraffic.GameServer
                 if (gameActionQueue.TryDequeue(out gameAction))
                 {
                     gameAction.Perform(this.gameServer);
+					logger.Info(gameAction.Result);
                 }
             }
         }
@@ -198,5 +203,11 @@ namespace SpaceTraffic.GameServer
                 mutex.ReleaseMutex();
             }
         }
-    }
+
+
+		public Services.Contracts.ICargoService GetCargoService()
+		{
+			return new CargoService();
+		}
+	}
 }

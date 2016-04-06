@@ -46,5 +46,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 				return spaceship;
 			}
 		}
+
+		public SpaceShip GetDetailedSpaceShip(int spaceShipId)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				var spaceship = (channel as IShipsService).GetDetailedSpaceShip(spaceShipId);
+				return spaceship;
+			}
+		}
 	}
 }
