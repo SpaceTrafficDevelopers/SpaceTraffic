@@ -107,7 +107,7 @@
 	/* called when data arrives for each response object */
 	function handleSingleResponse(responseObject) {
 		if (responseObject.error && responseObject.error !== 'undefined') {
-			alert('Object ' + responseObject.requestId + ' ' + responseObject.error);
+			console.log('Object ' + responseObject.requestId + ' ' + responseObject.error);
 		} else {
 			doCallback($.fn.ajaxRequester.registeredRepeatedRequests, responseObject, false);
 			doCallback($.fn.ajaxRequester.registeredSingleRequests, responseObject, true);
