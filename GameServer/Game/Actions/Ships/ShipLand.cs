@@ -82,6 +82,8 @@ namespace SpaceTraffic.Game.Actions
             spaceShip.DamagePercent += (int)(spaceShip.WearRate * FlightTime);
             spaceShip.DockedAtBaseId = baseID;
             spaceShip.IsFlying = false;
+			spaceShip.IsAvailable = true;
+			spaceShip.StateText = SpaceShip.StateTextDefault;
             
             if(spaceShip.CurrentFuelTank < 0 || spaceShip.DamagePercent > 100)
             {

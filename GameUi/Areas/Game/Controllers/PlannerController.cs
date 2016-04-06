@@ -120,33 +120,12 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             return RedirectToAction("").Success("Naplánováno jak nikdy :D");
         }
 
-		// called by ajax
-		private ActionResult HandleFlyTo(int shipId, string toPlanet/*, int[] throughWormholesIds*/)
-		{
-
-			int pathPlanID = GSClient.PlanningService.CreatePathPlan(getCurrentPlayerId(), shipId, false);
-
-			if (pathPlanID == -1)
-				return new EmptyResult().Error("Vytváření plánu se nepovedlo. Máš loď?");
-
-			string[] toPlanetPair = toPlanet.Split('\\');
-
-			int firstItemID = GSClient.PlanningService.AddPlanItem(pathPlanID, toPlanetPair[0], true, toPlanetPair[1], 1);
-
-
-			bool startPlanResult = GSClient.PlanningService.StartPathPlan(pathPlanID);
-
-			if (!startPlanResult)
-				return new EmptyResult().Error("Při plánování nastala chyba.");
-
-			return new EmptyResult().Success("Naplánováno jak nikdy :D");
-		}
-
+		
 		//GET /Planner/FlyTo
 		public ActionResult FlyTo(int shipId)
 		{
 
-			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+			SpaceShip ship = GSClient.ShipsService.GetDetailedSpaceShip(shipId);
 			var partial = PartialView("_FlyTo");
 			partial.ViewBag.ship = ship;
 			return partial;

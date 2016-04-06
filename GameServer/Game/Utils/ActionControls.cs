@@ -114,12 +114,12 @@ namespace SpaceTraffic.Game.Utils
                 return;
             }
 
-            if (!ship.IsFlying && shouldFly)
+            if ((!ship.IsFlying && ship.IsAvailable) && shouldFly)
             {
                 action.Result = String.Format("Loď {0} nemůže provést akci, protože neletí", ship.SpaceShipName);
                 action.State = GameActionState.FAILED;
             }
-            else if(ship.IsFlying && !shouldFly)
+            else if((ship.IsFlying || !ship.IsAvailable) && !shouldFly)
             {
                 action.Result = String.Format("Loď {0} nemůže provést akci, protože letí", ship.SpaceShipName);
                 action.State = GameActionState.FAILED;

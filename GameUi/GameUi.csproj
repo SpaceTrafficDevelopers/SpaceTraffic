@@ -126,6 +126,7 @@
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AchievementController.cs" />
     <Compile Include="Controllers\AjaxHandlers\PlayerIsPlayingMinigame.cs" />
+    <Compile Include="Controllers\AjaxHandlers\PlanSingleFly.cs" />
     <Compile Include="Controllers\AjaxHandlers\ShipsInfo.cs" />
     <Compile Include="Controllers\AjaxHandlers\CreditsAmount.cs" />
     <Compile Include="Controllers\AjaxHandlers\EarnedAchievements.cs" />

@@ -68,7 +68,8 @@ namespace SpaceTraffic.Dao
 			using (var contextDB = CreateContext())
 			{
 				
-				var spaceship = contextDB.SpaceShips.Include("SpaceShipsCargos").FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipId));
+				var spaceship = contextDB.SpaceShips.Include("Base").Include("SpaceShipsCargos").FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipId));
+				spaceship.Base.SpaceShips = null;
 				foreach (var cargo in spaceship.SpaceShipsCargos)
 				{
 					cargo.SpaceShip = null;

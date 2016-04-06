@@ -16,6 +16,7 @@ var SvgPlanet = new Class({
 	onclickHandler: function (sender) {
 		this.showPlanetDetails($('#contextPanelContent'));
 		this.showPlanetInfo($('#infoPanel'));
+		$('body').trigger('planetClick', [sender, this.body]);
 	},
 
 	showPlanetInfo: function ($element) {/* info about planet on the left*/

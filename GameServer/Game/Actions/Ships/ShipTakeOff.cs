@@ -75,6 +75,7 @@ namespace SpaceTraffic.Game.Actions
 
             spaceShip.DockedAtBaseId = null;
             spaceShip.IsFlying = true;
+			spaceShip.StateText = "Je na cestě...";
 
             if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
             {
