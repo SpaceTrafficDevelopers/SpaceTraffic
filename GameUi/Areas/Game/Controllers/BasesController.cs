@@ -33,7 +33,9 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 				
 		public ActionResult Index()
 		{
-			return PartialView();
+			var partialView = PartialView();
+			partialView.ViewBag.bases = GSClient.GameService.GetAllBases();
+			return partialView;
 		}
 
 		//
@@ -66,7 +68,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 				return new EmptyResult().Error("Tato loď ti nepatří!");
 			}
 			var partialView = PartialView("_ShipDetail");
-			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+			SpaceShip ship = GSClient.ShipsService.GetDetailedSpaceShip(shipId);
 			partialView.ViewBag.ship = ship;
 
 			return partialView;

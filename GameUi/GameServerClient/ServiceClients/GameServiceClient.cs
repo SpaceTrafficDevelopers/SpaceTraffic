@@ -46,6 +46,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			}
 		}
 
+		public IList<SpaceTraffic.Entities.Base> GetAllBases()
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).GetAllBases();
+			}
+		}
+
 
 		public int PerformAction(int playerId, string actionName, params object[] actionArgs)
 		{

@@ -85,6 +85,17 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return GS.CurrentInstance.Persistence.GetBaseDAO().GetBaseByPlanetFullName(planetName);
 		}
 
+	/// <summary>
+	/// All available bases.
+	/// </summary>
+	/// <returns></returns>
+	public IList<SpaceTraffic.Entities.Base> GetAllBases()
+	{
+		return GS.CurrentInstance.Persistence.GetBaseDAO().GetBases();
+	}
+
+
+
 		/// <summary>
 		/// Finds action in SpaceTraffic.Game.Actions namespace and performs it with its arguments.
 		/// </summary>

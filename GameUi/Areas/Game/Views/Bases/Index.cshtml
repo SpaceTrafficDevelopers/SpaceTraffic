@@ -1,9 +1,15 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿
+
+<h1>Základny</h1>
+	
+@{
+	foreach (var planetBase in @ViewBag.bases)
+	{
+		string[] planetString = planetBase.Planet.Split('\\');
+		<a href="@Url.Action("Info", "Bases", new { planetName = planetString[1] })" class="ajax baseLink" data-related-element-id="contextPanelContent">
+			<strong>@planetBase.BaseName</strong>
+		</a>
+	}
 }
 
-@{
-    //@Html.Partial((string)ViewBag.CurrentTab.PartialViewName)
-    @*Html.Partial("~/Areas/Game/Views/Shared/_GameWindow.cshtml")*@
-}
 
