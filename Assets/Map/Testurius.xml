@@ -3,7 +3,7 @@
 		xmlns:st="SpaceTrafficData"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		version="1.2">
-		<starsystem name="Testurius" x="296" y="84">
+		<starsystem name="Testurius" x="300" y="84">
 				<star name="The Big Test">
 						<trajectory>
 							<ellipticOrbit period="1586" a="6" b="4" angle="3" initialAngle="10.0" />

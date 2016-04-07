@@ -30,11 +30,10 @@ using SpaceTraffic.Entities.PublicEntities;
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
     [Authorize]
-    public class MapController : TabsControllerBase
+    public class MapController : AbstractController
     {
         //
         // GET: /Map/
-        private readonly IGameServerClient GSClient = GameServerClientFactory.GetClientInstance();
         /// <summary>
         /// Získání xml galaxymapy na základě jeho jména. K získání cesty využívá klíč assetPath 
         /// </summary>
@@ -69,17 +68,8 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 
         public ActionResult Index()
         {
-			return PartialView(INDEX_VIEW);
+			return PartialView("GalaxyMap");
         }
 
-        public PartialViewResult GalaxyMap()
-        {
-            return this.GetTabView("GalaxyMap");
-        }
-
-        protected override void BuildTabs()
-        {
-            this.Tabs.AddTab("GalaxyMap", title: "GalaxyMap", partialViewName: "GalaxyMap");
-        }
     }
 }
