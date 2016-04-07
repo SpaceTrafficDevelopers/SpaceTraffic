@@ -75,12 +75,12 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             return manager.addPlayer(minigameId, playerId);
         }
 
-        public Result performActionLock(int minigameId, string actionName, object[] actionArgs, bool lockAction)
+        public Result performActionLock(int minigameId, string actionName, bool lockAction, params object[] actionArgs)
         {
-            return manager.performAction(minigameId, actionName, actionArgs, lockAction);
+            return manager.performAction(minigameId, actionName, lockAction, actionArgs);
         }
 
-        public Result performAction(int minigameId, string actionName, object[] actionArgs)
+        public Result performAction(int minigameId, string actionName, params object[] actionArgs)
         {
             return manager.performAction(minigameId, actionName, actionArgs);
         }
@@ -144,6 +144,11 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         public int actualPlayingMinigameId(int playerId)
         {
             return manager.actualPlayingMinigameId(playerId);
+        }
+
+        public Result checkMinigameLifeAndUpdateLastRequestTime(int minigameId)
+        {
+            return manager.checkMinigameLifeAndUpdateLastRequestTime(minigameId);
         }
     }
 }

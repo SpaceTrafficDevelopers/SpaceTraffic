@@ -133,6 +133,7 @@
     <Compile Include="Game\Actions\CargoSell.cs" />
     <Compile Include="Game\Actions\CargoBuy.cs" />
     <Compile Include="Game\Actions\HelloWorld.cs" />
+    <Compile Include="Game\Actions\MinigameAllGamesLifeAction.cs" />
     <Compile Include="Game\Actions\MinigameLifeControlAction.cs" />
     <Compile Include="Game\Actions\PlanEvents.cs" />
     <Compile Include="Game\Actions\Ships\ShipBuy.cs" />

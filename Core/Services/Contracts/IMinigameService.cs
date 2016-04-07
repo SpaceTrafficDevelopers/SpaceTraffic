@@ -29,7 +29,7 @@ namespace SpaceTraffic.Services.Contracts
     /// Minigame service contract interface.
     /// </summary>
     [ServiceContract]
-    [ServiceKnownType("GetKnownTypes", typeof(MinigameDescriptorHelper))]
+    [ServiceKnownType("GetKnownTypes", typeof(MinigameHelper))]
     public interface IMinigameService
     {
         /// <summary>
@@ -109,7 +109,7 @@ namespace SpaceTraffic.Services.Contracts
         /// <param name="lockAction">true if minigame instance has to be locked</param>
         /// <returns>success or failure result</returns>
         [OperationContract]
-        Result performActionLock(int minigameId, string actionName, object[] actionArgs, bool lockAction);
+        Result performActionLock(int minigameId, string actionName, bool lockAction, params object[] actionArgs);
 
         /// <summary>
         /// Method for perform action in minigame by name.
@@ -119,7 +119,7 @@ namespace SpaceTraffic.Services.Contracts
         /// <param name="actionArgs">action arguments</param>
         /// <returns>success or failure result</returns>
         [OperationContract]
-        Result performAction(int minigameId, string actionName, object[] actionArgs);
+        Result performAction(int minigameId, string actionName, params object[] actionArgs);
 
         /// <summary>
         /// Method for getting all start actions.
@@ -220,12 +220,21 @@ namespace SpaceTraffic.Services.Contracts
         /// <returns>returns actual playing minigame id or -1</returns>
         [OperationContract]
         int actualPlayingMinigameId(int playerId);
+        
+        /// <summary>
+        /// Method for check minigame life and if minigame is alive it is updated last request time.
+        /// </summary>
+        /// <param name="minigameId">minigame id</param>
+        /// <returns>success result with true return value if minigame is alive,
+        /// otherwiser returns failure result with false return value</returns>
+        [OperationContract]
+        Result checkMinigameLifeAndUpdateLastRequestTime(int minigameId);
     }
 
     /// <summary>
     /// MinigameDescriptorHelper class. Contains method which returns KnowTypes for IMinigameDescriptor.
     /// </summary>
-    static class MinigameDescriptorHelper
+    static class MinigameHelper
     {
         /// <summary>
         /// Method for getting known types of IMinigameDescriptor
@@ -237,6 +246,9 @@ namespace SpaceTraffic.Services.Contracts
             List<Type> knownTypes = new List<Type>();
 
             knownTypes.Add(typeof(MinigameDescriptor));
+            knownTypes.Add(typeof(Position));
+            knownTypes.Add(typeof(List<Position>));
+            knownTypes.Add(typeof(SpaceshipCargoFinderGameInfo));
             return knownTypes;
         }
     }

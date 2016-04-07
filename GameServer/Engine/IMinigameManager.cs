@@ -128,7 +128,7 @@ namespace SpaceTraffic.Engine
         /// <param name="actionArgs">action arguments</param>
         /// <param name="lockAction">true if minigame instance has to be locked</param>
         /// <returns>success or failure result</returns>
-        Result performAction(int minigameId, string actionName, object[] actionArgs, bool lockAction);
+        Result performAction(int minigameId, string actionName, bool lockAction, params object[] actionArgs);
 
         /// <summary>
         /// Method for perform action in minigame by name.
@@ -137,7 +137,7 @@ namespace SpaceTraffic.Engine
         /// <param name="actionName">action name</param>
         /// <param name="actionArgs">action arguments</param>
         /// <returns>success or failure result</returns>
-        Result performAction(int minigameId, string actionName, object[] actionArgs);
+        Result performAction(int minigameId, string actionName, params object[] actionArgs);
 
         /// <summary>
         /// Method for getting all start actions.
@@ -194,5 +194,20 @@ namespace SpaceTraffic.Engine
         /// <param name="playerId">player id</param>
         /// <returns>returns actual playing minigame id or -1</returns>
         int actualPlayingMinigameId(int playerId);
+
+        /// <summary>
+        /// Method for checking all minigames life and when the minigame 
+        /// was created before minimal limit and is not alive, than will be removed.
+        /// </summary>
+        /// <param name="limitForControl">minimal limit in milisecond for control</param>
+        void checkLifeOfAllMinigames(long limitForControl);
+
+        /// <summary>
+        /// Method for check minigame life and if minigame is alive it is updated last request time.
+        /// </summary>
+        /// <param name="minigameId">minigame id</param>
+        /// <returns>success result with true return value if minigame is alive,
+        /// otherwiser returns failure result with false return value</returns>
+        Result checkMinigameLifeAndUpdateLastRequestTime(int minigameId);
     }
 }

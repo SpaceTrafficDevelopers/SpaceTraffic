@@ -91,15 +91,15 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             }
         }
 
-        public Result performActionLock(int minigameId, string actionName, object[] actionArgs, bool lockAction)
+        public Result performActionLock(int minigameId, string actionName, bool lockAction, params object[] actionArgs)
         {
             using (var channel = this.GetClientChannel())
             {
-                return (channel as IMinigameService).performActionLock(minigameId, actionName, actionArgs, lockAction);
+                return (channel as IMinigameService).performActionLock(minigameId, actionName, lockAction, actionArgs);
             }
         }
 
-        public Result performAction(int minigameId, string actionName, object[] actionArgs)
+        public Result performAction(int minigameId, string actionName, params object[] actionArgs)
         {
             using (var channel = this.GetClientChannel())
             {
@@ -206,6 +206,15 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             using (var channel = this.GetClientChannel())
             {
                 return (channel as IMinigameService).actualPlayingMinigameId(playerId);
+            }
+        }
+
+
+        public Result checkMinigameLifeAndUpdateLastRequestTime(int minigameId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IMinigameService).checkMinigameLifeAndUpdateLastRequestTime(minigameId);
             }
         }
     }

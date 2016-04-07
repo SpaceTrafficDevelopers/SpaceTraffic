@@ -26,6 +26,7 @@ using SpaceTraffic.GameServer;
 using SpaceTraffic.Game.Minigame;
 using SpaceTraffic.Entities;
 using SpaceTraffic.Game;
+using SpaceTraffic.Game.Events;
 
 namespace SpaceTraffic.GameServerTests.GameServer
 {
@@ -39,7 +40,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
         /// <summary>
         /// Game server mock object
         /// </summary>
-        private IGameServer gameServer = new GameServerMock();
+        private IGameServer gameServer;
 
         /// <summary>
         /// Start actions
@@ -70,6 +71,8 @@ namespace SpaceTraffic.GameServerTests.GameServer
         [TestInitialize()]
         public void TestInitialize()
         {
+            this.gameServer  = new GameServerMock();
+
             startAction1 = CreateStartAction("ShipLanding");
             startAction2 = CreateStartAction("CargoBuy");
 
@@ -89,7 +92,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
 
             minigameDescriptor = CreateMinigameDescriptor();
 
-            manager = new MinigameManager(gameServer);
+            manager = this.gameServer.Minigame;
         }
 
         /// <summary>
@@ -350,7 +353,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
             manager.registerMinigame(this.minigameDescriptor);
             int minigameId = prepareMinigame();
 
-            Result result = manager.performAction(minigameId, "ToString", null, true);
+            Result result = manager.performAction(minigameId, "ToString", true, null);
 
             Assert.IsTrue(result.State == ResultState.SUCCESS, "PerformActionTest: " + result.Message);
             Assert.AreEqual(result.ReturnValue, "SpaceTraffic.Game.Minigame.Minigame", "PerformActionTest: Unexpected return value.");
@@ -401,10 +404,54 @@ namespace SpaceTraffic.GameServerTests.GameServer
         }
 
         /// <summary>
+        /// Test for updating  last request time.
+        /// </summary>
+        [TestMethod()]
+        public void UpdateLastRequestTimeTest()
+        {
+            manager.registerMinigame(this.minigameDescriptor);
+            int minigameId = manager.createGame(this.minigameDescriptor.MinigameId, true);
+            
+            manager.updateLastRequestTime(minigameId);            
+            bool result = manager.checkMinigameLife(minigameId);
+
+            Assert.IsTrue(result, "UpdateLastRequestTimeTest: Unxpected result. Minigame has to be alive.");
+        }
+
+        /// <summary>
+        /// Test for checking minigame life and updating last request time.
+        /// </summary>
+        [TestMethod()]
+        public void CheckMinigameLifeAndUpdateLastRequestTimeTest()
+        {
+            manager.registerMinigame(this.minigameDescriptor);
+            int minigameId = manager.createGame(this.minigameDescriptor.MinigameId, true);
+
+            manager.checkLifeOfAllMinigames(0);
+            bool result = manager.checkMinigameLife(minigameId);
+
+            Assert.IsTrue(result, "CheckMinigameLifeAndUpdateLastRequestTimeTest: Unxpected result. Minigame has to be alive.");
+        }
+
+        /// <summary>
         /// Test for checking actual playing minigame id.
         /// </summary>
         [TestMethod()]
         public void ActualPlayingMinigameIdTest()
+        {
+            manager.registerMinigame(this.minigameDescriptor);
+            int minigameId = prepareMinigame();
+
+            int resultId = manager.actualPlayingMinigameId(this.player1.PlayerId);
+
+            Assert.AreEqual(minigameId, resultId, "ActualPlayingMinigameIdTest: Unxpected actual playing minigame id.");
+        }
+
+        /// <summary>
+        /// Test for checking all minigame lifes.
+        /// </summary>
+        [TestMethod()]
+        public void CheckLifeOfAllMinigamesTest()
         {
             manager.registerMinigame(this.minigameDescriptor);
             int minigameId = prepareMinigame();
@@ -524,6 +571,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
         private IPersistenceManager persistenceManager;
         private IGameManager gameManager;
         private IWorldManager worldManager;
+        private IMinigameManager minigameManager;
 
         public IPersistenceManager Persistence
         {
@@ -533,6 +581,13 @@ namespace SpaceTraffic.GameServerTests.GameServer
         public IGameManager Game
         {
             get { return gameManager; }
+        }
+
+
+        public IMinigameManager Minigame
+        {
+            get { return this.minigameManager; }
+            set { this.minigameManager = value; }
         }
 
         #region Not Implemented Method
@@ -557,11 +612,6 @@ namespace SpaceTraffic.GameServerTests.GameServer
             get { throw new NotImplementedException(); }
         }
 
-        public IMinigameManager Minigame
-        {
-            get { throw new NotImplementedException(); }
-        }
-
         #endregion Not Implemented Method
         
         public GameServerMock()
@@ -569,6 +619,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
             this.persistenceManager = new PersitanceManagerMock();
             this.gameManager = new GameManagerMock();
             this.worldManager = new WorldManagerMock(this);
+            this.minigameManager = new MinigameManager(this);
         }
     }
 
@@ -678,7 +729,6 @@ namespace SpaceTraffic.GameServerTests.GameServer
     /// </summary>
     internal class GameManagerMock : IGameManager
     {
-
         public GameTime currentGameTime
         {
             get { 
@@ -686,6 +736,30 @@ namespace SpaceTraffic.GameServerTests.GameServer
                     Value = DateTime.UtcNow 
                 }; 
             }
+        }
+
+        private EventQueue gameEventQueue = new EventQueue();
+
+        public void PlanEvent(IGameAction action, DateTime when)
+        {
+            if (action != null && when != null)
+            {
+                action.State = GameActionState.PREPARED;
+                GeneralEvent newEvent = new GeneralEvent();
+                GameTime time = new GameTime();
+                time.Value = when;
+
+                newEvent.BoundAction = action;
+                newEvent.PlannedTime = time;
+
+                PlanEvent(newEvent);
+            }
+        }
+
+
+        public void PlanEvent(IGameEvent gameEvent)
+        {
+            this.gameEventQueue.Enqueue(gameEvent);
         }
 
         #region Not Implemented Method
@@ -699,17 +773,6 @@ namespace SpaceTraffic.GameServerTests.GameServer
         {
             throw new NotImplementedException();
         }
-
-        public void PlanEvent(IGameEvent gameEvent)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void PlanEvent(IGameAction action, DateTime when)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion Not Implemented Method
 
 
