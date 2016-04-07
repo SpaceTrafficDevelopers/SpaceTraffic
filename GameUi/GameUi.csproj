@@ -135,14 +135,8 @@
     <Compile Include="Areas\Game\Controllers\AjaxHandlers\EarnedAchievements.cs" />
     <Compile Include="Areas\Game\Controllers\AjaxHandlers\IAjaxHandleable.cs" />
     <Compile Include="Areas\Game\Controllers\AjaxHandlers\MinigameStarter.cs" />
-    <Compile Include="Controllers\AjaxHandlers\Minigame\SpaceshipCargoFinder\PerformActionSpaceshipCargoFinder.cs" />
-    <Compile Include="Controllers\AjaxHandlers\Minigame\SpaceshipCargoFinder\StartSpaceshipCargoFinder.cs" />
-    <Compile Include="Controllers\AjaxHandlers\PlayerIsPlayingMinigame.cs" />
-    <Compile Include="Controllers\AjaxHandlers\ShipsInfo.cs" />
-    <Compile Include="Controllers\AjaxHandlers\CreditsAmount.cs" />
-    <Compile Include="Controllers\AjaxHandlers\EarnedAchievements.cs" />
-    <Compile Include="Controllers\AjaxHandlers\IAjaxHandleable.cs" />
-    <Compile Include="Controllers\AjaxHandlers\MinigameStarter.cs" />
+    <Compile Include="Areas\Game\Controllers\AjaxHandlers\Minigame\SpaceshipCargoFinder\PerformActionSpaceshipCargoFinder.cs" />
+    <Compile Include="Areas\Game\Controllers\AjaxHandlers\Minigame\SpaceshipCargoFinder\StartSpaceshipCargoFinder.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Game\Controllers\MapController.cs" />
     <Compile Include="Areas\Game\Controllers\MessagesController.cs" />
