@@ -7,7 +7,7 @@
     int scale = 1;
     string destination = "Solar System";
 }
-<h2>Galaxy Map</h2> 
+<h2>Mapa galaxie</h2> 
 <script type="text/javascript">
      changeSystem: function changeSystem(evt) {
 
@@ -32,9 +32,15 @@
 <div class="background border">
 
 
-<svg width="500" height="500" 
+<svg width="100%" height="500" id="starSystemMap" 
 xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+	<radialGradient id="starSystemGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+		<stop offset="0%" class="gradientFrom" />
+		<stop offset="100%" class="gradientTo" />
+	</radialGradient>
+	</defs>
   
 @foreach(SpaceTraffic.Game.StarSystem starSystem in starSystems)
 {
@@ -50,7 +56,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
         destination = endpoint.Destination.StarSystem.Name;
         var X2 = endpoint.Destination.StarSystem.MapPosition.X * scale;
         var Y2 = endpoint.Destination.StarSystem.MapPosition.Y * scale;
-       <line x1="@X" y1="@Y" x2="@X2" y2="@Y2" style="stroke:lightblue;stroke-width:2" />
+       <line x1="@X" y1="@Y" x2="@X2" y2="@Y2" class="connectionLine" />
     }
 }    
 
@@ -60,8 +66,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
     var X = starSystem.MapPosition.X * scale;
     var Y = starSystem.MapPosition.Y * scale;
     
-    <circle id="@starSystem.Name" cx="@X" cy="@Y" r="20" stroke="grey" stroke-width="4" fill="yellow" onclick="changeSystem(evt)">
-   <!--  <set attributeName="fill" to="blue" begin="click"/> -->
+    <circle id="@starSystem.Name" cx="@X" cy="@Y" r="20" class="starSystem" style="fill:url('#starSystemGradient');" onclick="changeSystem(evt)">
     </circle>
 }
 
@@ -70,10 +75,10 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 {
     var length = starSystem.Name.Length;
     var X = starSystem.MapPosition.X * scale - length * 6 / 2;
-    var Y = starSystem.MapPosition.Y * scale - 20;
+    var Y = starSystem.MapPosition.Y * scale + 35;
     
     <text>
-    <text x="@X" y="@Y" fill="whitesmoke" >@starSystem.Name</text>
+    <text x="@X" y="@Y" class="starSystemTitle" >@starSystem.Name</text>
     </text>
 }
 
