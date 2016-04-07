@@ -47,24 +47,34 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
 			if (pathPlanID == -1)
 				return new EmptyResult().Error("Vytváření plánu se nepovedlo. Máš loď?");
 
-			int firstItemID = controller.GSClient.PlanningService.AddPlanItem(pathPlanID, fromStarSystem, true, fromPlanet, 1);
+			int position = 1;
 
-			int secondItemID = controller.GSClient.PlanningService.AddPlanItem(pathPlanID, toStarSystem, true, toPlanet, 2);
+			controller.GSClient.PlanningService.AddPlanItem(pathPlanID, fromStarSystem, true, fromPlanet, position);
+			foreach (var wormhole in wormholes) {
+				var starsystem = wormhole["starsystem"];
+				var index = wormhole["index"];
+				position++;
+				controller.GSClient.PlanningService.AddPlanItem(pathPlanID, starsystem, false, index + "", position);
+			}
+
+
+			controller.GSClient.PlanningService.AddPlanItem(pathPlanID, toStarSystem, true, toPlanet, 2);
 
 			object[] args = new object[]{
                     toStarSystem,
 					toPlanet,
 					shipId
             };
-
-
-			string startPlanResult = controller.GSClient.PlanningService.StartPathPlan(pathPlanID);
-
 			SpaceShip ship = controller.GSClient.ShipsService.GetSpaceShip(shipId);
 			if (!controller.controlShipAccess(ship))
 			{
 				return new EmptyResult().Error(controller.ErrorMessage);
 			}
+			controller.GSClient.ShipsService.ChangeShipState(shipId, true, "Připravuje se k odletu.");
+
+			string startPlanResult = controller.GSClient.PlanningService.StartPathPlan(pathPlanID);
+
+			
 			
 			if (String.IsNullOrEmpty(startPlanResult))
 			{

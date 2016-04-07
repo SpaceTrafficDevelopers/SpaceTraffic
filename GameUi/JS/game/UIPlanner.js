@@ -11,16 +11,19 @@ var updateShipPlan = function () {
 	}
 	if (wormholes.length > 0) {
 		buff = buff + '<p>Přes: ';
-		console.log(wormholes);
-		buff = buff + wormholes.map(function (hole) { return hole.id; }).join(', ');
+		buff = buff + wormholes.map(function (hole) { return "→" + hole.destination; }).join('');
 		buff = buff + '</p>';
 	}
 		planPlace.html(buff);
 }
 
+/* switching to star system where the ship is */
+StarSystemLoader.switchToStarSystem(currentShipStarSystem);
+/* closing planning */
 $('#planningUI .closebutton').click(function (e) {
 	$('#planningUI').remove();
 });
+/* binding reactions on planets and wormholes clicking*/
 $('body').off('planetClick wormholeClick');
 $('body').on('planetClick', function (e, originalEvent, planet) {
 	var hasBase = (typeof (planet.hasBase) != "undefined" && planet.hasBase !== null && planet.hasBase);
@@ -34,6 +37,7 @@ $('body').on('wormholeClick', function (e, originalEvent, wormhole) {
 	wormholes.push(wormhole);
 	updateShipPlan();
 });
+/* cancel button*/
 $('#cancelPlan').click(function (e) {
 	wormholes = [];
 	toPlanet = null;
@@ -41,6 +45,7 @@ $('#cancelPlan').click(function (e) {
 	updateShipPlan();
 });
 
+/* start button */
 $('#runPlan').click(function (e) {
 	if (toPlanet != null) {
 		ajax.send({
@@ -52,7 +57,7 @@ $('#runPlan').click(function (e) {
 				fromPlanet: currentPlanetName,
 				toStarSystem: toStarSystem,
 				toPlanet: toPlanet.name,
-				wormholes: wormholes.map(function (hole) { return hole.id; })
+				wormholes: wormholes.map(function (hole) { return {index: hole.id, starsystem: hole.destination} })
 			},
 			callback: function () {
 				$('#planningUI .closebutton').click();

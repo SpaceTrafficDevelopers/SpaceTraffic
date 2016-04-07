@@ -31,6 +31,16 @@ var StarSystemLoader = {
 		}); 
 		//console.groupEnd();
 	},
+	switchToStarSystem:function(destination){
+		this.loadStarSystem(destination, function (starSystem) {
+			SvgStarSystemMap.currentStarSystem = starSystem;
+			// Sets currentStarSystem cookie
+			$.cookie("currentStarSystem", starSystem.name, { path: '/' });
+			//console.debug("currentStarSystem: ", SvgStarSystemMap.currentStarSystem);
+			SvgStarSystemMap.draw();
+			SvgStarSystemMap.startUpdateTimer();
+		});
+	},
 
 	parseStarSystem: function ($starSystem) {
 		//console.debug("parseStarSystem()", $starSystem);
