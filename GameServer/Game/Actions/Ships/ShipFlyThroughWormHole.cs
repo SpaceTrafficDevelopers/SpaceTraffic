@@ -83,7 +83,7 @@ namespace SpaceTraffic.Game.Actions
 
             spaceShip.CurrentStarSystem = wormHole.Destination.StarSystem.Name;
 
-            if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
+            if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShip(spaceShip))
             {
                 Result = String.Format("Změny se nepovedlo zapsat do databáze");
                 State = GameActionState.FAILED;

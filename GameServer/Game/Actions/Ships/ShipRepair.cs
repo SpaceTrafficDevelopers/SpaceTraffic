@@ -124,7 +124,7 @@ namespace SpaceTraffic.Game.Actions
 				spaceShip.IsAvailable = true;
 				spaceShip.StateText = SpaceShip.StateTextDefault;
                 
-                if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
+                if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShip(spaceShip))
                 {
                     Result = String.Format("Změny se nepovedlo zapsat do databáze");
                     State = GameActionState.FAILED;
@@ -144,7 +144,7 @@ namespace SpaceTraffic.Game.Actions
 				spaceShip.StateText = "Loď se opravuje...";
                 RepairFinished = true;
 
-				if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
+				if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShip(spaceShip))
 				{
 					Result = String.Format("Změny se nepovedlo zapsat do databáze");
 					State = GameActionState.FAILED;

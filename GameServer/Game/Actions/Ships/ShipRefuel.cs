@@ -126,7 +126,7 @@ namespace SpaceTraffic.Game.Actions
                 }
 
                 //update
-				if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
+				if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShip(spaceShip))
 				{
 					Result = String.Format("Změny se nepovedlo zapsat do databáze");
 					State = GameActionState.FAILED;
@@ -143,7 +143,7 @@ namespace SpaceTraffic.Game.Actions
 				}
 				spaceShip.IsAvailable = false;
 				spaceShip.StateText = "Tankuje...";
-				if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
+				if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShip(spaceShip))
 				{
 					Result = String.Format("Změny se nepovedlo zapsat do databáze");
 					State = GameActionState.FAILED;

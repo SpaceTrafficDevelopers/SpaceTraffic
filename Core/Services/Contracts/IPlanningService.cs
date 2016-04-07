@@ -39,6 +39,6 @@ namespace SpaceTraffic.Services.Contracts
 		bool AddPlanAction(int planItemId, int sequenceNumber, int playerId, string actionName, params object[] actionArgs);
 
 		[OperationContract]
-		bool StartPathPlan(int pathPlanId);
+		string StartPathPlan(int pathPlanId);
 	}
 }

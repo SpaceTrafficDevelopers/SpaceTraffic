@@ -77,7 +77,7 @@ namespace SpaceTraffic.Game.Actions
             spaceShip.IsFlying = true;
 			spaceShip.StateText = "Je na cestě...";
 
-            if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
+            if (!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShip(spaceShip))
             {
                 Result = String.Format("Změny se nepovedlo zapsat do databáze");
                 State = GameActionState.FAILED;

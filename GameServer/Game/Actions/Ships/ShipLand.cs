@@ -92,7 +92,7 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            if(!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
+            if(!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShip(spaceShip))
             {
                 Result = String.Format("Změny se nepovedlo zapsat do databáze");
                 State = GameActionState.FAILED;

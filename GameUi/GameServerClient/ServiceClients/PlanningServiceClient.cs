@@ -55,7 +55,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			}
 		}
 
-		public bool StartPathPlan(int pathPlanId)
+		public string StartPathPlan(int pathPlanId)
 		{
 			using (var channel = this.GetClientChannel())
 			{

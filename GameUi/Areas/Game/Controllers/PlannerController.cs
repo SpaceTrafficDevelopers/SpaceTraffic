@@ -112,12 +112,13 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			bool cargoSellResult = GSClient.PlanningService.AddPlanAction(thirdItemID, 2, 1, "CargoSell", args);
 
 
-			bool startPlanResult = GSClient.PlanningService.StartPathPlan(pathPlanID);
+			string startPlanResult = GSClient.PlanningService.StartPathPlan(pathPlanID);
 
-            if(!startPlanResult)
-                return RedirectToAction("").Error("Při plánování nastala chyba.");
+			if (String.IsNullOrEmpty(startPlanResult))
+				return RedirectToAction("").Success("Naplánováno jak nikdy :D");
 
-            return RedirectToAction("").Success("Naplánováno jak nikdy :D");
+			return RedirectToAction("").Error(startPlanResult);
+				
         }
 
 		

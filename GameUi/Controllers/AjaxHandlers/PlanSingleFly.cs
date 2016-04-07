@@ -58,12 +58,25 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
             };
 
 
-			bool startPlanResult = controller.GSClient.PlanningService.StartPathPlan(pathPlanID);
+			string startPlanResult = controller.GSClient.PlanningService.StartPathPlan(pathPlanID);
 
-			if (!startPlanResult)
-				return new EmptyResult().Error("Při plánování nastala chyba.");
+			SpaceShip ship = controller.GSClient.ShipsService.GetSpaceShip(shipId);
+			if (!controller.controlShipAccess(ship))
+			{
+				return new EmptyResult().Error(controller.ErrorMessage);
+			}
+			
+			if (String.IsNullOrEmpty(startPlanResult))
+			{
+				return new EmptyResult().Success("Loď se vydává na svou cestu...");
+			}
+			else
+			{
+				controller.GSClient.ShipsService.ChangeShipState(shipId, true, "Loď měla problémy se startem.");
+				return new EmptyResult().Error(startPlanResult);
+			}
+				
 
-			return new EmptyResult().Success("Naplánováno jak nikdy :D");
 		}
 
 	}

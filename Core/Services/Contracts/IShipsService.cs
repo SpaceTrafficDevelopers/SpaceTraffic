@@ -39,6 +39,9 @@ namespace SpaceTraffic.Services.Contracts
 		[OperationContract]
 		SpaceShip GetDetailedSpaceShip(int shipId);
 
+		[OperationContract]
+		SpaceShip ChangeShipState(int shipId, bool available, string message = "");
+
 	}
 
 }

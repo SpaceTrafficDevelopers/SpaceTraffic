@@ -78,7 +78,7 @@ namespace SpaceTraffic.Dao
         /// <returns>Return true if operation of update is successful.</returns>
         /// <exception cref="OptimisticConcurrencyException">The exception that is thrown when an optimistic concurrency violation occurs.</exception>
         /// <exception cref="UpdateException" >The exception that is thrown when modifications to object instances cannot be persisted to the data store.</exception>
-        bool UpdateSpaceShipById(SpaceShip spaceShip);
+        bool UpdateSpaceShip(SpaceShip spaceShip);
 
 		
 	}
