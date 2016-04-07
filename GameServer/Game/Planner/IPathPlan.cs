@@ -64,7 +64,7 @@ namespace SpaceTraffic.Game.Planner
         /// Plan first path item.
         /// </summary>
         /// <param name="gameServer">Instance of game server.</param>
-        void PlanFirstItem(IGameServer gameServer);
+        string PlanFirstItem(IGameServer gameServer);
 
         /// <summary>
         /// Plan spaceship flight between depart point and destination point.

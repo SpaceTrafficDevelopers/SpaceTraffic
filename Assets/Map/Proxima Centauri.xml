@@ -54,6 +54,7 @@
                     <description>
                         Description of Prima placeholder.
                     </description>
+									<inhabited>true</inhabited>
 									<appearance>
 										<size>5</size>
 										<type>terrastrial</type>

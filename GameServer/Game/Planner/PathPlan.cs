@@ -102,12 +102,13 @@ namespace SpaceTraffic.Game.Planner
 
         }
 
-        public void PlanFirstItem(IGameServer gameServer)
+        public string PlanFirstItem(IGameServer gameServer)
         {
             PlanItem item = this.ElementAt(0);
 
             if (!isShipOnItem(item, gameServer))
-                return;
+                return "Loď se ztratila.";
+
 
             double actionStartDelay = TIME_BETWEEN_EVENTS;
             foreach (IPlannableAction action in item.Actions)
@@ -124,8 +125,22 @@ namespace SpaceTraffic.Game.Planner
                 eventsPlan.ActionArgs = new object[] { this, item };
                 eventsPlan.PlayerId = PlayerID;
 
+				NavPath path = getPathBetweenTwoItems(item, nextItem);
+				PathPlanner.SolvePath(path, ship, gameServer.Game.currentGameTime.ValueInSeconds);
+				Double flightTime = (nextItem.Place.TimeOfArrival.Subtract(item.Place.TimeOfArrival)).TotalSeconds;
+
+				if (ActionControls.isShipTooMuchDamaged(ship.Id, flightTime))
+				{
+					return "Loď je příliš poškozená a cestu by nezvládla.";
+				}
+				if (!ActionControls.hasShipEnoughFuel(ship.Id, flightTime))
+				{
+					return "Loď nemá na cestu dostatek paliva.";
+				}
+				
                 gameServer.Game.PlanEvent(eventsPlan, gameServer.Game.currentGameTime.Value.AddSeconds(actionStartDelay));
             }
+			return null;/* ok */
         }
 
         public bool PlanFlightBetweenPoints(PlanItem depart, PlanItem dest, IGameServer gameServer, Spaceship ship)
@@ -167,7 +182,7 @@ namespace SpaceTraffic.Game.Planner
             {
                 Planet actualPlanet = dest.Place.Location as Planet;
                 gameAction = new ShipLand();
-
+				
                 gameAction.ActionArgs = new object[] { actualPlanet.StarSystem.Name, actualPlanet.Name, ship.Id,  flightTime};
                 gameAction.PlayerId = PlayerID;
 

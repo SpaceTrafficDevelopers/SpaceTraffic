@@ -215,7 +215,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             spaceShip.WearRate = 0.1;
             spaceShip.MaxSpeed = 68;
             
-            target.UpdateSpaceShipById(spaceShip);
+            target.UpdateSpaceShip(spaceShip);
             SpaceShip compare = target.GetSpaceShipById(spaceShip.SpaceShipId);
 
             SpaceShipTest(spaceShip, compare);

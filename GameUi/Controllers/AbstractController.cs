@@ -38,7 +38,7 @@ namespace SpaceTraffic.GameUi.Controllers
 	public abstract class AbstractController : Controller
 	{
 		public readonly IGameServerClient GSClient = GameServerClientFactory.GetClientInstance();
-		protected string ErrorMessage = "";
+		public string ErrorMessage = "";
 
 		/// <summary>
 		/// Loads the XML assembly from assembly folder
@@ -92,7 +92,7 @@ namespace SpaceTraffic.GameUi.Controllers
 		/// </summary>
 		/// <returns>True when is everything ok</returns>
 
-		protected bool controlShipAccess(SpaceShip ship)
+		public bool controlShipAccess(SpaceShip ship)
 		{
 			int curPlayerId = getCurrentPlayerId();
 			if (ship == null)

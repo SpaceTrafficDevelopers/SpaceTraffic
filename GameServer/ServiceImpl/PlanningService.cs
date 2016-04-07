@@ -127,8 +127,8 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 		/// Start path plan. Update path plan to planned to database.
 		/// </summary>
 		/// <param name="pathPlanId">Identification number of path plan.</param>
-		/// <returns>Result of updating in database.</returns>
-		public bool StartPathPlan(int pathPlanId)
+		/// <returns>Result of planning. Is null or empty if everything is ok.</returns>
+		public string StartPathPlan(int pathPlanId)
 		{
 			IPathPlanEntityDAO pped = GameServer.CurrentInstance.Persistence.GetPathPlanEntityDAO();
 			PathPlanEntity plan = pped.GetPathPlanById(pathPlanId);
@@ -138,15 +138,18 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 				PlannerConverter converter = new PlannerConverter();
 				IPathPlan pathPlan = converter.createPathPlan(plan);
 
-				pathPlan.PlanFirstItem(GameServer.CurrentInstance);
+				string planResult = pathPlan.PlanFirstItem(GameServer.CurrentInstance);
+				if(!String.IsNullOrEmpty(planResult)){
+					return planResult;
+				}
 
 				plan.IsPlanned = true;
 				pped.UpdatePathPlanById(plan);
 
-				return true;
+				return null;
 			}
 
-			return false;
+			return "Navigační počítač je rozbitý a plán neexistuje. (kontaktujte vývojáře)";
 		}
 	}
 }

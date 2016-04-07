@@ -126,6 +126,7 @@
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AchievementController.cs" />
     <Compile Include="Controllers\AjaxHandlers\PlayerIsPlayingMinigame.cs" />
+    <Compile Include="Controllers\AjaxHandlers\PlanSingleFly.cs" />
     <Compile Include="Controllers\AjaxHandlers\ShipsInfo.cs" />
     <Compile Include="Controllers\AjaxHandlers\CreditsAmount.cs" />
     <Compile Include="Controllers\AjaxHandlers\EarnedAchievements.cs" />
@@ -301,6 +302,7 @@
     <Content Include="Areas\Game\Views\Cargo\_CargoBuy.cshtml" />
     <Content Include="Areas\Game\Views\Cargo\_CargoSell.cshtml" />
     <Content Include="Areas\Game\Views\Ships\_ShipCargo.cshtml" />
+    <Content Include="Areas\Game\Views\Planner\_FlyTo.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\itemtable.less" />

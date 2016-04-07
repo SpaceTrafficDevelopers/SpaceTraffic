@@ -69,6 +69,11 @@ namespace SpaceTraffic.Dao
 			{
 				
 				var spaceship = contextDB.SpaceShips.Include("SpaceShipsCargos").FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipId));
+				if (spaceship.DockedAtBaseId != null) {
+					contextDB.Entry(spaceship).Reference("Base").Load();
+					spaceship.Base.SpaceShips = null;
+				}
+				
 				foreach (var cargo in spaceship.SpaceShipsCargos)
 				{
 					cargo.SpaceShip = null;
@@ -134,7 +139,7 @@ namespace SpaceTraffic.Dao
 			}
 		}
 
-		public bool UpdateSpaceShipById(SpaceShip spaceShip)
+		public bool UpdateSpaceShip(SpaceShip spaceShip)
 		{
 			using (var contextDB = CreateContext())
 			try

@@ -55,5 +55,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 				return spaceship;
 			}
 		}
+
+		public SpaceShip ChangeShipState(int shipId, bool available, string message = "")
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				var spaceship = (channel as IShipsService).ChangeShipState(shipId, available, message);
+				return spaceship;
+			}
+		}
 	}
 }
