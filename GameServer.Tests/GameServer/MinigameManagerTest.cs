@@ -353,7 +353,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
             manager.registerMinigame(this.minigameDescriptor);
             int minigameId = prepareMinigame();
 
-            Result result = manager.performAction(minigameId, "ToString", null, true);
+            Result result = manager.performAction(minigameId, "ToString", true, null);
 
             Assert.IsTrue(result.State == ResultState.SUCCESS, "PerformActionTest: " + result.Message);
             Assert.AreEqual(result.ReturnValue, "SpaceTraffic.Game.Minigame.Minigame", "PerformActionTest: Unexpected return value.");
@@ -404,10 +404,54 @@ namespace SpaceTraffic.GameServerTests.GameServer
         }
 
         /// <summary>
+        /// Test for updating  last request time.
+        /// </summary>
+        [TestMethod()]
+        public void UpdateLastRequestTimeTest()
+        {
+            manager.registerMinigame(this.minigameDescriptor);
+            int minigameId = manager.createGame(this.minigameDescriptor.MinigameId, true);
+            
+            manager.updateLastRequestTime(minigameId);            
+            bool result = manager.checkMinigameLife(minigameId);
+
+            Assert.IsTrue(result, "UpdateLastRequestTimeTest: Unxpected result. Minigame has to be alive.");
+        }
+
+        /// <summary>
+        /// Test for checking minigame life and updating last request time.
+        /// </summary>
+        [TestMethod()]
+        public void CheckMinigameLifeAndUpdateLastRequestTimeTest()
+        {
+            manager.registerMinigame(this.minigameDescriptor);
+            int minigameId = manager.createGame(this.minigameDescriptor.MinigameId, true);
+
+            manager.checkLifeOfAllMinigames(0);
+            bool result = manager.checkMinigameLife(minigameId);
+
+            Assert.IsTrue(result, "CheckMinigameLifeAndUpdateLastRequestTimeTest: Unxpected result. Minigame has to be alive.");
+        }
+
+        /// <summary>
         /// Test for checking actual playing minigame id.
         /// </summary>
         [TestMethod()]
         public void ActualPlayingMinigameIdTest()
+        {
+            manager.registerMinigame(this.minigameDescriptor);
+            int minigameId = prepareMinigame();
+
+            int resultId = manager.actualPlayingMinigameId(this.player1.PlayerId);
+
+            Assert.AreEqual(minigameId, resultId, "ActualPlayingMinigameIdTest: Unxpected actual playing minigame id.");
+        }
+
+        /// <summary>
+        /// Test for checking all minigame lifes.
+        /// </summary>
+        [TestMethod()]
+        public void CheckLifeOfAllMinigamesTest()
         {
             manager.registerMinigame(this.minigameDescriptor);
             int minigameId = prepareMinigame();
