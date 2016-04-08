@@ -53,10 +53,11 @@ $(document).ready(function () {
     {
     	storedStarSystem = 'Solar System'
     }
+    $.cookie("currentStarSystem", storedStarSystem, { path: '/' });
     StarSystemLoader.loadStarSystem(storedStarSystem,function(starSystem){
         SvgStarSystemMap.currentStarSystem = starSystem;
         SvgStarSystemMap.init($("#viewport"));
-        
+
         //console.debug("currentStarSystem: ", SvgStarSystemMap.currentStarSystem);
         SvgStarSystemMap.draw();
         SvgStarSystemMap.startUpdateTimer();
