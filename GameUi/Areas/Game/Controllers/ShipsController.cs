@@ -52,7 +52,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			if (shipModel != null){
 				if (GSClient.PlayerService.PlayerHasEnaughCredits(getCurrentPlayerId(), shipModel.Price))
 				{
-					GSClient.GameService.PerformAction(getCurrentPlayerId(), "ShipBuy", getCurrentPlayerId(), starSystemName, baseId, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price, shipModel.Consumption, shipModel.WearRate, shipModel.MaxSpeed);
+					GSClient.GameService.PerformAction(getCurrentPlayerId(), "ShipBuy", getCurrentPlayerId(), starSystemName, baseId, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price, shipModel.Consumption, shipModel.WearRate, shipModel.MaxSpeed, shipModel.CarryingCapacity, shipModel.CssClass);
 				} else {
 					return result.Warning(String.Format("Nemáš dostatek kreditů na koupi lodě {0}.", shipModel.Model));
 				}
@@ -228,7 +228,8 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 				ship.Image = (string)shipNode.Descendants("image").FirstOrDefault();
 				ship.Price = (int)shipNode.Descendants("price").FirstOrDefault();
 				ship.Description = (string)shipNode.Descendants("description").FirstOrDefault();
-                ship.MaxSpeed = (int)shipNode.Descendants("maxSpeed").FirstOrDefault();
+				ship.MaxSpeed = (int)shipNode.Descendants("maxSpeed").FirstOrDefault();
+				ship.CssClass = (string)shipNode.Descendants("cssClass").FirstOrDefault();
 
 				ships.Add(ship);
 			}

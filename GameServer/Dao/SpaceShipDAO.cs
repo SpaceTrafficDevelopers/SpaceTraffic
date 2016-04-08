@@ -157,6 +157,7 @@ namespace SpaceTraffic.Dao
 				spaceShipTab.CurrentStarSystem = spaceShip.CurrentStarSystem;
 				spaceShipTab.FuelTank = spaceShip.FuelTank;
 				spaceShipTab.CurrentFuelTank = spaceShip.CurrentFuelTank;
+				spaceShipTab.CssClass = spaceShip.CssClass;
 				spaceShipTab.PlayerId = spaceShip.PlayerId;
                 spaceShipTab.CargoSpace = spaceShip.CargoSpace;
                 spaceShipTab.Consumption = spaceShip.Consumption;

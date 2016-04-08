@@ -83,7 +83,8 @@ namespace SpaceTraffic.Game.Actions
 				StateText = SpaceShip.StateTextDefault,
                 UserCode = "",
 				TimeOfArrival = "",
-				CargoSpace = 100    //TODO: je potřeba přidat ještě maximální množství nákladu lodě 
+				CargoSpace = Convert.ToInt32(this.ActionArgs.ElementAt(11)),
+				CssClass = this.ActionArgs.ElementAt(12).ToString()
                 
 			};
 			return spaceShip;

@@ -421,6 +421,7 @@
     <Content Include="Content\less\Parts\icons.less" />
     <Content Include="Content\less\Parts\alerts.less" />
     <Content Include="Content\less\ModalWindow.less" />
+    <Content Include="Content\less\StarSystemMap.less" />
     <None Include="Views\Shared\_Achievements.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

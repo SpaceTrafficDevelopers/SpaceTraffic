@@ -70,5 +70,8 @@ namespace SpaceTraffic.GameUi.Areas.Game.Models
         [Required]
         [Display(Name = "Maximální rychlost")]
         public int MaxSpeed { get; set; }
+		
+		[Display(Name = "")]
+		public string CssClass { get; set; }
 	}
 }

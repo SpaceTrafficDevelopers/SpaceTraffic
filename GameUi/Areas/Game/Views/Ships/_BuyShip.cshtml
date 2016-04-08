@@ -14,11 +14,14 @@
 	</thead>
 	<tbody>
 @{
+	int i = 0;
 	foreach (var ship in @ViewBag.Ships)
 	{
+		i++;
 		<tr class="tline">
 			<td>
-				<img src="@Url.Content("~/Content/images/Ships/" + @ship.Image)" style="float:left; height:80px;" /> <br />
+				<div type="image/svg+xml" style="float:left; height:80px;" id="shipImage-@i" class="shipImage @ship.CssClass"></div>
+				<script>$('#shipImage-@i').load('@Url.Content("~/Content/images/Ships/" + @ship.Image)');</script>
 				<span>
 					@ship.Model
 				</span>
