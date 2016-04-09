@@ -45,11 +45,11 @@ namespace SpaceTraffic.GameUi.Models
 
     public class LogOnModel
     {
-        [Required]
+        [Required(ErrorMessage = "Jméno je povinné.")]
         [DataType(DataType.Text)]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Heslo je povinné.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
