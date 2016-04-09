@@ -46,6 +46,7 @@ namespace SpaceTraffic.GameUi.Models
     public class LogOnModel
     {
         [Required]
+        [DataType(DataType.Text)]
         public string UserName { get; set; }
 
         [Required]
