@@ -247,6 +247,13 @@ namespace SpaceTraffic.GameUi.Controllers
             return View();
         }
 
+        //
+        // GET: /Account/LostPassword
+        public ActionResult LostPassword()
+        {
+            return View();
+        }
+
         #region Status Codes
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
