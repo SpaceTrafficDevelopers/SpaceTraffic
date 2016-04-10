@@ -59,26 +59,26 @@ namespace SpaceTraffic.GameUi.Models
 
     public class RegisterModel
     {
-        [Required]
+        [Required(ErrorMessage = "Jméno je povinné.")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
         [DataType(DataType.Text)]
         public string NickName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Email je povinný.")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Heslo je povinné.")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Musíte potvrdit heslo.")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
-        [Display(Name = "Souhlasím s podmínkami")]
+        [BoolRequired(ErrorMessage = "Musíte souhlasit s podmínkami.")]
         public bool Rules { get; set; }
     }
 
@@ -93,5 +93,27 @@ namespace SpaceTraffic.GameUi.Models
         public string Email { get; set; }
     }
 
-    
+
+    /// <summary>
+    /// Validation attribute for boolean value which must be true (Required).
+    /// This is workaround for required error message which dosen't work for bool values.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public class BoolRequiredAttribute : ValidationAttribute, IClientValidatable
+    {
+        public override bool IsValid(object value)
+        {
+            return value != null && value is bool && (bool)value;
+        }
+
+        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
+        {
+            yield return new ModelClientValidationRule
+            {
+                ErrorMessage = this.ErrorMessage,
+                ValidationType = "boolrequired"
+            };
+        }
+    }
+
 }
