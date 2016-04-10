@@ -57,6 +57,31 @@ namespace SpaceTraffic.GameUi.Models
         public bool RememberMe { get; set; }
     }
 
+    public class RegisterModel
+    {
+        [Required(ErrorMessage = "Jméno je povinné.")]
+        [StringLength(50, ErrorMessage = "Jméno musí mít alespoň {2} znaků.", MinimumLength = 5)]
+        [DataType(DataType.Text)]
+        public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Email je povinný.")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Heslo je povinné.")]
+        [StringLength(100, ErrorMessage = "Heslo musí mít alespoň {2} znaků.", MinimumLength = 8)]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [Required(ErrorMessage = "Musíte potvrdit heslo.")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Zadaná hesla se neshodují.")]
+        public string ConfirmPassword { get; set; }
+
+        [BoolRequired(ErrorMessage = "Musíte souhlasit s podmínkami.")]
+        public bool Rules { get; set; }
+    }
+
     public class LostPasswordModel
     {
         [Required]
@@ -68,5 +93,27 @@ namespace SpaceTraffic.GameUi.Models
         public string Email { get; set; }
     }
 
-    
+
+    /// <summary>
+    /// Validation attribute for boolean value which must be true (Required).
+    /// This is workaround for required error message which dosen't work for bool values.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public class BoolRequiredAttribute : ValidationAttribute, IClientValidatable
+    {
+        public override bool IsValid(object value)
+        {
+            return value != null && value is bool && (bool)value;
+        }
+
+        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
+        {
+            yield return new ModelClientValidationRule
+            {
+                ErrorMessage = this.ErrorMessage,
+                ValidationType = "boolrequired"
+            };
+        }
+    }
+
 }

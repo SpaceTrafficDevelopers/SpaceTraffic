@@ -120,14 +120,14 @@ namespace SpaceTraffic.GameUi.Controllers
         // POST: /Account/Register
 
         [HttpPost]
-        public ActionResult Register(AccountInfoModel model)
+        public ActionResult Register(RegisterModel model)
         {
             DebugEx.WriteLineF("Registration step 1: {0}", model);
             if (ModelState.IsValid)
             {
 
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.NickName, model.Password, model.Email, null, null, true, null, out createStatus);
+                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
 
                 //if (createStatus == MembershipCreateStatus.Success)
                 //{
@@ -162,7 +162,7 @@ namespace SpaceTraffic.GameUi.Controllers
         //
         // POST: /Account/RegisterStep2
 
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult RegisterStep2(PlayerInfoModel model)
         {
             RegistrationModel regModel = (RegistrationModel)TempData["registration"];
@@ -175,7 +175,7 @@ namespace SpaceTraffic.GameUi.Controllers
                 return RedirectToAction("RegistrationSuccessful", "Account");
             }
             return RedirectToAction("RegistrationSuccessful", "Account");
-        }
+        }*/
 
         //
         // GET: /Account/RegistrationSuccessful

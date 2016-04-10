@@ -161,7 +161,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\RegistrationModel.cs" />
     <Compile Include="Models\Ui\TabItem.cs" />
     <Compile Include="Models\Ui\Tabs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -566,9 +565,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_STJSIncludeDefaults.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Account\RegisterStep2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\RegistrationSuccessful.cshtml" />
