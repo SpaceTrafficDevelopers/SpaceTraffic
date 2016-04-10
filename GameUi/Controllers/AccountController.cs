@@ -127,7 +127,7 @@ namespace SpaceTraffic.GameUi.Controllers
             {
 
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.NickName, model.Password, model.Email, null, null, true, null, out createStatus);
+                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
 
                 //if (createStatus == MembershipCreateStatus.Success)
                 //{

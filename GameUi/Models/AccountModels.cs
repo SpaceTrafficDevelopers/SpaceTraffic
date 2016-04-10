@@ -60,22 +60,22 @@ namespace SpaceTraffic.GameUi.Models
     public class RegisterModel
     {
         [Required(ErrorMessage = "Jméno je povinné.")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
+        [StringLength(50, ErrorMessage = "Jméno musí mít alespoň {2} znaků.", MinimumLength = 5)]
         [DataType(DataType.Text)]
-        public string NickName { get; set; }
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Email je povinný.")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Heslo je povinné.")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Heslo musí mít alespoň {2} znaků.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Musíte potvrdit heslo.")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Zadaná hesla se neshodují.")]
         public string ConfirmPassword { get; set; }
 
         [BoolRequired(ErrorMessage = "Musíte souhlasit s podmínkami.")]
