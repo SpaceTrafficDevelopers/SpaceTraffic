@@ -28,26 +28,10 @@ namespace SpaceTraffic.Services.Contracts
     /// <summary>
     /// Minigame service contract interface.
     /// </summary>
-    [ServiceContract]
+    [ServiceContract(Namespace = "http://spacetraffic.kiv.zcu.cz/MinigameService")]
     [ServiceKnownType("GetKnownTypes", typeof(MinigameHelper))]
     public interface IMinigameService
     {
-        /// <summary>
-        /// Method for registering minigame. (Adding into database)
-        /// </summary>
-        /// <param name="minigame">minigame</param>
-        /// <returns>true if registering was successfull</returns>
-        [OperationContract]
-        bool registerMinigame(MinigameDescriptor minigame);
-
-        /// <summary>
-        /// Method for deregistering minigame. (Remove from database)
-        /// </summary>
-        /// <param name="minigameDescriptorId">minigame id</param>
-        /// <returns>true if deregistering was successfull</returns>
-        [OperationContract]
-        bool deregisterMinigame(int minigameDescriptorId);
-
         /// <summary>
         /// Method for create minigame instace in minigame manager.
         /// </summary>
@@ -229,6 +213,16 @@ namespace SpaceTraffic.Services.Contracts
         /// otherwiser returns failure result with false return value</returns>
         [OperationContract]
         Result checkMinigameLifeAndUpdateLastRequestTime(int minigameId);
+
+        /// <summary>
+        /// Method for player authentication.
+        /// </summary>
+        /// <param name="userName">user name</param>
+        /// <param name="passwd"></param>
+        /// <returns></returns>
+        [OperationContract]
+        int authenticatePlayerForMinigame(string userName, string passwd);
+    
     }
 
     /// <summary>

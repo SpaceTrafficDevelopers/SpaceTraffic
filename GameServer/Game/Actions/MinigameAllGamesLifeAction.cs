@@ -49,6 +49,8 @@ namespace SpaceTraffic.Game.Actions
             gameServer.Minigame.checkLifeOfAllMinigames(30*60*1000);
             gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddMinutes(NEXT_CONTROL_TIME));
 
+            this.Result = "MinigameAllGamesLifeAction: All minigames have been checked.";
+
             this.State = GameActionState.FINISHED;
         }
     }

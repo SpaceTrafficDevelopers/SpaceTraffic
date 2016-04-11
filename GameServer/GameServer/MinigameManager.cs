@@ -196,7 +196,8 @@ namespace SpaceTraffic.GameServer
             }
             catch (System.IO.FileNotFoundException e)
             {
-                logger.ErrorException("Minigame file with assembly qualified name " + descriptor.MinigameClassFullName + " was not found.", e);
+                logger.ErrorException(string.Format("Minigame file with assembly qualified name {0} was not found.",
+                    descriptor.MinigameClassFullName) , e);
             }
 
             return null;
@@ -222,26 +223,26 @@ namespace SpaceTraffic.GameServer
             IMinigame minigame = getActiveGameById(minigameId);
 
             if (minigame == null)
-                return Result.createFailureResult("Hra s id " + minigameId + " neexistuje.");
-            
-            if(minigame.FreeGame)
-                return Result.createFailureResult("Hra byla rozehrána jako volná hra.");
+                return ResultFactory.minigameNotExistsFailure(minigameId);
+
+            if (minigame.FreeGame)
+                return ResultFactory.minigameIsFreeGameFailure();
 
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(playerId);
 
             if (player == null)
-                return Result.createFailureResult("Hráč s id " + playerId + " neexistuje.");
+                return ResultFactory.playerNotExistsFailure(playerId);
 
             if (!minigameControls.isPlayerInMinigame(minigame, playerId))
-                return Result.createFailureResult("Hráč s id " + playerId + " ve hře není.");
+                return ResultFactory.playerNotInGameFailure(playerId);
 
             if (minigameControls.checkState(minigame, MinigameState.FINISHED))
             {
                 rewarder.rewardPlayer(player, minigame.Descriptor);
-                return Result.createSuccessResult("Hráč byl odměněn.");
+                return ResultFactory.playerRewardedSuccess();
             }
 
-            return Result.createFailureResult("Hra nebyla ukončena.");
+            return ResultFactory.gameNotFinishedFailure();
         }
 
         public Result startGame(int minigameId)
@@ -249,20 +250,20 @@ namespace SpaceTraffic.GameServer
             IMinigame minigame = getActiveGameById(minigameId);
 
             if (minigame == null)
-                return Result.createFailureResult("Hra s id " + minigameId + " neexistuje.");
+                return ResultFactory.minigameNotExistsFailure(minigameId);
 
-            if(!minigameControls.checkState(minigame, MinigameState.PREPARED))
-                return Result.createFailureResult("Hra není ve stavu prepared.");
+            if (!minigameControls.checkState(minigame, MinigameState.PREPARED))
+                return ResultFactory.gameIsNotInStateFailure(MinigameState.PREPARED);
 
             if (minigameControls.checkNumberOfPlayers(minigame))
             {
                 minigame.State = MinigameState.PLAYED;
                 startCheckLifeAction(minigameId);
 
-                return Result.createSuccessResult("Hra byla úspěšně odstartována.");
+                return ResultFactory.minigamegameStartedSuccess();
             }
 
-            return Result.createFailureResult("Ke hře není připojen dostatečný počet hráčů.");
+            return ResultFactory.insufficientNumberOfPlayersFailure();
         }
 
         /// <summary>
@@ -297,12 +298,12 @@ namespace SpaceTraffic.GameServer
             IMinigame minigame = getActiveGameById(minigameId);
 
             if (minigame == null)
-                return Result.createFailureResult("Hra s id " + minigameId + " neexistuje.");
+                return ResultFactory.minigameNotExistsFailure(minigameId);
             
             setFalseToIsPlayingMinigame(minigame);
             minigame.State = MinigameState.FINISHED;
-                
-            return Result.createSuccessResult("Hra byla ukončena.");
+
+            return ResultFactory.minigameFinishedSuccess();
         }
 
         public List<int> getMinigameList(string actionName, int playerId)
@@ -310,10 +311,7 @@ namespace SpaceTraffic.GameServer
             Player player;
             ICollection<MinigameDescriptor> minigames = getMinigameDescriptorCollectionByActionName(actionName, playerId, out player);
 
-            if (minigames == null)
-                return null;
-
-            return coditionSolver.getMinigames(minigames, player);
+            return minigames == null ? null : coditionSolver.getMinigames(minigames, player);
         }
 
         public List<MinigameDescriptor> getMinigameDescriptorListByActionName(string actionName, int playerId)
@@ -321,10 +319,7 @@ namespace SpaceTraffic.GameServer
             Player player;
             ICollection<MinigameDescriptor> minigames = getMinigameDescriptorCollectionByActionName(actionName, playerId, out player);
 
-            if (minigames == null)
-                return null;
-
-            return coditionSolver.getMinigameDescriptorList(minigames, player);
+            return minigames == null ? null : coditionSolver.getMinigameDescriptorList(minigames, player);
         }
 
         public IMinigameDescriptor getMinigameDescriptorByActionName(string actionName, int playerId)
@@ -332,10 +327,7 @@ namespace SpaceTraffic.GameServer
             Player player;
             ICollection<MinigameDescriptor> minigames = getMinigameDescriptorCollectionByActionName(actionName, playerId, out player);
 
-            if (minigames == null)
-                return null;
-
-            return coditionSolver.getMinigameDescriptor(minigames, player);
+            return minigames == null ? null : coditionSolver.getMinigameDescriptor(minigames, player);
         }
 
         public int getMinigame(string actionName, int playerId)
@@ -343,11 +335,7 @@ namespace SpaceTraffic.GameServer
             Player player;
             ICollection<MinigameDescriptor> minigames = getMinigameDescriptorCollectionByActionName(actionName, playerId, out player);
 
-            if (minigames == null)
-                return -1;
-    
-            return coditionSolver.getMinigame(minigames, player);
-            
+            return minigames == null ? -1 : coditionSolver.getMinigame(minigames, player);
         }
 
         /// <summary>
@@ -362,12 +350,9 @@ namespace SpaceTraffic.GameServer
         {
             player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(playerId);
 
-            if (player == null)
-                return null;
-
             IGamePlayer gamePlayer = this.gameServer.World.GetPlayer(playerId);
 
-            if (gamePlayer != null && gamePlayer.IsPlayingMinigame)
+            if (player == null || gamePlayer == null || gamePlayer.IsPlayingMinigame)
                 return null;
 
             ICollection<MinigameDescriptor> minigames = getMinigameCollection(actionName, playerId);
@@ -393,7 +378,7 @@ namespace SpaceTraffic.GameServer
                 }
                 catch (Exception e)
                 {
-                    logger.InfoException("For start action with " + actionName + " name does not exist any Minigame.", e);
+                    logger.InfoException(string.Format("For start action with {0} name does not exist any Minigame.", actionName), e);
                     return null;
                 }
             }
@@ -406,18 +391,18 @@ namespace SpaceTraffic.GameServer
             IMinigame minigame = getActiveGameById(minigameId);
 
             if (minigame == null)
-                return Result.createFailureResult("Hra s id " + minigameId + " neexistuje.");
-            
+                return ResultFactory.minigameNotExistsFailure(minigameId);
+
             if (minigameControls.checkNumberOfPlayers(minigame))
-                return Result.createFailureResult("Ve hře je dostatečný počet hráčů.");
+                return ResultFactory.sufficientNumberOfPlayersFailure();
 
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerById(playerId);
 
             if (player == null)
-                return Result.createFailureResult("Hráč s id " + playerId + " neexistuje.");
+                return ResultFactory.playerNotExistsFailure(playerId);
 
             if (minigameControls.isPlayerInMinigame(minigame, playerId))
-                return Result.createFailureResult("Hráč s id " + playerId + " již ve hře je.");
+                return ResultFactory.playerIsInGameFailure(playerId);
 
             if (minigameControls.checkState(minigame, MinigameState.CREATED)
                 || minigameControls.checkState(minigame, MinigameState.WAITING_FOR_PLAYERS))
@@ -428,11 +413,10 @@ namespace SpaceTraffic.GameServer
                 minigame.State = minigame.Players.Count == minigame.Descriptor.PlayerCount
                     ? MinigameState.PREPARED : MinigameState.WAITING_FOR_PLAYERS;
 
-                return Result.createSuccessResult("Hráč s id " + playerId + "byl úspěšně přidán do hry s id "
-                    + minigameId + ".");
+                return ResultFactory.playerAddedSuccess(playerId, minigameId);
             }
 
-            return Result.createFailureResult("Hra čeká na zahájení nebo již byla rozehrána či ukončena.");
+            return ResultFactory.minigameWaitingStartedOrFinishedFailure();
         }
 
         public Result performAction(int minigameId, string actionName, bool lockAction, params object[] actionArgs)
@@ -440,7 +424,10 @@ namespace SpaceTraffic.GameServer
             IMinigame minigame = getActiveGameById(minigameId);
 
             if (minigame == null)
-                return Result.createFailureResult("Hra s id " + minigameId + " neexistuje.");
+                return ResultFactory.minigameNotExistsFailure(minigameId);
+
+            if (!this.minigameControls.checkState(minigame, MinigameState.PLAYED))
+                return ResultFactory.gameIsNotInStateFailure(MinigameState.PLAYED);
                
             object returnValue = null;
             try
@@ -448,11 +435,11 @@ namespace SpaceTraffic.GameServer
                 returnValue = lockAction ? minigame.performActionWithLock(actionName, actionArgs) 
                     : minigame.performAction(actionName, actionArgs);
 
-                return Result.createSuccessResult("Akce " + actionName + " byla provedena úspěšně.", returnValue);
+                return ResultFactory.actionPerformedSuccess(actionName, returnValue);
             }
             catch (Exception e)
             {
-                return Result.createFailureResult("Metoda skončila vyjímkou : " + e.Message);
+                return ResultFactory.exceptionFailure(e);
             }
         }
 
@@ -475,7 +462,7 @@ namespace SpaceTraffic.GameServer
             }
             catch (KeyNotFoundException e)
             {
-                logger.InfoException("Minigame with ID " + minigameId + " was not found in ActiveMinigames.", e);
+                logger.InfoException(string.Format("Minigame with ID {0} was not found in ActiveMinigames.", minigameId), e);
             }
 
             return null;
@@ -536,7 +523,7 @@ namespace SpaceTraffic.GameServer
             IMinigame minigame = getActiveGameById(minigameId);
 
             if(minigame == null)
-                return Result.createFailureResult("Hra s id " + minigameId + " neexistuje.");
+                return ResultFactory.minigameNotExistsFailure(minigameId);
 
             if(minigameControls.checkState(minigame, MinigameState.FINISHED) || minigameControls.checkState(minigame, MinigameState.FAILED)){
                     
@@ -544,15 +531,15 @@ namespace SpaceTraffic.GameServer
                     IMinigame ignore;
                     this.activeMinigames.TryRemove(minigameId, out ignore);
 
-                    return Result.createSuccessResult("Hra s id " + minigameId + " byla úspěšně odstraněna.");
+                    return ResultFactory.minigameRemovecSuccess(minigameId);
                 }
                 catch (KeyNotFoundException e) {
-                    logger.InfoException("Minigame with ID " + minigameId + " was not found in ActiveMinigames.", e);
+                    logger.InfoException(string.Format("Minigame with ID {0} was not found in ActiveMinigames.", minigameId), e);
                 }
-                    
-                return Result.createFailureResult("Hra již byla pravděpodobně odstraněna.");
+
+                return ResultFactory.removedGameFailure();
             }
-            return Result.createFailureResult("Hra ještě nebyla ukončena.");
+            return ResultFactory.gameNotFinishedFailure();
         }
         
         public bool isPlayerPlaying(int playerId)
@@ -583,18 +570,18 @@ namespace SpaceTraffic.GameServer
             IMinigame minigame = getActiveGameById(minigameId);
 
             if (minigame == null)
-                return Result.createFailureResult("Minihra s id " + minigameId + " neexistuje.", false);
+                return ResultFactory.minigameNotExistsFailure(minigameId, false);
 
             if (minigame.isAlive(this.gameServer.Game.currentGameTime.Value)){
                     
                 minigame.updateLastRequestTime(this.gameServer.Game.currentGameTime.Value);
-                return Result.createSuccessResult("Minihra s id " + minigameId + " \"žije\".", true);
+                return ResultFactory.minigameIsAliveSuccess(minigameId, true);
             }
             else{
                 this.endGame(minigameId);
                 this.removeGame(minigameId);
-                    
-                return Result.createFailureResult("Minihra s id " + minigameId + " již \"nežije\" a byla ukončena.", false);
+
+                return ResultFactory.minigameNotAliveFailure(minigameId, false);
             }               
         }
 

@@ -21,6 +21,7 @@ using SpaceTraffic.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
@@ -28,22 +29,13 @@ namespace SpaceTraffic.GameServer.ServiceImpl
     /// <summary>
     /// Minigame service.
     /// </summary>
+    [ServiceBehavior(Namespace = "http://spacetraffic.kiv.zcu.cz/MinigameService")]
     public class MinigameService : IMinigameService
     {
         /// <summary>
         /// Minigame manager instance.
         /// </summary>
         private IMinigameManager manager = GameServer.CurrentInstance.Minigame;
-
-        public bool registerMinigame(MinigameDescriptor minigame)
-        {
-            return manager.registerMinigame(minigame);
-        }
-
-        public bool deregisterMinigame(int minigameDescriptorId)
-        {
-            return manager.deregisterMinigame(minigameDescriptorId);
-        }
 
         public int createGame(int minigameDescriptorId, bool freeGame)
         {

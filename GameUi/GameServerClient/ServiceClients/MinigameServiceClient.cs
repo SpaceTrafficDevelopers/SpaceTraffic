@@ -26,23 +26,6 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 {
     public class MinigameServiceClient : ServiceClientBase<IMinigameService>, IMinigameService
     {
-
-        public bool registerMinigame(MinigameDescriptor minigame)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IMinigameService).registerMinigame(minigame);
-            }
-        }
-
-        public bool deregisterMinigame(int minigameDescriptorId)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IMinigameService).deregisterMinigame(minigameDescriptorId);
-            }
-        }
-
         public int createGame(int minigameDescriptorId, bool freeGame)
         {
             using (var channel = this.GetClientChannel())

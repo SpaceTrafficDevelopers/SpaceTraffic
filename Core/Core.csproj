@@ -115,6 +115,7 @@
     <Compile Include="Game\Minigame\IMinigame.cs" />
     <Compile Include="Game\Minigame\Minigame.cs" />
     <Compile Include="Game\Minigame\Result.cs" />
+    <Compile Include="Game\Minigame\ResultFactory.cs" />
     <Compile Include="Game\Minigame\SpaceshipCargoFinder.cs" />
     <Compile Include="Game\VisibleObject.cs" />
     <Compile Include="Game\Geometry\CircularOrbit.cs" />
