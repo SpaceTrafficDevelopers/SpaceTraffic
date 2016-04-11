@@ -23,6 +23,7 @@ var ViewportManager = {
 		this.$mainPanel = $('#mainPanel');
 		this.$menuPanel = $('#menuPanel');
 		this.$topPanel = $('#applicationPanel');
+		this.$infoPanel = $('#infoPanel');
 
 		// method binding
 		this.doLayout = this.doLayout.bind(this);
@@ -48,6 +49,7 @@ var ViewportManager = {
 		this.$contextPanel.on('click', '.closebutton', function () {
 			$('#gameTopPanel .rightPart').removeClass('contextOpen');
 			parent.$contextPanel.removeClass('open');
+			parent.$infoPanel.removeClass('open');
 			parent.doLayout();
 		});
 		this.$mainPanel.on('click', '.closebutton', function () {
