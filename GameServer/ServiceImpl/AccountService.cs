@@ -28,6 +28,8 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 {
     public class AccountService : IAccountService
     {
+        private Utils.Security.PasswordHasher pwdHasher;
+
         private Logger Logger = LogManager.GetCurrentClassLogger();
 
         public bool Authenticate(string userName, string password)
@@ -35,7 +37,13 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             Logger.Info("AccountService: Authenticate {0}", userName);
             Player player = GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByName(userName);
             
-            return (player != null && player.PlayerName == userName && player.PsswdHash == password);
+            if(pwdHasher == null)
+            {
+                pwdHasher = new Utils.Security.PasswordHasher(Utils.Security.PasswordHasher.DEF_ITERATION_COUNT);
+            }
+
+
+            return (player != null && player.PlayerName == userName && pwdHasher.ValidatePassword(password,player.PsswdHash));
         }
 
 
@@ -80,7 +88,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         /// <returns></returns>
         public bool AccountUsernameExists(string userName)
         {
-            Logger.Info("AccountService: AccountExists {0}", userName);
+            Logger.Info("AccountService: AccountUsernameExists {0}", userName);
             Player player = GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByName(userName);
 
             return (player != null);
@@ -93,7 +101,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         /// <returns></returns>
         public bool AccountEmailExists(string email)
         {
-            Logger.Info("AccountService: AccountExists {0}", email);
+            Logger.Info("AccountService: AccountEmailExists {0}", email);
             Player player = GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByEmail(email);
 
             return (player != null);
