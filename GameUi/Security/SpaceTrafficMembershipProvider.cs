@@ -43,6 +43,7 @@ namespace SpaceTraffic.GameUi.Security
         private bool _RequiresQuestionAndAnswer = false;
         private bool _RequiresUniqueEmail = true;
         //private string _ServiceEndpoint;
+        SpaceTraffic.Utils.Security.PasswordHasher pwdHasher;
 
 
         private readonly IGameServerClient GSClient = GameServerClientFactory.GetClientInstance();
@@ -219,13 +220,16 @@ namespace SpaceTraffic.GameUi.Security
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
             string usernameLower = username.ToLower();
+            email = email.ToLower();
 
             if (!ValidateUserData(username, password, email, out status))
                 return null;
             if (AccountDataTaken(usernameLower, email, out status))
                 return null;
 
-            Entities.Player newPlayer = new Entities.Player() { PlayerName = usernameLower, FirstName = username, PsswdHash = password, PsswdSalt="", Email = email, AddedDate = DateTime.Now, DateOfBirth = DateTime.Now, LastVisitedDate = DateTime.Now, LastName = "", ExperienceLevel = 0, Experiences = 0, Credit = 0 };
+            string pwdHash = pwdHasher.HashPassword(password);
+
+            Entities.Player newPlayer = new Entities.Player() { PlayerName = usernameLower, FirstName = username, PsswdHash = pwdHash, PsswdSalt="", Email = email, AddedDate = DateTime.Now, DateOfBirth = DateTime.Now, LastVisitedDate = DateTime.Now, LastName = "", ExperienceLevel = 0, Experiences = 0, Credit = 20000 };
             GSClient.AccountService.RegisterPlayer(newPlayer);
 
             if (!GSClient.AccountService.AccountUsernameExists(usernameLower))
@@ -259,7 +263,7 @@ namespace SpaceTraffic.GameUi.Security
                 status = MembershipCreateStatus.DuplicateUserName;
                 return true;
             }
-            else if (GSClient.AccountService.AccountUsernameExists(email))
+            else if (GSClient.AccountService.AccountEmailExists(email))
             {
                 status = MembershipCreateStatus.DuplicateEmail;
                 return true;
@@ -398,6 +402,7 @@ namespace SpaceTraffic.GameUi.Security
             this._EnablePasswordReset = Convert.ToBoolean(GetConfigValue(config["enablePasswordReset"], "true"));
             this._PasswordStrengthRegularExpression = Convert.ToString(GetConfigValue(config["passwordStrengthRegularExpression"], ""));
             //this._ServiceEndpoint = GetConfigValue(config["serviceEndpoint"], "AccountService");
+            pwdHasher = new SpaceTraffic.Utils.Security.PasswordHasher(SpaceTraffic.Utils.Security.PasswordHasher.DEF_ITERATION_COUNT);
         }
 
         private string GetConfigValue(string configValue, string defaultValue)
