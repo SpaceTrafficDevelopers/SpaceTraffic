@@ -1,0 +1,76 @@
+﻿@import "../Variables/colors.less";
+@import "../Variables/fonts.less";
+
+.shipImage{
+	svg{
+		transform: rotate(45deg);
+	}
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+
+	
+	background: transparent;
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.5) 0%, transparent 70%); /* FF3.6-15 */
+	background: -webkit-radial-gradient(center, ellipse cover,   rgba(255,255,255,0.5) 0%,transparent 70%); /* Chrome10-25,Safari5.1-6 */
+	background: radial-gradient(ellipse at center,  rgba(255,255,255,0.5) 0%,transparent 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	
+}
+
+.ship{
+	&.german{
+		.primaryColor{
+			fill: #fecd00 !important;
+		}
+		.secondaryColor{
+			fill: #dc0000 !important;
+		}
+		.additionalColor{
+			fill: #000000 !important;
+		}
+
+	}
+}
+
+.shipCard{
+	
+	.shipName{
+		font-size: 20px;
+		font-weight: 400;
+	}
+	.shipManufacturer{
+		font-size: 12px;
+		color: #aaa;
+	}
+	.info{
+		clear: both;
+		padding: 5px 5px;
+		.label{
+			clear: left;
+			float: left;
+			font-weight: bold;
+		}
+		.value{
+			clear: right;
+			float: right;
+			font-weight: 200;
+		}
+	}
+	.shipInfo{
+		min-height: 150px;
+	}
+
+	.shipPrice{
+		display: block;
+		font-size: 16px;
+		line-height: 20px;
+		.icon{
+			vertical-align: text-top;
+		}
+	}
+	.shipDescription{
+		clear: both;		
+		padding: 10px 0;
+		font-size: 12px;
+	}
+}

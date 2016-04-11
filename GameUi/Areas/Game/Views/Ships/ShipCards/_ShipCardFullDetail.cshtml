@@ -1,0 +1,30 @@
+﻿
+@{
+	var ship = ViewBag.ship;
+	int index = ViewBag.index;
+	}
+
+	<div class="shipCard fullInfo">
+		<h2 class="shipName">@ship.Model</h2>
+		<h5 class="shipManufacturer">@ship.Manufacturer</h5>
+
+		<div type="image/svg+xml" id="shipImage-@index" class="ship shipImage @ship.CssClass"></div>
+		<script>$('#shipImage-@index').load('@Url.Content("~/Content/images/Ships/" + @ship.Image)');</script>
+
+		<span class="shipPrice">@String.Format("{0:n0}", ship.Price)<span class="icon creditsIcon mediumIcon"></span></span>
+
+		<div class="info fuelInfo">
+			<span class="label">Kapacita nádrže</span><span class="value">@ship.FuelCapacity</span>
+			<span class="label">Spotřeba</span><span class="value">@ship.Consumption</span>
+		</div>
+		<div class="info cargoInfo">
+			<span class="label">Maximální náklad</span><span class="value">@ship.CarryingCapacity</span>
+		</div>
+		<div class="info speedInfo">
+			<span class="label">Maximální rychlost</span><span class="value">@ship.MaxSpeed</span>
+			<span class="label">Rychlost opotřebování</span><span class="value">@ship.WearRate</span>
+		</div>
+
+		<p class="shipDescription">@ship.Description</p>
+
+	</div>
