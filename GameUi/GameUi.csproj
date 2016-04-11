@@ -386,6 +386,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="JS\jsimport" Exclude="JS\.*" />
     <Content Include="JS\**\*.js" />
+    <Content Include="Content\less\Parts\buttons.less" />
     <None Include="JS\minigame\spaceshipCargoFinderImport" />
     <Content Include="Libs\System.Web.Helpers.dll" />
     <Content Include="Libs\System.Web.Razor.dll" />

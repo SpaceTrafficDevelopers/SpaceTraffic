@@ -1,0 +1,58 @@
+﻿
+@import "../Variables/colors.less";
+@import "../Variables/fonts.less";
+
+.btn{
+	display: inline-block;
+	background: #eee;
+	border-radius: 16px;
+	font-family: @textFont;
+	color: white;
+	font-size: 14px;
+	padding: 4px 10px 4px 10px;
+	text-decoration: none;
+
+	&:hover{
+		color: white !important;
+	}
+
+	&.large{
+		font-size: 20px;
+		padding: 10px 20px 10px 20px;
+	}
+
+	&.small{
+		font-size: 10px;
+		padding: 2px 5px 2px 5px;
+	}
+
+	&.btn-credits{
+		background: @creditsIconColor;
+		&:hover{
+			background: lighten(@creditsIconColor, 5%);
+		}
+		&:active{
+			background: darken(@creditsIconColor, 5%);
+		}
+	}
+
+	&.btn-ships{
+		background: @shipIconColor;
+		&:hover{
+			background: lighten(@shipIconColor, 5%);
+		}
+		&:active{
+			background: darken(@shipIconColor, 5%);
+		}
+	}
+
+	&.btn-info{
+		background: @infoIconColor;
+		&:hover{
+			background: lighten(@infoIconColor, 5%);
+		}
+		&:active{
+			background: darken(@infoIconColor, 5%);
+		}
+	}
+}
