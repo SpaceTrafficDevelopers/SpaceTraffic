@@ -19,10 +19,7 @@ var updateShipPlan = function () {
 
 /* switching to star system where the ship is */
 StarSystemLoader.switchToStarSystem(currentShipStarSystem);
-/* closing planning */
-$('#planningUI .closebutton').click(function (e) {
-	$('#planningUI').remove();
-});
+
 /* binding reactions on planets and wormholes clicking*/
 $('body').off('planetClick wormholeClick');
 $('body').on('planetClick', function (e, originalEvent, planet) {
@@ -60,7 +57,7 @@ $('#runPlan').click(function (e) {
 				wormholes: wormholes.map(function (hole) { return {index: hole.id, starsystem: hole.destination} })
 			},
 			callback: function () {
-				$('#planningUI .closebutton').click();
+				$('#planningUI').parent().parent().find('.closebutton').click();
 				$('#contextPanelContent .refreshButton').click();
 			}
 		});
