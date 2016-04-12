@@ -45,5 +45,11 @@ namespace SpaceTraffic.Engine
         string GetMapFilePath(string name);
 
         //GalaxyMap LoadGalaxyMap(string galaxyMapName);
+
+        /// <summary>
+        /// Method for loading logos for LogoQuiz.
+        /// </summary>
+        /// <returns>list of logo or null</returns>
+        public List<Logo> LoadLogos();
     }
 }

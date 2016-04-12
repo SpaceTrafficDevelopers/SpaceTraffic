@@ -111,6 +111,11 @@ namespace SpaceTraffic.GameServer
             this.rewarder = new Rewarder(gameServer);
         }
 
+        public void loadAssets()
+        {
+            LogoQuiz.Logos = this.gameServer.Assets.LoadLogos();
+        }
+
         /// <summary>
         /// Method for loading minigames from database into minigames by start action dictionary.
         /// </summary>
@@ -197,7 +202,7 @@ namespace SpaceTraffic.GameServer
             catch (System.IO.FileNotFoundException e)
             {
                 logger.ErrorException(string.Format("Minigame file with assembly qualified name {0} was not found.",
-                    descriptor.MinigameClassFullName) , e);
+                    descriptor.MinigameClassFullName), e);
             }
 
             return null;

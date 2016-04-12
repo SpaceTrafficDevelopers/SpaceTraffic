@@ -28,6 +28,12 @@ namespace SpaceTraffic.Engine
     /// </summary>
     public interface IMinigameManager
     {
+
+        /// <summary>
+        /// Method for loading all assets for minigames.
+        /// </summary>
+        public void loadAssets();
+
         /// <summary>
         /// Method for registering minigame. (Adding into database)
         /// </summary>

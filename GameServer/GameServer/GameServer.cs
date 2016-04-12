@@ -177,6 +177,7 @@ namespace SpaceTraffic.GameServer
             );
 
             this.minigameManager = new MinigameManager(this);
+            this.minigameManager.loadAssets();
 
             //for tests: add "user" player into active players
             //TODO: add this into log-on and remove into log-off
@@ -188,7 +189,7 @@ namespace SpaceTraffic.GameServer
 
             //test minigame and start action data
             #region minigame test data
-
+            
             StartAction startAction = new StartAction { ActionName = "TestAction" };
             this.persistenceManager.GetStartActionDAO().InsertStartAction(startAction);
 

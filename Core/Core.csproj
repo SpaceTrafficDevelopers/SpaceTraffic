@@ -72,6 +72,7 @@
     <Compile Include="Data\GoodsXmlHelper.cs" />
     <Compile Include="Data\IGalaxyMapDataStreamProvider.cs" />
     <Compile Include="Data\IGoodsDataStreamProvider.cs" />
+    <Compile Include="Data\Minigame\LogoQuizLoader.cs" />
     <Compile Include="Data\StarSystemLoader.cs" />
     <Compile Include="Data\StarSystemXmlHelper.cs" />
     <Compile Include="Entities\Achievements.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Game\IGameObject.cs" />
     <Compile Include="Game\IPlanet.cs" />
     <Compile Include="Game\Minigame\IMinigame.cs" />
+    <Compile Include="Game\Minigame\LogoQuiz.cs" />
     <Compile Include="Game\Minigame\Minigame.cs" />
     <Compile Include="Game\Minigame\Result.cs" />
     <Compile Include="Game\Minigame\ResultFactory.cs" />
