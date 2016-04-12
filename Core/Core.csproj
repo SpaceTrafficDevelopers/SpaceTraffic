@@ -137,6 +137,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Security\MinigamePasswordHasher.cs" />
     <Compile Include="Utils\Security\PasswordHasher.cs" />
     <Compile Include="Services\Contracts\IAchievementsService.cs" />
     <Compile Include="Services\Contracts\ICargoService.cs" />

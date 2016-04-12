@@ -82,16 +82,6 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             return manager.getStartActions();
         }
 
-        public bool addRelationshipWithStartActions(string minigameName, string startActionName)
-        {
-            return manager.addRelationshipWithStartActions(minigameName, startActionName);
-        }
-
-        public bool removeRelationshipWithStartActions(string minigameName, string startActionName)
-        {
-            return manager.removeRelationshipWithStartActions(minigameName, startActionName);
-        }
-
         public List<int> getMinigameList(string actionName, int playerId)
         {
             return manager.getMinigameList(actionName, playerId);
@@ -141,6 +131,16 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         public Result checkMinigameLifeAndUpdateLastRequestTime(int minigameId)
         {
             return manager.checkMinigameLifeAndUpdateLastRequestTime(minigameId);
+        }
+
+        public int authenticatePlayerForMinigame(string userName, string passwd)
+        {
+            return manager.authenticatePlayerForMinigame(userName, passwd);
+        }
+
+        public Result checkAnswersSupportMethod(int minigameId, List<Answer> answers)
+        {
+            return manager.performAction(minigameId, "checkAnswers", answers);
         }
     }
 }

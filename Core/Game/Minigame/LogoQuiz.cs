@@ -17,6 +17,7 @@ limitations under the License.
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace SpaceTraffic.Game.Minigame
@@ -87,13 +88,18 @@ namespace SpaceTraffic.Game.Minigame
             bool duplicateExists = answers.GroupBy(n => n.Id).Any(g => g.Count() > 1);
             bool lessThanMin = answers.Min(n => n.Id) < 0;
             bool biggerThanMax = answers.Max(n => n.Id) >= answers.Count;
+            bool expectedNumberOfAnswers = answers.Count == NUMBER_OF_QUESTIONS; 
 
-            if (duplicateExists || lessThanMin || biggerThanMax)
+            if (duplicateExists || lessThanMin || biggerThanMax || expectedNumberOfAnswers)
                 return false;
 
-            foreach (Answer answer in answers)
+            foreach (Question question in this.questions)
             {
-                Question question = this.questions[answer.Id];
+                Answer answer = answers.FirstOrDefault(n => n.Id == question.Id);
+
+                if (answer == null)
+                    return false;
+
                 if (answer.SelectedAnswer.CompareTo(question.RightChoice) == 0)
                     score++;        
             }
@@ -103,28 +109,39 @@ namespace SpaceTraffic.Game.Minigame
 
     }
 
+    [DataContract]
     public class Logo
     {
+        [DataMember]
         public string Name { get; set; }
 
+        [DataMember]
         public string ImageName { get; set; }
     }
 
+    [DataContract]
     public class Question
     {
+        [DataMember]
         public int Id { get; set; }
 
+        [DataMember]
         public Logo RightChoice { get; set; }
 
+        [DataMember]
         public string FirstWrongChoice { get; set; }
 
+        [DataMember]
         public string SecondWrongChoice { get; set; }
     }
 
+    [DataContract]
     public class Answer{
-        
+
+        [DataMember]
         public int Id { get; set; }
 
+        [DataMember]
         public string SelectedAnswer { get; set; } 
     }
 }

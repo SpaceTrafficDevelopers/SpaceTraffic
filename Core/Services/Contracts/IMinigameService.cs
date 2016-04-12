@@ -113,24 +113,6 @@ namespace SpaceTraffic.Services.Contracts
         List<StartAction> getStartActions();
 
         /// <summary>
-        /// Method for adding relationship between minigame and start action.
-        /// </summary>
-        /// <param name="minigameName">minigame name</param>
-        /// <param name="startActionName">start action name</param>
-        /// <returns>true if adding was successfull</returns>
-        [OperationContract]
-        bool addRelationshipWithStartActions(string minigameName, string startActionName);
-
-        /// <summary>
-        /// Method for removing relationship between minigame and start action.
-        /// </summary>
-        /// <param name="minigameName">minigame name</param>
-        /// <param name="startActionName">start action name</param>
-        /// <returns>true if removing was successfull</returns>
-        [OperationContract]
-        bool removeRelationshipWithStartActions(string minigameName, string startActionName);
-
-        /// <summary>
         /// Method for getting minigames by start action name for player.
         /// </summary>
         /// <param name="actionName">start action name</param>
@@ -218,11 +200,21 @@ namespace SpaceTraffic.Services.Contracts
         /// Method for player authentication.
         /// </summary>
         /// <param name="userName">user name</param>
-        /// <param name="passwd"></param>
-        /// <returns></returns>
+        /// <param name="passwd">encrypt password</param>
+        /// <returns>playerId or -1</returns>
         [OperationContract]
         int authenticatePlayerForMinigame(string userName, string passwd);
     
+        /// <summary>
+        /// Support method for call checkAnswers method in LogoQuiz. This is because perform action
+        /// called from android, cannot passed list of answers as object.
+        /// </summary>
+        /// <param name="minigameId">minigame id</param>
+        /// <param name="answers">list of answers</param>
+        /// <returns>success or failure result with return value</returns>
+        [OperationContract]
+        Result checkAnswersSupportMethod(int minigameId, List<Answer> answers);
+
     }
 
     /// <summary>
@@ -243,6 +235,12 @@ namespace SpaceTraffic.Services.Contracts
             knownTypes.Add(typeof(Position));
             knownTypes.Add(typeof(List<Position>));
             knownTypes.Add(typeof(SpaceshipCargoFinderGameInfo));
+            knownTypes.Add(typeof(Answer));
+            knownTypes.Add(typeof(List<Answer>));
+            knownTypes.Add(typeof(Logo));
+            knownTypes.Add(typeof(Question));
+            knownTypes.Add(typeof(List<Question>));
+
             return knownTypes;
         }
     }

@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using SpaceTraffic.Data;
 using SpaceTraffic.Game;
+using SpaceTraffic.Game.Minigame;
 
 namespace SpaceTraffic.Engine
 {
@@ -50,6 +51,6 @@ namespace SpaceTraffic.Engine
         /// Method for loading logos for LogoQuiz.
         /// </summary>
         /// <returns>list of logo or null</returns>
-        public List<Logo> LoadLogos();
+        List<Logo> LoadLogos();
     }
 }

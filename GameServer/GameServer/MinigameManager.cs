@@ -23,6 +23,7 @@ using SpaceTraffic.Game;
 using SpaceTraffic.Game.Actions;
 using SpaceTraffic.Game.Events;
 using SpaceTraffic.Game.Minigame;
+using SpaceTraffic.Utils.Security;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -91,6 +92,11 @@ namespace SpaceTraffic.GameServer
         /// MinigameControls servent.
         /// </summary>
         private MinigameControls minigameControls;
+
+        /// <summary>
+        /// Password hasher for minigame.
+        /// </summary>
+        private MinigamePasswordHasher passwordHasher;
         
         /// <summary>
         /// Logger.
@@ -109,6 +115,7 @@ namespace SpaceTraffic.GameServer
             this.minigameControls = new MinigameControls(gameServer);
             this.coditionSolver = new ConditionSolver(gameServer);
             this.rewarder = new Rewarder(gameServer);
+            this.passwordHasher = new MinigamePasswordHasher();
         }
 
         public void loadAssets()
@@ -612,6 +619,19 @@ namespace SpaceTraffic.GameServer
                     this.removeGame(id);
                 }
             }
+        }
+
+        public int authenticatePlayerForMinigame(string userName, string passwd)
+        {
+            Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerByName(userName);
+            
+            if (player == null || string.IsNullOrEmpty(passwd))
+                return -1;
+
+            string originalPassword = this.passwordHasher.getOriginalPassword(passwd);
+            PasswordHasher psswdHasher = new PasswordHasher(PasswordHasher.DEF_ITERATION_COUNT);
+
+            return psswdHasher.ValidatePassword(originalPassword, player.PsswdHash) ? player.PlayerId : -1;
         }
     }
 }
