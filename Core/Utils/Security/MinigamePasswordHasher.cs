@@ -51,7 +51,7 @@ namespace SpaceTraffic.Utils.Security
         {
             using (AesCryptoServiceProvider aesCryptServiceProvider = new AesCryptoServiceProvider())
             {
-                ICryptoTransform transformation = getCryptographicTransformation(aesCryptServiceProvider, true);
+                ICryptoTransform transformation = getCryptographicTransformation(aesCryptServiceProvider, false);
                 
                 byte[] bytePassword = Encoding.UTF8.GetBytes(password);
                 byte[] encryptedPassword = transformation.TransformFinalBlock(bytePassword, 0, bytePassword.Length);
@@ -69,7 +69,7 @@ namespace SpaceTraffic.Utils.Security
         {
             using (AesCryptoServiceProvider aesCryptServiceProvider = new AesCryptoServiceProvider())
             {
-                ICryptoTransform transformation = getCryptographicTransformation(aesCryptServiceProvider, false);
+                ICryptoTransform transformation = getCryptographicTransformation(aesCryptServiceProvider, true);
 
                 byte[] fromBase = Convert.FromBase64String(encryptedPassword);
                 byte[] decryptedPassword = transformation.TransformFinalBlock(fromBase, 0, fromBase.Length);

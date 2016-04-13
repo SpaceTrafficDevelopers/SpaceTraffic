@@ -62,18 +62,21 @@ namespace SpaceTraffic.Data.Minigame
         /// <param name="logos">list for logos</param>
         private static void parseDocument(XmlNode root, List<Logo> logos)
         {
-            foreach (XmlNode node in root.ChildNodes)
+            foreach (XmlNode logoNode in root.ChildNodes)
             {
                 Logo logo = new Logo();
 
-                switch (node.Name)
-                {
-                    case "name":
-                        logo.Name = node.InnerText;
-                        break;
-                    case "file_name":
-                        logo.ImageName = node.InnerText;
-                        break;
+                foreach (XmlNode attr in logoNode.ChildNodes) 
+                { 
+                    switch (attr.Name)
+                    {
+                        case "name":
+                            logo.Name = attr.InnerText;
+                            break;
+                        case "file_name":
+                            logo.ImageName = attr.InnerText;
+                            break;
+                    }
                 }
 
                 logos.Add(logo);

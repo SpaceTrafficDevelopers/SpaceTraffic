@@ -27,6 +27,7 @@ using SpaceTraffic.Game.Minigame;
 using SpaceTraffic.Entities;
 using SpaceTraffic.Game;
 using SpaceTraffic.Game.Events;
+using SpaceTraffic.Utils.Security;
 
 namespace SpaceTraffic.GameServerTests.GameServer
 {
@@ -462,6 +463,19 @@ namespace SpaceTraffic.GameServerTests.GameServer
         }
 
         /// <summary>
+        /// Test for check authentication fo
+        /// </summary>
+        [TestMethod()]
+        public void AuthenticatePlayerForMinigameTest()
+        {
+            MinigamePasswordHasher hasher = new MinigamePasswordHasher();
+            string encryptPassword = hasher.getEncryptedPassword("user");
+            int playerID = manager.authenticatePlayerForMinigame(this.player1.PlayerName, encryptPassword);
+
+            Assert.AreEqual(playerID, this.player1.PlayerId, "AuthenticatePlayerForMinigameTest: Unexpected player ID.");
+        }
+
+        /// <summary>
         /// Assert method for minigame descriptor.
         /// </summary>
         /// <param name="descriptor">minigame descriptor</param>
@@ -552,8 +566,8 @@ namespace SpaceTraffic.GameServerTests.GameServer
             player.Credit = 100;
             player.DateOfBirth = new DateTime(2008, 2, 16, 12, 15, 12);
             player.Email = "email@email.cz";
-            player.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
-            player.PsswdSalt = "cbOpKKxb";
+            player.PsswdHash = "o8Drx+MJghpMvCN5v0oGB1AB0m0TABBWjt+p1jFsAnvQkBWaGkqFiMo2r6fPeG5+";
+            player.PsswdSalt = "";
             player.OrionEmail = "email@students.zcu.cz";
             player.AddedDate = DateTime.Now;
             player.LastVisitedDate = DateTime.Now;

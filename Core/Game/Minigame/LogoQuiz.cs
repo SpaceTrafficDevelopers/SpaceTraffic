@@ -22,27 +22,57 @@ using System.Text;
 
 namespace SpaceTraffic.Game.Minigame
 {
+    /// <summary>
+    /// Logo quiz minigame.
+    /// </summary>
     public class LogoQuiz : Minigame
     {
+        /// <summary>
+        /// List of all logos.
+        /// </summary>
         public static List<Logo> Logos { get; set; }
 
+        /// <summary>
+        /// List of question.
+        /// </summary>
         private List<Question> questions;
 
+        /// <summary>
+        /// Maximum nubmer of questions in one game.
+        /// </summary>
         private const int NUMBER_OF_QUESTIONS = 30;
+
+        /// <summary>
+        /// Minimal score to win.
+        /// </summary>
         private const int WIN_SCORE = 20;
+
+        /// <summary>
+        /// Random.
+        /// </summary>
         private Random random;
 
+        /// <summary>
+        /// LogoQuiz constructor.
+        /// </summary>
         public LogoQuiz() : base()
         {
             this.random = new Random();
         }
 
+        /// <summary>
+        /// Method for get list of questions for one game.
+        /// </summary>
+        /// <returns>return list of question</returns>
         public List<Question> getQuestions()
         {
             this.generateQuestions();
             return this.questions;
         }
 
+        /// <summary>
+        /// Method for generating list of unique question.
+        /// </summary>
         private void generateQuestions()
         {
             List<Logo> logos = new List<Logo>(Logos);
@@ -54,6 +84,12 @@ namespace SpaceTraffic.Game.Minigame
             }
         }
 
+        /// <summary>
+        /// Method for creating question with unique answers.
+        /// </summary>
+        /// <param name="id">question id</param>
+        /// <param name="logos">list of all logos</param>
+        /// <returns>question</returns>
         private Question createQuestion(int id, List<Logo> logos){
             int index = random.Next(logos.Count);
             
@@ -67,6 +103,11 @@ namespace SpaceTraffic.Game.Minigame
             return question;
         }
 
+        /// <summary>
+        /// Method for creating wrong answers.
+        /// </summary>
+        /// <param name="question">question</param>
+        /// <param name="logos">list of logo</param>
         private void createWrongChoices(Question question, List<Logo> logos)
         {
             int firstWrongChoiceIndex = random.Next(logos.Count);
@@ -81,18 +122,25 @@ namespace SpaceTraffic.Game.Minigame
             question.SecondWrongChoice = logos[secondWrongChoiceIndex].Name;
         }
 
+        /// <summary>
+        /// Method for check list of answers.
+        /// </summary>
+        /// <param name="answers">list of answers</param>
+        /// <returns>true if player wins, otherwise false (even if player cheats)</returns>
         public bool checkAnswers(List<Answer> answers)
         {
             int score = 0;
 
             bool duplicateExists = answers.GroupBy(n => n.Id).Any(g => g.Count() > 1);
             bool lessThanMin = answers.Min(n => n.Id) < 0;
-            bool biggerThanMax = answers.Max(n => n.Id) >= answers.Count;
+            bool biggerThanMax = answers.Max(n => n.Id) >= this.questions.Count;
             bool expectedNumberOfAnswers = answers.Count == NUMBER_OF_QUESTIONS; 
 
-            if (duplicateExists || lessThanMin || biggerThanMax || expectedNumberOfAnswers)
+            if (duplicateExists || lessThanMin || biggerThanMax || !expectedNumberOfAnswers)
                 return false;
 
+            //check all questions and if list of answers does not contains any question from list
+            //it is automatically false
             foreach (Question question in this.questions)
             {
                 Answer answer = answers.FirstOrDefault(n => n.Id == question.Id);
@@ -100,7 +148,7 @@ namespace SpaceTraffic.Game.Minigame
                 if (answer == null)
                     return false;
 
-                if (answer.SelectedAnswer.CompareTo(question.RightChoice) == 0)
+                if (answer.SelectedAnswer.CompareTo(question.RightChoice.Name) == 0)
                     score++;        
             }
 
@@ -109,38 +157,71 @@ namespace SpaceTraffic.Game.Minigame
 
     }
 
+    /// <summary>
+    /// Logo class.
+    /// </summary>
     [DataContract]
     public class Logo
     {
+        /// <summary>
+        /// Logo name.
+        /// </summary>
         [DataMember]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Image name (with file extension).
+        /// </summary>
         [DataMember]
         public string ImageName { get; set; }
     }
 
+    /// <summary>
+    /// Question class.
+    /// </summary>
     [DataContract]
     public class Question
     {
+        /// <summary>
+        /// Question Id.
+        /// </summary>
         [DataMember]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Right choice.
+        /// </summary>
         [DataMember]
         public Logo RightChoice { get; set; }
 
+        /// <summary>
+        /// First wrong choice.
+        /// </summary>
         [DataMember]
         public string FirstWrongChoice { get; set; }
 
+        /// <summary>
+        /// Second wrong choice.
+        /// </summary>
         [DataMember]
         public string SecondWrongChoice { get; set; }
     }
 
+    /// <summary>
+    /// Answer class.
+    /// </summary>
     [DataContract]
     public class Answer{
-
+        
+        /// <summary>
+        /// Answer Id. It should be same as question Id.
+        /// </summary>
         [DataMember]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Selected answer.
+        /// </summary>
         [DataMember]
         public string SelectedAnswer { get; set; } 
     }
