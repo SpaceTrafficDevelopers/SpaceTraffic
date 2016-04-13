@@ -20,6 +20,13 @@ var updateShipPlan = function () {
 /* switching to star system where the ship is */
 StarSystemLoader.switchToStarSystem(currentShipStarSystem);
 
+/* visual mode change */
+$('#viewport').addClass('selectPlanetMode');
+
+$('#planningUI').parent().parent().find('.closebutton').click(function () {
+	$('#viewport').removeClass('selectPlanetMode');
+});
+
 /* binding reactions on planets and wormholes clicking*/
 $('body').off('planetClick wormholeClick');
 $('body').on('planetClick', function (e, originalEvent, planet) {

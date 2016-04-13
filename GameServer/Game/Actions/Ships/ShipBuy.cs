@@ -84,7 +84,8 @@ namespace SpaceTraffic.Game.Actions
                 UserCode = "",
 				TimeOfArrival = "",
 				CargoSpace = Convert.ToInt32(this.ActionArgs.ElementAt(11)),
-				CssClass = this.ActionArgs.ElementAt(12).ToString()
+				CssClass = this.ActionArgs.ElementAt(12).ToString(),
+				Image = this.ActionArgs.ElementAt(13).ToString()
                 
 			};
 			return spaceShip;

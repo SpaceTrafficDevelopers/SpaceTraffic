@@ -73,4 +73,87 @@
 		padding: 10px 0;
 		font-size: 12px;
 	}
+
+	&.basicInfo{
+
+		position: relative;
+		padding: 3px;
+		margin: 5px;
+		background: rgba(255, 255, 255, 0.1);
+		height: 50px;
+
+		&:hover{
+			cursor: pointer;
+
+			.shipName{
+				color: #ccc;
+			}
+		}
+
+		.statusInfo{
+			padding: 0 10%;
+			font-size: 14px;
+			height: 15px;
+			line-height: 18px;
+			text-align: center;
+		}
+
+		.fuelInfo{
+			position: absolute;
+			line-height: 24px;
+			top: 3px;
+			right: 5px;
+		}
+
+		.mainInfo{
+			min-width: 200px;
+		}
+
+		.bad{
+				color: @badColor;
+			}
+		.good{
+			color: @goodColor;
+		}
+
+		.damageInfo{
+			position: absolute;
+			right: 5px;
+			bottom: 3px;
+			line-height: 14px;
+		}
+
+		.shipName{
+			font-family: @textFont;
+			font-weight: 400;
+			height: 18px;
+			font-size: 15px;
+			text-decoration: underline;
+			padding-right: 50px;
+		}
+		.shipModel{
+			font-family: @textFont;
+			font-weight: 400;
+			height: 14px;
+			font-size: 13px;
+			padding-right: 50px;
+			color: #aaa;
+		}
+
+
+		.shipImage{
+			width: 50px;
+			height: 50px;
+			float: left;
+
+			svg{
+				transform: scale(0.5,0.5) rotate(45deg) translate(-71px, 0px);
+			}
+		}
+		.info{
+			padding: 0;
+			float: left;
+			clear: none;
+		}
+	}
 }

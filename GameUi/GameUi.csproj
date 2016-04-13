@@ -318,6 +318,8 @@
     <Content Include="Areas\Minigame\Views\SpaceshipCargoFinder\Index.cshtml" />
     <Content Include="Content\less\dialog.less" />
     <Content Include="Areas\Game\Views\Ships\ShipCards\_ShipCardFullDetail.cshtml" />
+    <Content Include="Content\less\GalaxyMapView.less" />
+    <Content Include="Areas\Game\Views\Ships\ShipCards\_ShipCardBasic.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\ShipsView.less" />

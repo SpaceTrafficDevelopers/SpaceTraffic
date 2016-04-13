@@ -66,6 +66,11 @@ namespace SpaceTraffic.Entities
 		/// </summary>
 		public string CssClass { get; set; }
 
+		/// <summary>
+		/// Used image name.
+		/// </summary>
+		public string Image { get; set; }
+
 		public static string StateTextDefault { get { return "Připravena."; } }
 
         public int? DockedAtBaseId { get; set; }

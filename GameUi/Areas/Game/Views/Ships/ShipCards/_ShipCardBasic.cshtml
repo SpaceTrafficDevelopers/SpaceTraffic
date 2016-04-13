@@ -1,0 +1,61 @@
+﻿
+@{
+	var ship = ViewBag.ship;
+	Random rand = new Random();
+	int index = ViewBag.index + rand.Next();
+
+	var fuelClass = "";
+	var damageClass = "";
+
+	double fuelRatio = ship.CurrentFuelTank / ship.FuelTank;
+
+	if (fuelRatio > 0.75)
+	{
+		fuelClass = "good";
+	}
+	else if (fuelRatio < 0.25)
+	{
+		fuelClass = "bad";
+	}
+
+	if (ship.DamagePercent < 25)
+	{
+		damageClass = "good";
+	} else if (fuelRatio > 75)
+	{
+		damageClass = "bad";
+	}
+}
+
+	<div class="shipCard basicInfo">
+
+		<div type="image/svg+xml" id="shipImage-@index" class="ship shipImage @ship.CssClass"></div>
+		<script>
+			$('#shipImage-@index').load('@Url.Content("~/Content/images/Ships/" + @ship.Image)');
+		</script>
+
+		<div class="info mainInfo">
+			<h2 class="shipName">@ship.SpaceShipName</h2>
+			<p class="statusInfo">@ship.StateText</p>
+			<h5 class="shipModel">@ship.SpaceShipModel</h5>
+		</div>
+		<div class="info fuelInfo @fuelClass">@ship.CurrentFuelTank/@ship.FuelTank</div>
+		<div class="info damageInfo @damageClass">@ship.DamagePercent %</div>
+		
+@*
+	<span class="shipPrice">@String.Format("{0:n0}", ship.Price)<span class="icon creditsIcon mediumIcon"></span></span>
+
+	<div class="info fuelInfo">
+		<span class="label">Kapacita nádrže</span><span class="value">@ship.FuelCapacity</span>
+		<span class="label">Spotřeba</span><span class="value">@ship.Consumption</span>
+	</div>
+	<div class="info cargoInfo">
+		<span class="label">Maximální náklad</span><span class="value">@ship.CarryingCapacity</span>
+	</div>
+	<div class="info speedInfo">
+		<span class="label">Maximální rychlost</span><span class="value">@ship.MaxSpeed</span>
+		<span class="label">Rychlost opotřebování</span><span class="value">@ship.WearRate</span>
+	</div>*@
+		<div style="clear: both;"></div>
+		
+	</div>
