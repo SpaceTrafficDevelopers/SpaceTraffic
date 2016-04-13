@@ -86,6 +86,20 @@ namespace SpaceTraffic.Entities
 		/// </summary>
 		public int CargoSpace { get; set; }
 
+		
+		public int CurrentCargoSize{
+			get{
+				int currCargo = 0;
+				if (SpaceShipsCargos == null) {
+					return -1;
+				}
+				foreach(var cargo in SpaceShipsCargos){
+					currCargo += cargo.CargoCount * cargo.Cargo.Volume;
+				}
+				return currCargo;
+			}
+		}
+
 		public virtual ICollection<SpaceShipCargo> SpaceShipsCargos { get; set; }
 
         public int MaxSpeed { get; set; }
