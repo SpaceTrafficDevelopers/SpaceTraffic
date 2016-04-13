@@ -3,10 +3,8 @@
 
 <a href="@Url.Action("ShipDetail", "Bases", new { shipId = ViewBag.ship.SpaceShipId })" class="ajax refreshButton" data-related-element-id="contextPanelContent">↻</a>
 
-<div>@ViewBag.ship.SpaceShipName<br />@ViewBag.SpaceShipModel</div>
-<div>Palivo: @ViewBag.ship.CurrentFuelTank / @ViewBag.ship.FuelTank</div>
-<div>Poškození: @ViewBag.ship.DamagePercent %</div>
-<div>Stav: @ViewBag.ship.StateText</div>
+
+@Html.Partial("../Ships/ShipCards/_ShipCardDetailed", new ViewDataDictionary { { "ship", ViewBag.ship }, { "index", 0 } })
 
 @if (ViewBag.ship.IsAvailable)
 {

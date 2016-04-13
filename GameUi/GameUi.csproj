@@ -320,6 +320,7 @@
     <Content Include="Areas\Game\Views\Ships\ShipCards\_ShipCardFullDetail.cshtml" />
     <Content Include="Content\less\GalaxyMapView.less" />
     <Content Include="Areas\Game\Views\Ships\ShipCards\_ShipCardBasic.cshtml" />
+    <Content Include="Areas\Game\Views\Ships\ShipCards\_ShipCardDetailed.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\ShipsView.less" />

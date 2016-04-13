@@ -27,7 +27,7 @@
 	}
 }
 
-	<div class="shipCard basicInfo">
+	<div class="shipCard detailedInfo">
 
 		<div type="image/svg+xml" id="shipImage-@index" class="ship shipImage @ship.CssClass"></div>
 		<script>
@@ -39,8 +39,19 @@
 			<p class="statusInfo">@ship.StateText</p>
 			<h5 class="shipModel">@ship.SpaceShipModel</h5>
 		</div>
-		<div class="info fuelInfo @fuelClass">@ship.CurrentFuelTank/@ship.FuelTank</div>
-		<div class="info damageInfo @damageClass">@ship.DamagePercent %</div>
+		<div class="info fuelInfo @fuelClass">Palivo: @ship.CurrentFuelTank/@ship.FuelTank</div>
+		<div class="info damageInfo @damageClass">Poškození: @ship.DamagePercent %</div>
+
+		<div class="info fuelInfo">
+			<span class="label">Spotřeba</span><span class="value">@ship.Consumption</span>
+		</div>
+		<div class="info cargoInfo">
+			<span class="label">Náklad</span><span class="value">@ship.CurrentCargoSize/@ship.CargoSpace</span>
+		</div>
+		<div class="info speedInfo">
+			<span class="label">Maximální rychlost</span><span class="value">@ship.MaxSpeed</span>
+			<span class="label">Rychlost opotřebování</span><span class="value">@ship.WearRate</span>
+		</div>
 		<div style="clear: both;"></div>
 		
 	</div>

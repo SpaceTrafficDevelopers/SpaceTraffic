@@ -74,21 +74,14 @@
 		font-size: 12px;
 	}
 
+	
 	&.basicInfo{
 
 		position: relative;
+		background: rgba(255, 255, 255, 0.1);
 		padding: 3px;
 		margin: 5px;
-		background: rgba(255, 255, 255, 0.1);
 		height: 50px;
-
-		&:hover{
-			cursor: pointer;
-
-			.shipName{
-				color: #ccc;
-			}
-		}
 
 		.statusInfo{
 			padding: 0 10%;
@@ -107,13 +100,6 @@
 
 		.mainInfo{
 			min-width: 200px;
-		}
-
-		.bad{
-				color: @badColor;
-			}
-		.good{
-			color: @goodColor;
 		}
 
 		.damageInfo{
@@ -156,4 +142,52 @@
 			clear: none;
 		}
 	}
+	
+	&.detailedInfo{
+		position: relative;
+		padding: 5px;
+		text-align: center;
+		
+		.shipName{
+		}
+		.shipModel{
+			color: #aaa;
+		}
+
+
+		.shipImage{
+			width: 200px;
+			height: 200px;
+			display: block;
+			margin: 10px auto;
+			background: none;
+
+			svg{
+				transform: scale(2,2) rotate(45deg) translate(18px, 18px);
+			}
+		}
+		.info{
+			padding: 0;
+			float: none;
+			display: block;
+			clear: none;
+		}
+	}
+}
+
+a .basicInfo{
+	&:hover{
+		cursor: pointer;
+
+		.shipName{
+			color: #ccc;
+		}
+	}
+}
+
+.bad{
+	color:@badColor;
+}
+.good{
+	color: @goodColor;
 }
