@@ -25,6 +25,8 @@
 	{
 		damageClass = "bad";
 	}
+
+	var location = (ship.IsFlying || ship.Base == null)? "vesmír" : @ship.Base.BaseName;
 }
 
 	<div class="shipCard detailedInfo">
@@ -39,6 +41,7 @@
 			<p class="statusInfo">@ship.StateText</p>
 			<h5 class="shipModel">@ship.SpaceShipModel</h5>
 		</div>
+		<p class="baseInfo">@location</p>
 		<div class="info fuelInfo @fuelClass">Palivo: @ship.CurrentFuelTank/@ship.FuelTank</div>
 		<div class="info damageInfo @damageClass">Poškození: @ship.DamagePercent %</div>
 

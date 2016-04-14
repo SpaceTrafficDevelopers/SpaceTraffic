@@ -12,6 +12,7 @@
 	padding: 4px 10px 4px 10px;
 	margin: 2px;
 	text-decoration: none;
+	border: none;
 
 	&:hover{
 		color: white !important;
@@ -27,7 +28,7 @@
 		padding: 2px 5px 2px 5px;
 	}
 
-	&.btn-credits{
+	&.btn-credits, &.btn-good{
 		background: @creditsIconColor;
 		&:hover{
 			background: lighten(@creditsIconColor, 5%);
@@ -37,7 +38,7 @@
 		}
 	}
 
-	&.btn-ships{
+	&.btn-ships, &.btn-bad{
 		background: @shipIconColor;
 		&:hover{
 			background: lighten(@shipIconColor, 5%);

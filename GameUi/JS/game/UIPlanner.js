@@ -7,7 +7,7 @@ var planPlace = $('#shipPlan');
 var updateShipPlan = function () {
 	var buff = '';
 	if (typeof toPlanet !== 'undefined' && toPlanet != null) {
-		buff = buff + '<span>Leť na:' + toPlanet.altName + '</span>';
+		buff = buff + '<span class="flyTo">Leť na: <strong>' + toPlanet.altName + '</strong></span>';
 	}
 	if (wormholes.length > 0) {
 		buff = buff + '<p>Přes: ';
