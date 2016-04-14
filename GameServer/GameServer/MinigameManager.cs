@@ -437,9 +437,6 @@ namespace SpaceTraffic.GameServer
 
             if (minigame == null)
                 return ResultFactory.minigameNotExistsFailure(minigameId);
-
-            if (!this.minigameControls.checkState(minigame, MinigameState.PLAYED))
-                return ResultFactory.gameIsNotInStateFailure(MinigameState.PLAYED);
                
             object returnValue = null;
             try
