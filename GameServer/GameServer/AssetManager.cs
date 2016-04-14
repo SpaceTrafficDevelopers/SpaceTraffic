@@ -26,6 +26,8 @@ using SpaceTraffic.Data;
 using System.Xml;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Entities.Goods;
+using SpaceTraffic.Game.Minigame;
+using SpaceTraffic.Data.Minigame;
 
 namespace SpaceTraffic.GameServer
 {
@@ -240,5 +242,17 @@ namespace SpaceTraffic.GameServer
 
 			return experienceLevels;
 		}
+
+        /// <summary>
+        /// Method for loading logos for LogoQuiz.
+        /// </summary>
+        /// <returns>list of logo or null</returns>
+        public List<Logo> LoadLogos()
+        {
+            string fileName = Path.Combine(this.AssetRootPath, "Minigames", "LogoQuiz", "logos.xml");
+			logger.Info("Loading logos for LogoQuiz: {0}", fileName);
+
+            return LogoQuizLoader.loadLogos(fileName);
+        }
     }
 }

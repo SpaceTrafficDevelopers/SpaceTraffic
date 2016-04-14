@@ -26,23 +26,6 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 {
     public class MinigameServiceClient : ServiceClientBase<IMinigameService>, IMinigameService
     {
-
-        public bool registerMinigame(MinigameDescriptor minigame)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IMinigameService).registerMinigame(minigame);
-            }
-        }
-
-        public bool deregisterMinigame(int minigameDescriptorId)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IMinigameService).deregisterMinigame(minigameDescriptorId);
-            }
-        }
-
         public int createGame(int minigameDescriptorId, bool freeGame)
         {
             using (var channel = this.GetClientChannel())
@@ -107,7 +90,6 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             }
         }
 
-
         public List<StartAction> getStartActions()
         {
             using (var channel = this.GetClientChannel())
@@ -115,23 +97,6 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
                 return (channel as IMinigameService).getStartActions();
             }
         }
-
-        public bool addRelationshipWithStartActions(string minigameName, string startActionName)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IMinigameService).addRelationshipWithStartActions(minigameName, startActionName);
-            }
-        }
-
-        public bool removeRelationshipWithStartActions(string minigameName, string startActionName)
-        {
-            using (var channel = this.GetClientChannel())
-            {
-                return (channel as IMinigameService).removeRelationshipWithStartActions(minigameName, startActionName);
-            }
-        }
-
 
         public List<int> getMinigameList(string actionName, int playerId)
         {
@@ -157,7 +122,6 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             }
         }
 
-
         public List<MinigameDescriptor> getMinigameDescriptorListByActionName(string actionName, int playerId)
         {
             using (var channel = this.GetClientChannel())
@@ -173,7 +137,6 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
                 return (channel as IMinigameService).getMinigameDescriptorByActionName(actionName, playerId);
             }
         }
-
 
         public bool isPlayerPlaying(int playerId)
         {
@@ -191,7 +154,6 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             }
         }
 
-
         public bool checkMinigameLife(int minigameId)
         {
             using (var channel = this.GetClientChannel())
@@ -199,7 +161,6 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
                 return (channel as IMinigameService).checkMinigameLife(minigameId);
             }
         }
-
 
         public int actualPlayingMinigameId(int playerId)
         {
@@ -209,12 +170,27 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             }
         }
 
-
         public Result checkMinigameLifeAndUpdateLastRequestTime(int minigameId)
         {
             using (var channel = this.GetClientChannel())
             {
                 return (channel as IMinigameService).checkMinigameLifeAndUpdateLastRequestTime(minigameId);
+            }
+        }
+
+        public int authenticatePlayerForMinigame(string userName, string passwd)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IMinigameService).authenticatePlayerForMinigame(userName, passwd);
+            }
+        }
+
+        public Result checkAnswersSupportMethod(int minigameId, List<Answer> answers)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IMinigameService).checkAnswersSupportMethod(minigameId, answers);
             }
         }
     }

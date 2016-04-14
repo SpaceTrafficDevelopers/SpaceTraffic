@@ -72,6 +72,7 @@
     <Compile Include="Data\GoodsXmlHelper.cs" />
     <Compile Include="Data\IGalaxyMapDataStreamProvider.cs" />
     <Compile Include="Data\IGoodsDataStreamProvider.cs" />
+    <Compile Include="Data\Minigame\LogoQuizLoader.cs" />
     <Compile Include="Data\StarSystemLoader.cs" />
     <Compile Include="Data\StarSystemXmlHelper.cs" />
     <Compile Include="Entities\Achievements.cs" />
@@ -113,8 +114,10 @@
     <Compile Include="Game\IGameObject.cs" />
     <Compile Include="Game\IPlanet.cs" />
     <Compile Include="Game\Minigame\IMinigame.cs" />
+    <Compile Include="Game\Minigame\LogoQuiz.cs" />
     <Compile Include="Game\Minigame\Minigame.cs" />
     <Compile Include="Game\Minigame\Result.cs" />
+    <Compile Include="Game\Minigame\ResultFactory.cs" />
     <Compile Include="Game\Minigame\SpaceshipCargoFinder.cs" />
     <Compile Include="Game\VisibleObject.cs" />
     <Compile Include="Game\Geometry\CircularOrbit.cs" />
@@ -134,6 +137,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Security\MinigamePasswordHasher.cs" />
     <Compile Include="Utils\Security\PasswordHasher.cs" />
     <Compile Include="Services\Contracts\IAchievementsService.cs" />
     <Compile Include="Services\Contracts\ICargoService.cs" />

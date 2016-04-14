@@ -21,6 +21,7 @@ using SpaceTraffic.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 
 namespace SpaceTraffic.GameServer.ServiceImpl
@@ -28,22 +29,13 @@ namespace SpaceTraffic.GameServer.ServiceImpl
     /// <summary>
     /// Minigame service.
     /// </summary>
+    [ServiceBehavior(Namespace = "http://spacetraffic.kiv.zcu.cz/MinigameService")]
     public class MinigameService : IMinigameService
     {
         /// <summary>
         /// Minigame manager instance.
         /// </summary>
         private IMinigameManager manager = GameServer.CurrentInstance.Minigame;
-
-        public bool registerMinigame(MinigameDescriptor minigame)
-        {
-            return manager.registerMinigame(minigame);
-        }
-
-        public bool deregisterMinigame(int minigameDescriptorId)
-        {
-            return manager.deregisterMinigame(minigameDescriptorId);
-        }
 
         public int createGame(int minigameDescriptorId, bool freeGame)
         {
@@ -88,16 +80,6 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         public List<StartAction> getStartActions()
         {
             return manager.getStartActions();
-        }
-
-        public bool addRelationshipWithStartActions(string minigameName, string startActionName)
-        {
-            return manager.addRelationshipWithStartActions(minigameName, startActionName);
-        }
-
-        public bool removeRelationshipWithStartActions(string minigameName, string startActionName)
-        {
-            return manager.removeRelationshipWithStartActions(minigameName, startActionName);
         }
 
         public List<int> getMinigameList(string actionName, int playerId)
@@ -149,6 +131,16 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         public Result checkMinigameLifeAndUpdateLastRequestTime(int minigameId)
         {
             return manager.checkMinigameLifeAndUpdateLastRequestTime(minigameId);
+        }
+
+        public int authenticatePlayerForMinigame(string userName, string passwd)
+        {
+            return manager.authenticatePlayerForMinigame(userName, passwd);
+        }
+
+        public Result checkAnswersSupportMethod(int minigameId, List<Answer> answers)
+        {
+            return manager.performAction(minigameId, "checkAnswers", answers);
         }
     }
 }

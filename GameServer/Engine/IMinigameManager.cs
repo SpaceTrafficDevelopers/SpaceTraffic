@@ -28,6 +28,12 @@ namespace SpaceTraffic.Engine
     /// </summary>
     public interface IMinigameManager
     {
+
+        /// <summary>
+        /// Method for loading all assets for minigames.
+        /// </summary>
+        void loadAssets();
+
         /// <summary>
         /// Method for registering minigame. (Adding into database)
         /// </summary>
@@ -209,5 +215,14 @@ namespace SpaceTraffic.Engine
         /// <returns>success result with true return value if minigame is alive,
         /// otherwiser returns failure result with false return value</returns>
         Result checkMinigameLifeAndUpdateLastRequestTime(int minigameId);
+
+        /// <summary>
+        /// Method for player authentication.
+        /// </summary>
+        /// <param name="userName">user name</param>
+        /// <param name="passwd">encrypt password</param>
+        /// <returns>playerId or -1</returns>
+        int authenticatePlayerForMinigame(string userName, string passwd);
+
     }
 }

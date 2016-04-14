@@ -50,12 +50,15 @@ namespace SpaceTraffic.Game.Actions
             int minigameId = int.Parse(this.ActionArgs[0].ToString());
             bool isAlive = gameServer.Minigame.checkMinigameLife(minigameId);
 
-            if (isAlive)
+            if (isAlive){
                 gameServer.Game.PlanEvent(this, gameServer.Game.currentGameTime.Value.AddMinutes(NEXT_CONTROL_TIME));
+                this.Result = string.Format("MinigameLifeControlAction: Minigame with id {0} is still alive. Action has been re-planned.", minigameId);
+            }
             else
             {
                 gameServer.Minigame.endGame(minigameId);
                 gameServer.Minigame.removeGame(minigameId);
+                this.Result = string.Format("MinigameLifeControlAction: Minigame with id {0} is not alive and it has been removed.", minigameId);
             }
 
             this.State = GameActionState.FINISHED;
