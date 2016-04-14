@@ -1,14 +1,20 @@
 ﻿
 
 <h1>Základny</h1>
-	
+<div class="basesList">
 @{
 	foreach (var planetBase in @ViewBag.bases)
 	{
 		<a href="@Url.Action("Info", "Bases", new { planetName = planetBase.PlanetName })" class="ajax baseLink" data-related-element-id="contextPanelContent">
-			<strong>@planetBase.BaseName</strong>
+			<span class="icon basesIcon hugeIcon"></span>
+			<p class="baseInfo">
+				<strong class="baseName">@planetBase.BaseName</strong>
+				<span class="starSystemName">@planetBase.StarSystemName</span>
+			</p>
 		</a>
 	}
+	<div style="clear:both;"></div>
 }
+</div>
 
 
