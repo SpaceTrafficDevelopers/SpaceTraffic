@@ -321,6 +321,7 @@
     <Content Include="Content\less\GalaxyMapView.less" />
     <Content Include="Areas\Game\Views\Ships\ShipCards\_ShipCardBasic.cshtml" />
     <Content Include="Areas\Game\Views\Ships\ShipCards\_ShipCardDetailed.cshtml" />
+    <Content Include="Content\less\BasesView.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\ShipsView.less" />
@@ -391,6 +392,7 @@
     <Content Include="JS\**\*.js" />
     <Content Include="Content\less\Parts\buttons.less" />
     <Content Include="Content\less\Game\ships.less" />
+    <Content Include="Content\less\PlannerView.less" />
     <None Include="JS\minigame\spaceshipCargoFinderImport" />
     <Content Include="Libs\System.Web.Helpers.dll" />
     <Content Include="Libs\System.Web.Razor.dll" />

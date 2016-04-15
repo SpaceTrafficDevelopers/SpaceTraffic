@@ -80,6 +80,10 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		{
 			var partialView = PartialView("_Goods");
 			partialView = addHeaderViewBag(partialView, planetName);
+			if (partialView.ViewBag.currentBase != null)
+			{
+				partialView.ViewBag.trader = GSClient.CargoService.GetTraderAtBaseWithCargo(partialView.ViewBag.currentBase.BaseId);
+			}
 			return partialView;
 		}
 
