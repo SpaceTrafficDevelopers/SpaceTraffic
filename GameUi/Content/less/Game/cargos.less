@@ -1,0 +1,70 @@
+﻿
+
+
+.cargoCard{
+
+	&.basicInfo{
+		position: relative;
+		width: auto;
+		padding: 5px;
+		margin: 2px 0;
+		background: rgba(255,255,255,0.05);
+
+		.label{
+			color: #aaa;
+			font-size: 11px;
+		}
+		.value{
+			font-weight: bolder;
+		}
+		.basicInfo, .detailedInfo{
+			float: left;
+		}
+		.basicInfo{
+			min-width: 120px;
+		}
+
+		.cargoName{
+			font-weight: bolder;
+			font-size: 20px;
+		}
+		.cargoPrice{
+			display: block;
+			float: left;
+			.value{
+				font-size: 20px;
+			}
+			.creditsIcon{
+				position: relative;
+				top: -3px;
+			}	
+
+		}
+		.cargoVolume{
+			float: right;
+			display: block;
+			.value{
+				font-size: 18px;
+			}			
+
+		}
+		.detailedInfo{
+			clear: both;
+			width: 100%;
+			.value{
+				font-weight: 400;
+			}
+		}
+		.cargoAmount{
+			display: block;
+		}
+		.cargoFullPrice{
+			float: left;
+		}
+		.cargoFullVolume{
+			float: right;
+		}
+
+	}
+}
+

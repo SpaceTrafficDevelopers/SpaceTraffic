@@ -7,7 +7,7 @@
 	if (ViewBag.trader != null)
 	{
 		foreach(var traderCargo in ViewBag.trader.TraderCargos){
-			<span>1111</span>
+			@Html.Partial("../Cargo/CargoCards/_CargoCardBasic", new ViewDataDictionary { { "cargo", traderCargo }})
 		}
 	}
 }

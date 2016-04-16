@@ -322,6 +322,7 @@
     <Content Include="Areas\Game\Views\Ships\ShipCards\_ShipCardBasic.cshtml" />
     <Content Include="Areas\Game\Views\Ships\ShipCards\_ShipCardDetailed.cshtml" />
     <Content Include="Content\less\BasesView.less" />
+    <Content Include="Areas\Game\Views\Cargo\CargoCards\_CargoCardBasic.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\ShipsView.less" />
