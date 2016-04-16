@@ -23,6 +23,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using SpaceTraffic.GameUi.Models;
 using SpaceTraffic.Utils.Debugging;
+using SpaceTraffic.GameUi.Security;
 
 namespace SpaceTraffic.GameUi.Controllers
 {
@@ -32,7 +33,7 @@ namespace SpaceTraffic.GameUi.Controllers
 
         //
         // GET: /Account/LogOn
-
+        [AllowAnonymous]
         public ActionResult LogOn()
         {
             return View();
@@ -40,7 +41,7 @@ namespace SpaceTraffic.GameUi.Controllers
 
         //
         // POST: /Account/LogOn
-
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
@@ -97,7 +98,7 @@ namespace SpaceTraffic.GameUi.Controllers
 
         //
         // GET: /Account/Register
-
+        [AllowAnonymous]
         public ActionResult Register()
         {
             DebugEx.WriteLineF("Registration begin");
@@ -136,6 +137,7 @@ namespace SpaceTraffic.GameUi.Controllers
         // POST: /Account/Register
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Register(RegisterModel model)
         {
             DebugEx.WriteLineF("Registration step 1: {0}", model);
@@ -195,7 +197,7 @@ namespace SpaceTraffic.GameUi.Controllers
 
         //
         // GET: /Account/RegistrationSuccessful
-
+        [AllowAnonymous]
         public ActionResult RegistrationSuccessful()
         {
             return View();
@@ -203,7 +205,7 @@ namespace SpaceTraffic.GameUi.Controllers
 
         //
         // GET: /Account/RegistrationFailed
-
+        [AllowAnonymous]
         public ActionResult RegistrationFailed()
         {
             return View();
@@ -265,9 +267,17 @@ namespace SpaceTraffic.GameUi.Controllers
 
         //
         // GET: /Account/LostPassword
+        [AllowAnonymous]
         public ActionResult LostPassword()
         {
             return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult LostPassword(LostPasswordModel model)
+        {
+            return View(model);
         }
 
         #region Status Codes

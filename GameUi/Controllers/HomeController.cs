@@ -23,6 +23,7 @@ using SpaceTraffic.Services.Contracts;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Diagnostics;
+using SpaceTraffic.GameUi.Security;
 
 namespace SpaceTraffic.GameUi.Controllers
 {
@@ -30,7 +31,7 @@ namespace SpaceTraffic.GameUi.Controllers
     {
         //
         // GET: /Home/
-
+        [AllowAnonymous]
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome";
@@ -38,6 +39,7 @@ namespace SpaceTraffic.GameUi.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult RunTests()
         {
             ViewBag.Message = "Welcome";
