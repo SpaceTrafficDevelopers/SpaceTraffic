@@ -41,8 +41,9 @@ namespace SpaceTraffic.GameUi.Controllers
 
         //
         // POST: /Account/LogOn
-        [AllowAnonymous]
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
             if (ModelState.IsValid)
@@ -138,6 +139,7 @@ namespace SpaceTraffic.GameUi.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
             DebugEx.WriteLineF("Registration step 1: {0}", model);
@@ -275,6 +277,7 @@ namespace SpaceTraffic.GameUi.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult LostPassword(LostPasswordModel model)
         {
             return View(model);

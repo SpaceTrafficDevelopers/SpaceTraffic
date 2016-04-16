@@ -15,7 +15,9 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 <script type="text/javascript">$.validator.unobtrusive.adapters.addBool("boolrequired", "required"); jQuery.extend(jQuery.validator.messages, { email: "Zadejte validní email." });</script>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
     <div class="form">
         <h1>Registrace</h1>
         <p>
