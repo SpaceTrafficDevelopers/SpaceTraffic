@@ -48,7 +48,23 @@ namespace SpaceTraffic.GameUi.Controllers
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    string userData = Membership.GetUser(model.UserName).ProviderUserKey.ToString();
+
+                    FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, model.UserName, DateTime.Now, DateTime.Now.AddMinutes(FormsAuthentication.Timeout.TotalMinutes), model.RememberMe, userData, FormsAuthentication.FormsCookiePath);
+
+                    string encTicket = FormsAuthentication.Encrypt(authTicket);
+
+                    HttpCookie faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
+                    faCookie.HttpOnly = true;
+                    faCookie.Secure = FormsAuthentication.RequireSSL;
+                    faCookie.Path = FormsAuthentication.FormsCookiePath;
+                    faCookie.Domain = FormsAuthentication.CookieDomain;
+
+                    if (authTicket.IsPersistent)
+                        faCookie.Expires = authTicket.Expiration;
+
+                    Response.Cookies.Add(faCookie);
+
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {

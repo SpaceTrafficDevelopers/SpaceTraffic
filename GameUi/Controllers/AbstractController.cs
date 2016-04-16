@@ -65,8 +65,19 @@ namespace SpaceTraffic.GameUi.Controllers
 		/// <returns></returns>
 		public int getCurrentPlayerId()
 		{
-			return (int)Membership.GetUser().ProviderUserKey;
-		}
+            //todo: ošetřit parsování int - zeptat se na schůzce
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+
+            if (authCookie == null)
+            {
+                throw new InvalidOperationException("Authentication cookie not found");
+            }
+
+            FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+            int val = int.Parse(authTicket.UserData);
+            //DebugEx.WriteLineF("getCurrentPlayerId() called: " + val);
+            return val;
+        }
 
 		/// <summary>
 		/// Returns username of player who is currently signed in.
