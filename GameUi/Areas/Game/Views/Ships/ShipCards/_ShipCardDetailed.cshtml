@@ -1,6 +1,7 @@
 ﻿
 @{
 	var ship = ViewBag.ship;
+	var shipUI = ViewBag.shipUI;
 	Random rand = new Random();
 	int index = ViewBag.index + rand.Next();
 
@@ -44,6 +45,16 @@
 		<p class="baseInfo">@location</p>
 		<div class="info fuelInfo @fuelClass">Palivo: @ship.CurrentFuelTank/@ship.FuelTank</div>
 		<div class="info damageInfo @damageClass">Poškození: @ship.DamagePercent %</div>
+		@{
+			if (shipUI && ship.IsAvailable)
+			{
+				<div style="clear: both;"></div>
+				<div class="shipMenuBlock">
+					<a href="@Url.Action("Refuel", "Ships", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax btn btn-credits small" data-related-element-id="spaceShipDetailContent">Natankuj</a>
+					<a href="@Url.Action("Repair", "Ships", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax btn btn-ships small" data-related-element-id="spaceShipDetailContent">Oprav</a>
+				</div>
+			}
+		}
 
 		<div class="info fuelInfo">
 			<span class="label">Spotřeba</span><span class="value">@ship.Consumption</span>
@@ -51,10 +62,26 @@
 		<div class="info cargoInfo">
 			<span class="label">Náklad</span><span class="value">@ship.CurrentCargoSize/@ship.CargoSpace</span>
 		</div>
+		
 		<div class="info speedInfo">
 			<span class="label">Maximální rychlost</span><span class="value">@ship.MaxSpeed</span>
 			<span class="label">Rychlost opotřebování</span><span class="value">@ship.WearRate</span>
 		</div>
+
+		@{
+			if (shipUI && ship.IsAvailable)
+			{
+				<div style="clear: both;"></div>
+				<div class="shipMenuBlock">
+					<a href="@Url.Action("ShipCargo", "Ships", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax btn btn-info small" data-related-element-id="spaceShipDetailContent">Náklad</a>
+					<a href="@Url.Action("Buy", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax btn btn-credits small" data-related-element-id="spaceShipDetailContent">Nakup zboží</a>
+					<a href="@Url.Action("Sell", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax btn btn-ships small" data-related-element-id="spaceShipDetailContent">Prodej zboží</a>
+				</div>
+				<div class="shipMenuBlock mainMenu">
+					<a href="@Url.Action("FlyTo", "Planner", new { shipId = ViewBag.ship.SpaceShipId })" class="ajax btn btn-info" data-related-element-id="mainPanelContent">Leť na planetu...</a>
+				</div>
+			}
+		}		
 		<div style="clear: both;"></div>
 		
 	</div>

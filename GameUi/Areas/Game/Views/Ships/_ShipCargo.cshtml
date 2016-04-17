@@ -1,9 +1,14 @@
-﻿<div class="scrollable">
+﻿<div class="scrollable small">
 @{
+	int i = 0;
 	foreach (var cargo in ViewBag.ship.SpaceShipsCargos)
 	{
+		i++;
 		@Html.Partial("../Cargo/CargoCards/_CargoCardBasic", new ViewDataDictionary { { "cargo", cargo } })
 
+	}
+	if (i == 0) { 
+		<p class="infoNote">Na této lodi se nenachází žádný náklad.</p>
 	}
 
 }

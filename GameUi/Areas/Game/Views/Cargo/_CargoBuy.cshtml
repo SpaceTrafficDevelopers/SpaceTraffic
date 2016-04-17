@@ -1,6 +1,6 @@
 ﻿<div class="ajax" id="cargoBuyForm">
 	<h4>Koupit zboží</h4>
-	
+	<div class="scrollable small">
 	@foreach(var cargo in ViewBag.trader.TraderCargos){
 		<strong>@cargo.Cargo.Name</strong>
 		<span>@cargo.Cargo.Type</span>
@@ -16,6 +16,7 @@
 		
 		}
 	}
+	</div>
 </div>
 <script>
 	$('#cargoBuyForm').on('successSend', function () {
