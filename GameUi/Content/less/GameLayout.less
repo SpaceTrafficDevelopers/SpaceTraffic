@@ -26,10 +26,10 @@
 		height: @appPanelHeight;
 	}
 	.leftPart, .rightPart{
-		width: 40%;
+		width: 36%;
 	}
 	.middlePart{
-		width: 20%;
+		width: 28%;
 		overflow: visible;
 	}
 	.rightPart{
@@ -45,8 +45,8 @@
 }
 
 @gameTopHeight: 40px;
-@leftSize: 25%;/* width of left part, including menu*/
-@rightSize: 20%;/* width of right part, including context panel */
+@leftSize: 20%;/* width of left part, including menu*/
+@rightSize: 25%;/* width of right part, including context panel */
 #gameTopPanel{
 	position: fixed;
 	left: 0;
@@ -196,14 +196,6 @@
 	}
 }
 
-
-
-
-.mainWindow {
-	.panel;
-	min-height: 200px;
-}
-
 ul.mainmenu {
 	list-style: none;
 }
@@ -345,6 +337,12 @@ ul.mainmenu {
 	z-index: 11;
 	min-height: 350px;
 	text-align: justify;
+	h2, p{
+		background: rgba(0,0,0,0.8);
+		box-shadow: 0 0 40px 10px #000;
+		border-radius: 5px;
+		overflow: visible;
+	}
 }
 
 .closebutton{

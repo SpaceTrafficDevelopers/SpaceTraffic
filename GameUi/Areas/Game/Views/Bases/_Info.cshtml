@@ -2,3 +2,20 @@
 @Html.Partial("_Header")
 
 <a href="@Url.Action("Info", "Bases", new { planetName = ViewBag.planetName })" class="ajax refreshButton" data-related-element-id="contextPanelContent">↻</a>
+<div class="infoPanel">
+	<div class="fuelPrice">
+		<h5>Cena paliva</h5>
+		<span>
+			<strong class="value">@ViewBag.trader.FuelPrice</strong>
+			<span class="icon creditsIcon largeIcon"></span>
+		</span>
+	</div>
+	<div class="repairPrice">
+		<h5>Cena oprav</h5>
+		<span>
+			<strong class="value">@ViewBag.trader.RepairPrice</strong>
+			<span class="icon creditsIcon largeIcon"></span>
+		</span>
+	</div>
+	<div style="clear: both;"></div>
+</div>

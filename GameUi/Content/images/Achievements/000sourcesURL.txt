@@ -1,5 +1,7 @@
 Zdrojáky byly vytvoøeny v open source programu Inkscape.
 
+Nové zdroje obrázkù nezapomeòte pøidávat do hry do Reference Controlleru v souladu s jejich licencemi.
+
 Lodì: http://vectorpage.com/icons/black-icons-with-transport/
 Želva: http://all-free-download.com/free-vector/download/turtle_totem_vector_2_163600.html
 Start: http://cz.vector.me/browse/244924/space_shuttle

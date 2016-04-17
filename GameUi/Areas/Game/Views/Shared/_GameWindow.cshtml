@@ -6,7 +6,7 @@
 }
 
 	
-	<ul id="tabsInterface" class="gamewindow_tabs">
+	<ul id="tabsInterface">
 	@if (tabs.Items.Count <= 0)
 	{
 		throw new ApplicationException("No tabs");
@@ -14,9 +14,8 @@
 	
 	@foreach (SpaceTraffic.GameUi.Models.Ui.TabItem tabItem in tabs.Items)
 	{
-		<li>
-			<a href="@Url.Action(tabItem.Action, tabItem.PartialViewModel)" title="@tabItem.Title" class="ajax tabButton" data-related-element-id="tabsContent"><span>@tabItem.Text</span></a>
-		</li>
+			<a href="@Url.Action(tabItem.Action, tabItem.PartialViewModel)" title="@tabItem.Title" class="ajax tabButton" data-related-element-id="tabsContent">@tabItem.Text</a>
+		
 	}
 	
 	</ul>

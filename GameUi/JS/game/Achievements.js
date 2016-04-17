@@ -4,7 +4,7 @@
 			requestId: 'EarnedAchievements',
 			relatedObject: 'EarnedAchievements',
 			data: {},
-			repeatEvery: 60,
+			repeatEvery: 30,
 			callback: function (unviewedAchievements) {
 				if (jQuery.isEmptyObject(unviewedAchievements)) {
 					return;
@@ -14,7 +14,7 @@
 					var achvPopup = $("#achievements");
 					achvPopup.queue(function () {
 						$(".name").text(achievement.Name);
-						$(".icon img").attr("src", achievement.Image);
+						$(".achievementIcon").attr("src", achievement.Image);
 						$(this).dequeue();
 					}).slideDown(400).delay(2000).slideUp(400);
 				});

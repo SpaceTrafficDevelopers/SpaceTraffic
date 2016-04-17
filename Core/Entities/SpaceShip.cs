@@ -66,6 +66,11 @@ namespace SpaceTraffic.Entities
 		/// </summary>
 		public string CssClass { get; set; }
 
+		/// <summary>
+		/// Used image name.
+		/// </summary>
+		public string Image { get; set; }
+
 		public static string StateTextDefault { get { return "Připravena."; } }
 
         public int? DockedAtBaseId { get; set; }
@@ -80,6 +85,20 @@ namespace SpaceTraffic.Entities
 		/// Maximum space for cargo.
 		/// </summary>
 		public int CargoSpace { get; set; }
+
+		
+		public int CurrentCargoSize{
+			get{
+				int currCargo = 0;
+				if (SpaceShipsCargos == null) {
+					return -1;
+				}
+				foreach(var cargo in SpaceShipsCargos){
+					currCargo += cargo.CargoCount * cargo.Cargo.Volume;
+				}
+				return currCargo;
+			}
+		}
 
 		public virtual ICollection<SpaceShipCargo> SpaceShipsCargos { get; set; }
 

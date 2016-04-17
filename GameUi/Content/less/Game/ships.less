@@ -1,0 +1,194 @@
+﻿@import "../Variables/colors.less";
+@import "../Variables/fonts.less";
+
+.shipImage{
+	svg{
+		transform: rotate(45deg);
+	}
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+    overflow: hidden;
+
+	
+	background: transparent;
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.5) 0%, transparent 70%); /* FF3.6-15 */
+	background: -webkit-radial-gradient(center, ellipse cover,   rgba(255,255,255,0.5) 0%,transparent 70%); /* Chrome10-25,Safari5.1-6 */
+	background: radial-gradient(ellipse at center,  rgba(255,255,255,0.5) 0%,transparent 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	
+}
+
+.ship{
+	&.german{
+		.primaryColor{
+			fill: #fecd00 !important;
+		}
+		.secondaryColor{
+			fill: #dc0000 !important;
+		}
+		.additionalColor{
+			fill: #000000 !important;
+		}
+
+	}
+}
+
+.shipCard{
+	
+	.shipName{
+		font-size: 20px;
+		font-weight: 400;
+	}
+	.shipManufacturer{
+		font-size: 12px;
+		color: #aaa;
+	}
+	.info{
+		clear: both;
+		padding: 5px 5px;
+		.label{
+			clear: left;
+			float: left;
+			font-weight: bold;
+		}
+		.value{
+			clear: right;
+			float: right;
+			font-weight: 200;
+		}
+	}
+	.shipInfo{
+		min-height: 150px;
+	}
+
+	.shipPrice{
+		display: block;
+		font-size: 16px;
+		line-height: 20px;
+		.icon{
+			vertical-align: text-top;
+		}
+	}
+	.shipDescription{
+		clear: both;		
+		padding: 10px 0;
+		font-size: 12px;
+	}
+
+	
+	&.basicInfo{
+
+		position: relative;
+		background: rgba(255, 255, 255, 0.1);
+		padding: 3px;
+		margin: 5px;
+		height: 50px;
+
+		.statusInfo{
+			padding: 0 10%;
+			font-size: 14px;
+			height: 15px;
+			line-height: 18px;
+			text-align: center;
+		}
+
+		.fuelInfo{
+			position: absolute;
+			line-height: 24px;
+			top: 3px;
+			right: 5px;
+		}
+
+		.mainInfo{
+			min-width: 200px;
+		}
+
+		.damageInfo{
+			position: absolute;
+			right: 5px;
+			bottom: 3px;
+			line-height: 14px;
+		}
+
+		.shipName{
+			font-family: @textFont;
+			font-weight: 400;
+			height: 18px;
+			font-size: 15px;
+			text-decoration: underline;
+			padding-right: 50px;
+		}
+		.shipModel{
+			font-family: @textFont;
+			font-weight: 400;
+			height: 14px;
+			font-size: 13px;
+			padding-right: 50px;
+			color: #aaa;
+		}
+
+
+		.shipImage{
+			width: 50px;
+			height: 50px;
+			float: left;
+
+			svg{
+				transform: scale(0.5,0.5) rotate(45deg) translate(-71px, 0px);
+			}
+		}
+		.info{
+			padding: 0;
+			float: left;
+			clear: none;
+		}
+	}
+	
+	&.detailedInfo{
+		position: relative;
+		padding: 5px;
+		text-align: center;
+		
+		.shipName{
+		}
+		.shipModel{
+			color: #aaa;
+		}
+
+
+		.shipImage{
+			width: 200px;
+			height: 200px;
+			display: block;
+			margin: 10px auto;
+			background: none;
+
+			svg{
+				transform: scale(2,2) rotate(45deg) translate(18px, 18px);
+			}
+		}
+		.info{
+			padding: 0;
+			float: none;
+			display: block;
+			clear: none;
+		}
+	}
+}
+
+a .basicInfo{
+	&:hover{
+		cursor: pointer;
+
+		.shipName{
+			color: #ccc;
+		}
+	}
+}
+
+.bad{
+	color:@badColor;
+}
+.good{
+	color: @goodColor;
+}

@@ -12,6 +12,14 @@ var SvgNameplate = new Class({
 		this.text = text;
 		this.dx = dx;
 		this.dy = dy;
+		if (relatedObject instanceof Planet) {
+			if (relatedObject.hasBase) {
+				cssClass = cssClass + ' withBase';
+			} else {
+				cssClass = cssClass + ' withoutBase';
+			}
+		}
+		
 		this.cssClass = cssClass;
 		this.cssClassPrefix = "nameplate";
 		this.relatedObject = relatedObject;

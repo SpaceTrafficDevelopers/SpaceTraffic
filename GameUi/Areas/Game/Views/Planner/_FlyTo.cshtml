@@ -3,16 +3,17 @@
    
 }
 <div id="planningUI" class="relative">
-	<span class="closebutton">✖</span>
-	<p id="aboutShipPlan">
+	<h3>PRÁVĚ OPOUŠTÍTE</h3>
+	<h1 id="aboutShipPlan">
 		@ViewBag.ship.Base.BaseName
-	</p>
+	</h1>
+	<span class="leavingNote">Děkujeme za návštěvu.</span>
 	<p id="shipPlan">
 		Klikněte na planetu, kam chcete letět.
 	</p>
 
-	<button id="runPlan">Start!</button>
-	<button id="cancelPlan">Zrušit</button>
+	<button id="runPlan" class="btn btn-good">Start!</button>
+	<button id="cancelPlan" class="btn btn-info">Zrušit</button>
 	
 </div>
 <script>

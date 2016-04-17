@@ -1,14 +1,16 @@
-﻿@{
-	ViewBag.Title = "_ShipList";
-}
+﻿
 
 <h2>Mé lodě</h2>
-
+<div class="shipList scrollable">
 	@{
+	int i = 0;
 	foreach (var ship in @ViewBag.Ships)
 	{
+		i++;
 		<a href="@Url.Action("ShipDetail", "Bases", new { shipId = @ship.SpaceShipId })" class="ajax" data-related-element-id="contextPanelContent">
-			<div>@ship.SpaceShipName<br />@ship.SpaceShipModel</div>
+			@Html.Partial("ShipCards/_ShipCardBasic", new ViewDataDictionary { { "ship", ship }, { "index", i } })
 		</a>
 		}
 	}
+</div>
+<div style="clear:both;"></div>

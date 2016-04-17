@@ -3,17 +3,8 @@
 
 <a href="@Url.Action("ShipDetail", "Bases", new { shipId = ViewBag.ship.SpaceShipId })" class="ajax refreshButton" data-related-element-id="contextPanelContent">↻</a>
 
-<div>@ViewBag.ship.SpaceShipName<br />@ViewBag.SpaceShipModel</div>
-<div>Palivo: @ViewBag.ship.CurrentFuelTank / @ViewBag.ship.FuelTank</div>
-<div>Poškození: @ViewBag.ship.DamagePercent %</div>
-<div>Stav: @ViewBag.ship.StateText</div>
 
-@if(ViewBag.ship.IsAvailable){
-<a href="@Url.Action("FlyTo", "Planner", new { shipId = ViewBag.ship.SpaceShipId })" class="ajax" data-related-element-id="spaceShipPlannerContent">Leť na planetu...</a>
-<a href="@Url.Action("ShipCargo", "Ships", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax" data-related-element-id="spaceShipDetailContent">Náklad</a>
-<a href="@Url.Action("Buy", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax" data-related-element-id="spaceShipDetailContent">Nakup zboží</a>
-<a href="@Url.Action("Sell", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax" data-related-element-id="spaceShipDetailContent">Prodej zboží</a>
-<a href="@Url.Action("Refuel", "Ships", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax" data-related-element-id="spaceShipDetailContent">Natankuj</a>
-<a href="@Url.Action("Repair", "Ships", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax" data-related-element-id="spaceShipDetailContent">Oprav</a>
-}
+@Html.Partial("../Ships/ShipCards/_ShipCardDetailed", new ViewDataDictionary { { "ship", ViewBag.ship }, { "index", 0 }, {"shipUI", true} })
+
+
 <div id="spaceShipDetailContent"></div>

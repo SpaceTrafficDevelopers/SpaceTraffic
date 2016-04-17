@@ -221,6 +221,22 @@ line.tagLine{
 	overflow: visible;
 }
 
+.selectPlanetMode{
+
+	.nameplate text{
+		fill: @infoIconColor !important;
+	}
+
+	.nameplate.withoutBase{
+		visibility: hidden;
+		display: none;
+	}
+	.nameplate.withBase{
+		text, .baseIconSVG path{
+			fill: @goodColor !important;
+		}
+	}
+}
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

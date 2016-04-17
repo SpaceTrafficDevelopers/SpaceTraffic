@@ -1,37 +1,105 @@
-table.shipsview {
-	/*padding: 120px;*/
+
+#shipBuyContainer{
+	max-height: 600px;
+	overflow: auto;
 }
 
-table.shipsview tbody {
-	margin-left: 10px;
-	border-bottom: 2px solid #0f0f0f;	
+.shipBuyContainer{
+
+	float: left;
+	width: 260px;
+	text-align: center;
+	padding: 5px 10px;
+	margin: 5px;
+    background: rgba(255, 255, 255, 0.1);
+	height: 400px;
+
+	.shipCard{
+		min-height: 350px;
+	}
 }
 
-/*tr.tline {
-	border-collapse: collapse;
+#contextPanelContent{
+	
+	.shipList{
+		.shipCard{
+			width: auto !important;
+		}
+	}
 }
 
-.tline td {
-	border-bottom: 2px solid #1A4D3E;
-	border-collapse: collapse;
-}*/
-.shipImage{
-	svg{
-		transform: rotate(45deg);
+#mainPanelContent{
+	.shipList{
+		.shipCard{
+			min-width: 250px;
+			float: left;
+		}
+	}
+}
+
+.shipMenuBlock{
+	margin: 2px auto;
+	
+	&.mainMenu{
+		text-align: left;
+		margin: 5px auto;
+	}
+
+}
+.infoNote{
+
+	padding: 10px 0;
+	font-size: 18px;
+	color: #aaa;
+}
+form{
+	input[type="submit"].btn{
+		margin: 0 5px;
+	}
+}
+
+.actionPrice{
+	line-height: 40px;
+
+	span{
+		font-size: 14px;
+		color: #aaa;
+	}
+	strong{
+		font-size: 24px;
+	}
+	.creditsIcon{
+		position: relative;
+		top: -5px;
+	}
+}
+
+#refuelingForm, #repairingForm{
+	input[type="number"]{
+		max-width: 80px;
+	}
+}
+
+.cargoItemBuyContainer, .cargoItemSellContainer{
+	position: relative;
+	background: rgba(255, 255, 255, 0.1);
+
+	.cargoCard{
+		background: none !important;
 	}
 	
-
-	&.german{
-		.primaryColor{
-			fill: #fecd00 !important;
-		}
-		.secondaryColor{
-			fill: #dc0000 !important;
-		}
-		.additionalColor{
-			fill: #000000 !important;
-		}
-
+}
+#refuelingForm, #repairingForm, .cargoItemBuyContainer, .cargoItemSellContainer{
+	.sendBtn{
+		float: left;
+		margin: 0 5px;
 	}
-	
+	.sendMax{
+		float: right;
+		margin: 0;
+	}
+	input[type="number"]{
+		float: left;
+		max-width: 80px;
+	}
 }

@@ -7,7 +7,7 @@ var planPlace = $('#shipPlan');
 var updateShipPlan = function () {
 	var buff = '';
 	if (typeof toPlanet !== 'undefined' && toPlanet != null) {
-		buff = buff + '<span>Leť na:' + toPlanet.altName + '</span>';
+		buff = buff + '<span class="flyTo">Leť na: <strong>' + toPlanet.altName + '</strong></span>';
 	}
 	if (wormholes.length > 0) {
 		buff = buff + '<p>Přes: ';
@@ -19,10 +19,14 @@ var updateShipPlan = function () {
 
 /* switching to star system where the ship is */
 StarSystemLoader.switchToStarSystem(currentShipStarSystem);
-/* closing planning */
-$('#planningUI .closebutton').click(function (e) {
-	$('#planningUI').remove();
+
+/* visual mode change */
+$('#viewport').addClass('selectPlanetMode');
+
+$('#planningUI').parent().parent().find('.closebutton').click(function () {
+	$('#viewport').removeClass('selectPlanetMode');
 });
+
 /* binding reactions on planets and wormholes clicking*/
 $('body').off('planetClick wormholeClick');
 $('body').on('planetClick', function (e, originalEvent, planet) {
@@ -60,7 +64,7 @@ $('#runPlan').click(function (e) {
 				wormholes: wormholes.map(function (hole) { return {index: hole.id, starsystem: hole.destination} })
 			},
 			callback: function () {
-				$('#planningUI .closebutton').click();
+				$('#planningUI').parent().parent().find('.closebutton').click();
 				$('#contextPanelContent .refreshButton').click();
 			}
 		});

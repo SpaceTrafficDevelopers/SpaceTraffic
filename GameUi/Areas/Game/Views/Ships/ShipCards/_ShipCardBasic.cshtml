@@ -1,0 +1,46 @@
+﻿
+@{
+	var ship = ViewBag.ship;
+	Random rand = new Random();
+	int index = ViewBag.index + rand.Next();
+
+	var fuelClass = "";
+	var damageClass = "";
+
+	double fuelRatio = ((double)ship.CurrentFuelTank / (double)ship.FuelTank);
+
+	if (fuelRatio > 0.75)
+	{
+		fuelClass = "good";
+	}
+	else if (fuelRatio < 0.25)
+	{
+		fuelClass = "bad";
+	}
+
+	if (ship.DamagePercent < 25)
+	{
+		damageClass = "good";
+	} else if (fuelRatio > 75)
+	{
+		damageClass = "bad";
+	}
+}
+
+	<div class="shipCard basicInfo">
+
+		<div type="image/svg+xml" id="shipImage-@index" class="ship shipImage @ship.CssClass"></div>
+		<script>
+			$('#shipImage-@index').load('@Url.Content("~/Content/images/Ships/" + @ship.Image)');
+		</script>
+
+		<div class="info mainInfo">
+			<h2 class="shipName">@ship.SpaceShipName</h2>
+			<p class="statusInfo">@ship.StateText</p>
+			<h5 class="shipModel">@ship.SpaceShipModel</h5>
+		</div>
+		<div class="info fuelInfo @fuelClass">@ship.CurrentFuelTank/@ship.FuelTank</div>
+		<div class="info damageInfo @damageClass">@ship.DamagePercent %</div>
+		<div style="clear: both;"></div>
+		
+	</div>

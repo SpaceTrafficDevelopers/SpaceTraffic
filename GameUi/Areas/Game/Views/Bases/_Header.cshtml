@@ -4,11 +4,8 @@
 }
 @if (ViewBag.planetName != null)
 {
-<a href="@Url.Action("Info", "Bases", new { planetName = ViewBag.planetName })" class="ajax" data-related-element-id="contextPanelContent">Souhrn</a>
-<a href="@Url.Action("Ships", "Bases", new { planetName = ViewBag.planetName })" class="ajax" data-related-element-id="contextPanelContent">Lodě</a>
-<a href="@Url.Action("Goods", "Bases", new { planetName = ViewBag.planetName })" class="ajax" data-related-element-id="contextPanelContent">Zboží</a>
+<a href="@Url.Action("Info", "Bases", new { planetName = ViewBag.planetName })" class="ajax btn btn-info" data-related-element-id="contextPanelContent">Souhrn</a>
+<a href="@Url.Action("Ships", "Bases", new { planetName = ViewBag.planetName })" class="ajax btn btn-ships" data-related-element-id="contextPanelContent">Lodě</a>
+<a href="@Url.Action("Goods", "Bases", new { planetName = ViewBag.planetName })" class="ajax btn btn-credits" data-related-element-id="contextPanelContent">Zboží</a>
 }
-@if (ViewBag.currentBase != null)
-{
-<a href="@Url.Action("BuyShip", "Ships", new { baseId = ViewBag.currentBase.BaseId })" class="ajax" data-related-element-id="mainPanelContent">Koupit loď</a>
-}
+

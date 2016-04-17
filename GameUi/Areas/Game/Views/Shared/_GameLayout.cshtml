@@ -39,7 +39,7 @@
 				<div class="leftPart">
 					<div class="brick">Česká verze</div>
 					<div class="brick">
-						<a href="@Url.Action("Index", "References", new { Area = "Game" }, null)" title="O autorech a použitých knihovnách" class="ajax" data-related-element-id="contextPanelContent">Reference</a>
+						<a href="@Url.Action("Index", "References", new { Area = "Game" }, null)" title="O autorech a použitých knihovnách" class="ajax" data-related-element-id="mainPanelContent">Reference</a>
 					</div>
 				</div>
 				<a href="@Url.Action("Index","/")" title="Na hlavní obrazovku" id="logo" class="middlePart">
@@ -85,13 +85,10 @@
 			</nav>
 
 		</div>
-		<div id="infoPanel">
-		</div>
 		<div id="content">
 			@Html.Partial("_Flash")
 			<div id="contextPanel">
 				<span class="closebutton">&#x2716;</span>
-				<div id="spaceShipPlannerContent"></div>
 				<div id="contextPanelContent">
 				@RenderSection("ContextPanel", false)
 				</div>
@@ -104,6 +101,9 @@
 			</div>
 			<div id="viewport">
 				@*SVG starsystem viewport*@
+			</div>
+
+			<div id="infoPanel">
 			</div>
 
 			@Html.Partial("_Achievements")
