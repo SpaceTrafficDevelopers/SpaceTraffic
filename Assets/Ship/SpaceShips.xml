@@ -8,12 +8,12 @@
 			<manufacturer>United Space Ships</manufacturer>
 			<power>200</power>
 			<consumption>0.8</consumption>
-			<wearRate>0.3</wearRate>
+			<wearRate>0.5</wearRate>
 			<fuelCapacity>40</fuelCapacity>
-			<carryingCapacity>1000</carryingCapacity>
+			<carryingCapacity>550</carryingCapacity>
 			<cssClass>mainShip</cssClass>
 			<image>spaceshipType1.svg</image>
-			<price>150000</price>
+			<price>15000</price>
 			<description>Poslední verze populární lodi od koncernu United Space Ships. Kvalita za dobrou cenu.</description>
       <maxSpeed>20</maxSpeed>
 			<!-- Example for latest versions - not implemented yet -->
@@ -64,84 +64,366 @@
 			<consumption>0.6</consumption>
 			<wearRate>0.4</wearRate>
 			<fuelCapacity>40</fuelCapacity>
-			<carryingCapacity>400</carryingCapacity>
+			<carryingCapacity>680</carryingCapacity>
 			<cssClass>german</cssClass>
 			<image>spaceshipType1.svg</image>
 			<price>20000</price>
 			<description>Loď z kvalitního neměckého hliníku, určená pro běžné použití. Německo tradičně vyrábí rychlé a účinné stroje.</description>
+			<maxSpeed>40</maxSpeed>
+		</ship>
+		<ship>
+			<model>Bison</model>
+			<manufacturer>NASA</manufacturer>
+			<power>350</power>
+			<consumption>1.2</consumption>
+			<wearRate>0.7</wearRate>
+			<fuelCapacity>55</fuelCapacity>
+			<carryingCapacity>1000</carryingCapacity>
+			<cssClass>american</cssClass>
+			<image>spaceshipType1.svg</image>
+			<price>21000</price>
+			<description>Americká loď s pořádným výkonem. Při tankování prosím vypněte motor.</description>
+			<maxSpeed>18</maxSpeed>
+		</ship>
+
+
+		<!--level 2-->
+		<ship>
+			<model>Shipuntipla</model>
+			<manufacturer>United Space Ships</manufacturer>
+			<power>400</power>
+			<consumption>1.5</consumption>
+			<wearRate>0.5</wearRate>
+			<fuelCapacity>80</fuelCapacity>
+			<carryingCapacity>1600</carryingCapacity>
+			<cssClass>mainShip</cssClass>
+			<image>spaceshipType2.svg</image>
+			<price>30000</price>
+			<description>Vítěz ankety o nejošklivější loď ve vesmíru. Nicméně je pohodlná a levná.</description>
+			<maxSpeed>50</maxSpeed>
+			<!-- Example for latest versions - not implemented yet -->
+			<slots>
+				<!-- Slot pro motor -->
+				<slot slotName="engineSlot" required="true" copmonentID="Engine" exchangeable="true">
+					<whitelist>
+						<component>Engine</component>
+					</whitelist>
+				</slot>
+				<!-- Slot pro palivovou nadrz (nakladovy prostor pro palivo) -->
+				<slot slotName="tankSlot" required="true" copmonentID="FuelCargo"
+						exchangeable="false">
+					<whitelist>
+						<component>FuelCargo</component>
+					</whitelist>
+				</slot>
+				<!-- Slot pro povinny nakladovy prostor -->
+				<slot slotName="cargoSlot" required="true" copmonentID="BasicCargohold"
+						exchangeable="true">
+					<whitelist>
+						<component>BasicCargohold</component>
+						<component>ExtraCargohold</component>
+					</whitelist>
+				</slot>
+				<!-- Muzou nasledovat az 3 (podle wiki) dalsi sloty pro nakladovy prostor -->
+				<!-- Muzou nasledovat dalsi sloty pro ostatni komponenty -->
+			</slots>
+		</ship>
+		<ship>
+			<model>Šun-ka</model>
+			<manufacturer>Made in China Corp.</manufacturer>
+			<power>160</power>
+			<consumption>1</consumption>
+			<wearRate>1.2</wearRate>
+			<fuelCapacity>30</fuelCapacity>
+			<carryingCapacity>850</carryingCapacity>
+			<cssClass>chinese</cssClass>
+			<image>spaceshipType2.svg</image>
+			<price>19999</price>
+			<description>Masově vyráběná čínská loď, oblíbená v zemědělství a pro příležitostké lety do vesmíru.</description>
 			<maxSpeed>25</maxSpeed>
 		</ship>
 		<ship>
 			<model>Weltallwagen</model>
 			<manufacturer>Raumfabrik Deutschland</manufacturer>
 			<power>500</power>
-			<consumption>1.1</consumption>
+			<consumption>1.4</consumption>
 			<wearRate>0.5</wearRate>
 			<fuelCapacity>90</fuelCapacity>
-			<carryingCapacity>400</carryingCapacity>
+			<carryingCapacity>1200</carryingCapacity>
 			<cssClass>german</cssClass>
 			<image>spaceshipType2.svg</image>
-			<price>50000</price>
-			<description>Loď z kvalitního neměckého hliníku, určená pro běžné použití.</description>
-			<maxSpeed>25</maxSpeed>
+			<price>48000</price>
+			<description>Standardní německá loď splňující nejnovější normy na počet držáků na kafe.</description>
+			<maxSpeed>85</maxSpeed>
+		</ship>
+		<ship>
+			<model>Bull</model>
+			<manufacturer>NASA</manufacturer>
+			<power>800</power>
+			<consumption>2.5</consumption>
+			<wearRate>0.65</wearRate>
+			<fuelCapacity>200</fuelCapacity>
+			<carryingCapacity>3000</carryingCapacity>
+			<cssClass>american</cssClass>
+			<image>spaceshipType2.svg</image>
+			<price>57400</price>
+			<description>Silná, rychlá a divoká loď pro opravdové kovboje.</description>
+			<maxSpeed>92</maxSpeed>
+		</ship>
+
+
+		<!-- level 3 -->
+		<ship>
+			<model>Shipedes</model>
+			<manufacturer>United Space Ships</manufacturer>
+			<power>900</power>
+			<consumption>2</consumption>
+			<wearRate>0.45</wearRate>
+			<fuelCapacity>160</fuelCapacity>
+			<carryingCapacity>3800</carryingCapacity>
+			<cssClass>mainShip</cssClass>
+			<image>spaceshipType3.svg</image>
+			<price>64000</price>
+			<description>Loď s pohodlným sedadlem pro pilota a kávovarem zdarma. Loď roku 2143.</description>
+			<maxSpeed>120</maxSpeed>
+			<!-- Example for latest versions - not implemented yet -->
+			<slots>
+				<!-- Slot pro motor -->
+				<slot slotName="engineSlot" required="true" copmonentID="Engine" exchangeable="true">
+					<whitelist>
+						<component>Engine</component>
+					</whitelist>
+				</slot>
+				<!-- Slot pro palivovou nadrz (nakladovy prostor pro palivo) -->
+				<slot slotName="tankSlot" required="true" copmonentID="FuelCargo"
+						exchangeable="false">
+					<whitelist>
+						<component>FuelCargo</component>
+					</whitelist>
+				</slot>
+				<!-- Slot pro povinny nakladovy prostor -->
+				<slot slotName="cargoSlot" required="true" copmonentID="BasicCargohold"
+						exchangeable="true">
+					<whitelist>
+						<component>BasicCargohold</component>
+						<component>ExtraCargohold</component>
+					</whitelist>
+				</slot>
+				<!-- Muzou nasledovat az 3 (podle wiki) dalsi sloty pro nakladovy prostor -->
+				<!-- Muzou nasledovat dalsi sloty pro ostatni komponenty -->
+			</slots>
+		</ship>
+		<ship>
+			<model>Kung-šuo</model>
+			<manufacturer>Made in China Corp.</manufacturer>
+			<power>400</power>
+			<consumption>2.6</consumption>
+			<wearRate>1.1</wearRate>
+			<fuelCapacity>70</fuelCapacity>
+			<carryingCapacity>1500</carryingCapacity>
+			<cssClass>chinese</cssClass>
+			<image>spaceshipType3.svg</image>
+			<price>45000</price>
+			<description>Extrémně levná loď střední třídy pro vesmírné skrblíky.</description>
+			<maxSpeed>50</maxSpeed>
 		</ship>
 		<ship>
 			<model>Hauptweltallwagen</model>
 			<manufacturer>Raumfabrik Deutschland</manufacturer>
-			<power>250</power>
-			<consumption>0.6</consumption>
-			<wearRate>0.4</wearRate>
-			<fuelCapacity>40</fuelCapacity>
-			<carryingCapacity>400</carryingCapacity>
+			<power>1000</power>
+			<consumption>1.8</consumption>
+			<wearRate>0.3</wearRate>
+			<fuelCapacity>200</fuelCapacity>
+			<carryingCapacity>2500</carryingCapacity>
 			<cssClass>german</cssClass>
 			<image>spaceshipType3.svg</image>
-			<price>200000</price>
-			<description>Loď z kvalitního neměckého hliníku, určená pro běžné použití.</description>
-			<maxSpeed>25</maxSpeed>
+			<price>100000</price>
+			<description>Vlajková vesmírná loď německého výrobce. Precizní seřízení a kvalitní materiály z ní dělají jednu z nejkvalitnějších lodí na trhu.</description>
+			<maxSpeed>200</maxSpeed>
+		</ship>
+		<ship>
+			<model>Space Eagle</model>
+			<manufacturer>NASA</manufacturer>
+			<power>1800</power>
+			<consumption>4.5</consumption>
+			<wearRate>0.44</wearRate>
+			<fuelCapacity>650</fuelCapacity>
+			<carryingCapacity>8000</carryingCapacity>
+			<cssClass>american</cssClass>
+			<image>spaceshipType3.svg</image>
+			<price>99999</price>
+			<description>Obsahuje velký počet vycpaných orlů zlepšujících rychlost a celkovou stylovost lodi.</description>
+			<maxSpeed>160</maxSpeed>
+		</ship>
+
+		<!-- level 4 -->
+		<ship>
+			<model>Raketa</model>
+			<manufacturer>United Space Ships</manufacturer>
+			<power>2000</power>
+			<consumption>6</consumption>
+			<wearRate>0.45</wearRate>
+			<fuelCapacity>1500</fuelCapacity>
+			<carryingCapacity>4000</carryingCapacity>
+			<cssClass>mainShip</cssClass>
+			<image>spaceshipType4.svg</image>
+			<price>150000</price>
+			<description>Loď s prostým názvem "Raketa" a experimentálním pohonem. Extrémně rychlá za cenu velké spotřeby a malé kapacity.</description>
+			<maxSpeed>600</maxSpeed>
+			<!-- Example for latest versions - not implemented yet -->
+			<slots>
+				<!-- Slot pro motor -->
+				<slot slotName="engineSlot" required="true" copmonentID="Engine" exchangeable="true">
+					<whitelist>
+						<component>Engine</component>
+					</whitelist>
+				</slot>
+				<!-- Slot pro palivovou nadrz (nakladovy prostor pro palivo) -->
+				<slot slotName="tankSlot" required="true" copmonentID="FuelCargo"
+						exchangeable="false">
+					<whitelist>
+						<component>FuelCargo</component>
+					</whitelist>
+				</slot>
+				<!-- Slot pro povinny nakladovy prostor -->
+				<slot slotName="cargoSlot" required="true" copmonentID="BasicCargohold"
+						exchangeable="true">
+					<whitelist>
+						<component>BasicCargohold</component>
+						<component>ExtraCargohold</component>
+					</whitelist>
+				</slot>
+				<!-- Muzou nasledovat az 3 (podle wiki) dalsi sloty pro nakladovy prostor -->
+				<!-- Muzou nasledovat dalsi sloty pro ostatni komponenty -->
+			</slots>
+		</ship>
+		<ship>
+			<model>Nebeské nudle</model>
+			<manufacturer>Made in China Corp.</manufacturer>
+			<power>1000</power>
+			<consumption>4</consumption>
+			<wearRate>1</wearRate>
+			<fuelCapacity>150</fuelCapacity>
+			<carryingCapacity>4500</carryingCapacity>
+			<cssClass>chinese</cssClass>
+			<image>spaceshipType4.svg</image>
+			<price>111111</price>
+			<description>Přezdívka této řady lodí "Nebeské nudle" vznikla proto, že nápad na její unikátní konstrukci dostal ve snu majitel jistého bistra po konzumaci prošlých nudlí.</description>
+			<maxSpeed>120</maxSpeed>
 		</ship>
 		<ship>
 			<model>Sturmweltallwagen</model>
 			<manufacturer>Raumfabrik Deutschland</manufacturer>
-			<power>250</power>
-			<consumption>0.6</consumption>
-			<wearRate>0.4</wearRate>
-			<fuelCapacity>40</fuelCapacity>
-			<carryingCapacity>400</carryingCapacity>
+			<power>3000</power>
+			<consumption>2</consumption>
+			<wearRate>0.55</wearRate>
+			<fuelCapacity>300</fuelCapacity>
+			<carryingCapacity>7500</carryingCapacity>
 			<cssClass>german</cssClass>
 			<image>spaceshipType4.svg</image>
-			<price>200000</price>
-			<description>Loď z kvalitního neměckého hliníku, určená pro běžné použití.</description>
-			<maxSpeed>25</maxSpeed>
+			<price>320000</price>
+			<description>Výrobce udává, že na mocné dunění motoru této lodě úspěšně průměrně sbalíte 65% žen a 92% mužů.</description>
+			<maxSpeed>500</maxSpeed>
+		</ship>
+		<ship>
+			<model>Big Mike</model>
+			<manufacturer>NASA</manufacturer>
+			<power>2800</power>
+			<consumption>4</consumption>
+			<wearRate>0.6</wearRate>
+			<fuelCapacity>1000</fuelCapacity>
+			<carryingCapacity>10000</carryingCapacity>
+			<cssClass>american</cssClass>
+			<image>spaceshipType4.svg</image>
+			<price>300000</price>
+			<description>Loď pro novou generaci Američanů. Značková, bezlepková a s širokými sedadly.</description>
+			<maxSpeed>380</maxSpeed>
+		</ship>
+
+		<!-- level 5 -->
+		<ship>
+			<model>Srdce ze stříbra</model>
+			<manufacturer>United Space Ships</manufacturer>
+			<power>40000</power>
+			<consumption>6.2</consumption>
+			<wearRate>0.6</wearRate>
+			<fuelCapacity>1800</fuelCapacity>
+			<carryingCapacity>6500</carryingCapacity>
+			<cssClass>mainShip</cssClass>
+			<image>spaceshipType5.svg</image>
+			<price>2400000</price>
+			<description>Loď poslední generace poháněná konečnou nepravděpodobností. Její vznik byl krajně nepravděpodobný a provázel ho řetězec podivných událostí.</description>
+			<maxSpeed>12000</maxSpeed>
+			<!-- Example for latest versions - not implemented yet -->
+			<slots>
+				<!-- Slot pro motor -->
+				<slot slotName="engineSlot" required="true" copmonentID="Engine" exchangeable="true">
+					<whitelist>
+						<component>Engine</component>
+					</whitelist>
+				</slot>
+				<!-- Slot pro palivovou nadrz (nakladovy prostor pro palivo) -->
+				<slot slotName="tankSlot" required="true" copmonentID="FuelCargo"
+						exchangeable="false">
+					<whitelist>
+						<component>FuelCargo</component>
+					</whitelist>
+				</slot>
+				<!-- Slot pro povinny nakladovy prostor -->
+				<slot slotName="cargoSlot" required="true" copmonentID="BasicCargohold"
+						exchangeable="true">
+					<whitelist>
+						<component>BasicCargohold</component>
+						<component>ExtraCargohold</component>
+					</whitelist>
+				</slot>
+				<!-- Muzou nasledovat az 3 (podle wiki) dalsi sloty pro nakladovy prostor -->
+				<!-- Muzou nasledovat dalsi sloty pro ostatni komponenty -->
+			</slots>
+		</ship>
+		<ship>
+			<model>Sun-tzu</model>
+			<manufacturer>Made in China Corp.</manufacturer>
+			<power>38000</power>
+			<consumption>5</consumption>
+			<wearRate>0.9</wearRate>
+			<fuelCapacity>1200</fuelCapacity>
+			<carryingCapacity>7800</carryingCapacity>
+			<cssClass>chinese</cssClass>
+			<image>spaceshipType5.svg</image>
+			<price>1999999</price>
+			<description>Čínský národní poklad, dostupný pouze nejvyšším stranickým špičkám a nejlepším obchodním partnerům. Obsahuje jednu živou pandu.</description>
+			<maxSpeed>3200</maxSpeed>
 		</ship>
 		<ship>
 			<model>Obersturmweltallwagen</model>
 			<manufacturer>Raumfabrik Deutschland</manufacturer>
-			<power>250</power>
-			<consumption>0.6</consumption>
-			<wearRate>0.4</wearRate>
-			<fuelCapacity>40</fuelCapacity>
-			<carryingCapacity>400</carryingCapacity>
+			<power>50000</power>
+			<consumption>3.2</consumption>
+			<wearRate>0.5</wearRate>
+			<fuelCapacity>4000</fuelCapacity>
+			<carryingCapacity>100000</carryingCapacity>
 			<cssClass>german</cssClass>
 			<image>spaceshipType5.svg</image>
-			<price>200000</price>
-			<description>Loď z kvalitního neměckého hliníku, určená pro běžné použití.</description>
-			<maxSpeed>25</maxSpeed>
+			<price>3200000</price>
+			<description>Německá nadloď. Špičkový produkt nejlepšího vesmírného inženýrství. Jednoznačně nejlepší loď na trhu.</description>
+			<maxSpeed>5000</maxSpeed>
 		</ship>
-		
-		
 		<ship>
-			<model>Bison</model>
+			<model>Freedom Star</model>
 			<manufacturer>NASA</manufacturer>
-			<power>350</power>
-			<consumption>1.5</consumption>
-			<wearRate>0.6</wearRate>
-			<fuelCapacity>90</fuelCapacity>
-			<carryingCapacity>3000</carryingCapacity>
+			<power>100000</power>
+			<consumption>25</consumption>
+			<wearRate>0.7</wearRate>
+			<fuelCapacity>100000</fuelCapacity>
+			<carryingCapacity>500000</carryingCapacity>
 			<cssClass>american</cssClass>
-			<image>spaceshipType1.svg</image>
-			<price>250000</price>
-			<description>Loď typu Bumper, oblíbená především mezi středními dopravci pro její velkou kapacitu.</description>
-      <maxSpeed>30</maxSpeed>
-		</ship>
+			<image>spaceshipType5.svg</image>
+			<price>5000000</price>
+			<description>Obrovská loď obsahující 4832 restaurací rychlého občerstvení a muzeum útočných pušek. Zvolna pluje vesmírem a šíří svobodu a tučná jídla do všech jeho koutů.</description>
+			<maxSpeed>50</maxSpeed>
+		</ship>	
+		
+		
 	</ships>
 </st:stdata>
