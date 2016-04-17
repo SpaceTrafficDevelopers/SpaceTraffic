@@ -1,4 +1,4 @@
-﻿<div class="ajax" id="cargoBuyForm">
+﻿<div class="ajax" id="cargoSellForm">
 	<h4>Prodat zboží</h4>
 
 	<div class="scrollable small">
@@ -6,24 +6,24 @@
 			int i = 0;
 			foreach (var cargoToSell in ViewBag.cargosToSell)
 			{
-				i++;
+				<div class="cargoItemSellContainer">
+				@{
+					i++;
+					var traderCargo = cargoToSell.traderCargo;
+					var cargo = cargoToSell.shipCargo;
+				
+					@Html.Partial("../Cargo/CargoCards/_CargoCardBasic", new ViewDataDictionary { { "cargo", cargo } });
 
-				var traderCargo = cargoToSell.traderCargo;
-				var cargo = cargoToSell.shipCargo;
-				<strong>@cargo.Cargo.Name</strong>
-				<span>@cargo.Cargo.Type</span>
-				<p>@cargo.Cargo.Description</p>
-				<span>Nakoupeno za: @cargo.CargoPrice</span>
-				<span>Prodejní cena: @traderCargo.CargoPrice</span>
-				<span>Velikost: @cargo.Cargo.Volume</span>
-				<span>K dispozici: @cargo.CargoCount</span>
+					using (Html.BeginForm("Sell", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.trader.BaseId, cargoId = cargo.SpaceShipCargoId }, FormMethod.Post, null))
+					{
+						<input type="number" class="buyAmount" name="Amount" min="0" max="@cargo.CargoCount" value="@cargo.CargoCount" />
+						<input type="submit" class="btn btn-bad sendBtn" value="Prodat" />
+						<a class="btn btn-bad sendMax" href="">Prodat vše</a>
+						<div style="clear: both;"></div>
 
-				using (Html.BeginForm("Sell", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.trader.BaseId, cargoId = cargo.SpaceShipCargoId }, FormMethod.Post, null))
-				{
-					<input type="number" name="Amount" min="0" max="@cargo.CargoCount" value="@cargo.CargoCount" />
-					<input type="submit" value="Prodat" />
-
+					}
 				}
+				</div>
 			}
 			if (i == 0)
 			{
@@ -32,8 +32,4 @@
 }
 	</div>
 </div>
-<script>
-	$('#cargoBuyForm').on('successSend', function () {
-		$('.refreshButton').click();
-	});
-</script>
+@Content.Script("../JS/game/BuySellScripts.js", Url)
