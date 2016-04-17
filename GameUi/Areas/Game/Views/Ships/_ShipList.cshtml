@@ -10,7 +10,11 @@
 		<a href="@Url.Action("ShipDetail", "Bases", new { shipId = @ship.SpaceShipId })" class="ajax" data-related-element-id="contextPanelContent">
 			@Html.Partial("ShipCards/_ShipCardBasic", new ViewDataDictionary { { "ship", ship }, { "index", i } })
 		</a>
-		}
 	}
+	if (i == 0)
+	{
+		<p class="infoNote">Nevlastníte žádné lodě.</p>
+	}
+}
 </div>
 <div style="clear:both;"></div>
