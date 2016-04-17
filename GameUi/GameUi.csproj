@@ -110,6 +110,7 @@
     <Compile Include="Areas\Game\Controllers\PlannerController.cs" />
     <Compile Include="Areas\Game\Models\CargoSellModel.cs" />
     <Compile Include="Areas\Game\Models\CargoBuyModel.cs" />
+    <Compile Include="Areas\Game\Models\ProfileSettingsModel.cs" />
     <Compile Include="Areas\Game\Models\RepairShipModel.cs" />
     <Compile Include="Areas\Game\Models\FuelBuyModel.cs" />
     <Compile Include="Areas\Game\Models\CargoPairModel.cs" />
