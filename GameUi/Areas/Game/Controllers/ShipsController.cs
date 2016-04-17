@@ -73,7 +73,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			return viewResult;
 		}
 
-		public ActionResult ShipCargo(int shipId, int baseId)
+		public ActionResult ShipCargo(int shipId)
 		{
 			if (!GSClient.PlayerService.PlayerHasSpaceShip(getCurrentPlayerId(), shipId))
 			{
