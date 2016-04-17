@@ -453,6 +453,7 @@
     <Content Include="JS\util\Modal.js" />
     <Content Include="JS\util\Queue.js" />
     <Content Include="JS\util\TimeUtils.js" />
+    <Content Include="JS\util\TouchDeviceSupport.js" />
     <Content Include="JS\util\UIUtils.js" />
     <Content Include="JS\game\ShipScripts.js" />
     <Content Include="Content\less\Parts\buttons.less" />
