@@ -14,7 +14,7 @@
 					var achvPopup = $("#achievements");
 					achvPopup.queue(function () {
 						$(".name").text(achievement.Name);
-						$(".achievementIcon").attr("src", achievement.Image);
+						$(".achievementIcon").attr("src", baseUrl + achievement.Image);
 						$(this).dequeue();
 					}).slideDown(400).delay(2000).slideUp(400);
 				});
