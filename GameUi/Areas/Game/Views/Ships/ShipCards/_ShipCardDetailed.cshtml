@@ -8,7 +8,7 @@
 	var fuelClass = "";
 	var damageClass = "";
 
-	double fuelRatio = ship.CurrentFuelTank / ship.FuelTank;
+	double fuelRatio = ((double)ship.CurrentFuelTank / (double)ship.FuelTank);
 
 	if (fuelRatio > 0.75)
 	{
