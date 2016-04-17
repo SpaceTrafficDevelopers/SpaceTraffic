@@ -2,6 +2,7 @@
  util/MathUtils.js
  util/Queue.js
  util/UIUtils.js
+ util/TouchDeviceSupport.js
  ui/ViewportManager.js
  ui/GameWindowTabs.js
  game/geometry/Trajectory.js

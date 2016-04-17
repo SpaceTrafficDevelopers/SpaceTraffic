@@ -33,7 +33,12 @@ var SvgViewportManager = new Class({
 		
 		this.renderer = renderer;
 		
-		this.$svgViewport.mousedown((function (e) {
+		this.$svgViewport.mousedown((function (e, touchPageXY) {
+			if (typeof e.pageX === 'undefined' && typeof touchPageXY !== 'undefined') {
+				e.pageX = touchPageXY.pageX;
+				e.pageY = touchPageXY.pageY;
+				e.which = 1;
+			}
 			this.$svgViewport.css('cursor', 'pointer');
 			this.offsetX = this.viewportTX - e.pageX;
 			this.offsetY = this.viewportTY - e.pageY;
@@ -86,7 +91,11 @@ var SvgViewportManager = new Class({
 		
 		// If map is dragged, it will unset mouseMove flag and finalize dragging.
 		// registered for mouseup and mouseleave events.
-		var endDrag = (function (e) {
+		var endDrag = (function (e, touchPageXY) {
+			if (typeof e.pageX === 'undefined' && typeof touchPageXY !== 'undefined') {
+				e.pageX = touchPageXY.pageX;
+				e.pageY = touchPageXY.pageY;
+			}
 			if (this.mouseMove)
 			{
 				this.mouseMove = false;
@@ -111,6 +120,9 @@ var SvgViewportManager = new Class({
 		/* zooming with mousewheel */
 		var parent = this;
 		this.$svgViewport.mousewheel(function (e, delta) {
+			if (typeof delta === 'undefined' && typeof e.delta !== 'undefined') {
+				delta = e.delta;
+			}
 			var oldZoom = parent.zoom;
 			var oldBgZoom = parent.bgZoom;
 			var oldBg2Zoom = parent.bg2Zoom;
