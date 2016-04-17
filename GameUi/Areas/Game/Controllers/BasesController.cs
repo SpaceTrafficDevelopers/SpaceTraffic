@@ -44,6 +44,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		{
 			var partialView = PartialView("_Info");
 			partialView = addHeaderViewBag(partialView, planetName);
+			partialView.ViewBag.trader = GSClient.CargoService.GetTraderAtBase(partialView.ViewBag.currentBase.BaseId);
 			return partialView;
 		}
 
