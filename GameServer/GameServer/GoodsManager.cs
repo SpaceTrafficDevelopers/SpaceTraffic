@@ -123,6 +123,10 @@ namespace SpaceTraffic.GameServer
         /// <param name="tc">trader cargo</param>
         private void InsertTraderCargo(TraderCargo tc)
         {
+			Random rand = new Random();
+			int originalPrice = tc.CargoPrice;
+			int cargoPriceFraction = (int)(originalPrice * 0.4); /*40% of price*/
+			tc.CargoPrice = (tc.CargoPrice - cargoPriceFraction) + rand.Next(cargoPriceFraction * 2); /* price is modified - +-40% of price*/
             this.gameServer.Persistence.GetTraderCargoDAO().InsertCargo(tc);
         }
 
