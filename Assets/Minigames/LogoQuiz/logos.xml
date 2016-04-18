@@ -1,1223 +1,239 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <logos>
   <logo>
-    <name>ABARTH</name>
+    <name>A B N - Amro</name>
+    <file_name>a_b_n__amro.png</file_name>
+  </logo>
+  <logo>
+    <name>Abarth</name>
     <file_name>abarth.png</file_name>
   </logo>
   <logo>
-    <name>ABB</name>
-    <file_name>abb.png</file_name>
-  </logo>
-  <logo>
-    <name>ABBA</name>
-    <file_name>abba.png</file_name>
-  </logo>
-  <logo>
-    <name>ABBOTT</name>
-    <file_name>abbott.png</file_name>
-  </logo>
-  <logo>
-    <name>ABC</name>
-    <file_name>abc.png</file_name>
-  </logo>
-  <logo>
-    <name>ABENGOA</name>
-    <file_name>abengoa.png</file_name>
-  </logo>
-  <logo>
-    <name>ABERCROMBIE</name>
-    <file_name>abercrombie.png</file_name>
-  </logo>
-  <logo>
-    <name>ABERTIS</name>
-    <file_name>abertis.png</file_name>
-  </logo>
-  <logo>
-    <name>ABN AMRO</name>
-    <file_name>abn_amro.png</file_name>
-  </logo>
-  <logo>
-    <name>ABSOLUT VODKA</name>
-    <file_name>absolut_vodka.png</file_name>
-  </logo>
-  <logo>
-    <name>ACCENTURE</name>
-    <file_name>accenture.png</file_name>
+    <name>Absolut</name>
+    <file_name>absolut.png</file_name>
   </logo>
   <logo>
     <name>ACDC</name>
     <file_name>acdc.png</file_name>
   </logo>
   <logo>
-    <name>ACER</name>
-    <file_name>acer.png</file_name>
-  </logo>
-  <logo>
-    <name>ACS</name>
-    <file_name>acs.png</file_name>
-  </logo>
-  <logo>
-    <name>ACTIMEL</name>
-    <file_name>actimel.png</file_name>
-  </logo>
-  <logo>
-    <name>ACTIVISION</name>
+    <name>Activision</name>
     <file_name>activision.png</file_name>
   </logo>
   <logo>
-    <name>ACURA</name>
-    <file_name>acura.png</file_name>
-  </logo>
-  <logo>
-    <name>ADECCO</name>
-    <file_name>adecco.png</file_name>
-  </logo>
-  <logo>
-    <name>ADELAIDE</name>
-    <file_name>adelaide.png</file_name>
-  </logo>
-  <logo>
-    <name>ADELE</name>
-    <file_name>adele.png</file_name>
-  </logo>
-  <logo>
-    <name>ADIDAS</name>
+    <name>Adidas</name>
     <file_name>adidas.png</file_name>
   </logo>
   <logo>
-    <name>ADIO</name>
-    <file_name>adio.png</file_name>
-  </logo>
-  <logo>
-    <name>ADOBE</name>
-    <file_name>adobe.png</file_name>
-  </logo>
-  <logo>
-    <name>ADOLFO DOMINGUEZ</name>
-    <file_name>adolfo_dominguez.png</file_name>
-  </logo>
-  <logo>
-    <name>AEG</name>
-    <file_name>aeg.png</file_name>
-  </logo>
-  <logo>
-    <name>AEGON</name>
-    <file_name>aegon.png</file_name>
-  </logo>
-  <logo>
-    <name>AEROFLOT</name>
+    <name>Aeroflot</name>
     <file_name>aeroflot.png</file_name>
   </logo>
   <logo>
-    <name>AFL</name>
-    <file_name>afl.png</file_name>
+    <name>After Eight</name>
+    <file_name>after_eight.png</file_name>
   </logo>
   <logo>
-    <name>AGBAR</name>
-    <file_name>agbar.png</file_name>
-  </logo>
-  <logo>
-    <name>AGFA</name>
-    <file_name>agfa.png</file_name>
-  </logo>
-  <logo>
-    <name>AGUSTA</name>
-    <file_name>agusta.png</file_name>
-  </logo>
-  <logo>
-    <name>AGV</name>
-    <file_name>agv.png</file_name>
-  </logo>
-  <logo>
-    <name>AIG</name>
-    <file_name>aig.png</file_name>
-  </logo>
-  <logo>
-    <name>AIM</name>
-    <file_name>aim.png</file_name>
-  </logo>
-  <logo>
-    <name>AIRBNB</name>
-    <file_name>airbnb.png</file_name>
-  </logo>
-  <logo>
-    <name>AIRBUS</name>
-    <file_name>airbus.png</file_name>
-  </logo>
-  <logo>
-    <name>AIRFRANCE</name>
-    <file_name>airfrance.png</file_name>
-  </logo>
-  <logo>
-    <name>AIRJAMAICA</name>
-    <file_name>airjamaica.png</file_name>
-  </logo>
-  <logo>
-    <name>AIRNESS</name>
-    <file_name>airness.png</file_name>
-  </logo>
-  <logo>
-    <name>AIRNEWZELAND</name>
-    <file_name>airnewzeland.png</file_name>
-  </logo>
-  <logo>
-    <name>AIRWALK</name>
-    <file_name>airwalk.png</file_name>
-  </logo>
-  <logo>
-    <name>AIR BERLIN</name>
+    <name>Air Berlin</name>
     <file_name>air_berlin.png</file_name>
   </logo>
   <logo>
-    <name>AIR CANADA</name>
-    <file_name>air_canada.png</file_name>
-  </logo>
-  <logo>
-    <name>AIR DOLOMITI</name>
-    <file_name>air_dolomiti.png</file_name>
-  </logo>
-  <logo>
-    <name>AIR JORDAN</name>
+    <name>Air Jordan</name>
     <file_name>air_jordan.png</file_name>
   </logo>
   <logo>
-    <name>AIR WICK</name>
-    <file_name>air_wick.png</file_name>
+    <name>Air New Zealand</name>
+    <file_name>air_new_zealand.png</file_name>
   </logo>
   <logo>
-    <name>AIWA</name>
-    <file_name>aiwa.png</file_name>
+    <name>AkzoNobel</name>
+    <file_name>akzonobel.png</file_name>
   </logo>
   <logo>
-    <name>ALCATEL</name>
-    <file_name>alcatel.png</file_name>
+    <name>Al Jazeera</name>
+    <file_name>al_jazeera.png</file_name>
   </logo>
   <logo>
-    <name>ALDI</name>
-    <file_name>aldi.png</file_name>
-  </logo>
-  <logo>
-    <name>ALFABANK</name>
-    <file_name>alfabank.png</file_name>
-  </logo>
-  <logo>
-    <name>ALFA ROMEO</name>
+    <name>Alfa Romeo</name>
     <file_name>alfa_romeo.png</file_name>
   </logo>
   <logo>
-    <name>ALISA</name>
-    <file_name>alisa.png</file_name>
-  </logo>
-  <logo>
-    <name>ALITALIA</name>
-    <file_name>alitalia.png</file_name>
-  </logo>
-  <logo>
-    <name>ALJAZEERA</name>
-    <file_name>aljazeera.png</file_name>
-  </logo>
-  <logo>
-    <name>ALLIANZ</name>
+    <name>Allianz</name>
     <file_name>allianz.png</file_name>
   </logo>
   <logo>
-    <name>ALLOCINE</name>
-    <file_name>allocine.png</file_name>
-  </logo>
-  <logo>
-    <name>ALL NIPPON AIRWAYS</name>
-    <file_name>all_nippon_airways.png</file_name>
-  </logo>
-  <logo>
-    <name>ALPINA</name>
-    <file_name>alpina.png</file_name>
-  </logo>
-  <logo>
-    <name>ALPINE</name>
-    <file_name>alpine.png</file_name>
-  </logo>
-  <logo>
-    <name>ALTRIA</name>
-    <file_name>altria.png</file_name>
-  </logo>
-  <logo>
-    <name>ALWAYS</name>
-    <file_name>always.png</file_name>
-  </logo>
-  <logo>
-    <name>AMAZON</name>
+    <name>Amazon</name>
     <file_name>amazon.png</file_name>
   </logo>
   <logo>
-    <name>AMCOR</name>
-    <file_name>amcor.png</file_name>
-  </logo>
-  <logo>
-    <name>AMD</name>
-    <file_name>amd.png</file_name>
-  </logo>
-  <logo>
-    <name>AMERICANGIRL</name>
-    <file_name>americangirl.png</file_name>
-  </logo>
-  <logo>
-    <name>AMERICAN AIRLINES</name>
+    <name>American Airlines</name>
     <file_name>american_airlines.png</file_name>
   </logo>
   <logo>
-    <name>AMERICAN EAGLE</name>
-    <file_name>american_eagle.png</file_name>
-  </logo>
-  <logo>
-    <name>AMERICAN EXPRESS</name>
-    <file_name>american_express.png</file_name>
-  </logo>
-  <logo>
-    <name>AMG</name>
-    <file_name>amg.png</file_name>
-  </logo>
-  <logo>
-    <name>AMNESTY</name>
-    <file_name>amnesty.png</file_name>
-  </logo>
-  <logo>
-    <name>AMSTEL</name>
+    <name>Amstel</name>
     <file_name>amstel.png</file_name>
   </logo>
   <logo>
-    <name>AMSTRAD</name>
-    <file_name>amstrad.png</file_name>
-  </logo>
-  <logo>
-    <name>AMTRAK</name>
+    <name>Amtrak</name>
     <file_name>amtrak.png</file_name>
   </logo>
   <logo>
-    <name>AMWAY</name>
-    <file_name>amway.png</file_name>
-  </logo>
-  <logo>
-    <name>AND1</name>
-    <file_name>and1.png</file_name>
-  </logo>
-  <logo>
-    <name>ANDROID</name>
+    <name>Android</name>
     <file_name>android.png</file_name>
   </logo>
   <logo>
-    <name>ANIC</name>
-    <file_name>anic.png</file_name>
-  </logo>
-  <logo>
-    <name>ANIMAL PLANET</name>
-    <file_name>animal_planet.png</file_name>
-  </logo>
-  <logo>
-    <name>ANTONOV</name>
-    <file_name>antonov.png</file_name>
-  </logo>
-  <logo>
-    <name>ANZ</name>
-    <file_name>anz.png</file_name>
-  </logo>
-  <logo>
-    <name>AOL</name>
-    <file_name>aol.png</file_name>
-  </logo>
-  <logo>
-    <name>APART</name>
-    <file_name>apart.png</file_name>
-  </logo>
-  <logo>
-    <name>APEROL</name>
-    <file_name>aperol.png</file_name>
-  </logo>
-  <logo>
-    <name>APPLE</name>
+    <name>Apple</name>
     <file_name>apple.png</file_name>
   </logo>
   <logo>
-    <name>APPLEBEES</name>
-    <file_name>applebees.png</file_name>
-  </logo>
-  <logo>
-    <name>APPSTORE</name>
-    <file_name>appstore.png</file_name>
-  </logo>
-  <logo>
-    <name>APRILIA</name>
-    <file_name>aprilia.png</file_name>
-  </logo>
-  <logo>
-    <name>AQUAFINA</name>
-    <file_name>aquafina.png</file_name>
-  </logo>
-  <logo>
-    <name>ARCELORMITTAL</name>
-    <file_name>arcelormittal.png</file_name>
-  </logo>
-  <logo>
-    <name>ARENA</name>
-    <file_name>arena.png</file_name>
-  </logo>
-  <logo>
-    <name>ARGOS</name>
-    <file_name>argos.png</file_name>
-  </logo>
-  <logo>
-    <name>ARIEL</name>
+    <name>Ariel</name>
     <file_name>ariel.png</file_name>
   </logo>
   <logo>
-    <name>ARTEGA</name>
-    <file_name>artega.png</file_name>
-  </logo>
-  <logo>
-    <name>ASCARI</name>
-    <file_name>ascari.png</file_name>
-  </logo>
-  <logo>
-    <name>ASDA</name>
-    <file_name>asda.png</file_name>
-  </logo>
-  <logo>
-    <name>ASIAAIRLINES</name>
-    <file_name>asiaairlines.png</file_name>
-  </logo>
-  <logo>
-    <name>ASICS</name>
+    <name>Asics</name>
     <file_name>asics.png</file_name>
   </logo>
   <logo>
-    <name>ASK</name>
-    <file_name>ask.png</file_name>
-  </logo>
-  <logo>
-    <name>ASKITALIAN</name>
-    <file_name>askitalian.png</file_name>
-  </logo>
-  <logo>
-    <name>ASOS</name>
-    <file_name>asos.png</file_name>
-  </logo>
-  <logo>
-    <name>ASSOCIATED PRESS</name>
-    <file_name>associated_press.png</file_name>
-  </logo>
-  <logo>
-    <name>ASTON MARTIN</name>
-    <file_name>aston_martin.png</file_name>
-  </logo>
-  <logo>
-    <name>ASUS</name>
+    <name>Asus</name>
     <file_name>asus.png</file_name>
   </logo>
   <logo>
-    <name>ATARI</name>
+    <name>Atari</name>
     <file_name>atari.png</file_name>
   </logo>
   <logo>
-    <name>ATHLETIC</name>
-    <file_name>athletic.png</file_name>
+    <name>Aunt Bessie's</name>
+    <file_name>aunt_bessies.png</file_name>
   </logo>
   <logo>
-    <name>ATI</name>
-    <file_name>ati.png</file_name>
-  </logo>
-  <logo>
-    <name>ATOMIC</name>
-    <file_name>atomic.png</file_name>
-  </logo>
-  <logo>
-    <name>ATP</name>
-    <file_name>atp.png</file_name>
-  </logo>
-  <logo>
-    <name>ATT</name>
-    <file_name>att.png</file_name>
-  </logo>
-  <logo>
-    <name>AUCHAN</name>
-    <file_name>auchan.png</file_name>
-  </logo>
-  <logo>
-    <name>AUDI</name>
-    <file_name>audi.png</file_name>
-  </logo>
-  <logo>
-    <name>AUNTIEANNES</name>
-    <file_name>auntieannes.png</file_name>
-  </logo>
-  <logo>
-    <name>AUSTIN</name>
-    <file_name>austin.png</file_name>
-  </logo>
-  <logo>
-    <name>AUSTRALIANOPEN</name>
-    <file_name>australianopen.png</file_name>
-  </logo>
-  <logo>
-    <name>AUSTRIAN AIRLINES</name>
-    <file_name>austrian_airlines.png</file_name>
-  </logo>
-  <logo>
-    <name>AUTOZONE</name>
-    <file_name>autozone.png</file_name>
-  </logo>
-  <logo>
-    <name>AVERY</name>
+    <name>Avery</name>
     <file_name>avery.png</file_name>
   </logo>
   <logo>
-    <name>AVG</name>
-    <file_name>avg.png</file_name>
+    <name>Bad Religion</name>
+    <file_name>bad_religion.png</file_name>
   </logo>
   <logo>
-    <name>AVIS</name>
-    <file_name>avis.png</file_name>
+    <name>Banana Boat</name>
+    <file_name>banana_boat.png</file_name>
   </logo>
   <logo>
-    <name>AVIVA</name>
-    <file_name>aviva.png</file_name>
-  </logo>
-  <logo>
-    <name>AVON</name>
-    <file_name>avon.png</file_name>
-  </logo>
-  <logo>
-    <name>AWACS</name>
-    <file_name>awacs.png</file_name>
-  </logo>
-  <logo>
-    <name>AXA</name>
-    <file_name>axa.png</file_name>
-  </logo>
-  <logo>
-    <name>AXE</name>
-    <file_name>axe.png</file_name>
-  </logo>
-  <logo>
-    <name>AXN</name>
-    <file_name>axn.png</file_name>
-  </logo>
-  <logo>
-    <name>A LEAGUE</name>
-    <file_name>a_league.png</file_name>
-  </logo>
-  <logo>
-    <name>BABOLAT</name>
-    <file_name>babolat.png</file_name>
-  </logo>
-  <logo>
-    <name>BABOR</name>
-    <file_name>babor.png</file_name>
-  </logo>
-  <logo>
-    <name>BACARDI</name>
-    <file_name>bacardi.png</file_name>
-  </logo>
-  <logo>
-    <name>BADBOYRECORDS</name>
-    <file_name>badboyrecords.png</file_name>
-  </logo>
-  <logo>
-    <name>BADOIT</name>
-    <file_name>badoit.png</file_name>
-  </logo>
-  <logo>
-    <name>BADOO</name>
-    <file_name>badoo.png</file_name>
-  </logo>
-  <logo>
-    <name>BADPIGGIES</name>
-    <file_name>badpiggies.png</file_name>
-  </logo>
-  <logo>
-    <name>BADROBOT</name>
-    <file_name>badrobot.png</file_name>
-  </logo>
-  <logo>
-    <name>BAIDU</name>
-    <file_name>baidu.png</file_name>
-  </logo>
-  <logo>
-    <name>BAILEYS</name>
-    <file_name>baileys.png</file_name>
-  </logo>
-  <logo>
-    <name>BAJAJ</name>
-    <file_name>bajaj.png</file_name>
-  </logo>
-  <logo>
-    <name>BAKER HUGHES</name>
-    <file_name>baker_hughes.png</file_name>
-  </logo>
-  <logo>
-    <name>BALLANTINES</name>
-    <file_name>ballantines.png</file_name>
-  </logo>
-  <logo>
-    <name>BANCA INTESA</name>
-    <file_name>banca_intesa.png</file_name>
-  </logo>
-  <logo>
-    <name>BANCO</name>
-    <file_name>banco.png</file_name>
-  </logo>
-  <logo>
-    <name>BANCO DESIO</name>
-    <file_name>banco_desio.png</file_name>
-  </logo>
-  <logo>
-    <name>BANCO SANTANDER</name>
-    <file_name>banco_santander.png</file_name>
-  </logo>
-  <logo>
-    <name>BANDAI</name>
-    <file_name>bandai.png</file_name>
-  </logo>
-  <logo>
-    <name>BANESTO</name>
-    <file_name>banesto.png</file_name>
-  </logo>
-  <logo>
-    <name>BANKIA</name>
-    <file_name>bankia.png</file_name>
-  </logo>
-  <logo>
-    <name>BANKINTER</name>
-    <file_name>bankinter.png</file_name>
-  </logo>
-  <logo>
-    <name>BANKMOSCOW</name>
-    <file_name>bankmoscow.png</file_name>
-  </logo>
-  <logo>
-    <name>BANKWEST</name>
-    <file_name>bankwest.png</file_name>
-  </logo>
-  <logo>
-    <name>BANK OF AMERICA</name>
+    <name>Bank of America</name>
     <file_name>bank_of_america.png</file_name>
   </logo>
   <logo>
-    <name>BANK OF CHINA</name>
-    <file_name>bank_of_china.png</file_name>
-  </logo>
-  <logo>
-    <name>BARBIE</name>
+    <name>Barbie</name>
     <file_name>barbie.png</file_name>
   </logo>
   <logo>
-    <name>BARCELONA</name>
-    <file_name>barcelona.png</file_name>
-  </logo>
-  <logo>
-    <name>BARCLAYS</name>
-    <file_name>barclays.png</file_name>
-  </logo>
-  <logo>
-    <name>BARILLA</name>
-    <file_name>barilla.png</file_name>
-  </logo>
-  <logo>
-    <name>BARINGS</name>
-    <file_name>barings.png</file_name>
-  </logo>
-  <logo>
-    <name>BARNES NOBLE</name>
-    <file_name>barnes_noble.png</file_name>
-  </logo>
-  <logo>
-    <name>BARUM</name>
-    <file_name>barum.png</file_name>
-  </logo>
-  <logo>
-    <name>BASF</name>
+    <name>Basf</name>
     <file_name>basf.png</file_name>
   </logo>
   <logo>
-    <name>BASKIN ROBBINS</name>
+    <name>Baskin Robbins</name>
     <file_name>baskin_robbins.png</file_name>
   </logo>
   <logo>
-    <name>BATMAN</name>
-    <file_name>batman.png</file_name>
-  </logo>
-  <logo>
-    <name>BAYER</name>
-    <file_name>bayer.png</file_name>
-  </logo>
-  <logo>
-    <name>BAYERN</name>
-    <file_name>bayern.png</file_name>
+    <name>Bat</name>
+    <file_name>bat.png</file_name>
   </logo>
   <logo>
     <name>BBC</name>
     <file_name>bbc.png</file_name>
   </logo>
   <logo>
-    <name>BBS</name>
-    <file_name>bbs.png</file_name>
-  </logo>
-  <logo>
-    <name>BBURAGO</name>
-    <file_name>bburago.png</file_name>
-  </logo>
-  <logo>
-    <name>BBVA</name>
-    <file_name>bbva.png</file_name>
-  </logo>
-  <logo>
-    <name>BEATSAUDIO</name>
-    <file_name>beatsaudio.png</file_name>
-  </logo>
-  <logo>
-    <name>BEBO</name>
-    <file_name>bebo.png</file_name>
-  </logo>
-  <logo>
-    <name>BECKS</name>
-    <file_name>becks.png</file_name>
-  </logo>
-  <logo>
-    <name>BEIERSDORF</name>
-    <file_name>beiersdorf.png</file_name>
-  </logo>
-  <logo>
-    <name>BEKO</name>
-    <file_name>beko.png</file_name>
-  </logo>
-  <logo>
-    <name>BELINEA</name>
-    <file_name>belinea.png</file_name>
-  </logo>
-  <logo>
-    <name>BELK</name>
-    <file_name>belk.png</file_name>
-  </logo>
-  <logo>
-    <name>BELLAGIO</name>
-    <file_name>bellagio.png</file_name>
-  </logo>
-  <logo>
-    <name>BELVEDERE</name>
-    <file_name>belvedere.png</file_name>
-  </logo>
-  <logo>
-    <name>BENDIGO BANK</name>
-    <file_name>bendigo_bank.png</file_name>
-  </logo>
-  <logo>
-    <name>BENETTON</name>
+    <name>Benetton</name>
     <file_name>benetton.png</file_name>
   </logo>
   <logo>
-    <name>BENIHANA</name>
-    <file_name>benihana.png</file_name>
+    <name>Bertolli</name>
+    <file_name>bertolli.png</file_name>
   </logo>
   <logo>
-    <name>BENQ</name>
-    <file_name>benq.png</file_name>
-  </logo>
-  <logo>
-    <name>BENTLEY</name>
-    <file_name>bentley.png</file_name>
-  </logo>
-  <logo>
-    <name>BERSHKA</name>
-    <file_name>bershka.png</file_name>
-  </logo>
-  <logo>
-    <name>BERTONE</name>
-    <file_name>bertone.png</file_name>
-  </logo>
-  <logo>
-    <name>BEST BUY</name>
-    <file_name>best_buy.png</file_name>
-  </logo>
-  <logo>
-    <name>BEST WESTERN</name>
-    <file_name>best_western.png</file_name>
-  </logo>
-  <logo>
-    <name>BET365</name>
-    <file_name>bet365.png</file_name>
-  </logo>
-  <logo>
-    <name>BETAT</name>
-    <file_name>betat.png</file_name>
-  </logo>
-  <logo>
-    <name>BETFAIR</name>
-    <file_name>betfair.png</file_name>
-  </logo>
-  <logo>
-    <name>BEVELRY</name>
-    <file_name>bevelry.png</file_name>
-  </logo>
-  <logo>
-    <name>BHPBILLITON</name>
-    <file_name>bhpbilliton.png</file_name>
-  </logo>
-  <logo>
-    <name>BHS</name>
-    <file_name>bhs.png</file_name>
-  </logo>
-  <logo>
-    <name>BIC</name>
+    <name>BiC</name>
     <file_name>bic.png</file_name>
   </logo>
   <logo>
-    <name>BIGBANGTHEORY</name>
-    <file_name>bigbangtheory.png</file_name>
-  </logo>
-  <logo>
-    <name>BIGLOTS</name>
-    <file_name>biglots.png</file_name>
-  </logo>
-  <logo>
-    <name>BIGW</name>
-    <file_name>bigw.png</file_name>
-  </logo>
-  <logo>
-    <name>BILLABONG</name>
+    <name>Billabong</name>
     <file_name>billabong.png</file_name>
   </logo>
   <logo>
-    <name>BIMOTA</name>
-    <file_name>bimota.png</file_name>
-  </logo>
-  <logo>
-    <name>BING</name>
-    <file_name>bing.png</file_name>
-  </logo>
-  <logo>
-    <name>BIOTHERM</name>
-    <file_name>biotherm.png</file_name>
-  </logo>
-  <logo>
-    <name>BIRDHOUSE</name>
-    <file_name>birdhouse.png</file_name>
-  </logo>
-  <logo>
-    <name>BITBURGER</name>
-    <file_name>bitburger.png</file_name>
-  </logo>
-  <logo>
-    <name>BLACKBERRY</name>
-    <file_name>blackberry.png</file_name>
-  </logo>
-  <logo>
-    <name>BLIND</name>
-    <file_name>blind.png</file_name>
-  </logo>
-  <logo>
-    <name>BLIZZARD</name>
-    <file_name>blizzard.png</file_name>
-  </logo>
-  <logo>
-    <name>BLOCKBUSTER</name>
-    <file_name>blockbuster.png</file_name>
-  </logo>
-  <logo>
-    <name>BLOGGER</name>
-    <file_name>blogger.png</file_name>
-  </logo>
-  <logo>
-    <name>BLU</name>
-    <file_name>blu.png</file_name>
-  </logo>
-  <logo>
-    <name>BLUETOOTH</name>
+    <name>Bluetooth</name>
     <file_name>bluetooth.png</file_name>
   </logo>
   <logo>
-    <name>BLUE INC</name>
-    <file_name>blue_inc.png</file_name>
-  </logo>
-  <logo>
-    <name>BLURAY</name>
-    <file_name>bluray.png</file_name>
-  </logo>
-  <logo>
-    <name>BMI</name>
-    <file_name>bmi.png</file_name>
-  </logo>
-  <logo>
-    <name>BMW</name>
-    <file_name>bmw.png</file_name>
-  </logo>
-  <logo>
-    <name>BMWM</name>
-    <file_name>bmwm.png</file_name>
-  </logo>
-  <logo>
-    <name>BNL</name>
-    <file_name>bnl.png</file_name>
-  </logo>
-  <logo>
-    <name>BNP PARIBAS</name>
+    <name>BNP Paribas</name>
     <file_name>bnp_paribas.png</file_name>
   </logo>
   <logo>
-    <name>BOBCAT</name>
-    <file_name>bobcat.png</file_name>
+    <name>Body Shop</name>
+    <file_name>body_shop.png</file_name>
   </logo>
   <logo>
-    <name>BOEING</name>
-    <file_name>boeing.png</file_name>
-  </logo>
-  <logo>
-    <name>BOLOGNA</name>
-    <file_name>bologna.png</file_name>
-  </logo>
-  <logo>
-    <name>BOMBARDIER</name>
-    <file_name>bombardier.png</file_name>
-  </logo>
-  <logo>
-    <name>BOMBAY SAPPHIRE</name>
-    <file_name>bombay_sapphire.png</file_name>
-  </logo>
-  <logo>
-    <name>BOOTS</name>
-    <file_name>boots.png</file_name>
-  </logo>
-  <logo>
-    <name>BORGES</name>
-    <file_name>borges.png</file_name>
-  </logo>
-  <logo>
-    <name>BOSCH</name>
-    <file_name>bosch.png</file_name>
-  </logo>
-  <logo>
-    <name>BOSE</name>
-    <file_name>bose.png</file_name>
-  </logo>
-  <logo>
-    <name>BOX</name>
-    <file_name>box.png</file_name>
-  </logo>
-  <logo>
-    <name>BP</name>
-    <file_name>bp.png</file_name>
-  </logo>
-  <logo>
-    <name>BPM</name>
-    <file_name>bpm.png</file_name>
-  </logo>
-  <logo>
-    <name>BRABUS</name>
-    <file_name>brabus.png</file_name>
-  </logo>
-  <logo>
-    <name>BRADESCO</name>
-    <file_name>bradesco.png</file_name>
-  </logo>
-  <logo>
-    <name>BRAUN</name>
-    <file_name>braun.png</file_name>
-  </logo>
-  <logo>
-    <name>BREAKING BAD</name>
-    <file_name>breaking_bad.png</file_name>
-  </logo>
-  <logo>
-    <name>BREGUET</name>
-    <file_name>breguet.png</file_name>
-  </logo>
-  <logo>
-    <name>BREIL</name>
-    <file_name>breil.png</file_name>
-  </logo>
-  <logo>
-    <name>BREITLING</name>
-    <file_name>breitling.png</file_name>
-  </logo>
-  <logo>
-    <name>BREMBO</name>
-    <file_name>brembo.png</file_name>
-  </logo>
-  <logo>
-    <name>BRIDGESTONE</name>
+    <name>Bridgestone</name>
     <file_name>bridgestone.png</file_name>
   </logo>
   <logo>
-    <name>BRIONI</name>
-    <file_name>brioni.png</file_name>
+    <name>British Gas</name>
+    <file_name>british_gas.png</file_name>
   </logo>
   <logo>
-    <name>BRISTOL</name>
-    <file_name>bristol.png</file_name>
+    <name>Brunswick</name>
+    <file_name>brunswick.png</file_name>
   </logo>
   <logo>
-    <name>BRITA</name>
-    <file_name>brita.png</file_name>
+    <name>Budget</name>
+    <file_name>budget.png</file_name>
   </logo>
   <logo>
-    <name>BRITANNIA HOTELS</name>
-    <file_name>britannia_hotels.png</file_name>
-  </logo>
-  <logo>
-    <name>BRITISH AIRWAYS</name>
-    <file_name>british_airways.png</file_name>
-  </logo>
-  <logo>
-    <name>BRITISH AMERICAN TOBACCO</name>
-    <file_name>british_american_tobacco.png</file_name>
-  </logo>
-  <logo>
-    <name>BRITISH TELECOM</name>
-    <file_name>british_telecom.png</file_name>
-  </logo>
-  <logo>
-    <name>BROOKS</name>
-    <file_name>brooks.png</file_name>
-  </logo>
-  <logo>
-    <name>BROTHER</name>
-    <file_name>brother.png</file_name>
-  </logo>
-  <logo>
-    <name>BRUSSELSAIRLINES</name>
-    <file_name>brusselsairlines.png</file_name>
-  </logo>
-  <logo>
-    <name>BSB</name>
-    <file_name>bsb.png</file_name>
-  </logo>
-  <logo>
-    <name>BTCC</name>
-    <file_name>btcc.png</file_name>
-  </logo>
-  <logo>
-    <name>BUDLIGHT</name>
-    <file_name>budlight.png</file_name>
-  </logo>
-  <logo>
-    <name>BUDWEISER</name>
+    <name>Budweiser</name>
     <file_name>budweiser.png</file_name>
   </logo>
   <logo>
-    <name>BUFFALO GRILL</name>
-    <file_name>buffalo_grill.png</file_name>
-  </logo>
-  <logo>
-    <name>BUGATTI</name>
+    <name>Bugatti</name>
     <file_name>bugatti.png</file_name>
   </logo>
   <logo>
-    <name>BUGZILLA</name>
-    <file_name>bugzilla.png</file_name>
-  </logo>
-  <logo>
-    <name>BUICK</name>
+    <name>Buick</name>
     <file_name>buick.png</file_name>
   </logo>
   <logo>
-    <name>BULGARIAAIR</name>
-    <file_name>bulgariaair.png</file_name>
-  </logo>
-  <logo>
-    <name>BULLEIT</name>
-    <file_name>bulleit.png</file_name>
-  </logo>
-  <logo>
-    <name>BULOVA</name>
-    <file_name>bulova.png</file_name>
-  </logo>
-  <logo>
-    <name>BUMP</name>
-    <file_name>bump.png</file_name>
-  </logo>
-  <logo>
-    <name>BUNDESLIGA</name>
-    <file_name>bundesliga.png</file_name>
-  </logo>
-  <logo>
-    <name>BUNNINGS</name>
-    <file_name>bunnings.png</file_name>
-  </logo>
-  <logo>
-    <name>BURBERRY</name>
-    <file_name>burberry.png</file_name>
-  </logo>
-  <logo>
-    <name>BURGER KING</name>
+    <name>Burger King</name>
     <file_name>burger_king.png</file_name>
   </logo>
   <logo>
-    <name>BURN</name>
-    <file_name>burn.png</file_name>
-  </logo>
-  <logo>
-    <name>BURTON</name>
+    <name>Burton</name>
     <file_name>burton.png</file_name>
   </logo>
   <logo>
-    <name>BUSHMILLS</name>
-    <file_name>bushmills.png</file_name>
+    <name>Cadbury</name>
+    <file_name>cadbury.png</file_name>
   </logo>
   <logo>
-    <name>BVB</name>
-    <file_name>bvb.png</file_name>
-  </logo>
-  <logo>
-    <name>BVLGARI</name>
-    <file_name>bvlgari.png</file_name>
-  </logo>
-  <logo>
-    <name>BWIN</name>
-    <file_name>bwin.png</file_name>
-  </logo>
-  <logo>
-    <name>BYD</name>
-    <file_name>byd.png</file_name>
-  </logo>
-  <logo>
-    <name>B Q</name>
-    <file_name>b_q.png</file_name>
-  </logo>
-  <logo>
-    <name>CACHAREL</name>
-    <file_name>cacharel.png</file_name>
-  </logo>
-  <logo>
-    <name>CADILLAC</name>
-    <file_name>cadillac.png</file_name>
-  </logo>
-  <logo>
-    <name>CAIXANOVA</name>
-    <file_name>caixanova.png</file_name>
-  </logo>
-  <logo>
-    <name>CAJA MADRID</name>
-    <file_name>caja_madrid.png</file_name>
-  </logo>
-  <logo>
-    <name>CALLOFDUTY</name>
-    <file_name>callofduty.png</file_name>
-  </logo>
-  <logo>
-    <name>CALVIN KLEIN</name>
-    <file_name>calvin_klein.png</file_name>
-  </logo>
-  <logo>
-    <name>CAMEL</name>
-    <file_name>camel.png</file_name>
-  </logo>
-  <logo>
-    <name>CAMELBAK</name>
-    <file_name>camelbak.png</file_name>
-  </logo>
-  <logo>
-    <name>CAMPARI</name>
-    <file_name>campari.png</file_name>
-  </logo>
-  <logo>
-    <name>CAMPBELLS</name>
-    <file_name>campbells.png</file_name>
-  </logo>
-  <logo>
-    <name>CAMPER</name>
-    <file_name>camper.png</file_name>
-  </logo>
-  <logo>
-    <name>CAMPINA</name>
-    <file_name>campina.png</file_name>
-  </logo>
-  <logo>
-    <name>CANADADRY</name>
-    <file_name>canadadry.png</file_name>
-  </logo>
-  <logo>
-    <name>CANADIANTIRE</name>
-    <file_name>canadiantire.png</file_name>
-  </logo>
-  <logo>
-    <name>CANAL PLUS</name>
-    <file_name>canal_plus.png</file_name>
-  </logo>
-  <logo>
-    <name>CANON</name>
-    <file_name>canon.png</file_name>
-  </logo>
-  <logo>
-    <name>CANTERBURY</name>
-    <file_name>canterbury.png</file_name>
-  </logo>
-  <logo>
-    <name>CAPCOM</name>
+    <name>Capcom</name>
     <file_name>capcom.png</file_name>
   </logo>
   <logo>
-    <name>CAPITALONE</name>
-    <file_name>capitalone.png</file_name>
-  </logo>
-  <logo>
-    <name>CAPTAIN MORGAN</name>
-    <file_name>captain_morgan.png</file_name>
-  </logo>
-  <logo>
-    <name>CARHARTT</name>
+    <name>Carhartt</name>
     <file_name>carhartt.png</file_name>
   </logo>
   <logo>
-    <name>CARIGE</name>
-    <file_name>carige.png</file_name>
-  </logo>
-  <logo>
-    <name>CARLSBERG</name>
+    <name>Carlsberg</name>
     <file_name>carlsberg.png</file_name>
   </logo>
   <logo>
-    <name>CARLSSON</name>
-    <file_name>carlsson.png</file_name>
-  </logo>
-  <logo>
-    <name>CAROLINA HERRERA</name>
-    <file_name>carolina_herrera.png</file_name>
-  </logo>
-  <logo>
-    <name>CARREFOUR</name>
-    <file_name>carrefour.png</file_name>
-  </logo>
-  <logo>
-    <name>CARS</name>
+    <name>Cars</name>
     <file_name>cars.png</file_name>
   </logo>
   <logo>
-    <name>CARTIER</name>
-    <file_name>cartier.png</file_name>
-  </logo>
-  <logo>
-    <name>CARTOON NETWORK</name>
+    <name>Cartoon Network</name>
     <file_name>cartoon_network.png</file_name>
   </logo>
   <logo>
-    <name>CASIO</name>
-    <file_name>casio.png</file_name>
-  </logo>
-  <logo>
-    <name>CASTELLI</name>
-    <file_name>castelli.png</file_name>
-  </logo>
-  <logo>
-    <name>CASTROL</name>
-    <file_name>castrol.png</file_name>
-  </logo>
-  <logo>
-    <name>CATERHAM</name>
-    <file_name>caterham.png</file_name>
-  </logo>
-  <logo>
-    <name>CATERPILLAR</name>
+    <name>Caterpillar</name>
     <file_name>caterpillar.png</file_name>
   </logo>
   <logo>
-    <name>CATHAY PACIFIC</name>
+    <name>Cathay Pacific</name>
     <file_name>cathay_pacific.png</file_name>
   </logo>
   <logo>
@@ -1225,1640 +241,268 @@
     <file_name>cbs.png</file_name>
   </logo>
   <logo>
-    <name>CENT</name>
-    <file_name>cent.png</file_name>
-  </logo>
-  <logo>
-    <name>CENTRUM</name>
-    <file_name>centrum.png</file_name>
-  </logo>
-  <logo>
-    <name>CERRUTI</name>
-    <file_name>cerruti.png</file_name>
-  </logo>
-  <logo>
-    <name>CERTINA</name>
-    <file_name>certina.png</file_name>
-  </logo>
-  <logo>
-    <name>CESSNA</name>
-    <file_name>cessna.png</file_name>
-  </logo>
-  <logo>
-    <name>CHAMPION</name>
+    <name>Champion</name>
     <file_name>champion.png</file_name>
   </logo>
   <logo>
-    <name>CHAMPIONS LEAGUE</name>
+    <name>Champions League</name>
     <file_name>champions_league.png</file_name>
   </logo>
   <logo>
-    <name>CHANEL</name>
-    <file_name>chanel.png</file_name>
-  </logo>
-  <logo>
-    <name>CHANNEL4</name>
-    <file_name>channel4.png</file_name>
-  </logo>
-  <logo>
-    <name>CHASE</name>
+    <name>Chase</name>
     <file_name>chase.png</file_name>
   </logo>
   <logo>
-    <name>CHEERIOS</name>
+    <name>Cheerios</name>
     <file_name>cheerios.png</file_name>
   </logo>
   <logo>
-    <name>CHEETOS</name>
-    <file_name>cheetos.png</file_name>
-  </logo>
-  <logo>
-    <name>CHELSEA</name>
-    <file_name>chelsea.png</file_name>
-  </logo>
-  <logo>
-    <name>CHERY</name>
-    <file_name>chery.png</file_name>
-  </logo>
-  <logo>
-    <name>CHESAPEAKE</name>
-    <file_name>chesapeake.png</file_name>
-  </logo>
-  <logo>
-    <name>CHEVROLET</name>
-    <file_name>chevrolet.png</file_name>
-  </logo>
-  <logo>
-    <name>CHEVRON</name>
-    <file_name>chevron.png</file_name>
-  </logo>
-  <logo>
-    <name>CHICAGO BULLS</name>
-    <file_name>chicago_bulls.png</file_name>
-  </logo>
-  <logo>
-    <name>CHICCO</name>
-    <file_name>chicco.png</file_name>
-  </logo>
-  <logo>
-    <name>CHICKEN TREAT</name>
-    <file_name>chicken_treat.png</file_name>
-  </logo>
-  <logo>
-    <name>CHICKFILA</name>
-    <file_name>chickfila.png</file_name>
-  </logo>
-  <logo>
-    <name>CHILIS</name>
-    <file_name>chilis.png</file_name>
-  </logo>
-  <logo>
-    <name>CHINATELECOM</name>
-    <file_name>chinatelecom.png</file_name>
-  </logo>
-  <logo>
-    <name>CHINA MOBILE</name>
-    <file_name>china_mobile.png</file_name>
-  </logo>
-  <logo>
-    <name>CHINA SOUTHERN</name>
-    <file_name>china_southern.png</file_name>
-  </logo>
-  <logo>
-    <name>CHIQUITA</name>
+    <name>Chiquita</name>
     <file_name>chiquita.png</file_name>
   </logo>
   <logo>
-    <name>CHIVAS REGAL</name>
-    <file_name>chivas_regal.png</file_name>
+    <name>Chupa Chups</name>
+    <file_name>chupa_chups.png</file_name>
   </logo>
   <logo>
-    <name>CHOICE HOTELS</name>
-    <file_name>choice_hotels.png</file_name>
+    <name>Cirrus</name>
+    <file_name>cirrus.png</file_name>
   </logo>
   <logo>
-    <name>CHROME</name>
-    <file_name>chrome.png</file_name>
+    <name>Colemans</name>
+    <file_name>colemans.png</file_name>
   </logo>
   <logo>
-    <name>CHRYSLER</name>
-    <file_name>chrysler.png</file_name>
-  </logo>
-  <logo>
-    <name>CHUBU</name>
-    <file_name>chubu.png</file_name>
-  </logo>
-  <logo>
-    <name>CHUCKE CHEESES</name>
-    <file_name>chucke_cheeses.png</file_name>
-  </logo>
-  <logo>
-    <name>CHUPA</name>
-    <file_name>chupa.png</file_name>
-  </logo>
-  <logo>
-    <name>CIA</name>
-    <file_name>cia.png</file_name>
-  </logo>
-  <logo>
-    <name>CIC</name>
-    <file_name>cic.png</file_name>
-  </logo>
-  <logo>
-    <name>CIF</name>
-    <file_name>cif.png</file_name>
-  </logo>
-  <logo>
-    <name>CINEMA</name>
-    <file_name>cinema.png</file_name>
-  </logo>
-  <logo>
-    <name>CINNABON</name>
-    <file_name>cinnabon.png</file_name>
-  </logo>
-  <logo>
-    <name>CINZANO</name>
-    <file_name>cinzano.png</file_name>
-  </logo>
-  <logo>
-    <name>CIRCA</name>
-    <file_name>circa.png</file_name>
-  </logo>
-  <logo>
-    <name>CISCO</name>
-    <file_name>cisco.png</file_name>
-  </logo>
-  <logo>
-    <name>CITI</name>
-    <file_name>citi.png</file_name>
-  </logo>
-  <logo>
-    <name>CITIBANK</name>
-    <file_name>citibank.png</file_name>
-  </logo>
-  <logo>
-    <name>CITROEN</name>
-    <file_name>citroen.png</file_name>
-  </logo>
-  <logo>
-    <name>CLARINS</name>
-    <file_name>clarins.png</file_name>
-  </logo>
-  <logo>
-    <name>CLEARASIL</name>
-    <file_name>clearasil.png</file_name>
-  </logo>
-  <logo>
-    <name>CLINIQUE</name>
-    <file_name>clinique.png</file_name>
-  </logo>
-  <logo>
-    <name>CNET</name>
-    <file_name>cnet.png</file_name>
-  </logo>
-  <logo>
-    <name>CNN</name>
-    <file_name>cnn.png</file_name>
-  </logo>
-  <logo>
-    <name>COACH</name>
-    <file_name>coach.png</file_name>
-  </logo>
-  <logo>
-    <name>COCACOLA</name>
-    <file_name>cocacola.png</file_name>
-  </logo>
-  <logo>
-    <name>COFFEEHOUSE</name>
-    <file_name>coffeehouse.png</file_name>
-  </logo>
-  <logo>
-    <name>COHIBA</name>
-    <file_name>cohiba.png</file_name>
-  </logo>
-  <logo>
-    <name>COLGATE</name>
-    <file_name>colgate.png</file_name>
-  </logo>
-  <logo>
-    <name>COLLINGWOOD</name>
-    <file_name>collingwood.png</file_name>
-  </logo>
-  <logo>
-    <name>COLTS</name>
-    <file_name>colts.png</file_name>
-  </logo>
-  <logo>
-    <name>COLUMBIA</name>
-    <file_name>columbia.png</file_name>
-  </logo>
-  <logo>
-    <name>COLUMBIA PICTURES</name>
-    <file_name>columbia_pictures.png</file_name>
-  </logo>
-  <logo>
-    <name>COMEDYCLUB</name>
-    <file_name>comedyclub.png</file_name>
-  </logo>
-  <logo>
-    <name>COMEDY CENTRAL</name>
-    <file_name>comedy_central.png</file_name>
-  </logo>
-  <logo>
-    <name>COMET</name>
-    <file_name>comet.png</file_name>
-  </logo>
-  <logo>
-    <name>COMMERZBANK</name>
-    <file_name>commerzbank.png</file_name>
-  </logo>
-  <logo>
-    <name>COMMONWEALTH</name>
-    <file_name>commonwealth.png</file_name>
-  </logo>
-  <logo>
-    <name>COMPAQ</name>
+    <name>Compaq</name>
     <file_name>compaq.png</file_name>
   </logo>
   <logo>
-    <name>COMPUSA</name>
-    <file_name>compusa.png</file_name>
-  </logo>
-  <logo>
-    <name>CONTINENTAL</name>
-    <file_name>continental.png</file_name>
-  </logo>
-  <logo>
-    <name>CONTINENTAL AIRLINES</name>
-    <file_name>continental_airlines.png</file_name>
-  </logo>
-  <logo>
-    <name>CONVERSE</name>
+    <name>Converse</name>
     <file_name>converse.png</file_name>
   </logo>
   <logo>
-    <name>COORS</name>
-    <file_name>coors.png</file_name>
+    <name>Corona</name>
+    <file_name>corona.png</file_name>
   </logo>
   <logo>
-    <name>CORNFLAKES</name>
-    <file_name>cornflakes.png</file_name>
-  </logo>
-  <logo>
-    <name>CORNY</name>
-    <file_name>corny.png</file_name>
-  </logo>
-  <logo>
-    <name>CORONA EXTRA</name>
-    <file_name>corona_extra.png</file_name>
-  </logo>
-  <logo>
-    <name>CORSAIR</name>
-    <file_name>corsair.png</file_name>
-  </logo>
-  <logo>
-    <name>CORVETTE</name>
-    <file_name>corvette.png</file_name>
-  </logo>
-  <logo>
-    <name>COSMOPOLITAN</name>
-    <file_name>cosmopolitan.png</file_name>
-  </logo>
-  <logo>
-    <name>COSTACRUISES</name>
-    <file_name>costacruises.png</file_name>
-  </logo>
-  <logo>
-    <name>COSTA COFFEE</name>
-    <file_name>costa_coffee.png</file_name>
-  </logo>
-  <logo>
-    <name>COSTCO</name>
-    <file_name>costco.png</file_name>
-  </logo>
-  <logo>
-    <name>COUNTRY INN</name>
-    <file_name>country_inn.png</file_name>
-  </logo>
-  <logo>
-    <name>COURTYARD</name>
-    <file_name>courtyard.png</file_name>
-  </logo>
-  <logo>
-    <name>COURVOISIER</name>
-    <file_name>courvoisier.png</file_name>
-  </logo>
-  <logo>
-    <name>CRAIGSLIST</name>
-    <file_name>craigslist.png</file_name>
-  </logo>
-  <logo>
-    <name>CREDIT MUTUEL</name>
-    <file_name>credit_mutuel.png</file_name>
-  </logo>
-  <logo>
-    <name>CREDIT SUISSE</name>
-    <file_name>credit_suisse.png</file_name>
-  </logo>
-  <logo>
-    <name>CROCS</name>
+    <name>Crocs</name>
     <file_name>crocs.png</file_name>
   </logo>
   <logo>
-    <name>CROWNE PLAZA</name>
-    <file_name>crowne_plaza.png</file_name>
-  </logo>
-  <logo>
-    <name>CRUZAN</name>
-    <file_name>cruzan.png</file_name>
-  </logo>
-  <logo>
-    <name>CSKA</name>
-    <file_name>cska.png</file_name>
-  </logo>
-  <logo>
-    <name>CURRYS</name>
-    <file_name>currys.png</file_name>
-  </logo>
-  <logo>
-    <name>CVS</name>
-    <file_name>cvs.png</file_name>
-  </logo>
-  <logo>
-    <name>DABS</name>
-    <file_name>dabs.png</file_name>
-  </logo>
-  <logo>
-    <name>DACIA</name>
-    <file_name>dacia.png</file_name>
-  </logo>
-  <logo>
-    <name>DAEWOO</name>
-    <file_name>daewoo.png</file_name>
-  </logo>
-  <logo>
-    <name>DAF</name>
-    <file_name>daf.png</file_name>
-  </logo>
-  <logo>
-    <name>DAIHATSU</name>
-    <file_name>daihatsu.png</file_name>
-  </logo>
-  <logo>
-    <name>DAILY RECORD</name>
-    <file_name>daily_record.png</file_name>
-  </logo>
-  <logo>
-    <name>DAIMLER</name>
-    <file_name>daimler.png</file_name>
-  </logo>
-  <logo>
-    <name>DAINESE</name>
-    <file_name>dainese.png</file_name>
-  </logo>
-  <logo>
-    <name>DAIRY FARMERS</name>
-    <file_name>dairy_farmers.png</file_name>
-  </logo>
-  <logo>
-    <name>DAKAR</name>
+    <name>Dakar</name>
     <file_name>dakar.png</file_name>
   </logo>
   <logo>
-    <name>DAKINE</name>
-    <file_name>dakine.png</file_name>
-  </logo>
-  <logo>
-    <name>DANONE</name>
+    <name>Danone</name>
     <file_name>danone.png</file_name>
   </logo>
   <logo>
-    <name>DASANI</name>
-    <file_name>dasani.png</file_name>
+    <name>Delonghi</name>
+    <file_name>delonghi.png</file_name>
   </logo>
   <logo>
-    <name>DAVIDOFF</name>
-    <file_name>davidoff.png</file_name>
-  </logo>
-  <logo>
-    <name>DAYS INN</name>
-    <file_name>days_inn.png</file_name>
-  </logo>
-  <logo>
-    <name>DAYTONA</name>
-    <file_name>daytona.png</file_name>
-  </logo>
-  <logo>
-    <name>DCSHOES</name>
-    <file_name>dcshoes.png</file_name>
-  </logo>
-  <logo>
-    <name>DC COMICS</name>
-    <file_name>dc_comics.png</file_name>
-  </logo>
-  <logo>
-    <name>DEA</name>
-    <file_name>dea.png</file_name>
-  </logo>
-  <logo>
-    <name>DEBENHAMS</name>
-    <file_name>debenhams.png</file_name>
-  </logo>
-  <logo>
-    <name>DEBIAN</name>
-    <file_name>debian.png</file_name>
-  </logo>
-  <logo>
-    <name>DELL</name>
-    <file_name>dell.png</file_name>
-  </logo>
-  <logo>
-    <name>DELOITTE</name>
-    <file_name>deloitte.png</file_name>
-  </logo>
-  <logo>
-    <name>DELTA AIRLINES</name>
+    <name>Delta Airlines</name>
     <file_name>delta_airlines.png</file_name>
   </logo>
   <logo>
-    <name>DEL MONTE</name>
-    <file_name>del_monte.png</file_name>
-  </logo>
-  <logo>
-    <name>DEMOCRATS</name>
-    <file_name>democrats.png</file_name>
-  </logo>
-  <logo>
-    <name>DEMONOID</name>
-    <file_name>demonoid.png</file_name>
-  </logo>
-  <logo>
-    <name>DENDY</name>
-    <file_name>dendy.png</file_name>
-  </logo>
-  <logo>
-    <name>DENON</name>
-    <file_name>denon.png</file_name>
-  </logo>
-  <logo>
-    <name>DESCENTE</name>
-    <file_name>descente.png</file_name>
-  </logo>
-  <logo>
-    <name>DEUTER</name>
-    <file_name>deuter.png</file_name>
-  </logo>
-  <logo>
-    <name>DEUTSCHEPOST</name>
-    <file_name>deutschepost.png</file_name>
-  </logo>
-  <logo>
-    <name>DEUTSCHE BANK</name>
+    <name>Deutsche Bank</name>
     <file_name>deutsche_bank.png</file_name>
   </logo>
   <logo>
-    <name>DEWALT</name>
-    <file_name>dewalt.png</file_name>
-  </logo>
-  <logo>
-    <name>DE LA RUE</name>
-    <file_name>de_la_rue.png</file_name>
-  </logo>
-  <logo>
-    <name>DHARMA INITIATIVE</name>
-    <file_name>dharma_initiative.png</file_name>
-  </logo>
-  <logo>
-    <name>DHL</name>
-    <file_name>dhl.png</file_name>
-  </logo>
-  <logo>
-    <name>DIADORA</name>
-    <file_name>diadora.png</file_name>
-  </logo>
-  <logo>
-    <name>DICKIES</name>
-    <file_name>dickies.png</file_name>
-  </logo>
-  <logo>
-    <name>DIESEL</name>
+    <name>Diesel</name>
     <file_name>diesel.png</file_name>
   </logo>
   <logo>
-    <name>DIGG</name>
-    <file_name>digg.png</file_name>
-  </logo>
-  <logo>
-    <name>DINAMO</name>
-    <file_name>dinamo.png</file_name>
-  </logo>
-  <logo>
-    <name>DINERS CLUB</name>
-    <file_name>diners_club.png</file_name>
-  </logo>
-  <logo>
-    <name>DIOR</name>
-    <file_name>dior.png</file_name>
-  </logo>
-  <logo>
-    <name>DIRECTGOV</name>
-    <file_name>directgov.png</file_name>
-  </logo>
-  <logo>
-    <name>DISCOVER</name>
-    <file_name>discover.png</file_name>
-  </logo>
-  <logo>
-    <name>DISCOVERY</name>
+    <name>Discovery</name>
     <file_name>discovery.png</file_name>
   </logo>
   <logo>
-    <name>DISNEYLAND</name>
-    <file_name>disneyland.png</file_name>
-  </logo>
-  <logo>
-    <name>DISNEY CHANNEL</name>
-    <file_name>disney_channel.png</file_name>
-  </logo>
-  <logo>
-    <name>DIVELLA</name>
-    <file_name>divella.png</file_name>
-  </logo>
-  <logo>
-    <name>DIVX</name>
-    <file_name>divx.png</file_name>
-  </logo>
-  <logo>
-    <name>DM</name>
-    <file_name>dm.png</file_name>
-  </logo>
-  <logo>
-    <name>DODGE</name>
-    <file_name>dodge.png</file_name>
-  </logo>
-  <logo>
-    <name>DODGE VIPER</name>
-    <file_name>dodge_viper.png</file_name>
-  </logo>
-  <logo>
-    <name>DOLBY</name>
-    <file_name>dolby.png</file_name>
-  </logo>
-  <logo>
-    <name>DOLCEGABBANA</name>
-    <file_name>dolcegabbana.png</file_name>
-  </logo>
-  <logo>
-    <name>DOLLARTREE</name>
-    <file_name>dollartree.png</file_name>
-  </logo>
-  <logo>
-    <name>DOMESTOS</name>
-    <file_name>domestos.png</file_name>
-  </logo>
-  <logo>
-    <name>DOMINOS PIZZA</name>
-    <file_name>dominos_pizza.png</file_name>
-  </logo>
-  <logo>
-    <name>DOM PERIGNON</name>
-    <file_name>dom_perignon.png</file_name>
-  </logo>
-  <logo>
-    <name>DONNA KARAN NEW YORK</name>
-    <file_name>donna_karan_new_york.png</file_name>
-  </logo>
-  <logo>
-    <name>DON Q</name>
-    <file_name>don_q.png</file_name>
-  </logo>
-  <logo>
-    <name>DOOM</name>
-    <file_name>doom.png</file_name>
-  </logo>
-  <logo>
-    <name>DOORS</name>
-    <file_name>doors.png</file_name>
-  </logo>
-  <logo>
-    <name>DOUBLETREE</name>
-    <file_name>doubletree.png</file_name>
-  </logo>
-  <logo>
-    <name>DOUGLAS</name>
-    <file_name>douglas.png</file_name>
-  </logo>
-  <logo>
-    <name>DOUX</name>
-    <file_name>doux.png</file_name>
+    <name>Dole</name>
+    <file_name>dole.png</file_name>
   </logo>
   <logo>
     <name>DOVE</name>
     <file_name>dove.png</file_name>
   </logo>
   <logo>
-    <name>DRAGER</name>
-    <file_name>drager.png</file_name>
+    <name>DreamWorks</name>
+    <file_name>dreamworks.png</file_name>
   </logo>
   <logo>
-    <name>DRAGON</name>
-    <file_name>dragon.png</file_name>
-  </logo>
-  <logo>
-    <name>DRAGON BALL</name>
-    <file_name>dragon_ball.png</file_name>
-  </logo>
-  <logo>
-    <name>DREAMCAST</name>
-    <file_name>dreamcast.png</file_name>
-  </logo>
-  <logo>
-    <name>DREAMWORKSPICTURES</name>
-    <file_name>dreamworkspictures.png</file_name>
-  </logo>
-  <logo>
-    <name>DROPBOX</name>
-    <file_name>dropbox.png</file_name>
-  </logo>
-  <logo>
-    <name>DRUPAL</name>
-    <file_name>drupal.png</file_name>
-  </logo>
-  <logo>
-    <name>DR DRE</name>
-    <file_name>dr_dre.png</file_name>
-  </logo>
-  <logo>
-    <name>DR MARTENS</name>
-    <file_name>dr_martens.png</file_name>
-  </logo>
-  <logo>
-    <name>DR PEPPER</name>
-    <file_name>dr_pepper.png</file_name>
-  </logo>
-  <logo>
-    <name>DUCATI</name>
-    <file_name>ducati.png</file_name>
-  </logo>
-  <logo>
-    <name>DUFF</name>
-    <file_name>duff.png</file_name>
-  </logo>
-  <logo>
-    <name>DULUX</name>
-    <file_name>dulux.png</file_name>
-  </logo>
-  <logo>
-    <name>DUNHILL</name>
-    <file_name>dunhill.png</file_name>
-  </logo>
-  <logo>
-    <name>DUNKIN DONUTS</name>
+    <name>Dunkin Donuts</name>
     <file_name>dunkin_donuts.png</file_name>
   </logo>
   <logo>
-    <name>DUNLOP</name>
-    <file_name>dunlop.png</file_name>
+    <name>Dupont</name>
+    <file_name>dupont.png</file_name>
   </logo>
   <logo>
-    <name>DURACELL</name>
-    <file_name>duracell.png</file_name>
-  </logo>
-  <logo>
-    <name>DUREX</name>
+    <name>Durex</name>
     <file_name>durex.png</file_name>
   </logo>
   <logo>
-    <name>DVD</name>
-    <file_name>dvd.png</file_name>
-  </logo>
-  <logo>
-    <name>DYNAMOTIVE</name>
-    <file_name>dynamotive.png</file_name>
-  </logo>
-  <logo>
-    <name>DZ BANK</name>
-    <file_name>dz_bank.png</file_name>
-  </logo>
-  <logo>
-    <name>EADS</name>
-    <file_name>eads.png</file_name>
-  </logo>
-  <logo>
-    <name>EAGLECREEK</name>
-    <file_name>eaglecreek.png</file_name>
-  </logo>
-  <logo>
-    <name>EAGLE BOYS</name>
-    <file_name>eagle_boys.png</file_name>
-  </logo>
-  <logo>
-    <name>EASTPAK</name>
-    <file_name>eastpak.png</file_name>
-  </logo>
-  <logo>
-    <name>EASYJET</name>
-    <file_name>easyjet.png</file_name>
-  </logo>
-  <logo>
-    <name>EBAY</name>
+    <name>ebay</name>
     <file_name>ebay.png</file_name>
   </logo>
   <logo>
-    <name>ECCO</name>
-    <file_name>ecco.png</file_name>
-  </logo>
-  <logo>
-    <name>ECKO</name>
-    <file_name>ecko.png</file_name>
-  </logo>
-  <logo>
-    <name>ECONO LODGE</name>
-    <file_name>econo_lodge.png</file_name>
-  </logo>
-  <logo>
-    <name>EDEKA</name>
-    <file_name>edeka.png</file_name>
-  </logo>
-  <logo>
-    <name>EDF</name>
-    <file_name>edf.png</file_name>
-  </logo>
-  <logo>
-    <name>EE</name>
-    <file_name>ee.png</file_name>
-  </logo>
-  <logo>
-    <name>EIFFAGE</name>
-    <file_name>eiffage.png</file_name>
-  </logo>
-  <logo>
-    <name>ELECTRIC</name>
-    <file_name>electric.png</file_name>
-  </logo>
-  <logo>
-    <name>ELECTROLUX</name>
-    <file_name>electrolux.png</file_name>
-  </logo>
-  <logo>
-    <name>ELECTRONIC ARTS</name>
-    <file_name>electronic_arts.png</file_name>
-  </logo>
-  <logo>
-    <name>ELEMENT</name>
+    <name>Element</name>
     <file_name>element.png</file_name>
   </logo>
   <logo>
-    <name>ELF</name>
-    <file_name>elf.png</file_name>
-  </logo>
-  <logo>
-    <name>ELI LILLY</name>
-    <file_name>eli_lilly.png</file_name>
-  </logo>
-  <logo>
-    <name>ELLESSE</name>
-    <file_name>ellesse.png</file_name>
-  </logo>
-  <logo>
-    <name>ELMUNDO</name>
-    <file_name>elmundo.png</file_name>
-  </logo>
-  <logo>
-    <name>EMAAR</name>
-    <file_name>emaar.png</file_name>
-  </logo>
-  <logo>
-    <name>EMBASSY SUITES</name>
-    <file_name>embassy_suites.png</file_name>
-  </logo>
-  <logo>
-    <name>EMBRAER</name>
-    <file_name>embraer.png</file_name>
-  </logo>
-  <logo>
-    <name>EMINEM</name>
-    <file_name>eminem.png</file_name>
-  </logo>
-  <logo>
-    <name>EMIRATES</name>
+    <name>Emirates</name>
     <file_name>emirates.png</file_name>
   </logo>
   <logo>
-    <name>EMPIRE</name>
-    <file_name>empire.png</file_name>
+    <name>Enron</name>
+    <file_name>enron.png</file_name>
   </logo>
   <logo>
-    <name>EMU</name>
-    <file_name>emu.png</file_name>
-  </logo>
-  <logo>
-    <name>ENBW</name>
-    <file_name>enbw.png</file_name>
-  </logo>
-  <logo>
-    <name>ENDESA</name>
-    <file_name>endesa.png</file_name>
-  </logo>
-  <logo>
-    <name>ENDOMONDO</name>
-    <file_name>endomondo.png</file_name>
-  </logo>
-  <logo>
-    <name>ENERGIZER</name>
-    <file_name>energizer.png</file_name>
-  </logo>
-  <logo>
-    <name>ENI</name>
-    <file_name>eni.png</file_name>
-  </logo>
-  <logo>
-    <name>EON</name>
-    <file_name>eon.png</file_name>
-  </logo>
-  <logo>
-    <name>EPCOS</name>
-    <file_name>epcos.png</file_name>
-  </logo>
-  <logo>
-    <name>EREDIVISIE</name>
-    <file_name>eredivisie.png</file_name>
-  </logo>
-  <logo>
-    <name>ERICSSON</name>
+    <name>Ericsson</name>
     <file_name>ericsson.png</file_name>
   </logo>
   <logo>
-    <name>ERNST YOUNG</name>
-    <file_name>ernst_young.png</file_name>
-  </logo>
-  <logo>
-    <name>EROSKI</name>
-    <file_name>eroski.png</file_name>
-  </logo>
-  <logo>
-    <name>ESCADA</name>
-    <file_name>escada.png</file_name>
-  </logo>
-  <logo>
-    <name>ESET</name>
-    <file_name>eset.png</file_name>
-  </logo>
-  <logo>
-    <name>ESPN</name>
-    <file_name>espn.png</file_name>
-  </logo>
-  <logo>
-    <name>ESPRIT</name>
-    <file_name>esprit.png</file_name>
-  </logo>
-  <logo>
-    <name>ESSO</name>
-    <file_name>esso.png</file_name>
-  </logo>
-  <logo>
-    <name>ESTEE LAUDER</name>
+    <name>Estee Lauder</name>
     <file_name>estee_lauder.png</file_name>
   </logo>
   <logo>
-    <name>ETHIAD AIRWAYS</name>
-    <file_name>ethiad_airways.png</file_name>
+    <name>Eurosport</name>
+    <file_name>eurosport.png</file_name>
   </logo>
   <logo>
-    <name>ETHIOPIAN AIRLINES</name>
-    <file_name>ethiopian_airlines.png</file_name>
-  </logo>
-  <logo>
-    <name>ETNIES</name>
-    <file_name>etnies.png</file_name>
-  </logo>
-  <logo>
-    <name>EUKANUBA</name>
-    <file_name>eukanuba.png</file_name>
-  </logo>
-  <logo>
-    <name>EUROCOPTER</name>
-    <file_name>eurocopter.png</file_name>
-  </logo>
-  <logo>
-    <name>EURONEWS</name>
-    <file_name>euronews.png</file_name>
-  </logo>
-  <logo>
-    <name>EUROVISION</name>
-    <file_name>eurovision.png</file_name>
-  </logo>
-  <logo>
-    <name>EURO SPORT</name>
-    <file_name>euro_sport.png</file_name>
-  </logo>
-  <logo>
-    <name>EVERNOTE</name>
-    <file_name>evernote.png</file_name>
-  </logo>
-  <logo>
-    <name>EVERTON</name>
-    <file_name>everton.png</file_name>
-  </logo>
-  <logo>
-    <name>EVIAN</name>
-    <file_name>evian.png</file_name>
-  </logo>
-  <logo>
-    <name>EXPEDIA</name>
-    <file_name>expedia.png</file_name>
-  </logo>
-  <logo>
-    <name>EXXON</name>
+    <name>Exxon</name>
     <file_name>exxon.png</file_name>
   </logo>
   <logo>
-    <name>FA</name>
-    <file_name>fa.png</file_name>
-  </logo>
-  <logo>
-    <name>FABERCASTELL</name>
-    <file_name>fabercastell.png</file_name>
-  </logo>
-  <logo>
-    <name>FACEBOOK</name>
+    <name>Facebook</name>
     <file_name>facebook.png</file_name>
   </logo>
   <logo>
-    <name>FAIRLINE</name>
-    <file_name>fairline.png</file_name>
+    <name>Fairtrade</name>
+    <file_name>fairtrade.png</file_name>
   </logo>
   <logo>
-    <name>FAKEBAKE</name>
-    <file_name>fakebake.png</file_name>
+    <name>Fat Face</name>
+    <file_name>fat_face.png</file_name>
   </logo>
   <logo>
-    <name>FAMILYDOLLAR</name>
-    <file_name>familydollar.png</file_name>
-  </logo>
-  <logo>
-    <name>FAMILYGUY</name>
-    <file_name>familyguy.png</file_name>
-  </logo>
-  <logo>
-    <name>FANDANGO</name>
-    <file_name>fandango.png</file_name>
-  </logo>
-  <logo>
-    <name>FANTA</name>
-    <file_name>fanta.png</file_name>
-  </logo>
-  <logo>
-    <name>FASHIONTV</name>
-    <file_name>fashiontv.png</file_name>
-  </logo>
-  <logo>
-    <name>FBI</name>
-    <file_name>fbi.png</file_name>
-  </logo>
-  <logo>
-    <name>FBM</name>
-    <file_name>fbm.png</file_name>
-  </logo>
-  <logo>
-    <name>FCC</name>
-    <file_name>fcc.png</file_name>
-  </logo>
-  <logo>
-    <name>FEDEX</name>
+    <name>FedEx</name>
     <file_name>fedex.png</file_name>
   </logo>
   <logo>
-    <name>FELIX THE CAT</name>
-    <file_name>felix_the_cat.png</file_name>
-  </logo>
-  <logo>
-    <name>FENDER</name>
+    <name>Fender</name>
     <file_name>fender.png</file_name>
   </logo>
   <logo>
-    <name>FENDI</name>
+    <name>Fendi</name>
     <file_name>fendi.png</file_name>
   </logo>
   <logo>
-    <name>FERRARI</name>
-    <file_name>ferrari.png</file_name>
-  </logo>
-  <logo>
-    <name>FERRERO</name>
-    <file_name>ferrero.png</file_name>
-  </logo>
-  <logo>
-    <name>FERROVIAL</name>
-    <file_name>ferrovial.png</file_name>
-  </logo>
-  <logo>
-    <name>FIAT</name>
+    <name>Fiat</name>
     <file_name>fiat.png</file_name>
   </logo>
   <logo>
-    <name>FIAWORLDRALLY</name>
-    <file_name>fiaworldrally.png</file_name>
+    <name>Firebird</name>
+    <file_name>firebird.png</file_name>
   </logo>
   <logo>
-    <name>FIBA</name>
-    <file_name>fiba.png</file_name>
-  </logo>
-  <logo>
-    <name>FIFA</name>
-    <file_name>fifa.png</file_name>
-  </logo>
-  <logo>
-    <name>FIFTHGEAR</name>
-    <file_name>fifthgear.png</file_name>
-  </logo>
-  <logo>
-    <name>FILA</name>
-    <file_name>fila.png</file_name>
-  </logo>
-  <logo>
-    <name>FILMAX</name>
-    <file_name>filmax.png</file_name>
-  </logo>
-  <logo>
-    <name>FINEBURGER</name>
-    <file_name>fineburger.png</file_name>
-  </logo>
-  <logo>
-    <name>FINLANDIA VODKA</name>
-    <file_name>finlandia_vodka.png</file_name>
-  </logo>
-  <logo>
-    <name>FINNAIR</name>
-    <file_name>finnair.png</file_name>
-  </logo>
-  <logo>
-    <name>FIORENTINA</name>
-    <file_name>fiorentina.png</file_name>
-  </logo>
-  <logo>
-    <name>FIREFLY</name>
-    <file_name>firefly.png</file_name>
-  </logo>
-  <logo>
-    <name>FIREFOX</name>
-    <file_name>firefox.png</file_name>
-  </logo>
-  <logo>
-    <name>FIRESTONE</name>
+    <name>Firestone</name>
     <file_name>firestone.png</file_name>
   </logo>
   <logo>
-    <name>FISCHER</name>
-    <file_name>fischer.png</file_name>
-  </logo>
-  <logo>
-    <name>FISHER PRICE</name>
+    <name>Fisher Price</name>
     <file_name>fisher_price.png</file_name>
   </logo>
   <logo>
-    <name>FLICKR</name>
-    <file_name>flickr.png</file_name>
+    <name>Fisherman's Friend</name>
+    <file_name>fishermans_friend.png</file_name>
   </logo>
   <logo>
-    <name>FOOT LOCKER</name>
-    <file_name>foot_locker.png</file_name>
-  </logo>
-  <logo>
-    <name>FORBES</name>
-    <file_name>forbes.png</file_name>
-  </logo>
-  <logo>
-    <name>FORD</name>
-    <file_name>ford.png</file_name>
-  </logo>
-  <logo>
-    <name>FORMULA1</name>
-    <file_name>formula1.png</file_name>
-  </logo>
-  <logo>
-    <name>FORUM</name>
-    <file_name>forum.png</file_name>
-  </logo>
-  <logo>
-    <name>FOSTERS</name>
+    <name>Fosters</name>
     <file_name>fosters.png</file_name>
   </logo>
   <logo>
-    <name>FOURSQUARE</name>
-    <file_name>foursquare.png</file_name>
-  </logo>
-  <logo>
-    <name>FOX</name>
+    <name>Fox</name>
     <file_name>fox.png</file_name>
   </logo>
   <logo>
-    <name>FRANZISKANER</name>
-    <file_name>franziskaner.png</file_name>
-  </logo>
-  <logo>
-    <name>FRED PERRY</name>
+    <name>Fred Perry</name>
     <file_name>fred_perry.png</file_name>
   </logo>
   <logo>
-    <name>FREEBSD</name>
-    <file_name>freebsd.png</file_name>
-  </logo>
-  <logo>
-    <name>FREEMOBILE</name>
-    <file_name>freemobile.png</file_name>
-  </logo>
-  <logo>
-    <name>FRIDAYS</name>
-    <file_name>fridays.png</file_name>
-  </logo>
-  <logo>
-    <name>FROOTLOOPS</name>
-    <file_name>frootloops.png</file_name>
-  </logo>
-  <logo>
-    <name>FRUITTELLA</name>
-    <file_name>fruittella.png</file_name>
-  </logo>
-  <logo>
-    <name>FRUIT OF THE LOOM</name>
+    <name>Fruit of The Loom</name>
     <file_name>fruit_of_the_loom.png</file_name>
   </logo>
   <logo>
-    <name>FUJIFILM</name>
+    <name>FSC</name>
+    <file_name>fsc.png</file_name>
+  </logo>
+  <logo>
+    <name>Fujifilm</name>
     <file_name>fujifilm.png</file_name>
   </logo>
   <logo>
-    <name>FUJITSU</name>
+    <name>Fujitsu</name>
     <file_name>fujitsu.png</file_name>
   </logo>
   <logo>
-    <name>FULDA</name>
-    <file_name>fulda.png</file_name>
+    <name>G-Shock</name>
+    <file_name>gshock.png</file_name>
   </logo>
   <logo>
-    <name>GALBANI</name>
-    <file_name>galbani.png</file_name>
+    <name>Gatorade</name>
+    <file_name>gatorade.png</file_name>
   </logo>
   <logo>
-    <name>GALLINA BLANCA</name>
-    <file_name>gallina_blanca.png</file_name>
-  </logo>
-  <logo>
-    <name>GALLO</name>
-    <file_name>gallo.png</file_name>
-  </logo>
-  <logo>
-    <name>GALP</name>
-    <file_name>galp.png</file_name>
-  </logo>
-  <logo>
-    <name>GAMESA</name>
-    <file_name>gamesa.png</file_name>
-  </logo>
-  <logo>
-    <name>GAMESTAR</name>
-    <file_name>gamestar.png</file_name>
-  </logo>
-  <logo>
-    <name>GANCIA</name>
-    <file_name>gancia.png</file_name>
-  </logo>
-  <logo>
-    <name>GAP</name>
-    <file_name>gap.png</file_name>
-  </logo>
-  <logo>
-    <name>GARMIN</name>
-    <file_name>garmin.png</file_name>
-  </logo>
-  <logo>
-    <name>GARNIER</name>
-    <file_name>garnier.png</file_name>
-  </logo>
-  <logo>
-    <name>GAS</name>
-    <file_name>gas.png</file_name>
-  </logo>
-  <logo>
-    <name>GAS NATURAL</name>
-    <file_name>gas_natural.png</file_name>
-  </logo>
-  <logo>
-    <name>GAULOISES</name>
-    <file_name>gauloises.png</file_name>
-  </logo>
-  <logo>
-    <name>GAZ</name>
-    <file_name>gaz.png</file_name>
-  </logo>
-  <logo>
-    <name>GAZPROM</name>
-    <file_name>gazprom.png</file_name>
-  </logo>
-  <logo>
-    <name>GEELONG CATS</name>
-    <file_name>geelong_cats.png</file_name>
-  </logo>
-  <logo>
-    <name>GEELY</name>
-    <file_name>geely.png</file_name>
-  </logo>
-  <logo>
-    <name>GENERALELECTRIC</name>
-    <file_name>generalelectric.png</file_name>
-  </logo>
-  <logo>
-    <name>GENERALI</name>
-    <file_name>generali.png</file_name>
-  </logo>
-  <logo>
-    <name>GENERAL MOTORS</name>
-    <file_name>general_motors.png</file_name>
-  </logo>
-  <logo>
-    <name>GENIUS</name>
-    <file_name>genius.png</file_name>
-  </logo>
-  <logo>
-    <name>GEOX</name>
-    <file_name>geox.png</file_name>
-  </logo>
-  <logo>
-    <name>GERBER</name>
-    <file_name>gerber.png</file_name>
-  </logo>
-  <logo>
-    <name>GHOSTBUSTERS</name>
+    <name>Ghostbusters</name>
     <file_name>ghostbusters.png</file_name>
   </logo>
   <logo>
-    <name>GIANT</name>
-    <file_name>giant.png</file_name>
+    <name>Girl Souts of America</name>
+    <file_name>girl_souts_of_america.png</file_name>
   </logo>
   <logo>
-    <name>GIBSON</name>
-    <file_name>gibson.png</file_name>
+    <name>GlaxoSmithKline</name>
+    <file_name>glaxosmithkline.png</file_name>
   </logo>
   <logo>
-    <name>GIJOE</name>
-    <file_name>gijoe.png</file_name>
-  </logo>
-  <logo>
-    <name>GILLETTE</name>
-    <file_name>gillette.png</file_name>
-  </logo>
-  <logo>
-    <name>GIORGIO ARMANI</name>
-    <file_name>giorgio_armani.png</file_name>
-  </logo>
-  <logo>
-    <name>GIRO</name>
-    <file_name>giro.png</file_name>
-  </logo>
-  <logo>
-    <name>GIRONDINS</name>
-    <file_name>girondins.png</file_name>
-  </logo>
-  <logo>
-    <name>GIRO D ITALIA</name>
-    <file_name>giro_d_italia.png</file_name>
-  </logo>
-  <logo>
-    <name>GITHUB</name>
-    <file_name>github.png</file_name>
-  </logo>
-  <logo>
-    <name>GIVENCHY</name>
-    <file_name>givenchy.png</file_name>
-  </logo>
-  <logo>
-    <name>GLAXO SMITH KLINE</name>
-    <file_name>glaxo_smith_kline.png</file_name>
-  </logo>
-  <logo>
-    <name>GLENFIDDICH</name>
-    <file_name>glenfiddich.png</file_name>
-  </logo>
-  <logo>
-    <name>GLORIA JEANS</name>
-    <file_name>gloria_jeans.png</file_name>
-  </logo>
-  <logo>
-    <name>GMAIL</name>
-    <file_name>gmail.png</file_name>
-  </logo>
-  <logo>
-    <name>GMC</name>
-    <file_name>gmc.png</file_name>
-  </logo>
-  <logo>
-    <name>GODADDY</name>
-    <file_name>godaddy.png</file_name>
-  </logo>
-  <logo>
-    <name>GODFATHER</name>
-    <file_name>godfather.png</file_name>
-  </logo>
-  <logo>
-    <name>GODIVA</name>
-    <file_name>godiva.png</file_name>
-  </logo>
-  <logo>
-    <name>GOLDMANSACHS</name>
-    <file_name>goldmansachs.png</file_name>
-  </logo>
-  <logo>
-    <name>GOODYEAR</name>
+    <name>Goodyear</name>
     <file_name>goodyear.png</file_name>
   </logo>
   <logo>
-    <name>GOOGLE</name>
-    <file_name>google.png</file_name>
-  </logo>
-  <logo>
-    <name>GOOGLEMAPS</name>
-    <file_name>googlemaps.png</file_name>
-  </logo>
-  <logo>
-    <name>GOOGLEPLAY</name>
-    <file_name>googleplay.png</file_name>
-  </logo>
-  <logo>
-    <name>GOOGLETV</name>
-    <file_name>googletv.png</file_name>
-  </logo>
-  <logo>
-    <name>GOOGLEWALLET</name>
-    <file_name>googlewallet.png</file_name>
-  </logo>
-  <logo>
-    <name>GOOGLE PLAY</name>
-    <file_name>google_play.png</file_name>
-  </logo>
-  <logo>
-    <name>GOOGLE TALK</name>
-    <file_name>google_talk.png</file_name>
-  </logo>
-  <logo>
-    <name>GORDONS</name>
-    <file_name>gordons.png</file_name>
-  </logo>
-  <logo>
-    <name>GOSH</name>
-    <file_name>gosh.png</file_name>
-  </logo>
-  <logo>
-    <name>GOSH HOSPITAL</name>
-    <file_name>gosh_hospital.png</file_name>
-  </logo>
-  <logo>
-    <name>GQ</name>
-    <file_name>gq.png</file_name>
-  </logo>
-  <logo>
-    <name>GRANINI</name>
-    <file_name>granini.png</file_name>
-  </logo>
-  <logo>
-    <name>GRANTS</name>
-    <file_name>grants.png</file_name>
-  </logo>
-  <logo>
-    <name>GREENE KING</name>
-    <file_name>greene_king.png</file_name>
-  </logo>
-  <logo>
-    <name>GREENPEACE</name>
-    <file_name>greenpeace.png</file_name>
-  </logo>
-  <logo>
-    <name>GREEN GIANT</name>
-    <file_name>green_giant.png</file_name>
-  </logo>
-  <logo>
-    <name>GREYGOOSE</name>
-    <file_name>greygoose.png</file_name>
-  </logo>
-  <logo>
-    <name>GROLSCH</name>
+    <name>Grolsch</name>
     <file_name>grolsch.png</file_name>
   </logo>
   <logo>
-    <name>GROUPON</name>
-    <file_name>groupon.png</file_name>
-  </logo>
-  <logo>
-    <name>GTA</name>
-    <file_name>gta.png</file_name>
-  </logo>
-  <logo>
-    <name>GUCCI</name>
-    <file_name>gucci.png</file_name>
-  </logo>
-  <logo>
-    <name>GUERLAIN</name>
-    <file_name>guerlain.png</file_name>
-  </logo>
-  <logo>
-    <name>GUINNESS</name>
+    <name>Guinness</name>
     <file_name>guinness.png</file_name>
   </logo>
   <logo>
-    <name>GUITAR HERO</name>
+    <name>Guitar Hero</name>
     <file_name>guitar_hero.png</file_name>
   </logo>
   <logo>
-    <name>GULF AIR</name>
-    <file_name>gulf_air.png</file_name>
+    <name>Guns N' Roses</name>
+    <file_name>guns_n_roses.png</file_name>
   </logo>
   <logo>
-    <name>GUMTREE</name>
-    <file_name>gumtree.png</file_name>
+    <name>Harry Potter</name>
+    <file_name>harry_potter.png</file_name>
   </logo>
   <logo>
-    <name>HAAGEN DAZS</name>
-    <file_name>haagen_dazs.png</file_name>
-  </logo>
-  <logo>
-    <name>HALF LIFE</name>
-    <file_name>half_life.png</file_name>
-  </logo>
-  <logo>
-    <name>HALIFAX</name>
-    <file_name>halifax.png</file_name>
-  </logo>
-  <logo>
-    <name>HALLMARK CHANNEL</name>
-    <file_name>hallmark_channel.png</file_name>
-  </logo>
-  <logo>
-    <name>HALLOWEEN</name>
-    <file_name>halloween.png</file_name>
-  </logo>
-  <logo>
-    <name>HALLS</name>
-    <file_name>halls.png</file_name>
-  </logo>
-  <logo>
-    <name>HAMBURGER</name>
-    <file_name>hamburger.png</file_name>
-  </logo>
-  <logo>
-    <name>HAMPTON</name>
-    <file_name>hampton.png</file_name>
-  </logo>
-  <logo>
-    <name>HANDM</name>
-    <file_name>handm.png</file_name>
-  </logo>
-  <logo>
-    <name>HANKOOK</name>
-    <file_name>hankook.png</file_name>
-  </logo>
-  <logo>
-    <name>HANNOVER96</name>
-    <file_name>hannover96.png</file_name>
-  </logo>
-  <logo>
-    <name>HARD ROCK CAFE</name>
-    <file_name>hard_rock_cafe.png</file_name>
-  </logo>
-  <logo>
-    <name>HARIBO</name>
-    <file_name>haribo.png</file_name>
-  </logo>
-  <logo>
-    <name>HARLEY DAVIDSON</name>
-    <file_name>harley_davidson.png</file_name>
-  </logo>
-  <logo>
-    <name>HARRODS</name>
-    <file_name>harrods.png</file_name>
-  </logo>
-  <logo>
-    <name>HARVARD</name>
-    <file_name>harvard.png</file_name>
-  </logo>
-  <logo>
-    <name>HARVARD UNIVERSITY</name>
-    <file_name>harvard_university.png</file_name>
-  </logo>
-  <logo>
-    <name>HASBRO</name>
+    <name>Hasbro</name>
     <file_name>hasbro.png</file_name>
   </logo>
   <logo>
-    <name>HAVANA CLUB</name>
-    <file_name>havana_club.png</file_name>
+    <name>Head and Shoulders</name>
+    <file_name>head_and_shoulders.png</file_name>
   </logo>
   <logo>
-    <name>HAWAIIAN AIRLINES</name>
-    <file_name>hawaiian_airlines.png</file_name>
-  </logo>
-  <logo>
-    <name>HAWTHORN</name>
-    <file_name>hawthorn.png</file_name>
-  </logo>
-  <logo>
-    <name>HBO</name>
-    <file_name>hbo.png</file_name>
-  </logo>
-  <logo>
-    <name>HEAD</name>
-    <file_name>head.png</file_name>
-  </logo>
-  <logo>
-    <name>HEADANDSHOULDERS</name>
-    <file_name>headandshoulders.png</file_name>
-  </logo>
-  <logo>
-    <name>HEARTBRAND</name>
-    <file_name>heartbrand.png</file_name>
-  </logo>
-  <logo>
-    <name>HEINEKEN</name>
-    <file_name>heineken.png</file_name>
-  </logo>
-  <logo>
-    <name>HEINZ</name>
-    <file_name>heinz.png</file_name>
-  </logo>
-  <logo>
-    <name>HEISE</name>
-    <file_name>heise.png</file_name>
-  </logo>
-  <logo>
-    <name>HELENA RUBINSTEIN</name>
-    <file_name>helena_rubinstein.png</file_name>
-  </logo>
-  <logo>
-    <name>HELLMANNS</name>
-    <file_name>hellmanns.png</file_name>
-  </logo>
-  <logo>
-    <name>HELLO KITTY</name>
+    <name>Hello Kitty</name>
     <file_name>hello_kitty.png</file_name>
   </logo>
   <logo>
-    <name>HENKEL</name>
-    <file_name>henkel.png</file_name>
-  </logo>
-  <logo>
-    <name>HENNESSY</name>
-    <file_name>hennessy.png</file_name>
-  </logo>
-  <logo>
-    <name>HERBALIFE</name>
-    <file_name>herbalife.png</file_name>
-  </logo>
-  <logo>
-    <name>HERMES PARIS</name>
-    <file_name>hermes_paris.png</file_name>
-  </logo>
-  <logo>
-    <name>HEROES</name>
-    <file_name>heroes.png</file_name>
-  </logo>
-  <logo>
-    <name>HERSHEYS</name>
-    <file_name>hersheys.png</file_name>
-  </logo>
-  <logo>
-    <name>HERTZ</name>
-    <file_name>hertz.png</file_name>
-  </logo>
-  <logo>
-    <name>HETTICH</name>
-    <file_name>hettich.png</file_name>
-  </logo>
-  <logo>
-    <name>HEWLETT PACKARD</name>
-    <file_name>hewlett_packard.png</file_name>
-  </logo>
-  <logo>
-    <name>HILTON</name>
-    <file_name>hilton.png</file_name>
-  </logo>
-  <logo>
-    <name>HILTON GARDEN INN</name>
-    <file_name>hilton_garden_inn.png</file_name>
-  </logo>
-  <logo>
-    <name>HIPERDINO</name>
-    <file_name>hiperdino.png</file_name>
-  </logo>
-  <logo>
-    <name>HIPMUNK</name>
-    <file_name>hipmunk.png</file_name>
-  </logo>
-  <logo>
-    <name>HISTORY CHANNEL</name>
-    <file_name>history_channel.png</file_name>
-  </logo>
-  <logo>
-    <name>HITACHI</name>
-    <file_name>hitachi.png</file_name>
+    <name>Heras</name>
+    <file_name>heras.png</file_name>
   </logo>
   <logo>
     <name>HM</name>
@@ -2869,440 +513,60 @@
     <file_name>hmv.png</file_name>
   </logo>
   <logo>
-    <name>HOCHLAND</name>
-    <file_name>hochland.png</file_name>
-  </logo>
-  <logo>
-    <name>HOEGAARDEN</name>
-    <file_name>hoegaarden.png</file_name>
-  </logo>
-  <logo>
-    <name>HOLDEN</name>
-    <file_name>holden.png</file_name>
-  </logo>
-  <logo>
-    <name>HOLIDAY INN</name>
+    <name>Holiday Inn</name>
     <file_name>holiday_inn.png</file_name>
   </logo>
   <logo>
-    <name>HOLLISTER</name>
-    <file_name>hollister.png</file_name>
-  </logo>
-  <logo>
-    <name>HOLSTEN</name>
-    <file_name>holsten.png</file_name>
-  </logo>
-  <logo>
-    <name>HONDA</name>
+    <name>Honda</name>
     <file_name>honda.png</file_name>
   </logo>
   <logo>
-    <name>HOOTERS</name>
-    <file_name>hooters.png</file_name>
-  </logo>
-  <logo>
-    <name>HOT WHEELS</name>
+    <name>Hot Wheels</name>
     <file_name>hot_wheels.png</file_name>
-  </logo>
-  <logo>
-    <name>HOUSE</name>
-    <file_name>house.png</file_name>
-  </logo>
-  <logo>
-    <name>HOVIS</name>
-    <file_name>hovis.png</file_name>
-  </logo>
-  <logo>
-    <name>HOYTS</name>
-    <file_name>hoyts.png</file_name>
   </logo>
   <logo>
     <name>HSBC</name>
     <file_name>hsbc.png</file_name>
   </logo>
   <logo>
-    <name>HTC</name>
-    <file_name>htc.png</file_name>
-  </logo>
-  <logo>
-    <name>HUAWEI</name>
+    <name>Huawei</name>
     <file_name>huawei.png</file_name>
-  </logo>
-  <logo>
-    <name>HUGGIES</name>
-    <file_name>huggies.png</file_name>
-  </logo>
-  <logo>
-    <name>HUGO</name>
-    <file_name>hugo.png</file_name>
-  </logo>
-  <logo>
-    <name>HUGO BOSS</name>
-    <file_name>hugo_boss.png</file_name>
-  </logo>
-  <logo>
-    <name>HUMMEL</name>
-    <file_name>hummel.png</file_name>
-  </logo>
-  <logo>
-    <name>HUMMER</name>
-    <file_name>hummer.png</file_name>
-  </logo>
-  <logo>
-    <name>HUNGRYHOUSE</name>
-    <file_name>hungryhouse.png</file_name>
-  </logo>
-  <logo>
-    <name>HUNGRY HORSE</name>
-    <file_name>hungry_horse.png</file_name>
-  </logo>
-  <logo>
-    <name>HUNGRY JACKS</name>
-    <file_name>hungry_jacks.png</file_name>
-  </logo>
-  <logo>
-    <name>HUNTINGTON</name>
-    <file_name>huntington.png</file_name>
-  </logo>
-  <logo>
-    <name>HUSQVARNA</name>
-    <file_name>husqvarna.png</file_name>
-  </logo>
-  <logo>
-    <name>HYATT</name>
-    <file_name>hyatt.png</file_name>
-  </logo>
-  <logo>
-    <name>HYUNDAI</name>
-    <file_name>hyundai.png</file_name>
-  </logo>
-  <logo>
-    <name>IATA</name>
-    <file_name>iata.png</file_name>
-  </logo>
-  <logo>
-    <name>IBANEZ</name>
-    <file_name>ibanez.png</file_name>
-  </logo>
-  <logo>
-    <name>IBERDROLA</name>
-    <file_name>iberdrola.png</file_name>
-  </logo>
-  <logo>
-    <name>IBERIA</name>
-    <file_name>iberia.png</file_name>
-  </logo>
-  <logo>
-    <name>IBIS</name>
-    <file_name>ibis.png</file_name>
-  </logo>
-  <logo>
-    <name>IBM</name>
-    <file_name>ibm.png</file_name>
-  </logo>
-  <logo>
-    <name>ICBC</name>
-    <file_name>icbc.png</file_name>
   </logo>
   <logo>
     <name>ICQ</name>
     <file_name>icq.png</file_name>
   </logo>
   <logo>
-    <name>IKEA</name>
-    <file_name>ikea.png</file_name>
-  </logo>
-  <logo>
-    <name>ILLY</name>
+    <name>Illy</name>
     <file_name>illy.png</file_name>
   </logo>
   <logo>
-    <name>ILOVENY</name>
-    <file_name>iloveny.png</file_name>
+    <name>Infinity</name>
+    <file_name>infinity.png</file_name>
   </logo>
   <logo>
-    <name>IMAX</name>
-    <file_name>imax.png</file_name>
-  </logo>
-  <logo>
-    <name>IMDB</name>
-    <file_name>imdb.png</file_name>
-  </logo>
-  <logo>
-    <name>IMPALA</name>
-    <file_name>impala.png</file_name>
-  </logo>
-  <logo>
-    <name>INDESIT</name>
-    <file_name>indesit.png</file_name>
-  </logo>
-  <logo>
-    <name>INFINITI</name>
-    <file_name>infiniti.png</file_name>
-  </logo>
-  <logo>
-    <name>ING DIRECT</name>
-    <file_name>ing_direct.png</file_name>
-  </logo>
-  <logo>
-    <name>INSTAGRAM</name>
-    <file_name>instagram.png</file_name>
-  </logo>
-  <logo>
-    <name>INTEL</name>
-    <file_name>intel.png</file_name>
-  </logo>
-  <logo>
-    <name>INTERNAZIONALE</name>
-    <file_name>internazionale.png</file_name>
-  </logo>
-  <logo>
-    <name>INTERNET EXPLORER</name>
-    <file_name>internet_explorer.png</file_name>
-  </logo>
-  <logo>
-    <name>IN N OUT</name>
-    <file_name>in_n_out.png</file_name>
-  </logo>
-  <logo>
-    <name>IPSOS</name>
-    <file_name>ipsos.png</file_name>
-  </logo>
-  <logo>
-    <name>IRFANVIEW</name>
-    <file_name>irfanview.png</file_name>
-  </logo>
-  <logo>
-    <name>IRONMAN</name>
-    <file_name>ironman.png</file_name>
-  </logo>
-  <logo>
-    <name>ISUZU</name>
-    <file_name>isuzu.png</file_name>
-  </logo>
-  <logo>
-    <name>ITUNES</name>
-    <file_name>itunes.png</file_name>
-  </logo>
-  <logo>
-    <name>ITV</name>
-    <file_name>itv.png</file_name>
-  </logo>
-  <logo>
-    <name>IVECO</name>
-    <file_name>iveco.png</file_name>
-  </logo>
-  <logo>
-    <name>J5</name>
-    <file_name>j5.png</file_name>
-  </logo>
-  <logo>
-    <name>J7</name>
-    <file_name>j7.png</file_name>
-  </logo>
-  <logo>
-    <name>JACKASS</name>
-    <file_name>jackass.png</file_name>
-  </logo>
-  <logo>
-    <name>JACK DANIELS</name>
-    <file_name>jack_daniels.png</file_name>
-  </logo>
-  <logo>
-    <name>JACK LONDON</name>
-    <file_name>jack_london.png</file_name>
-  </logo>
-  <logo>
-    <name>JACK WOLFSKIN</name>
-    <file_name>jack_wolfskin.png</file_name>
-  </logo>
-  <logo>
-    <name>JACOBS</name>
-    <file_name>jacobs.png</file_name>
-  </logo>
-  <logo>
-    <name>JAGERMEISTE</name>
-    <file_name>jagermeiste.png</file_name>
-  </logo>
-  <logo>
-    <name>JAGUAR</name>
+    <name>Jaguar</name>
     <file_name>jaguar.png</file_name>
   </logo>
   <logo>
-    <name>JAGWIRE</name>
-    <file_name>jagwire.png</file_name>
+    <name>JAL</name>
+    <file_name>jal.png</file_name>
   </logo>
   <logo>
-    <name>JAMESON</name>
-    <file_name>jameson.png</file_name>
-  </logo>
-  <logo>
-    <name>JANSPORT</name>
-    <file_name>jansport.png</file_name>
-  </logo>
-  <logo>
-    <name>JAVA</name>
-    <file_name>java.png</file_name>
-  </logo>
-  <logo>
-    <name>JB</name>
-    <file_name>jb.png</file_name>
-  </logo>
-  <logo>
-    <name>JBL</name>
-    <file_name>jbl.png</file_name>
-  </logo>
-  <logo>
-    <name>JCPENNEY</name>
-    <file_name>jcpenney.png</file_name>
-  </logo>
-  <logo>
-    <name>JEEP</name>
+    <name>Jeep</name>
     <file_name>jeep.png</file_name>
   </logo>
   <logo>
-    <name>JENGA</name>
-    <file_name>jenga.png</file_name>
-  </logo>
-  <logo>
-    <name>JETBLUE</name>
-    <file_name>jetblue.png</file_name>
-  </logo>
-  <logo>
-    <name>JETSTAR</name>
-    <file_name>jetstar.png</file_name>
-  </logo>
-  <logo>
-    <name>JIM BEAM</name>
-    <file_name>jim_beam.png</file_name>
-  </logo>
-  <logo>
-    <name>JLO</name>
-    <file_name>jlo.png</file_name>
-  </logo>
-  <logo>
-    <name>JOHNGALLIANO</name>
-    <file_name>johngalliano.png</file_name>
-  </logo>
-  <logo>
-    <name>JOHNNIE WALKER</name>
-    <file_name>johnnie_walker.png</file_name>
-  </logo>
-  <logo>
-    <name>JOHNSON</name>
-    <file_name>johnson.png</file_name>
-  </logo>
-  <logo>
-    <name>JOHN DEERE</name>
+    <name>John Deere</name>
     <file_name>john_deere.png</file_name>
   </logo>
   <logo>
-    <name>JOHN LEWIS</name>
-    <file_name>john_lewis.png</file_name>
-  </logo>
-  <logo>
-    <name>JOHN SMITH</name>
-    <file_name>john_smith.png</file_name>
-  </logo>
-  <logo>
-    <name>JOMA</name>
-    <file_name>joma.png</file_name>
-  </logo>
-  <logo>
-    <name>JOOMLA</name>
+    <name>Joomla</name>
     <file_name>joomla.png</file_name>
   </logo>
   <logo>
-    <name>JQUERY</name>
-    <file_name>jquery.png</file_name>
-  </logo>
-  <logo>
-    <name>JUICY COUTURE</name>
-    <file_name>juicy_couture.png</file_name>
-  </logo>
-  <logo>
-    <name>JUICY FRUIT</name>
-    <file_name>juicy_fruit.png</file_name>
-  </logo>
-  <logo>
-    <name>JURASSIC PARK</name>
-    <file_name>jurassic_park.png</file_name>
-  </logo>
-  <logo>
-    <name>JUST CAVALLI</name>
-    <file_name>just_cavalli.png</file_name>
-  </logo>
-  <logo>
-    <name>JUVENTUS</name>
-    <file_name>juventus.png</file_name>
-  </logo>
-  <logo>
-    <name>JVC</name>
-    <file_name>jvc.png</file_name>
-  </logo>
-  <logo>
-    <name>KABAYA</name>
-    <file_name>kabaya.png</file_name>
-  </logo>
-  <logo>
-    <name>KAHLUA MEXICAN</name>
-    <file_name>kahlua_mexican.png</file_name>
-  </logo>
-  <logo>
-    <name>KAMAZ</name>
-    <file_name>kamaz.png</file_name>
-  </logo>
-  <logo>
-    <name>KANGOL</name>
-    <file_name>kangol.png</file_name>
-  </logo>
-  <logo>
-    <name>KAPPA</name>
-    <file_name>kappa.png</file_name>
-  </logo>
-  <logo>
-    <name>KARCHER</name>
-    <file_name>karcher.png</file_name>
-  </logo>
-  <logo>
-    <name>KARSTADT</name>
-    <file_name>karstadt.png</file_name>
-  </logo>
-  <logo>
-    <name>KASPERSKY</name>
-    <file_name>kaspersky.png</file_name>
-  </logo>
-  <logo>
-    <name>KAWASAKI</name>
-    <file_name>kawasaki.png</file_name>
-  </logo>
-  <logo>
-    <name>KDDI</name>
-    <file_name>kddi.png</file_name>
-  </logo>
-  <logo>
-    <name>KELLOGGS</name>
-    <file_name>kelloggs.png</file_name>
-  </logo>
-  <logo>
-    <name>KELME</name>
-    <file_name>kelme.png</file_name>
-  </logo>
-  <logo>
-    <name>KEMPINSKI</name>
-    <file_name>kempinski.png</file_name>
-  </logo>
-  <logo>
-    <name>KENWOOD</name>
+    <name>Kenwood</name>
     <file_name>kenwood.png</file_name>
-  </logo>
-  <logo>
-    <name>KENWORTH</name>
-    <file_name>kenworth.png</file_name>
-  </logo>
-  <logo>
-    <name>KENZO</name>
-    <file_name>kenzo.png</file_name>
   </logo>
   <logo>
     <name>KFC</name>
@@ -3313,2179 +577,335 @@
     <file_name>kia.png</file_name>
   </logo>
   <logo>
-    <name>KINDER SURPRISE</name>
-    <file_name>kinder_surprise.png</file_name>
-  </logo>
-  <logo>
-    <name>KINGSLA</name>
-    <file_name>kingsla.png</file_name>
-  </logo>
-  <logo>
-    <name>KITEKAT</name>
-    <file_name>kitekat.png</file_name>
-  </logo>
-  <logo>
-    <name>KITKAT</name>
-    <file_name>kitkat.png</file_name>
-  </logo>
-  <logo>
-    <name>KLEENEX</name>
+    <name>Kleenex</name>
     <file_name>kleenex.png</file_name>
   </logo>
   <logo>
-    <name>KLM</name>
-    <file_name>klm.png</file_name>
-  </logo>
-  <logo>
-    <name>KNOB CREEK</name>
-    <file_name>knob_creek.png</file_name>
-  </logo>
-  <logo>
-    <name>KNORR</name>
+    <name>Knorr</name>
     <file_name>knorr.png</file_name>
   </logo>
   <logo>
-    <name>KODAK</name>
+    <name>Kodak</name>
     <file_name>kodak.png</file_name>
   </logo>
   <logo>
-    <name>KOENIGSEGG</name>
-    <file_name>koenigsegg.png</file_name>
-  </logo>
-  <logo>
-    <name>KONIKA MINOLTA</name>
-    <file_name>konika_minolta.png</file_name>
-  </logo>
-  <logo>
-    <name>KOOKABURRA</name>
-    <file_name>kookaburra.png</file_name>
-  </logo>
-  <logo>
-    <name>KOOL AID</name>
-    <file_name>kool_aid.png</file_name>
-  </logo>
-  <logo>
-    <name>KOREAN AIR</name>
-    <file_name>korean_air.png</file_name>
-  </logo>
-  <logo>
-    <name>KOTEX</name>
-    <file_name>kotex.png</file_name>
-  </logo>
-  <logo>
-    <name>KPMG</name>
-    <file_name>kpmg.png</file_name>
-  </logo>
-  <logo>
-    <name>KRAFT</name>
+    <name>Kraft</name>
     <file_name>kraft.png</file_name>
   </logo>
   <logo>
-    <name>KROGER</name>
-    <file_name>kroger.png</file_name>
-  </logo>
-  <logo>
-    <name>KROMBACHER</name>
-    <file_name>krombacher.png</file_name>
-  </logo>
-  <logo>
-    <name>KRONENBOURG</name>
-    <file_name>kronenbourg.png</file_name>
-  </logo>
-  <logo>
-    <name>KRUSOVICE</name>
-    <file_name>krusovice.png</file_name>
-  </logo>
-  <logo>
-    <name>KSWISS</name>
-    <file_name>kswiss.png</file_name>
-  </logo>
-  <logo>
-    <name>KTM</name>
-    <file_name>ktm.png</file_name>
-  </logo>
-  <logo>
-    <name>KYOCERA</name>
+    <name>Kyocera</name>
     <file_name>kyocera.png</file_name>
   </logo>
   <logo>
-    <name>LACAIXA</name>
-    <file_name>lacaixa.png</file_name>
-  </logo>
-  <logo>
-    <name>LACOSTE</name>
+    <name>Lacoste</name>
     <file_name>lacoste.png</file_name>
   </logo>
   <logo>
-    <name>LADA</name>
-    <file_name>lada.png</file_name>
-  </logo>
-  <logo>
-    <name>LAGONDA</name>
-    <file_name>lagonda.png</file_name>
-  </logo>
-  <logo>
-    <name>LALIGA</name>
-    <file_name>laliga.png</file_name>
-  </logo>
-  <logo>
-    <name>LAMBORGHINI</name>
-    <file_name>lamborghini.png</file_name>
-  </logo>
-  <logo>
-    <name>LANCIA</name>
+    <name>Lancia</name>
     <file_name>lancia.png</file_name>
   </logo>
   <logo>
-    <name>LANCOME</name>
+    <name>Lancome</name>
     <file_name>lancome.png</file_name>
   </logo>
   <logo>
-    <name>LANDWIND</name>
-    <file_name>landwind.png</file_name>
-  </logo>
-  <logo>
-    <name>LAND ROVER</name>
+    <name>Land Rover</name>
     <file_name>land_rover.png</file_name>
   </logo>
   <logo>
-    <name>LAPOSTE</name>
-    <file_name>laposte.png</file_name>
+    <name>Laura Ashley</name>
+    <file_name>laura_ashley.png</file_name>
   </logo>
   <logo>
-    <name>LASTFM</name>
-    <file_name>lastfm.png</file_name>
-  </logo>
-  <logo>
-    <name>LATESHOW</name>
-    <file_name>lateshow.png</file_name>
-  </logo>
-  <logo>
-    <name>LAVAZZA</name>
-    <file_name>lavazza.png</file_name>
-  </logo>
-  <logo>
-    <name>LAYS</name>
+    <name>Lays</name>
     <file_name>lays.png</file_name>
   </logo>
   <logo>
-    <name>LAZIO</name>
-    <file_name>lazio.png</file_name>
-  </logo>
-  <logo>
-    <name>LA CAIXA</name>
-    <file_name>la_caixa.png</file_name>
-  </logo>
-  <logo>
-    <name>LEDA</name>
-    <file_name>leda.png</file_name>
-  </logo>
-  <logo>
-    <name>LED ZEPPELIN</name>
-    <file_name>led_zeppelin.png</file_name>
-  </logo>
-  <logo>
-    <name>LEE</name>
-    <file_name>lee.png</file_name>
-  </logo>
-  <logo>
-    <name>LEGO</name>
-    <file_name>lego.png</file_name>
-  </logo>
-  <logo>
-    <name>LEICA</name>
-    <file_name>leica.png</file_name>
-  </logo>
-  <logo>
-    <name>LEMONDE</name>
-    <file_name>lemonde.png</file_name>
-  </logo>
-  <logo>
-    <name>LEND LEASE</name>
-    <file_name>lend_lease.png</file_name>
-  </logo>
-  <logo>
-    <name>LENOVO</name>
-    <file_name>lenovo.png</file_name>
-  </logo>
-  <logo>
-    <name>LEROY MERLIN</name>
-    <file_name>leroy_merlin.png</file_name>
-  </logo>
-  <logo>
-    <name>LEVIS</name>
+    <name>Levis</name>
     <file_name>levis.png</file_name>
   </logo>
   <logo>
-    <name>LEXMARK</name>
-    <file_name>lexmark.png</file_name>
-  </logo>
-  <logo>
-    <name>LEXUS</name>
+    <name>Lexus</name>
     <file_name>lexus.png</file_name>
   </logo>
   <logo>
-    <name>LE COQ SPORTIF</name>
-    <file_name>le_coq_sportif.png</file_name>
-  </logo>
-  <logo>
-    <name>LG</name>
-    <file_name>lg.png</file_name>
-  </logo>
-  <logo>
-    <name>LIBBYS</name>
-    <file_name>libbys.png</file_name>
-  </logo>
-  <logo>
-    <name>LIDL</name>
-    <file_name>lidl.png</file_name>
-  </logo>
-  <logo>
-    <name>LIFETIME</name>
-    <file_name>lifetime.png</file_name>
-  </logo>
-  <logo>
-    <name>LIGUE1</name>
-    <file_name>ligue1.png</file_name>
-  </logo>
-  <logo>
-    <name>LINCOLN</name>
+    <name>Lincoln</name>
     <file_name>lincoln.png</file_name>
   </logo>
   <logo>
-    <name>LINDT</name>
-    <file_name>lindt.png</file_name>
-  </logo>
-  <logo>
-    <name>LINKEDIN</name>
+    <name>LinkedIn</name>
     <file_name>linkedin.png</file_name>
   </logo>
   <logo>
-    <name>LINUX</name>
-    <file_name>linux.png</file_name>
+    <name>Linkin Park</name>
+    <file_name>linkin_park.png</file_name>
   </logo>
   <logo>
-    <name>LIPTON</name>
-    <file_name>lipton.png</file_name>
-  </logo>
-  <logo>
-    <name>LIQUI MOLY</name>
-    <file_name>liqui_moly.png</file_name>
-  </logo>
-  <logo>
-    <name>LIVEJOURNAL</name>
-    <file_name>livejournal.png</file_name>
-  </logo>
-  <logo>
-    <name>LIVELEAK</name>
-    <file_name>liveleak.png</file_name>
-  </logo>
-  <logo>
-    <name>LIVERPOOL</name>
-    <file_name>liverpool.png</file_name>
-  </logo>
-  <logo>
-    <name>LIVINGSOCIAL</name>
-    <file_name>livingsocial.png</file_name>
-  </logo>
-  <logo>
-    <name>LLOYDS TSB</name>
-    <file_name>lloyds_tsb.png</file_name>
-  </logo>
-  <logo>
-    <name>LOCCITANE</name>
-    <file_name>loccitane.png</file_name>
-  </logo>
-  <logo>
-    <name>LOCHFYNE</name>
-    <file_name>lochfyne.png</file_name>
-  </logo>
-  <logo>
-    <name>LOCKHEED</name>
-    <file_name>lockheed.png</file_name>
-  </logo>
-  <logo>
-    <name>LOEWE</name>
-    <file_name>loewe.png</file_name>
-  </logo>
-  <logo>
-    <name>LOGITECH</name>
+    <name>Logitech</name>
     <file_name>logitech.png</file_name>
   </logo>
   <logo>
-    <name>LONDON OLYMPICS</name>
-    <file_name>london_olympics.png</file_name>
-  </logo>
-  <logo>
-    <name>LONDON UNDERGROUND</name>
-    <file_name>london_underground.png</file_name>
-  </logo>
-  <logo>
-    <name>LONELYPLANET</name>
-    <file_name>lonelyplanet.png</file_name>
-  </logo>
-  <logo>
-    <name>LONGINES</name>
-    <file_name>longines.png</file_name>
-  </logo>
-  <logo>
-    <name>LONSDALE</name>
-    <file_name>lonsdale.png</file_name>
-  </logo>
-  <logo>
-    <name>LORDOFTHERINGS</name>
-    <file_name>lordoftherings.png</file_name>
-  </logo>
-  <logo>
-    <name>LOREAL</name>
-    <file_name>loreal.png</file_name>
-  </logo>
-  <logo>
-    <name>LORUS</name>
-    <file_name>lorus.png</file_name>
-  </logo>
-  <logo>
-    <name>LOST</name>
-    <file_name>lost.png</file_name>
-  </logo>
-  <logo>
-    <name>LOTTO</name>
+    <name>Lotto</name>
     <file_name>lotto.png</file_name>
   </logo>
   <logo>
-    <name>LOTUS</name>
-    <file_name>lotus.png</file_name>
+    <name>Lucent</name>
+    <file_name>lucent.png</file_name>
   </logo>
   <logo>
-    <name>LOUISROEDERER</name>
-    <file_name>louisroederer.png</file_name>
-  </logo>
-  <logo>
-    <name>LOUIS VUITTON</name>
-    <file_name>louis_vuitton.png</file_name>
-  </logo>
-  <logo>
-    <name>LOVEFILM</name>
-    <file_name>lovefilm.png</file_name>
-  </logo>
-  <logo>
-    <name>LOVE IS</name>
-    <file_name>love_is.png</file_name>
-  </logo>
-  <logo>
-    <name>LOWENBRAU</name>
-    <file_name>lowenbrau.png</file_name>
-  </logo>
-  <logo>
-    <name>LOWEPRO</name>
-    <file_name>lowepro.png</file_name>
-  </logo>
-  <logo>
-    <name>LOWES</name>
-    <file_name>lowes.png</file_name>
-  </logo>
-  <logo>
-    <name>LU</name>
-    <file_name>lu.png</file_name>
-  </logo>
-  <logo>
-    <name>LUCASARTS</name>
-    <file_name>lucasarts.png</file_name>
-  </logo>
-  <logo>
-    <name>LUCKYBRAND</name>
-    <file_name>luckybrand.png</file_name>
-  </logo>
-  <logo>
-    <name>LUCKY STRIKE</name>
-    <file_name>lucky_strike.png</file_name>
-  </logo>
-  <logo>
-    <name>LUFTHANSA</name>
+    <name>Lufthansa</name>
     <file_name>lufthansa.png</file_name>
   </logo>
   <logo>
-    <name>LUKOIL</name>
-    <file_name>lukoil.png</file_name>
+    <name>Maersk</name>
+    <file_name>maersk.png</file_name>
   </logo>
   <logo>
-    <name>LUXOTTICA</name>
-    <file_name>luxottica.png</file_name>
-  </logo>
-  <logo>
-    <name>LYLE SCOTT</name>
-    <file_name>lyle_scott.png</file_name>
-  </logo>
-  <logo>
-    <name>MAC</name>
-    <file_name>mac.png</file_name>
-  </logo>
-  <logo>
-    <name>MACHINDRA</name>
-    <file_name>machindra.png</file_name>
-  </logo>
-  <logo>
-    <name>MACK</name>
-    <file_name>mack.png</file_name>
-  </logo>
-  <logo>
-    <name>MACQUARIE</name>
-    <file_name>macquarie.png</file_name>
-  </logo>
-  <logo>
-    <name>MACROMEDIA</name>
-    <file_name>macromedia.png</file_name>
-  </logo>
-  <logo>
-    <name>MACYS</name>
-    <file_name>macys.png</file_name>
-  </logo>
-  <logo>
-    <name>MAESTRO</name>
-    <file_name>maestro.png</file_name>
-  </logo>
-  <logo>
-    <name>MAGENTO</name>
-    <file_name>magento.png</file_name>
-  </logo>
-  <logo>
-    <name>MAGGI</name>
+    <name>Maggi</name>
     <file_name>maggi.png</file_name>
   </logo>
   <logo>
-    <name>MAGNUM</name>
-    <file_name>magnum.png</file_name>
+    <name>Magners</name>
+    <file_name>magners.png</file_name>
   </logo>
   <logo>
-    <name>MAKITA</name>
-    <file_name>makita.png</file_name>
-  </logo>
-  <logo>
-    <name>MALAYSIA AIRLINES</name>
-    <file_name>malaysia_airlines.png</file_name>
-  </logo>
-  <logo>
-    <name>MALIBU</name>
+    <name>Malibu</name>
     <file_name>malibu.png</file_name>
   </logo>
   <logo>
-    <name>MAMBA</name>
-    <file_name>mamba.png</file_name>
+    <name>Massey Ferguson</name>
+    <file_name>massey_ferguson.png</file_name>
   </logo>
   <logo>
-    <name>MAN</name>
-    <file_name>man.png</file_name>
-  </logo>
-  <logo>
-    <name>MANSORY</name>
-    <file_name>mansory.png</file_name>
-  </logo>
-  <logo>
-    <name>MARES</name>
-    <file_name>mares.png</file_name>
-  </logo>
-  <logo>
-    <name>MARKS SPENCER</name>
-    <file_name>marks_spencer.png</file_name>
-  </logo>
-  <logo>
-    <name>MARLBORO</name>
-    <file_name>marlboro.png</file_name>
-  </logo>
-  <logo>
-    <name>MARRIEDCHILDREN</name>
-    <file_name>marriedchildren.png</file_name>
-  </logo>
-  <logo>
-    <name>MARRIOTT</name>
-    <file_name>marriott.png</file_name>
-  </logo>
-  <logo>
-    <name>MARS</name>
-    <file_name>mars.png</file_name>
-  </logo>
-  <logo>
-    <name>MARSHALL</name>
-    <file_name>marshall.png</file_name>
-  </logo>
-  <logo>
-    <name>MARTELL</name>
-    <file_name>martell.png</file_name>
-  </logo>
-  <logo>
-    <name>MARTINI</name>
-    <file_name>martini.png</file_name>
-  </logo>
-  <logo>
-    <name>MARUSSIA</name>
-    <file_name>marussia.png</file_name>
-  </logo>
-  <logo>
-    <name>MARVEL</name>
-    <file_name>marvel.png</file_name>
-  </logo>
-  <logo>
-    <name>MASERATI</name>
-    <file_name>maserati.png</file_name>
-  </logo>
-  <logo>
-    <name>MASHABLE</name>
-    <file_name>mashable.png</file_name>
-  </logo>
-  <logo>
-    <name>MASTERCARD</name>
-    <file_name>mastercard.png</file_name>
-  </logo>
-  <logo>
-    <name>MASTERCHEF</name>
-    <file_name>masterchef.png</file_name>
-  </logo>
-  <logo>
-    <name>MATTEL</name>
+    <name>Mattel</name>
     <file_name>mattel.png</file_name>
   </logo>
   <logo>
-    <name>MAVIC</name>
-    <file_name>mavic.png</file_name>
-  </logo>
-  <logo>
-    <name>MAXMARA</name>
-    <file_name>maxmara.png</file_name>
-  </logo>
-  <logo>
-    <name>MAXWELLHOUSE</name>
-    <file_name>maxwellhouse.png</file_name>
-  </logo>
-  <logo>
-    <name>MAYBACH</name>
+    <name>Maybach</name>
     <file_name>maybach.png</file_name>
   </logo>
   <logo>
-    <name>MAYBELLINE</name>
-    <file_name>maybelline.png</file_name>
-  </logo>
-  <logo>
-    <name>MAZDA</name>
-    <file_name>mazda.png</file_name>
-  </logo>
-  <logo>
-    <name>MCAFEE</name>
-    <file_name>mcafee.png</file_name>
-  </logo>
-  <logo>
-    <name>MCCAIN</name>
-    <file_name>mccain.png</file_name>
-  </logo>
-  <logo>
-    <name>MCDONALDS</name>
+    <name>McDonald's</name>
     <file_name>mcdonalds.png</file_name>
   </logo>
   <logo>
-    <name>MCKINLEY</name>
-    <file_name>mckinley.png</file_name>
-  </logo>
-  <logo>
-    <name>MCLAREN</name>
-    <file_name>mclaren.png</file_name>
-  </logo>
-  <logo>
-    <name>MDMBANK</name>
-    <file_name>mdmbank.png</file_name>
-  </logo>
-  <logo>
-    <name>MEDIAMARKT</name>
-    <file_name>mediamarkt.png</file_name>
-  </logo>
-  <logo>
-    <name>MEDIOLANUM</name>
-    <file_name>mediolanum.png</file_name>
-  </logo>
-  <logo>
-    <name>MEGA</name>
-    <file_name>mega.png</file_name>
-  </logo>
-  <logo>
-    <name>MENSHELTH</name>
-    <file_name>menshelth.png</file_name>
-  </logo>
-  <logo>
-    <name>MERCEDES</name>
-    <file_name>mercedes.png</file_name>
-  </logo>
-  <logo>
-    <name>MERCK</name>
-    <file_name>merck.png</file_name>
-  </logo>
-  <logo>
-    <name>MERCURY</name>
-    <file_name>mercury.png</file_name>
-  </logo>
-  <logo>
-    <name>MERIDAN</name>
-    <file_name>meridan.png</file_name>
-  </logo>
-  <logo>
-    <name>MERRELL</name>
-    <file_name>merrell.png</file_name>
-  </logo>
-  <logo>
-    <name>MERRIL LYNCH</name>
-    <file_name>merril_lynch.png</file_name>
-  </logo>
-  <logo>
-    <name>METALLICA</name>
+    <name>Metallica</name>
     <file_name>metallica.png</file_name>
   </logo>
   <logo>
-    <name>METAL MULISHA</name>
-    <file_name>metal_mulisha.png</file_name>
+    <name>Miami Heat</name>
+    <file_name>miami_heat.png</file_name>
   </logo>
   <logo>
-    <name>METAXA</name>
-    <file_name>metaxa.png</file_name>
-  </logo>
-  <logo>
-    <name>METRO</name>
-    <file_name>metro.png</file_name>
-  </logo>
-  <logo>
-    <name>METRO GOLDWYN MAYER</name>
-    <file_name>metro_goldwyn_mayer.png</file_name>
-  </logo>
-  <logo>
-    <name>MICHAELS</name>
-    <file_name>michaels.png</file_name>
-  </logo>
-  <logo>
-    <name>MICHELIN</name>
-    <file_name>michelin.png</file_name>
-  </logo>
-  <logo>
-    <name>MICHIGAN</name>
-    <file_name>michigan.png</file_name>
-  </logo>
-  <logo>
-    <name>MICROSOFT</name>
-    <file_name>microsoft.png</file_name>
-  </logo>
-  <logo>
-    <name>MIELE</name>
-    <file_name>miele.png</file_name>
-  </logo>
-  <logo>
-    <name>MIKASA</name>
-    <file_name>mikasa.png</file_name>
-  </logo>
-  <logo>
-    <name>MILAN</name>
-    <file_name>milan.png</file_name>
-  </logo>
-  <logo>
-    <name>MILKA</name>
+    <name>Milka</name>
     <file_name>milka.png</file_name>
   </logo>
   <logo>
-    <name>MILKY WAY</name>
-    <file_name>milky_way.png</file_name>
-  </logo>
-  <logo>
-    <name>MILLER</name>
-    <file_name>miller.png</file_name>
-  </logo>
-  <logo>
-    <name>MILTONBRADLEY</name>
-    <file_name>miltonbradley.png</file_name>
-  </logo>
-  <logo>
-    <name>MINECRAFT</name>
+    <name>Minecraft</name>
     <file_name>minecraft.png</file_name>
   </logo>
   <logo>
-    <name>MINI</name>
+    <name>Mini</name>
     <file_name>mini.png</file_name>
   </logo>
   <logo>
-    <name>MINISTRY OF SOUND</name>
-    <file_name>ministry_of_sound.png</file_name>
-  </logo>
-  <logo>
-    <name>MINTCOM</name>
-    <file_name>mintcom.png</file_name>
-  </logo>
-  <logo>
-    <name>MINUTE MAID</name>
-    <file_name>minute_maid.png</file_name>
-  </logo>
-  <logo>
-    <name>MIRAMAX</name>
-    <file_name>miramax.png</file_name>
-  </logo>
-  <logo>
-    <name>MIRINDA</name>
-    <file_name>mirinda.png</file_name>
-  </logo>
-  <logo>
-    <name>MIRROR</name>
-    <file_name>mirror.png</file_name>
-  </logo>
-  <logo>
-    <name>MITSUBISHI</name>
+    <name>Mitsubishi</name>
     <file_name>mitsubishi.png</file_name>
   </logo>
   <logo>
-    <name>MIZUNO</name>
-    <file_name>mizuno.png</file_name>
-  </logo>
-  <logo>
-    <name>MLB</name>
-    <file_name>mlb.png</file_name>
-  </logo>
-  <logo>
-    <name>MLS</name>
-    <file_name>mls.png</file_name>
-  </logo>
-  <logo>
-    <name>MM</name>
-    <file_name>mm.png</file_name>
-  </logo>
-  <logo>
-    <name>MMM</name>
-    <file_name>mmm.png</file_name>
-  </logo>
-  <logo>
-    <name>MOBIL</name>
-    <file_name>mobil.png</file_name>
-  </logo>
-  <logo>
-    <name>MOBIL ONE</name>
-    <file_name>mobil_one.png</file_name>
-  </logo>
-  <logo>
-    <name>MOET CHANDON</name>
-    <file_name>moet_chandon.png</file_name>
-  </logo>
-  <logo>
-    <name>MONACO</name>
-    <file_name>monaco.png</file_name>
-  </logo>
-  <logo>
-    <name>MONOPOLY</name>
-    <file_name>monopoly.png</file_name>
-  </logo>
-  <logo>
-    <name>MONSTER</name>
-    <file_name>monster.png</file_name>
-  </logo>
-  <logo>
-    <name>MONTBLANC</name>
+    <name>Montblanc</name>
     <file_name>montblanc.png</file_name>
   </logo>
   <logo>
-    <name>MOOKS</name>
-    <file_name>mooks.png</file_name>
-  </logo>
-  <logo>
-    <name>MOONPIG</name>
-    <file_name>moonpig.png</file_name>
-  </logo>
-  <logo>
-    <name>MORGANSTANLEY</name>
-    <file_name>morganstanley.png</file_name>
-  </logo>
-  <logo>
-    <name>MORRISONS</name>
-    <file_name>morrisons.png</file_name>
-  </logo>
-  <logo>
-    <name>MORTAL KOMBAT</name>
-    <file_name>mortal_kombat.png</file_name>
-  </logo>
-  <logo>
-    <name>MOTEL 6</name>
-    <file_name>motel_6.png</file_name>
-  </logo>
-  <logo>
-    <name>MOTOGP</name>
-    <file_name>motogp.png</file_name>
-  </logo>
-  <logo>
-    <name>MOTOROLA</name>
-    <file_name>motorola.png</file_name>
-  </logo>
-  <logo>
-    <name>MOUNTAIN DEW</name>
-    <file_name>mountain_dew.png</file_name>
-  </logo>
-  <logo>
-    <name>MOVISTAR</name>
-    <file_name>movistar.png</file_name>
-  </logo>
-  <logo>
-    <name>MOZILLA</name>
+    <name>Mozilla</name>
     <file_name>mozilla.png</file_name>
   </logo>
   <logo>
-    <name>MR CLEAN</name>
-    <file_name>mr_clean.png</file_name>
-  </logo>
-  <logo>
-    <name>MSDOS</name>
-    <file_name>msdos.png</file_name>
-  </logo>
-  <logo>
-    <name>MSN</name>
-    <file_name>msn.png</file_name>
-  </logo>
-  <logo>
-    <name>MTV</name>
-    <file_name>mtv.png</file_name>
-  </logo>
-  <logo>
-    <name>MUNICH RE</name>
-    <file_name>munich_re.png</file_name>
-  </logo>
-  <logo>
-    <name>MUSTANG</name>
-    <file_name>mustang.png</file_name>
-  </logo>
-  <logo>
-    <name>MUZZ BUZZ</name>
-    <file_name>muzz_buzz.png</file_name>
-  </logo>
-  <logo>
-    <name>MVIDEO</name>
-    <file_name>mvideo.png</file_name>
-  </logo>
-  <logo>
-    <name>MYER</name>
-    <file_name>myer.png</file_name>
-  </logo>
-  <logo>
-    <name>MYSPACE</name>
-    <file_name>myspace.png</file_name>
-  </logo>
-  <logo>
-    <name>MYSQL</name>
-    <file_name>mysql.png</file_name>
-  </logo>
-  <logo>
-    <name>NAB</name>
-    <file_name>nab.png</file_name>
-  </logo>
-  <logo>
-    <name>NABISCO</name>
-    <file_name>nabisco.png</file_name>
-  </logo>
-  <logo>
-    <name>NAMCO</name>
-    <file_name>namco.png</file_name>
-  </logo>
-  <logo>
-    <name>NANDOS</name>
+    <name>Nandos</name>
     <file_name>nandos.png</file_name>
-  </logo>
-  <logo>
-    <name>NAPOLI</name>
-    <file_name>napoli.png</file_name>
-  </logo>
-  <logo>
-    <name>NAPSTER</name>
-    <file_name>napster.png</file_name>
   </logo>
   <logo>
     <name>NASA</name>
     <file_name>nasa.png</file_name>
   </logo>
   <logo>
-    <name>NASCAR</name>
-    <file_name>nascar.png</file_name>
+    <name>NCR</name>
+    <file_name>ncr.png</file_name>
   </logo>
   <logo>
-    <name>NASDAQ</name>
-    <file_name>nasdaq.png</file_name>
-  </logo>
-  <logo>
-    <name>NATIONAL</name>
-    <file_name>national.png</file_name>
-  </logo>
-  <logo>
-    <name>NATIONAL GEOGRAPHIC</name>
-    <file_name>national_geographic.png</file_name>
-  </logo>
-  <logo>
-    <name>NATIONAL RAIL</name>
-    <file_name>national_rail.png</file_name>
-  </logo>
-  <logo>
-    <name>NATIXIS</name>
-    <file_name>natixis.png</file_name>
-  </logo>
-  <logo>
-    <name>NATO</name>
-    <file_name>nato.png</file_name>
-  </logo>
-  <logo>
-    <name>NATWEST</name>
-    <file_name>natwest.png</file_name>
-  </logo>
-  <logo>
-    <name>NAUTICA</name>
-    <file_name>nautica.png</file_name>
-  </logo>
-  <logo>
-    <name>NBA</name>
-    <file_name>nba.png</file_name>
-  </logo>
-  <logo>
-    <name>NBC</name>
-    <file_name>nbc.png</file_name>
-  </logo>
-  <logo>
-    <name>NCAA</name>
-    <file_name>ncaa.png</file_name>
-  </logo>
-  <logo>
-    <name>NEC</name>
-    <file_name>nec.png</file_name>
-  </logo>
-  <logo>
-    <name>NEMIROFF</name>
-    <file_name>nemiroff.png</file_name>
-  </logo>
-  <logo>
-    <name>NESCAFE</name>
-    <file_name>nescafe.png</file_name>
-  </logo>
-  <logo>
-    <name>NESPRESSO</name>
+    <name>Nespresso</name>
     <file_name>nespresso.png</file_name>
   </logo>
   <logo>
-    <name>NESQUIK</name>
-    <file_name>nesquik.png</file_name>
-  </logo>
-  <logo>
-    <name>NESTLE</name>
+    <name>Nestle</name>
     <file_name>nestle.png</file_name>
   </logo>
   <logo>
-    <name>NETFLIX</name>
-    <file_name>netflix.png</file_name>
-  </logo>
-  <logo>
-    <name>NETSCAPE</name>
-    <file_name>netscape.png</file_name>
-  </logo>
-  <logo>
-    <name>NETTO</name>
-    <file_name>netto.png</file_name>
-  </logo>
-  <logo>
-    <name>NEWLOOK</name>
-    <file_name>newlook.png</file_name>
-  </logo>
-  <logo>
-    <name>NEWSWEEK</name>
-    <file_name>newsweek.png</file_name>
-  </logo>
-  <logo>
-    <name>NEWYORKER</name>
-    <file_name>newyorker.png</file_name>
-  </logo>
-  <logo>
-    <name>NEW BALANCE</name>
+    <name>New Balance</name>
     <file_name>new_balance.png</file_name>
   </logo>
   <logo>
-    <name>NEW YORK RANGERS</name>
-    <file_name>new_york_rangers.png</file_name>
-  </logo>
-  <logo>
-    <name>NEXT</name>
-    <file_name>next.png</file_name>
-  </logo>
-  <logo>
-    <name>NFL</name>
-    <file_name>nfl.png</file_name>
-  </logo>
-  <logo>
-    <name>NHL</name>
-    <file_name>nhl.png</file_name>
-  </logo>
-  <logo>
-    <name>NICKELODEON</name>
+    <name>Nickelodeon</name>
     <file_name>nickelodeon.png</file_name>
   </logo>
   <logo>
-    <name>NIKE</name>
+    <name>Nike</name>
     <file_name>nike.png</file_name>
   </logo>
   <logo>
-    <name>NIKITA</name>
-    <file_name>nikita.png</file_name>
-  </logo>
-  <logo>
-    <name>NIKON</name>
+    <name>Nikon</name>
     <file_name>nikon.png</file_name>
   </logo>
   <logo>
-    <name>NINA RICCI</name>
-    <file_name>nina_ricci.png</file_name>
-  </logo>
-  <logo>
-    <name>NINTENDO</name>
-    <file_name>nintendo.png</file_name>
-  </logo>
-  <logo>
-    <name>NINTENDO3DS</name>
-    <file_name>nintendo3ds.png</file_name>
-  </logo>
-  <logo>
-    <name>NINTENDODS</name>
-    <file_name>nintendods.png</file_name>
-  </logo>
-  <logo>
-    <name>NIRVANA</name>
-    <file_name>nirvana.png</file_name>
-  </logo>
-  <logo>
-    <name>NISSAN</name>
-    <file_name>nissan.png</file_name>
-  </logo>
-  <logo>
-    <name>NITRO</name>
-    <file_name>nitro.png</file_name>
-  </logo>
-  <logo>
-    <name>NIVEA</name>
+    <name>Nivea</name>
     <file_name>nivea.png</file_name>
   </logo>
   <logo>
-    <name>NIXON</name>
-    <file_name>nixon.png</file_name>
+    <name>Nortel</name>
+    <file_name>nortel.png</file_name>
   </logo>
   <logo>
-    <name>NOKIA</name>
-    <file_name>nokia.png</file_name>
+    <name>North Face</name>
+    <file_name>north_face.png</file_name>
   </logo>
   <logo>
-    <name>NOKIAN</name>
-    <file_name>nokian.png</file_name>
-  </logo>
-  <logo>
-    <name>NOMOS BANK</name>
-    <file_name>nomos_bank.png</file_name>
-  </logo>
-  <logo>
-    <name>NORIS</name>
-    <file_name>noris.png</file_name>
-  </logo>
-  <logo>
-    <name>NORMA</name>
-    <file_name>norma.png</file_name>
-  </logo>
-  <logo>
-    <name>NOS</name>
-    <file_name>nos.png</file_name>
-  </logo>
-  <logo>
-    <name>NOVARTIS</name>
+    <name>Novartis</name>
     <file_name>novartis.png</file_name>
   </logo>
   <logo>
-    <name>NOVOTEL</name>
-    <file_name>novotel.png</file_name>
-  </logo>
-  <logo>
-    <name>NOVO NORDISK</name>
-    <file_name>novo_nordisk.png</file_name>
-  </logo>
-  <logo>
-    <name>NTT DOCOMO</name>
-    <file_name>ntt_docomo.png</file_name>
-  </logo>
-  <logo>
-    <name>NUANCE</name>
-    <file_name>nuance.png</file_name>
-  </logo>
-  <logo>
-    <name>NURBURGRING</name>
-    <file_name>nurburgring.png</file_name>
-  </logo>
-  <logo>
-    <name>NUTELLA</name>
-    <file_name>nutella.png</file_name>
-  </logo>
-  <logo>
-    <name>NVIDIA</name>
+    <name>nvidia</name>
     <file_name>nvidia.png</file_name>
   </logo>
   <logo>
-    <name>O2</name>
-    <file_name>o2.png</file_name>
-  </logo>
-  <logo>
-    <name>OAKLEY</name>
-    <file_name>oakley.png</file_name>
-  </logo>
-  <logo>
-    <name>OB</name>
-    <file_name>ob.png</file_name>
-  </logo>
-  <logo>
-    <name>OBI</name>
-    <file_name>obi.png</file_name>
-  </logo>
-  <logo>
-    <name>OCC</name>
-    <file_name>occ.png</file_name>
-  </logo>
-  <logo>
-    <name>OCEANIC AIRLINES</name>
-    <file_name>oceanic_airlines.png</file_name>
-  </logo>
-  <logo>
-    <name>OCEANSPRAY</name>
-    <file_name>oceanspray.png</file_name>
-  </logo>
-  <logo>
-    <name>ODEON</name>
-    <file_name>odeon.png</file_name>
-  </logo>
-  <logo>
-    <name>ODLO</name>
-    <file_name>odlo.png</file_name>
-  </logo>
-  <logo>
-    <name>OETKER</name>
-    <file_name>oetker.png</file_name>
-  </logo>
-  <logo>
-    <name>OFCOM</name>
-    <file_name>ofcom.png</file_name>
-  </logo>
-  <logo>
-    <name>OFF</name>
-    <file_name>off.png</file_name>
-  </logo>
-  <logo>
-    <name>OGILVY</name>
-    <file_name>ogilvy.png</file_name>
-  </logo>
-  <logo>
-    <name>OI</name>
-    <file_name>oi.png</file_name>
-  </logo>
-  <logo>
-    <name>OKCUPID</name>
-    <file_name>okcupid.png</file_name>
-  </logo>
-  <logo>
-    <name>OLAY</name>
-    <file_name>olay.png</file_name>
-  </logo>
-  <logo>
-    <name>OLDSMOBILE</name>
-    <file_name>oldsmobile.png</file_name>
-  </logo>
-  <logo>
-    <name>OLD NAVY</name>
-    <file_name>old_navy.png</file_name>
-  </logo>
-  <logo>
-    <name>OLD SPICE</name>
-    <file_name>old_spice.png</file_name>
-  </logo>
-  <logo>
-    <name>OLMECA</name>
-    <file_name>olmeca.png</file_name>
-  </logo>
-  <logo>
-    <name>OLYMPIC</name>
-    <file_name>olympic.png</file_name>
-  </logo>
-  <logo>
-    <name>OLYMPIQUE</name>
-    <file_name>olympique.png</file_name>
-  </logo>
-  <logo>
-    <name>OLYMPUS</name>
-    <file_name>olympus.png</file_name>
-  </logo>
-  <logo>
-    <name>OMEGA</name>
-    <file_name>omega.png</file_name>
-  </logo>
-  <logo>
-    <name>OMV</name>
-    <file_name>omv.png</file_name>
-  </logo>
-  <logo>
-    <name>ONEILL</name>
-    <file_name>oneill.png</file_name>
-  </logo>
-  <logo>
-    <name>ONION</name>
-    <file_name>onion.png</file_name>
-  </logo>
-  <logo>
-    <name>OPEL</name>
-    <file_name>opel.png</file_name>
-  </logo>
-  <logo>
-    <name>OPENBSD</name>
-    <file_name>openbsd.png</file_name>
-  </logo>
-  <logo>
-    <name>OPENCOR</name>
-    <file_name>opencor.png</file_name>
-  </logo>
-  <logo>
-    <name>OPENTABLE</name>
-    <file_name>opentable.png</file_name>
-  </logo>
-  <logo>
-    <name>OPERA</name>
-    <file_name>opera.png</file_name>
-  </logo>
-  <logo>
-    <name>OPORTO</name>
-    <file_name>oporto.png</file_name>
-  </logo>
-  <logo>
-    <name>ORACLE</name>
-    <file_name>oracle.png</file_name>
-  </logo>
-  <logo>
-    <name>ORALB</name>
+    <name>OralB</name>
     <file_name>oralb.png</file_name>
   </logo>
   <logo>
-    <name>ORANGE</name>
-    <file_name>orange.png</file_name>
-  </logo>
-  <logo>
-    <name>ORBIT</name>
-    <file_name>orbit.png</file_name>
-  </logo>
-  <logo>
-    <name>ORBITZ</name>
-    <file_name>orbitz.png</file_name>
-  </logo>
-  <logo>
-    <name>OREO</name>
-    <file_name>oreo.png</file_name>
-  </logo>
-  <logo>
-    <name>ORIENT</name>
-    <file_name>orient.png</file_name>
-  </logo>
-  <logo>
-    <name>ORIFLAME</name>
-    <file_name>oriflame.png</file_name>
-  </logo>
-  <logo>
-    <name>ORIGIN</name>
-    <file_name>origin.png</file_name>
-  </logo>
-  <logo>
-    <name>OSBORNE</name>
-    <file_name>osborne.png</file_name>
-  </logo>
-  <logo>
-    <name>OTP BANK</name>
-    <file_name>otp_bank.png</file_name>
-  </logo>
-  <logo>
-    <name>OXFAM</name>
+    <name>Oxfam</name>
     <file_name>oxfam.png</file_name>
   </logo>
   <logo>
-    <name>OXFORD</name>
-    <file_name>oxford.png</file_name>
-  </logo>
-  <logo>
-    <name>OXFORD UNIVERSITY</name>
-    <file_name>oxford_university.png</file_name>
-  </logo>
-  <logo>
-    <name>OYSTER</name>
-    <file_name>oyster.png</file_name>
-  </logo>
-  <logo>
-    <name>OZOSHI</name>
-    <file_name>ozoshi.png</file_name>
-  </logo>
-  <logo>
-    <name>PACHA</name>
-    <file_name>pacha.png</file_name>
-  </logo>
-  <logo>
-    <name>PADI</name>
-    <file_name>padi.png</file_name>
-  </logo>
-  <logo>
-    <name>PAGANI</name>
-    <file_name>pagani.png</file_name>
-  </logo>
-  <logo>
-    <name>PALLMALL</name>
-    <file_name>pallmall.png</file_name>
-  </logo>
-  <logo>
-    <name>PALM</name>
-    <file_name>palm.png</file_name>
-  </logo>
-  <logo>
-    <name>PAMPERS</name>
+    <name>Pampers</name>
     <file_name>pampers.png</file_name>
   </logo>
   <logo>
-    <name>PANAM</name>
+    <name>Panam</name>
     <file_name>panam.png</file_name>
   </logo>
   <logo>
-    <name>PANASONIC</name>
-    <file_name>panasonic.png</file_name>
+    <name>Parker Games</name>
+    <file_name>parker_games.png</file_name>
   </logo>
   <logo>
-    <name>PANDA</name>
-    <file_name>panda.png</file_name>
+    <name>Parker Pens</name>
+    <file_name>parker_pens.png</file_name>
   </logo>
   <logo>
-    <name>PANDA EXPRESS</name>
-    <file_name>panda_express.png</file_name>
+    <name>Paul Shark Yachting</name>
+    <file_name>paul_shark_yachting.png</file_name>
   </logo>
   <logo>
-    <name>PANTENE</name>
-    <file_name>pantene.png</file_name>
+    <name>Pearl Jam</name>
+    <file_name>pearl_jam.png</file_name>
   </logo>
   <logo>
-    <name>PAPA JOHNS</name>
-    <file_name>papa_johns.png</file_name>
+    <name>Peavey</name>
+    <file_name>peavey.png</file_name>
   </logo>
   <logo>
-    <name>PAPER MATE</name>
-    <file_name>paper_mate.png</file_name>
-  </logo>
-  <logo>
-    <name>PARALLELS</name>
-    <file_name>parallels.png</file_name>
-  </logo>
-  <logo>
-    <name>PARAMOUNT PICTURES</name>
-    <file_name>paramount_pictures.png</file_name>
-  </logo>
-  <logo>
-    <name>PARKER</name>
-    <file_name>parker.png</file_name>
-  </logo>
-  <logo>
-    <name>PARMALAT</name>
-    <file_name>parmalat.png</file_name>
-  </logo>
-  <logo>
-    <name>PARTIDA</name>
-    <file_name>partida.png</file_name>
-  </logo>
-  <logo>
-    <name>PASCUCCI</name>
-    <file_name>pascucci.png</file_name>
-  </logo>
-  <logo>
-    <name>PATAGONIA</name>
-    <file_name>patagonia.png</file_name>
-  </logo>
-  <logo>
-    <name>PATEK PHILIPPE</name>
-    <file_name>patek_philippe.png</file_name>
-  </logo>
-  <logo>
-    <name>PATHE</name>
-    <file_name>pathe.png</file_name>
-  </logo>
-  <logo>
-    <name>PAULANER</name>
-    <file_name>paulaner.png</file_name>
-  </logo>
-  <logo>
-    <name>PAULS</name>
-    <file_name>pauls.png</file_name>
-  </logo>
-  <logo>
-    <name>PAYPAL</name>
-    <file_name>paypal.png</file_name>
-  </logo>
-  <logo>
-    <name>PBS</name>
-    <file_name>pbs.png</file_name>
-  </logo>
-  <logo>
-    <name>PEDIGREE</name>
-    <file_name>pedigree.png</file_name>
-  </logo>
-  <logo>
-    <name>PELIKAN</name>
+    <name>Pelikan</name>
     <file_name>pelikan.png</file_name>
   </logo>
   <logo>
-    <name>PELLEGRINO</name>
-    <file_name>pellegrino.png</file_name>
-  </logo>
-  <logo>
-    <name>PENGUIN</name>
+    <name>Penguin</name>
     <file_name>penguin.png</file_name>
   </logo>
   <logo>
-    <name>PENNZOIL</name>
-    <file_name>pennzoil.png</file_name>
-  </logo>
-  <logo>
-    <name>PENTAX</name>
-    <file_name>pentax.png</file_name>
-  </logo>
-  <logo>
-    <name>PEPE JEANS</name>
-    <file_name>pepe_jeans.png</file_name>
-  </logo>
-  <logo>
-    <name>PEPSI</name>
+    <name>Pepsi</name>
     <file_name>pepsi.png</file_name>
   </logo>
   <logo>
-    <name>PERNOD</name>
-    <file_name>pernod.png</file_name>
-  </logo>
-  <logo>
-    <name>PERONI</name>
-    <file_name>peroni.png</file_name>
-  </logo>
-  <logo>
-    <name>PERRIER</name>
-    <file_name>perrier.png</file_name>
-  </logo>
-  <logo>
-    <name>PERSIL</name>
-    <file_name>persil.png</file_name>
-  </logo>
-  <logo>
-    <name>PERSOL</name>
-    <file_name>persol.png</file_name>
-  </logo>
-  <logo>
-    <name>PETA</name>
-    <file_name>peta.png</file_name>
-  </logo>
-  <logo>
-    <name>PETCO</name>
-    <file_name>petco.png</file_name>
-  </logo>
-  <logo>
-    <name>PETERBILT</name>
-    <file_name>peterbilt.png</file_name>
-  </logo>
-  <logo>
-    <name>PETROCANADA</name>
-    <file_name>petrocanada.png</file_name>
-  </logo>
-  <logo>
-    <name>PETROCHINA</name>
-    <file_name>petrochina.png</file_name>
-  </logo>
-  <logo>
-    <name>PETRONAS</name>
-    <file_name>petronas.png</file_name>
-  </logo>
-  <logo>
-    <name>PETRONOR</name>
-    <file_name>petronor.png</file_name>
-  </logo>
-  <logo>
-    <name>PEUGEOT</name>
-    <file_name>peugeot.png</file_name>
-  </logo>
-  <logo>
-    <name>PFIZER</name>
+    <name>Pfizer</name>
     <file_name>pfizer.png</file_name>
   </logo>
   <logo>
-    <name>PHILIPS</name>
-    <file_name>philips.png</file_name>
-  </logo>
-  <logo>
-    <name>PHILIP MORRIS</name>
-    <file_name>philip_morris.png</file_name>
-  </logo>
-  <logo>
-    <name>PIAGGIO</name>
+    <name>Piaggio</name>
     <file_name>piaggio.png</file_name>
   </logo>
   <logo>
-    <name>PICASA</name>
-    <file_name>picasa.png</file_name>
-  </logo>
-  <logo>
-    <name>PIERRE CARDIN</name>
-    <file_name>pierre_cardin.png</file_name>
-  </logo>
-  <logo>
-    <name>PILLSBURY</name>
-    <file_name>pillsbury.png</file_name>
-  </logo>
-  <logo>
-    <name>PILOT</name>
-    <file_name>pilot.png</file_name>
-  </logo>
-  <logo>
-    <name>PIMPMYRIDE</name>
-    <file_name>pimpmyride.png</file_name>
-  </logo>
-  <logo>
-    <name>PINKFLOYD</name>
-    <file_name>pinkfloyd.png</file_name>
-  </logo>
-  <logo>
-    <name>PINTEREST</name>
-    <file_name>pinterest.png</file_name>
-  </logo>
-  <logo>
-    <name>PIONEER</name>
-    <file_name>pioneer.png</file_name>
-  </logo>
-  <logo>
-    <name>PIPER</name>
-    <file_name>piper.png</file_name>
-  </logo>
-  <logo>
-    <name>PIRATEBAY</name>
-    <file_name>piratebay.png</file_name>
-  </logo>
-  <logo>
-    <name>PIRELLI</name>
-    <file_name>pirelli.png</file_name>
-  </logo>
-  <logo>
-    <name>PIXAR</name>
+    <name>Pixar</name>
     <file_name>pixar.png</file_name>
   </logo>
   <logo>
-    <name>PIZZA HUT</name>
-    <file_name>pizza_hut.png</file_name>
-  </logo>
-  <logo>
-    <name>PLAYBOY</name>
+    <name>Playboy</name>
     <file_name>playboy.png</file_name>
   </logo>
   <logo>
-    <name>PLAYCOM</name>
-    <file_name>playcom.png</file_name>
-  </logo>
-  <logo>
-    <name>PLAYDOH</name>
-    <file_name>playdoh.png</file_name>
-  </logo>
-  <logo>
-    <name>PLAYMOBIL</name>
-    <file_name>playmobil.png</file_name>
-  </logo>
-  <logo>
-    <name>PLAYSKOOL</name>
-    <file_name>playskool.png</file_name>
-  </logo>
-  <logo>
-    <name>PLAYSTATION</name>
+    <name>PlayStation</name>
     <file_name>playstation.png</file_name>
   </logo>
   <logo>
-    <name>PLAYSTATIONMOVE</name>
-    <file_name>playstationmove.png</file_name>
-  </logo>
-  <logo>
-    <name>PLYMOUTH</name>
-    <file_name>plymouth.png</file_name>
-  </logo>
-  <logo>
-    <name>PNC</name>
-    <file_name>pnc.png</file_name>
-  </logo>
-  <logo>
-    <name>POCARI</name>
-    <file_name>pocari.png</file_name>
-  </logo>
-  <logo>
-    <name>POKEMON</name>
-    <file_name>pokemon.png</file_name>
-  </logo>
-  <logo>
-    <name>POKER STARS</name>
-    <file_name>poker_stars.png</file_name>
-  </logo>
-  <logo>
-    <name>POLAROID</name>
-    <file_name>polaroid.png</file_name>
-  </logo>
-  <logo>
-    <name>POLE EMPLOI</name>
-    <file_name>pole_emploi.png</file_name>
-  </logo>
-  <logo>
-    <name>POLOLOCO</name>
-    <file_name>pololoco.png</file_name>
-  </logo>
-  <logo>
-    <name>PONTIAC</name>
-    <file_name>pontiac.png</file_name>
-  </logo>
-  <logo>
-    <name>PONY</name>
-    <file_name>pony.png</file_name>
-  </logo>
-  <logo>
-    <name>POP</name>
-    <file_name>pop.png</file_name>
-  </logo>
-  <logo>
-    <name>PORSCHE</name>
-    <file_name>porsche.png</file_name>
-  </logo>
-  <logo>
-    <name>PORTUGALIA AIRLINES</name>
-    <file_name>portugalia_airlines.png</file_name>
-  </logo>
-  <logo>
-    <name>POSTBANK</name>
-    <file_name>postbank.png</file_name>
-  </logo>
-  <logo>
-    <name>POSTIT</name>
-    <file_name>postit.png</file_name>
-  </logo>
-  <logo>
-    <name>POWERADE</name>
-    <file_name>powerade.png</file_name>
-  </logo>
-  <logo>
-    <name>PRADA</name>
-    <file_name>prada.png</file_name>
-  </logo>
-  <logo>
-    <name>PRAKTIKER</name>
-    <file_name>praktiker.png</file_name>
-  </logo>
-  <logo>
-    <name>PREMIER INN</name>
-    <file_name>premier_inn.png</file_name>
-  </logo>
-  <logo>
-    <name>PRESIDENT</name>
-    <file_name>president.png</file_name>
-  </logo>
-  <logo>
-    <name>PRICE WATERHOUSE COOPERS</name>
-    <file_name>price_waterhouse_coopers.png</file_name>
-  </logo>
-  <logo>
-    <name>PRINCE</name>
-    <file_name>prince.png</file_name>
-  </logo>
-  <logo>
-    <name>PRINGLES</name>
+    <name>Pringles</name>
     <file_name>pringles.png</file_name>
   </logo>
   <logo>
-    <name>PRITT</name>
-    <file_name>pritt.png</file_name>
-  </logo>
-  <logo>
-    <name>PRODIGY</name>
-    <file_name>prodigy.png</file_name>
-  </logo>
-  <logo>
-    <name>PROTON</name>
-    <file_name>proton.png</file_name>
-  </logo>
-  <logo>
-    <name>PSG</name>
-    <file_name>psg.png</file_name>
-  </logo>
-  <logo>
-    <name>PSP</name>
-    <file_name>psp.png</file_name>
-  </logo>
-  <logo>
-    <name>PSVITA</name>
-    <file_name>psvita.png</file_name>
-  </logo>
-  <logo>
-    <name>PUBLIX</name>
-    <file_name>publix.png</file_name>
-  </logo>
-  <logo>
-    <name>PULEVA</name>
-    <file_name>puleva.png</file_name>
-  </logo>
-  <logo>
-    <name>PUMA</name>
+    <name>Puma</name>
     <file_name>puma.png</file_name>
   </logo>
   <logo>
-    <name>PUNISHER</name>
-    <file_name>punisher.png</file_name>
-  </logo>
-  <logo>
-    <name>PUPA</name>
-    <file_name>pupa.png</file_name>
-  </logo>
-  <logo>
-    <name>PURINA</name>
-    <file_name>purina.png</file_name>
-  </logo>
-  <logo>
-    <name>QANTAS</name>
-    <file_name>qantas.png</file_name>
-  </logo>
-  <logo>
-    <name>QATAR AIRWAYS</name>
-    <file_name>qatar_airways.png</file_name>
-  </logo>
-  <logo>
-    <name>QOO</name>
-    <file_name>qoo.png</file_name>
-  </logo>
-  <logo>
-    <name>QUAKER</name>
+    <name>Quaker</name>
     <file_name>quaker.png</file_name>
   </logo>
   <logo>
-    <name>QUALCOMM</name>
-    <file_name>qualcomm.png</file_name>
+    <name>Quantas</name>
+    <file_name>quantas.png</file_name>
   </logo>
   <logo>
-    <name>QUECHUA</name>
-    <file_name>quechua.png</file_name>
-  </logo>
-  <logo>
-    <name>QUEEN</name>
-    <file_name>queen.png</file_name>
-  </logo>
-  <logo>
-    <name>QUICK</name>
-    <file_name>quick.png</file_name>
-  </logo>
-  <logo>
-    <name>QUICKTIME</name>
+    <name>QuickTime</name>
     <file_name>quicktime.png</file_name>
   </logo>
   <logo>
-    <name>QUIKSILVER</name>
-    <file_name>quiksilver.png</file_name>
+    <name>Radley</name>
+    <file_name>radley.png</file_name>
   </logo>
   <logo>
-    <name>QUIZNOS</name>
-    <file_name>quiznos.png</file_name>
+    <name>Ramones</name>
+    <file_name>ramones.png</file_name>
   </logo>
   <logo>
-    <name>QUORA</name>
-    <file_name>quora.png</file_name>
+    <name>Rawlings</name>
+    <file_name>rawlings.png</file_name>
   </logo>
   <logo>
-    <name>QVC</name>
-    <file_name>qvc.png</file_name>
-  </logo>
-  <logo>
-    <name>QWEST</name>
-    <file_name>qwest.png</file_name>
-  </logo>
-  <logo>
-    <name>R66</name>
-    <file_name>r66.png</file_name>
-  </logo>
-  <logo>
-    <name>RABOBANK</name>
-    <file_name>rabobank.png</file_name>
-  </logo>
-  <logo>
-    <name>RADIOSHACK</name>
-    <file_name>radioshack.png</file_name>
-  </logo>
-  <logo>
-    <name>RADISSON</name>
-    <file_name>radisson.png</file_name>
-  </logo>
-  <logo>
-    <name>RADO</name>
-    <file_name>rado.png</file_name>
-  </logo>
-  <logo>
-    <name>RAI</name>
-    <file_name>rai.png</file_name>
-  </logo>
-  <logo>
-    <name>RAIFFEISEN</name>
-    <file_name>raiffeisen.png</file_name>
-  </logo>
-  <logo>
-    <name>RALPHLAUREN</name>
-    <file_name>ralphlauren.png</file_name>
-  </logo>
-  <logo>
-    <name>RALPHLOREN</name>
-    <file_name>ralphloren.png</file_name>
-  </logo>
-  <logo>
-    <name>RAMADA</name>
-    <file_name>ramada.png</file_name>
-  </logo>
-  <logo>
-    <name>RAMSTAIN</name>
-    <file_name>ramstain.png</file_name>
-  </logo>
-  <logo>
-    <name>RANDSTAD</name>
-    <file_name>randstad.png</file_name>
-  </logo>
-  <logo>
-    <name>RAYMOND WEIL</name>
-    <file_name>raymond_weil.png</file_name>
-  </logo>
-  <logo>
-    <name>RAY BAN</name>
-    <file_name>ray_ban.png</file_name>
-  </logo>
-  <logo>
-    <name>RBS</name>
-    <file_name>rbs.png</file_name>
-  </logo>
-  <logo>
-    <name>READERSDIGEST</name>
-    <file_name>readersdigest.png</file_name>
-  </logo>
-  <logo>
-    <name>REALTEK</name>
-    <file_name>realtek.png</file_name>
-  </logo>
-  <logo>
-    <name>REAL MADRID</name>
-    <file_name>real_madrid.png</file_name>
-  </logo>
-  <logo>
-    <name>RECARO</name>
-    <file_name>recaro.png</file_name>
-  </logo>
-  <logo>
-    <name>REDDIT</name>
-    <file_name>reddit.png</file_name>
-  </logo>
-  <logo>
-    <name>RED BULL</name>
-    <file_name>red_bull.png</file_name>
-  </logo>
-  <logo>
-    <name>RED CROSS</name>
-    <file_name>red_cross.png</file_name>
-  </logo>
-  <logo>
-    <name>RED HAT</name>
-    <file_name>red_hat.png</file_name>
-  </logo>
-  <logo>
-    <name>RED LOBSTER</name>
-    <file_name>red_lobster.png</file_name>
-  </logo>
-  <logo>
-    <name>RED ROOSTER</name>
-    <file_name>red_rooster.png</file_name>
-  </logo>
-  <logo>
-    <name>REEBOK</name>
-    <file_name>reebok.png</file_name>
-  </logo>
-  <logo>
-    <name>REEF</name>
-    <file_name>reef.png</file_name>
-  </logo>
-  <logo>
-    <name>RENAULT</name>
+    <name>Renault</name>
     <file_name>renault.png</file_name>
   </logo>
   <logo>
-    <name>RENFE</name>
-    <file_name>renfe.png</file_name>
-  </logo>
-  <logo>
-    <name>REPSOL</name>
-    <file_name>repsol.png</file_name>
-  </logo>
-  <logo>
-    <name>REPUBLICANS</name>
-    <file_name>republicans.png</file_name>
-  </logo>
-  <logo>
-    <name>RESIDENCE INN</name>
-    <file_name>residence_inn.png</file_name>
-  </logo>
-  <logo>
-    <name>RETRO GAMER</name>
-    <file_name>retro_gamer.png</file_name>
-  </logo>
-  <logo>
-    <name>REUSCH</name>
-    <file_name>reusch.png</file_name>
-  </logo>
-  <logo>
-    <name>REUTERS</name>
-    <file_name>reuters.png</file_name>
-  </logo>
-  <logo>
-    <name>REWE</name>
-    <file_name>rewe.png</file_name>
-  </logo>
-  <logo>
-    <name>REXONA</name>
-    <file_name>rexona.png</file_name>
-  </logo>
-  <logo>
-    <name>RICHMOND</name>
-    <file_name>richmond.png</file_name>
-  </logo>
-  <logo>
-    <name>RIGHTMOVE</name>
-    <file_name>rightmove.png</file_name>
-  </logo>
-  <logo>
-    <name>RILEY</name>
-    <file_name>riley.png</file_name>
-  </logo>
-  <logo>
-    <name>RIM</name>
-    <file_name>rim.png</file_name>
-  </logo>
-  <logo>
-    <name>RIP CURL</name>
-    <file_name>rip_curl.png</file_name>
-  </logo>
-  <logo>
-    <name>RITTER SPORT</name>
-    <file_name>ritter_sport.png</file_name>
-  </logo>
-  <logo>
-    <name>RITZ CARLTON</name>
-    <file_name>ritz_carlton.png</file_name>
-  </logo>
-  <logo>
-    <name>ROCHE</name>
-    <file_name>roche.png</file_name>
-  </logo>
-  <logo>
-    <name>ROCKPORT</name>
-    <file_name>rockport.png</file_name>
-  </logo>
-  <logo>
-    <name>ROCKSHOX</name>
-    <file_name>rockshox.png</file_name>
-  </logo>
-  <logo>
-    <name>ROCKSTAR</name>
-    <file_name>rockstar.png</file_name>
-  </logo>
-  <logo>
-    <name>ROCKSTAR GAMES</name>
-    <file_name>rockstar_games.png</file_name>
-  </logo>
-  <logo>
-    <name>ROLAND GARROS</name>
+    <name>Roland Garros</name>
     <file_name>roland_garros.png</file_name>
   </logo>
   <logo>
-    <name>ROLEX</name>
-    <file_name>rolex.png</file_name>
-  </logo>
-  <logo>
-    <name>ROLLERBLADE</name>
-    <file_name>rollerblade.png</file_name>
-  </logo>
-  <logo>
-    <name>ROLLING STONES</name>
-    <file_name>rolling_stones.png</file_name>
-  </logo>
-  <logo>
-    <name>ROLLS ROYCE</name>
-    <file_name>rolls_royce.png</file_name>
-  </logo>
-  <logo>
-    <name>ROMA</name>
-    <file_name>roma.png</file_name>
-  </logo>
-  <logo>
-    <name>RONALDMCDONALD</name>
-    <file_name>ronaldmcdonald.png</file_name>
-  </logo>
-  <logo>
-    <name>RONCATO</name>
-    <file_name>roncato.png</file_name>
-  </logo>
-  <logo>
-    <name>ROOTS</name>
-    <file_name>roots.png</file_name>
-  </logo>
-  <logo>
-    <name>ROSBANK</name>
-    <file_name>rosbank.png</file_name>
-  </logo>
-  <logo>
-    <name>ROSNEFT</name>
-    <file_name>rosneft.png</file_name>
-  </logo>
-  <logo>
-    <name>ROSS</name>
-    <file_name>ross.png</file_name>
-  </logo>
-  <logo>
-    <name>ROSSIGNOL</name>
-    <file_name>rossignol.png</file_name>
-  </logo>
-  <logo>
-    <name>ROTHAUS</name>
-    <file_name>rothaus.png</file_name>
-  </logo>
-  <logo>
-    <name>ROTRING</name>
-    <file_name>rotring.png</file_name>
-  </logo>
-  <logo>
-    <name>ROTTEN TOMATOES</name>
-    <file_name>rotten_tomatoes.png</file_name>
-  </logo>
-  <logo>
-    <name>ROVER</name>
-    <file_name>rover.png</file_name>
-  </logo>
-  <logo>
-    <name>ROWENTA</name>
-    <file_name>rowenta.png</file_name>
-  </logo>
-  <logo>
-    <name>ROXY</name>
-    <file_name>roxy.png</file_name>
-  </logo>
-  <logo>
-    <name>ROYALBRUNEI</name>
-    <file_name>royalbrunei.png</file_name>
-  </logo>
-  <logo>
-    <name>ROYALCANIN</name>
-    <file_name>royalcanin.png</file_name>
-  </logo>
-  <logo>
-    <name>ROYAL BANK OF CANADA</name>
-    <file_name>royal_bank_of_canada.png</file_name>
-  </logo>
-  <logo>
-    <name>ROYAL BANK OF SCOTLAND</name>
-    <file_name>royal_bank_of_scotland.png</file_name>
-  </logo>
-  <logo>
-    <name>ROYAL MAIL</name>
-    <file_name>royal_mail.png</file_name>
+    <name>Rolls-Royce</name>
+    <file_name>rollsroyce.png</file_name>
   </logo>
   <logo>
     <name>RSS</name>
     <file_name>rss.png</file_name>
   </logo>
   <logo>
-    <name>RUBIN</name>
-    <file_name>rubin.png</file_name>
-  </logo>
-  <logo>
-    <name>RUINART</name>
-    <file_name>ruinart.png</file_name>
-  </logo>
-  <logo>
-    <name>RUMI</name>
-    <file_name>rumi.png</file_name>
-  </logo>
-  <logo>
-    <name>RUSNANO</name>
-    <file_name>rusnano.png</file_name>
-  </logo>
-  <logo>
-    <name>RYANAIR</name>
+    <name>Ryanair</name>
     <file_name>ryanair.png</file_name>
   </logo>
   <logo>
-    <name>S7</name>
-    <file_name>s7.png</file_name>
-  </logo>
-  <logo>
-    <name>SAAB</name>
-    <file_name>saab.png</file_name>
-  </logo>
-  <logo>
-    <name>SABADELL</name>
-    <file_name>sabadell.png</file_name>
-  </logo>
-  <logo>
-    <name>SABMILLER</name>
-    <file_name>sabmiller.png</file_name>
-  </logo>
-  <logo>
-    <name>SAFARI</name>
-    <file_name>safari.png</file_name>
-  </logo>
-  <logo>
-    <name>SAFEWAY</name>
+    <name>Safeway</name>
     <file_name>safeway.png</file_name>
   </logo>
   <logo>
-    <name>SAINSBURYS</name>
-    <file_name>sainsburys.png</file_name>
-  </logo>
-  <logo>
-    <name>SAINT GOBAIN</name>
-    <file_name>saint_gobain.png</file_name>
-  </logo>
-  <logo>
-    <name>SALEEN</name>
-    <file_name>saleen.png</file_name>
-  </logo>
-  <logo>
-    <name>SALOMON</name>
-    <file_name>salomon.png</file_name>
-  </logo>
-  <logo>
-    <name>SAMSCLUB</name>
-    <file_name>samsclub.png</file_name>
-  </logo>
-  <logo>
-    <name>SAMSONITE</name>
-    <file_name>samsonite.png</file_name>
-  </logo>
-  <logo>
-    <name>SAMSUNG</name>
-    <file_name>samsung.png</file_name>
-  </logo>
-  <logo>
-    <name>SAMURAI</name>
-    <file_name>samurai.png</file_name>
-  </logo>
-  <logo>
-    <name>SANDISK</name>
-    <file_name>sandisk.png</file_name>
-  </logo>
-  <logo>
-    <name>SANITARIUM</name>
-    <file_name>sanitarium.png</file_name>
-  </logo>
-  <logo>
-    <name>SANTANA</name>
-    <file_name>santana.png</file_name>
-  </logo>
-  <logo>
-    <name>SANTANDER</name>
+    <name>Santander</name>
     <file_name>santander.png</file_name>
   </logo>
   <logo>
-    <name>SANYO</name>
+    <name>Sanyo</name>
     <file_name>sanyo.png</file_name>
   </logo>
   <logo>
@@ -5493,1435 +913,203 @@
     <file_name>sap.png</file_name>
   </logo>
   <logo>
-    <name>SATURN</name>
-    <file_name>saturn.png</file_name>
+    <name>Save The Children</name>
+    <file_name>save_the_children.png</file_name>
   </logo>
   <logo>
-    <name>SAUDI ARABIAN AIRLINES</name>
-    <file_name>saudi_arabian_airlines.png</file_name>
-  </logo>
-  <logo>
-    <name>SAVVYTEL</name>
-    <file_name>savvytel.png</file_name>
-  </logo>
-  <logo>
-    <name>SAXO</name>
-    <file_name>saxo.png</file_name>
-  </logo>
-  <logo>
-    <name>SBARRO</name>
-    <file_name>sbarro.png</file_name>
-  </logo>
-  <logo>
-    <name>SBERBANK</name>
-    <file_name>sberbank.png</file_name>
-  </logo>
-  <logo>
-    <name>SCANIA</name>
-    <file_name>scania.png</file_name>
-  </logo>
-  <logo>
-    <name>SCHALKE04</name>
-    <file_name>schalke04.png</file_name>
-  </logo>
-  <logo>
-    <name>SCHWARZKOPF</name>
-    <file_name>schwarzkopf.png</file_name>
-  </logo>
-  <logo>
-    <name>SCHWEPPES</name>
-    <file_name>schweppes.png</file_name>
-  </logo>
-  <logo>
-    <name>SCIFI</name>
-    <file_name>scifi.png</file_name>
-  </logo>
-  <logo>
-    <name>SCRIBD</name>
-    <file_name>scribd.png</file_name>
-  </logo>
-  <logo>
-    <name>SEAGATE</name>
-    <file_name>seagate.png</file_name>
-  </logo>
-  <logo>
-    <name>SEARS</name>
-    <file_name>sears.png</file_name>
-  </logo>
-  <logo>
-    <name>SEASHEPHERD</name>
-    <file_name>seashepherd.png</file_name>
-  </logo>
-  <logo>
-    <name>SEAT</name>
+    <name>Seat</name>
     <file_name>seat.png</file_name>
   </logo>
   <logo>
-    <name>SECONDLIFE</name>
-    <file_name>secondlife.png</file_name>
-  </logo>
-  <logo>
-    <name>SEGA</name>
-    <file_name>sega.png</file_name>
-  </logo>
-  <logo>
-    <name>SEGWAY</name>
-    <file_name>segway.png</file_name>
-  </logo>
-  <logo>
-    <name>SEIKO</name>
-    <file_name>seiko.png</file_name>
-  </logo>
-  <logo>
-    <name>SENNHEISER</name>
-    <file_name>sennheiser.png</file_name>
-  </logo>
-  <logo>
-    <name>SEPHORA</name>
-    <file_name>sephora.png</file_name>
-  </logo>
-  <logo>
-    <name>SERGIO TACCHINI</name>
-    <file_name>sergio_tacchini.png</file_name>
-  </logo>
-  <logo>
-    <name>SERIE A</name>
-    <file_name>serie_a.png</file_name>
-  </logo>
-  <logo>
-    <name>SESAME</name>
-    <file_name>sesame.png</file_name>
-  </logo>
-  <logo>
-    <name>SEVEN ELEVEN</name>
+    <name>Seven Eleven</name>
     <file_name>seven_eleven.png</file_name>
   </logo>
   <logo>
-    <name>SEVEN UP</name>
-    <file_name>seven_up.png</file_name>
-  </logo>
-  <logo>
-    <name>SEVILLA</name>
-    <file_name>sevilla.png</file_name>
-  </logo>
-  <logo>
-    <name>SEX PISTOLS</name>
-    <file_name>sex_pistols.png</file_name>
-  </logo>
-  <logo>
-    <name>SHARP</name>
-    <file_name>sharp.png</file_name>
-  </logo>
-  <logo>
-    <name>SHELL</name>
-    <file_name>shell.png</file_name>
-  </logo>
-  <logo>
-    <name>SHERATON</name>
+    <name>Sheraton</name>
     <file_name>sheraton.png</file_name>
   </logo>
   <logo>
-    <name>SHIMANO</name>
-    <file_name>shimano.png</file_name>
-  </logo>
-  <logo>
-    <name>SHISEIDO</name>
-    <file_name>shiseido.png</file_name>
-  </logo>
-  <logo>
-    <name>SHOEI</name>
-    <file_name>shoei.png</file_name>
-  </logo>
-  <logo>
-    <name>SHOPIFY</name>
-    <file_name>shopify.png</file_name>
-  </logo>
-  <logo>
-    <name>SHOWS70</name>
-    <file_name>shows70.png</file_name>
-  </logo>
-  <logo>
-    <name>SHOWTIME</name>
+    <name>Showtime</name>
     <file_name>showtime.png</file_name>
   </logo>
   <logo>
-    <name>SHREK</name>
-    <file_name>shrek.png</file_name>
-  </logo>
-  <logo>
-    <name>SIEMENS</name>
-    <file_name>siemens.png</file_name>
-  </logo>
-  <logo>
-    <name>SIGMA</name>
-    <file_name>sigma.png</file_name>
-  </logo>
-  <logo>
-    <name>SIGMA AU</name>
-    <file_name>sigma_au.png</file_name>
-  </logo>
-  <logo>
-    <name>SIGNAL</name>
-    <file_name>signal.png</file_name>
-  </logo>
-  <logo>
-    <name>SIKORSKY</name>
-    <file_name>sikorsky.png</file_name>
-  </logo>
-  <logo>
-    <name>SILVERSTONE</name>
-    <file_name>silverstone.png</file_name>
-  </logo>
-  <logo>
-    <name>SIMPLY</name>
-    <file_name>simply.png</file_name>
-  </logo>
-  <logo>
-    <name>SIMPSONS</name>
-    <file_name>simpsons.png</file_name>
-  </logo>
-  <logo>
-    <name>SIMS</name>
-    <file_name>sims.png</file_name>
-  </logo>
-  <logo>
-    <name>SINGAPORE AIRLINES</name>
+    <name>Singapore Airlines</name>
     <file_name>singapore_airlines.png</file_name>
   </logo>
   <logo>
-    <name>SIXT</name>
-    <file_name>sixt.png</file_name>
-  </logo>
-  <logo>
-    <name>SKF</name>
-    <file_name>skf.png</file_name>
-  </logo>
-  <logo>
-    <name>SKITTLES</name>
-    <file_name>skittles.png</file_name>
-  </logo>
-  <logo>
-    <name>SKODA</name>
-    <file_name>skoda.png</file_name>
-  </logo>
-  <logo>
-    <name>SKULLCANDY</name>
-    <file_name>skullcandy.png</file_name>
-  </logo>
-  <logo>
-    <name>SKYPE</name>
-    <file_name>skype.png</file_name>
-  </logo>
-  <logo>
-    <name>SKYY</name>
-    <file_name>skyy.png</file_name>
-  </logo>
-  <logo>
-    <name>SLAZENGER</name>
-    <file_name>slazenger.png</file_name>
-  </logo>
-  <logo>
-    <name>SMART</name>
-    <file_name>smart.png</file_name>
-  </logo>
-  <logo>
-    <name>SMIRNOFF</name>
-    <file_name>smirnoff.png</file_name>
-  </logo>
-  <logo>
-    <name>SNCF</name>
-    <file_name>sncf.png</file_name>
-  </logo>
-  <logo>
-    <name>SNICKERS</name>
-    <file_name>snickers.png</file_name>
-  </logo>
-  <logo>
-    <name>SOCIETE GENERALE</name>
-    <file_name>societe_generale.png</file_name>
-  </logo>
-  <logo>
-    <name>SODEXO</name>
-    <file_name>sodexo.png</file_name>
-  </logo>
-  <logo>
-    <name>SONIM</name>
-    <file_name>sonim.png</file_name>
-  </logo>
-  <logo>
-    <name>SONY</name>
-    <file_name>sony.png</file_name>
-  </logo>
-  <logo>
-    <name>SOPRANOS</name>
-    <file_name>sopranos.png</file_name>
-  </logo>
-  <logo>
-    <name>SOUNDCLOUD</name>
-    <file_name>soundcloud.png</file_name>
-  </logo>
-  <logo>
-    <name>SOUTHAFRICAN</name>
-    <file_name>southafrican.png</file_name>
-  </logo>
-  <logo>
-    <name>SOUTHWEST AIRLINES</name>
-    <file_name>southwest_airlines.png</file_name>
-  </logo>
-  <logo>
-    <name>SPALDING</name>
-    <file_name>spalding.png</file_name>
-  </logo>
-  <logo>
-    <name>SPANAIR</name>
-    <file_name>spanair.png</file_name>
+    <name>Snapple</name>
+    <file_name>snapple.png</file_name>
   </logo>
   <logo>
     <name>SPAR</name>
     <file_name>spar.png</file_name>
   </logo>
   <logo>
-    <name>SPARCO</name>
-    <file_name>sparco.png</file_name>
-  </logo>
-  <logo>
-    <name>SPARTAK</name>
-    <file_name>spartak.png</file_name>
-  </logo>
-  <logo>
-    <name>SPEARMINT</name>
-    <file_name>spearmint.png</file_name>
-  </logo>
-  <logo>
-    <name>SPEEDO</name>
-    <file_name>speedo.png</file_name>
-  </logo>
-  <logo>
-    <name>SPITFIRE</name>
-    <file_name>spitfire.png</file_name>
-  </logo>
-  <logo>
-    <name>SPOTIFY</name>
-    <file_name>spotify.png</file_name>
-  </logo>
-  <logo>
-    <name>SPRINT</name>
-    <file_name>sprint.png</file_name>
-  </logo>
-  <logo>
-    <name>SPRITE</name>
-    <file_name>sprite.png</file_name>
-  </logo>
-  <logo>
-    <name>SPYKER</name>
-    <file_name>spyker.png</file_name>
-  </logo>
-  <logo>
-    <name>SRAM</name>
-    <file_name>sram.png</file_name>
-  </logo>
-  <logo>
-    <name>SRILANKAAIRLINES</name>
-    <file_name>srilankaairlines.png</file_name>
-  </logo>
-  <logo>
-    <name>SSANGYONG</name>
-    <file_name>ssangyong.png</file_name>
-  </logo>
-  <logo>
-    <name>STABILO</name>
+    <name>Stabilo</name>
     <file_name>stabilo.png</file_name>
   </logo>
   <logo>
-    <name>STAEDTLER</name>
-    <file_name>staedtler.png</file_name>
-  </logo>
-  <logo>
-    <name>STANDARDCHARTERED</name>
-    <file_name>standardchartered.png</file_name>
-  </logo>
-  <logo>
-    <name>STANFORD UNIVERSITY</name>
-    <file_name>stanford_university.png</file_name>
-  </logo>
-  <logo>
-    <name>STANLEY</name>
+    <name>Stanley</name>
     <file_name>stanley.png</file_name>
   </logo>
   <logo>
-    <name>STAPLES</name>
-    <file_name>staples.png</file_name>
-  </logo>
-  <logo>
-    <name>STARALLIANCE</name>
-    <file_name>staralliance.png</file_name>
-  </logo>
-  <logo>
-    <name>STARBUCKS</name>
-    <file_name>starbucks.png</file_name>
-  </logo>
-  <logo>
-    <name>STARWARS</name>
-    <file_name>starwars.png</file_name>
-  </logo>
-  <logo>
-    <name>STATOIL</name>
-    <file_name>statoil.png</file_name>
-  </logo>
-  <logo>
-    <name>STEINWAYANDSONS</name>
-    <file_name>steinwayandsons.png</file_name>
-  </logo>
-  <logo>
-    <name>STELLA ARTOIS</name>
-    <file_name>stella_artois.png</file_name>
-  </logo>
-  <logo>
-    <name>STENALINE</name>
-    <file_name>stenaline.png</file_name>
-  </logo>
-  <logo>
-    <name>STGEORGE</name>
-    <file_name>stgeorge.png</file_name>
-  </logo>
-  <logo>
-    <name>STIHL</name>
-    <file_name>stihl.png</file_name>
-  </logo>
-  <logo>
-    <name>STIMOROL</name>
-    <file_name>stimorol.png</file_name>
-  </logo>
-  <logo>
-    <name>STOCKLAND</name>
-    <file_name>stockland.png</file_name>
-  </logo>
-  <logo>
-    <name>STUMBLEUPON</name>
-    <file_name>stumbleupon.png</file_name>
-  </logo>
-  <logo>
-    <name>SUBARU</name>
+    <name>Subaru</name>
     <file_name>subaru.png</file_name>
   </logo>
   <logo>
-    <name>SUBWAY</name>
-    <file_name>subway.png</file_name>
+    <name>SUN</name>
+    <file_name>sun.png</file_name>
   </logo>
   <logo>
-    <name>SUNCORP</name>
-    <file_name>suncorp.png</file_name>
-  </logo>
-  <logo>
-    <name>SUNOCO</name>
-    <file_name>sunoco.png</file_name>
-  </logo>
-  <logo>
-    <name>SUPERMAN</name>
-    <file_name>superman.png</file_name>
-  </logo>
-  <logo>
-    <name>SUPER 8</name>
-    <file_name>super_8.png</file_name>
-  </logo>
-  <logo>
-    <name>SUSE</name>
-    <file_name>suse.png</file_name>
-  </logo>
-  <logo>
-    <name>SUZUKI</name>
+    <name>Suzuki</name>
     <file_name>suzuki.png</file_name>
   </logo>
   <logo>
-    <name>SWAROVSKI</name>
-    <file_name>swarovski.png</file_name>
-  </logo>
-  <logo>
-    <name>SWATCH</name>
-    <file_name>swatch.png</file_name>
-  </logo>
-  <logo>
-    <name>SWISSCOM</name>
-    <file_name>swisscom.png</file_name>
-  </logo>
-  <logo>
-    <name>SYMANTEC</name>
+    <name>Symantec</name>
     <file_name>symantec.png</file_name>
   </logo>
   <logo>
-    <name>SYMBIAN</name>
-    <file_name>symbian.png</file_name>
-  </logo>
-  <logo>
-    <name>S OLIVER</name>
-    <file_name>s_oliver.png</file_name>
-  </logo>
-  <logo>
-    <name>TAB</name>
-    <file_name>tab.png</file_name>
-  </logo>
-  <logo>
-    <name>TACO BELL</name>
-    <file_name>taco_bell.png</file_name>
-  </logo>
-  <logo>
-    <name>TAG HEUER</name>
+    <name>Tag Heuer</name>
     <file_name>tag_heuer.png</file_name>
   </logo>
   <logo>
-    <name>TALBOT</name>
-    <file_name>talbot.png</file_name>
-  </logo>
-  <logo>
-    <name>TAMPAX</name>
-    <file_name>tampax.png</file_name>
-  </logo>
-  <logo>
-    <name>TAMRON</name>
-    <file_name>tamron.png</file_name>
-  </logo>
-  <logo>
-    <name>TANQUERAY</name>
-    <file_name>tanqueray.png</file_name>
-  </logo>
-  <logo>
-    <name>TARGET</name>
+    <name>Target</name>
     <file_name>target.png</file_name>
   </logo>
   <logo>
-    <name>TATA</name>
+    <name>Tata</name>
     <file_name>tata.png</file_name>
-  </logo>
-  <logo>
-    <name>TATNEFT</name>
-    <file_name>tatneft.png</file_name>
-  </logo>
-  <logo>
-    <name>TATRA</name>
-    <file_name>tatra.png</file_name>
-  </logo>
-  <logo>
-    <name>TCM</name>
-    <file_name>tcm.png</file_name>
   </logo>
   <logo>
     <name>TDK</name>
     <file_name>tdk.png</file_name>
   </logo>
   <logo>
-    <name>TECHCRUNCH</name>
-    <file_name>techcrunch.png</file_name>
-  </logo>
-  <logo>
-    <name>TECHNICOLOR</name>
-    <file_name>technicolor.png</file_name>
-  </logo>
-  <logo>
-    <name>TEFAL</name>
-    <file_name>tefal.png</file_name>
-  </logo>
-  <logo>
-    <name>TEKA</name>
-    <file_name>teka.png</file_name>
-  </logo>
-  <logo>
-    <name>TELEFONICA</name>
-    <file_name>telefonica.png</file_name>
-  </logo>
-  <logo>
-    <name>TELENOR</name>
-    <file_name>telenor.png</file_name>
-  </logo>
-  <logo>
-    <name>TELMEX</name>
-    <file_name>telmex.png</file_name>
-  </logo>
-  <logo>
-    <name>TELSTRA</name>
-    <file_name>telstra.png</file_name>
-  </logo>
-  <logo>
-    <name>TESCO</name>
+    <name>Tesco</name>
     <file_name>tesco.png</file_name>
   </logo>
   <logo>
-    <name>TESLA</name>
-    <file_name>tesla.png</file_name>
+    <name>Thai</name>
+    <file_name>thai.png</file_name>
   </logo>
   <logo>
-    <name>TETTLEY</name>
-    <file_name>tettley.png</file_name>
+    <name>TI</name>
+    <file_name>ti.png</file_name>
   </logo>
   <logo>
-    <name>TEXACO</name>
-    <file_name>texaco.png</file_name>
+    <name>TicTac</name>
+    <file_name>tictac.png</file_name>
   </logo>
   <logo>
-    <name>TEXAS INSTRUMENTS</name>
-    <file_name>texas_instruments.png</file_name>
-  </logo>
-  <logo>
-    <name>TEXTAR</name>
-    <file_name>textar.png</file_name>
-  </logo>
-  <logo>
-    <name>THAI AIRWAYS</name>
-    <file_name>thai_airways.png</file_name>
-  </logo>
-  <logo>
-    <name>THALES</name>
-    <file_name>thales.png</file_name>
-  </logo>
-  <logo>
-    <name>THESUN</name>
-    <file_name>thesun.png</file_name>
-  </logo>
-  <logo>
-    <name>THE BEATLES</name>
-    <file_name>the_beatles.png</file_name>
-  </logo>
-  <logo>
-    <name>THE BODY SHOP</name>
-    <file_name>the_body_shop.png</file_name>
-  </logo>
-  <logo>
-    <name>THE HOME DEPOT</name>
-    <file_name>the_home_depot.png</file_name>
-  </logo>
-  <logo>
-    <name>THE INDEPENDENT</name>
-    <file_name>the_independent.png</file_name>
-  </logo>
-  <logo>
-    <name>THE NEW YORK TIMES</name>
-    <file_name>the_new_york_times.png</file_name>
-  </logo>
-  <logo>
-    <name>THE NORTH FACE</name>
-    <file_name>the_north_face.png</file_name>
-  </logo>
-  <logo>
-    <name>THE PIRATE BAY</name>
-    <file_name>the_pirate_bay.png</file_name>
-  </logo>
-  <logo>
-    <name>THIERRYMUGLER</name>
-    <file_name>thierrymugler.png</file_name>
-  </logo>
-  <logo>
-    <name>THQ</name>
-    <file_name>thq.png</file_name>
-  </logo>
-  <logo>
-    <name>THREE M</name>
-    <file_name>three_m.png</file_name>
-  </logo>
-  <logo>
-    <name>THUNDERBIRD</name>
-    <file_name>thunderbird.png</file_name>
-  </logo>
-  <logo>
-    <name>TIC TAC</name>
-    <file_name>tic_tac.png</file_name>
-  </logo>
-  <logo>
-    <name>TIDE</name>
-    <file_name>tide.png</file_name>
-  </logo>
-  <logo>
-    <name>TIFFANY CO</name>
-    <file_name>tiffany_co.png</file_name>
-  </logo>
-  <logo>
-    <name>TIM</name>
-    <file_name>tim.png</file_name>
-  </logo>
-  <logo>
-    <name>TIMBERLAND</name>
-    <file_name>timberland.png</file_name>
-  </logo>
-  <logo>
-    <name>TIME</name>
-    <file_name>time.png</file_name>
-  </logo>
-  <logo>
-    <name>TISCALI</name>
-    <file_name>tiscali.png</file_name>
-  </logo>
-  <logo>
-    <name>TISSOT</name>
+    <name>Tissot</name>
     <file_name>tissot.png</file_name>
   </logo>
   <logo>
-    <name>TIVO</name>
-    <file_name>tivo.png</file_name>
-  </logo>
-  <logo>
-    <name>TJMAXX</name>
-    <file_name>tjmaxx.png</file_name>
-  </logo>
-  <logo>
-    <name>TNT</name>
-    <file_name>tnt.png</file_name>
-  </logo>
-  <logo>
-    <name>TOBLERONE</name>
+    <name>Toblerone</name>
     <file_name>toblerone.png</file_name>
   </logo>
   <logo>
-    <name>TOFFIFEE</name>
-    <file_name>toffifee.png</file_name>
-  </logo>
-  <logo>
-    <name>TOKINA</name>
-    <file_name>tokina.png</file_name>
-  </logo>
-  <logo>
-    <name>TOMMY HILFIGER</name>
-    <file_name>tommy_hilfiger.png</file_name>
-  </logo>
-  <logo>
-    <name>TOMTOM</name>
+    <name>TomTom</name>
     <file_name>tomtom.png</file_name>
   </logo>
   <logo>
-    <name>TOM TAILOR</name>
-    <file_name>tom_tailor.png</file_name>
+    <name>Top Gun</name>
+    <file_name>top_gun.png</file_name>
   </logo>
   <logo>
-    <name>TOPGEAR</name>
-    <file_name>topgear.png</file_name>
-  </logo>
-  <logo>
-    <name>TOPTABLE</name>
-    <file_name>toptable.png</file_name>
-  </logo>
-  <logo>
-    <name>TORRES</name>
-    <file_name>torres.png</file_name>
-  </logo>
-  <logo>
-    <name>TORRID</name>
-    <file_name>torrid.png</file_name>
-  </logo>
-  <logo>
-    <name>TOSHIBA</name>
-    <file_name>toshiba.png</file_name>
-  </logo>
-  <logo>
-    <name>TOTAL</name>
+    <name>Total</name>
     <file_name>total.png</file_name>
   </logo>
   <logo>
-    <name>TOURDEFRANCE</name>
-    <file_name>tourdefrance.png</file_name>
+    <name>Transformers</name>
+    <file_name>transformers.png</file_name>
   </logo>
   <logo>
-    <name>TOURDEPOLOGNE</name>
-    <file_name>tourdepologne.png</file_name>
-  </logo>
-  <logo>
-    <name>TOUS</name>
-    <file_name>tous.png</file_name>
-  </logo>
-  <logo>
-    <name>TOYMACHINE</name>
-    <file_name>toymachine.png</file_name>
-  </logo>
-  <logo>
-    <name>TOYOTA</name>
-    <file_name>toyota.png</file_name>
-  </logo>
-  <logo>
-    <name>TOYOTIRES</name>
-    <file_name>toyotires.png</file_name>
-  </logo>
-  <logo>
-    <name>TOYS R US</name>
-    <file_name>toys_r_us.png</file_name>
-  </logo>
-  <logo>
-    <name>TRANSAERO</name>
-    <file_name>transaero.png</file_name>
-  </logo>
-  <logo>
-    <name>TRANSUNION</name>
-    <file_name>transunion.png</file_name>
-  </logo>
-  <logo>
-    <name>TRAVELODGE</name>
-    <file_name>travelodge.png</file_name>
-  </logo>
-  <logo>
-    <name>TRIPADVISOR</name>
-    <file_name>tripadvisor.png</file_name>
-  </logo>
-  <logo>
-    <name>TRIUMPH</name>
-    <file_name>triumph.png</file_name>
-  </logo>
-  <logo>
-    <name>TROIKA DIALOG</name>
-    <file_name>troika_dialog.png</file_name>
-  </logo>
-  <logo>
-    <name>TROPICANA</name>
-    <file_name>tropicana.png</file_name>
-  </logo>
-  <logo>
-    <name>TRUE RELIGION</name>
-    <file_name>true_religion.png</file_name>
-  </logo>
-  <logo>
-    <name>TSN</name>
-    <file_name>tsn.png</file_name>
-  </logo>
-  <logo>
-    <name>TUENTI</name>
-    <file_name>tuenti.png</file_name>
-  </logo>
-  <logo>
-    <name>TUI</name>
-    <file_name>tui.png</file_name>
-  </logo>
-  <logo>
-    <name>TUNEIN</name>
-    <file_name>tunein.png</file_name>
-  </logo>
-  <logo>
-    <name>TURTLES</name>
-    <file_name>turtles.png</file_name>
-  </logo>
-  <logo>
-    <name>TURTLEWAX</name>
-    <file_name>turtlewax.png</file_name>
-  </logo>
-  <logo>
-    <name>TUX</name>
-    <file_name>tux.png</file_name>
-  </logo>
-  <logo>
-    <name>TVS</name>
-    <file_name>tvs.png</file_name>
-  </logo>
-  <logo>
-    <name>TV GUIDE</name>
-    <file_name>tv_guide.png</file_name>
-  </logo>
-  <logo>
-    <name>TWITTER</name>
+    <name>Twitter</name>
     <file_name>twitter.png</file_name>
   </logo>
   <logo>
-    <name>TWIX</name>
-    <file_name>twix.png</file_name>
-  </logo>
-  <logo>
-    <name>T MOBILE</name>
-    <file_name>t_mobile.png</file_name>
-  </logo>
-  <logo>
-    <name>U2</name>
-    <file_name>u2.png</file_name>
-  </logo>
-  <logo>
-    <name>UBISOFT</name>
-    <file_name>ubisoft.png</file_name>
-  </logo>
-  <logo>
-    <name>UBI BANCA</name>
-    <file_name>ubi_banca.png</file_name>
-  </logo>
-  <logo>
-    <name>UBS</name>
-    <file_name>ubs.png</file_name>
-  </logo>
-  <logo>
-    <name>UBUNTU</name>
-    <file_name>ubuntu.png</file_name>
-  </logo>
-  <logo>
-    <name>UE</name>
-    <file_name>ue.png</file_name>
-  </logo>
-  <logo>
-    <name>UEFA</name>
-    <file_name>uefa.png</file_name>
-  </logo>
-  <logo>
-    <name>UGG</name>
-    <file_name>ugg.png</file_name>
-  </logo>
-  <logo>
-    <name>ULKER</name>
-    <file_name>ulker.png</file_name>
-  </logo>
-  <logo>
-    <name>ULYSSE NARDIN</name>
-    <file_name>ulysse_nardin.png</file_name>
-  </logo>
-  <logo>
-    <name>UMBRO</name>
+    <name>Umbro</name>
     <file_name>umbro.png</file_name>
   </logo>
   <logo>
-    <name>UNCLE BENS</name>
-    <file_name>uncle_bens.png</file_name>
-  </logo>
-  <logo>
-    <name>UNESCO</name>
-    <file_name>unesco.png</file_name>
-  </logo>
-  <logo>
-    <name>UNICAJA</name>
-    <file_name>unicaja.png</file_name>
-  </logo>
-  <logo>
-    <name>UNICEF</name>
+    <name>unicef</name>
     <file_name>unicef.png</file_name>
   </logo>
   <logo>
-    <name>UNICOM</name>
-    <file_name>unicom.png</file_name>
-  </logo>
-  <logo>
-    <name>UNICREDIT</name>
-    <file_name>unicredit.png</file_name>
-  </logo>
-  <logo>
-    <name>UNILEVER</name>
-    <file_name>unilever.png</file_name>
-  </logo>
-  <logo>
-    <name>UNIQLO</name>
-    <file_name>uniqlo.png</file_name>
-  </logo>
-  <logo>
-    <name>UNIROYAL</name>
-    <file_name>uniroyal.png</file_name>
-  </logo>
-  <logo>
-    <name>UNITED</name>
-    <file_name>united.png</file_name>
-  </logo>
-  <logo>
-    <name>UNITED AIRLINES</name>
-    <file_name>united_airlines.png</file_name>
-  </logo>
-  <logo>
-    <name>UNITED NATIONS</name>
-    <file_name>united_nations.png</file_name>
-  </logo>
-  <logo>
-    <name>UNITED STATES POSTAL SERVICE</name>
-    <file_name>united_states_postal_service.png</file_name>
-  </logo>
-  <logo>
-    <name>UNIVERSITY OF CAMBRIDGE</name>
-    <file_name>university_of_cambridge.png</file_name>
-  </logo>
-  <logo>
-    <name>UPS</name>
-    <file_name>ups.png</file_name>
-  </logo>
-  <logo>
-    <name>URALSIB</name>
-    <file_name>uralsib.png</file_name>
-  </logo>
-  <logo>
-    <name>URBANSPOON</name>
-    <file_name>urbanspoon.png</file_name>
-  </logo>
-  <logo>
-    <name>USATODAY</name>
-    <file_name>usatoday.png</file_name>
-  </logo>
-  <logo>
-    <name>USB</name>
+    <name>usb</name>
     <file_name>usb.png</file_name>
   </logo>
   <logo>
-    <name>USOPEN</name>
-    <file_name>usopen.png</file_name>
+    <name>USPS</name>
+    <file_name>usps.png</file_name>
   </logo>
   <logo>
-    <name>USROBOTICS</name>
-    <file_name>usrobotics.png</file_name>
-  </logo>
-  <logo>
-    <name>US AIRWAYS</name>
-    <file_name>us_airways.png</file_name>
-  </logo>
-  <logo>
-    <name>UTORRENT</name>
-    <file_name>utorrent.png</file_name>
-  </logo>
-  <logo>
-    <name>VAIO</name>
-    <file_name>vaio.png</file_name>
-  </logo>
-  <logo>
-    <name>VALE</name>
-    <file_name>vale.png</file_name>
-  </logo>
-  <logo>
-    <name>VALENCIA</name>
-    <file_name>valencia.png</file_name>
-  </logo>
-  <logo>
-    <name>VALIO</name>
-    <file_name>valio.png</file_name>
-  </logo>
-  <logo>
-    <name>VALVOLINE</name>
-    <file_name>valvoline.png</file_name>
-  </logo>
-  <logo>
-    <name>VARTA</name>
-    <file_name>varta.png</file_name>
-  </logo>
-  <logo>
-    <name>VAUXHALL</name>
-    <file_name>vauxhall.png</file_name>
-  </logo>
-  <logo>
-    <name>VEOLIA</name>
-    <file_name>veolia.png</file_name>
-  </logo>
-  <logo>
-    <name>VERBATIM</name>
-    <file_name>verbatim.png</file_name>
-  </logo>
-  <logo>
-    <name>VERISIGN</name>
-    <file_name>verisign.png</file_name>
-  </logo>
-  <logo>
-    <name>VERIZON</name>
-    <file_name>verizon.png</file_name>
-  </logo>
-  <logo>
-    <name>VERSACE</name>
-    <file_name>versace.png</file_name>
-  </logo>
-  <logo>
-    <name>VESPA</name>
-    <file_name>vespa.png</file_name>
-  </logo>
-  <logo>
-    <name>VEVO</name>
-    <file_name>vevo.png</file_name>
-  </logo>
-  <logo>
-    <name>VH1</name>
-    <file_name>vh1.png</file_name>
-  </logo>
-  <logo>
-    <name>VIBER</name>
-    <file_name>viber.png</file_name>
-  </logo>
-  <logo>
-    <name>VICHY</name>
-    <file_name>vichy.png</file_name>
-  </logo>
-  <logo>
-    <name>VIEW SONIC</name>
-    <file_name>view_sonic.png</file_name>
-  </logo>
-  <logo>
-    <name>VIMEO</name>
-    <file_name>vimeo.png</file_name>
-  </logo>
-  <logo>
-    <name>VIRGIN</name>
-    <file_name>virgin.png</file_name>
+    <name>Vertigo</name>
+    <file_name>vertigo.png</file_name>
   </logo>
   <logo>
     <name>VISA</name>
     <file_name>visa.png</file_name>
   </logo>
   <logo>
-    <name>VIVENDI</name>
-    <file_name>vivendi.png</file_name>
-  </logo>
-  <logo>
-    <name>VIVIENNE WESTWOOD</name>
-    <file_name>vivienne_westwood.png</file_name>
-  </logo>
-  <logo>
-    <name>VIVO</name>
-    <file_name>vivo.png</file_name>
-  </logo>
-  <logo>
-    <name>VKONTAKTE</name>
-    <file_name>vkontakte.png</file_name>
-  </logo>
-  <logo>
-    <name>VMWARE</name>
-    <file_name>vmware.png</file_name>
-  </logo>
-  <logo>
-    <name>VODAFONE</name>
-    <file_name>vodafone.png</file_name>
-  </logo>
-  <logo>
-    <name>VOGUE</name>
-    <file_name>vogue.png</file_name>
-  </logo>
-  <logo>
-    <name>VOLCOM</name>
-    <file_name>volcom.png</file_name>
-  </logo>
-  <logo>
-    <name>VOLKSWAGEN</name>
-    <file_name>volkswagen.png</file_name>
-  </logo>
-  <logo>
-    <name>VOLVO</name>
-    <file_name>volvo.png</file_name>
-  </logo>
-  <logo>
-    <name>VTB24</name>
-    <file_name>vtb24.png</file_name>
-  </logo>
-  <logo>
-    <name>VUELING</name>
-    <file_name>vueling.png</file_name>
-  </logo>
-  <logo>
-    <name>WACOM</name>
-    <file_name>wacom.png</file_name>
-  </logo>
-  <logo>
-    <name>WAGAMAMA</name>
-    <file_name>wagamama.png</file_name>
-  </logo>
-  <logo>
-    <name>WAGON WHEELS</name>
-    <file_name>wagon_wheels.png</file_name>
-  </logo>
-  <logo>
-    <name>WAITROSE</name>
-    <file_name>waitrose.png</file_name>
-  </logo>
-  <logo>
-    <name>WALGREENS</name>
-    <file_name>walgreens.png</file_name>
-  </logo>
-  <logo>
-    <name>WALKABOUT</name>
-    <file_name>walkabout.png</file_name>
-  </logo>
-  <logo>
-    <name>WALKMAN</name>
-    <file_name>walkman.png</file_name>
-  </logo>
-  <logo>
-    <name>WALLE</name>
-    <file_name>walle.png</file_name>
-  </logo>
-  <logo>
-    <name>WALMART</name>
+    <name>Walmart</name>
     <file_name>walmart.png</file_name>
   </logo>
   <logo>
-    <name>WALT DISNEY</name>
-    <file_name>walt_disney.png</file_name>
-  </logo>
-  <logo>
-    <name>WARNER BROTHERS</name>
-    <file_name>warner_brothers.png</file_name>
-  </logo>
-  <logo>
-    <name>WD40</name>
-    <file_name>wd40.png</file_name>
-  </logo>
-  <logo>
-    <name>WEBMONEY</name>
-    <file_name>webmoney.png</file_name>
-  </logo>
-  <logo>
-    <name>WELLA</name>
-    <file_name>wella.png</file_name>
-  </logo>
-  <logo>
-    <name>WELLS FARGO</name>
-    <file_name>wells_fargo.png</file_name>
-  </logo>
-  <logo>
-    <name>WENDYS</name>
-    <file_name>wendys.png</file_name>
-  </logo>
-  <logo>
-    <name>WERDER</name>
-    <file_name>werder.png</file_name>
-  </logo>
-  <logo>
-    <name>WESTCOAST</name>
-    <file_name>westcoast.png</file_name>
-  </logo>
-  <logo>
-    <name>WESTERN DIGITAL</name>
-    <file_name>western_digital.png</file_name>
-  </logo>
-  <logo>
-    <name>WESTERN UNION</name>
-    <file_name>western_union.png</file_name>
-  </logo>
-  <logo>
-    <name>WESTIN</name>
-    <file_name>westin.png</file_name>
-  </logo>
-  <logo>
-    <name>WESTINGHOUSE</name>
-    <file_name>westinghouse.png</file_name>
-  </logo>
-  <logo>
-    <name>WESTJET</name>
-    <file_name>westjet.png</file_name>
-  </logo>
-  <logo>
-    <name>WESTPAC</name>
-    <file_name>westpac.png</file_name>
-  </logo>
-  <logo>
-    <name>WHATABURGER</name>
-    <file_name>whataburger.png</file_name>
-  </logo>
-  <logo>
-    <name>WHATSAPP</name>
-    <file_name>whatsapp.png</file_name>
-  </logo>
-  <logo>
-    <name>WHIRLPOOL</name>
+    <name>Whirlpool</name>
     <file_name>whirlpool.png</file_name>
   </logo>
   <logo>
-    <name>WHISKAS</name>
-    <file_name>whiskas.png</file_name>
-  </logo>
-  <logo>
-    <name>WHITECASTLE</name>
-    <file_name>whitecastle.png</file_name>
-  </logo>
-  <logo>
-    <name>WHO</name>
-    <file_name>who.png</file_name>
-  </logo>
-  <logo>
-    <name>WHOLEFOODS</name>
-    <file_name>wholefoods.png</file_name>
-  </logo>
-  <logo>
-    <name>WIENERWALD</name>
-    <file_name>wienerwald.png</file_name>
-  </logo>
-  <logo>
-    <name>WIFI</name>
+    <name>wifi</name>
     <file_name>wifi.png</file_name>
   </logo>
   <logo>
-    <name>WII</name>
-    <file_name>wii.png</file_name>
-  </logo>
-  <logo>
-    <name>WIKIPEDIA</name>
+    <name>Wikipedia</name>
     <file_name>wikipedia.png</file_name>
   </logo>
   <logo>
-    <name>WILLIAM HILL</name>
-    <file_name>william_hill.png</file_name>
-  </logo>
-  <logo>
-    <name>WILSON</name>
+    <name>Wilson</name>
     <file_name>wilson.png</file_name>
   </logo>
   <logo>
-    <name>WIMPY</name>
-    <file_name>wimpy.png</file_name>
-  </logo>
-  <logo>
-    <name>WINAMP</name>
+    <name>Winamp</name>
     <file_name>winamp.png</file_name>
   </logo>
   <logo>
-    <name>WINDOWS</name>
-    <file_name>windows.png</file_name>
-  </logo>
-  <logo>
-    <name>WINDOWSPHONE</name>
-    <file_name>windowsphone.png</file_name>
-  </logo>
-  <logo>
-    <name>WIRED</name>
-    <file_name>wired.png</file_name>
-  </logo>
-  <logo>
-    <name>WIZZAIR</name>
-    <file_name>wizzair.png</file_name>
-  </logo>
-  <logo>
-    <name>WNBA</name>
-    <file_name>wnba.png</file_name>
-  </logo>
-  <logo>
-    <name>WOOLMARK</name>
+    <name>Woolmark</name>
     <file_name>woolmark.png</file_name>
-  </logo>
-  <logo>
-    <name>WORDPRESS</name>
-    <file_name>wordpress.png</file_name>
-  </logo>
-  <logo>
-    <name>WRANGLER</name>
-    <file_name>wrangler.png</file_name>
-  </logo>
-  <logo>
-    <name>WTO</name>
-    <file_name>wto.png</file_name>
   </logo>
   <logo>
     <name>WWE</name>
     <file_name>wwe.png</file_name>
   </logo>
   <logo>
-    <name>WWF</name>
-    <file_name>wwf.png</file_name>
-  </logo>
-  <logo>
-    <name>WYBOROWA</name>
-    <file_name>wyborowa.png</file_name>
-  </logo>
-  <logo>
     <name>XBOX</name>
     <file_name>xbox.png</file_name>
   </logo>
   <logo>
-    <name>XEROX</name>
+    <name>Xerox</name>
     <file_name>xerox.png</file_name>
   </logo>
   <logo>
-    <name>XGAMES</name>
-    <file_name>xgames.png</file_name>
-  </logo>
-  <logo>
-    <name>YAHOO</name>
+    <name>Yahoo</name>
     <file_name>yahoo.png</file_name>
   </logo>
   <logo>
-    <name>YAMAHA</name>
-    <file_name>yamaha.png</file_name>
+    <name>Yellow Pages</name>
+    <file_name>yellow_pages.png</file_name>
   </logo>
   <logo>
-    <name>YAMMER</name>
-    <file_name>yammer.png</file_name>
+    <name>Zain</name>
+    <file_name>zain.png</file_name>
   </logo>
   <logo>
-    <name>YANDEX</name>
-    <file_name>yandex.png</file_name>
-  </logo>
-  <logo>
-    <name>YCOMBINATOR</name>
-    <file_name>ycombinator.png</file_name>
-  </logo>
-  <logo>
-    <name>YELP</name>
-    <file_name>yelp.png</file_name>
-  </logo>
-  <logo>
-    <name>YOAUTO</name>
-    <file_name>yoauto.png</file_name>
-  </logo>
-  <logo>
-    <name>YOIGO</name>
-    <file_name>yoigo.png</file_name>
-  </logo>
-  <logo>
-    <name>YOKOHAMA</name>
-    <file_name>yokohama.png</file_name>
-  </logo>
-  <logo>
-    <name>YONEX</name>
-    <file_name>yonex.png</file_name>
-  </logo>
-  <logo>
-    <name>YOPLAIT</name>
-    <file_name>yoplait.png</file_name>
-  </logo>
-  <logo>
-    <name>YOSUSHI</name>
-    <file_name>yosushi.png</file_name>
-  </logo>
-  <logo>
-    <name>YOUTUBE</name>
-    <file_name>youtube.png</file_name>
-  </logo>
-  <logo>
-    <name>YVES ROCHER</name>
-    <file_name>yves_rocher.png</file_name>
-  </logo>
-  <logo>
-    <name>ZAPPOS</name>
-    <file_name>zappos.png</file_name>
-  </logo>
-  <logo>
-    <name>ZARA</name>
-    <file_name>zara.png</file_name>
-  </logo>
-  <logo>
-    <name>ZAVVI</name>
-    <file_name>zavvi.png</file_name>
-  </logo>
-  <logo>
-    <name>ZAZ</name>
-    <file_name>zaz.png</file_name>
-  </logo>
-  <logo>
-    <name>ZEISS</name>
-    <file_name>zeiss.png</file_name>
-  </logo>
-  <logo>
-    <name>ZELLERS</name>
-    <file_name>zellers.png</file_name>
-  </logo>
-  <logo>
-    <name>ZENIT</name>
-    <file_name>zenit.png</file_name>
-  </logo>
-  <logo>
-    <name>ZENITH</name>
-    <file_name>zenith.png</file_name>
-  </logo>
-  <logo>
-    <name>ZIL</name>
-    <file_name>zil.png</file_name>
-  </logo>
-  <logo>
-    <name>ZILLOW</name>
-    <file_name>zillow.png</file_name>
-  </logo>
-  <logo>
-    <name>ZIPPO</name>
+    <name>Zippo</name>
     <file_name>zippo.png</file_name>
   </logo>
   <logo>
-    <name>ZOOPLA</name>
-    <file_name>zoopla.png</file_name>
-  </logo>
-  <logo>
-    <name>ZTE</name>
-    <file_name>zte.png</file_name>
-  </logo>
-  <logo>
-    <name>ZURICH</name>
-    <file_name>zurich.png</file_name>
-  </logo>
-  <logo>
-    <name>ZYNGA</name>
-    <file_name>zynga.png</file_name>
-  </logo>
-  <logo>
-    <name>ZYXEL</name>
-    <file_name>zyxel.png</file_name>
+    <name>Zune</name>
+    <file_name>zune.png</file_name>
   </logo>
 </logos>

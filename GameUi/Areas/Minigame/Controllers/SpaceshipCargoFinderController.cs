@@ -48,7 +48,9 @@ namespace SpaceTraffic.GameUi.Areas.Minigame.Controllers
 
             ViewBag.GameInfo = result.ReturnValue;
             ViewBag.StartDescription = string.Format("Kapitánovi se rozsypal náklad. " +
-                    "Pomož mu nasbírat alespoň {0} jednotek nákladu a dostaneš odměnu {1} kreditů.",
+                    "Pomož mu nasbírat alespoň {0} jednotek nákladu a dostaneš odměnu {1} kreditů. " +
+                    "Hra funguje na principu hada. Cílem hry je pomocí lodi (hada) sbírat náklad (jídlo). " + 
+                    "UPOZORNĚNÍ: Připrav se bude to rychlé!",
                     info.WinScore, info.RewardCount);
 
             return View();

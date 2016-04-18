@@ -207,13 +207,13 @@ namespace SpaceTraffic.Services.Contracts
     
         /// <summary>
         /// Support method for call checkAnswers method in LogoQuiz. This is because perform action
-        /// called from android, cannot passed list of answers as object.
+        /// called from android, cannot passed list of object.
         /// </summary>
         /// <param name="minigameId">minigame id</param>
-        /// <param name="answers">list of answers</param>
+        /// <param name="answersXml">answers in xml as string</param>
         /// <returns>success or failure result with return value</returns>
         [OperationContract]
-        Result checkAnswersSupportMethod(int minigameId, List<Answer> answers);
+        Result checkAnswersSupportMethod(int minigameId, string answersXml);
 
     }
 
@@ -235,8 +235,6 @@ namespace SpaceTraffic.Services.Contracts
             knownTypes.Add(typeof(Position));
             knownTypes.Add(typeof(List<Position>));
             knownTypes.Add(typeof(SpaceshipCargoFinderGameInfo));
-            knownTypes.Add(typeof(Answer));
-            knownTypes.Add(typeof(List<Answer>));
             knownTypes.Add(typeof(Logo));
             knownTypes.Add(typeof(Question));
             knownTypes.Add(typeof(List<Question>));

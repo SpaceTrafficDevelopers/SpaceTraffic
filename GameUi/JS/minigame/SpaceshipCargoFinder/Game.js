@@ -34,10 +34,13 @@ function Game(canvas, gameId, gameName, pauseDialog) {
     this.status;
 
     //game interval (speed regulation)
-    var interval = 70;
+    var interval = 80;
 
     //this for private method
     var that = this;
+
+    //countdown timer attribute
+    var timer = 3;
 
     //initialization method
     this.init = function (pieceSize, snakeLength) {
@@ -128,14 +131,30 @@ function Game(canvas, gameId, gameName, pauseDialog) {
     this.start = function () {
         preparePauseDialog();
 
-        that.gameLoop = setInterval(that.update, interval);
-        that.status = State.RUN;
+        countDownStart();
+        //that.gameLoop = setInterval(that.update, interval);
+        //that.status = State.RUN;
 
-        initPause()
+        initPause();
 
         //start sending update request and check collision request
         updateRequestMessage();
         checkCollisionMessage();
+    }
+
+    //countdown and start game
+    function countDownStart() {
+        if (timer == 0) {
+            that.gameLoop = setInterval(that.update, interval);
+            that.status = State.RUN;
+        }
+        else {
+            drawElements();
+            that.gameArea.paintTimer(that.contex, timer);
+            timer--;
+            setTimeout(countDownStart, 1500);
+        }
+            
     }
 
     //update request callback method

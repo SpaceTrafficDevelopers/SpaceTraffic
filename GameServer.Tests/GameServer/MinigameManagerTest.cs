@@ -483,6 +483,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
         {
             Assert.AreEqual(this.minigameDescriptor.MinigameId, descriptor.MinigameId);
             Assert.AreEqual(this.minigameDescriptor.Name, descriptor.Name);
+            Assert.AreEqual(this.minigameDescriptor.Controls, descriptor.Controls);
             Assert.AreEqual(this.minigameDescriptor.PlayerCount, descriptor.PlayerCount);
             Assert.AreEqual(this.minigameDescriptor.MinigameClassFullName, descriptor.MinigameClassFullName);
             Assert.AreEqual(this.minigameDescriptor.RewardAmount, descriptor.RewardAmount);
@@ -533,6 +534,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
             md.Name = "SpaceTraffic";
             md.PlayerCount = 2;
             md.Description = "Popis hry.";
+            md.Controls = "Hra se ovládá lopatou.";
             md.RewardType = RewardType.CREDIT;
             md.SpecificReward = null;
             md.RewardAmount = 10;

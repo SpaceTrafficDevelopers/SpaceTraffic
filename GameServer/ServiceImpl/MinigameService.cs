@@ -138,9 +138,9 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             return manager.authenticatePlayerForMinigame(userName, passwd);
         }
 
-        public Result checkAnswersSupportMethod(int minigameId, List<Answer> answers)
+        public Result checkAnswersSupportMethod(int minigameId, string answersXml)
         {
-            return manager.performAction(minigameId, "checkAnswers", answers);
+            return manager.performAction(minigameId, "checkAnswers", answersXml);
         }
     }
 }

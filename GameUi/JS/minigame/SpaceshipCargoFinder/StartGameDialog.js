@@ -1,5 +1,5 @@
 ﻿//start game dialog class
-function StartGameDialog(dialogElement, startGameFce, gameId, gameName, startDescription) {
+function StartGameDialog(dialogElement, startGameFce, gameId, gameName, startDescription, controls) {
     //dialog element
     this.dialogElement = dialogElement;
 
@@ -15,6 +15,9 @@ function StartGameDialog(dialogElement, startGameFce, gameId, gameName, startDes
     //start description
     this.startDescription = startDescription;
 
+    //controls description
+    this.controls = controls;
+
     //this for private methods
     var that = this;
 
@@ -22,6 +25,7 @@ function StartGameDialog(dialogElement, startGameFce, gameId, gameName, startDes
     this.showDialog = function () {
         this.dialogElement.empty();
         this.dialogElement.append(this.startDescription);
+        this.dialogElement.append('<br />Ovládání: ' + this.controls);
 
         prepareDialog();
     };
@@ -57,6 +61,6 @@ function StartGameDialog(dialogElement, startGameFce, gameId, gameName, startDes
             window.close();
         }
         else
-            that.startGameFce();
+            that.startGameFce();  
     }
 };

@@ -49,6 +49,11 @@ namespace SpaceTraffic.Entities.Minigames
         string Description { get; set; }
 
         /// <summary>
+        /// Controls description.
+        /// </summary>
+        string Controls { get; set; }
+
+        /// <summary>
         /// Start actions for minigame.
         /// </summary>
         ICollection<StartAction> StartActions { get; set; }

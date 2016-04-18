@@ -40,23 +40,12 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 
         public ActionResult GameRequest(bool list)
         {
-            object minigames = null;
             if (list)
-                 minigames = GSClient.MinigameService.getMinigameDescriptorListByActionName("TestAction", getCurrentPlayerId());
+                evaluateMinigameListByStartActionName("TestAction");
             else
-                minigames = GSClient.MinigameService.getMinigameDescriptorByActionName("TestAction", getCurrentPlayerId());
+                evaluateMinigameByStartActionName("TestAction");
 
-            if (minigames != null)
-                Session["minigame"] = minigames;
-
-            return RedirectToAction("");
-        }
-
-        public ActionResult AddPlayer(int minigameId)
-        {
-            this.GSClient.MinigameService.addPlayer(minigameId, this.getCurrentPlayerId());
-            
-            return RedirectToAction("");
+                return RedirectToAction("");
         }
     }
 }

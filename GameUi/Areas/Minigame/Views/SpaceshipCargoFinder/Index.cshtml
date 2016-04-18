@@ -77,7 +77,7 @@
 
                 //create and show start dialog
                 var startDialog = new StartGameDialog($('#startDialog'), game.start, @ViewBag.GameInfo.ID,
-                    '@ViewBag.GameInfo.Name', '@ViewBag.StartDescription');
+                    '@ViewBag.GameInfo.Name', '@ViewBag.StartDescription', '@ViewBag.GameInfo.Controls');
 
                 startDialog.showDialog();
             });
