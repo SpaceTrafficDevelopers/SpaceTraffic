@@ -1,4 +1,71 @@
+@import "Variables/fonts.less";
 
+@formBgColor: #373535;
+@formBorderColor: #595959;
+@sectionTitleColor: #48a2f0;
+@buttonBgColor: #159515;
+@linkHoverColor: #48a2f0;
+
+/*  SETTINGS    */
+.settings_form{
+    min-width:338px;
+    width: 400px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    //background: red;
+    text-align: center;
+    font-size: 1.4em;
+
+    section{
+    margin-bottom: 15px;
+    background: @formBgColor;
+    border: 3px solid @formBorderColor;
+    line-height: 30px;
+     font-weight: bold;
+
+        h1{
+            color: @sectionTitleColor;
+            font-family: @titleFont;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        hr{
+            width: 70%;
+            margin: auto;
+            
+            border: 1px solid @formBorderColor;
+        }
+
+        a{
+            text-decoration: none;
+            &:hover{
+                color: @linkHoverColor !important;
+            }
+        }
+
+        #deleteAccount{
+            color: red;
+            &:hover{
+                color: red !important;
+            }
+        }
+    }
+
+     input[type="submit"]{
+        cursor: pointer;
+        background: @buttonBgColor;
+        font-family: @textFont;
+        font-weight: 700;
+        margin-top: -10px;
+        padding: 3px 10px;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        border: 1px solid transparent;
+    }
+
+}
+/*--------------------------------*/
 .profile_category{
 	font-size:110%;
 	font-weight:bold;
