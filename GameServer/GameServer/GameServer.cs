@@ -227,7 +227,7 @@ namespace SpaceTraffic.GameServer
                 ConditionArgs = "100",
                 ExternalClient = true,
                 MinigameClassFullName = "SpaceTraffic.Game.Minigame.LogoQuiz, SpaceTraffic.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                ClientURL = "path_to_apk_or_google_play"
+                ClientURL = "Content/minigames/logo_quiz.apk"
             };
 
             this.minigameManager.registerMinigame(md);

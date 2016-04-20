@@ -460,6 +460,7 @@
     <Content Include="Content\less\Parts\buttons.less" />
     <Content Include="Content\less\Game\ships.less" />
     <Content Include="Content\less\PlannerView.less" />
+    <Content Include="Content\minigames\logo_quiz.apk" />
     <None Include="JS\minigame\spaceshipCargoFinderImport" />
     <Content Include="Libs\System.Web.Helpers.dll" />
     <Content Include="Libs\System.Web.Razor.dll" />
