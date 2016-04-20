@@ -441,6 +441,7 @@ using System.Linq.Expressions;
             HasKey(p => p.MinigameId);
             Property(p => p.Name).HasColumnType("varchar").HasMaxLength(256).IsRequired();
             Property(p => p.Description).HasColumnType("varchar").HasMaxLength(2048).IsRequired();
+            Property(p => p.Controls).HasColumnType("varchar").HasMaxLength(2048).IsRequired();
             Property(p => p.PlayerCount).HasColumnType("int").IsRequired();
             Property(p => p.RewardTypeInt).HasColumnType("int").IsRequired();
             Ignore(p => p.RewardType);

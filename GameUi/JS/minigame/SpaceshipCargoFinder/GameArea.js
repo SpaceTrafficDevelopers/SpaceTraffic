@@ -41,4 +41,12 @@ function GameArea(width, height, cellSize) {
 
         return false;
     }
+
+    //method for painting countdown timer
+    this.paintTimer = function (context, number) {
+        context.font = "60px Arial";
+        context.fillStyle = "white";
+        context.textAlign = "center";
+        context.fillText(number, this.width / 2, this.height / 2);
+    }
 };

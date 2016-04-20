@@ -29,6 +29,7 @@ using SpaceTraffic.Entities.PublicEntities;
 using SpaceTraffic.GameUi.Extensions;
 using System.Web.Security;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Entities.Minigames;
 
 namespace SpaceTraffic.GameUi.Controllers
 {
@@ -124,5 +125,30 @@ namespace SpaceTraffic.GameUi.Controllers
 			return true;
 		}
 
+        /// <summary>
+        /// Method for evaluating if player can play any minigame by action name.
+        /// If player can play any minigame, it is set into session and start in client.
+        /// </summary>
+        /// <param name="actionName">minigame start action name</param>
+        public void evaluateMinigameByStartActionName(string actionName)
+        {
+            IMinigameDescriptor minigame = GSClient.MinigameService.getMinigameDescriptorByActionName(actionName, getCurrentPlayerId());
+
+            if (minigame != null)
+                Session["minigame"] = minigame;
+        }
+
+        /// <summary>
+        /// Method for evaluating if player can play any minigames by action name.
+        /// If player can play any minigame, it is set into session and start in client.
+        /// </summary>
+        /// <param name="actionName">minigame start action name</param>
+        public void evaluateMinigameListByStartActionName(string actionName)
+        {
+            List<MinigameDescriptor> minigames = GSClient.MinigameService.getMinigameDescriptorListByActionName(actionName, getCurrentPlayerId());
+
+            if (minigames != null)
+                Session["minigame"] = minigames;
+        }
 	}
 }

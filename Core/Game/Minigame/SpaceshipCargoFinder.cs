@@ -120,6 +120,7 @@ namespace SpaceTraffic.Game.Minigame
             {
                 ID = this.ID,
                 Name = this.Descriptor.Name,
+                Controls = this.Descriptor.Controls,
                 Width = WIDTH,
                 Height = HEIGHT,
                 CellSize = CELL_SIZE,
@@ -168,6 +169,12 @@ namespace SpaceTraffic.Game.Minigame
         /// </summary>
         [DataMember]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Controls description.
+        /// </summary>
+        [DataMember]
+        public string Controls { get; set; }
 
         /// <summary>
         /// Game area width.

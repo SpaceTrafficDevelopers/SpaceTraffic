@@ -24,6 +24,8 @@ using SpaceTraffic.Entities;
 using SpaceTraffic.Data.Minigame;
 using System.IO;
 using System.Reflection;
+using System.Xml;
+using System.Text;
 
 namespace Core.Tests.Game.Minigame
 {
@@ -94,8 +96,8 @@ namespace Core.Tests.Game.Minigame
         {
             List<Question> questions = this.minigame.getQuestions();
 
-            bool winResult = this.minigame.checkAnswers(generateAnswers(questions, true));
-            bool looseResult = this.minigame.checkAnswers(generateAnswers(questions, false));
+            bool winResult = this.minigame.checkAnswers(generateAnswersXml(generateAnswers(questions, true)));
+            bool looseResult = this.minigame.checkAnswers(generateAnswersXml(generateAnswers(questions, false)));
             
             Assert.IsTrue(winResult);
             Assert.IsFalse(looseResult);
@@ -145,6 +147,34 @@ namespace Core.Tests.Game.Minigame
             }
 
             return answers;
+        }
+
+        /// <summary>
+        /// Method for generating xml from list of asnwers.
+        /// </summary>
+        /// <param name="answers">list of answers</param>
+        /// <returns>list of answer in xml as string</returns>
+        private string generateAnswersXml(List<Answer> answers){
+            StringBuilder builder = new StringBuilder();
+
+            using (XmlWriter writer = XmlWriter.Create(builder)) { 
+
+                writer.WriteStartDocument();
+                writer.WriteStartElement("answers");
+            
+                foreach(Answer answer in answers){
+                    writer.WriteStartElement("answer");
+
+                    writer.WriteElementString("id", answer.Id.ToString());
+                    writer.WriteElementString("selectedAnswer", answer.SelectedAnswer);
+                    
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+            }
+
+            return builder.ToString();
         }
 
 

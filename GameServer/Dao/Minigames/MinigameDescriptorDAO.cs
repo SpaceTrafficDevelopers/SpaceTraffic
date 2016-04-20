@@ -185,6 +185,7 @@ namespace SpaceTraffic.Dao
                     mg.Name = minigame.Name;
                     mg.PlayerCount = minigame.PlayerCount;
                     mg.Description = minigame.Description;
+                    mg.Controls = minigame.Controls;
                     mg.RewardType = minigame.RewardType;
                     mg.SpecificReward = minigame.SpecificReward;
                     mg.RewardAmount = minigame.RewardAmount;

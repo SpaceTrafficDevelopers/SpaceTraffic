@@ -1,4 +1,5 @@
-﻿/**
+﻿using NLog;
+/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Xml;
 
 namespace SpaceTraffic.Game.Minigame
 {
@@ -125,11 +127,16 @@ namespace SpaceTraffic.Game.Minigame
         /// <summary>
         /// Method for check list of answers.
         /// </summary>
-        /// <param name="answers">list of answers</param>
+        /// <param name="answersXml">answers in XML as string</param>
         /// <returns>true if player wins, otherwise false (even if player cheats)</returns>
-        public bool checkAnswers(List<Answer> answers)
-        {
+        public bool checkAnswers(string answersXml)
+        {         
+            List<Answer> answers = this.parseAnswersXml(answersXml);
+
             int score = 0;
+
+            if (answers == null || answers.Count == 0)
+                return false;
 
             bool duplicateExists = answers.GroupBy(n => n.Id).Any(g => g.Count() > 1);
             bool lessThanMin = answers.Min(n => n.Id) < 0;
@@ -155,6 +162,63 @@ namespace SpaceTraffic.Game.Minigame
             return score >= WIN_SCORE;
         }
 
+        /// <summary>
+        /// Method for parsing answers in xml.
+        /// Format:
+        /// <answers>
+        ///     <answer>
+        ///         <id>value</id>
+        ///         <selectedAnswers>value</selectedAnswers>
+        ///     </answer>
+        /// </answers>
+        /// </summary>
+        /// <param name="answerXml">xml as string in format</param>
+        /// <returns>list of answers</returns>
+        private List<Answer> parseAnswersXml(string answerXml)
+        {
+            List<Answer> answers = new List<Answer>();
+
+            try { 
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(answerXml);
+                parseRootNode(doc.DocumentElement, answers);
+                
+            }
+            catch (Exception e)
+            {
+                LogManager.GetCurrentClassLogger().InfoException("LogoQuiz: Error on parsing answers xml.", e);
+            }
+
+            return answers;
+        }
+
+        /// <summary>
+        /// Method for parsing answer xml root node.
+        /// </summary>
+        /// <param name="root">root node</param>
+        /// <param name="answers">empty list of answers</param>
+        private void parseRootNode(XmlNode root, List<Answer> answers)
+        {
+            foreach (XmlNode answerNode in root.ChildNodes)
+            {
+                Answer answer = new Answer();
+
+                foreach (XmlNode attr in answerNode.ChildNodes)
+                {
+                    switch (attr.Name)
+                    {
+                        case "id":
+                            answer.Id = int.Parse(attr.InnerText);
+                            break;
+                        case "selectedAnswer":
+                            answer.SelectedAnswer = attr.InnerText;
+                            break;
+                    }
+                }
+
+                answers.Add(answer);
+            }
+        }
     }
 
     /// <summary>
@@ -210,19 +274,16 @@ namespace SpaceTraffic.Game.Minigame
     /// <summary>
     /// Answer class.
     /// </summary>
-    [DataContract]
     public class Answer{
         
         /// <summary>
         /// Answer Id. It should be same as question Id.
         /// </summary>
-        [DataMember]
         public int Id { get; set; }
 
         /// <summary>
         /// Selected answer.
         /// </summary>
-        [DataMember]
         public string SelectedAnswer { get; set; } 
     }
 }

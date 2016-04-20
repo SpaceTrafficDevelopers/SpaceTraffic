@@ -186,11 +186,11 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             }
         }
 
-        public Result checkAnswersSupportMethod(int minigameId, List<Answer> answers)
+        public Result checkAnswersSupportMethod(int minigameId, string answersXml)
         {
             using (var channel = this.GetClientChannel())
             {
-                return (channel as IMinigameService).checkAnswersSupportMethod(minigameId, answers);
+                return (channel as IMinigameService).checkAnswersSupportMethod(minigameId, answersXml);
             }
         }
     }

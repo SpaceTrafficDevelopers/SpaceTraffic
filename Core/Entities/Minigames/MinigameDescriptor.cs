@@ -39,6 +39,9 @@ namespace SpaceTraffic.Entities.Minigames
         public string Description { get; set; }
 
         [DataMember]
+        public string Controls { get; set; }
+
+        [DataMember]
         public virtual ICollection<StartAction> StartActions { get; set; }
 
         //Mapping on RewardType enum.

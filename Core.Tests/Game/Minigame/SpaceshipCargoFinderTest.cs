@@ -117,6 +117,7 @@ namespace Core.Tests.Game.Minigame
 
             Assert.AreEqual(this.minigame.ID, info.ID);
             Assert.AreEqual(this.minigame.Descriptor.Name, info.Name);
+            Assert.AreEqual(this.minigame.Descriptor.Controls, info.Controls);
             Assert.AreEqual((int)this.minigame.Descriptor.RewardAmount, info.RewardCount);
             Assert.AreEqual(500, info.Width);
             Assert.AreEqual(500, info.Height);
