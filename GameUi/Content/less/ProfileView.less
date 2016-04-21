@@ -6,13 +6,81 @@
 @buttonBgColor: #159515;
 @linkHoverColor: #48a2f0;
 
+/*  PROFILE     */
+
+.profile_wrapper { 
+  //border : 2px solid #000; 
+  overflow:hidden;
+}
+
+.profile_wrapper div {
+   //min-height: 360px;
+   //padding: 10px;
+   margin-bottom: 10px;
+}
+
+#profile_experience {
+  //background-color: gray;
+  float:left; 
+  margin-right:20px;
+  width:338px;
+  height: 360px;
+  //border-right:2px solid #000;
+}
+
+#profile_experience canvas {
+    //background: green;
+    display: block;
+}
+
+#profile_experience #exp_text {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    height: 1.2em;
+}
+
+#profile_info { 
+  background-color: @formBgColor;
+  overflow: hidden;
+  margin: 10px;
+  min-height: 200px;
+  border: 3px solid @formBorderColor;
+  font-size: 1.4em;
+
+  h1{
+        color: @sectionTitleColor;
+        font-family: @titleFont;
+        text-align: center;
+    } 
+
+  p{
+        font-family: @textFont;
+        margin-left: 30px;
+    }
+
+  .profile_p_title{
+        font-weight: bold;
+  }
+}
+
+/*Potøeba pøedìlat, nedává smysl pøi zavøených menu*/
+@media screen and (max-width: 1526px) {
+   #profile_experience { 
+    float: none;
+    margin: auto;
+    margin-bottom: 10px;
+    border:0;
+    //border-bottom:2px solid #000;    
+  }
+}
+
 /*  SETTINGS    */
 .settings_form{
     min-width:338px;
     width: 400px;
-    margin: 0 auto;
+    margin: auto;
     margin-bottom: 10px;
-    //background: red;
     text-align: center;
     font-size: 1.4em;
 
@@ -21,7 +89,7 @@
     background: @formBgColor;
     border: 3px solid @formBorderColor;
     line-height: 30px;
-     font-weight: bold;
+    font-weight: bold;
 
         h1{
             color: @sectionTitleColor;
@@ -33,7 +101,6 @@
         hr{
             width: 70%;
             margin: auto;
-            
             border: 1px solid @formBorderColor;
         }
 
