@@ -1,5 +1,5 @@
 ﻿
-
+@import "../Variables/colors.less";
 
 .cargoCard{
 
@@ -57,6 +57,10 @@
 		}
 		.cargoAmount{
 			display: block;
+			font-size: 16px;
+			.value.bad {
+				color: @badColor;
+			}
 		}
 		.cargoFullPrice{
 			float: left;

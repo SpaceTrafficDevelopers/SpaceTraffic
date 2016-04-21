@@ -1,6 +1,11 @@
 ﻿
 @{
 	var cargo = ViewBag.cargo;
+	var cargoClass = "";
+	if (cargo.CargoCount <= 0)
+	{
+		cargoClass = "bad";
+	}
 }
 
 
@@ -15,7 +20,7 @@
 			<strong class="cargoVolume"><span class="label">Velikost:</span> <span class="value">@cargo.Cargo.Volume</span></strong>
 		</p>
 		<p class="detailedInfo">
-			<span class="cargoAmount"><span class="label">Množství:</span> <span class="value">@cargo.CargoCount</span></span>
+			<span class="cargoAmount"><span class="label">Množství:</span> <span class="value @cargoClass">@cargo.CargoCount</span></span>
 			<span class="cargoFullPrice"><span class="label">Celková cena:</span> <span class="value">@value <span class="icon creditsIcon smallIcon"></span></span></span>
 			<span class="cargoFullVolume"><span class="label">Celková velikost:</span> <span class="value">@spaceTaken</span> </span>
 			<span style="clear: both;"></span>
