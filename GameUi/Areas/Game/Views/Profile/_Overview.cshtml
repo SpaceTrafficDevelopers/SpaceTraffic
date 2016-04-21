@@ -1,34 +1,29 @@
 ﻿@{
     ViewBag.Title = "_Overview";
-	
 }
 
-<h2>Account overview</h2>
-<div class="profile">
-	<div class="profile_category">Account</div>
-		<table class="profile_detailTable">
-			<tr><td class="profile_detailTableTitle">Email:</td><td>IAmTester@te.st</td></tr>
-			<tr><td class="profile_detailTableTitle">Password:</td><td><a href="#">Change password</a></td></tr>
-			<tr><td class="profile_detailTableTitle">Control:</td><td><a class="profile_freezeButton" href="./#" title="Freeze account">Freeze account</a>
-            | 
-            <a class="profile_deleteButton" href="#" title="Delete account">Delete account</a></td></tr>
-		</table>
-
-	<h2>Experience</h2>
-	<div class="profile_category">Experience</div>
-	<div class="experience">
-		<table class="experiencetable">
-			<tr>
-				<td class="levelText">Level</td>
-				<td class="level">@ViewBag.currentLevel.LevelID</td>
-				<td class="dash">-</td>
-				<td class="levelName">@ViewBag.currentLevel.Name</td>
-			</tr>
-			<tr>
-				<td class="currentExp" colspan="2">@ViewBag.player.Experiences</td>
-				<td class="slash">/</td>
-				<td class="nextExp">@ViewBag.nextLevelExp</td>
-			</tr>
-		</table>
-	</div> 
+<div class="profile_wrapper">
+    <div id="profile_experience">
+        <canvas id="exp_ring" width="338" height="338"></canvas>
+        <!--<div id="exp_text">@ViewBag.player.Experiences / @ViewBag.nextLevelExp</div>-->
+        <div id="exp_text">Potřebných zkušeností: xxx</div>
+    </div>
+    <div id="profile_info">
+        <h1>Informace</h1>
+        <p>
+            <span class="profile_p_title">Jméno:</span> @ViewBag.player.FirstName
+        </p>
+        <p>
+            <span class="profile_p_title">Úroveň:</span> @ViewBag.currentLevel.LevelID - @ViewBag.currentLevel.Name
+        </p>
+        <p>
+            <span class="profile_p_title">Zkušenosti:</span> @ViewBag.player.Experiences
+        </p>
+        <p>
+            <span class="profile_p_title">Věk:</span>
+        </p>
+        <p>
+            <span class="profile_p_title">Info:</span>
+        </p>
+    </div>
 </div>
