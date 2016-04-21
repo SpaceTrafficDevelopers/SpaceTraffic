@@ -8,13 +8,16 @@ var updateShipPlan = function () {
 	var buff = '';
 	if (typeof toPlanet !== 'undefined' && toPlanet != null) {
 		buff = buff + '<span class="flyTo">Leť na: <strong>' + toPlanet.altName + '</strong></span>';
+		$('.hideWithoutPlan').css('visibility', 'visible');
+	} else {
+		$('.hideWithoutPlan').css('visibility', 'hidden');
 	}
 	if (wormholes.length > 0) {
 		buff = buff + '<p>Přes: ';
 		buff = buff + wormholes.map(function (hole) { return "→" + hole.destination; }).join('');
 		buff = buff + '</p>';
 	}
-		planPlace.html(buff);
+	planPlace.html(buff);
 }
 
 /* switching to star system where the ship is */
@@ -22,6 +25,9 @@ StarSystemLoader.switchToStarSystem(currentShipStarSystem);
 
 /* visual mode change */
 $('#viewport').addClass('selectPlanetMode');
+
+/* hide buttons */
+$('.hideWithoutPlan').css('visibility', 'hidden');
 
 $('#planningUI').parent().parent().find('.closebutton').click(function () {
 	$('#viewport').removeClass('selectPlanetMode');
