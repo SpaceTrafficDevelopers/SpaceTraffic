@@ -13,3 +13,9 @@ $('.sendMax').click(function (e) {
 	inp.val(inp.attr('max'));
 	send.click();
 });
+$('#cargoBuyForm form, #cargoSellForm form').submit(function () {
+	setTimeout(function () {
+		$('#mainPanel .refreshButton').click();
+	}, 800);
+	
+});

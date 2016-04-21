@@ -1,4 +1,6 @@
-﻿<div class="ajax" id="cargoBuyForm">
+﻿<a href="@Url.Action("Buy", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax refreshButton" data-related-element-id="mainPanelContent">↻</a>
+
+<div class="ajax" id="cargoBuyForm">
 	<h2>Koupit zboží</h2>
 	<div class="scrollable small">
 	@foreach(var cargo in ViewBag.trader.TraderCargos){
