@@ -13,6 +13,7 @@ var SvgNameplate = new Class({
 		this.dx = dx;
 		this.dy = dy;
 		if (relatedObject instanceof Planet) {
+			cssClass = cssClass + ' forPlanet' + relatedObject.name.trim().toLowerCase().replace(/ /g, '');
 			if (relatedObject.hasBase) {
 				cssClass = cssClass + ' withBase';
 			} else {

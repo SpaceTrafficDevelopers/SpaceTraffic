@@ -26,11 +26,20 @@ StarSystemLoader.switchToStarSystem(currentShipStarSystem);
 /* visual mode change */
 $('#viewport').addClass('selectPlanetMode');
 
+/* planet where the ship is has class currentPlanet*/
+$('head').append('<style id="currentPlanetStyle">'
+	+ '.nameplate.withBase.forPlanet' + currentPlanetName.trim().toLowerCase().replace(/ /g, '') + ' text { fill: #ec3131 !important; }'
+	+ '.nameplate.withBase.forPlanet' + currentPlanetName.trim().toLowerCase().replace(/ /g, '') + ' .baseIconSVG path { fill: #ec3131 !important; }'
+	+'</style>');
+
+
+
 /* hide buttons */
 $('.hideWithoutPlan').css('visibility', 'hidden');
 
 $('#planningUI').parent().parent().find('.closebutton').click(function () {
 	$('#viewport').removeClass('selectPlanetMode');
+	$('head #currentPlanetStyle').remove();
 });
 
 /* binding reactions on planets and wormholes clicking*/
