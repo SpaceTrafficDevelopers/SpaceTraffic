@@ -2,7 +2,8 @@
 
 $('#cargoBuyForm, #cargoSellForm, #repairingForm, #refuelingForm').on('successSend', function () {
 	setTimeout(function () {
-		$('.refreshButton').click();
+		$('#contextPanel .refreshButton').click();
+		$('#mainPanel .closebutton').click();
 	}, 800);
 });
 //send max amount button
