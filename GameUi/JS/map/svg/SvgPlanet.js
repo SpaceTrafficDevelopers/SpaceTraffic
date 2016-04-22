@@ -25,20 +25,35 @@ var SvgPlanet = new Class({
 	},
 	showPlanetDetails: function ($element) {/* detailed UI of planet on the right */
 		var hasBase = (typeof (this.body.hasBase) != "undefined" && this.body.hasBase !== null && this.body.hasBase);
-		if(hasBase){
+		if (hasBase) {
+			var url = this.getPlanetContextUrl();
 			$.ajax({
-				url: baseUrl + 'Game/Bases/Info',
+				url: url,
 				data: { planetName: this.planetName },
 				success: function (data) {
 					$element.html(data);
 					$element.find('a.ajax').click(function (e) {
 						ajaxClick(e, $(this));
-			});
+					});
 					$element.parent().addClass('open');
 					ViewportManager.doLayout();
 			}
 			});
 		}
+	},
+	/* returns which url is used during first planet load */
+	getPlanetContextUrl: function () {
+		switch (openedPlanetContext) {
+			case 'planetInfo':
+				return baseUrl + 'Game/Bases/Info';
+			case 'planetShips':
+				return baseUrl + 'Game/Bases/Ships';
+			case 'planetGoods':
+				return baseUrl + 'Game/Bases/Goods';
+			default:
+				return baseUrl + 'Game/Bases/Info';
+		}
+		
 	},
 	/* override */
 	buildObject: function (t) {
