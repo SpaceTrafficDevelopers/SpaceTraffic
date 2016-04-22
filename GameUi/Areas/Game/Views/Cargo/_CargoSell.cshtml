@@ -18,7 +18,7 @@
 
 					using (Html.BeginForm("Sell", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.trader.BaseId, cargoId = cargo.SpaceShipCargoId }, FormMethod.Post, null))
 					{
-						<input type="number" class="buyAmount" name="Amount" min="0" max="@cargo.CargoCount" value="@cargo.CargoCount" />
+						<input type="number" class="sellAmount" name="Amount" min="0" max="@cargo.CargoCount" value="@cargo.CargoCount" />
 						<input type="submit" class="btn btn-bad sendBtn" value="Prodat" />
 						<a class="btn btn-bad sendMax" href="">Prodat vše</a>
 						<div style="clear: both;"></div>
