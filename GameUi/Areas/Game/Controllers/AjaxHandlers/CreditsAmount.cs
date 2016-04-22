@@ -33,7 +33,8 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
 		/// <returns></returns>
 		public object handleRequest(dynamic data, AbstractController controller)
 		{
-			return controller.GSClient.PlayerService.GetPlayersCredits(controller.getCurrentPlayerId());
+			int credits = controller.GSClient.PlayerService.GetPlayersCredits(controller.getCurrentPlayerId());
+			return String.Format("{0:n0}", credits);
 		}
 	}
 }

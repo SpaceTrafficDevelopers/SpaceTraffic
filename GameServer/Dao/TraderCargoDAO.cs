@@ -87,7 +87,7 @@ namespace SpaceTraffic.Dao
                 try
                 {
                     var dbCargoLoadEntity = contextDB.TraderCargos.FirstOrDefault(x => x.CargoId.Equals(cargoLoadEntity.CargoId)
-                                && x.CargoPrice.Equals(cargoLoadEntity.CargoPrice) && x.TraderId.Equals(cargoLoadEntity.CargoOwnerId));
+                                && x.TraderId.Equals(cargoLoadEntity.CargoOwnerId));
 
                     if (dbCargoLoadEntity == null)
                         return false;
@@ -149,7 +149,7 @@ namespace SpaceTraffic.Dao
             using (var contextDB = CreateContext())
             {
                 var item = contextDB.TraderCargos.FirstOrDefault(x => x.CargoId.Equals(cargo.CargoId)
-                                && x.CargoPrice.Equals(cargo.CargoPrice) && x.TraderId.Equals(cargo.CargoOwnerId));
+                                && x.TraderId.Equals(cargo.CargoOwnerId));
 
                 if (item == null)
                 {
@@ -170,7 +170,7 @@ namespace SpaceTraffic.Dao
                     return false;
 
                 var dbCargo = contextDB.TraderCargos.FirstOrDefault(x => x.CargoId.Equals(cargo.CargoId)
-                                && x.CargoPrice.Equals(cargo.CargoPrice) && x.TraderId.Equals(cargo.CargoOwnerId));
+                                && x.TraderId.Equals(cargo.CargoOwnerId));
 
                 try
                 {

@@ -14,6 +14,7 @@
  game/Star.js
  game/Planet.js
  game/WormholeEndpoint.js
+ game/UIPlanets.js
  map/StarSystemLoader.js
  map/SvgStarSystemMap.js
  map/SvgRenderer.js
