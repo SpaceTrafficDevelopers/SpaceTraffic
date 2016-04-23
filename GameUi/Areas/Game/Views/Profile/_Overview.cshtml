@@ -1,12 +1,17 @@
 ﻿@{
     ViewBag.Title = "_Overview";
+    @Content.Script("../JS/ui/ProfileOverviewExp.js", Url)
+    bool lastLevel = (@ViewBag.expToNextL > 0) ? false : true;
 }
 
 <div class="profile_wrapper">
     <div id="profile_experience">
+        <img src="@Url.Content("~/Content/images/Account/Avatars/avatar_" + @ViewBag.avatarID + ".png")" alt="Avatar" id="profile_avatar" />
         <canvas id="exp_ring" width="338" height="338"></canvas>
-        <!--<div id="exp_text">@ViewBag.player.Experiences / @ViewBag.nextLevelExp</div>-->
-        <div id="exp_text">Potřebných zkušeností: xxx</div>
+        @if (!lastLevel)
+        {
+            <div id="exp_text">Potřebných zkušeností: @ViewBag.expToNextL</div>
+        }
     </div>
     <div id="profile_info">
         <h1>Informace</h1>
@@ -20,10 +25,28 @@
             <span class="profile_p_title">Zkušenosti:</span> @ViewBag.player.Experiences
         </p>
         <p>
-            <span class="profile_p_title">Věk:</span>
+            <span class="profile_p_title">Herní věk:</span> @ViewBag.playerGameAge
         </p>
         <p>
             <span class="profile_p_title">Info:</span>
         </p>
     </div>
 </div>
+@if (lastLevel)
+{
+    <script>
+    $(document).ready(function () {
+        var exp = @ViewBag.expInPercent;
+        ringAnimationStart(exp, true);
+    });
+    </script>
+}
+else
+{
+    <script>
+    $(document).ready(function () {
+        var exp = @ViewBag.expInPercent;
+        ringAnimationStart(exp, false);
+    });
+    </script>
+}
