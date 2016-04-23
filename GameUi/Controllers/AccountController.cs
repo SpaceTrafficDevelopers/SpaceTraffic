@@ -114,7 +114,6 @@ namespace SpaceTraffic.GameUi.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
-            DebugEx.WriteLineF("Registration step 1: {0}", model);
 
             if (ModelState.IsValid)
             {
@@ -122,18 +121,14 @@ namespace SpaceTraffic.GameUi.Controllers
                 MembershipCreateStatus createStatus;
                 Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
 
-                //if (createStatus == MembershipCreateStatus.Success)
-                //{
-                //    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie *//*);
-                //    return RedirectToAction("Index", "Home");
-                //}
-                //else
-                //{
-                //    ModelState.AddModelError("", ErrorCodeToString(createStatus));
-                //}
-                if(createStatus == MembershipCreateStatus.Success)
+                if (createStatus == MembershipCreateStatus.Success)
+                {
                     return RedirectToAction("RegistrationSuccessful", "Account");
-
+                }
+                else
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
+                }
             }
 
             return View(model);
