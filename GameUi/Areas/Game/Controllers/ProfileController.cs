@@ -30,10 +30,10 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
     {
         protected override void BuildTabs()
         {
-            this.Tabs.AddTab("Overview", "Profile", "Profile overview", "_Overview");
-            this.Tabs.AddTab("Personal", title: "Personal informations.", partialViewName: "_Personal");
-            this.Tabs.AddTab("Settings", title: "Profile settings.", partialViewName: "_Settings");
-            this.Tabs.AddTab("Achievements", title: "Achievements", partialViewName: "_AchievementsList");
+            this.Tabs.AddTab("Overview", text: "Profil", title: "Profile overview", partialViewName: "_Overview");
+            //this.Tabs.AddTab("Personal", title: "Personal informations.", partialViewName: "_Personal");
+            this.Tabs.AddTab("Settings", text: "Nastavení" ,title: "Profile settings.", partialViewName: "_Settings", partialViewModel: new Models.ProfileSettingsModel());
+            this.Tabs.AddTab("Achievements", text: "Úspěchy", title: "Achievements", partialViewName: "_AchievementsList");
         }
 
         public ActionResult Index()
@@ -55,7 +55,21 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			tabView.ViewBag.currentLevel = currentLevel;
 			tabView.ViewBag.nextLevel = nextLevel;
 			tabView.ViewBag.nextLevelExp = nextLevelExp;
-			return tabView;
+
+            //exp to percent for exp_ring
+            float requiredExp = (currentLevel.LevelID > 0) ? currentLevel.RequiredXP : nextLevel.RequiredXP;
+            tabView.ViewBag.expInPercent = (nextLevel == null) ? 100 : (int)(((player.Experiences - currentLevel.RequiredXP) / requiredExp) * 100);
+
+            //exp to next level
+            tabView.ViewBag.expToNextL = (nextLevel == null) ? 0 : (nextLevel.RequiredXP - player.Experiences);
+
+            //avatar image
+            tabView.ViewBag.avatarID = currentLevel.LevelID;
+
+            //player game age 
+            tabView.ViewBag.playerGameAge = 0; //todo: implement
+
+            return tabView;
         }
 
         public PartialViewResult Personal()
