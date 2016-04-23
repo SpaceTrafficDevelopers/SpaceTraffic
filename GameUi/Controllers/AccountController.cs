@@ -108,34 +108,6 @@ namespace SpaceTraffic.GameUi.Controllers
 
         //
         // POST: /Account/Register
-        /*
-        [HttpPost]
-        public ActionResult Register(RegisterModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Attempt to register the user
-                MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
-
-                if (createStatus == MembershipCreateStatus.Success)
-                {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie *//*);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-        */
-
-        //
-        // POST: /Account/Register
 
         [HttpPost]
         [AllowAnonymous]
@@ -143,6 +115,7 @@ namespace SpaceTraffic.GameUi.Controllers
         public ActionResult Register(RegisterModel model)
         {
             DebugEx.WriteLineF("Registration step 1: {0}", model);
+
             if (ModelState.IsValid)
             {
 
@@ -158,57 +131,18 @@ namespace SpaceTraffic.GameUi.Controllers
                 //{
                 //    ModelState.AddModelError("", ErrorCodeToString(createStatus));
                 //}
-                //RegistrationModel regModel = new RegistrationModel();
-                //regModel.AccountInfo = model;
-                //regModel.WizzardStep = RegistrationWizzardStep.ACCOUNT_INFO;
-                //this.TempData["registration"] = regModel;
-
-                //return View("RegisterStep2", new PlayerInfoModel());
                 if(createStatus == MembershipCreateStatus.Success)
                     return RedirectToAction("RegistrationSuccessful", "Account");
 
             }
+
             return View(model);
         }
-
-        //
-        // GET: /Account/RegisterStep2
-
-        //public ActionResult RegisterStep2()
-        //{
-        //    return View();
-        //}
-
-        //
-        // POST: /Account/RegisterStep2
-
-        /*[HttpPost]
-        public ActionResult RegisterStep2(PlayerInfoModel model)
-        {
-            RegistrationModel regModel = (RegistrationModel)TempData["registration"];
-            if (ModelState.IsValid)
-            {
-                regModel.PlayerInfo = model;
-                regModel.WizzardStep = RegistrationWizzardStep.ACCOUNT_INFO;
-                TempData["registration"] = regModel;
-
-                return RedirectToAction("RegistrationSuccessful", "Account");
-            }
-            return RedirectToAction("RegistrationSuccessful", "Account");
-        }*/
 
         //
         // GET: /Account/RegistrationSuccessful
         [AllowAnonymous]
         public ActionResult RegistrationSuccessful()
-        {
-            return View();
-        }
-
-        //
-        // GET: /Account/RegistrationFailed
-        [AllowAnonymous]
-        public ActionResult RegistrationFailed()
         {
             return View();
         }
