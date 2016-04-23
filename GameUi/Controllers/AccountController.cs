@@ -108,20 +108,22 @@ namespace SpaceTraffic.GameUi.Controllers
 
         //
         // POST: /Account/Register
-        /*
+
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
+
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
+
                 MembershipCreateStatus createStatus;
                 Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie *//*);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("RegistrationSuccessful", "Account");
                 }
                 else
                 {
@@ -129,86 +131,13 @@ namespace SpaceTraffic.GameUi.Controllers
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
-        */
-
-        //
-        // POST: /Account/Register
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
-        {
-            DebugEx.WriteLineF("Registration step 1: {0}", model);
-            if (ModelState.IsValid)
-            {
-
-                MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
-
-                //if (createStatus == MembershipCreateStatus.Success)
-                //{
-                //    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie *//*);
-                //    return RedirectToAction("Index", "Home");
-                //}
-                //else
-                //{
-                //    ModelState.AddModelError("", ErrorCodeToString(createStatus));
-                //}
-                //RegistrationModel regModel = new RegistrationModel();
-                //regModel.AccountInfo = model;
-                //regModel.WizzardStep = RegistrationWizzardStep.ACCOUNT_INFO;
-                //this.TempData["registration"] = regModel;
-
-                //return View("RegisterStep2", new PlayerInfoModel());
-                if(createStatus == MembershipCreateStatus.Success)
-                    return RedirectToAction("RegistrationSuccessful", "Account");
-
-            }
-            return View(model);
-        }
-
-        //
-        // GET: /Account/RegisterStep2
-
-        //public ActionResult RegisterStep2()
-        //{
-        //    return View();
-        //}
-
-        //
-        // POST: /Account/RegisterStep2
-
-        /*[HttpPost]
-        public ActionResult RegisterStep2(PlayerInfoModel model)
-        {
-            RegistrationModel regModel = (RegistrationModel)TempData["registration"];
-            if (ModelState.IsValid)
-            {
-                regModel.PlayerInfo = model;
-                regModel.WizzardStep = RegistrationWizzardStep.ACCOUNT_INFO;
-                TempData["registration"] = regModel;
-
-                return RedirectToAction("RegistrationSuccessful", "Account");
-            }
-            return RedirectToAction("RegistrationSuccessful", "Account");
-        }*/
 
         //
         // GET: /Account/RegistrationSuccessful
         [AllowAnonymous]
         public ActionResult RegistrationSuccessful()
-        {
-            return View();
-        }
-
-        //
-        // GET: /Account/RegistrationFailed
-        [AllowAnonymous]
-        public ActionResult RegistrationFailed()
         {
             return View();
         }
@@ -291,34 +220,16 @@ namespace SpaceTraffic.GameUi.Controllers
             switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:
-                    return "User name already exists. Please enter a different user name.";
+                    return "Toto jméno je již obsazené.";
 
                 case MembershipCreateStatus.DuplicateEmail:
-                    return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
-
-                case MembershipCreateStatus.InvalidPassword:
-                    return "The password provided is invalid. Please enter a valid password value.";
-
-                case MembershipCreateStatus.InvalidEmail:
-                    return "The e-mail address provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidAnswer:
-                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidQuestion:
-                    return "The password retrieval question provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidUserName:
-                    return "The user name provided is invalid. Please check the value and try again.";
+                    return "Účet s tímto e-mailem již existuje.";
 
                 case MembershipCreateStatus.ProviderError:
-                    return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                case MembershipCreateStatus.UserRejected:
-                    return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+                    return "Došlo k chybě při registraci. Prosím zkuste to znovu.";
 
                 default:
-                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+                    return "Nastala neznámá chyba. Prosím zkuste to znovu, nebo kontaktujte tým Space Traffic.";
             }
         }
         #endregion
