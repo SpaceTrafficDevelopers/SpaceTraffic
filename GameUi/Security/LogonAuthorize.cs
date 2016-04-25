@@ -25,10 +25,15 @@ namespace SpaceTraffic.GameUi.Security
 {
     /// <summary>
     /// LogonAuthorize is filter that derives from AuthorizeAttribute, which runs Authorize filter on every controller except controllers with [AllowAnonymous] attribute.
+    /// This filter also handles Unauthorized requests -> redirects to login page.
     /// This filter must be registered in global.asax file as global filter to work globaly.
     /// </summary>
     public sealed class LogonAuthorize : AuthorizeAttribute
     {
+        /// <summary>
+        /// Called when a process requests authorization.
+        /// </summary>
+        /// <param name="filterContext">AuthorizationContext</param>
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             bool skipAuthorization = filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
@@ -36,6 +41,35 @@ namespace SpaceTraffic.GameUi.Security
             if (!skipAuthorization)
             {
                 base.OnAuthorization(filterContext);
+            }
+        }
+
+        /// <summary>
+        /// HTTP 401 result for unauthorized request
+        /// </summary>
+        private class Http401Result : ActionResult
+        {
+            public override void ExecuteResult(ControllerContext context)
+            {
+                context.HttpContext.Response.StatusCode = 401;
+                context.HttpContext.Response.Write("Vaše přihlášení vypršelo.");
+                context.HttpContext.Response.End();
+            }
+        }
+
+        /// <summary>
+        /// Handles unauthorized requests
+        /// </summary>
+        /// <param name="filterContext">Authorization context</param>
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAjaxRequest())
+            {
+                filterContext.Result = new Http401Result();
+            }
+            else
+            {
+                base.HandleUnauthorizedRequest(filterContext);
             }
         }
     }
