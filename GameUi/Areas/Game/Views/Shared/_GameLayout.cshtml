@@ -48,7 +48,7 @@
 				<div class="rightPart">
 					<div class="brick">@Membership.GetUser().UserName</div>
 					<div class="brick">
-						<a href="#">Odhlásit se</a>
+						<a href="@Url.Action("LogOff", "Account", new { Area = String.Empty })">Odhlásit se</a>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -137,6 +137,22 @@
 	@Content.JSImport("~/JS/jsimport", Url)
 	@Content.JSImport("~/JS/layoutImport", Url)
 	@RenderSection("Scripts", false)
+
+    <script>
+        $(document).ready(function () {
+              $.ajaxSetup({
+                  cache: false
+              });
+
+              $(document).ajaxError(
+                  function (e, request) {
+                      if (request.status == 401) {
+                          window.location.replace("@Url.Action("LogOn", "Account", new { Area = String.Empty })");
+                      }
+                  }
+              );
+          })
+    </script>
 
   </body>
 </html>
