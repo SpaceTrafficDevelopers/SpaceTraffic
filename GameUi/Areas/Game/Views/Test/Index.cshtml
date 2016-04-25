@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@section LinkStyles {
+	<link href="@Url.Content("~/JS/libs/test/qunit-1.23.1.css")" rel="stylesheet" type="text/css" />
+}
+<div class="scrollable">
+	<h1 id="qunit-header">Qunit testy pro přihlášeného uživatele</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="qunit-fixture"></div>
+</div>
+
+@section ContextPanel {
+}
+
+@section Scripts {
+	@Content.Script("../JS/libs/test/qunit-1.23.1.js", Url)
+	@Content.STJS("tests/StarSystemLoaderTest.js", Url)
+	@Content.STJS("tests/SvgStarSystemMap.Tests.js", Url)
+	@Content.STJS("tests/StarSystemObjects.Tests.js", Url)
+	<script>
+		$('#mainPanel').addClass('open');
+	</script>
+}

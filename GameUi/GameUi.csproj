@@ -108,6 +108,7 @@
     <Compile Include="Areas\Game\Controllers\ReferencesController.cs" />
     <Compile Include="Areas\Game\Controllers\CargoController.cs" />
     <Compile Include="Areas\Game\Controllers\PlannerController.cs" />
+    <Compile Include="Areas\Game\Controllers\TestController.cs" />
     <Compile Include="Areas\Game\Models\CargoSellModel.cs" />
     <Compile Include="Areas\Game\Models\CargoBuyModel.cs" />
     <Compile Include="Areas\Game\Models\ProfileSettingsModel.cs" />
@@ -338,6 +339,7 @@
     <Content Include="Content\less\BasesView.less" />
     <Content Include="Areas\Game\Views\Cargo\CargoCards\_CargoCardBasic.cshtml" />
     <Content Include="Content\less\Game\cargos.less" />
+    <Content Include="Areas\Game\Views\Test\Index.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\ShipsView.less" />
@@ -431,6 +433,8 @@
     <Content Include="JS\libs\mousewheel\jquery.mousewheel.js" />
     <Content Include="JS\libs\mousewheel\jquery.mousewheel.min.js" />
     <Content Include="JS\libs\random\seedrandom.js" />
+    <Content Include="JS\libs\test\qunit-1.23.1.css" />
+    <Content Include="JS\libs\test\qunit-1.23.1.js" />
     <Content Include="JS\map\GalaxyMapLoader.js" />
     <Content Include="JS\map\GraphicTransform.js" />
     <Content Include="JS\map\StarSystemLoader.js" />
