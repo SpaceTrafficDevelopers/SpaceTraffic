@@ -130,6 +130,45 @@ a.rules {
     text-decoration: underline;
 }
 
+/* Form validation error messages */
+.field-validation-error {
+    margin-top: 5px;
+    width: 251px;
+    font-size: 0.8em;
+    max-height: 30px;
+    padding: 3px 0;
+    background-color: rgba(255, 0, 0, .4); 
+    display: block;
+
+    animation: fadeIn 0.6s ease-out;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-errors {
+    width: 251px;
+    margin: 0 10px 15px 10px;
+    font-size: 1em;
+    text-align: center;
+    background-color: rgba(255, 0, 0, .4);
+}
+
+.validation-summary-errors ul {
+    list-style-type: none;
+    display: block;
+    padding: 3px 0;
+    max-height: 30px;
+
+    animation: fadeIn 0.6s ease-out;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+/*------------------------------*/
+
 /* Buttons */
 .button {
     color: @textColor;
@@ -184,6 +223,27 @@ a.cancel:hover {
     50% {opacity: 1;}
     75% {opacity: 0.5;}
     100% {opacity: 1;}
+}
+
+/* FadeIn animation - Error messages */
+@keyframes fadeIn {
+    0% {
+        display: none;
+        max-height: 0;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        max-height: 0;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        max-height: 30px;
+        opacity: 1;
+    }
 }
 
 @import "ModalWindow.less";
