@@ -84,11 +84,12 @@ namespace SpaceTraffic.GameUi.Models
 
     public class LostPasswordModel
     {
-        [Required]
+        [Required(ErrorMessage = "Jméno je povinné.")]
+        [StringLength(50, ErrorMessage = "Jméno musí mít alespoň {2} znaků.", MinimumLength = 5)]
         [DataType(DataType.Text)]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Email je povinný.")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
     }
