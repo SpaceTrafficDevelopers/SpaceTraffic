@@ -93,6 +93,12 @@ namespace SpaceTraffic.GameUi.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
+            Session.Abandon();
+
+            // clears session cookie
+            HttpCookie sessionCookie = new HttpCookie("ASP.NET_SessionId", string.Empty);
+            sessionCookie.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(sessionCookie);
 
             return RedirectToAction("Index", "Home");
         }
