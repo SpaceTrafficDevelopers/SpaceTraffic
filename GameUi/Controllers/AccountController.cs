@@ -79,7 +79,7 @@ namespace SpaceTraffic.GameUi.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Špatné uživatelské jméno nebo heslo.");
+                    ModelState.AddModelError("", "Špatné jméno nebo heslo.");
                 }
             }
 
