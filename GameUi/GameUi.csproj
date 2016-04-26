@@ -457,10 +457,13 @@
     <Content Include="JS\minigame\SpaceshipCargoFinder\SendAjaxMessage.js" />
     <Content Include="JS\minigame\SpaceshipCargoFinder\Snake.js" />
     <Content Include="JS\minigame\SpaceshipCargoFinder\StartGameDialog.js" />
+    <Content Include="JS\tests\AjaxTest.js" />
     <Content Include="JS\tests\JQuerySvgDomTest.js" />
     <Content Include="JS\tests\StarSystemLoaderTest.js" />
+    <Content Include="JS\tests\StarSystemMapUITest.js" />
     <Content Include="JS\tests\StarSystemObjects.Tests.js" />
     <Content Include="JS\tests\SvgStarSystemMap.Tests.js" />
+    <Content Include="JS\tests\UIAreThereTest.js" />
     <Content Include="JS\ui\Ajax.js" />
     <Content Include="JS\ui\GameWindowTabs.js" />
     <Content Include="JS\ui\InfoMarquee.js" />
