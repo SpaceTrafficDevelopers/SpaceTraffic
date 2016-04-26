@@ -221,7 +221,7 @@ namespace SpaceTraffic.GameServerTests.Dao
 
             tc = target.GetCargoByID(traderCargo.TraderCargoId) as TraderCargo;
 
-            Assert.IsNull(tc);
+            Assert.AreEqual(tc.CargoCount, 0);
         }
 
         private Cargo CreateCargo()

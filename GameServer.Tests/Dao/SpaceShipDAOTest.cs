@@ -138,20 +138,53 @@ namespace SpaceTraffic.GameServerTests.Dao
             target.RemoveSpaceShipById(spaceShip.SpaceShipId);
         }
 
-        /// <summary>
-        ///A test for GetSpaceShipsByPlayer
-        ///</summary>
-        [TestMethod()]
-        public void GetSpaceShipsByPlayerTest()
-        {
-            SpaceShipDAO target = new SpaceShipDAO();
-            SpaceShip spaceShip = CreateSpaceShip();
-            target.InsertSpaceShip(spaceShip);
-            List<SpaceShip> spaceShips = target.GetSpaceShipsByPlayer(player.PlayerId);
-            Assert.IsNotNull(spaceShips);
+		/// <summary>
+		///A test for GetSpaceShipsByPlayer
+		///</summary>
+		[TestMethod()]
+		public void GetSpaceShipsByPlayerTest()
+		{
+			SpaceShipDAO target = new SpaceShipDAO();
+			SpaceShip spaceShip = CreateSpaceShip();
+			target.InsertSpaceShip(spaceShip);
+			List<SpaceShip> spaceShips = target.GetSpaceShipsByPlayer(player.PlayerId);
+			Assert.IsNotNull(spaceShips);
 
-            target.RemoveSpaceShipById(spaceShip.SpaceShipId);
-        }
+			target.RemoveSpaceShipById(spaceShip.SpaceShipId);
+		}
+
+		/// <summary>
+		///A test for GetPlayersShipsAtBase
+		///</summary>
+		[TestMethod()]
+		public void GetSpaceShipsAtBaseByPlayerTest()
+		{
+			SpaceShipDAO target = new SpaceShipDAO();
+			SpaceShip spaceShip = CreateSpaceShip();
+			SpaceShip spaceShip2 = CreateSpaceShip();
+			target.InsertSpaceShip(spaceShip);
+			target.InsertSpaceShip(spaceShip2);
+			IList<SpaceShip> spaceShips = target.GetPlayersShipsAtBase(player.PlayerId, newBase.BaseId);
+			Assert.IsNotNull(spaceShips);
+			Assert.AreEqual(2, spaceShips.Count);
+
+			target.RemoveSpaceShipById(spaceShip.SpaceShipId);
+		}
+
+		/// <summary>
+		///A test for GetDetailedSpaceShipById
+		///</summary>
+		[TestMethod()]
+		public void GetDetailedSpaceShipByIdTest()
+		{
+			SpaceShipDAO target = new SpaceShipDAO();
+			SpaceShip spaceShip = CreateSpaceShip();
+			target.InsertSpaceShip(spaceShip);
+			SpaceShip actual = target.GetDetailedSpaceShipById(spaceShip.SpaceShipId);
+			Assert.IsNotNull(actual);
+			Assert.IsNotNull(actual.Base);
+			Assert.IsNotNull(actual.SpaceShipsCargos);
+		}
 
         /// <summary>
         ///A test for InsertSpaceShip
