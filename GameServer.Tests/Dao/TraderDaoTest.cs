@@ -99,30 +99,56 @@ namespace SpaceTraffic.GameServerTests.Dao
             Assert.IsTrue(traders.Count == 2, "GetTradersTest: List of traders does not have expected number of items.");
         }
 
-        /// <summary>
-        ///A test for GetTraderByBaseId
-        ///</summary>
-        [TestMethod()]
-        public void GetTraderByBaseIdTest()
-        {
-            TraderDAO target = new TraderDAO();
-            traderTest = CreateTrader();
-            target.InsertTrader(traderTest);
+		/// <summary>
+		///A test for GetTraderByBaseId
+		///</summary>
+		[TestMethod()]
+		public void GetTraderByBaseIdTest()
+		{
+			TraderDAO target = new TraderDAO();
+			traderTest = CreateTrader();
+			target.InsertTrader(traderTest);
 
-            baseTest2 = new Base();
-            baseTest2.BaseId = 2;
-            baseTest2.Planet = "Naboo";
+			baseTest2 = new Base();
+			baseTest2.BaseId = 2;
+			baseTest2.Planet = "Naboo";
 
-            BaseDAO bd = new BaseDAO();
-            bd.InsertBase(baseTest2);
+			BaseDAO bd = new BaseDAO();
+			bd.InsertBase(baseTest2);
 
-            traderTest.BaseId = baseTest2.BaseId;
-            target.InsertTrader(traderTest);
-            
-            Trader newTrader = target.GetTraderByBaseId(traderTest.BaseId);
+			traderTest.BaseId = baseTest2.BaseId;
+			target.InsertTrader(traderTest);
 
-            TraderTest(newTrader);
-        }
+			Trader newTrader = target.GetTraderByBaseId(traderTest.BaseId);
+
+			TraderTest(newTrader);
+		}
+
+		/// <summary>
+		///A test for GetTraderByBaseIdWithCargo
+		///</summary>
+		[TestMethod()]
+		public void GetTraderByBaseIdWithCargoTest()
+		{
+			TraderDAO target = new TraderDAO();
+			traderTest = CreateTrader();
+			target.InsertTrader(traderTest);
+
+			baseTest2 = new Base();
+			baseTest2.BaseId = 2;
+			baseTest2.Planet = "Naboo";
+
+			BaseDAO bd = new BaseDAO();
+			bd.InsertBase(baseTest2);
+
+			traderTest.BaseId = baseTest2.BaseId;
+			target.InsertTrader(traderTest);
+
+			Trader newTrader = target.GetTraderByBaseIdWithCargo(traderTest.BaseId);
+
+			TraderTest(newTrader);
+			Assert.IsNotNull(newTrader.TraderCargos);
+		}
         
         /// <summary>
         ///A test for GetTraderById

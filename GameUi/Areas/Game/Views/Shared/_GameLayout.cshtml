@@ -29,8 +29,10 @@
 	<link href="@Url.Content("~/Content/Game.less")" rel="stylesheet" type="text/css" />
 	<link href="@Url.Content("~/Content/themes/base/jquery.ui.base.css")" rel="stylesheet" type="text/css" />
       <script type="text/javascript">
-		var baseUrl = "@Url.Content("~")";
+	  	var baseUrl = "@Url.Content("~")";
+	  	var testing = false;
   	</script>
+  	@RenderSection("LinkStyles", false)
 
   </head>
   <body>
@@ -136,6 +138,7 @@
 	@Content.Script("jquery.flash-message.js", Url)
 	@Content.JSImport("~/JS/jsimport", Url)
 	@Content.JSImport("~/JS/layoutImport", Url)
+  	
 	@RenderSection("Scripts", false)
 
     <script>
