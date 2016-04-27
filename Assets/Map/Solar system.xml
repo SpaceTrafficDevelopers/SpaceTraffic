@@ -71,7 +71,7 @@
 						</planet>
 						<planet altName="Země" name="Sol 3">
 								<trajectory>
-										<circularOrbit period="365" initialAngle="80.0" radius="100"/>
+										<circularOrbit period="365" initialAngle="80.0" direction="clockwise" radius="100"/>
 								</trajectory>
 								<details>
 										<gravity>0</gravity>
