@@ -81,8 +81,8 @@ namespace SpaceTraffic.GameServerTests.GameServer
             startActionDao.InsertStartAction(startAction1);
             startActionDao.InsertStartAction(startAction2);
 
-            player1 = CreatePlayer("Karel", "Malý", "player");
-            player2 = CreatePlayer("Anakin", "Skywalker", "Darth Vader");
+            player1 = CreatePlayer("player");
+            player2 = CreatePlayer("Darth Vader");
 
             PlayerDAO playerDao = new PlayerDAO();
             playerDao.InsertPlayer(player1);
@@ -553,24 +553,17 @@ namespace SpaceTraffic.GameServerTests.GameServer
         /// <summary>
         /// Method for creating player.
         /// </summary>
-        /// <param name="firstName">first name</param>
-        /// <param name="lastName">last name</param>
         /// <param name="playerName">player name</param>
         /// <returns>return player</returns>
-        private Player CreatePlayer(string firstName, string lastName, string playerName)
+        private Player CreatePlayer(string playerName)
         {
             Player player = new Player();
 
-            player.FirstName = firstName;
-            player.LastName = lastName;
             player.PlayerName = playerName;
-            player.CorporationName = "ZCU";
+            player.PlayerShowName = playerName;
             player.Credit = 100;
-            player.DateOfBirth = new DateTime(2008, 2, 16, 12, 15, 12);
             player.Email = "email@email.cz";
             player.PsswdHash = "o8Drx+MJghpMvCN5v0oGB1AB0m0TABBWjt+p1jFsAnvQkBWaGkqFiMo2r6fPeG5+";
-            player.PsswdSalt = "";
-            player.OrionEmail = "email@students.zcu.cz";
             player.AddedDate = DateTime.Now;
             player.LastVisitedDate = DateTime.Now;
             player.ExperienceLevel = 11;

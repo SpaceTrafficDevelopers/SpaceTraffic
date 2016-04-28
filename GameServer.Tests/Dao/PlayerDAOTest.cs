@@ -222,11 +222,11 @@ namespace SpaceTraffic.GameServerTests.Dao
             PlayerDAO dao = new PlayerDAO();
             int id = dao.GetPlayerByName("player").PlayerId;
             Player player = dao.GetPlayerById(id);
-            player.FirstName = "Lukáš";
+            player.PlayerShowName = "Lukáš";
             bool result = dao.UpdatePlayerById(player);
             Player comparePlayer = dao.GetPlayerById(id);
             Assert.IsTrue(result);
-            Assert.IsTrue(comparePlayer.FirstName.Equals("Lukáš"));
+            Assert.IsTrue(comparePlayer.PlayerShowName.Equals("Lukáš"));
         }
 
         /// <summary>
@@ -261,16 +261,11 @@ namespace SpaceTraffic.GameServerTests.Dao
         private Player CreatePlayer()
         {
             Player newPlayer = new Player();
-            newPlayer.FirstName = "Karel";
-            newPlayer.LastName = "Malý";
             newPlayer.PlayerName = "player";
-            newPlayer.CorporationName = "ZCU";
+            newPlayer.PlayerShowName = "Player";
             newPlayer.Credit = 10;
-            newPlayer.DateOfBirth = new DateTime(2008, 2, 16, 12, 15, 12);
             newPlayer.Email = "email@email.cz";
             newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
-            newPlayer.PsswdSalt = "cbOpKKxb";
-            newPlayer.OrionEmail = "email@students.zcu.cz";
             newPlayer.AddedDate = DateTime.Now;
             newPlayer.LastVisitedDate = DateTime.Now;
             return newPlayer;

@@ -318,16 +318,12 @@ namespace SpaceTraffic.GameServerTests.Dao
         private Player CreatePlayer()
         {
             Player newPlayer = new Player();
-            newPlayer.FirstName = "Karel";
-            newPlayer.LastName = "Malý";
-            newPlayer.PlayerName = RandomString(4);
-            newPlayer.CorporationName = "ZCU";
+            string pName = RandomString(4);
+            newPlayer.PlayerName = pName.ToLower();
+            newPlayer.PlayerShowName = pName;
             newPlayer.Credit = 0;
-            newPlayer.DateOfBirth = new DateTime(2008, 2, 16, 12, 15, 12);
             newPlayer.Email = "email@email.cz";
             newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
-            newPlayer.PsswdSalt = "cbOpKKxb";
-            newPlayer.OrionEmail = "email@students.zcu.cz";
             newPlayer.AddedDate = DateTime.Now;
             newPlayer.LastVisitedDate = DateTime.Now;
             return newPlayer;

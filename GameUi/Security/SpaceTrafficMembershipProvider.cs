@@ -229,7 +229,23 @@ namespace SpaceTraffic.GameUi.Security
 
             string pwdHash = pwdHasher.HashPassword(password);
 
-            Entities.Player newPlayer = new Entities.Player() { PlayerName = usernameLower, FirstName = username, PsswdHash = pwdHash, PsswdSalt="", Email = email, AddedDate = DateTime.Now, DateOfBirth = DateTime.Now, LastVisitedDate = DateTime.Now, LastName = "", ExperienceLevel = 0, Experiences = 0, Credit = 18000 };
+            Entities.Player newPlayer = new Entities.Player()
+            {
+                PlayerName = usernameLower,
+                PlayerShowName = username,
+                Email = email,
+                PsswdHash = pwdHash,
+                IsEmailConfirmed = false,
+                AddedDate = DateTime.Now,
+                LastVisitedDate = DateTime.Now,
+                Credit = 18000,
+                ExperienceLevel = 0,
+                Experiences = 0,
+                StayLogedIn = false,
+                SendInGameInfo = false,
+                SendNewsletter = false
+            };
+
             GSClient.AccountService.RegisterPlayer(newPlayer);
 
             if (!GSClient.AccountService.AccountUsernameExists(usernameLower))

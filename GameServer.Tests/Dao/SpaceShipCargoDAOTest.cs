@@ -271,16 +271,11 @@ namespace SpaceTraffic.GameServerTests.Dao
         private Player CreatePlayer()
         {
             Player newPlayer = new Player();
-            newPlayer.FirstName = "Michel";
-            newPlayer.LastName = "Párek";
             newPlayer.PlayerName = "UplneNejvicNejbozesjiJmeno";
-            newPlayer.CorporationName = "ZCU";
+            newPlayer.PlayerShowName = "UplneNejvicNejbozesjiJmeno";
             newPlayer.Credit = 0;
-            newPlayer.DateOfBirth = new DateTime(2008, 02, 16, 12, 15, 12);
             newPlayer.Email = "michel@párek.cz";
             newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
-            newPlayer.PsswdSalt = "cbOpKKxb";
-            newPlayer.OrionEmail = "párek@students.zcu.cz";
             newPlayer.AddedDate = DateTime.Now;
             newPlayer.LastVisitedDate = DateTime.Now;
             return newPlayer;
