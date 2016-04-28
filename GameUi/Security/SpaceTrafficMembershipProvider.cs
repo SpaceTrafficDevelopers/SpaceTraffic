@@ -229,7 +229,26 @@ namespace SpaceTraffic.GameUi.Security
 
             string pwdHash = pwdHasher.HashPassword(password);
 
-            Entities.Player newPlayer = new Entities.Player() { PlayerName = usernameLower, FirstName = username, PsswdHash = pwdHash, PsswdSalt="", Email = email, AddedDate = DateTime.Now, DateOfBirth = DateTime.Now, LastVisitedDate = DateTime.Now, LastName = "", ExperienceLevel = 0, Experiences = 0, Credit = 18000 };
+            Entities.Player newPlayer = new Entities.Player()
+            {
+                PlayerToken = string.Empty,
+                PlayerName = usernameLower,
+                PlayerShowName = username,
+                Email = email,
+                PsswdHash = pwdHash,
+                NewPsswdHash = string.Empty,
+                IsEmailConfirmed = false,
+                PassChangeDate = DateTime.Now,
+                AddedDate = DateTime.Now,
+                LastVisitedDate = DateTime.Now,
+                Credit = 18000,
+                ExperienceLevel = 0,
+                Experiences = 0,
+                StayLogedIn = false,
+                SendInGameInfo = false,
+                SendNewsletter = false
+            };
+
             GSClient.AccountService.RegisterPlayer(newPlayer);
 
             if (!GSClient.AccountService.AccountUsernameExists(usernameLower))
@@ -411,6 +430,23 @@ namespace SpaceTraffic.GameUi.Security
                 return defaultValue;
 
             return configValue;
+        }
+
+        public bool AddPlayerIntoActivePlayers(int playerId)
+        {
+            if(GSClient.AccountService.AccountExists(playerId))
+            {
+                return GSClient.AccountService.AddPlayerIntoActivePlayers(playerId);
+            }
+            return false;
+        }
+
+        public void RemovePlayerFromActivePlayers(int playerId)
+        {
+            if (GSClient.AccountService.AccountExists(playerId))
+            {
+                GSClient.AccountService.RemovePlayerFromActivePlayers(playerId);
+            }
         }
     }
 }

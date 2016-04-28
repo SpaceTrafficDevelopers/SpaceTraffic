@@ -116,26 +116,24 @@ namespace SpaceTraffic.Dao
 				try
 				{
 					var playerTab = contextDB.Players.FirstOrDefault(x => x.PlayerId.Equals(player.PlayerId));
+                    playerTab.PlayerToken = player.PlayerToken;
 					playerTab.PlayerName = player.PlayerName;
-					playerTab.FirstName = player.FirstName;
-					playerTab.LastName = player.LastName;
+                    playerTab.PlayerShowName = player.PlayerShowName;
 					playerTab.Email = player.Email;
-					player.DateOfBirth = player.DateOfBirth;
-					player.CorporationName = player.CorporationName;
 					player.Credit = player.Credit;
-					player.IsAccountLocked = player.IsAccountLocked;
-					player.IsEmailConfirmed = player.IsEmailConfirmed;
-					playerTab.IsOrionEmailConfirmed = player.IsOrionEmailConfirmed;
-					playerTab.IsFavStudent = player.IsFavStudent;
-					playerTab.OrionEmail = player.OrionEmail;                   
+					player.IsEmailConfirmed = player.IsEmailConfirmed;          
 					player.PsswdHash = player.PsswdHash;
-					player.PsswdSalt = player.PsswdSalt;
-					playerTab.ExperienceLevel = player.ExperienceLevel;
+                    player.NewPsswdHash = player.NewPsswdHash;
+                    playerTab.ExperienceLevel = player.ExperienceLevel;
 					playerTab.Experiences = player.Experiences;
-					// save context to database
+                    player.PassChangeDate = player.PassChangeDate;
+                    playerTab.LastVisitedDate = player.LastVisitedDate;
+                    playerTab.StayLogedIn = player.StayLogedIn;
+                    playerTab.SendInGameInfo = player.SendInGameInfo;
+                    playerTab.SendNewsletter = player.SendNewsletter;
 					contextDB.SaveChanges();
 					return true;
-				}
+                }
 				catch (Exception)
 				{
 					return false;

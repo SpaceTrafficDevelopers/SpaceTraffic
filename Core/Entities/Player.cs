@@ -29,10 +29,16 @@ namespace SpaceTraffic.Entities
 		[DataMember]
 		public int PlayerId { get; set; }
 
-		[DataMember]
+        [DataMember]
+        public string PlayerToken { get; set; }
+
+        [DataMember]
 		public string PlayerName { get; set; }
 
-		[DataMember]
+        [DataMember]
+        public string PlayerShowName { get; set; }
+
+        [DataMember]
 		public virtual ICollection<Statistic> Statistics { get; set; }
 
 		[DataMember]
@@ -42,43 +48,22 @@ namespace SpaceTraffic.Entities
         public string Email { get; set; }
 
         [DataMember]
-        public string FirstName { get; set; }
-
-        [DataMember]
-        public string LastName { get; set; }
-
-        [DataMember]
         public string PsswdHash { get; set; }
-
+        
         [DataMember]
-        public string PsswdSalt { get; set; }
-
-        [DataMember]
-        public DateTime DateOfBirth { get; set; }
-
-        [DataMember]
-        public string OrionEmail { get; set; }
-
-        [DataMember]
-        public bool IsFavStudent { get; set; }
-
-        [DataMember]
-        public bool IsOrionEmailConfirmed { get; set; }
+        public string NewPsswdHash { get; set; }
 
         [DataMember]
         public bool IsEmailConfirmed { get; set; }
 
         [DataMember]
-        public bool IsAccountLocked { get; set; }
+        public DateTime PassChangeDate { get; set; }
 
         [DataMember]
         public DateTime AddedDate { get; set; }
 
         [DataMember]
         public DateTime LastVisitedDate { get; set; }
-
-        [DataMember]
-        public string CorporationName { get; set; }
 
         [DataMember]
         public int Credit { get; set; }
@@ -91,5 +76,14 @@ namespace SpaceTraffic.Entities
 
 		[DataMember]
 		public int Experiences { get; set; }
+
+        [DataMember]
+        public bool StayLogedIn { get; set; }
+
+        [DataMember]
+        public bool SendInGameInfo { get; set; }
+
+        [DataMember]
+        public bool SendNewsletter { get; set; }
 	}
 }

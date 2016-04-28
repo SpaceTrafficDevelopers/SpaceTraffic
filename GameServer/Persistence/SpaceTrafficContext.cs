@@ -109,25 +109,22 @@ using System.Linq.Expressions;
             : base()
         {
             HasKey(p => p.PlayerId);
+            Property(p=>p.PlayerToken).HasMaxLength(200).HasColumnType("varchar").IsOptional();
             Property(p => p.PlayerName).HasMaxLength(50).HasColumnType("nvarchar").IsRequired();
-            Property(p => p.FirstName).HasMaxLength(50).HasColumnType("varchar").IsOptional();
-            Property(p => p.LastName).HasMaxLength(50).HasColumnType("varchar").IsOptional();
-            Property(p => p.Email).HasMaxLength(50).HasColumnType("varchar").IsRequired();
+            Property(p => p.PlayerShowName).HasMaxLength(50).HasColumnType("nvarchar").IsRequired();
+            Property(p => p.Email).HasMaxLength(100).HasColumnType("varchar").IsRequired();
             Property(p => p.PsswdHash).HasMaxLength(200).HasColumnType("varchar").IsOptional();
-            Property(p => p.PsswdSalt).HasMaxLength(50).HasColumnType("varchar").IsOptional();
-            Property(p => p.DateOfBirth).HasColumnType("datetime").IsRequired();
-            Property(p => p.OrionEmail).HasMaxLength(50).HasColumnType("varchar").IsOptional();
-            Property(p => p.IsFavStudent).IsOptional();
-            Property(p => p.IsOrionEmailConfirmed).IsOptional();
+            Property(p => p.NewPsswdHash).HasMaxLength(200).HasColumnType("varchar").IsOptional();
             Property(p => p.IsEmailConfirmed).IsOptional();
-            Property(p => p.IsAccountLocked).IsOptional();
+            Property(p=>p.PassChangeDate).HasColumnType("datetime").IsOptional();
             Property(p => p.AddedDate).HasColumnType("datetime").IsOptional();
             Property(p => p.LastVisitedDate).HasColumnType("datetime").IsOptional();
-            Property(p => p.CorporationName).HasMaxLength(50).HasColumnType("varchar").IsOptional();
-            Property(p => p.Credit).HasColumnType("int").IsOptional();            
+            Property(p => p.Credit).HasColumnType("int").IsOptional();
+            Property(p => p.StayLogedIn).IsOptional();
+            Property(p => p.SendInGameInfo).IsOptional();
+            Property(p => p.SendNewsletter).IsOptional();
             ToTable("Players");
         }
-
     }
 
      public class EarnedAchievementsConfiguration : EntityTypeConfiguration<EarnedAchievement>
