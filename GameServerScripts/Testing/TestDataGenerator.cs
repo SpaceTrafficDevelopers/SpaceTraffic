@@ -42,6 +42,7 @@ namespace SpaceTraffic.Scripts.Testing
 			newPlayer.Credit = 120000000;
 			newPlayer.Email = "nobody@nowhere.local";
             newPlayer.PsswdHash = "o8Drx+MJghpMvCN5v0oGB1AB0m0TABBWjt+p1jFsAnvQkBWaGkqFiMo2r6fPeG5+";
+            newPlayer.PassChangeDate = DateTime.Now;
 			newPlayer.AddedDate = DateTime.Now;
 			newPlayer.LastVisitedDate = DateTime.Now;
             newPlayer.IsEmailConfirmed = true;

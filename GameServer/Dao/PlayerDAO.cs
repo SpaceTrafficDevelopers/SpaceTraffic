@@ -116,14 +116,17 @@ namespace SpaceTraffic.Dao
 				try
 				{
 					var playerTab = contextDB.Players.FirstOrDefault(x => x.PlayerId.Equals(player.PlayerId));
+                    playerTab.PlayerToken = player.PlayerToken;
 					playerTab.PlayerName = player.PlayerName;
                     playerTab.PlayerShowName = player.PlayerShowName;
 					playerTab.Email = player.Email;
 					player.Credit = player.Credit;
 					player.IsEmailConfirmed = player.IsEmailConfirmed;          
 					player.PsswdHash = player.PsswdHash;
-					playerTab.ExperienceLevel = player.ExperienceLevel;
+                    player.NewPsswdHash = player.NewPsswdHash;
+                    playerTab.ExperienceLevel = player.ExperienceLevel;
 					playerTab.Experiences = player.Experiences;
+                    player.PassChangeDate = player.PassChangeDate;
                     playerTab.LastVisitedDate = player.LastVisitedDate;
                     playerTab.StayLogedIn = player.StayLogedIn;
                     playerTab.SendInGameInfo = player.SendInGameInfo;

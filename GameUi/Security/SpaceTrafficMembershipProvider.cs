@@ -231,11 +231,14 @@ namespace SpaceTraffic.GameUi.Security
 
             Entities.Player newPlayer = new Entities.Player()
             {
+                PlayerToken = string.Empty,
                 PlayerName = usernameLower,
                 PlayerShowName = username,
                 Email = email,
                 PsswdHash = pwdHash,
+                NewPsswdHash = string.Empty,
                 IsEmailConfirmed = false,
+                PassChangeDate = DateTime.Now,
                 AddedDate = DateTime.Now,
                 LastVisitedDate = DateTime.Now,
                 Credit = 18000,

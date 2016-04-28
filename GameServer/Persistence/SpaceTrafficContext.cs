@@ -109,11 +109,14 @@ using System.Linq.Expressions;
             : base()
         {
             HasKey(p => p.PlayerId);
+            Property(p=>p.PlayerToken).HasMaxLength(200).HasColumnType("varchar").IsOptional();
             Property(p => p.PlayerName).HasMaxLength(50).HasColumnType("nvarchar").IsRequired();
             Property(p => p.PlayerShowName).HasMaxLength(50).HasColumnType("nvarchar").IsRequired();
             Property(p => p.Email).HasMaxLength(100).HasColumnType("varchar").IsRequired();
             Property(p => p.PsswdHash).HasMaxLength(200).HasColumnType("varchar").IsOptional();
+            Property(p => p.NewPsswdHash).HasMaxLength(200).HasColumnType("varchar").IsOptional();
             Property(p => p.IsEmailConfirmed).IsOptional();
+            Property(p=>p.PassChangeDate).HasColumnType("datetime").IsOptional();
             Property(p => p.AddedDate).HasColumnType("datetime").IsOptional();
             Property(p => p.LastVisitedDate).HasColumnType("datetime").IsOptional();
             Property(p => p.Credit).HasColumnType("int").IsOptional();

@@ -564,6 +564,7 @@ namespace SpaceTraffic.GameServerTests.GameServer
             player.Credit = 100;
             player.Email = "email@email.cz";
             player.PsswdHash = "o8Drx+MJghpMvCN5v0oGB1AB0m0TABBWjt+p1jFsAnvQkBWaGkqFiMo2r6fPeG5+";
+            player.PassChangeDate = DateTime.Now;
             player.AddedDate = DateTime.Now;
             player.LastVisitedDate = DateTime.Now;
             player.ExperienceLevel = 11;

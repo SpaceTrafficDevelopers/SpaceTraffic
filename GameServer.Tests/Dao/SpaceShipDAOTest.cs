@@ -324,6 +324,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             newPlayer.Credit = 0;
             newPlayer.Email = "email@email.cz";
             newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
+            newPlayer.PassChangeDate = DateTime.Now;
             newPlayer.AddedDate = DateTime.Now;
             newPlayer.LastVisitedDate = DateTime.Now;
             return newPlayer;

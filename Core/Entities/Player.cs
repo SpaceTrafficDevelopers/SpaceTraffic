@@ -29,7 +29,10 @@ namespace SpaceTraffic.Entities
 		[DataMember]
 		public int PlayerId { get; set; }
 
-		[DataMember]
+        [DataMember]
+        public string PlayerToken { get; set; }
+
+        [DataMember]
 		public string PlayerName { get; set; }
 
         [DataMember]
@@ -46,9 +49,15 @@ namespace SpaceTraffic.Entities
 
         [DataMember]
         public string PsswdHash { get; set; }
+        
+        [DataMember]
+        public string NewPsswdHash { get; set; }
 
         [DataMember]
         public bool IsEmailConfirmed { get; set; }
+
+        [DataMember]
+        public DateTime PassChangeDate { get; set; }
 
         [DataMember]
         public DateTime AddedDate { get; set; }
