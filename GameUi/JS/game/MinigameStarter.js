@@ -177,7 +177,7 @@ function MinigameStarterDialog() {
     //method for show external minigame info dialog
     function showInfoDialog(minigameDescriptor, gameId) {
         var info = '<div>Tuto hru si můžete zahrát pouze v externím klientovi. ID vaší hry je : ' + gameId;
-        info += '<br />Klienta stáhnete <a target="_blank" href="' + minigameDescriptor.ClientURL + '">zde</a>';
+        info += '<br />Klienta stáhnete <a target="_blank" href="/Minigame/Default/DownloadGame?file=' + minigameDescriptor.ClientURL + '">zde</a>';
         info += '</div>';
 
         $(info).dialog({
