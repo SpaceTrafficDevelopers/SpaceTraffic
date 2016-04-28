@@ -17,9 +17,11 @@ limitations under the License.
 using SpaceTraffic.GameUi.Controllers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net.Mime;
 
 namespace SpaceTraffic.GameUi.Areas.Minigame.Controllers
 {
@@ -34,6 +36,32 @@ namespace SpaceTraffic.GameUi.Areas.Minigame.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        /// <summary>
+        /// Method for download external game as apk.
+        /// </summary>
+        /// <param name="file">file name</param>
+        /// <returns>file or 404</returns>
+        public ActionResult DownloadGame(string file){
+
+            string filePath = Server.MapPath("~/Content/minigames/" + file);
+
+            if (!System.IO.File.Exists(filePath))
+                return HttpNotFound();
+
+            byte[] filedata = System.IO.File.ReadAllBytes(filePath);
+            string contentType = "application/vnd.android.package-archive";
+
+            ContentDisposition cd = new ContentDisposition
+            {
+                FileName = file,
+                Inline = true,
+            };
+
+            Response.AppendHeader("Content-Disposition", cd.ToString());
+
+            return File(filedata, contentType);
         }
     }
 }
