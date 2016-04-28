@@ -428,5 +428,22 @@ namespace SpaceTraffic.GameUi.Security
 
             return configValue;
         }
+
+        public bool AddPlayerIntoActivePlayers(int playerId)
+        {
+            if(GSClient.AccountService.AccountExists(playerId))
+            {
+                return GSClient.AccountService.AddPlayerIntoActivePlayers(playerId);
+            }
+            return false;
+        }
+
+        public void RemovePlayerFromActivePlayers(int playerId)
+        {
+            if (GSClient.AccountService.AccountExists(playerId))
+            {
+                GSClient.AccountService.RemovePlayerFromActivePlayers(playerId);
+            }
+        }
     }
 }
