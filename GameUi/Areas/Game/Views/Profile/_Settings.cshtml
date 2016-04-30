@@ -1,31 +1,29 @@
-﻿@{
+﻿@model SpaceTraffic.GameUi.Areas.Game.Models.ProfileSettingsModel
+
+@{
     ViewBag.Title = "_Settings";
 }
 
-
+<div class="ajax" data-related-element-id="tabsContent">
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         <div class="settings_form">
             <section>
                 <h1>Účet</h1>
-                E-mail:<br>
-                Zůstat přihlášen<br>
+                @Html.LabelFor(m => m.Email) @Html.DisplayFor(m => m.Email)<br>
+                @Html.LabelFor(m => m.RememberMe) @Html.CheckBoxFor(m => m.RememberMe)<br>
                 <hr />
-                <a href="#">Změnit heslo</a><br>
-                <a href="#" id="deleteAccount">Zrušit účet</a><br>
+                <a href="@Url.Action("ChangePassword", "Account", new { Area = String.Empty })" class="ajax" data-related-element-id="tabsContent">Změnit heslo</a><br>
+                <a href="@Url.Action("DeleteAccount", "Account", new { Area = String.Empty })" id="deleteAccount" class="ajax" data-related-element-id="tabsContent">Zrušit účet</a><br>
             </section>
             <section>
                 <h1>E-mail</h1>
-                Zasílat info ze hry:<br>
-                Zasílat novinky:<br>
-            </section>
-            <section>
-                <h1>Zobrazení</h1>
-                Počet zobrazených událostí:<br>
-                Počet zobrazených zpráv:<br>
+                @Html.LabelFor(m => m.SendGameInfo) @Html.CheckBoxFor(m => m.SendGameInfo)<br>
+                @Html.LabelFor(m => m.SendNews) @Html.CheckBoxFor(m => m.SendNews)<br>
             </section>
             <input type="submit" value="Uložit" />
         </div>
     }
+</div>
 
