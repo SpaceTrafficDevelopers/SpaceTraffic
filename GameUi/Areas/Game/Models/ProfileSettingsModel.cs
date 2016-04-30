@@ -28,6 +28,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Models
 {
     public class ProfileSettingsModel
     {
+        [Display(Name = "E-mail:")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
@@ -39,11 +40,5 @@ namespace SpaceTraffic.GameUi.Areas.Game.Models
 
         [Display(Name = "Zasílat novinky:")]
         public bool SendNews { get; set; }
-
-        [Display(Name = "Počet zobrazených událostí:")]
-        public int CountOfEvents{ get; set; }
-
-        [Display(Name = "Počet zobrazených zpráv:")]
-        public int CountOfMessages { get; set; }
     }
 }

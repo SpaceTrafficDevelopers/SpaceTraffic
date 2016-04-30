@@ -103,7 +103,7 @@
     margin-bottom: 15px;
     background: @formBgColor;
     border: 3px solid @formBorderColor;
-    line-height: 30px;
+    line-height: 35px;
     font-weight: bold;
 
         h1{
@@ -129,7 +129,7 @@
         #deleteAccount{
             color: red;
             &:hover{
-                color: red !important;
+                color: darken(red, 10%) !important;
             }
         }
     }
@@ -139,13 +139,17 @@
         background: @buttonBgColor;
         font-family: @textFont;
         font-weight: 700;
-        margin-top: -10px;
+        margin-top: -5px;
         padding: 3px 10px;
         font-size: 1.5em;
         text-transform: uppercase;
         border: 1px solid transparent;
     }
-
+    
+    input[type="checkbox"] {
+        margin-left: 4px;
+        vertical-align: middle;
+    }
 }
 /*--------------------------------*/
 .profile_category{
