@@ -23,13 +23,26 @@ using SpaceTraffic.Entities.Minigames;
 
 namespace SpaceTraffic.GameServerTests.Dao
 {
+    /// <summary>
+    /// Start action dao test.
+    /// </summary>
     [TestClass()]
     [DeploymentItem("GameServer.Tests.dll.config")]
     public class StartActionDaoTest
     {
+        /// <summary>
+        /// Minigame descriptor.
+        /// </summary>
         private MinigameDescriptor minigame;
+        
+        /// <summary>
+        /// Start action.
+        /// </summary>
         private StartAction startAction;
 
+        /// <summary>
+        /// Initialization method.
+        /// </summary>
         [TestInitialize()]
         public void TestInitialize()
         {
@@ -39,6 +52,9 @@ namespace SpaceTraffic.GameServerTests.Dao
             minigameDao.InsertMinigame(minigame);
         }
 
+        /// <summary>
+        /// Cleanup method.
+        /// </summary>
         [TestCleanup()]
         public void CleanUp()
         {
@@ -218,6 +234,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             md.Name = "SpaceTraffic";
             md.PlayerCount = 4;
             md.Description = "Popis hry.";
+            md.Controls = "Ovládání myší.";
             md.RewardType = RewardType.SHIP;
             md.SpecificReward = "Shipunto";
             md.RewardAmount = 1;

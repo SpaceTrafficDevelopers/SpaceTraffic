@@ -26,6 +26,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using System.Text;
+using SpaceTraffic.Utils.Tests;
 
 namespace Core.Tests.Game.Minigame
 {
@@ -56,7 +57,8 @@ namespace Core.Tests.Game.Minigame
         [TestInitialize()]
         public void TestInitialize()
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..", xmlPath);
+            string solutionPath = TestPath.getPathToSolution();
+            string path = Path.Combine(solutionPath, xmlPath);
 
             LogoQuiz.Logos = LogoQuizLoader.loadLogos(path);
 
@@ -176,7 +178,6 @@ namespace Core.Tests.Game.Minigame
 
             return builder.ToString();
         }
-
 
         /// <summary>
         /// Method for creating minigame descriptor for Logo Quiz.
