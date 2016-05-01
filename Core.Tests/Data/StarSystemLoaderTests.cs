@@ -87,7 +87,7 @@ namespace Core.Tests
         [TestMethod]
         public void StarSystemLoadTest()
         {
-			TestGalaxyMapDataStreamProvider provider = new TestGalaxyMapDataStreamProvider(".//..//..//Assets");
+			TestGalaxyMapDataStreamProvider provider = new TestGalaxyMapDataStreamProvider(".//..//..//..//Assets");
             provider.Initialize();
             StarSystemLoader loader = new StarSystemLoader();
             StarSystem loadedSS = loader.LoadStarSystem("Solar system", provider);

@@ -34,23 +34,23 @@ namespace SpaceTraffic.Scripts.Testing
             return true;
 		}
 
-
 		private Player CreatePlayer()
 		{
 			Player newPlayer = new Player();
-			newPlayer.FirstName = "Test";
-			newPlayer.LastName = "User";
 			newPlayer.PlayerName = "user";
-			newPlayer.CorporationName = "STTeam";
+            newPlayer.PlayerShowName = "User";
 			newPlayer.Credit = 120000000;
-		    newPlayer.DateOfBirth = new DateTime(2000, 1, 1, 0, 58, 0);
 			newPlayer.Email = "nobody@nowhere.local";
             newPlayer.PsswdHash = "o8Drx+MJghpMvCN5v0oGB1AB0m0TABBWjt+p1jFsAnvQkBWaGkqFiMo2r6fPeG5+";
-			newPlayer.PsswdSalt = "";
+            newPlayer.PassChangeDate = DateTime.Now;
 			newPlayer.AddedDate = DateTime.Now;
 			newPlayer.LastVisitedDate = DateTime.Now;
+            newPlayer.IsEmailConfirmed = true;
+            newPlayer.StayLogedIn = false;
+            newPlayer.SendInGameInfo = false;
+            newPlayer.SendNewsletter = false;
 			return newPlayer;
-		}
+        }
     }
 
 }

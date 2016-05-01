@@ -82,7 +82,7 @@ namespace Core.Tests
         [TestMethod]
         public void GalaxyLoadTest()
         {
-			TestGalaxyMapDataStreamProvider provider = new TestGalaxyMapDataStreamProvider("..//..//Assets");
+			TestGalaxyMapDataStreamProvider provider = new TestGalaxyMapDataStreamProvider("..//..//..//Assets");
             provider.Initialize();
             GalaxyMapLoader loader = new GalaxyMapLoader();
             map = loader.LoadGalaxyMap("GalaxyMap", provider);
