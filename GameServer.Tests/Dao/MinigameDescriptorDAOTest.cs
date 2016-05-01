@@ -23,13 +23,26 @@ using SpaceTraffic.Entities.Minigames;
 
 namespace SpaceTraffic.GameServerTests.Dao
 {
+    /// <summary>
+    /// Minigame descriptor dao tests.
+    /// </summary>
     [TestClass()]
     [DeploymentItem("GameServer.Tests.dll.config")]
     public class MinigameDescriptorDAOTest
     {
+        /// <summary>
+        /// Minigame descriptor.
+        /// </summary>
         private MinigameDescriptor minigame;
+        
+        /// <summary>
+        /// Start action-
+        /// </summary>
         private StartAction startAction;
 
+        /// <summary>
+        /// Initialization method.
+        /// </summary>
         [TestInitialize()]
         public void TestInitialize()
         {
@@ -39,6 +52,9 @@ namespace SpaceTraffic.GameServerTests.Dao
             startActionDao.InsertStartAction(startAction);
         }
 
+        /// <summary>
+        /// Cleanup method
+        /// </summary>
         [TestCleanup()]
         public void CleanUp()
         {
@@ -266,11 +282,12 @@ namespace SpaceTraffic.GameServerTests.Dao
             minigame.Description = "Novy popis hry.";
             minigame.RewardType = RewardType.GOODS;
             minigame.SpecificReward = "Banany";
+            minigame.Controls = "Ovladani myší.";
             minigame.RewardAmount = 3;
             minigame.ConditionType = ConditionType.TRADER;
             minigame.ConditionArgs = "Watto";
             minigame.ExternalClient = false;
-            minigame.ClientURL = null;
+            minigame.ClientURL = "url";
             minigame.MinigameClassFullName = "SpaceTraffic.Pokus";
 
             bool update = target.UpdateMinigameById(minigame);
@@ -289,6 +306,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             md.Description = "Popis hry.";
             md.RewardType = RewardType.SHIP;
             md.SpecificReward = "Shipunto";
+            md.Controls = "Ovládání šipkama.";
             md.RewardAmount = 1;
             md.ConditionType = ConditionType.PLANET;
             md.ConditionArgs = "Zeme";

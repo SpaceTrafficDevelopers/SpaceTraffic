@@ -148,6 +148,7 @@
     <Compile Include="Services\Contracts\IGameService.cs" />
     <Compile Include="Utils\Collections\CollectionToString.cs" />
     <Compile Include="Utils\Debugging\DebugEx.cs" />
+    <Compile Include="Utils\Tests\TestPath.cs" />
     <Compile Include="Xml\XmlHelper.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\PublicEntities\AccountInfo.cs" />

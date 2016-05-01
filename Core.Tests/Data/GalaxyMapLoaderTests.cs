@@ -24,6 +24,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SpaceTraffic.Data;
 using SpaceTraffic.Game;
+using System.IO;
+using SpaceTraffic.Utils.Tests;
 
 namespace Core.Tests
 {
@@ -82,7 +84,8 @@ namespace Core.Tests
         [TestMethod]
         public void GalaxyLoadTest()
         {
-			TestGalaxyMapDataStreamProvider provider = new TestGalaxyMapDataStreamProvider("..//..//Assets");
+            string path = Path.Combine(TestPath.getPathToSolution(), "Assets");
+			TestGalaxyMapDataStreamProvider provider = new TestGalaxyMapDataStreamProvider(path);
             provider.Initialize();
             GalaxyMapLoader loader = new GalaxyMapLoader();
             map = loader.LoadGalaxyMap("GalaxyMap", provider);
