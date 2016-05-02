@@ -203,7 +203,19 @@ namespace SpaceTraffic.GameUi.Security
 
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
-            throw new NotImplementedException();
+            string usernameLower = username.ToLower();
+            if (!GSClient.AccountService.AccountUsernameExists(usernameLower) || !GSClient.AccountService.Authenticate(usernameLower, oldPassword))
+            {
+                return false;
+            }
+
+            int playerId = GSClient.AccountService.GetAccountInfoByUserName(usernameLower).PlayerId;
+            Entities.Player player = GSClient.PlayerService.GetPlayer(playerId);
+            string newPwdHash = pwdHasher.HashPassword(newPassword);
+
+            player.PsswdHash = newPwdHash;
+
+            return GSClient.AccountService.UpdatePlayer(player);
         }
 
         /// <summary>
