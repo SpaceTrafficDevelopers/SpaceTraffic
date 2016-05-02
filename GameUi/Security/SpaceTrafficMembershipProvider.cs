@@ -381,8 +381,34 @@ namespace SpaceTraffic.GameUi.Security
 
         public override string ResetPassword(string username, string answer)
         {
-            //TODO: ResetPassword, implement later.
-            throw new NotImplementedException();
+            string usernameLower = username.ToLower();
+            if (!GSClient.AccountService.AccountUsernameExists(usernameLower))
+            {
+                return null;
+            }
+
+            int playerId = GSClient.AccountService.GetAccountInfoByUserName(usernameLower).PlayerId;
+            Entities.Player player = GSClient.PlayerService.GetPlayer(playerId);
+
+            string token = GeneratePlayerToken(player);
+            string newPass = pwdHasher.GenerateRandomPassword(10);
+            string newHash = pwdHasher.HashPassword(newPass);
+
+            player.PlayerToken = token;
+            player.NewPsswdHash = newHash;
+            player.PassChangeDate = DateTime.Now;
+
+            string appUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+
+            if (GSClient.AccountService.UpdatePlayer(player))
+            {
+                if (GSClient.MailService.SendLostPassMail(player, "test@spacetraffic.zcu.cz", appUrl+"/ResetToken?Token="+token, newPass))
+                    return "";
+                else
+                    return null;
+            }
+            else
+                return null;
         }
 
         public override bool UnlockUser(string userName)
@@ -465,6 +491,20 @@ namespace SpaceTraffic.GameUi.Security
             {
                 GSClient.AccountService.RemovePlayerFromActivePlayers(playerId);
             }
+        }
+
+        /// <summary>
+        /// Generates token representing player
+        /// </summary>
+        /// <param name="player">Player to generate token</param>
+        /// <returns>Player token</returns>
+        private string GeneratePlayerToken(Entities.Player player)
+        {
+            string data = player.PlayerName + player.PlayerId + player.Email + player.PsswdHash;
+
+            string token = pwdHasher.HashPassword(data).Replace('+','a').Replace('/','b').Replace('=','c');
+
+            return token;
         }
     }
 }

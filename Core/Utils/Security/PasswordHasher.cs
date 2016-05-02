@@ -66,6 +66,22 @@ namespace SpaceTraffic.Utils.Security
         }
 
         /// <summary>
+        /// Generates random password with given length
+        /// </summary>
+        /// <param name="length">Password length. Minimum value is 1</param>
+        /// <returns>Random password or null when length is smaller than minimum (1)</returns>
+        public string GenerateRandomPassword(int length)
+        {
+            if (length < 1)
+                return null;
+
+            byte[] passBytes = new byte[length + 6];
+            rng.GetBytes(passBytes);
+
+            return Convert.ToBase64String(passBytes).Substring(2,length);
+        }
+
+        /// <summary>
         /// Validates password to given encrypted password
         /// </summary>
         /// <param name="password">Password to encrypt</param>
