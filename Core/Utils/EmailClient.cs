@@ -86,7 +86,7 @@ namespace SpaceTraffic.Utils
         /// <returns>True if operation succeeded</returns>
         public static bool SendActivationMail(Player playerToActivate, string senderAddress, string activationUrl)
         {
-            string text = FormatTemplates("lostpassword_text_template.html", playerToActivate.PlayerShowName);
+            string text = FormatTemplates("activation_text_template.html", playerToActivate.PlayerShowName);
             string messageContent = FormatTemplates("button_email_template.html", text, activationUrl, "Aktivovat účet", "");
             string messageBody = FormatTemplates("base_email_template.html", messageContent, DateTime.Now.Year.ToString());
 
