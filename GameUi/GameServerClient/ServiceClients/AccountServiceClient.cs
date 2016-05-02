@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SpaceTraffic.Entities;
 using SpaceTraffic.Services.Contracts;
 
 namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
@@ -75,6 +76,34 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             {
                 (channel as IAccountService).RegisterPlayer(player);
             }
+        }
+
+        /// <summary>
+        /// Method update player in DB
+        /// </summary>
+        /// <param name="player">Player to update</param>
+        public bool UpdatePlayer(Player player)
+        {
+            bool result;
+            using (var channel = this.GetClientChannel())
+            {
+                result = (channel as IAccountService).UpdatePlayer(player);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Method removes player from DB
+        /// </summary>
+        /// <param name="player">Payer id</param>
+        public bool RemovePlayer(int playerId)
+        {
+            bool result;
+            using (var channel = this.GetClientChannel())
+            {
+                result = (channel as IAccountService).RemovePlayer(playerId);
+            }
+            return result;
         }
 
 

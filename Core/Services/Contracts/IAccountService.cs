@@ -64,6 +64,20 @@ namespace SpaceTraffic.Services.Contracts
         void RegisterPlayer(Player player);
 
         /// <summary>
+        /// Method update player in DB
+        /// </summary>
+        /// <param name="player">Player to update</param>
+        [OperationContract]
+        bool UpdatePlayer(Player player);
+
+        /// <summary>
+        /// Method removes player from DB
+        /// </summary>
+        /// <param name="player">Payer id</param>
+        [OperationContract]
+        bool RemovePlayer(int playerId);
+
+        /// <summary>
         /// Method for adding player into active players.
         /// </summary>
         /// <param name="playerId">player id</param>

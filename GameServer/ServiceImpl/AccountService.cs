@@ -62,13 +62,40 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         }
 
 
-        public void RegisterPlayer(Entities.Player player)
+        public void RegisterPlayer(Player player)
         {
             Logger.Info("RegisterPlayer: {0}", player);
             if(GameServer.CurrentInstance.Persistence.GetPlayerDAO().InsertPlayer(player))
                 Logger.Info("Player registration for: {0} succeded", player);
             else
                 Logger.Info("Player registration for: {0} failed", player);
+        }
+
+        /// <summary>
+        /// Method update player in DB
+        /// </summary>
+        /// <param name="player">Player to update</param>
+        public bool UpdatePlayer(Player player)
+        {
+            Logger.Info("UpdatePlayer: {0}", player);
+            bool result = GameServer.CurrentInstance.Persistence.GetPlayerDAO().UpdatePlayerById(player);
+            Logger.Info("Player update for: {0} " + (result ? "succeded" : "failed"), player);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Method removes player from DB
+        /// </summary>
+        /// <param name="player">Payer id</param>
+        public bool RemovePlayer(int playerId)
+        {
+            Logger.Info("RemovePlayer: {0}", playerId);
+            bool result = GameServer.CurrentInstance.Persistence.GetPlayerDAO().RemovePlayerById(playerId);
+            
+            Logger.Info("Remove of player: {0} " + (result ? "succeded" : "failed"), playerId);
+
+            return result;
         }
 
         public bool AddPlayerIntoActivePlayers(int playerId)
