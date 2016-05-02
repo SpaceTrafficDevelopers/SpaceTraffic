@@ -37,6 +37,14 @@ namespace SpaceTraffic.Services.Contracts
         AccountInfo GetAccountInfoByAccountId(int accountId);
 
         /// <summary>
+        /// Method returns account information from token
+        /// </summary>
+        /// <param name="token">Player token</param>
+        /// <returns>Acount informations</returns>
+        [OperationContract]
+        AccountInfo GetAccountInfoByToken(string token);
+
+        /// <summary>
         /// Method check if username exists
         /// </summary>
         /// <param name="userName">Player username</param>

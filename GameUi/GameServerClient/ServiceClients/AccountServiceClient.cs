@@ -57,6 +57,22 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
         }
 
         /// <summary>
+        /// Method returns account information from token
+        /// </summary>
+        /// <param name="token">Player token</param>
+        /// <returns>Acount informations</returns>
+        public Entities.PublicEntities.AccountInfo GetAccountInfoByToken(string token)
+        {
+            Entities.PublicEntities.AccountInfo result;
+            using (var channel = this.GetClientChannel())
+            {
+                result = (channel as IAccountService).GetAccountInfoByUserName(token);
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Gets the account info by account id.
         /// </summary>
         /// <param name="accountId">The account id.</param>
