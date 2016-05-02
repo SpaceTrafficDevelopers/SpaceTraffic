@@ -294,8 +294,14 @@ namespace SpaceTraffic.GameUi.Security
 
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
-            //todo: DeleteUser, implement later.
-            throw new NotImplementedException();
+            username = username.ToLower();
+            if (GSClient.AccountService.AccountUsernameExists(username))
+            {
+                int id = GSClient.AccountService.GetAccountInfoByUserName(username).PlayerId;
+                return GSClient.AccountService.RemovePlayer(id);
+            }
+            else
+                return false;
         }
 
         public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
