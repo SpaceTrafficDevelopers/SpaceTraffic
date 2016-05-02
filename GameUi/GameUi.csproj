@@ -26,6 +26,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup>
     <MvcBuildViews>true</MvcBuildViews>
@@ -150,6 +151,7 @@
     <Compile Include="GameServerClient\IGameServerClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\AccountServiceClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\CargoServiceClient.cs" />
+    <Compile Include="GameServerClient\ServiceClients\MailServiceClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\MinigameServiceClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\PlanningServiceClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\ShipsServiceClient.cs" />

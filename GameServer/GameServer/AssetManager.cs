@@ -28,6 +28,7 @@ using SpaceTraffic.Engine;
 using SpaceTraffic.Entities.Goods;
 using SpaceTraffic.Game.Minigame;
 using SpaceTraffic.Data.Minigame;
+using SpaceTraffic.Data.EmailClient;
 
 namespace SpaceTraffic.GameServer
 {
@@ -253,6 +254,18 @@ namespace SpaceTraffic.GameServer
 			logger.Info("Loading logos for LogoQuiz: {0}", fileName);
 
             return LogoQuizLoader.loadLogos(fileName);
+        }
+
+        /// <summary>
+        /// Method for loading email templates for MailClient
+        /// </summary>
+        /// <returns>Dictionary of templates or null</returns>
+        public Dictionary<string, string> LoadEmailTemplates()
+        {
+            string pathBase = Path.Combine(this.AssetRootPath, "EmailTemplates");
+            logger.Info("Loading templates for MailClient from: {0}", pathBase);
+
+            return EmailTemplateLoader.loadAllTemplates(pathBase);
         }
     }
 }

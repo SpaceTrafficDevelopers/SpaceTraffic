@@ -43,6 +43,10 @@ namespace SpaceTraffic.GameUi.GameServerClient
 		IShipsService ShipsService { get; }
 
         IMinigameService MinigameService { get; }
-		
-	}
+
+        /// <summary>
+		/// Gets the mail service of GameServer.
+		/// </summary>
+        IMailService MailService { get; }
+    }
 }
