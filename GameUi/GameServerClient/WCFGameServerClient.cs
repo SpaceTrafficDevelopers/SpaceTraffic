@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using SpaceTraffic.GameUi.GameServerClient.ServiceClients;
+using SpaceTraffic.Services.Contracts;
 
 namespace SpaceTraffic.GameUi.GameServerClient
 {
@@ -35,6 +36,7 @@ namespace SpaceTraffic.GameUi.GameServerClient
 		private PlanningServiceClient _PlanningService = new PlanningServiceClient();
 		private ShipsServiceClient _ShipsService = new ShipsServiceClient();
         private MinigameServiceClient _MinigameService = new MinigameServiceClient();
+        private MailServiceClient _MailService = new MailServiceClient();
 
 		/// <summary>
 		/// Gets the account service of GameServer.
@@ -79,5 +81,13 @@ namespace SpaceTraffic.GameUi.GameServerClient
         {
             get { return _MinigameService; }
         }
-	}
+
+        /// <summary>
+		/// Gets the mail service of GameServer.
+		/// </summary>
+        public IMailService MailService
+        {
+            get { return _MailService; }
+        }
+    }
 }
