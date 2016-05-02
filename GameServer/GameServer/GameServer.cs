@@ -179,6 +179,8 @@ namespace SpaceTraffic.GameServer
             this.minigameManager = new MinigameManager(this);
             this.minigameManager.loadAssets();
 
+            Utils.EmailClient.EmailFormats = assetManager.LoadEmailTemplates();
+
             //for tests: add "user" player into active players
             //TODO: add this into log-on and remove into log-off
             this.worldManager.AddPlayer(1);
@@ -239,7 +241,7 @@ namespace SpaceTraffic.GameServer
 
             serviceManager = new ServiceManager();
             //Načíst servisy z konfigurace
-			serviceManager.ServiceList = new List<Type>(new Type[] { typeof(AccountService), typeof(GameService), typeof(HelloWorldService), typeof(AchievementsService), typeof(CargoService), typeof(ShipsService), typeof(PlanningService), typeof(PlayerService), typeof(MinigameService)});
+			serviceManager.ServiceList = new List<Type>(new Type[] { typeof(AccountService), typeof(GameService), typeof(HelloWorldService), typeof(AchievementsService), typeof(CargoService), typeof(ShipsService), typeof(PlanningService), typeof(PlayerService), typeof(MinigameService), typeof(MailService)});
             serviceManager.Initialize();
         }
 

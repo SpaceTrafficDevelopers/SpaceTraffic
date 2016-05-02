@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AchievementsLoader.cs" />
+    <Compile Include="Data\EmailClient\EmailTemplateLoader.cs" />
     <Compile Include="Data\ExperienceLevelsLoader.cs" />
     <Compile Include="Data\GalaxyMapLoader.cs" />
     <Compile Include="Data\GalaxyMapBuildingException.cs" />
@@ -137,6 +138,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Contracts\IMailService.cs" />
+    <Compile Include="Utils\EmailClient.cs" />
     <Compile Include="Utils\Security\MinigamePasswordHasher.cs" />
     <Compile Include="Utils\Security\PasswordHasher.cs" />
     <Compile Include="Services\Contracts\IAchievementsService.cs" />

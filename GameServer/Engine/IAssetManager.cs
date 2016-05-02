@@ -52,5 +52,11 @@ namespace SpaceTraffic.Engine
         /// </summary>
         /// <returns>list of logo or null</returns>
         List<Logo> LoadLogos();
+
+        /// <summary>
+        /// Method for loading email templates for MailClient
+        /// </summary>
+        /// <returns>Dictionary of templates or null</returns>
+        Dictionary<string, string> LoadEmailTemplates();
     }
 }
