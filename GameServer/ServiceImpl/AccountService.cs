@@ -61,6 +61,18 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			return new AccountInfo { PlayerName = player.PlayerName, PlayerId = player.PlayerId };
         }
 
+        /// <summary>
+        /// Method returns account information from token
+        /// </summary>
+        /// <param name="token">Player token</param>
+        /// <returns>Acount informations</returns>
+        public AccountInfo GetAccountInfoByToken(string token)
+        {
+            Logger.Info("AccountService: GetAccountInfoByAccountToken {0}", token);
+            Player player = GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByToken(token);
+            return new AccountInfo { PlayerName = player.PlayerName, PlayerId = player.PlayerId };
+        }
+
 
         public void RegisterPlayer(Player player)
         {

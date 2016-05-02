@@ -54,14 +54,22 @@ namespace SpaceTraffic.Dao
 		/// <param name="email">Email</param>
 		/// <returns>Return object of player by email</returns>
 		Player GetPlayerByEmail(string email);
-		/// <summary>
-		/// Insert new player to database
+
+        /// <summary>
+		/// Get player from database by token
 		/// </summary>
-		/// <param name="player">Player</param>
-		/// <returns>Return true if operation of insert is successful.</returns>
-		/// <exception cref="OptimisticConcurrencyException">The exception that is thrown when an optimistic concurrency violation occurs.</exception>
-		/// <exception cref="UpdateException" >The exception that is thrown when modifications to object instances cannot be persisted to the data store.</exception>
-		bool InsertPlayer(Player player);
+		/// <param name="email">Token</param>
+		/// <returns>Return object of player by token</returns>
+		Player GetPlayerByToken(string token);
+
+        /// <summary>
+        /// Insert new player to database
+        /// </summary>
+        /// <param name="player">Player</param>
+        /// <returns>Return true if operation of insert is successful.</returns>
+        /// <exception cref="OptimisticConcurrencyException">The exception that is thrown when an optimistic concurrency violation occurs.</exception>
+        /// <exception cref="UpdateException" >The exception that is thrown when modifications to object instances cannot be persisted to the data store.</exception>
+        bool InsertPlayer(Player player);
 		/// <summary>
 		/// Remove exist player by id
 		/// </summary>

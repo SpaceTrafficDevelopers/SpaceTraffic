@@ -68,7 +68,20 @@ namespace SpaceTraffic.Dao
 			}
 		}
 
-		public bool InsertPlayer(Player player)
+        /// <summary>
+		/// Get player from database by token
+		/// </summary>
+		/// <param name="email">Token</param>
+		/// <returns>Return object of player by token</returns>
+        public Player GetPlayerByToken(string token)
+        {
+            using (var contextDB = CreateContext())
+            {
+                return contextDB.Players.FirstOrDefault(x => x.PlayerToken.Equals(token));
+            }
+        }
+
+        public bool InsertPlayer(Player player)
 		{
 			using (var contextDB = CreateContext())
 			{
