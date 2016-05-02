@@ -26,20 +26,18 @@ namespace SpaceTraffic.GameUi.Models
 
     public class ChangePasswordModel
     {
-        [Required]
+        [Required(ErrorMessage = "Heslo je povinné.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
         public string OldPassword { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Nové heslo je povinné.")]
+        [StringLength(100, ErrorMessage = "Nové heslo musí mít alespoň {2} znaků.", MinimumLength = 8)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
+        [Required(ErrorMessage = "Musíte potvrdit nové heslo.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessage = "Nová hesla se neshodují.")]
         public string ConfirmPassword { get; set; }
     }
 
