@@ -1,1 +1,0 @@
-include ':app', ':commons-codec-1.10', ':ksoap2-android-assembly-3.6.0-jar-with-dependencies'
