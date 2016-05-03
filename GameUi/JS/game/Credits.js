@@ -7,9 +7,9 @@ $(document).ready(function () {
 			repeatEvery: 5,
 			callback: function (credits) {
 				$('.creditsAmount').each(function () {
-					var before = +$(this).text();
+					var before = $(this).text();
 					$(this).text(credits);
-					if (before && before != credits) {
+					if (before != '-' && before != credits) {
 						if (before > credits) {
 							$(this).css('color', 'red');
 						} else {
