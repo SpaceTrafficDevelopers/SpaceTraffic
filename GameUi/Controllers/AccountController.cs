@@ -256,11 +256,48 @@ namespace SpaceTraffic.GameUi.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Sends reset email to user after username and email verification.
+        /// If successful, redirects user to LogOn screen, otherwise displays error message to user.
+        /// </summary>
+        /// <param name="model">LostPasswordModel model</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult LostPassword(LostPasswordModel model)
         {
+            if(ModelState.IsValid)
+            {
+                string playerName = model.UserName.ToLower();
+                bool status = GSClient.AccountService.AccountUsernameExists(playerName);
+
+                if(status)
+                {
+                    Entities.Player player = GSClient.PlayerService.GetPlayer(GSClient.AccountService.GetAccountInfoByUserName(playerName).PlayerId);
+
+                    if (player.Email == model.Email.ToLower())
+                    {
+                        if(Membership.Provider.ResetPassword(playerName, string.Empty) == null)
+                        {
+                            ModelState.AddModelError("", "Nastala neznámá chyba.");
+                        }
+                        else
+                        {
+                            return RedirectToAction("LogOn", "Account").Success("Email pro obnovu hesla byl odeslán.");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Špatné jméno nebo email.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Špatné jméno nebo email.");
+                }
+            }
+
             return View(model);
         }
 
