@@ -72,8 +72,31 @@ namespace SpaceTraffic.GameUi.Extensions
 			return result;
 		}
 
+        public static JavaScriptResult Error(this JavaScriptResult result, string message)
+        {
+            CreateCookieWithFlashMessage(Notification.Error, message);
+            return result;
+        }
 
-		private static void CreateCookieWithFlashMessage(Notification notification, string message)
+        public static JavaScriptResult Warning(this JavaScriptResult result, string message)
+        {
+            CreateCookieWithFlashMessage(Notification.Warning, message);
+            return result;
+        }
+
+        public static JavaScriptResult Success(this JavaScriptResult result, string message)
+        {
+            CreateCookieWithFlashMessage(Notification.Success, message);
+            return result;
+        }
+
+        public static JavaScriptResult Information(this JavaScriptResult result, string message)
+        {
+            CreateCookieWithFlashMessage(Notification.Info, message);
+            return result;
+        }
+
+        private static void CreateCookieWithFlashMessage(Notification notification, string message)
 		{
 			HttpContext.Current.Response.Cookies.Add(new HttpCookie(string.Format("Flash.{0}", notification), message) { Path = "/" });
 		}
