@@ -410,7 +410,7 @@ namespace SpaceTraffic.GameUi.Security
 
             if (GSClient.AccountService.UpdatePlayer(player))
             {
-                if (GSClient.MailService.SendLostPassMail(player, "test@spacetraffic.zcu.cz", appUrl+"/ResetToken?Token="+token, newPass))
+                if (GSClient.MailService.SendLostPassMail(player, "test@spacetraffic.zcu.cz", appUrl+"/Account/ResetToken?Token="+token, newPass))
                     return "";
                 else
                     return null;
