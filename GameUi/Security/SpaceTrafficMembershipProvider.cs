@@ -250,7 +250,7 @@ namespace SpaceTraffic.GameUi.Security
                 PsswdHash = pwdHash,
                 NewPsswdHash = string.Empty,
                 IsEmailConfirmed = false,
-                PassChangeDate = DateTime.Now,
+                PassChangeDate = DateTime.Now.AddDays(-3),
                 AddedDate = DateTime.Now,
                 LastVisitedDate = DateTime.Now,
                 Credit = 18000,
