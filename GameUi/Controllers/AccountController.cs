@@ -24,6 +24,7 @@ using System.Web.Security;
 using SpaceTraffic.GameUi.Models;
 using SpaceTraffic.Utils.Debugging;
 using SpaceTraffic.GameUi.Security;
+using SpaceTraffic.GameUi.Extensions;
 
 namespace SpaceTraffic.GameUi.Controllers
 {
@@ -203,6 +204,55 @@ namespace SpaceTraffic.GameUi.Controllers
         }
 
         //
+        // GET: /Account/DeleteAccount
+
+        [Authorize]
+        public ActionResult DeleteAccount()
+        {
+            return PartialView();
+        }
+
+        /// <summary>
+        /// Deletes currently signed on player after password verification.
+        /// If successful, redirects user to LogOn screen, otherwise displays error message to user.
+        /// </summary>
+        /// <param name="model">DeleteAccountModel model</param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAccount(DeleteAccountModel model)
+        {
+            //DebugEx.WriteLineF("Delete Account clicked");
+
+            if (ModelState.IsValid)
+            {
+                string playerName = getCurrentPlayerName();
+
+                if (Membership.ValidateUser(playerName, model.Password))
+                {
+                    bool status = Membership.DeleteUser(playerName, true);
+
+                    if (status)
+                    {
+                        return RedirectToAction("LogOff").Success("Účet byl smazán.");
+                    }
+                    else
+                    {
+                        return ModelErrorUsingJS("Nastala neznámá chyba. Prosím zkuste to znovu, nebo kontaktujte tým Space Traffic.");
+                    }
+                }
+                else
+                {
+                    return ModelErrorUsingJS("Špatně zadané heslo.");
+                }
+                
+            }
+
+            return PartialView(model);
+        }
+
+        //
         // GET: /Account/LostPassword
         [AllowAnonymous]
         public ActionResult LostPassword()
@@ -216,6 +266,17 @@ namespace SpaceTraffic.GameUi.Controllers
         public ActionResult LostPassword(LostPasswordModel model)
         {
             return View(model);
+        }
+
+        /// <summary>
+        /// This is javascript workaround for ModelState.AddModelError.
+        /// There must be <div></div> with validation-summary-errors class for proper function inside of view.
+        /// </summary>
+        /// <param name="message">Error message</param>
+        /// <returns></returns>
+        private JavaScriptResult ModelErrorUsingJS(string message)
+        {
+            return JavaScript("$(\".validation-summary-errors\").html(\"<ul><li>" + message +"</li></ul>\");");
         }
 
         #region Status Codes
