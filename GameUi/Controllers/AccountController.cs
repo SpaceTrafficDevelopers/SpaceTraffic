@@ -294,13 +294,20 @@ namespace SpaceTraffic.GameUi.Controllers
 
                     if (player.Email == model.Email.ToLower())
                     {
-                        if(Membership.Provider.ResetPassword(playerName, string.Empty) == null)
+                        if (player.IsEmailConfirmed)
                         {
-                            ModelState.AddModelError("", "Nastala neznámá chyba.");
+                            if (Membership.Provider.ResetPassword(playerName, string.Empty) == null)
+                            {
+                                ModelState.AddModelError("", "Nastala neznámá chyba.");
+                            }
+                            else
+                            {
+                                return RedirectToAction("LogOn", "Account").Success("Email pro obnovu hesla byl odeslán.");
+                            }
                         }
                         else
                         {
-                            return RedirectToAction("LogOn", "Account").Success("Email pro obnovu hesla byl odeslán.");
+                            ModelState.AddModelError("", "Účet není aktivován.");
                         }
                     }
                     else
