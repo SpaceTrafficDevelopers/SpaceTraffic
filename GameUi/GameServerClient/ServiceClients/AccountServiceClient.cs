@@ -66,7 +66,7 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             Entities.PublicEntities.AccountInfo result;
             using (var channel = this.GetClientChannel())
             {
-                result = (channel as IAccountService).GetAccountInfoByUserName(token);
+                result = (channel as IAccountService).GetAccountInfoByToken(token);
             }
 
             return result;
@@ -177,6 +177,21 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             {
                 return (channel as IAccountService).AccountExists(accountId);
             }
+        }
+
+        /// <summary>
+        /// Method check if token exists
+        /// </summary>
+        /// <param name="email">Player token</param>
+        /// <returns></returns>
+        public bool AccountTokenExists(string token)
+        {
+            bool result;
+            using (var channel = this.GetClientChannel())
+            {
+                result = (channel as IAccountService).AccountTokenExists(token);
+            }
+            return result;
         }
     }
 }

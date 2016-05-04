@@ -158,5 +158,18 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
             return (player != null);
         }
+
+        /// <summary>
+        /// Method check if token exists
+        /// </summary>
+        /// <param name="email">Player token</param>
+        /// <returns></returns>
+        public bool AccountTokenExists(string token)
+        {
+            Logger.Info("AccountService: AccountTokenExists {0}", token);
+            Player player = GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByToken(token);
+
+            return (player != null);
+        }
     }
 }

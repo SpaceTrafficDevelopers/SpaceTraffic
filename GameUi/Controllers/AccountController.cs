@@ -302,6 +302,59 @@ namespace SpaceTraffic.GameUi.Controllers
         }
 
         /// <summary>
+        /// Activates user with token.
+        /// If invalid token si given, than shows error message
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult ActivationToken()
+        {
+            string[] tokens = Request.QueryString.GetValues("Token");
+            if (tokens != null && tokens.Length == 1)
+            {
+                string token = tokens[0];
+
+                if (GSClient.AccountService.AccountTokenExists(token))
+                {
+                    int id = GSClient.AccountService.GetAccountInfoByToken(token).PlayerId;
+                    Entities.Player player = GSClient.PlayerService.GetPlayer(id);
+
+                    if (player.IsEmailConfirmed)
+                    {
+                        return RedirectToAction("LogOn", "Account").Error("Účet je již aktivován");
+                    }
+
+                    if ((DateTime.Now - player.AddedDate) > new TimeSpan(48, 0, 0))
+                    {
+                        Membership.DeleteUser(player.PlayerName);
+
+                        return RedirectToAction("LogOn", "Account").Error("Účet byl odstraněn. Propásli jste aktivační lhůtu (48 hodin).");
+                    }
+
+                    player.IsEmailConfirmed = true;
+
+                    if (GSClient.AccountService.UpdatePlayer(player))
+                    {
+                        return RedirectToAction("LogOn", "Account").Error("Účet byl úspěšně aktivován.");
+                    }
+                    else
+                    {
+                        return RedirectToAction("LogOn", "Account").Error("Nastala neznámá chyba.");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("LogOn", "Account").Error("Nesprávný aktivační odkaz");
+                }
+            }
+            else
+            {
+                return RedirectToAction("LogOn", "Account").Error("Nesprávný aktivační odkaz");
+            }
+        }
+
+
+        /// <summary>
         /// This is javascript workaround for ModelState.AddModelError.
         /// There must be <div></div> with validation-summary-errors class for proper function inside of view.
         /// </summary>

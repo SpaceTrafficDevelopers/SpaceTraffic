@@ -61,6 +61,14 @@ namespace SpaceTraffic.Services.Contracts
         bool AccountEmailExists(string email);
 
         /// <summary>
+        /// Method check if token exists
+        /// </summary>
+        /// <param name="email">Player token</param>
+        /// <returns></returns>
+        [OperationContract]
+        bool AccountTokenExists(string token);
+
+        /// <summary>
         /// Method check if user exists
         /// </summary>
         /// <param name="accountId">Player id</param>
