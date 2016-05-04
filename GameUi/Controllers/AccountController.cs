@@ -155,52 +155,46 @@ namespace SpaceTraffic.GameUi.Controllers
         [Authorize]
         public ActionResult ChangePassword()
         {
-            return View();
+            return PartialView();
         }
 
         //
         // POST: /Account/ChangePassword
-
+        /// <summary>
+        /// Changes password for currently signed in player after password verification.
+        /// If successful, redirects user to Settings screen, otherwise displays error message to user.
+        /// </summary>
+        /// <param name="model">ChangePasswordModel model</param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
+                bool status = Membership.Provider.ChangePassword(getCurrentPlayerName(), model.OldPassword, model.NewPassword);
 
-                // ChangePassword will throw an exception rather
-                // than return false in certain failure scenarios.
-                bool changePasswordSucceeded;
-                try
+                if (status)
                 {
-                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true /* userIsOnline */);
-                    changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
-                }
-                catch (Exception)
-                {
-                    changePasswordSucceeded = false;
-                }
-
-                if (changePasswordSucceeded)
-                {
-                    return RedirectToAction("ChangePasswordSuccess");
+                    if (Request.IsAjaxRequest())
+                    {
+                        //return JavaScript("document.location.replace('" + Url.Action("Settings", "Profile", new { Area = "Game" }) + "');").Success("Heslo bylo změněno.");
+                        //return JavaScript("document.location.replace('" + Url.Action("Index", "Default", new { Area = "Game" }) + "');").Success("Heslo bylo změněno.");
+                        return JavaScript("$('#cancelbutton').click();").Success("Heslo bylo změněno.");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Default", new { Area = "Game" });
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                    return ModelErrorUsingJS("Špatně zadané heslo.");
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        //
-        // GET: /Account/ChangePasswordSuccess
-
-        public ActionResult ChangePasswordSuccess()
-        {
-            return View();
+            return PartialView(model);
         }
 
         //
@@ -212,6 +206,8 @@ namespace SpaceTraffic.GameUi.Controllers
             return PartialView();
         }
 
+        //
+        // POST: /Account/DeleteAccount
         /// <summary>
         /// Deletes currently signed on player after password verification.
         /// If successful, redirects user to LogOn screen, otherwise displays error message to user.
