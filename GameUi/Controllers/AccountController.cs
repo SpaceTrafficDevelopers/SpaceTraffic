@@ -218,6 +218,17 @@ namespace SpaceTraffic.GameUi.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// This is javascript workaround for ModelState.AddModelError.
+        /// There must be <div></div> with validation-summary-errors class for proper function inside of view.
+        /// </summary>
+        /// <param name="message">Error message</param>
+        /// <returns></returns>
+        private JavaScriptResult ModelErrorUsingJS(string message)
+        {
+            return JavaScript("$(\".validation-summary-errors\").html(\"<ul><li>" + message +"</li></ul>\");");
+        }
+
         #region Status Codes
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
