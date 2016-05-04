@@ -87,7 +87,11 @@ namespace SpaceTraffic.Utils
         public static bool SendActivationMail(Player playerToActivate, string senderAddress, string activationUrl)
         {
             string text = FormatTemplates("activation_text_template.html", playerToActivate.PlayerShowName);
-            string messageContent = FormatTemplates("button_email_template.html", text, activationUrl, "Aktivovat účet", "");
+            string messageContent = FormatTemplates("button_email_template.html",
+                text,
+                activationUrl,
+                "Aktivovat účet",
+                "Aktivační email je platný pouze jednou po dobu 48 hodin.");
             string messageBody = FormatTemplates("base_email_template.html", messageContent, DateTime.Now.Year.ToString());
 
             return SendCustomMail(senderAddress, playerToActivate.Email, "Aktivujte váš nový Space Trafic účet", messageBody, true);
@@ -104,7 +108,11 @@ namespace SpaceTraffic.Utils
         public static bool SendLostPassMail(Player player, string senderAddress, string activationUrl, string newPass)
         {
             string text = FormatTemplates("lostpassword_text_template.html", player.PlayerShowName, newPass);
-            string messageContent = FormatTemplates("button_email_template.html", text, activationUrl, "Aktivovat nové heslo", "");
+            string messageContent = FormatTemplates("button_email_template.html",
+                text,
+                activationUrl,
+                "Aktivovat nové heslo",
+                "Aktivační email je platný pouze jednou po dobu 48 hodin.<br>Platí poslední zaslaný aktivační email.");
             string messageBody = FormatTemplates("base_email_template.html", messageContent, DateTime.Now.Year.ToString());
 
             return SendCustomMail(senderAddress, player.Email, "Reset hesla Space Traffic", messageBody, true);
