@@ -80,7 +80,23 @@ namespace SpaceTraffic.GameUi.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Špatné jméno nebo heslo.");
+                    string userLower = model.UserName.ToLower();
+                    if (GSClient.AccountService.AccountUsernameExists(userLower))
+                    {
+                        int id = GSClient.AccountService.GetAccountInfoByUserName(userLower).PlayerId;
+                        if (GSClient.PlayerService.GetPlayer(id).IsEmailConfirmed)
+                        {
+                            ModelState.AddModelError("", "Špatné jméno nebo heslo.");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Účet není aktivován.");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Špatné jméno nebo heslo.");
+                    }
                 }
             }
 

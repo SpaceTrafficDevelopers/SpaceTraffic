@@ -43,7 +43,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
             }
 
 
-            return (player != null && player.PlayerName == userName && pwdHasher.ValidatePassword(password,player.PsswdHash));
+            return (player != null && player.IsEmailConfirmed && player.PlayerName == userName && pwdHasher.ValidatePassword(password, player.PsswdHash));
         }
 
 
