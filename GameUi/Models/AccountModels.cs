@@ -92,6 +92,13 @@ namespace SpaceTraffic.GameUi.Models
         public string Email { get; set; }
     }
 
+    public class DeleteAccountModel
+    {
+        [Required(ErrorMessage = "Musíte zadat vaše heslo.")]
+        [StringLength(100, ErrorMessage = "Heslo musí mít alespoň {2} znaků.", MinimumLength = 8)]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+    }
 
     /// <summary>
     /// Validation attribute for boolean value which must be true (Required).
