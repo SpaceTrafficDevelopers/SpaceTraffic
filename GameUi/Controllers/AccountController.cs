@@ -376,6 +376,56 @@ namespace SpaceTraffic.GameUi.Controllers
             }
         }
 
+        /// <summary>
+        /// Activates new password with token.
+        /// If invalid token si given, than shows error message
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult ResetToken()
+        {
+            string[] tokens = Request.QueryString.GetValues("Token");
+            if (tokens != null && tokens.Length == 1)
+            {
+                string token = tokens[0];
+
+                if (GSClient.AccountService.AccountTokenExists(token))
+                {
+                    int id = GSClient.AccountService.GetAccountInfoByToken(token).PlayerId;
+                    Entities.Player player = GSClient.PlayerService.GetPlayer(id);
+
+                    if (!player.IsEmailConfirmed)
+                    {
+                        return RedirectToAction("LogOn", "Account").Warning("Účet není aktivován");
+                    }
+
+                    if ((DateTime.Now - player.PassChangeDate) > new TimeSpan(48, 0, 0))
+                    {
+                        return RedirectToAction("LogOn", "Account").Error("Vypršela platnost vygenerovaného hesla.");
+                    }
+
+                    player.PsswdHash = player.NewPsswdHash;
+                    player.PassChangeDate = DateTime.Now.AddDays(-3);
+
+                    if (GSClient.AccountService.UpdatePlayer(player))
+                    {
+                        return RedirectToAction("LogOn", "Account").Success("Nové heslo byl úspěšně aktivován.");
+                    }
+                    else
+                    {
+                        return RedirectToAction("LogOn", "Account").Error("Nastala neznámá chyba.");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("LogOn", "Account").Error("Nesprávný aktivační odkaz");
+                }
+            }
+            else
+            {
+                return RedirectToAction("LogOn", "Account").Error("Nesprávný aktivační odkaz");
+            }
+        }
 
         /// <summary>
         /// This is javascript workaround for ModelState.AddModelError.
