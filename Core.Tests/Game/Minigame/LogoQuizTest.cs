@@ -76,6 +76,7 @@ namespace Core.Tests.Game.Minigame
 
         /// <summary>
         /// Test for creating expected logo quiz instance.
+        /// This test contains tests for loading logos.
         /// </summary>
         [TestMethod()]
         public void ConsturctorTest()
@@ -87,6 +88,7 @@ namespace Core.Tests.Game.Minigame
             Assert.AreEqual(this.minigame.CreateTime, this.minigame.LastRequestTime);
             Assert.IsNotNull(this.minigame.Descriptor);
             Assert.IsTrue(this.minigame.FreeGame);
+            Assert.AreEqual(LogoQuiz.Logos.Count, 278);
         }
 
 
