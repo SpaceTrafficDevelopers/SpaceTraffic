@@ -337,7 +337,7 @@ namespace SpaceTraffic.GameUi.Controllers
 
                     if (player.IsEmailConfirmed)
                     {
-                        return RedirectToAction("LogOn", "Account").Error("Účet je již aktivován");
+                        return RedirectToAction("LogOn", "Account").Warning("Účet je již aktivován");
                     }
 
                     if ((DateTime.Now - player.AddedDate) > new TimeSpan(48, 0, 0))
@@ -351,7 +351,7 @@ namespace SpaceTraffic.GameUi.Controllers
 
                     if (GSClient.AccountService.UpdatePlayer(player))
                     {
-                        return RedirectToAction("LogOn", "Account").Error("Účet byl úspěšně aktivován.");
+                        return RedirectToAction("LogOn", "Account").Success("Účet byl úspěšně aktivován.");
                     }
                     else
                     {
