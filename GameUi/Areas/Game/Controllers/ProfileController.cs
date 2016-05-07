@@ -102,5 +102,55 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			return tabView;
 
         }
+
+        /// <summary>
+        /// Formats player age to days and hours, which is more user friendly.
+        /// </summary>
+        /// <param name="age">Player age</param>
+        /// <returns></returns>
+        private string FormatInGameAge(TimeSpan age)
+        {
+            string result = "";
+            int days = age.Days;
+            int hours = age.Hours;
+
+            if (days > 0)
+            {
+                if(days == 1)
+                {
+                    result = days + " den a ";
+                }
+                else if(days <= 4)
+                {
+                    result = days + " dny a ";
+                }
+                else
+                {
+                    result = days + " dní a ";
+                }
+            }
+
+            if (hours == 0)
+            {
+                result += "O hodin";
+            }
+            else if (hours > 0)
+            {
+                if (hours == 1)
+                {
+                    result += hours + " hodina";
+                }
+                else if (hours <= 4)
+                {
+                    result += hours + " hodiny";
+                }
+                else
+                {
+                    result += hours + " hodin";
+                }
+            }
+
+            return result;
+        }
     }
 }
