@@ -68,5 +68,17 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             this.Tabs.CurrentTab = this.Tabs.Items[tabName];
             return PartialView(this.Tabs.Items[tabName].PartialViewName);
         }
+
+        /// <summary>
+        /// Gets the view for given tab.
+        /// </summary>
+        /// <param name="tabName">Name of the tab</param>
+        /// <param name="model">Model</param>
+        /// <returns></returns>
+        protected PartialViewResult GetTabView(string tabName, object model)
+        {
+            this.Tabs.CurrentTab = this.Tabs.Items[tabName];
+            return PartialView(this.Tabs.Items[tabName].PartialViewName, model);
+        }
     }
 }
