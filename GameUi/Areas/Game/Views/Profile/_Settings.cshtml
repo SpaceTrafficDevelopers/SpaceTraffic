@@ -11,7 +11,7 @@
         <div class="settings_form">
             <section>
                 <h1>Účet</h1>
-                @Html.LabelFor(m => m.Email) @Html.DisplayFor(m => m.Email)<br>
+                @Html.LabelFor(m => m.Email) @Html.Encode(@Model.Email)<br>
                 @Html.LabelFor(m => m.RememberMe) @Html.CheckBoxFor(m => m.RememberMe)<br>
                 <hr />
                 <a href="@Url.Action("ChangePassword", "Account", new { Area = String.Empty })" class="ajax" data-related-element-id="tabsContent">Změnit heslo</a><br>
