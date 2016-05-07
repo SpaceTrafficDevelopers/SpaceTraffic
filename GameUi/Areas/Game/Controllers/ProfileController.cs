@@ -70,19 +70,60 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             tabView.ViewBag.avatarID = currentLevel.LevelID;
 
             //player game age 
-            tabView.ViewBag.playerGameAge = 0; //todo: implement
+            tabView.ViewBag.playerGameAge = FormatInGameAge(DateTime.Now - player.AddedDate);
 
             return tabView;
         }
 
-        public PartialViewResult Personal()
-        {
-            return GetTabView("Personal");
-        }
-
+        /// <summary>
+        /// Gets user settings from database and displays them to user.
+        /// </summary>
+        /// <returns></returns>
         public PartialViewResult Settings()
         {
-            return GetTabView("Settings");
+            Models.ProfileSettingsModel model = new Models.ProfileSettingsModel();
+            Player player = GSClient.PlayerService.GetPlayer(getCurrentPlayerId());
+
+            model.Email = player.Email;
+            model.RememberMe = player.StayLogedIn;
+            model.SendGameInfo = player.SendInGameInfo;
+            model.SendNews = player.SendNewsletter;
+
+            return GetTabView("Settings", model);
+        }
+
+        /// <summary>
+        /// Saves user settings to database.
+        /// If successful, displays success message to user, otherwise displays error message to user.
+        /// </summary>
+        /// <param name="model">ProfileSettingsModel model</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Settings(Models.ProfileSettingsModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                //SpaceTraffic.Utils.Debugging.DebugEx.WriteLineF("PlayerUpdate begin: rem:" + model.RememberMe + ", GInfo: " + model.SendGameInfo + ", SNews: " + model.SendNews);
+                Player player = GSClient.PlayerService.GetPlayer(getCurrentPlayerId());
+
+                player.StayLogedIn = model.RememberMe;
+                player.SendInGameInfo = model.SendGameInfo;
+                player.SendNewsletter = model.SendNews;
+
+                bool state = GSClient.AccountService.UpdatePlayer(player);
+
+                if(state)
+                {
+                    return JavaScript("$('a[title=\"Nastavení\"]').click();").Success("Nastavení bylo uloženo.");
+                }
+                else
+                {
+                    return JavaScript("$('a[title=\"Nastavení\"]').click();").Error("Při ukládání nastala chyba.");
+                }
+            }
+
+            return GetTabView("Settings", model);
         }
 
         public PartialViewResult Achievements()
