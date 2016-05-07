@@ -22,6 +22,7 @@ using System.Web.Mvc;
 using SpaceTraffic.GameUi.Models.Ui;
 using SpaceTraffic.Entities;
 using System.Collections;
+using SpaceTraffic.GameUi.Extensions;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
@@ -30,10 +31,9 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
     {
         protected override void BuildTabs()
         {
-            this.Tabs.AddTab("Overview", text: "Profil", title: "Profile overview", partialViewName: "_Overview");
-            //this.Tabs.AddTab("Personal", title: "Personal informations.", partialViewName: "_Personal");
-            this.Tabs.AddTab("Settings", text: "Nastavení" ,title: "Profile settings.", partialViewName: "_Settings", partialViewModel: new Models.ProfileSettingsModel());
-            this.Tabs.AddTab("Achievements", text: "Úspěchy", title: "Achievements", partialViewName: "_AchievementsList");
+            this.Tabs.AddTab("Overview", text: "Profil", title: "Profil", partialViewName: "_Overview");
+            this.Tabs.AddTab("Settings", text: "Nastavení" ,title: "Nastavení", partialViewName: "_Settings", partialViewModel: new Models.ProfileSettingsModel());
+            this.Tabs.AddTab("Achievements", text: "Úspěchy", title: "Úspěchy", partialViewName: "_AchievementsList");
         }
 
         public ActionResult Index()
