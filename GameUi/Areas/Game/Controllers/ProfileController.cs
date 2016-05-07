@@ -41,20 +41,23 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			return PartialView(INDEX_VIEW);
         }
 
+        /// <summary>
+        /// Gets user data from database and displays them to user.
+        /// </summary>
+        /// <returns></returns>
         public PartialViewResult Overview()
         {
 			Player player = GSClient.PlayerService.GetPlayer(getCurrentPlayerId());
 			ExperienceLevels globalExpiriencesLevels = GSClient.AchievementsService.GetExperienceLevels();
 			TLevel currentLevel = globalExpiriencesLevels.GetLevel(player.ExperienceLevel);
 			TLevel nextLevel = globalExpiriencesLevels.GetLevel(currentLevel.LevelID + 1);
-			String nextLevelExp = (nextLevel == null) ? "-" : "" + nextLevel.RequiredXP;
-			
 			
 			var tabView = GetTabView("Overview");
+            //player entity
 			tabView.ViewBag.player = player;
+
+            //player current level
 			tabView.ViewBag.currentLevel = currentLevel;
-			tabView.ViewBag.nextLevel = nextLevel;
-			tabView.ViewBag.nextLevelExp = nextLevelExp;
 
             //exp to percent for exp_ring
             float requiredExp = (currentLevel.LevelID > 0) ? currentLevel.RequiredXP : nextLevel.RequiredXP;
