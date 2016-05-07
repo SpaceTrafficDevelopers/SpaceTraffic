@@ -91,7 +91,7 @@ namespace SpaceTraffic.Utils
                 text,
                 activationUrl,
                 "Aktivovat účet",
-                "Aktivační email je platný pouze jednou po dobu 48 hodin.");
+                "Aktivační email je platný pouze jednou po dobu 48 hodin.<br>Pokud v této lhůtě nedojde k aktivaci, bude účet odstraněn.");
             string messageBody = FormatTemplates("base_email_template.html", messageContent, DateTime.Now.Year.ToString());
 
             return SendCustomMail(senderAddress, playerToActivate.Email, "Aktivujte váš nový Space Trafic účet", messageBody, true);

@@ -267,14 +267,15 @@ namespace SpaceTraffic.GameUi.Security
             GSClient.AccountService.RegisterPlayer(newPlayer);
 
             string appUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
-
-
+            
             if (!GSClient.AccountService.AccountUsernameExists(usernameLower))
             {
                 status = MembershipCreateStatus.ProviderError;
                 return null;
             }
-            
+
+            GSClient.GameService.PerformAction(GSClient.AccountService.GetAccountInfoByUserName(usernameLower).PlayerId, "InactivePlayerRemove", newPlayer.PlayerShowName);
+
             GSClient.MailService.SendActivationMail(newPlayer, "test@spacetraffic.zcu.cz", appUrl + "/Account/ActivationToken?Token=" + token);
 
             status = MembershipCreateStatus.Success;
