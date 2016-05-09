@@ -447,6 +447,7 @@
     <Content Include="JS\libs\mousewheel\jquery.mousewheel.js" />
     <Content Include="JS\libs\mousewheel\jquery.mousewheel.min.js" />
     <Content Include="JS\libs\random\seedrandom.js" />
+    <Content Include="JS\libs\smartresize\smartresize.js" />
     <Content Include="JS\libs\test\qunit-1.23.1.css" />
     <Content Include="JS\libs\test\qunit-1.23.1.js" />
     <Content Include="JS\map\GalaxyMapLoader.js" />
@@ -479,6 +480,7 @@
     <Content Include="JS\tests\SvgStarSystemMap.Tests.js" />
     <Content Include="JS\tests\UIAreThereTest.js" />
     <Content Include="JS\ui\Ajax.js" />
+    <Content Include="JS\ui\BackgroundPlanets.js" />
     <Content Include="JS\ui\GameWindowTabs.js" />
     <Content Include="JS\ui\InfoMarquee.js" />
     <Content Include="JS\ui\Menus.js" />
