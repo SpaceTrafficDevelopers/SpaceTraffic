@@ -47,6 +47,7 @@ body{
     text-align: center;
     font-family: @titleFont;
     margin-top: 40px;
+    margin-bottom: 0;
     font-size: 90px;
 }
 
@@ -58,7 +59,7 @@ body{
 /* Form */
 .form-wrapper {
     width: 295px;
-    margin: 0 auto;
+    margin: -150px auto;
     font-family: @textFont;
 
     a {
@@ -72,7 +73,7 @@ body{
 }
 
 .form {
-    background-color: @formBgColor;
+    background-color: rgba( red(@formBgColor), green(@formBgColor), blue(@formBgColor), 0.9);
     border: 3px solid @formBorderColor;
 	padding: 10px;
     font-weight: 400;
@@ -247,3 +248,193 @@ a.cancel:hover, a.login:hover {
 }
 
 @import "ModalWindow.less";
+
+/* Background planets */
+#planets-wrapper { 
+      margin-top: 20px;
+      height: 350px;
+      width: 100%;
+      overflow: hidden;
+      text-align: center;
+    }
+
+#planets_right, #planets_left, #planets_spacer {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+    
+  .planet {
+    margin: 0px 20px;
+    border-radius: 50%;
+    position: relative;
+    animation-name: rotate;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    z-index: -1;
+    
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .earth {
+    background-image: url('../images/solarsystem/background_images/earth.png');
+    background-color: #0072bc;
+    width: 60px;
+    height: 60px;
+    
+    animation-name: rotateEarth;
+    animation-duration: 4s;
+  }
+
+  .mars {
+    background-image: url('../images/solarsystem/background_images/mars.png');
+    background-color: #ed1c24;
+    width: 50px;
+    height: 50px;
+    
+    animation-name: rotateMars;
+  }
+  
+  .mercury {
+    background-image: url('../images/solarsystem/background_images/mercury.png');
+    background-color: #b57916;
+    width: 40px;
+    height: 40px;
+    
+    animation-name: rotateMercury;
+  }
+  
+  .neptune
+  {
+    background-image: url('../images/solarsystem/background_images/neptune.png');
+    background-color: #4b15ad;
+    width: 70px;
+    height: 70px;
+    
+    animation-name: rotateNeptune;
+  }
+  
+  .pluto {
+    background-image: url('../images/solarsystem/background_images/pluto.png');
+    background-color: #f0cdab;
+    width: 30px;
+    height: 30px;
+    
+    animation-name: rotatePluto;
+  }
+  
+  .sun {
+    background-image: url('../images/solarsystem/background_images/sun.png');
+    background-color: #fff200;
+    width: 350px;
+    height: 350px;
+    
+    animation-name: rotateSun;
+    animation-duration: 40s;
+  }
+  
+  .venus {
+    background-image: url('../images/solarsystem/background_images/venus.png');
+    background-color: #f7941d;
+    width: 50px;
+    height: 50px;
+    
+    animation-name: rotateVenus;
+  }
+  
+  .saturne {
+    background-image: url('../images/solarsystem/background_images/saturne.png');
+    background-color: #998675;
+    width: 100px;
+    height: 100px;
+    margin: 0 62px;
+    
+    animation-name: rotateSaturne;
+  }
+
+  .saturne-ring {
+      width: 190px;
+      height: 38px;
+      position: relative;
+      top: 35px;
+      left: -45px;
+
+      display: inline-block;
+  }
+
+  .uranus-ring {
+      position: relative;
+      top: -28px;
+      width: 39px;
+      height: 127px;
+  }
+  
+  .uranus {
+    background-image: url('../images/solarsystem/background_images/uranus.png');
+    background-color: #7dd8c8;
+    width: 70px;
+    height: 70px;
+    
+    animation-name: rotateUranus;
+  }
+  
+  .jupiter {
+    background-image: url('../images/solarsystem/background_images/jupiter.png');
+    background-color: #a67c52;
+    width: 130px;
+    height: 130px;
+    
+    animation-name: rotateJupiter;
+  }
+ 
+  @keyframes rotateEarth {
+    0% { background-position: 0px; }
+    100% { background-position: 120px; }
+  }
+  
+  @keyframes rotateMars {
+    0% { background-position: 0px; }
+    100% { background-position: 100px; }
+  }
+  
+  @keyframes rotateMercury {
+    0% { background-position: 0px; }
+    100% { background-position: 80px; }
+  }
+  
+  @keyframes rotateNeptune {
+    0% { background-position: 0px; }
+    100% { background-position: 140px; }
+  }
+  
+  @keyframes rotatePluto {
+    0% { background-position: 0px; }
+    100% { background-position: 60px; }
+  }
+  
+  @keyframes rotateSun {
+    0% { background-position: 0px; }
+    100% { background-position: 700px; }
+  }
+  
+  @keyframes rotateVenus {
+    0% { background-position: 0px; }
+    100% { background-position: 100px; }
+  }
+  
+  @keyframes rotateSaturne {
+    0% { background-position: 0px; }
+    100% { background-position: 200px; }
+  }
+  
+  @keyframes rotateUranus {
+    0% { background-position: 0px; }
+    100% { background-position: 140px; }
+  }
+  
+  @keyframes rotateJupiter {
+    0% { background-position: 0px; }
+    100% { background-position: 260px; }
+  }
