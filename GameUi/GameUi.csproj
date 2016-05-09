@@ -480,6 +480,7 @@
     <Content Include="JS\tests\SvgStarSystemMap.Tests.js" />
     <Content Include="JS\tests\UIAreThereTest.js" />
     <Content Include="JS\ui\Ajax.js" />
+    <Content Include="JS\ui\BackgroundPlanets.js" />
     <Content Include="JS\ui\GameWindowTabs.js" />
     <Content Include="JS\ui\InfoMarquee.js" />
     <Content Include="JS\ui\Menus.js" />
