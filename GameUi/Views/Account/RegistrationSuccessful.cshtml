@@ -1,17 +1,18 @@
 ﻿@{
-    ViewBag.Title = "Register Step 3";
+    ViewBag.Title = "Registrace dokončena";
 }
 
-<div class="account-window">
-    <h2>Create a New Account - Step 3</h2>
+<div class="form-wrapper form">
+    <h1>Registrace dokončena</h1>
     <p>
-        Your account was created. Now you can log into the game. 
+        Vytvoření vašeho účtu proběhlo úspěšně. 
     </p>
     <p>
-    <strong>Remember: </strong> You need to activate your account up to 48 hours via an email which will be sent.
+        Byl vám odeslán aktivační email.<br />
+        Prosím aktivujte si svůj účet do<br />
+        <b>48 hodin</b>, jinak bude smazán.
     </p>
-    <h3>Your account</h3>
-    <p>Information about your profile...</p>
-
-    <a class="play-button" href="#">Play</a>
+    <p>
+        <a class="button login" href="@Url.Action("LogOn", "Account")">Hrát!</a>
+    </p>
 </div>
