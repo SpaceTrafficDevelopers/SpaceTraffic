@@ -215,6 +215,37 @@ a.cancel:hover, a.login:hover {
     color: @textColor;
 }
 
+/* Flash messages (alert)*/
+.alert{
+	z-index: 2;
+	position: relative;
+	width: auto;
+	padding: 5px 15px;
+	margin-bottom: 8px;
+	text-align: center;
+	font-size: 25px;
+    font-family: @textFont;
+
+	.close{
+		display: none;
+	}
+}
+
+.alert-success{
+	background: rgba( red(@goodColor), green(@goodColor), blue(@goodColor), 0.8);
+	color: white;
+}
+
+.alert-warning{
+	background: rgba( red(@neutralColor), green(@neutralColor), blue(@neutralColor), 0.8);
+	color: white;
+}
+
+.alert-error{
+	background: rgba( red(@badColor), green(@badColor), blue(@badColor), 0.8);
+	color: white;
+}
+
 /* Animations */
 
 /* Flash animation */
