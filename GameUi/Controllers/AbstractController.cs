@@ -63,10 +63,9 @@ namespace SpaceTraffic.GameUi.Controllers
 		/// <summary>
 		/// Returns id of player who is currently signed in.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>int player id</returns>
 		public int getCurrentPlayerId()
 		{
-            //todo: ošetřit parsování int - zeptat se na schůzce
             HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
 
             if (authCookie == null)
@@ -75,7 +74,12 @@ namespace SpaceTraffic.GameUi.Controllers
             }
 
             FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
-            int val = int.Parse(authTicket.UserData);
+
+            int val;
+            if(!int.TryParse(authTicket.UserData, out val))
+            {
+                throw new FormatException("Invalid player ID (ID must be int)");
+            }
             //DebugEx.WriteLineF("getCurrentPlayerId() called: " + val);
             return val;
         }
