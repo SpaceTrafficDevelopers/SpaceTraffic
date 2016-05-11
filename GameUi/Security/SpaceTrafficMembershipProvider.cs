@@ -327,26 +327,22 @@ namespace SpaceTraffic.GameUi.Security
 
         public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
-            //TODO: FindUsersByEmail, implement later.
-            throw new NotImplementedException();
+            throw new NotSupportedException("FindUsersByEmail is not supported by this implementation. Use GetUser instead.");
         }
 
         public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
-            //TODO: FindUsersByName, implement later if needed.
-            throw new NotImplementedException();
+            throw new NotSupportedException("FindUsersByName is not supported by this implementation. Use GetUser instead.");
         }
 
         public override MembershipUserCollection GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
-            //TODO: GetAllUsers, implement later if needed.
-            throw new NotImplementedException();
+            throw new NotSupportedException("FindUsersByName is not supported by this implementation.");
         }
 
         public override int GetNumberOfUsersOnline()
         {
-            //TODO: GetNumberOfUsersOnline, implement later.
-            throw new NotImplementedException();
+            throw new NotSupportedException("UnlockUser is not supported by this implementation.");
         }
 
         /// <summary>
@@ -384,8 +380,17 @@ namespace SpaceTraffic.GameUi.Security
 
         public override string GetUserNameByEmail(string email)
         {
-            //TODO: GetUserNameByEmail, implement later.
-            throw new NotImplementedException();
+            if(GSClient.AccountService.AccountEmailExists(email.ToLower()))
+            {
+                int id = GSClient.AccountService.GetAccountInfoByEmail(email.ToLower()).PlayerId;
+                Entities.Player player = GSClient.PlayerService.GetPlayer(id);
+
+                if (player != null)
+                    return player.PlayerShowName;
+                
+            }
+
+            return null;
         }
 
         public override string ResetPassword(string username, string answer)
@@ -422,14 +427,12 @@ namespace SpaceTraffic.GameUi.Security
 
         public override bool UnlockUser(string userName)
         {
-            //TODO: UnlockUser, implement later.
-            throw new NotImplementedException();
+            throw new NotSupportedException("UnlockUser is not supported by this implementation. Use Account service instead.");
         }
 
         public override void UpdateUser(MembershipUser user)
         {
-            //TODO: UpdateUser, implement later.
-            throw new NotImplementedException();
+            throw new NotSupportedException("UpdateUser is not supported by this implementation. Use Account service instead.");
         }
 
         /// <summary>
