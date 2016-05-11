@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Entities.PublicEntities;
 using SpaceTraffic.Services.Contracts;
 
 namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
@@ -191,6 +192,22 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
             {
                 result = (channel as IAccountService).AccountTokenExists(token);
             }
+            return result;
+        }
+
+        /// <summary>
+        /// Method returns account information from email
+        /// </summary>
+        /// <param name="email">Player email</param>
+        /// <returns>Acount informations</returns>
+        public AccountInfo GetAccountInfoByEmail(string email)
+        {
+            Entities.PublicEntities.AccountInfo result;
+            using (var channel = this.GetClientChannel())
+            {
+                result = (channel as IAccountService).GetAccountInfoByEmail(email);
+            }
+
             return result;
         }
     }
