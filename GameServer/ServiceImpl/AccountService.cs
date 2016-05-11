@@ -171,5 +171,18 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
             return (player != null);
         }
+
+
+        /// <summary>
+        /// Method returns account information from email
+        /// </summary>
+        /// <param name="email">Player email</param>
+        /// <returns>Acount informations</returns>
+        public AccountInfo GetAccountInfoByEmail(string email)
+        {
+            Logger.Info("AccountService: GetAccountInfoByEmail {0}", email);
+            Player player = GameServer.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerByEmail(email);
+            return new AccountInfo { PlayerName = player.PlayerName, PlayerId = player.PlayerId };
+        }
     }
 }

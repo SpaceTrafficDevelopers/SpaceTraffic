@@ -117,19 +117,15 @@ namespace SpaceTraffic.Game.Actions
             if (State == GameActionState.FAILED)
                 return;
 
+            // increase player experiences by a fraction of cargo price; 1 is minimum gain 
+            gameServer.Statistics.IncrementExperiences(player, Math.Max(1, (int)(cargo.CargoPrice * Count) / ExperienceLevels.FRACTION_OF_CARGO_PRICE));
+
             if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(player.PlayerId, (int)(cargo.CargoPrice * Count)))
             {
                 Result = String.Format("Změny se nepovedlo zapsat do databáze");
                 State = GameActionState.FAILED;
                 return;
             }
-
-            player = gameServer.Persistence.GetPlayerDAO().GetPlayerWithIncludes(PlayerId);
-            if (player == null)
-                return;
-
-            // increase player experiences by a fraction of cargo price; 1 is minimum gain 
-            gameServer.Statistics.IncrementExperiences(player, Math.Max(1, (int)(cargo.CargoPrice * Count) / ExperienceLevels.FRACTION_OF_CARGO_PRICE));
 
             cargo.CargoCount = Count;
             cargo.CargoOwnerId = player.PlayerId;

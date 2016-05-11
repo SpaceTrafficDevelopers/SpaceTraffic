@@ -45,6 +45,14 @@ namespace SpaceTraffic.Services.Contracts
         AccountInfo GetAccountInfoByToken(string token);
 
         /// <summary>
+        /// Method returns account information from email
+        /// </summary>
+        /// <param name="email">Player email</param>
+        /// <returns>Acount informations</returns>
+        [OperationContract]
+        AccountInfo GetAccountInfoByEmail(string email);
+
+        /// <summary>
         /// Method check if username exists
         /// </summary>
         /// <param name="userName">Player username</param>
