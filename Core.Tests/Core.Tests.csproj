@@ -72,6 +72,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TestUtils.cs" />
+    <Compile Include="Utils\Security\PasswordHasherTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
