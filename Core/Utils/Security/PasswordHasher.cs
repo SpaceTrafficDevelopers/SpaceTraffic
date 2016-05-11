@@ -89,13 +89,14 @@ namespace SpaceTraffic.Utils.Security
         /// <returns>True if password is valid else False</returns>
         public bool ValidatePassword(string password, string pwdHash)
         {
-            byte[] salt = new byte[SALT_SIZE];
-            byte[] pwdHashBytes = Convert.FromBase64String(pwdHash);
-
             if (password == null || pwdHash == null)
             {
                 return false;
             }
+
+            byte[] salt = new byte[SALT_SIZE];
+            byte[] pwdHashBytes = Convert.FromBase64String(pwdHash);
+
             if (pwdHashBytes.Length != (SALT_SIZE + HASH_SIZE))
             {
                 return false;
