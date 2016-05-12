@@ -26,6 +26,10 @@
             @Html.LabelFor(m => m.RememberMe)
         </p>
         @Html.ValidationSummary(true)
+        @if (@ViewBag.notConfirmed)
+        {
+            <p><a href="@Url.Action("ResendActivationEmail", "Account")">Znovu zaslat aktivační email &rarr;</a></p>
+        }
         <p>
             <input type="submit" value="Log in" class="button login"/>
         </p>
