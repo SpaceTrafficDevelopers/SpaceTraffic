@@ -535,6 +535,7 @@
     <Content Include="Content\less\StarSystemMap.less" />
     <Content Include="Views\Account\LostPassword.cshtml" />
     <Content Include="Views\Account\DeleteAccount.cshtml" />
+    <Content Include="Views\Account\ResendActivationEmail.cshtml" />
     <None Include="Views\Shared\_Achievements.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
