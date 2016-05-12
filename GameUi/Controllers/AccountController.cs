@@ -307,7 +307,9 @@ namespace SpaceTraffic.GameUi.Controllers
         [AllowAnonymous]
         public ActionResult LostPassword()
         {
-            return View();
+            ViewResult view = View("LostPassword");
+            view.ViewBag.notConfirmed = false;
+            return view;
         }
 
         /// <summary>
@@ -321,7 +323,10 @@ namespace SpaceTraffic.GameUi.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LostPassword(LostPasswordModel model)
         {
-            if(ModelState.IsValid)
+            ViewResult view = View("LostPassword", model);
+            view.ViewBag.notConfirmed = false;
+
+            if (ModelState.IsValid)
             {
                 string playerName = model.UserName.ToLower();
                 bool status = GSClient.AccountService.AccountUsernameExists(playerName);
@@ -346,6 +351,9 @@ namespace SpaceTraffic.GameUi.Controllers
                         else
                         {
                             ModelState.AddModelError("", "Účet není aktivován.");
+                            view.ViewBag.notConfirmed = true;
+
+                            return view;
                         }
                     }
                     else
@@ -359,7 +367,7 @@ namespace SpaceTraffic.GameUi.Controllers
                 }
             }
 
-            return View(model);
+            return view;
         }
 
         //
