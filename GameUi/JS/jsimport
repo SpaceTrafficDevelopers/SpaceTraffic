@@ -37,4 +37,7 @@
  libs/random/seedrandom.js
  ui/InfoMarquee.js
  core/init.js
+ game/LogOff.js
+ libs/smartresize/smartresize.js
+ ui/ProfileOverviewExp.js
  

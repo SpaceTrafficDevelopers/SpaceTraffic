@@ -420,6 +420,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="JS\game\LogOff.js" />
     <Content Include="JS\jsimport" Exclude="JS\.*" />
     <Content Include="JS\core\flashInit.js" />
     <Content Include="JS\core\init.js" />
