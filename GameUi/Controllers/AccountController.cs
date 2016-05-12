@@ -37,21 +37,35 @@ namespace SpaceTraffic.GameUi.Controllers
         [AllowAnonymous]
         public ActionResult LogOn()
         {
-            return View();
+            ViewResult view = View("LogOn");
+            view.ViewBag.notConfirmed = false;
+            return view;
         }
 
         //
         // POST: /Account/LogOn
+        /// <summary>
+        /// Validates, if user with entered data exists in database.
+        /// If successful, creates FormsAuthenticationTicket which is stored in encrypted cookie which is used for authentication and redirects user to Game, 
+        /// otherwise displays error message to user.
+        /// </summary>
+        /// <param name="model">LogOnModel model</param>
+        /// <param name="returnUrl">return url</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
+            ViewResult view = View("LogOn", model);
+            view.ViewBag.notConfirmed = false;
+
             if (ModelState.IsValid)
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
-                    string userData = Membership.GetUser(model.UserName).ProviderUserKey.ToString();
+                    int userID = GSClient.AccountService.GetAccountInfoByUserName(model.UserName.ToLower()).PlayerId;
+                    string userData = userID.ToString();
 
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, model.UserName, DateTime.Now, DateTime.Now.AddMinutes(FormsAuthentication.Timeout.TotalMinutes), model.RememberMe, userData, FormsAuthentication.FormsCookiePath);
 
@@ -68,6 +82,16 @@ namespace SpaceTraffic.GameUi.Controllers
 
                     Response.Cookies.Add(faCookie);
 
+                    //WorldManager add to active players
+                    bool state = GSClient.AccountService.AddPlayerIntoActivePlayers(userID);
+                    DebugEx.WriteLineF("Player added to active players: " + state);
+
+                    //update players remember me in db
+                    Entities.Player player = GSClient.PlayerService.GetPlayer(userID);
+                    player.StayLogedIn = model.RememberMe;
+                    state = GSClient.AccountService.UpdatePlayer(player);
+                    DebugEx.WriteLineF("Players remember me updated: " + state);
+
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
@@ -75,7 +99,7 @@ namespace SpaceTraffic.GameUi.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Default", new { Area = "Game" });
                     }
                 }
                 else
@@ -91,6 +115,9 @@ namespace SpaceTraffic.GameUi.Controllers
                         else
                         {
                             ModelState.AddModelError("", "Účet není aktivován.");
+                            view.ViewBag.notConfirmed = true;
+
+                            return view;
                         }
                     }
                     else
@@ -101,14 +128,20 @@ namespace SpaceTraffic.GameUi.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return view;
         }
 
         //
         // GET: /Account/LogOff
-
+        /// <summary>
+        /// Deletes authentication cookie and sessions, then redirects user to LogOn screen.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult LogOff()
         {
+            //WorldManager remove from active players
+            GSClient.AccountService.RemovePlayerFromActivePlayers(getCurrentPlayerId());
+
             FormsAuthentication.SignOut();
             Session.Abandon();
 
@@ -117,7 +150,7 @@ namespace SpaceTraffic.GameUi.Controllers
             sessionCookie.Expires = DateTime.Now.AddDays(-1);
             Response.Cookies.Add(sessionCookie);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("LogOn", "Account");
         }
 
         //
@@ -131,7 +164,12 @@ namespace SpaceTraffic.GameUi.Controllers
 
         //
         // POST: /Account/Register
-
+        /// <summary>
+        /// Registers new player into game.
+        /// If successful, redirects user to RegistrationSuccessful screen, otherwise displays error message to user.
+        /// </summary>
+        /// <param name="model">RegisterModel model</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -442,7 +480,7 @@ namespace SpaceTraffic.GameUi.Controllers
 
         /// <summary>
         /// Activates new password with token.
-        /// If invalid token si given, than shows error message
+        /// If invalid token is given, than shows error message
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
