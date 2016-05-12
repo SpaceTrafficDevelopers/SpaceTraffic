@@ -100,6 +100,13 @@ namespace SpaceTraffic.GameUi.Models
         public string Password { get; set; }
     }
 
+    public class ResendActivationEmailModel
+    {
+        [Required(ErrorMessage = "Email je povinný.")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+    }
+
     /// <summary>
     /// Validation attribute for boolean value which must be true (Required).
     /// This is workaround for required error message which dosen't work for bool values.
