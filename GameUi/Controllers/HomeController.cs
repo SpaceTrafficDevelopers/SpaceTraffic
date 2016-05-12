@@ -36,7 +36,8 @@ namespace SpaceTraffic.GameUi.Controllers
         {
             ViewBag.Message = "Welcome";
 
-            return View();
+            return RedirectToAction("Index", "Default", new { Area = "Game" });
+            //return View();
         }
 
         [AllowAnonymous]
