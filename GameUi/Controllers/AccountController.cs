@@ -324,9 +324,73 @@ namespace SpaceTraffic.GameUi.Controllers
             return View(model);
         }
 
+        //
+        // GET: /Account/ResendActivationEmail
+        [AllowAnonymous]
+        public ActionResult ResendActivationEmail()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Resends activation email to user using his email address
+        /// If successful, redirects user to LogOn screen, otherwise displays error message to user.
+        /// </summary>
+        /// <param name="model">ResendActivationEmailModel model</param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResendActivationEmail(ResendActivationEmailModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string email = model.Email.ToLower();
+                bool status = GSClient.AccountService.AccountEmailExists(email);
+
+                if (status)
+                {
+                    int userID = GSClient.AccountService.GetAccountInfoByEmail(email).PlayerId;
+                    Entities.Player player = GSClient.PlayerService.GetPlayer(userID);
+
+                    if (player != null)
+                    {
+                        if(!player.IsEmailConfirmed)
+                        {
+                            string appUrl = HttpContext.Request.Url.GetLeftPart(UriPartial.Authority);
+                            status = GSClient.MailService.SendActivationMail(player, "info@spacetraffic.zcu.cz", appUrl + "/Account/ActivationToken?Token=" + player.PlayerToken);
+
+                            if(status)
+                            {
+                                return RedirectToAction("LogOn", "Account").Success("Aktivační email byl odeslán.");
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "Nastala chyba při odesílání.");
+                            }
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Účet je již aktivován");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Nastala neznámá chyba.");
+                    } 
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Účet s tímto emailem neexistuje.");
+                }
+            }
+
+            return View(model);
+        }
+
         /// <summary>
         /// Activates user with token.
-        /// If invalid token si given, than shows error message
+        /// If invalid token is given, than shows error message
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
