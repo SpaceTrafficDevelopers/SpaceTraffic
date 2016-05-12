@@ -1,6 +1,5 @@
 ﻿@{
     ViewBag.Title = "_Overview";
-    @Content.Script("../JS/ui/ProfileOverviewExp.js", Url)
     bool lastLevel = (@ViewBag.expToNextL > 0) ? false : true;
 }
 
@@ -32,18 +31,52 @@
 @if (lastLevel)
 {
     <script>
-    $(document).ready(function () {
-        var exp = @ViewBag.expInPercent;
-        ringAnimationStart(exp, true);
-    });
+        $(document).ready(function () {
+            var exp = @ViewBag.expInPercent;
+            ringAnimationStart(exp, true);
+
+            elementQuery(); 
+        });
+
+        $(window).smartresize(function () {
+            elementQuery();
+        });
+
+        function elementQuery() {
+            if($(".profile_wrapper").width() <= 700)
+            {
+                $("#profile_experience").attr("class","profile_experience_break");
+                $("#profile_avatar").attr("class","profile_avatar_break");
+            } else {
+                $("#profile_experience").removeAttr("class");
+                $("#profile_avatar").removeAttr("class");
+            }
+        }
     </script>
 }
 else
 {
     <script>
-    $(document).ready(function () {
-        var exp = @ViewBag.expInPercent;
-        ringAnimationStart(exp, false);
-    });
+        $(document).ready(function () {
+            var exp = @ViewBag.expInPercent;
+            ringAnimationStart(exp, false);
+
+            elementQuery();       
+        });
+
+        $(window).smartresize(function () {
+            elementQuery();
+        });
+
+        function elementQuery() {
+            if($(".profile_wrapper").width() <= 700)
+            {
+                $("#profile_experience").attr("class","profile_experience_break");
+                $("#profile_avatar").attr("class","profile_avatar_break");
+            } else {
+                $("#profile_experience").removeAttr("class");
+                $("#profile_avatar").removeAttr("class");
+            }
+        }
     </script>
 }

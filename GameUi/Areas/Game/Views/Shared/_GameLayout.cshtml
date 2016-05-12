@@ -141,21 +141,5 @@
   	
 	@RenderSection("Scripts", false)
 
-    <script>
-        $(document).ready(function () {
-              $.ajaxSetup({
-                  cache: false
-              });
-
-              $(document).ajaxError(
-                  function (e, request) {
-                      if (request.status == 401) {
-                          window.location.replace("@Url.Action("LogOn", "Account", new { Area = String.Empty })");
-                      }
-                  }
-              );
-          })
-    </script>
-
   </body>
 </html>
