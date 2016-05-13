@@ -36,8 +36,12 @@ namespace SpaceTraffic.GameUi.Controllers
         {
             ViewBag.Message = "Welcome";
 
+            //in debug mode redirects to Debug page (home/index.cshtml view), in release mode redirects to Game 
+#if DEBUG
+            return View();
+#else
             return RedirectToAction("Index", "Default", new { Area = "Game" });
-            //return View();
+#endif
         }
 
         [AllowAnonymous]
