@@ -52,5 +52,45 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			}
 			return false;
 		}
+
+		/// <summary>
+		/// Returns single spaceship
+		/// </summary>
+		/// <param name="spaceShipId">The space ship identifier.</param>
+		/// <returns></returns>
+		public SpaceShip GetSpaceShip(int spaceShipId)
+		{
+
+			var ship = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId);
+			return ship;
+		}
+
+		/// <summary>
+		/// Returns single spaceship
+		/// </summary>
+		/// <param name="spaceShipId">The space ship identifier.</param>
+		/// <returns></returns>
+		public SpaceShip GetDetailedSpaceShip(int spaceShipId)
+		{
+
+			var ship = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetDetailedSpaceShipById(spaceShipId);
+			return ship;
+		}
+
+		/// <summary>
+		/// Changes info about the ship - avalibility and state
+		/// </summary>
+		/// <param name="shipId">The ship identifier.</param>
+		/// <param name="available">if set to <c>true</c> [available].</param>
+		/// <param name="message">The message.</param>
+		/// <returns></returns>
+		public SpaceShip ChangeShipState(int shipId, bool available, string message = "") {
+			SpaceShip ship = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(shipId);
+			ship.IsAvailable = available;
+			ship.StateText = (String.IsNullOrEmpty(message)) ? SpaceShip.StateTextDefault : message;
+			GS.CurrentInstance.Persistence.GetSpaceShipDAO().UpdateSpaceShip(ship);
+
+			return ship;
+		}
 	}
 }

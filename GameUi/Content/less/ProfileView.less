@@ -1,12 +1,269 @@
-.profile{
-	background: url(images/transparent50.png) repeat;
-	width:98%;
-	margin:auto;
-	padding:5px;
-	color:#FFFFFF;
-	overflow:auto;
-	height:320px;
+@import "Variables/fonts.less";
+
+@formBgColor: #373535;
+@formBorderColor: #595959;
+@sectionTitleColor: #48a2f0;
+@buttonBgColor: #159515;
+@linkHoverColor: #48a2f0;
+@formInputBgColor: #131313;
+@buttonCancelBglColor: #ec3131;
+
+/*  PROFILE     */
+
+.profile_wrapper { 
+  //border : 2px solid #000; 
+  overflow:hidden;
 }
+
+.profile_wrapper div {
+   //min-height: 360px;
+   //padding: 10px;
+   margin-bottom: 10px;
+}
+
+#profile_experience {
+  //background-color: gray;
+  float:left; 
+  margin-right:20px;
+  width:338px;
+  height: 360px;
+  //border-right:2px solid #000;
+}
+
+#profile_experience canvas {
+    //background: green;
+    display: block;
+}
+
+#profile_experience #exp_text {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    height: 1.2em;
+}
+
+#profile_experience #profile_avatar {
+    position: absolute;
+    top: 57px;
+    left: 67px;
+    border: 2px solid #535353;
+    background: #03020f;
+    border-radius: 50%;
+}
+
+#profile_info { 
+  background-color: @formBgColor;
+  overflow: hidden;
+  margin: 10px;
+  min-height: 200px;
+  border: 3px solid @formBorderColor;
+  font-size: 1.4em;
+
+  h1{
+        color: @sectionTitleColor;
+        font-family: @titleFont;
+        text-align: center;
+    } 
+
+  p{
+        font-family: @textFont;
+        margin-left: 30px;
+    }
+
+  .profile_p_title{
+        font-weight: bold;
+  }
+}
+
+.profile_experience_break { 
+    float: none !important;
+    margin: auto !important;
+    margin-bottom: 10px;
+    border:0;
+    //border-bottom:2px solid #000;    
+}
+
+#profile_experience .profile_avatar_break {
+    left: auto !important;
+    margin-left: 60px;
+}
+
+/*  SETTINGS    */
+.settings_form{
+    min-width:338px;
+    width: 400px;
+    margin: auto;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.4em;
+
+    section{
+    margin-bottom: 15px;
+    background: @formBgColor;
+    border: 3px solid @formBorderColor;
+    line-height: 35px;
+
+        h1{
+            color: @sectionTitleColor;
+            font-family: @titleFont;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        hr{
+            width: 70%;
+            margin: auto;
+            border: 1px solid @formBorderColor;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        a{
+            text-decoration: none;
+            font-weight: bold;
+            &:hover{
+                color: @linkHoverColor !important;
+            }
+        }
+
+        #deleteAccount{
+            color: red;
+            &:hover{
+                color: darken(red, 10%) !important;
+            }
+        }
+
+         p {
+		    margin: 15px 10px 15px 10px;
+            font-weight: normal;
+	    }
+    }
+
+     input[type="submit"], a.cancel{
+        cursor: pointer;
+        background: @buttonBgColor;
+        font-family: @textFont;
+        font-weight: 700;
+        margin-top: -5px;
+        padding: 3px 10px;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        border: 1px solid transparent;
+    }
+
+    .ok {
+        float: right;
+        margin-top: 0px !important;
+    }
+
+    .clear {
+        overflow: auto;
+    }
+
+    a.cancel {
+        background: @buttonCancelBglColor;
+        text-decoration: none;
+        margin-top: 0px !important;
+        float: left;
+
+        &:hover{
+                color: white !important;
+        }
+    }
+
+    input[type="password"] {
+        width: 90%;
+        text-align: center;
+        background: @formInputBgColor;
+        border: 1px solid transparent;
+        font-size: 1.25em;
+        padding: 5px 0 5px 0;
+        font-weight: normal;
+        font-family: @textFont;
+    }
+    
+    input[type="checkbox"] {
+        margin-left: 4px;
+        vertical-align: middle;
+    }
+
+    input:focus {
+        border-color: white;
+        outline: none;
+    }
+
+    /*Annoying Mozzila red glow fix*/
+    input:invalid{
+        outline: none;
+        box-shadow: none;
+    }
+
+     /* Form validation error messages */
+    .field-validation-error {
+        margin-top: 5px;
+        margin-left: 19px;
+        width: 90%;
+        font-size: 0.8em;
+        max-height: 30px;
+        padding: 3px 0;
+        background-color: rgba(255, 0, 0, .4); 
+        display: block;
+        font-weight: normal;
+
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    .field-validation-valid {
+        display: none;
+    }
+
+    .validation-summary-errors {
+        width: 85.5%;
+        margin: 0 29px 15px 29px;
+        font-size: 1em;
+        text-align: center;
+        background-color: rgba(255, 0, 0, .4);
+    }
+
+    .validation-summary-errors ul {
+        list-style-type: none;
+        display: block;
+        padding: 3px 0;
+        max-height: 30px;
+
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    .validation-summary-valid {
+        display: none;
+    }
+    /*------------------------------*/
+}
+
+/* FadeIn animation - Error messages */
+@keyframes fadeIn {
+    0% {
+        display: none;
+        max-height: 0;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        max-height: 0;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        max-height: 30px;
+        opacity: 1;
+    }
+}
+
+/*--------------------------------*/
 .profile_category{
 	font-size:110%;
 	font-weight:bold;

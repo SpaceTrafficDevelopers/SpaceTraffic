@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AchievementsLoader.cs" />
+    <Compile Include="Data\EmailClient\EmailTemplateLoader.cs" />
     <Compile Include="Data\ExperienceLevelsLoader.cs" />
     <Compile Include="Data\GalaxyMapLoader.cs" />
     <Compile Include="Data\GalaxyMapBuildingException.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Data\GoodsXmlHelper.cs" />
     <Compile Include="Data\IGalaxyMapDataStreamProvider.cs" />
     <Compile Include="Data\IGoodsDataStreamProvider.cs" />
+    <Compile Include="Data\Minigame\LogoQuizLoader.cs" />
     <Compile Include="Data\StarSystemLoader.cs" />
     <Compile Include="Data\StarSystemXmlHelper.cs" />
     <Compile Include="Entities\Achievements.cs" />
@@ -93,6 +95,11 @@
     <Compile Include="Entities\ICargoLoad.cs" />
     <Compile Include="Entities\ICargoLoadEntity.cs" />
     <Compile Include="Entities\Message.cs" />
+    <Compile Include="Entities\Minigames\ConditionType.cs" />
+    <Compile Include="Entities\Minigames\IMinigameDescriptor.cs" />
+    <Compile Include="Entities\Minigames\MinigameDescriptor.cs" />
+    <Compile Include="Entities\Minigames\RewardType.cs" />
+    <Compile Include="Entities\Minigames\StartAction.cs" />
     <Compile Include="Entities\PathPlanEntity.cs" />
     <Compile Include="Entities\PlanAction.cs" />
     <Compile Include="Entities\PlanItemEntity.cs" />
@@ -107,6 +114,12 @@
     <Compile Include="Game\Geometry\Stacionary.cs" />
     <Compile Include="Game\IGameObject.cs" />
     <Compile Include="Game\IPlanet.cs" />
+    <Compile Include="Game\Minigame\IMinigame.cs" />
+    <Compile Include="Game\Minigame\LogoQuiz.cs" />
+    <Compile Include="Game\Minigame\Minigame.cs" />
+    <Compile Include="Game\Minigame\Result.cs" />
+    <Compile Include="Game\Minigame\ResultFactory.cs" />
+    <Compile Include="Game\Minigame\SpaceshipCargoFinder.cs" />
     <Compile Include="Game\VisibleObject.cs" />
     <Compile Include="Game\Geometry\CircularOrbit.cs" />
     <Compile Include="Game\Geometry\Direction.cs" />
@@ -125,14 +138,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Contracts\IMailService.cs" />
+    <Compile Include="Utils\EmailClient.cs" />
+    <Compile Include="Utils\Security\MinigamePasswordHasher.cs" />
+    <Compile Include="Utils\Security\PasswordHasher.cs" />
     <Compile Include="Services\Contracts\IAchievementsService.cs" />
     <Compile Include="Services\Contracts\ICargoService.cs" />
+    <Compile Include="Services\Contracts\IMinigameService.cs" />
     <Compile Include="Services\Contracts\IShipsService.cs" />
     <Compile Include="Services\Contracts\IPlanningService.cs" />
     <Compile Include="Services\Contracts\IPlayerService.cs" />
     <Compile Include="Services\Contracts\IGameService.cs" />
     <Compile Include="Utils\Collections\CollectionToString.cs" />
     <Compile Include="Utils\Debugging\DebugEx.cs" />
+    <Compile Include="Utils\Tests\TestPath.cs" />
     <Compile Include="Xml\XmlHelper.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\PublicEntities\AccountInfo.cs" />

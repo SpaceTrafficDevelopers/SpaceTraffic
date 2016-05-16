@@ -1,147 +1,217 @@
+@import "Variables/colors.less";
+@import "Variables/fonts.less";
+@import "Parts/icons.less";
+@import "defaults.less";
 
-
-// Color schema
-@spaceColor: #000000;
-@normalTextColor: #ffffff;
-@panelBorderColor: #151515;
-@headerBgColor: #111111;
-@footerBgColor: @headerBgColor;
-@footerBorderColor: #222222;
-@panelBgColor: #060525;
-//@panelBgColor: #050505;
-
-@menuLinkColor: #ffffff;
-@menuLinkHoverColor: #01ffc6;
-
-@panelLinkColor: #ffffff;
-@panelLinkHoverColor: #01ffc6;
-
-// Dimensions
-
-// Fonts
-
-@normalTextFont: Arial, sans-serif; 
-@menuFont: bold 12px 'Arial Narrow', sans-serif;
-
-* {
-	margin: 0;
-	padding: 0;	
-}
-
-html {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	font-size: 10pt;
-}
-
-body {
-	//background-color: green;
-	background-color: @spaceColor;
-	width: 100%;
-	min-height: 100%;
-	height: 100%;
-	font: @normalTextFont;
-	/*background-image: url(images/stars.gif);
-	background-repeat: no-repeat; 
-	background-position:top;*/
-	
-	background-color: black;
-	background-image: ~"url('images/content_stars_bg.png')";
-	background-repeat: repeat;
-	
-	color: @normalTextColor;
-}
-
-h1, h2, h3 {
-	color: white;
-	font-family: "Myriad Pro", Arial, sans-serif;
-}
 
 #envelope {
-	//background-color: yellow;
 	height: 100%;
 	width: 100%;
 }
 
-#logo 
-{
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	width: 200px;
-	height: 100px;
-	z-index: 50;
-}
-
-
-/*** HEADER ***/
-#header {
-	/*border-bottom: 2px solid;*/
-	background-color: @headerBgColor;
-	text-align: right;
-	
-	h1 {
-		text-indent: -9999px;
-		text-align: left;
-		display: block;
-		width: 0;
-		height: 0;
-	}
-	
-	margin-left: 0px;
-	/*padding-bottom: 40px;*/
-	position: absolute;
-	top:0;
-	left:0;
+@appPanelHeight: 20px;
+#applicationPanel{
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
 	width: 100%;
-	height: 30px;
-	z-index: 50;
+	height: @appPanelHeight;
+	background: @gamePanelBgColor;
+	z-index: 10;
+
+	.leftPart, .middlePart, .rightPart{
+		position: relative;
+		float: left;
+		height: @appPanelHeight;
+	}
+	.leftPart, .rightPart{
+		width: 36%;
+	}
+	.middlePart{
+		width: 28%;
+		overflow: visible;
+	}
+	.rightPart{
+		text-align: right;
+	}
+	.brick{
+		display: inline-block;
+		height: @appPanelHeight - 4;
+		line-height: @appPanelHeight - 4;
+		padding: 2px 4px;
+		border-right: 1px solid rgba(255,255,255, 0.1);
+	}
 }
 
-#header { /*border-bottom-color: #222222;*/ }
-/*#header { background-color: black; }*/
+@gameTopHeight: 40px;
+@leftSize: 20%;/* width of left part, including menu*/
+@rightSize: 25%;/* width of right part, including context panel */
+#gameTopPanel{
+	position: fixed;
+	left: 0;
+	top: @appPanelHeight;
+	width: 100%;
+	z-index: 9;
+
+	height: @gameTopHeight;
+	.leftPart, .middlePart, .rightPart{
+		position: relative;
+		z-index: 100;
+		float: left;
+		height: @gameTopHeight;
+	}
+	.leftPart{
+		width: @leftSize - 1;/* when modified, please correct other values in #menuPanel */
+		padding-left: 1%;
+	}
+	.middlePart{
+		z-index: 5;
+		width: 100 - @leftSize - @rightSize;
+	}
+	.rightPart{
+		width: @rightSize - 1;/* when modified, please correct other values #contextPanel */
+		padding-right: 1%;
+		text-align: right;
+	}
+	.leftPart, .rightPart{
+		background: @gamePanelBgColor;
+		border-bottom: 2px solid @gamePanelBorderColor;
+	}
+
+	.brick{
+		display: inline-block;
+		height: @gameTopHeight - 10;/* for top and bot padding*/
+		line-height: @gameTopHeight - 4;
+		padding: 8px 6px 2px 6px;
+		vertical-align: middle;
+		text-align: center;
+		&.minwidth{
+			min-width: 80px;
+		}
+	}
+	.middlePart{/* used for make /'''''''\ shape on the top panel*/
+		position: relative;
+
+		.middleShape{
+			position: relative;
+			width: 100%;
+			background: @gamePanelBgColor;
+			border-bottom: 2px solid @gamePanelBorderColor;
+			height: 16px;
+			z-index: 9;
+		}
+		.leftShape, .rightShape{
+			position: absolute;
+			top: -22px;
+			height: @gameTopHeight;
+			background: @gamePanelBgColor;
+			border-bottom: 2px solid @gamePanelBorderColor;
+			width: 80px;
+			z-index: 2;
+		}
+		.leftOverlay, .rightOverlay{
+			position: absolute;
+			background: @gamePanelBgColor;
+			top: 3px;
+			z-index: 20;
+			width: 40px;
+			height: 20px;
+		}
+		.leftShape{
+			left: -26px;
+			transform: rotate(-45deg);
+		}
+		.leftOverlay{
+			left: -8px;			
+			transform: rotate(-45deg);
+		}
+		.rightShape{
+			right: -26px;
+			transform: rotate(45deg);
+		}
+		.rightOverlay{
+			right: -8px;			
+			transform: rotate(45deg);
+		}
+
+	}
+
+}
 
 #logo {
-	background-image:~"url('images/logo_small.png')";
-	background-repeat: no-repeat; 
-	background-position: 10px 10px;
-}
+	position: relative;
+	text-decoration: none;
+	font-family: @titleFont;
+	color: @titleTextColor;
 
-.mainWindow {
-	.panel;
-	min-height: 100%;
-}
-
-ul.mainmenu {
-	list-style: none;
+	h1{
+		color: @textColor;
+		text-align: center;
+	}	
+	
 }
 
 #content {
 	position:absolute;
 	top: 30px;
 	left: 0;
-	/*clear: both;*/
 	width: 100%;
-	height: 500px;
-	
-	z-index: 0;	
+	height: 100%;	
+	z-index: 1;
+
+	#alert_placeholder{
+		padding: 8px 20px;
+		margin-left: @leftSize - 2;
+		margin-right: @rightSize - 2;
+	}
 }
+
+#gameBottomPanel{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: 10;
+	/*border-top: 2px solid @gamePanelBorderColor;*/
+
+	#infoStream{
+		background: @gamePanelBgColor;
+		height: 30px;
+		width: auto;
+		cursor: pointer;
+		border: none;
+		li{
+			line-height: 30px;
+			min-width: 100%;
+			text-align: center;
+			color: @textColor;
+			font-family: @textFont;
+			font-size: 18px;
+			padding: 0;
+		}
+		.marquee-showing{
+			width: auto;
+		}
+	}
+}
+
+ul.mainmenu {
+	list-style: none;
+}
+
+
 
 /*** CONTENT PANELS ***/
 .panel {
+	position: fixed;
+	z-index: 11;
 	
 	background-color: @panelBgColor;
-	//background-attachment: fixed;
 	background-image: ~"url('images/top-left_shape.png')";
 	background-repeat: no-repeat;
-	border-color: @panelBorderColor;
+	border: 2px solid @panelBorderColor;
 	
-	box-shadow: 0 0 20px rgba(58, 58, 58 , 1);
-	-webkit-box-shadow: 0 0 20px rgba(58, 58, 58, 1); 
-	-moz-box-shadow: 0 0 5px white, inset 0 0 5px #304035;
-
-
 	a {
 		color: @panelLinkColor;
 		&:hover {
@@ -157,139 +227,149 @@ ul.mainmenu {
 	}
 }
 
-#topPanel {
-	.panel;
-	
-	background-position: 250px -350px;
-	height: 60px;
-	margin-bottom: 5px;
-	margin-left: 200px;
-	margin-right: 10px;
-	padding-left: 20px;
-	z-index: 100;
-	vertical-aligh: top;
-	/*box-shadow: 0 0 20px rgba(58, 58, 58 , 1);*/
-	/*-webkit-box-shadow: 0 0 20px rgba(58, 58, 58, 1); 
-	-moz-box-shadow: 0 0 10px white, inset 0 0 10px #304035;*/
-	/*background-color: rgba(54,80,71,0.5);*/
-	border: 1px solid;
-	/*-moz-border-radius: 5px;*/
-	/*border-radius: 5px;*/
+/* MENU */
+
+@-moz-keyframes openArrow { 100% { -moz-transform: rotate(90deg); } }
+@-webkit-keyframes openArrow { 100% { -webkit-transform: rotate(90deg); } }
+@keyframes openArrow { 100% { -webkit-transform: rotate(90deg); transform:rotate(90deg); } }
+
+#menuButton{
+	text-decoration: underline;
+	font-family: @titleFont;
+	font-size: 18px;
+	#menuArrow{/* triangle */
+		display: inline-block;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 6.5px 0 6.5px 13px;
+		border-color: transparent transparent transparent @infoIconColor;
+		margin-left: 5px;
+
+	}
+
+	&:hover{
+		color: @panelLinkHoverColor;
+	}
+	&.active{
+		#menuArrow{
+			-webkit-animation:openArrow 0.2s linear forwards;
+			-moz-animation:openArrow 0.2s linear forwards;
+			animation:openArrow 0.2s linear forwards;
+		}
+
+	}
 }
 
 #menuPanel {
 	.panel;
-	
-	
-	border-top: 1px solid;
-	border-right: 1px solid;
-	border-bottom: 1px solid;
-	border-radius: 10px;
-	position: relative;
-	left: 0px;
-	float: left;
-	width: 150px; /*100px effectively, +20 padding left right*/
-	height: 360px;
-	margin-top: 20px;
-	margin-right: 10px;
-	padding: 5px;
-	z-index: 100;
-	
-	/*border-style: groove;*/
-	
-	background-color: @panelBgColor;
-	li	{
-		//background-image: ~"url('images/main_menu_item_bg.png')";
+	display: none;
+	max-width: @leftSize - 1;
+	padding-left: 1%;
+	border-left: none;
+	border-top: none;
+	background-position: 0 0;
+	top: @appPanelHeight + @gameTopHeight;
+
+	a {
+		
+		display: block;
+		text-transform: uppercase;
+		text-decoration: none;
+		font-family: @titleFont;
+		float: left;
+		width: 50%;
+		min-width: 132px;
+		padding: 5px 0;
 		background-repeat: no-repeat;
 		height: 40px;
+		line-height: 40px;
 		margin-bottom: 5px;
-	}
-	
-	img	{
-		position: relative;
-		top: 5px;
-		left: 5px;
-		margin-right: 8px;
-		display: inline-block;
-	}
-	
-	a {
-		color: @menuLinkColor;
-		font: @menuFont;
-		letter-spacing: 1px;
-		text-transform: uppercase;
-		text-shadow: 0 1px 0 #FFFFFF;
-		text-decoration: none;
-		
-		&:hover {
-			color: @menuLinkHoverColor;
-		}
-		
-		&:visited {
-			color: @menuLinkColor;
-			&:hover {
-				color: @menuLinkHoverColor;
-			}
+		cursor: pointer;
+
+		img	{
+			position: relative;
+			top: 5px;
+			left: 5px;
+			margin-right: 8px;
+			display: inline-block;
 		}
 	}
 }
 
+.open{
+	display: block !important;
+}
+
 #mainPanel {
-	/*opacity: 0.5;*/
+	display: none;
 	margin-top: 5px;
 	position:absolute;
-	display:block;
 	height: auto;
 	width: auto;
 	left: 0px;
-	top: 0px;
-	/*margin-right: 310px;*/
 	top: 20px;
 	z-index: 50;
-	background-color: magenta;
 }
 
 #contextPanel {
 	.panel;
-	background-position: -200px 0px;
-	border: 1px solid;
-	
-	.border-radius(8px, 8px, 8px,8px);
-	position: relative;
-	right: 5px;
-	float: right;
-	width: 280px; /* 300px effectively, padding */
-	height: 400px;
-	padding: 10px;
-	margin-top: 20px;
-	margin-left: 10px;
-	margin-right: 5px;
-	z-index: 100;
-	
-	
+	display: none;
+	width: @rightSize - 1 - 1%;
+	padding-right: 1%;
+	padding-left: 1%;
+	border-right: none;
+	border-top: none;
+	right: 0;
+	top: @appPanelHeight + @gameTopHeight;
 }
 
+#gameTopPanel .rightPart.contextOpen{
+	border-bottom-width: 0;
+}
 
-/*** FOOTER ***/
-#footer {
-	text-align: center;
-	vertical-align: bottom;
-	border-top: 2px solid;
-	background-color: @footerBgColor;
-	border-top-color:  @footerBorderColor;
-	clear: both;
-	padding-top: 10px;
+#infoPanel{
+	display: none;
 	position: fixed;
-	width: 100%;
-	bottom: 0;
-	left: 0;
-	display: block;
-	z-index: 50;
-	background-color: @spaceColor;
-	border-top: 2px solid #222222;
+	width: @leftSize - 1;
+	left: 1%;
+	bottom: 40px;
+	z-index: 11;
+	min-height: 350px;
+	text-align: justify;
+	h2, p{
+		background: rgba(0,0,0,0.8);
+		box-shadow: 0 0 40px 10px #000;
+		border-radius: 5px;
+		overflow: visible;
+	}
 }
 
+.closebutton{
+	text-decoration: none;
+	cursor: pointer;
+}
 
+#zoomUI{
+	display: none;
+	position: absolute;
+	z-index: 100;
+	bottom: 30px;
+	right: 25%;
+	width: 15%;
+
+
+	#zoomIn, #zoomOut{
+		display: inline-block;
+		background: rgba(255,255,255,0.3);
+		font-size: 30px;
+		width: 45%;
+		padding: 0;
+		margin: 0;
+		text-align: center;
+
+	}
+}
 
 
 

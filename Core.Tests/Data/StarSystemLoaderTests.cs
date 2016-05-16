@@ -27,6 +27,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SpaceTraffic.Data;
 using SpaceTraffic.Game;
+using SpaceTraffic.Utils.Tests;
 
 
 namespace Core.Tests
@@ -87,10 +88,11 @@ namespace Core.Tests
         [TestMethod]
         public void StarSystemLoadTest()
         {
-            TestGalaxyMapDataStreamProvider provider = new TestGalaxyMapDataStreamProvider(".//..//..//..//Assets");
+            string path = Path.Combine(TestPath.getPathToSolution(), "Assets");
+			TestGalaxyMapDataStreamProvider provider = new TestGalaxyMapDataStreamProvider(path);
             provider.Initialize();
             StarSystemLoader loader = new StarSystemLoader();
-            StarSystem loadedSS = loader.LoadStarSystem("Sol", provider);
+            StarSystem loadedSS = loader.LoadStarSystem("Solar system", provider);
             Debug.Assert((loadedSS != null), "Starsystem load failed!");
             Debug.Assert((loadedSS.Name.Equals("Solar system", StringComparison.CurrentCultureIgnoreCase)), "Solar system load failed!");
             Debug.Assert((loadedSS.Star != null), "Solar system star load failed!");

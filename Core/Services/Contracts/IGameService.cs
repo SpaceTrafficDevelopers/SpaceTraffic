@@ -20,35 +20,44 @@ using System.Linq;
 using System.Text;
 using System.ServiceModel;
 using SpaceTraffic.Entities.PublicEntities;
+using SpaceTraffic.Game;
 using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.Services.Contracts
 {
-	[ServiceContract]
-	public interface IGameService
-	{
-		[OperationContract]
-		IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem);
+    [ServiceContract]
+    public interface IGameService
+    {
+        [OperationContract]
+        IList<WormholeEndpointDestination> GetStarSystemConnections(string starSystem);
+
+        [OperationContract]
+        IList<StarSystem> GetGalaxyMap(string galaxyMap);
 
 		[OperationContract]
-		int PerformAction(int playerId, string actionName, params object[] actionArgs);
+		SpaceTraffic.Entities.Base GetBaseByName(string planetName);
 
 		[OperationContract]
-		object GetActionResult(int playerId, int actionCode);
+		IList<SpaceTraffic.Entities.Base> GetAllBases();
 
+        [OperationContract]
+        int PerformAction(int playerId, string actionName, params object[] actionArgs);
 
-	}
+        [OperationContract]
+        object GetActionResult(int playerId, int actionCode);
 
-	[Serializable]
-	public class ActionNotFoundException : Exception
-	{
-		public ActionNotFoundException() { }
-		public ActionNotFoundException(string message) : base(message) { }
-		public ActionNotFoundException(string message, Exception inner) : base(message, inner) { }
-		protected ActionNotFoundException(
-		  System.Runtime.Serialization.SerializationInfo info,
-		  System.Runtime.Serialization.StreamingContext context)
-			: base(info, context) { }
-	}
+    }
+
+    [Serializable]
+    public class ActionNotFoundException : Exception
+    {
+        public ActionNotFoundException() { }
+        public ActionNotFoundException(string message) : base(message) { }
+        public ActionNotFoundException(string message, Exception inner) : base(message, inner) { }
+        protected ActionNotFoundException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context)
+            : base(info, context) { }
+    }
 
 }

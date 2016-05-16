@@ -19,9 +19,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SpaceTraffic.Game.Geometry;
+using System.Runtime.Serialization;
 
 namespace SpaceTraffic.Game
 {
+    [DataContract(Name="VisibleObject", IsReference=true)]
     public abstract class VisibleObject
     {
         #region Properties
@@ -29,11 +31,13 @@ namespace SpaceTraffic.Game
         /// <summary>
         /// Star system where the object belongs to.
         /// </summary>
+        [DataMember]
         public StarSystem StarSystem { get; set; }
 
         /// <summary>
         /// Trajectory of the object.
         /// </summary>
+   //     [DataMember]
         public Trajectory Trajectory { get; set; }
         #endregion
 

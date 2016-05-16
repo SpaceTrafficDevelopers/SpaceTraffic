@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<st:stdata xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
+    xmlns:st="SpaceTrafficData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+    <components>
+        <!-- Prikladova komponenta pro motor -->
+        <component ID="Engine" type="SpaceTraffic.*.Engine">
+            <price value="10"/>
+            <prerequisites/>
+            <params>
+                <param name="trust" type="int" value="20"/>
+            </params>
+            <tags>
+                <tag>engine</tag>
+            </tags>
+        </component>
+        <!-- Prikladova komponenta pro nadrz -->
+        <component ID="FuelCargo" type="SpaceTraffic.*.FuelCargo">
+            <price value="150"/>
+            <prerequisites/>
+            <params>
+                <param name="cargo" type="fuel"/>
+                <param name="capacity" type="int" defaultValue="20" minValue="10" maxValue="50"/>
+            </params>
+        </component>
+        <!-- Prikladova komponenta pro nakladovy prostor -->
+        <component ID="BasicCargohold" type="SpaceTraffic.*.BasicCargohold">
+            <price value="200"/>
+            <prerequisites/>
+            <params>
+                <param name="capacity" type="int" defaultValue="20" minValue="10" maxValue="50"/>
+                <param name="cargo" type="string" value="regular"/>
+            </params>
+        </component>
+        <component ID="ExtraCargohold" type="SpaceTraffic.*.BasicCargohold">
+            <price value="500"/>
+            <prerequisites/>
+            <params>
+                <param name="capacity" type="int" defaultValue="40" minValue="10" maxValue="100"/>
+                <param name="cargo" type="string" value="special"/>
+            </params>
+        </component>
+    </components>
+</st:stdata>

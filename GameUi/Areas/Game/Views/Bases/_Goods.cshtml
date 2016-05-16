@@ -1,0 +1,18 @@
+﻿
+@Html.Partial("_Header")
+
+<a href="@Url.Action("Goods", "Bases", new { planetName = ViewBag.planetName })" class="ajax refreshButton" data-related-element-id="contextPanelContent">↻</a>
+<div class="scrollable">
+@{
+	if (ViewBag.trader != null)
+	{
+		foreach(var traderCargo in ViewBag.trader.TraderCargos){
+			@Html.Partial("../Cargo/CargoCards/_CargoCardBasic", new ViewDataDictionary { { "cargo", traderCargo }})
+		}
+	}
+}
+</div>
+<script>
+	$('#contextPanel .contextBtn').removeClass('active');
+	$('#planetGoods').addClass('active');
+</script>

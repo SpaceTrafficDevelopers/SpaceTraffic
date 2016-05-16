@@ -23,6 +23,7 @@ using SpaceTraffic.Services.Contracts;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Diagnostics;
+using SpaceTraffic.GameUi.Security;
 
 namespace SpaceTraffic.GameUi.Controllers
 {
@@ -30,14 +31,20 @@ namespace SpaceTraffic.GameUi.Controllers
     {
         //
         // GET: /Home/
-
+        [AllowAnonymous]
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome";
 
+            //in debug mode redirects to Debug page (home/index.cshtml view), in release mode redirects to Game 
+#if DEBUG
             return View();
+#else
+            return RedirectToAction("Index", "Default", new { Area = "Game" });
+#endif
         }
 
+        [AllowAnonymous]
         public ActionResult RunTests()
         {
             ViewBag.Message = "Welcome";

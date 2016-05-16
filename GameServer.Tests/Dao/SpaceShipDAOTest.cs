@@ -138,20 +138,53 @@ namespace SpaceTraffic.GameServerTests.Dao
             target.RemoveSpaceShipById(spaceShip.SpaceShipId);
         }
 
-        /// <summary>
-        ///A test for GetSpaceShipsByPlayer
-        ///</summary>
-        [TestMethod()]
-        public void GetSpaceShipsByPlayerTest()
-        {
-            SpaceShipDAO target = new SpaceShipDAO();
-            SpaceShip spaceShip = CreateSpaceShip();
-            target.InsertSpaceShip(spaceShip);
-            List<SpaceShip> spaceShips = target.GetSpaceShipsByPlayer(player.PlayerId);
-            Assert.IsNotNull(spaceShips);
+		/// <summary>
+		///A test for GetSpaceShipsByPlayer
+		///</summary>
+		[TestMethod()]
+		public void GetSpaceShipsByPlayerTest()
+		{
+			SpaceShipDAO target = new SpaceShipDAO();
+			SpaceShip spaceShip = CreateSpaceShip();
+			target.InsertSpaceShip(spaceShip);
+			List<SpaceShip> spaceShips = target.GetSpaceShipsByPlayer(player.PlayerId);
+			Assert.IsNotNull(spaceShips);
 
-            target.RemoveSpaceShipById(spaceShip.SpaceShipId);
-        }
+			target.RemoveSpaceShipById(spaceShip.SpaceShipId);
+		}
+
+		/// <summary>
+		///A test for GetPlayersShipsAtBase
+		///</summary>
+		[TestMethod()]
+		public void GetSpaceShipsAtBaseByPlayerTest()
+		{
+			SpaceShipDAO target = new SpaceShipDAO();
+			SpaceShip spaceShip = CreateSpaceShip();
+			SpaceShip spaceShip2 = CreateSpaceShip();
+			target.InsertSpaceShip(spaceShip);
+			target.InsertSpaceShip(spaceShip2);
+			IList<SpaceShip> spaceShips = target.GetPlayersShipsAtBase(player.PlayerId, newBase.BaseId);
+			Assert.IsNotNull(spaceShips);
+			Assert.AreEqual(2, spaceShips.Count);
+
+			target.RemoveSpaceShipById(spaceShip.SpaceShipId);
+		}
+
+		/// <summary>
+		///A test for GetDetailedSpaceShipById
+		///</summary>
+		[TestMethod()]
+		public void GetDetailedSpaceShipByIdTest()
+		{
+			SpaceShipDAO target = new SpaceShipDAO();
+			SpaceShip spaceShip = CreateSpaceShip();
+			target.InsertSpaceShip(spaceShip);
+			SpaceShip actual = target.GetDetailedSpaceShipById(spaceShip.SpaceShipId);
+			Assert.IsNotNull(actual);
+			Assert.IsNotNull(actual.Base);
+			Assert.IsNotNull(actual.SpaceShipsCargos);
+		}
 
         /// <summary>
         ///A test for InsertSpaceShip
@@ -215,7 +248,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             spaceShip.WearRate = 0.1;
             spaceShip.MaxSpeed = 68;
             
-            target.UpdateSpaceShipById(spaceShip);
+            target.UpdateSpaceShip(spaceShip);
             SpaceShip compare = target.GetSpaceShipById(spaceShip.SpaceShipId);
 
             SpaceShipTest(spaceShip, compare);
@@ -285,16 +318,13 @@ namespace SpaceTraffic.GameServerTests.Dao
         private Player CreatePlayer()
         {
             Player newPlayer = new Player();
-            newPlayer.FirstName = "Karel";
-            newPlayer.LastName = "Malý";
-            newPlayer.PlayerName = RandomString(4);
-            newPlayer.CorporationName = "ZCU";
+            string pName = RandomString(4);
+            newPlayer.PlayerName = pName.ToLower();
+            newPlayer.PlayerShowName = pName;
             newPlayer.Credit = 0;
-            newPlayer.DateOfBirth = new DateTime(2008, 2, 16, 12, 15, 12);
             newPlayer.Email = "email@email.cz";
             newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
-            newPlayer.PsswdSalt = "cbOpKKxb";
-            newPlayer.OrionEmail = "email@students.zcu.cz";
+            newPlayer.PassChangeDate = DateTime.Now;
             newPlayer.AddedDate = DateTime.Now;
             newPlayer.LastVisitedDate = DateTime.Now;
             return newPlayer;

@@ -1,4 +1,6 @@
-﻿/**
+﻿using SpaceTraffic.GameServer.ServiceImpl;
+using SpaceTraffic.Services.Contracts;
+/**
 Copyright 2010 FAV ZCU
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,6 +52,8 @@ namespace SpaceTraffic.Engine
         void PlanEvent(IGameEvent gameEvent);
 
         void PlanEvent(IGameAction action, DateTime when);
+
+		ICargoService GetCargoService();
 
     }
 }

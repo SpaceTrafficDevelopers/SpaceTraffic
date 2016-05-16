@@ -29,6 +29,10 @@ namespace SpaceTraffic.Entities
 
         public virtual Base Base { get; set; }
 
+		public int FuelPrice { get; set; }
+
+		public int RepairPrice { get; set; }
+
         public virtual ICollection<TraderCargo> TraderCargos { get; set; }
 
         public string CargoLoadDaoName

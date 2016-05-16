@@ -28,12 +28,20 @@ namespace SpaceTraffic.Services.Contracts
 	[ServiceContract]
 	public interface IShipsService
 	{
-		
+
 
 		[OperationContract]
 		bool SpaceShipDockedAtBase(int spaceShipId, string starSystemName, string planetName);
-		
-		
+
+		[OperationContract]
+		SpaceShip GetSpaceShip(int spaceShipId);
+
+		[OperationContract]
+		SpaceShip GetDetailedSpaceShip(int shipId);
+
+		[OperationContract]
+		SpaceShip ChangeShipState(int shipId, bool available, string message = "");
+
 	}
 
 }

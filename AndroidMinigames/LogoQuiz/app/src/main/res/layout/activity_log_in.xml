@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/title"
+        android:id="@+id/textView"
+        android:layout_weight="0.40"
+        android:textSize="70sp"
+        android:gravity="center"
+        android:textColor="@color/colorSecondary"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.60">
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/usernameTextView"
+            android:textSize="30sp"
+            android:text="user"
+            android:gravity="center"
+            android:hint="@string/username_hint"
+            android:inputType="text"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#ffffff"
+            android:elegantTextHeight="false"
+            android:textColorHint="@color/colorHint"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="10dp" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/passwordTextView"
+            android:textSize="30sp"
+            android:text="user"
+            android:gravity="center"
+            android:hint="@string/password_hint"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#ffffff"
+            android:elegantTextHeight="false"
+            android:textColorHint="@color/colorHint"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="10dp" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/gameIdTextView"
+            android:textSize="30sp"
+            android:text="1"
+            android:gravity="center"
+            android:hint="@string/game_id_hint"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#ffffff"
+            android:elegantTextHeight="false"
+            android:textColorHint="@color/colorHint"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="10dp"
+            android:maxLength="10" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/start_game"
+            android:id="@+id/button"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimary"
+            android:background="@color/colorSecondary"
+            android:textSize="30sp"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:onClick="start" />
+    </LinearLayout>
+</LinearLayout>
+

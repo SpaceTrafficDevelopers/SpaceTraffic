@@ -145,18 +145,33 @@ namespace SpaceTraffic.GameServerTests.Dao
         }
 
 
-        /// <summary>
-        ///A test for GetPlayerById
-        ///</summary>
-        [TestMethod()]
-        public void GetPlayerByIdTest()
-        {
-            PlayerDAO dao = new PlayerDAO();
-            int id = dao.GetPlayerByName("player").PlayerId;
-            Player player = dao.GetPlayerById(id);
-            Assert.IsTrue(player.PlayerId == id);
-            Assert.IsNotNull(player);
-        }
+		/// <summary>
+		///A test for GetPlayerById
+		///</summary>
+		[TestMethod()]
+		public void GetPlayerByIdTest()
+		{
+			PlayerDAO dao = new PlayerDAO();
+			int id = dao.GetPlayerByName("player").PlayerId;
+			Player player = dao.GetPlayerById(id);
+			Assert.IsTrue(player.PlayerId == id);
+			Assert.IsNotNull(player);
+		}
+
+
+		/// <summary>
+		///A test for GetPlayerWithIncludes
+		///</summary>
+		[TestMethod()]
+		public void GetPlayerWithIncludesTest()
+		{
+			PlayerDAO dao = new PlayerDAO();
+			int id = dao.GetPlayerByName("player").PlayerId;
+			Player player = dao.GetPlayerWithIncludes(id);
+			Assert.IsTrue(player.PlayerId == id);
+			Assert.IsNotNull(player);
+			Assert.IsNotNull(player.SpaceShips);
+		}
 
         /// <summary>
         ///A test for GetPlayers
@@ -170,6 +185,33 @@ namespace SpaceTraffic.GameServerTests.Dao
             Assert.IsTrue(players.Count > 0);
         }
 
+		/// <summary>
+		///A test for IncrasePlayersCredits
+		///</summary>
+		[TestMethod()]
+		public void IncrasePlayersCreditsTest()
+		{
+			PlayerDAO dao = new PlayerDAO();
+			Player player = dao.GetPlayerByName("player");
+			dao.IncrasePlayersCredits(player.PlayerId, 111);
+			Player player2 = dao.GetPlayerByName("player");
+			Assert.AreEqual(player.Credit + 111, player2.Credit);
+		}
+
+		/// <summary>
+		///A test for DecrasePlayersCredits
+		///</summary>
+		[TestMethod()]
+		public void DecrasePlayersCreditsTest()
+		{
+			PlayerDAO dao = new PlayerDAO();
+			Player player = dao.GetPlayerByName("player");
+			dao.IncrasePlayersCredits(player.PlayerId, 200);
+			dao.DecrasePlayersCredits(player.PlayerId, 100);
+			Player player2 = dao.GetPlayerByName("player");
+			Assert.AreEqual(player.Credit + 100, player2.Credit);
+		}
+
 
         /// <summary>
         ///A test for UpdatePlayerById
@@ -180,11 +222,11 @@ namespace SpaceTraffic.GameServerTests.Dao
             PlayerDAO dao = new PlayerDAO();
             int id = dao.GetPlayerByName("player").PlayerId;
             Player player = dao.GetPlayerById(id);
-            player.FirstName = "Lukáš";
+            player.PlayerShowName = "Lukáš";
             bool result = dao.UpdatePlayerById(player);
             Player comparePlayer = dao.GetPlayerById(id);
             Assert.IsTrue(result);
-            Assert.IsTrue(comparePlayer.FirstName.Equals("Lukáš"));
+            Assert.IsTrue(comparePlayer.PlayerShowName.Equals("Lukáš"));
         }
 
         /// <summary>
@@ -219,16 +261,12 @@ namespace SpaceTraffic.GameServerTests.Dao
         private Player CreatePlayer()
         {
             Player newPlayer = new Player();
-            newPlayer.FirstName = "Karel";
-            newPlayer.LastName = "Malý";
             newPlayer.PlayerName = "player";
-            newPlayer.CorporationName = "ZCU";
-            newPlayer.Credit = 0;
-            newPlayer.DateOfBirth = new DateTime(2008, 2, 16, 12, 15, 12);
+            newPlayer.PlayerShowName = "Player";
+            newPlayer.Credit = 10;
             newPlayer.Email = "email@email.cz";
             newPlayer.PsswdHash = "enanTfHBOWSrAlyc5x6d2emhcmI=";
-            newPlayer.PsswdSalt = "cbOpKKxb";
-            newPlayer.OrionEmail = "email@students.zcu.cz";
+            newPlayer.PassChangeDate = DateTime.Now;
             newPlayer.AddedDate = DateTime.Now;
             newPlayer.LastVisitedDate = DateTime.Now;
             return newPlayer;

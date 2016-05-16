@@ -82,6 +82,8 @@ namespace SpaceTraffic.Game.Actions
             spaceShip.DamagePercent += (int)(spaceShip.WearRate * FlightTime);
             spaceShip.DockedAtBaseId = baseID;
             spaceShip.IsFlying = false;
+			spaceShip.IsAvailable = true;
+			spaceShip.StateText = SpaceShip.StateTextDefault;
             
             if(spaceShip.CurrentFuelTank < 0 || spaceShip.DamagePercent > 100)
             {
@@ -90,7 +92,7 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            if(!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShipById(spaceShip))
+            if(!gameServer.Persistence.GetSpaceShipDAO().UpdateSpaceShip(spaceShip))
             {
                 Result = String.Format("Změny se nepovedlo zapsat do databáze");
                 State = GameActionState.FAILED;

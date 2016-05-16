@@ -1,0 +1,25 @@
+﻿
+@{
+   
+}
+<div id="planningUI" class="relative">
+	<h3>PRÁVĚ OPOUŠTÍTE</h3>
+	<h1 id="aboutShipPlan">
+		@ViewBag.ship.Base.BaseName
+	</h1>
+	<span class="leavingNote">Děkujeme za návštěvu.</span>
+	<p id="shipPlan">
+		Klikněte na planetu, kam chcete letět.
+	</p>
+
+	<button id="runPlan" class="btn btn-good hideWithoutPlan">Start!</button>
+	<button id="cancelPlan" class="btn btn-info hideWithoutPlan">Zrušit</button>
+	
+</div>
+<script>
+	var currentPlanetName = '@ViewBag.ship.Base.PlanetName';
+	var currentShipStarSystem = '@ViewBag.ship.CurrentStarSystem';
+	var currShipId = @ViewBag.ship.SpaceShipId;
+</script>
+@Content.Script("../JS/game/UIPlanner.js", Url)
+

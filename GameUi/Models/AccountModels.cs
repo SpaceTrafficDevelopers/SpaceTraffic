@@ -26,37 +26,107 @@ namespace SpaceTraffic.GameUi.Models
 
     public class ChangePasswordModel
     {
-        [Required]
+        [Required(ErrorMessage = "Heslo je povinné.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
         public string OldPassword { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Nové heslo je povinné.")]
+        [StringLength(100, ErrorMessage = "Nové heslo musí mít alespoň {2} znaků.", MinimumLength = 8)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
+        [Required(ErrorMessage = "Musíte potvrdit nové heslo.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessage = "Nová hesla se neshodují.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class LogOnModel
     {
-        [Required]
-        [Display(Name = "User name")]
+        [Required(ErrorMessage = "Jméno je povinné.")]
+        [DataType(DataType.Text)]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Heslo je povinné.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Pamatovat si mě?")]
         public bool RememberMe { get; set; }
     }
 
-    
+    public class RegisterModel
+    {
+        [Required(ErrorMessage = "Jméno je povinné.")]
+        [StringLength(50, ErrorMessage = "Jméno musí mít alespoň {2} znaků.", MinimumLength = 5)]
+        [DataType(DataType.Text)]
+        public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Email je povinný.")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Heslo je povinné.")]
+        [StringLength(100, ErrorMessage = "Heslo musí mít alespoň {2} znaků.", MinimumLength = 8)]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [Required(ErrorMessage = "Musíte potvrdit heslo.")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Zadaná hesla se neshodují.")]
+        public string ConfirmPassword { get; set; }
+
+        [BoolRequired(ErrorMessage = "Musíte souhlasit s podmínkami.")]
+        public bool Rules { get; set; }
+    }
+
+    public class LostPasswordModel
+    {
+        [Required(ErrorMessage = "Jméno je povinné.")]
+        [StringLength(50, ErrorMessage = "Jméno musí mít alespoň {2} znaků.", MinimumLength = 5)]
+        [DataType(DataType.Text)]
+        public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Email je povinný.")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+    }
+
+    public class DeleteAccountModel
+    {
+        [Required(ErrorMessage = "Musíte zadat vaše heslo.")]
+        [StringLength(100, ErrorMessage = "Heslo musí mít alespoň {2} znaků.", MinimumLength = 8)]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+    }
+
+    public class ResendActivationEmailModel
+    {
+        [Required(ErrorMessage = "Email je povinný.")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+    }
+
+    /// <summary>
+    /// Validation attribute for boolean value which must be true (Required).
+    /// This is workaround for required error message which dosen't work for bool values.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public class BoolRequiredAttribute : ValidationAttribute, IClientValidatable
+    {
+        public override bool IsValid(object value)
+        {
+            return value != null && value is bool && (bool)value;
+        }
+
+        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
+        {
+            yield return new ModelClientValidationRule
+            {
+                ErrorMessage = this.ErrorMessage,
+                ValidationType = "boolrequired"
+            };
+        }
+    }
+
 }

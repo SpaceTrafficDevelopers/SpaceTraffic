@@ -22,6 +22,7 @@ using System.Web.Mvc;
 using SpaceTraffic.GameUi.Models.Ui;
 using SpaceTraffic.Entities;
 using System.Collections;
+using SpaceTraffic.GameUi.Extensions;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
@@ -30,42 +31,99 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
     {
         protected override void BuildTabs()
         {
-            this.Tabs.AddTab("Overview", "Profile", "Profile overview", "_Overview");
-            this.Tabs.AddTab("Personal", title: "Personal informations.", partialViewName: "_Personal");
-            this.Tabs.AddTab("Settings", title: "Profile settings.", partialViewName: "_Settings");
-            this.Tabs.AddTab("Achievements", title: "Achievements", partialViewName: "_AchievementsList");
+            this.Tabs.AddTab("Overview", text: "Profil", title: "Profil", partialViewName: "_Overview");
+            this.Tabs.AddTab("Settings", text: "Nastavení" ,title: "Nastavení", partialViewName: "_Settings", partialViewModel: new Models.ProfileSettingsModel());
+            this.Tabs.AddTab("Achievements", text: "Úspěchy", title: "Úspěchy", partialViewName: "_AchievementsList");
         }
 
         public ActionResult Index()
         {
-            return View(INDEX_VIEW);
+			return PartialView(INDEX_VIEW);
         }
 
+        /// <summary>
+        /// Gets user data from database and displays them to user.
+        /// </summary>
+        /// <returns></returns>
         public PartialViewResult Overview()
         {
 			Player player = GSClient.PlayerService.GetPlayer(getCurrentPlayerId());
 			ExperienceLevels globalExpiriencesLevels = GSClient.AchievementsService.GetExperienceLevels();
 			TLevel currentLevel = globalExpiriencesLevels.GetLevel(player.ExperienceLevel);
 			TLevel nextLevel = globalExpiriencesLevels.GetLevel(currentLevel.LevelID + 1);
-			String nextLevelExp = (nextLevel == null) ? "-" : "" + nextLevel.RequiredXP;
-			
 			
 			var tabView = GetTabView("Overview");
+            //player entity
 			tabView.ViewBag.player = player;
+
+            //player current level
 			tabView.ViewBag.currentLevel = currentLevel;
-			tabView.ViewBag.nextLevel = nextLevel;
-			tabView.ViewBag.nextLevelExp = nextLevelExp;
-			return tabView;
+
+            //exp to percent for exp_ring
+            float requiredExp = (currentLevel.LevelID > 0) ? currentLevel.RequiredXP : nextLevel.RequiredXP;
+            tabView.ViewBag.expInPercent = (nextLevel == null) ? 100 : (int)(((player.Experiences - currentLevel.RequiredXP) / requiredExp) * 100);
+
+            //exp to next level
+            tabView.ViewBag.expToNextL = (nextLevel == null) ? 0 : (nextLevel.RequiredXP - player.Experiences);
+
+            //avatar image
+            tabView.ViewBag.avatarID = currentLevel.LevelID;
+
+            //player game age 
+            tabView.ViewBag.playerGameAge = FormatInGameAge(DateTime.Now - player.AddedDate);
+
+            return tabView;
         }
 
-        public PartialViewResult Personal()
-        {
-            return GetTabView("Personal");
-        }
-
+        /// <summary>
+        /// Gets user settings from database and displays them to user.
+        /// </summary>
+        /// <returns></returns>
         public PartialViewResult Settings()
         {
-            return GetTabView("Settings");
+            Models.ProfileSettingsModel model = new Models.ProfileSettingsModel();
+            Player player = GSClient.PlayerService.GetPlayer(getCurrentPlayerId());
+
+            model.Email = player.Email;
+            model.RememberMe = player.StayLogedIn;
+            model.SendGameInfo = player.SendInGameInfo;
+            model.SendNews = player.SendNewsletter;
+
+            return GetTabView("Settings", model);
+        }
+
+        /// <summary>
+        /// Saves user settings to database.
+        /// If successful, displays success message to user, otherwise displays error message to user.
+        /// </summary>
+        /// <param name="model">ProfileSettingsModel model</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Settings(Models.ProfileSettingsModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                //SpaceTraffic.Utils.Debugging.DebugEx.WriteLineF("PlayerUpdate begin: rem:" + model.RememberMe + ", GInfo: " + model.SendGameInfo + ", SNews: " + model.SendNews);
+                Player player = GSClient.PlayerService.GetPlayer(getCurrentPlayerId());
+
+                player.StayLogedIn = model.RememberMe;
+                player.SendInGameInfo = model.SendGameInfo;
+                player.SendNewsletter = model.SendNews;
+
+                bool state = GSClient.AccountService.UpdatePlayer(player);
+
+                if(state)
+                {
+                    return JavaScript("$('a[title=\"Nastavení\"]').click();").Success("Nastavení bylo uloženo.");
+                }
+                else
+                {
+                    return JavaScript("$('a[title=\"Nastavení\"]').click();").Error("Při ukládání nastala chyba.");
+                }
+            }
+
+            return GetTabView("Settings", model);
         }
 
         public PartialViewResult Achievements()
@@ -87,6 +145,56 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			tabView.ViewBag.lockedAchievements = lockedAchievements;
 			return tabView;
 
+        }
+
+        /// <summary>
+        /// Formats player age to days and hours, which is more user friendly.
+        /// </summary>
+        /// <param name="age">Player age</param>
+        /// <returns></returns>
+        private string FormatInGameAge(TimeSpan age)
+        {
+            string result = "";
+            int days = age.Days;
+            int hours = age.Hours;
+
+            if (days > 0)
+            {
+                if(days == 1)
+                {
+                    result = days + " den a ";
+                }
+                else if(days <= 4)
+                {
+                    result = days + " dny a ";
+                }
+                else
+                {
+                    result = days + " dní a ";
+                }
+            }
+
+            if (hours == 0)
+            {
+                result += "O hodin";
+            }
+            else if (hours > 0)
+            {
+                if (hours == 1)
+                {
+                    result += hours + " hodina";
+                }
+                else if (hours <= 4)
+                {
+                    result += hours + " hodiny";
+                }
+                else
+                {
+                    result += hours + " hodin";
+                }
+            }
+
+            return result;
         }
     }
 }

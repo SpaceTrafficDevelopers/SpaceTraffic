@@ -1,0 +1,10 @@
+﻿
+@Html.Partial("_Header")
+
+<a href="@Url.Action("ShipDetail", "Bases", new { shipId = ViewBag.ship.SpaceShipId })" class="ajax refreshButton" data-related-element-id="contextPanelContent">↻</a>
+
+
+@Html.Partial("../Ships/ShipCards/_ShipCardDetailed", new ViewDataDictionary { { "ship", ViewBag.ship }, { "index", 0 }, {"shipUI", true} })
+
+
+<div id="spaceShipDetailContent"></div>

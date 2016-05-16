@@ -146,8 +146,14 @@ namespace SpaceTraffic.Game
         {
             if (this.IsReadOnly)
                 throw new InvalidOperationException("GalaxyMap instance is locked, no modifications allowed.");
-
-            this.starSystems.Add(starSystem.Name, starSystem);
+            try
+            {
+                this.starSystems.Add(starSystem.Name, starSystem);
+            }
+            catch{
+                starSystem.Name += ""+2;
+                Add(starSystem);
+            }
         }
 
         public void AddAll(ICollection<StarSystem> starSystems)
@@ -307,6 +313,10 @@ namespace SpaceTraffic.Game
             this._locked = true;
         }
 
+        public void Unlock()
+        {
+            this._locked = false;
+        }
         /// <summary>
         /// Gets the list of star system instances in read only collection.
         /// </summary>
@@ -315,7 +325,17 @@ namespace SpaceTraffic.Game
         {
             return new ReadOnlyCollection<StarSystem>(this.starSystems.Values);
         }
-        
+
+        /// <summary>
+        /// Gets the list of star system instances in editable collection.
+        /// for starsystemeditor purposes - deleting desired star systems.
+        /// </summary>
+        /// <returns>IList of starSystems.</returns>
+        public SortedList<string, StarSystem> GetEditableStarSystems()
+        {
+            return this.starSystems;
+        }
+
         /// <summary>
         /// Gets the star system connections in list of WormholeEndpointDestination instances.
         /// Thread-safety of this method is guaranteed by locking the map after it is successfuly loaded by server.

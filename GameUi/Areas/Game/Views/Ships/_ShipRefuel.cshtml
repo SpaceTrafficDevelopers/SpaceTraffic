@@ -1,0 +1,18 @@
+﻿
+<div class="ajax" id="refuelingForm">
+	<h2>Natankovat</h2>
+	<p class="actionPrice">
+		<span>Cena paliva: </span>
+		<strong>@ViewBag.trader.FuelPrice</strong>
+		<span class="icon creditsIcon largeIcon"></span>
+</p>
+	@using (Html.BeginForm())
+	{
+		<input type="number" class="actionAmount" name="Amount" min="1" max="@Math.Max(ViewBag.maxToBuy, 10)" value="@Math.Max(ViewBag.maxToBuy, 1)" />
+			<input type="submit" class="btn btn-credits sendBtn" value="Natankovat" />
+			<a class="btn btn-credits sendMax" href="">Tankovat maximum</a>
+			<div style="clear: both;"></div>
+
+	}
+</div>
+@Content.Script("../JS/game/ShipScripts.js", Url)

@@ -24,28 +24,45 @@
 // Zakázání SimpLess css mimifikace
 //simpless:!minify
 
-@images-url: "http://localhost:2457/Content/images";
 
-@import "fonts/LeagueGothicRegular.css";
+
+@import "less/Variables/colors.less";
+@import "less/Variables/urls.less";
+@import "less/Variables/fonts.less";
+
+@import "less/Parts/buttons.less";
+@import "less/Parts/alerts.less";
+
 @import "less/elements.less";
 @import "less/development.less";
 
 @import "less/GameLayout.less";
 
 @import "less/gamewindow.less";
-@import "less/itemtable.less";
 @import "less/defaultforms.less";
 @import "less/summarytable.less";
 
 @import "less/MessagesView.less";
 @import "less/ScoreboardView.less";
+@import "less/GalaxyMapView.less";
 @import "less/ShipsView.less";
+@import "less/PlannerView.less";
+@import "less/BasesView.less";
+@import "less/Game/ships.less";
+@import "less/Game/cargos.less";
+@import "less/StarSystemMap.less";
 
 @import "less/ProfileView.less";
 
 @import "less/svg-starsystem.less";
 
-@import "less/Account.less";
+//@import "less/Account.less";
 @import "less/debug.less";
 
+@import "less/Game/libs/jquery.marquee.min.less";
+
 @import "less/Achievements/achievements.less";
+
+//TODO: when jquery theme will be added than this should be deleted
+@import "less/dialog.less";
+

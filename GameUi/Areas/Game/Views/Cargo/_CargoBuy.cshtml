@@ -1,0 +1,21 @@
+﻿<a href="@Url.Action("Buy", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax refreshButton" data-related-element-id="mainPanelContent">↻</a>
+
+<div class="ajax" id="cargoBuyForm">
+	<h2>Koupit zboží</h2>
+	<div class="scrollable small">
+	@foreach(var cargo in ViewBag.trader.TraderCargos){
+		<div class="cargoItemBuyContainer">
+		@Html.Partial("../Cargo/CargoCards/_CargoCardBasic", new ViewDataDictionary { { "cargo", cargo } })
+
+		@using (Html.BeginForm("Buy", "Cargo", new { traderId = ViewBag.trader.TraderId, shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.trader.BaseId, cargoId = cargo.TraderCargoId }, FormMethod.Post, null))
+		{
+			<input type="number" class="buyAmount" name="Amount" min="0" max="@Math.Min(ViewBag.credits / cargo.CargoPrice, cargo.CargoCount)" value="0" />
+			<input type="submit" class="btn btn-good sendBtn" value="Koupit" />
+			<a class="btn btn-good sendMax" href="">Koupit maximum</a>
+			<div style="clear: both;"></div>
+		}
+		</div>
+	}
+	</div>
+</div>
+@Content.Script("../JS/game/ShipScripts.js", Url)

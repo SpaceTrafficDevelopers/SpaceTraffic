@@ -1,43 +1,43 @@
 /*---------------------------------------------------
-    LESS Elements 0.6
+	LESS Elements 0.6
   ---------------------------------------------------
-    A set of useful LESS mixins by Dmitry Fadeyev
-    Special thanks for mixin suggestions to:
-      Kris Van Herzeele,
-      Benoit Adam,
-      Portenart Emile-Victor,
-      Ryan Faerman
+	A set of useful LESS mixins by Dmitry Fadeyev
+	Special thanks for mixin suggestions to:
+	  Kris Van Herzeele,
+	  Benoit Adam,
+	  Portenart Emile-Victor,
+	  Ryan Faerman
 
-    More info at: http://lesselements.com
+	More info at: http://lesselements.com
 -----------------------------------------------------*/
 
 .gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF) {
   background: @color;
   background: -webkit-gradient(linear,
-                               left bottom,
-                               left top,
-                               color-stop(0, @start),
-                               color-stop(1, @stop));
+							   left bottom,
+							   left top,
+							   color-stop(0, @start),
+							   color-stop(1, @stop));
   background: -ms-linear-gradient(bottom,
-                                  @start,
-                                  @stop);
+								  @start,
+								  @stop);
   background: -moz-linear-gradient(center bottom,
-                                   @start 0%,
-                                   @stop 100%);
+								   @start 0%,
+								   @stop 100%);
 }
 .bw-gradient(@color: #F5F5F5, @start: 0, @stop: 255) {
   background: @color;
   background: -webkit-gradient(linear,
-                               left bottom,
-                               left top,
-                               color-stop(0, rgb(@start,@start,@start)),
-                               color-stop(1, rgb(@stop,@stop,@stop)));
+							   left bottom,
+							   left top,
+							   color-stop(0, rgb(@start,@start,@start)),
+							   color-stop(1, rgb(@stop,@stop,@stop)));
   background: -ms-linear-gradient(bottom,
-                                  rgb(@start,@start,@start) 0%,
-                                  rgb(@start,@start,@start) 100%);
+								  rgb(@start,@start,@start) 0%,
+								  rgb(@start,@start,@start) 100%);
   background: -moz-linear-gradient(center bottom,
-                                   rgb(@start,@start,@start) 0%,
-                                   rgb(@stop,@stop,@stop) 100%);
+								   rgb(@start,@start,@start) 0%,
+								   rgb(@stop,@stop,@stop) 100%);
 }
 .bordered(@top-color: #EEE, @right-color: #EEE, @bottom-color: #EEE, @left-color: #EEE) {
   border-top: solid 1px @top-color;

@@ -18,6 +18,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SpaceTraffic.Entities;
+using SpaceTraffic.Entities.PublicEntities;
 using SpaceTraffic.Services.Contracts;
 
 namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
@@ -56,6 +58,22 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
         }
 
         /// <summary>
+        /// Method returns account information from token
+        /// </summary>
+        /// <param name="token">Player token</param>
+        /// <returns>Acount informations</returns>
+        public Entities.PublicEntities.AccountInfo GetAccountInfoByToken(string token)
+        {
+            Entities.PublicEntities.AccountInfo result;
+            using (var channel = this.GetClientChannel())
+            {
+                result = (channel as IAccountService).GetAccountInfoByToken(token);
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Gets the account info by account id.
         /// </summary>
         /// <param name="accountId">The account id.</param>
@@ -71,7 +89,126 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 
         public void RegisterPlayer(Entities.Player player)
         {
-            throw new NotImplementedException();
+            using (var channel = this.GetClientChannel())
+            {
+                (channel as IAccountService).RegisterPlayer(player);
+            }
+        }
+
+        /// <summary>
+        /// Method update player in DB
+        /// </summary>
+        /// <param name="player">Player to update</param>
+        public bool UpdatePlayer(Player player)
+        {
+            bool result;
+            using (var channel = this.GetClientChannel())
+            {
+                result = (channel as IAccountService).UpdatePlayer(player);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Method removes player from DB
+        /// </summary>
+        /// <param name="player">Payer id</param>
+        public bool RemovePlayer(int playerId)
+        {
+            bool result;
+            using (var channel = this.GetClientChannel())
+            {
+                result = (channel as IAccountService).RemovePlayer(playerId);
+            }
+            return result;
+        }
+
+
+        public bool AddPlayerIntoActivePlayers(int playerId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IAccountService).AddPlayerIntoActivePlayers(playerId);
+            }
+        }
+
+
+        public void RemovePlayerFromActivePlayers(int playerId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                (channel as IAccountService).RemovePlayerFromActivePlayers(playerId);
+            }
+        }
+
+        /// <summary>
+        /// Method check if username exists
+        /// </summary>
+        /// <param name="userName">Player username</param>
+        /// <returns></returns>
+        public bool AccountUsernameExists(string userName)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IAccountService).AccountUsernameExists(userName);
+            }
+        }
+
+        /// <summary>
+        /// Method check if email exists
+        /// </summary>
+        /// <param name="email">Player email</param>
+        /// <returns></returns>
+        public bool AccountEmailExists(string email)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IAccountService).AccountEmailExists(email);
+            }
+        }
+
+        /// <summary>
+        /// Method check if user exists
+        /// </summary>
+        /// <param name="accountId">Player id</param>
+        /// <returns></returns>
+        public bool AccountExists(int accountId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IAccountService).AccountExists(accountId);
+            }
+        }
+
+        /// <summary>
+        /// Method check if token exists
+        /// </summary>
+        /// <param name="email">Player token</param>
+        /// <returns></returns>
+        public bool AccountTokenExists(string token)
+        {
+            bool result;
+            using (var channel = this.GetClientChannel())
+            {
+                result = (channel as IAccountService).AccountTokenExists(token);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Method returns account information from email
+        /// </summary>
+        /// <param name="email">Player email</param>
+        /// <returns>Acount informations</returns>
+        public AccountInfo GetAccountInfoByEmail(string email)
+        {
+            Entities.PublicEntities.AccountInfo result;
+            using (var channel = this.GetClientChannel())
+            {
+                result = (channel as IAccountService).GetAccountInfoByEmail(email);
+            }
+
+            return result;
         }
     }
 }

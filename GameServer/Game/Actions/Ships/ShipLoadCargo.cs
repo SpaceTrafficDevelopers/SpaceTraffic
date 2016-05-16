@@ -59,7 +59,7 @@ namespace SpaceTraffic.Game.Actions
 
             ActionControls.shipDockedAtBase(this, spaceShip, planet);
             ActionControls.shipOwnerControl(this, spaceShip, player);
-            ActionControls.hasShipEnoughCargoSpace(this, spaceShip, cargo);
+            ActionControls.hasShipEnoughCargoSpace(this, spaceShip, cargo, Count);
             ActionControls.checkCargoCount(this, cargo, Count);
 
             if (State == GameActionState.FAILED)
@@ -75,7 +75,7 @@ namespace SpaceTraffic.Game.Actions
                 return;
             }
 
-            cargo.CargoOwnerId = PlayerId;
+            cargo.CargoOwnerId = spaceShip.SpaceShipId;
 
             gameServer.Persistence.GetSpaceShipCargoDAO().InsertOrUpdateCargo(cargo);
             Result = String.Format("Náklad byl úspěšně naložen na loď s {0}.", spaceShip.SpaceShipName);

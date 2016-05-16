@@ -1,15 +1,20 @@
-﻿@{
-	ViewBag.Title = "_ShipList";
-}
+﻿
 
 <h2>Mé lodě</h2>
-
-<table>
-	<tr><th>Loď</th><th>Typ</th><th>Poškození</th></tr>
-@{
+<div class="shipList scrollable">
+	@{
+	int i = 0;
 	foreach (var ship in @ViewBag.Ships)
 	{
-		<tr><td>@ship.SpaceShipName</td><td>@ship.SpaceShipModel</td><td>@ship.DamagePercent</td></tr>
+		i++;
+		<a href="@Url.Action("ShipDetail", "Bases", new { shipId = @ship.SpaceShipId })" class="ajax" data-related-element-id="contextPanelContent">
+			@Html.Partial("ShipCards/_ShipCardBasic", new ViewDataDictionary { { "ship", ship }, { "index", i } })
+		</a>
+	}
+	if (i == 0)
+	{
+		<p class="infoNote">Nevlastníte žádné lodě.</p>
 	}
 }
-</table>
+</div>
+<div style="clear:both;"></div>

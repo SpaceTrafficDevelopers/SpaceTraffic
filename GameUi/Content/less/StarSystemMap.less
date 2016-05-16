@@ -1,0 +1,36 @@
+﻿
+@import "Variables/colors.less";
+@import "Variables/fonts.less";
+
+#starSystemMap{
+
+
+	.connectionLine{
+		stroke: @infoIconColor;
+		stroke-opacity: 0.2;
+		stroke-width: 4;
+		
+	}
+
+	.starSystem{
+		
+
+	}
+
+	#starSystemGradient{
+		.gradientFrom{
+			stop-color: lighten(@infoIconColor, 25%);
+			stop-opacity: 1;
+		}
+
+		.gradientTo{
+			stop-color: @infoIconColor;
+			stop-opacity: 1;
+		}
+	}
+
+	.starSystemTitle{
+		fill: @textColor;
+		font-family: @titleFont;
+	}
+}

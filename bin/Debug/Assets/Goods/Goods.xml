@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<goods>
+  <product>
+    <!-- Jednoznačná identifikace produktu  -->
+    <id>1</id>
+    <!-- Název produktu -->
+    <name>Baterie</name>
+    <!-- Kategorie, do které patří -->
+    <category>Energy</category>
+    <!-- Popis produktu -->
+    <description>Běžný základní zdroj energie.</description>
+    <!-- Velikost (objem)  -->
+    <size>1</size>
+    <!-- Cena  -->
+    <price>15.5</price>
+    <!-- běžné (mainstream) nebo speciální (special)-->
+    <type>mainstream</type>
+    <!-- Level hráče, aby mohl zboží nakoupit -->
+    <levelToBuy>1</levelToBuy>
+  </product>
+  <product>
+    <id>2</id>
+    <name>Bavlna</name>
+    <category>Textile</category>
+    <description>Jemná bílá substance z vláken získávaných ze semen rostlin. </description>
+    <size>3</size>
+    <price>100</price>
+    <type>mainstream</type>
+    <levelToBuy>1</levelToBuy>
+  </product>
+  <product>
+    <id>3</id>
+    <name>Vlna</name>
+    <category>Textile</category>
+    <description>Textilní živočišná vlákna získaná ze zvířecích srstí.</description>
+    <size>3</size>
+    <price>125</price>
+    <type>mainstream</type>
+    <levelToBuy>2</levelToBuy>
+  </product>
+  <product>
+    <id>4</id>
+    <name>Steak</name>
+    <category>Food</category>
+    <description>Výborné maso.</description>
+    <size>1</size>
+    <price>250</price>
+    <type>mainstream</type>
+    <levelToBuy>4</levelToBuy>
+  </product>
+
+  <product>
+    <id>5</id>
+    <name>Mikročip</name>
+    <category>Technics</category>
+    <description>Elektronická součástka, která předává uložený kód čtecímu zařízení.</description>
+    <size>2</size>
+    <price>1150</price>
+    <type>mainstream</type>
+    <levelToBuy>4</levelToBuy>
+  </product>
+  <product>
+    <id>6</id>
+    <name>Integrovaný obvod</name>
+    <category>Technics</category>
+    <description>Elektronická součástka na spojení součástek do elektrického obvodu.</description>
+    <size>2</size>
+    <price>500</price>
+    <type>mainstream</type>
+    <levelToBuy>2</levelToBuy>
+  </product>
+ 
+  <product>
+    <id>7</id>
+    <name>Koření</name>
+    <category>Food</category>
+    <description>Používá se k vylepšení chutě pokrmů.</description>
+    <size>1</size>
+    <price>100</price>
+    <type>mainstream</type>
+    <levelToBuy>1</levelToBuy>
+  </product>
+  <product>
+    <id>8</id>
+    <name>Černé uhlí</name>
+    <category>Energy</category>
+    <description>Palivo pro získávání tepla a energie.</description>
+    <size>5</size>
+    <price>400</price>
+    <type>mainstream</type>
+    <levelToBuy>2</levelToBuy>
+  </product>
+  <product>
+    <id>9</id>
+    <name>Hnědé uhlí</name>
+    <category>Energy</category>
+    <description>Palivo pro získávání tepla a energie.</description>
+    <size>5</size>
+    <price>500</price>
+    <type>mainstream</type>
+    <levelToBuy>3</levelToBuy>
+  </product>
+  <product>
+    <id>10</id>
+    <name>Zbraně</name>
+    <category>Technics</category>
+    <description>Nástroj sloužící k prosazování zájmů.</description>
+    <size>4</size>
+    <price>9000</price>
+    <type>mainstream</type>
+    <levelToBuy>5</levelToBuy>
+  </product>
+  <product>
+    <id>11</id>
+    <name>Maso</name>
+    <category>Food</category>
+    <description>Kosterní svalovina zvířat, používaná k obživě.</description>
+    <size>1</size>
+    <price>80</price>
+    <type>mainstream</type>
+    <levelToBuy>4</levelToBuy>
+  </product>
+</goods>

@@ -27,15 +27,15 @@ using SpaceTraffic.Tools.StarSystemEditor.Exceptions;
 namespace SpaceTraffic.Tools.StarSystemEditor.Entities
 {
     /// <summary>
-    /// Abstraktni trida kterou by mel dedit kazdy editor pevnych objektu (planeta, hvezda, wormhole)
+    ///Abstract class for Planets, Wormholes and Star
     /// </summary>
     public abstract class ObjectEditorEntity : EditableEntity
     {
         /// <summary>
-        /// Metoda ktera nastavi nactenemu objektu novou trajektorii
+        /// Method setting new Trajectory
         /// </summary>
-        /// <param name="newTrajectory"></param>
-        /// <returns>Nova trajektorie</returns>
+        /// <param name="newTrajectory">New Trajectory</param>
+        /// <returns>New Trajectory</returns>
         public void SetTrajectory(Trajectory newTrajectory)
         {
             TryToSet();

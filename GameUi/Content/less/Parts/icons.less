@@ -1,0 +1,49 @@
+﻿@import "../Variables/colors.less";
+
+.icon{
+	display: inline-block;	
+	vertical-align: middle;
+	margin-right: 5px;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.smallIcon{
+	width: 12px;
+	height: 12px;
+}
+
+.mediumIcon{
+	width: 20px;
+	height: 20px;
+}
+
+.largeIcon{
+	width: 30px;
+	height: 30px;
+}
+
+.hugeIcon{
+	width: 50px;
+	height: 50px;
+}
+
+.shipsIcon{
+	background-image: ~"url('images/icons/spaceship.svg')"
+}
+.creditsIcon{
+	background-image: ~"url('images/icons/credits.svg')"
+}
+.basesIcon{
+	background-image: ~"url('images/icons/base.svg')"
+}
+
+.baseIconSVG{
+	path{
+		fill:@infoIconColor;
+	}
+	.iconBg{
+		fill:@infoIconColor;fill-opacity:0.2;
+	}
+
+}

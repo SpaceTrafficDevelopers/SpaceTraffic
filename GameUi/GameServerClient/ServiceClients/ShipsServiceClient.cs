@@ -36,5 +36,33 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 				return (channel as IShipsService).SpaceShipDockedAtBase(spaceShipId, starSystemName, planetName);
 			}
 		}
+
+
+		public SpaceShip GetSpaceShip(int spaceShipId)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				var spaceship = (channel as IShipsService).GetSpaceShip(spaceShipId);
+				return spaceship;
+			}
+		}
+
+		public SpaceShip GetDetailedSpaceShip(int spaceShipId)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				var spaceship = (channel as IShipsService).GetDetailedSpaceShip(spaceShipId);
+				return spaceship;
+			}
+		}
+
+		public SpaceShip ChangeShipState(int shipId, bool available, string message = "")
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				var spaceship = (channel as IShipsService).ChangeShipState(shipId, available, message);
+				return spaceship;
+			}
+		}
 	}
 }

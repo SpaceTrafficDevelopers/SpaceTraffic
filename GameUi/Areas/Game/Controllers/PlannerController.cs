@@ -21,6 +21,7 @@ using System.Web;
 using System.Web.Mvc;
 using SpaceTraffic.GameUi.Extensions;
 using SpaceTraffic.GameUi.Controllers;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
@@ -32,7 +33,7 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+			return PartialView();
         }
 
         /// <summary>
@@ -111,13 +112,25 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			bool cargoSellResult = GSClient.PlanningService.AddPlanAction(thirdItemID, 2, 1, "CargoSell", args);
 
 
-			bool startPlanResult = GSClient.PlanningService.StartPathPlan(pathPlanID);
+			string startPlanResult = GSClient.PlanningService.StartPathPlan(pathPlanID);
 
-            if(!startPlanResult)
-                return RedirectToAction("").Error("Při plánování nastala chyba.");
+			if (String.IsNullOrEmpty(startPlanResult))
+				return RedirectToAction("").Success("Naplánováno jak nikdy :D");
 
-            return RedirectToAction("").Success("Naplánováno jak nikdy :D");
+			return RedirectToAction("").Error(startPlanResult);
+				
         }
+
+		
+		//GET /Planner/FlyTo
+		public ActionResult FlyTo(int shipId)
+		{
+
+			SpaceShip ship = GSClient.ShipsService.GetDetailedSpaceShip(shipId);
+			var partial = PartialView("_FlyTo");
+			partial.ViewBag.ship = ship;
+			return partial;
+		}
        
     }
 }

@@ -28,6 +28,8 @@ using SpaceTraffic.GameUi.GameServerClient;
 using SpaceTraffic.Entities.PublicEntities;
 using SpaceTraffic.GameUi.Extensions;
 using System.Web.Security;
+using SpaceTraffic.Entities;
+using SpaceTraffic.Entities.Minigames;
 
 namespace SpaceTraffic.GameUi.Controllers
 {
@@ -36,7 +38,8 @@ namespace SpaceTraffic.GameUi.Controllers
 	/// </summary>
 	public abstract class AbstractController : Controller
 	{
-		protected readonly IGameServerClient GSClient = GameServerClientFactory.GetClientInstance();
+		public readonly IGameServerClient GSClient = GameServerClientFactory.GetClientInstance();
+		public string ErrorMessage = "";
 
 		/// <summary>
 		/// Loads the XML assembly from assembly folder
@@ -60,11 +63,26 @@ namespace SpaceTraffic.GameUi.Controllers
 		/// <summary>
 		/// Returns id of player who is currently signed in.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>int player id</returns>
 		public int getCurrentPlayerId()
 		{
-			return (int)Membership.GetUser().ProviderUserKey;
-		}
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+
+            if (authCookie == null)
+            {
+                throw new InvalidOperationException("Authentication cookie not found");
+            }
+
+            FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+
+            int val;
+            if(!int.TryParse(authTicket.UserData, out val))
+            {
+                throw new FormatException("Invalid player ID (ID must be int)");
+            }
+            //DebugEx.WriteLineF("getCurrentPlayerId() called: " + val);
+            return val;
+        }
 
 		/// <summary>
 		/// Returns username of player who is currently signed in.
@@ -75,5 +93,66 @@ namespace SpaceTraffic.GameUi.Controllers
 			return HttpContext.User.Identity.Name;
 		}
 
+		/// <summary>
+		/// Returns name of the starsystem player is currently in
+		/// </summary>
+		/// <returns></returns>
+		public string getCurrentStarSystem()
+		{
+			string cookieValue = Request.Cookies.Get("currentStarSystem").Value;
+			return cookieValue.Replace("%20", " ");
+		}
+
+		/// <summary>
+		/// Controls the ship access. Sets ErrorMessage when there is a problem.
+		/// </summary>
+		/// <returns>True when is everything ok</returns>
+
+		public bool controlShipAccess(SpaceShip ship)
+		{
+			int curPlayerId = getCurrentPlayerId();
+			if (ship == null)
+			{
+				this.ErrorMessage = "Tato loď neexistuje!";
+				return false;
+			}
+			if (ship.PlayerId != curPlayerId)
+			{
+				this.ErrorMessage = "Tato loď ti nepatří!";
+				return false;
+			}
+			if (!ship.IsAvailable)
+			{
+				this.ErrorMessage = "Tato loď je zaneprázdněna činností: " + ship.StateText;
+				return false;
+			}
+			return true;
+		}
+
+        /// <summary>
+        /// Method for evaluating if player can play any minigame by action name.
+        /// If player can play any minigame, it is set into session and start in client.
+        /// </summary>
+        /// <param name="actionName">minigame start action name</param>
+        public void evaluateMinigameByStartActionName(string actionName)
+        {
+            IMinigameDescriptor minigame = GSClient.MinigameService.getMinigameDescriptorByActionName(actionName, getCurrentPlayerId());
+
+            if (minigame != null)
+                Session["minigame"] = minigame;
+        }
+
+        /// <summary>
+        /// Method for evaluating if player can play any minigames by action name.
+        /// If player can play any minigame, it is set into session and start in client.
+        /// </summary>
+        /// <param name="actionName">minigame start action name</param>
+        public void evaluateMinigameListByStartActionName(string actionName)
+        {
+            List<MinigameDescriptor> minigames = GSClient.MinigameService.getMinigameDescriptorListByActionName(actionName, getCurrentPlayerId());
+
+            if (minigames != null)
+                Session["minigame"] = minigames;
+        }
 	}
 }

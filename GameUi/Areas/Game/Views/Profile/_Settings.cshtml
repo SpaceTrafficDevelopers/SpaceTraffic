@@ -1,24 +1,29 @@
-﻿@{
+﻿@model SpaceTraffic.GameUi.Areas.Game.Models.ProfileSettingsModel
+
+@{
     ViewBag.Title = "_Settings";
 }
 
-<h2>Account profile</h2>
-<div class="profile">
-	<form>
-		<table>
-		<tr><td class="profile_category" colspan="2">Account</td></tr>
-		<tr><td class="profile_detailCell">Allow permanent login</td><td><input type="checkbox" /></td></tr>
-		<tr><td class="profile_category" colspan="2">Profile</td></tr>
-		<tr><td class="profile_detailCell">Show age</td><td><input type="checkbox" /></td></tr>
-		<tr><td class="profile_category" colspan="2">Email</td></tr>
-		<tr><td class="profile_detailCell">Receive news by email</td><td><input type="checkbox" /></td></tr>
-		<tr><td class="profile_detailCell">{_"Receive events by email</td><td><input type="checkbox" /></td></tr>
-		<tr><td class="profile_category" colspan="2">Show</td></tr>
-		<tr><td class="profile_detailCell">Number of showed messagess</td><td><select><option>15</option><option>30</option><option>45</option><option>60</option></select></td></tr>
-		<tr><td class="profile_detailCell">Number of showed events</td><td><select><option>15</option><option>30</option><option>45</option><option>60</option></select></td></tr>
-		<tr><td class="profile_category" colspan="2">Test</td></tr>
-		<tr><td class="profile_detailCell">I am interested in testing game</td><td><input type="checkbox" /></td></tr>
-		</table>
-		<button>Edit</button>
-	</form>
+<div class="ajax" data-related-element-id="tabsContent">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="settings_form">
+            <section>
+                <h1>Účet</h1>
+                @Html.LabelFor(m => m.Email) @Html.Encode(@Model.Email)<br>
+                @Html.LabelFor(m => m.RememberMe) @Html.CheckBoxFor(m => m.RememberMe)<br>
+                <hr />
+                <a href="@Url.Action("ChangePassword", "Account", new { Area = String.Empty })" class="ajax" data-related-element-id="tabsContent">Změnit heslo</a><br>
+                <a href="@Url.Action("DeleteAccount", "Account", new { Area = String.Empty })" id="deleteAccount" class="ajax" data-related-element-id="tabsContent">Zrušit účet</a><br>
+            </section>
+            <section>
+                <h1>E-mail</h1>
+                @Html.LabelFor(m => m.SendGameInfo) @Html.CheckBoxFor(m => m.SendGameInfo)<br>
+                @Html.LabelFor(m => m.SendNews) @Html.CheckBoxFor(m => m.SendNews)<br>
+            </section>
+            <input type="submit" value="Uložit" />
+        </div>
+    }
 </div>
+

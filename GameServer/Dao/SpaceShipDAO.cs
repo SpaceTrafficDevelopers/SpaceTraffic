@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SpaceTraffic.Entities;
+using System.Data.Entity;
 
 namespace SpaceTraffic.Dao
 {
@@ -42,11 +43,44 @@ namespace SpaceTraffic.Dao
 			}
 		}
 
+		public IList<SpaceShip> GetPlayersShipsAtBase(int playerId, int baseId) {
+			using (var contextDB = CreateContext())
+			{
+				return (from x in contextDB.SpaceShips
+						where x.PlayerId.Equals(playerId)
+						where x.DockedAtBaseId != null
+						where x.DockedAtBaseId == baseId
+						select x).ToList<SpaceShip>();
+			}
+		}
+
 		public SpaceShip GetSpaceShipById(int spaceShipId)
 		{
 			using (var contextDB = CreateContext())
 			{
-				return contextDB.SpaceShips.FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipId));
+				var spaceship = contextDB.SpaceShips;
+				return spaceship.FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipId));
+			}
+		}
+
+		public SpaceShip GetDetailedSpaceShipById(int spaceShipId)
+		{
+			using (var contextDB = CreateContext())
+			{
+				
+				var spaceship = contextDB.SpaceShips.Include("SpaceShipsCargos").FirstOrDefault(x => x.SpaceShipId.Equals(spaceShipId));
+				if (spaceship.DockedAtBaseId != null) {
+					contextDB.Entry(spaceship).Reference("Base").Load();
+					spaceship.Base.SpaceShips = null;
+				}
+				
+				foreach (var cargo in spaceship.SpaceShipsCargos)
+				{
+					cargo.SpaceShip = null;
+					cargo.Cargo = contextDB.Cargos.FirstOrDefault(a => a.CargoId.Equals(cargo.CargoId));
+					cargo.Cargo.SpaceShipsCargos = null;
+				}
+				return spaceship;
 			}
 		}
 
@@ -105,7 +139,7 @@ namespace SpaceTraffic.Dao
 			}
 		}
 
-		public bool UpdateSpaceShipById(SpaceShip spaceShip)
+		public bool UpdateSpaceShip(SpaceShip spaceShip)
 		{
 			using (var contextDB = CreateContext())
 			try
@@ -117,10 +151,13 @@ namespace SpaceTraffic.Dao
 				spaceShipTab.IsFlying = spaceShip.IsFlying;
 				spaceShipTab.SpaceShipName = spaceShip.SpaceShipName;
 				spaceShipTab.SpaceShipModel = spaceShip.SpaceShipModel;
+				spaceShipTab.IsAvailable = spaceShip.IsAvailable;
+				spaceShipTab.StateText = spaceShip.StateText;
 				spaceShipTab.DockedAtBaseId = spaceShip.DockedAtBaseId;
 				spaceShipTab.CurrentStarSystem = spaceShip.CurrentStarSystem;
 				spaceShipTab.FuelTank = spaceShip.FuelTank;
 				spaceShipTab.CurrentFuelTank = spaceShip.CurrentFuelTank;
+				spaceShipTab.CssClass = spaceShip.CssClass;
 				spaceShipTab.PlayerId = spaceShip.PlayerId;
                 spaceShipTab.CargoSpace = spaceShip.CargoSpace;
                 spaceShipTab.Consumption = spaceShip.Consumption;

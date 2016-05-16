@@ -3,7 +3,7 @@
 		xmlns:st="SpaceTrafficData"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		version="1.2">
-		<starsystem name="Testurius">
+		<starsystem name="Testurius" x="300" y="84">
 				<star name="The Big Test">
 						<trajectory>
 							<ellipticOrbit period="1586" a="6" b="4" angle="3" initialAngle="10.0" />
@@ -14,50 +14,82 @@
 										<description>
 											Star of Solar system.
 										</description>
+							<appearance>
+								<size>80</size>
+								<type>gas</type>
+								<randomSeed>e55e</randomSeed>
+								<colorPrimary>#297cfc</colorPrimary>
+								<colorSecondary>#e9fdfb</colorSecondary>
+								<colorOptional>azure</colorOptional>
+							</appearance>
 						</details>
 				</star>
 				<planets>
-						<planet altName="Merktest" name="test 1">
+						<planet altName="Planeta X" name="test 1">
 								<trajectory>
-										<ellipticOrbit period="88" a="51" b="50" angle="3" initialAngle="10.0" />
+										<ellipticOrbit period="88" a="451" b="300" angle="3" initialAngle="10.0" />
 								</trajectory>
 								<details>
 										<gravity>0</gravity>
 										<mass>3.02236885577252e+023</mass>
 										<description>
-												Description of Mercurius placeholder.
+												Vtipný popisek bude dodán poštou.
 										</description>
+									<appearance>
+										<size>3</size>
+										<type>terrastrial</type>
+										<randomSeed>dser5</randomSeed>
+										<colorPrimary>#52a</colorPrimary>
+										<colorSecondary>#61b</colorSecondary>
+										<colorOptional>#a8a</colorOptional>
+									</appearance>
 								</details>
 						</planet>
-						<planet altName="Zemtest" name="test 2">
+						<planet altName="Malinus" name="test 2">
 								<trajectory>
-										<circularOrbit period="365" initialAngle="80.0" radius="54"/>
+										<circularOrbit period="365" initialAngle="80.0" radius="150"/>
 								</trajectory>
 								<details>
 										<gravity>0</gravity>
 										<mass>5.96642929606046e+024</mass>
 										<description>
-												Description of Terra placeholder.
+											Vtipný popisek bude dodán poštou.
 										</description>
+									<appearance>
+										<size>10</size>
+										<type>terrastrial</type>
+										<randomSeed>ew66</randomSeed>
+										<colorPrimary>#ad1dd4</colorPrimary>
+										<colorSecondary>#ad5dd4</colorSecondary>
+										<colorOptional>#ad2dd4</colorOptional>
+									</appearance>
 								</details>
 						</planet>
-						<planet altName="Juptest" name="test 5">
+						<planet altName="Darth Vaderus" name="test 5">
 								<trajectory>
-										<ellipticOrbit period="4435" a="82" b="81" angle="6" initialAngle="0.0" />
+										<ellipticOrbit period="4435" a="258" b="250" angle="6" initialAngle="0.0" />
 								</trajectory>
 								<details>
 										<gravity>0</gravity>
 										<mass>1.89181829106998e+027</mass>
 										<description>
-												Description of Jupiter placeholder.
+											Vtipný popisek bude dodán poštou.
 										</description>
+									<appearance>
+										<size>20</size>
+										<type>gas</type>
+										<randomSeed>erdss</randomSeed>
+										<colorPrimary>#3a351e</colorPrimary>
+										<colorSecondary>#ca0707</colorSecondary>
+										<colorOptional>#ca0707</colorOptional>
+									</appearance>
 								</details>
 						</planet>
 				</planets>
 				<wormholeEndpoints>
 						<wormholeEndpoint id="0">
 								<trajectory>
-										<circularOrbit period="65000" initialAngle="50.0" radius="210"/>
+										<circularOrbit period="65000" initialAngle="50.0" radius="410"/>
 								</trajectory>
 						</wormholeEndpoint>
 						<wormholeEndpoint id="1">

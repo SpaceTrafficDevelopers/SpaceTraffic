@@ -26,7 +26,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
     /// <summary>
     /// Zobrazovac planety
     /// </summary>
-    public class PlanetView : View
+    public class PlanetView : CelestialObjectView
     {
         /// <summary>
         /// Vykreslovany objekt
@@ -39,7 +39,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// <summary>
         /// Propery pro vykreslovanou pozici
         /// </summary>
-        public Point2d Position { get; private set; }
+        public override Point2d Position { get; set; }
         /// <summary>
         /// Zobrazovac trajektorie planety
         /// </summary>
@@ -51,6 +51,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         public PlanetView(Planet planet)
         {
             this.Planet = planet;
+            this.Name = planet.AlternativeName.ToString().Replace(" ", "");
         }
         /// <summary>
         /// Metoda vracejici grafiku objektu
@@ -65,8 +66,8 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             planetShape.Width = 2 * planetRadius;
             planetShape.Height = 2 * planetRadius;
             planetShape.Fill = Brushes.Green;
-            Name = Planet.Name.Replace(" ", "");
-            planetShape.Name = Planet.AlternativeName.ToString().Replace(" ", "");
+            Name = Planet.AlternativeName.ToString().Replace(" ", "");
+            planetShape.Name = Name;//Planet.AlternativeName.ToString().Replace(" ", "");
             Point2d point = TrajectoryView.Trajectory.CalculatePosition(Editor.Time);
             point.X *= Editor.dataPresenter.ObjectSizeRatio;
             point.Y *= Editor.dataPresenter.ObjectSizeRatio;
@@ -79,7 +80,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// Metoda pro ziskani grafiky trajektorie
         /// </summary>
         /// <returns>Grafika trajektorie</returns>
-        public Ellipse GetTrajectoryShape()
+        public override Ellipse GetTrajectoryShape()
         {
             TrajectoryView = new TrajectoryView(this.Planet.Trajectory);
             Ellipse trajectory = TrajectoryView.GetShape();
@@ -99,7 +100,7 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
         /// <returns>Jmeno objektu</returns>
         public override String GetName()
         {
-            return this.Planet.AlternativeName;
+            return this.Name;
         }
         /// <summary>
         /// Metoda vracejici velikost objektu
@@ -112,5 +113,23 @@ namespace SpaceTraffic.Tools.StarSystemEditor.Presentation
             size.Height = size.Width;
             return size;
         }
+
+        /// <summary>
+        /// Metoda vracejici TrajectoryView tohoto objektu
+        /// </summary>
+        /// <returns>TrajectoryView instance</returns>
+        public override TrajectoryView GetTrajectoryView()
+        {
+            return TrajectoryView;
+        }
+        /// <summary>
+        /// Metoda nastavujici TrajectoryView - potrebna pro zmenu mezi kruhovou a eliptickou orbitou
+        /// </summary>
+        /// <param name="view"></param>
+        public override void SetTrajectoryView(TrajectoryView view)
+        {
+            this.TrajectoryView = view;
+        }
+
     }
 }

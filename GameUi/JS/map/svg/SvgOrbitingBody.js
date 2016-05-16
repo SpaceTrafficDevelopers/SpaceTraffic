@@ -51,7 +51,7 @@ var SvgOrbitingBody = new Class({
 		var point = this.body.trajectory.calculatePosition(this.getT());
 		
 		var transform = SvgOrbitFactory.getTransformationForPointOnOrbit(point, this.body.trajectory);
-		//TODO: Parametrize
+		
 		return '<circle id="'+this.getId(ID_OBJECT_SUFFIX)+'" cx="0" cy="0" r="' + this.iconSize + 
 			'"class="'+this.cssClassPrefix+'" transform="' + transform + '"/>';
 	},
@@ -59,7 +59,7 @@ var SvgOrbitingBody = new Class({
 	buildOverlay : function(t) {
 		this.setT(t);
 		var point = this.body.trajectory.calculatePosition(this.getT());
-		this.svgNameplate = new SvgNameplate(this.getId(ID_NAMEPLATE_SUFFIX), this.getName(), 0, this.iconSize, '');
+		this.svgNameplate = new SvgNameplate(this.getId(ID_NAMEPLATE_SUFFIX), this.getName(), 0, this.iconSize, '', this.body);
 		var pointTansformation = SvgOrbitFactory.getTransformationForPointOnOrbit(point, this.body.trajectory);
 		return this.svgNameplate.buildOverlayAt(pointTansformation);
 	},
@@ -90,21 +90,17 @@ var SvgOrbitingBody = new Class({
 		var $svgNameplate = this.svgNameplate.$svgNameplate;
 		
 		var mouseoverHandler = function(){
-			console.debug("SvgPlanet.mouseoverHandler");
+			//console.debug("SvgPlanet.mouseoverHandler");
 			if(!$svgIcon.hasClass('hover'))
 			{
-				console.debug("Reordering svg");
+				//console.debug("Reordering svg");
 				$svgBody.addClass('hover');
-				SvgStarSystemMap.$svgTopLayer.append($svgBody);
-				SvgStarSystemMap.setFade();
+				SvgStarSystemMap.$svgTopLayer.append($svgNameplate);
 			}
 		};
 		var mouseleaveHandler = function(){
 			$svgBody.removeClass('hover');
-			SvgStarSystemMap.$svgBackgroundLayer.append($svgOrbit);
-			SvgStarSystemMap.$svgObjectLayer.append($svgIcon);
 			SvgStarSystemMap.$svgOverlayLayer.append($svgNameplate);
-			SvgStarSystemMap.unsetFade();
 		};
 		
 		$svgIcon.mouseenter(mouseoverHandler).mouseleave(mouseleaveHandler);

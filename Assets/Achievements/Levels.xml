@@ -53,5 +53,10 @@
 		<Name>Prezident vesmíru</Name>
 		<RequiredXP>256000</RequiredXP>
 	</Level>
+  
+  <Level levelID="11">
+    <Name>Funk Overlord</Name>
+    <RequiredXP>512000</RequiredXP>
+  </Level>
 
 </Levels>

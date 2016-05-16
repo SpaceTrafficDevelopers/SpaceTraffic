@@ -65,5 +65,8 @@ namespace SpaceTraffic.Engine
 
         IPlanItemEntityDAO GetPlanItemEntityDAO();
 
+        IMinigameDescriptorDAO GetMinigameDescriptorDAO();
+
+        IStartActionDAO GetStartActionDAO();
     }
 }

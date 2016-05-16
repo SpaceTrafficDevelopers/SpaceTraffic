@@ -24,34 +24,20 @@ using SpaceTraffic.GameUi.Areas.Game.Models;
 using System.Xml.Linq;
 using SpaceTraffic.Entities;
 using SpaceTraffic.GameUi.Extensions;
+using SpaceTraffic.GameUi.Controllers;
 
 namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 {
+
 	[Authorize]
-	public class ShipsController : TabsControllerBase
+	public class ShipsController : AbstractController
 	{
-		protected override void BuildTabs()
-		{
-			int baseId = Convert.ToInt32(Request.QueryString["baseId"]);/* getting parameter from url */
-			string starSystem = Request.QueryString["starSystemName"];/* getting parameter from url */
-			this.Tabs.AddTab("Overview", title: "Overview of all active ships and fleets", partialViewName: "_Overview", partialViewModel: new { Area="Game" });
-			this.Tabs.AddTab("ShipList", "Ships", "List of all your ships.", partialViewName: "_ShipList", partialViewModel: new { Area = "Game" });
-			if (baseId != 0) {
-				this.Tabs.AddTab("BuyShip", "Buy ship", "Buy new ship", partialViewName: "_BuyShip", partialViewModel: new { Area = "Game", baseId = baseId, starSystem = starSystem });
-			}
-			
-			this.Tabs.AddTab("NaviComp", title: "Navicomp view", partialViewName: "_NaviComp", partialViewModel: new { Area = "Game" });
-			
-		}
 
-		//
-		// GET: /Ships/
-				
-		public ActionResult Index()
-		{
-			return View(INDEX_VIEW);
-		}
+		const int MAX_DAMAGE = 100;
 
+		public PartialViewResult Index() {
+			return ShipList();
+		}
 		
 		//
 		// GET: /Ships/BuyModel		
@@ -61,58 +47,160 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 		/// <returns></returns>
 		public ActionResult BuyModel(int baseId, string starSystemName, string model)
 		{
+			ActionResult result = new EmptyResult();
 			ShipModel shipModel = getAllShips().Where(shipType => shipType.Model == model).First();
 			if (shipModel != null){
 				if (GSClient.PlayerService.PlayerHasEnaughCredits(getCurrentPlayerId(), shipModel.Price))
 				{
-					GSClient.GameService.PerformAction(getCurrentPlayerId(), "ShipBuy", getCurrentPlayerId(), starSystemName, baseId, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price, shipModel.Consumption, shipModel.WearRate, shipModel.MaxSpeed);
+					GSClient.GameService.PerformAction(getCurrentPlayerId(), "ShipBuy", getCurrentPlayerId(), starSystemName, baseId, shipModel.FuelCapacity, shipModel.FuelCapacity, shipModel.Model, shipModel.Model, shipModel.Price, shipModel.Consumption, shipModel.WearRate, shipModel.MaxSpeed, shipModel.CarryingCapacity, shipModel.CssClass, shipModel.Image);
 				} else {
-					return RedirectToAction("").Warning(String.Format("Nemáš dostatek kreditů na koupi lodě {0}.", shipModel.Model));
+					return result.Warning(String.Format("Nemáš dostatek kreditů na koupi lodě {0}.", shipModel.Model));
 				}
 			}else{
-				return RedirectToAction("").Error("Tento typ lodi neexistuje.");
+				return result.Error("Tento typ lodi neexistuje.");
 			}
-			return RedirectToAction("").Success(String.Format("Loď typu {0} byla úspěšně zakoupena.", shipModel.Model));
+			return result.Success(String.Format("Loď typu {0} byla úspěšně zakoupena.", shipModel.Model));
 		}
 
-		public PartialViewResult Overview()
-		{
-			return GetTabView("Overview");
-		}
 
 		public PartialViewResult ShipList()
 		{
 			// získání lodí uživatele
 			IList<SpaceShip> ships = GSClient.PlayerService.GetPlayersShips(getCurrentPlayerId());
 
-			var tabView = GetTabView("ShipList");
-			tabView.ViewBag.Ships = ships;
-			return tabView;
-		}
-		
-		public PartialViewResult FleetList()
-		{
-			return GetTabView("FleetList");
+			var viewResult = PartialView("_ShipList");
+			viewResult.ViewBag.Ships = ships;
+			return viewResult;
 		}
 
-		public PartialViewResult BuyShip(int baseId, string starSystem)
+		public ActionResult ShipCargo(int shipId)
+		{
+			if (!GSClient.PlayerService.PlayerHasSpaceShip(getCurrentPlayerId(), shipId))
+			{
+				return new EmptyResult().Error("Tato loď ti nepatří!");
+			}
+			var partialView = PartialView("_ShipCargo");
+			SpaceShip ship = GSClient.ShipsService.GetDetailedSpaceShip(shipId);
+			partialView.ViewBag.ship = ship;
+
+			return partialView;
+		}
+		
+		
+
+		public PartialViewResult BuyShip(int baseId)
 		{
 			// získání všech dostupných modelů lodí
 			List<ShipModel> ships = getAllShips();
 
-			var tabView = GetTabView("BuyShip");
-			tabView.ViewBag.Ships = ships;
-			tabView.ViewBag.baseId = baseId;
-			tabView.ViewBag.starSystemName = starSystem;
-			return tabView;
+			var viewResult = PartialView("_BuyShip");
+			viewResult.ViewBag.Ships = ships;
+			viewResult.ViewBag.baseId = baseId;
+			viewResult.ViewBag.starSystemName = getCurrentStarSystem();
+			return viewResult;
 		}
 
-
-		public PartialViewResult NaviComp()
+		//
+		// GET: /Ships/Refuel
+		public ActionResult Refuel(int shipId, int baseId)
 		{
-			return GetTabView("NaviComp");
+			int curPlayerId = getCurrentPlayerId();
+			
+			var partialView = PartialView("_ShipRefuel");
+			int credits = GSClient.PlayerService.GetPlayersCredits(curPlayerId);
+
+			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+			partialView.ViewBag.ship = ship;
+			if(!controlShipAccess(ship)){
+				return new EmptyResult().Error(this.ErrorMessage);
+			}
+
+			
+			Trader trader = GSClient.CargoService.GetTraderAtBase(baseId);
+			partialView.ViewBag.trader = trader;
+
+			partialView.ViewBag.maxToBuy = Math.Min(ship.FuelTank - ship.CurrentFuelTank, credits / trader.FuelPrice);
+			return partialView;
 		}
 
+		[HttpPost]
+		public ActionResult Refuel(FuelBuyModel values, int shipId, int baseId)
+		{
+			int curPlayerId = getCurrentPlayerId();
+			int credits = GSClient.PlayerService.GetPlayersCredits(curPlayerId);
+			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+			if (!controlShipAccess(ship))
+			{
+				return new EmptyResult().Error(this.ErrorMessage);
+			}
+
+			Trader trader = GSClient.CargoService.GetTraderAtBase(baseId);
+			int maxAmount = Math.Min(ship.FuelTank - ship.CurrentFuelTank, credits / trader.FuelPrice);
+			int finalAmount = Math.Min(maxAmount, values.Amount);
+			if (finalAmount > 0)
+			{
+				string[] planetString = trader.Base.Planet.Split('\\');
+				GSClient.GameService.PerformAction(curPlayerId, "ShipRefuel", planetString[0], planetString[1], shipId, finalAmount, trader.FuelPrice);
+
+				return new EmptyResult().Success("Tankuje se " + finalAmount + " jednotek paliva.");
+			}
+			else {
+				return new EmptyResult().Warning("Nádrž lodi je plná.");
+			}
+		}
+
+
+		//
+		// GET: /Ships/Repair
+		public ActionResult Repair(int shipId, int baseId)
+		{
+			int curPlayerId = getCurrentPlayerId();
+			var partialView = PartialView("_ShipRepair");
+			int credits = GSClient.PlayerService.GetPlayersCredits(curPlayerId);
+
+			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+			partialView.ViewBag.ship = ship;
+			if (!controlShipAccess(ship))
+			{
+				return new EmptyResult().Error(this.ErrorMessage);
+			}
+
+
+			Trader trader = GSClient.CargoService.GetTraderAtBase(baseId);
+			partialView.ViewBag.trader = trader;
+
+			partialView.ViewBag.maxToRepair = Math.Min(ship.DamagePercent, credits / trader.RepairPrice);
+			return partialView;
+		}
+
+		[HttpPost]
+		public ActionResult Repair(RepairShipModel values, int shipId, int baseId)
+		{
+			int curPlayerId = getCurrentPlayerId();
+			
+			int credits = GSClient.PlayerService.GetPlayersCredits(curPlayerId);
+			SpaceShip ship = GSClient.ShipsService.GetSpaceShip(shipId);
+
+			if (!controlShipAccess(ship))
+			{
+				return new EmptyResult().Error(this.ErrorMessage);
+			}
+
+			Trader trader = GSClient.CargoService.GetTraderAtBase(baseId);
+			int maxAmount = Math.Min((int)ship.DamagePercent, credits / trader.RepairPrice);
+			int finalAmount = Math.Min(maxAmount, values.Amount);
+			if (finalAmount > 0)
+			{
+				string[] planetString = trader.Base.Planet.Split('\\');
+				GSClient.GameService.PerformAction(curPlayerId, "ShipRepair", planetString[0], planetString[1], shipId, finalAmount, trader.RepairPrice);
+
+				return new EmptyResult().Success("Opravuje se " + finalAmount + " procent poškození.");
+			}
+			else {
+				return new EmptyResult().Warning("Loď není poškozená.");
+			}
+		}
+		
 
 		/// <summary>
 		/// Returns the list of all ships defined in SpaceShips.xml
@@ -140,7 +228,8 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 				ship.Image = (string)shipNode.Descendants("image").FirstOrDefault();
 				ship.Price = (int)shipNode.Descendants("price").FirstOrDefault();
 				ship.Description = (string)shipNode.Descendants("description").FirstOrDefault();
-                ship.MaxSpeed = (int)shipNode.Descendants("maxSpeed").FirstOrDefault();
+				ship.MaxSpeed = (int)shipNode.Descendants("maxSpeed").FirstOrDefault();
+				ship.CssClass = (string)shipNode.Descendants("cssClass").FirstOrDefault();
 
 				ships.Add(ship);
 			}

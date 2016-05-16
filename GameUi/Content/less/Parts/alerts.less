@@ -1,0 +1,33 @@
+﻿@import "../Variables/colors.less";
+
+.alert{
+	z-index: 2;
+	position: relative;
+	width: auto;
+	padding: 1px 15px;
+	margin-bottom: 8px;
+	min-height: 14px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 16px;
+	opacity: 0.8;
+
+	.close{
+		display: none;
+	}
+}
+
+.alert-success{
+	background: @goodColor;
+	color: white;
+}
+
+.alert-warning{
+	background: @neutralColor;
+	color: white;
+}
+
+.alert-error{
+	background: @badColor;
+	color: white;
+}

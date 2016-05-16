@@ -33,6 +33,9 @@ namespace SpaceTraffic.Services.Contracts
 		bool PlayerHasEnaughCredits(int playerId, long amount);
 
 		[OperationContract]
+		int GetPlayersCredits(int playerId);
+
+		[OperationContract]
 		Player GetPlayer(int playerId);
 
 		[OperationContract]
@@ -40,7 +43,9 @@ namespace SpaceTraffic.Services.Contracts
 
 		[OperationContract]
 		IList<SpaceShip> GetPlayersShips(int playerId);
-		
+
+		[OperationContract]
+		IList<SpaceShip> GetPlayersShipsAtBase(int playerId, int baseId);
 	}
 
 }

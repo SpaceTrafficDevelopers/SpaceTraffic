@@ -1,0 +1,34 @@
+﻿
+@Html.Partial("_Header")
+
+<a href="@Url.Action("Ships", "Bases", new { planetName = ViewBag.planetName })" class="ajax refreshButton" data-related-element-id="contextPanelContent">↻</a>
+<div>
+@if (ViewBag.currentBase != null)
+{
+	<a href="@Url.Action("BuyShip", "Ships", new { baseId = ViewBag.currentBase.BaseId })" class="ajax btn btn-ships" data-related-element-id="mainPanelContent">Koupit loď</a>
+}
+</div>
+
+<div class="scrollable">
+	@{
+		int i = 0;
+		foreach (var ship in @ViewBag.Ships)
+		{
+			i++;
+			<a href="@Url.Action("ShipDetail", "Bases", new { shipId = @ship.SpaceShipId })" class="ajax" data-related-element-id="contextPanelContent">
+				@Html.Partial("../Ships/ShipCards/_ShipCardBasic", new ViewDataDictionary { { "ship", ship }, { "index", i } })
+			</a>
+		}
+		if (i == 0)
+		{
+			<p class="infoNote">
+				Na této základně nemáte žádné lodě.
+			</p>
+		}
+	}
+
+</div>
+<script>
+	$('#contextPanel .contextBtn').removeClass('active');
+	$('#planetShips').addClass('active');
+</script>

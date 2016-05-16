@@ -43,6 +43,7 @@ namespace SpaceTraffic.GameUi.Security
         private bool _RequiresQuestionAndAnswer = false;
         private bool _RequiresUniqueEmail = true;
         //private string _ServiceEndpoint;
+        SpaceTraffic.Utils.Security.PasswordHasher pwdHasher;
 
 
         private readonly IGameServerClient GSClient = GameServerClientFactory.GetClientInstance();
@@ -202,7 +203,19 @@ namespace SpaceTraffic.GameUi.Security
 
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
-            throw new NotImplementedException();
+            string usernameLower = username.ToLower();
+            if (!GSClient.AccountService.AccountUsernameExists(usernameLower) || !GSClient.AccountService.Authenticate(usernameLower, oldPassword))
+            {
+                return false;
+            }
+
+            int playerId = GSClient.AccountService.GetAccountInfoByUserName(usernameLower).PlayerId;
+            Entities.Player player = GSClient.PlayerService.GetPlayer(playerId);
+            string newPwdHash = pwdHasher.HashPassword(newPassword);
+
+            player.PsswdHash = newPwdHash;
+
+            return GSClient.AccountService.UpdatePlayer(player);
         }
 
         /// <summary>
@@ -218,38 +231,118 @@ namespace SpaceTraffic.GameUi.Security
 
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
-            //todo: CreateUser
-            throw new NotImplementedException();
+            string usernameLower = username.ToLower();
+            email = email.ToLower();
+
+            if (!ValidateUserData(username, password, email, out status))
+                return null;
+            if (AccountDataTaken(usernameLower, email, out status))
+                return null;
+
+            string pwdHash = pwdHasher.HashPassword(password);
+
+            Entities.Player newPlayer = new Entities.Player()
+            {
+                PlayerToken = string.Empty,
+                PlayerName = usernameLower,
+                PlayerShowName = username,
+                Email = email,
+                PsswdHash = pwdHash,
+                NewPsswdHash = string.Empty,
+                IsEmailConfirmed = false,
+                PassChangeDate = DateTime.Now.AddDays(-3),
+                AddedDate = DateTime.Now,
+                LastVisitedDate = DateTime.Now,
+                Credit = 18000,
+                ExperienceLevel = 0,
+                Experiences = 0,
+                StayLogedIn = false,
+                SendInGameInfo = false,
+                SendNewsletter = false
+            };
+
+            string token = GeneratePlayerToken(newPlayer);
+            newPlayer.PlayerToken = token;
+
+            GSClient.AccountService.RegisterPlayer(newPlayer);
+
+            string appUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+            
+            if (!GSClient.AccountService.AccountUsernameExists(usernameLower))
+            {
+                status = MembershipCreateStatus.ProviderError;
+                return null;
+            }
+
+            GSClient.GameService.PerformAction(GSClient.AccountService.GetAccountInfoByUserName(usernameLower).PlayerId, "InactivePlayerRemove", newPlayer.PlayerShowName);
+
+            GSClient.MailService.SendActivationMail(newPlayer, "info@spacetraffic.zcu.cz", appUrl + "/Account/ActivationToken?Token=" + token);
+
+            status = MembershipCreateStatus.Success;
+            return GetUser(username, false);
+        }
+
+        private bool ValidateUserData(string username, string password, string email, out MembershipCreateStatus status)
+        {
+            //TODO: Evaluate if implementation is needed
+            status = MembershipCreateStatus.Success;
+            return true;
+        }
+
+        /// <summary>
+        /// Check if account data are taken by another user
+        /// </summary>
+        /// <param name="username">Player username</param>
+        /// <param name="email">Player email</param>
+        /// <param name="status">Accoun create status</param>
+        /// <returns></returns>
+        private bool AccountDataTaken(string username, string email, out MembershipCreateStatus status)
+        {
+            if (GSClient.AccountService.AccountUsernameExists(username))
+            {
+                status = MembershipCreateStatus.DuplicateUserName;
+                return true;
+            }
+            else if (GSClient.AccountService.AccountEmailExists(email))
+            {
+                status = MembershipCreateStatus.DuplicateEmail;
+                return true;
+            }
+
+            status = MembershipCreateStatus.Success;
+            return false;
         }
 
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
-            //todo: DeleteUser, implement later.
-            throw new NotImplementedException();
+            username = username.ToLower();
+            if (GSClient.AccountService.AccountUsernameExists(username))
+            {
+                int id = GSClient.AccountService.GetAccountInfoByUserName(username).PlayerId;
+                return GSClient.AccountService.RemovePlayer(id);
+            }
+            else
+                return false;
         }
 
         public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
-            //TODO: FindUsersByEmail, implement later.
-            throw new NotImplementedException();
+            throw new NotSupportedException("FindUsersByEmail is not supported by this implementation. Use GetUser instead.");
         }
 
         public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
         {
-            //TODO: FindUsersByName, implement later if needed.
-            throw new NotImplementedException();
+            throw new NotSupportedException("FindUsersByName is not supported by this implementation. Use GetUser instead.");
         }
 
         public override MembershipUserCollection GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
-            //TODO: GetAllUsers, implement later if needed.
-            throw new NotImplementedException();
+            throw new NotSupportedException("FindUsersByName is not supported by this implementation.");
         }
 
         public override int GetNumberOfUsersOnline()
         {
-            //TODO: GetNumberOfUsersOnline, implement later.
-            throw new NotImplementedException();
+            throw new NotSupportedException("UnlockUser is not supported by this implementation.");
         }
 
         /// <summary>
@@ -287,26 +380,59 @@ namespace SpaceTraffic.GameUi.Security
 
         public override string GetUserNameByEmail(string email)
         {
-            //TODO: GetUserNameByEmail, implement later.
-            throw new NotImplementedException();
+            if(GSClient.AccountService.AccountEmailExists(email.ToLower()))
+            {
+                int id = GSClient.AccountService.GetAccountInfoByEmail(email.ToLower()).PlayerId;
+                Entities.Player player = GSClient.PlayerService.GetPlayer(id);
+
+                if (player != null)
+                    return player.PlayerShowName;
+                
+            }
+
+            return null;
         }
 
         public override string ResetPassword(string username, string answer)
         {
-            //TODO: ResetPassword, implement later.
-            throw new NotImplementedException();
+            string usernameLower = username.ToLower();
+            if (!GSClient.AccountService.AccountUsernameExists(usernameLower))
+            {
+                return null;
+            }
+
+            int playerId = GSClient.AccountService.GetAccountInfoByUserName(usernameLower).PlayerId;
+            Entities.Player player = GSClient.PlayerService.GetPlayer(playerId);
+
+            string token = GeneratePlayerToken(player);
+            string newPass = pwdHasher.GenerateRandomPassword(10);
+            string newHash = pwdHasher.HashPassword(newPass);
+
+            player.PlayerToken = token;
+            player.NewPsswdHash = newHash;
+            player.PassChangeDate = DateTime.Now;
+
+            string appUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+
+            if (GSClient.AccountService.UpdatePlayer(player))
+            {
+                if (GSClient.MailService.SendLostPassMail(player, "info@spacetraffic.zcu.cz", appUrl+"/Account/ResetToken?Token="+token, newPass))
+                    return "";
+                else
+                    return null;
+            }
+            else
+                return null;
         }
 
         public override bool UnlockUser(string userName)
         {
-            //TODO: UnlockUser, implement later.
-            throw new NotImplementedException();
+            throw new NotSupportedException("UnlockUser is not supported by this implementation. Use Account service instead.");
         }
 
         public override void UpdateUser(MembershipUser user)
         {
-            //TODO: UpdateUser, implement later.
-            throw new NotImplementedException();
+            throw new NotSupportedException("UpdateUser is not supported by this implementation. Use Account service instead.");
         }
 
         /// <summary>
@@ -324,7 +450,7 @@ namespace SpaceTraffic.GameUi.Security
             //TODO: Exception handling.
             
 
-            return GSClient.AccountService.Authenticate(username, password);
+            return GSClient.AccountService.Authenticate(username.ToLower(), password);
         }
 
         public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
@@ -347,10 +473,11 @@ namespace SpaceTraffic.GameUi.Security
             this._MaxInvalidPasswordAttempts = Convert.ToInt32(GetConfigValue(config["maxInvalidPasswordAttempts"], "5"));
             this._PasswordAttemptWindow = Convert.ToInt32(GetConfigValue(config["passwordAttemptWindow"], "10"));
             this._MinRequiredNonAlphanumericCharacters = Convert.ToInt32(GetConfigValue(config["minRequiredNonalphanumericCharacters"], "0"));
-            this._MinRequiredPasswordLength = Convert.ToInt32(GetConfigValue(config["minRequiredPasswordLength"], "6"));
+            this._MinRequiredPasswordLength = Convert.ToInt32(GetConfigValue(config["minRequiredPasswordLength"], "8"));
             this._EnablePasswordReset = Convert.ToBoolean(GetConfigValue(config["enablePasswordReset"], "true"));
             this._PasswordStrengthRegularExpression = Convert.ToString(GetConfigValue(config["passwordStrengthRegularExpression"], ""));
             //this._ServiceEndpoint = GetConfigValue(config["serviceEndpoint"], "AccountService");
+            pwdHasher = new SpaceTraffic.Utils.Security.PasswordHasher(SpaceTraffic.Utils.Security.PasswordHasher.DEF_ITERATION_COUNT);
         }
 
         private string GetConfigValue(string configValue, string defaultValue)
@@ -359,6 +486,37 @@ namespace SpaceTraffic.GameUi.Security
                 return defaultValue;
 
             return configValue;
+        }
+
+        public bool AddPlayerIntoActivePlayers(int playerId)
+        {
+            if(GSClient.AccountService.AccountExists(playerId))
+            {
+                return GSClient.AccountService.AddPlayerIntoActivePlayers(playerId);
+            }
+            return false;
+        }
+
+        public void RemovePlayerFromActivePlayers(int playerId)
+        {
+            if (GSClient.AccountService.AccountExists(playerId))
+            {
+                GSClient.AccountService.RemovePlayerFromActivePlayers(playerId);
+            }
+        }
+
+        /// <summary>
+        /// Generates token representing player
+        /// </summary>
+        /// <param name="player">Player to generate token</param>
+        /// <returns>Player token</returns>
+        private string GeneratePlayerToken(Entities.Player player)
+        {
+            string data = player.PlayerName + player.PlayerId + player.Email + player.PsswdHash;
+
+            string token = pwdHasher.HashPassword(data).Replace('+','a').Replace('/','b').Replace('=','c');
+
+            return token;
         }
     }
 }

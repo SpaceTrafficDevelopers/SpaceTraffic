@@ -22,6 +22,9 @@ using SpaceTraffic.Services.Contracts;
 using SpaceTraffic.Entities.PublicEntities;
 using SpaceTraffic.Entities;
 using System.ServiceModel;
+using SpaceTraffic.Game;
+using System.ServiceModel;
+using System.Diagnostics;
 
 namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 {
@@ -32,6 +35,22 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			using (var channel = this.GetClientChannel())
 			{
 				return (channel as IGameService).GetStarSystemConnections(starSystem);
+			}
+		}
+
+		public SpaceTraffic.Entities.Base GetBaseByName(string planetName)
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).GetBaseByName(planetName);
+			}
+		}
+
+		public IList<SpaceTraffic.Entities.Base> GetAllBases()
+		{
+			using (var channel = this.GetClientChannel())
+			{
+				return (channel as IGameService).GetAllBases();
 			}
 		}
 
@@ -51,5 +70,22 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 				return (channel as IGameService).GetActionResult(playerId, actionCode);
 			}
 		}
+
+        public IList<StarSystem> GetGalaxyMap(string galaxyMap)
+        {
+            try
+            {
+                var channel = this.GetClientChannel();
+                channel.Open();
+                var ret = (channel as IGameService).GetGalaxyMap(galaxyMap);
+                channel.Close();
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+            }
+        }
 	}
 }

@@ -22,7 +22,7 @@ $(document).ready(function(){
 		
 		$('#qunit-fixture').html('<div id="outherHeightBugTest" style="width: 20px; margin: 10px; padding: 0px; position: relative;">&nbsp;</div>');
 		var resultWidth = $('#outherHeightBugTest').outerHeight(true);
-		var expected = 40;	
+		var expected = 38;	
 		strictEqual(resultWidth,expected, 'Expecting JQuery.outerHeight from created div element.');
 	});
 	
@@ -30,7 +30,7 @@ $(document).ready(function(){
 		
 		$('#qunit-fixture').html('<div id="outherHeightBugTest" style="width: 20px; margin: 10px; padding: 0px; position: relative;">&nbsp;</div>');
 		var resultWidth = $('#outherHeightBugTest').outerHeight(true);
-		var expected = 20;	
+		var expected = 38;	
 		strictEqual(resultWidth,expected, 'Expecting JQuery.outerHeight from created div element.');
 	});
 	

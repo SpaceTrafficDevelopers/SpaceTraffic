@@ -1,9 +1,29 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
+﻿
 
-@{
-    //@Html.Partial((string)ViewBag.CurrentTab.PartialViewName)
-    @*Html.Partial("~/Areas/Game/Views/Shared/_GameWindow.cshtml")*@
-}
+<h1>Základny</h1>
+<div class="basesList scrollable">
+	@{
+	foreach (var planetBase in @ViewBag.bases)
+	{
+		<div href="" data-starsystem="@planetBase.StarSystemName" class="falseLink baseLink">
+			<a href="@Url.Action("Info", "Bases", new { planetName = planetBase.PlanetName })" class="ajax originalLink" data-related-element-id="contextPanelContent"></a>
+				<span class="icon basesIcon hugeIcon"></span>
+				<p class="baseInfo">
+					<strong class="baseName">@planetBase.BaseName</strong>
+					<span class="starSystemName">@planetBase.StarSystemName</span>
+				</p>
+		</div>
+			}
+			<div style="clear:both;"></div>
+			}
+</div>
+<script>
+	$('.basesList .falseLink').click(function (e) {
+		$.cookie("currentStarSystem", $(this).data('starsystem'), { path: '/' });
+		StarSystemLoader.switchToStarSystem($(this).data('starsystem'));
+		ajaxClick(e, $(this).find('.originalLink'));
+	});
+
+</script>
+
 

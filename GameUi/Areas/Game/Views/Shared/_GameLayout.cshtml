@@ -1,7 +1,16 @@
 ﻿@{
-	var menu = new List<string>();
+	var menu = new List<dynamic>();
 
-	menu.AddRange(new string[] { "Events", "Ships", "Bases", "Messages", "Map", "Scoreboard", "Profile", "Help" });
+	menu.AddRange(new dynamic[] {
+		//new { Id = "Events", Name = "Události"},
+		new { Id = "Ships", Name = "Lodě"},
+		new { Id = "Bases", Name = "Základny"},
+		//new { Id = "Messages", Name = "Zprávy"},
+		new { Id = "Map", Name = "Mapa"},
+		//new { Id = "Scoreboard", Name = "Skóre"},
+		new { Id = "Profile", Name = "Profil"},
+		//new { Id = "Help", Name = "Pomoc"}
+	});
 }
 <!DOCTYPE html>
 <html>
@@ -13,73 +22,124 @@
 	<meta http-equiv="Content-Style-Type" content="text/css" />
 	
 	<title>Space Traffic</title>
-	
-  	<link href="@Url.Content("~/Content/Game.less")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/themes/base/jquery.ui.base.css")" rel="stylesheet" type="text/css" />
-	@*<link rel="shortcut icon" href="~/Content/spacetraffic.ico" type="image/x-icon">*@
 
-	@*<link rel="start" href="~/" title="Home" />*@
+	<link href='https://fonts.googleapis.com/css?family=Exo:400,800|Audiowide&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+   <!-- <link type="text/css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/vader/jquery-ui.min.css">-->
+
+	<link href="@Url.Content("~/Content/Game.less")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/themes/base/jquery.ui.base.css")" rel="stylesheet" type="text/css" />
+      <script type="text/javascript">
+	  	var baseUrl = "@Url.Content("~")";
+	  	var testing = false;
+  	</script>
+  	@RenderSection("LinkStyles", false)
+
   </head>
   <body>
 	<div id="envelope">
-	  <div id="header">
-		<h1>Space Traffic</h1>
-		<div>Debug Player&nbsp;<span>Czech | English</span></div>
-	  </div>
-	  <div id="logo">
-	  </div>
-	  <div id="content">
-		<div id="topPanel">
-			<div class="topbrick"><p>5/8</p><p>Ships</p></div>
-			<div class="topbrick"><p>10/8</p><p>Bases</p></div>
-			<div class="topbrick"><p>10/8</p><p>Messages</p></div>
-			<div class="topbrick"><p>Credits</p><p>145 830</p></div>
-			<div class="topbrick"><p>&nbsp;@Membership.GetUser().UserName</p></div>
-		</div>
+			<div id="applicationPanel">
+				<div class="leftPart">
+					<div class="brick">Česká verze</div>
+					<div class="brick">
+						<a href="@Url.Action("Index", "References", new { Area = "Game" }, null)" title="O autorech a použitých knihovnách" class="ajax" data-related-element-id="mainPanelContent">Reference</a>
+					</div>
+				</div>
+				<a href="@Url.Action("Index","/")" title="Na hlavní obrazovku" id="logo" class="middlePart">
+					<h1>Space Traffic</h1>
+				</a>
+				<div class="rightPart">
+					<div class="brick">@Membership.GetUser().UserName</div>
+					<div class="brick">
+						<a href="@Url.Action("LogOff", "Account", new { Area = String.Empty })">Odhlásit se</a>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div id="gameTopPanel">
+				<div class="leftPart">
+					<div class="brick">
+						<a href="#" title="Hlavní menu" id="menuButton">MENU<span id="menuArrow"></span></a>
+					</div>
+				</div>
+				<div class="middlePart">
+					<div class="leftShape"></div>
+					<div class="leftOverlay"></div>
+					<div class="middleShape"></div>
+					<div class="rightShape"></div>
+					<div class="rightOverlay"></div>
+				</div>
+				<div class="rightPart">
+					<a href="@Url.Action("ShipList", "Ships")" class="ajax brick minwidth" data-related-element-id="contextPanelContent"><span class="icon shipsIcon mediumIcon"></span><span class="shipsAmount">-</span></a>
+					<div class="brick minwidth"><span class="icon creditsIcon mediumIcon"></span><span class="creditsAmount">-</span></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
 		<div id="menuPanel">
-			<ul class="mainmenu">
-				@foreach (string menuItem in menu)
+			<nav class="mainmenu">
+				@foreach (dynamic menuItem in menu)
 				{
-					<li>
-						<a href="@Url.Action("Index", menuItem, new { Area = "Game" }, null)">
-							<img src="@Url.Content("~/Content/images/"+menuItem.ToLower()+"_button_icon.png")" width="32" height="32" />
-							@menuItem
-						</a>
-						
-					</li>
+					<a href="@Url.Action("Index", menuItem.Id, new { Area = "Game" }, null)" class="ajax" data-related-element-id="mainPanelContent">
+						<img src="@Url.Content("~/Content/images/icons/menu/"+menuItem.Id.ToLower()+"_button_icon.png")" width="32" height="32" />
+						@menuItem.Name
+					</a>
 				}
+				<div class="clearfix"></div>
+			</nav>
+
+		</div>
+		<div id="content">
+			@Html.Partial("_Flash")
+			<div id="contextPanel">
+				<span class="closebutton">&#x2716;</span>
+				<div id="contextPanelContent">
+				@RenderSection("ContextPanel", false)
+				</div>
+			</div>
+			<div id="mainPanel">
+				<span class="closebutton">&#x2716;</span>
+				<div id="mainPanelContent">
+					@RenderBody()
+				</div>
+			</div>
+			<div id="viewport">
+				@*SVG starsystem viewport*@
+			</div>
+
+			<div id="infoPanel">
+			</div>
+
+			@Html.Partial("_Achievements")
+
+		</div>
+		<div id="zoomUI">
+			<span id="zoomIn">+</span>
+			<span id="zoomOut">-</span>
+		</div>
+		<div id="gameBottomPanel">
+			<ul id="infoStream" class="marquee">
+				<li>Země se potýká s kritickým nedostatkem gumových medvídků. Vláda slibuje nápravu.</li>
+				<li>Kvůli nedostatku pušek, samohybných houfnic a taktických nukleárních střel sešlo z války gangů na základnách kolem Jupitera. Obě strany souhlasily s vyjednáváním.</li>
+				<li>Kolonie na Titanu potřebují více energie.</li>
+				<li>Vědci dokázali, že ve vesmíru nelze chovat čivavy.</li>
+				<li>Země hlásí nedostatek ropy. Už přes 200 let.</li>
 			</ul>
-			
 		</div>
-		<div id="contextPanel">
-			@RenderSection("ContextPanel", false)
-		</div>
-		@Html.Partial("_Flash")
-		<div id="mainPanel">
-			@RenderBody()
-		</div>
-		<div id="viewport">
-
-		</div>
-		
-		@Html.Partial("_Achievements")
-
-	  </div>
-	  <div id="footer">
-		<p>&copy; Space Traffic Team | <span lang="cs">ZČU</span> | <span lang="cs">FAV</span> | <span lang="cs">KIV</span></p>
-		<p>Sources for background images were taken by Hubble Space Telescope and published by NASA.</p>
-	  </div>
 	</div>
-	@Content.Script("jquery-1.6.4.js",Url)
+    <div id="minigameStarterDialog" canbedisplayed="true"></div>
+    <div id="isPlayingDialog"></div>
+	@Content.Script("jquery-2.2.2.min.js", Url)
+  	@Content.Script("jquery-migrate-1.4.0.min.js", Url)
 	@Content.Script("jquery.unobtrusive-ajax.js", Url)
-	@Content.Script("jquery-ui-1.8.16.js", Url)
-	@Content.Script("jquery.svg.js", Url)
-	@Content.Script("jquery.svgdom.js", Url)
+	@Content.Script("jquery-ui-1.11.4.min.js", Url)
+	@Content.Script("jquery.svg-1.5.min.js", Url)
+	@Content.Script("jquery.svgdom-1.5.min.js", Url)
 	@Content.Script("jquery.cookie.js", Url)
-	@Content.Script("mootools-core-1.4.1.js", Url)
+    @Content.Script("mootools-core-1.6.0.js", Url)
 	@Content.Script("jquery.flash-message.js", Url)
 	@Content.JSImport("~/JS/jsimport", Url)
 	@Content.JSImport("~/JS/layoutImport", Url)
+  	
 	@RenderSection("Scripts", false)
+
   </body>
 </html>

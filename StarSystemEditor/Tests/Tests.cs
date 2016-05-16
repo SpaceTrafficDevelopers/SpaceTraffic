@@ -52,11 +52,6 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             Console.WriteLine("Upraveno. {0}", Editor.PlanetEditor.GetInfo());
             //ShowStructure();
 
-            //planet move to another starsystem
-            Console.WriteLine("Prevadim planetu do soustavy Tertius");
-            Editor.PlanetEditor.MovePlanet("Tertius");
-            Console.WriteLine("Upraveno. {0}", Editor.PlanetEditor.GetInfo());
-            ShowStructure();
         }
         /// <summary>
         /// Metoda ktera postupne testuje nektere moznosti Star editoru
@@ -73,12 +68,6 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             Editor.StarEditor.SetName("Hvezdicka Cerna");
             Console.WriteLine("Nacteno. {0}", Editor.StarEditor.GetInfo());
             //ShowStructure();
-
-            //star test distance edit
-            Console.WriteLine("Menim bezpecnou vzdalenost na 100");
-            Editor.StarEditor.SetMinimumApproachDistance(100);
-            Console.WriteLine("Nacteno. {0}", Editor.StarEditor.GetInfo());
-            ShowStructure();
         }
         /// <summary>
         /// Metoda ktera postupne testuje nektere moznosti StarSystem editoru
@@ -101,14 +90,6 @@ namespace SpaceTraffic.Tools.StarSystemEditor
             Planet testPlanet = new Planet();
             testPlanet.Name = "Rambo";
             Editor.StarSystemEditor.AddPlanet(testPlanet);
-            Console.WriteLine("Nacteno. {0}", Editor.StarSystemEditor.GetInfo());
-            //ShowStructure();
-
-            //starsystem test set star
-            Console.WriteLine("Nastavuji hvezdu soustavy na \"Arnold Schwarzenegger\"");
-            Star testStar = new Star();
-            testStar.Name = "Arnold Schwarzenegger";
-            Editor.StarSystemEditor.SetStar(testStar);
             Console.WriteLine("Nacteno. {0}", Editor.StarSystemEditor.GetInfo());
             //ShowStructure();
 

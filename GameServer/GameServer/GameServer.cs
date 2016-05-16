@@ -27,6 +27,9 @@ using SpaceTraffic.Data;
 using System.Xml;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Entities.Goods;
+using SpaceTraffic.Entities.Minigames;
+using SpaceTraffic.Game.Actions;
+using SpaceTraffic.Game.Minigame;
 
 namespace SpaceTraffic.GameServer
 {
@@ -50,6 +53,8 @@ namespace SpaceTraffic.GameServer
         private GameManager gameManager;
         private GoodsManager goodsManager;
 		private StatisticsManager statisticsManager;
+        private MinigameManager minigameManager;
+
         public volatile bool run = false;
 
         public volatile GameTime currentGameTime;
@@ -91,6 +96,15 @@ namespace SpaceTraffic.GameServer
 				return this.statisticsManager;
 			}
 		}
+
+        public IMinigameManager Minigame
+        {
+            get
+            {
+                return this.minigameManager;
+            }
+        }
+
         #endregion
 
         //TODO: Thread-safe state indication of GameServer instance.
@@ -162,14 +176,72 @@ namespace SpaceTraffic.GameServer
                 this.persistenceManager.GetGameEventDao()
             );
 
+            this.minigameManager = new MinigameManager(this);
+            this.minigameManager.loadAssets();
+
+            Utils.EmailClient.EmailFormats = assetManager.LoadEmailTemplates();
+
+            //for tests: add "user" player into active players
+            //TODO: add this into log-on and remove into log-off
+            this.worldManager.AddPlayer(1);
+
             // Inicializace herního světa.
             this.gameManager = new GameManager(this, this.gameStateManager);
             this.gameManager.RestoreGameState();
 
+            //test minigame and start action data
+            #region minigame test data
             
+            StartAction startAction = new StartAction { ActionName = "TestAction" };
+            this.persistenceManager.GetStartActionDAO().InsertStartAction(startAction);
+
+            MinigameDescriptor md = new MinigameDescriptor
+            {
+                Name = "Spaceship cargo finder",
+                PlayerCount = 1,
+                Description = "Hra na motiva hada, kde je hlavním úkolem nasbírat alespoň 30 jednotek nákladu.",
+                Controls = "Hra se ovládá šipkami.",
+                StartActions = new List<StartAction>() { startAction },
+                RewardType = RewardType.CREDIT,
+                SpecificReward = null,
+                RewardAmount = 100,
+                ConditionType = ConditionType.CREDIT,
+                ConditionArgs = "100",
+                ExternalClient = false,
+                MinigameClassFullName = "SpaceTraffic.Game.Minigame.SpaceshipCargoFinder, SpaceTraffic.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                ClientURL = "/SpaceshipCargoFinder"
+            };
+
+            this.minigameManager.registerMinigame(md);
+
+            md = new MinigameDescriptor
+            {
+                Name = "LogoQuiz",
+                PlayerCount = 1,
+                Description = "Hra, kde je hlavním úkolem uhádnout z neúplného loga o jaké logo se jedná. " +
+                              "Pokud uhádneš alspoň 20 z 30 log, dostaneš odměnu 1000 kreditů.",
+                Controls = "Hra se ovládá dotykem.",
+                StartActions = new List<StartAction>(){ startAction },
+                RewardType = RewardType.CREDIT,
+                SpecificReward = null,
+                RewardAmount = 1000,
+                ConditionType = ConditionType.CREDIT,
+                ConditionArgs = "100",
+                ExternalClient = true,
+                MinigameClassFullName = "SpaceTraffic.Game.Minigame.LogoQuiz, SpaceTraffic.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                ClientURL = "logo_quiz.apk"
+            };
+
+            this.minigameManager.registerMinigame(md);
+            IGameAction ga = new MinigameAllGamesLifeAction();
+
+            this.Game.PlanEvent(ga, DateTime.UtcNow);
+
+            #endregion
+
             serviceManager = new ServiceManager();
             //Načíst servisy z konfigurace
-			serviceManager.ServiceList = new List<Type>(new Type[] { typeof(AccountService), typeof(GameService), typeof(HelloWorldService), typeof(AchievementsService), typeof(CargoService), typeof(ShipsService), typeof(PlanningService), typeof(PlayerService) });
+			serviceManager.ServiceList = new List<Type>(new Type[] { typeof(AccountService), typeof(GameService), typeof(HelloWorldService), typeof(AchievementsService), typeof(CargoService), typeof(ShipsService), typeof(PlanningService), typeof(PlayerService), typeof(MinigameService), typeof(MailService)});
             serviceManager.Initialize();
         }
 

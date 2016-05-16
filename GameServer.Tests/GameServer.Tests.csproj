@@ -80,12 +80,15 @@
     <Compile Include="Dao\PlayerDAOTest.cs" />
     <Compile Include="Dao\MessageDAOTest.cs" />
     <Compile Include="Dao\BaseDAOTest.cs" />
+    <Compile Include="Dao\MinigameDescriptorDAOTest.cs" />
+    <Compile Include="Dao\StartActionDAOTest.cs" />
     <Compile Include="Dao\TraderDAOTest.cs" />
     <Compile Include="Dao\TraderCargoDAOTest.cs" />
     <Compile Include="Dao\PathPlanEntityDAOTest.cs" />
     <Compile Include="Dao\PlanItemEntiyDAOTest.cs" />
     <Compile Include="Dao\PlanActionDAOTest.cs" />
     <Compile Include="GameServer\GameStateManagerTest.cs" />
+    <Compile Include="GameServer\MinigameManagerTest.cs" />
     <Compile Include="ServiceImpl\AccountServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dao\SpaceShipDAOTest.cs" />

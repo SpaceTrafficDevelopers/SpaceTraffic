@@ -26,6 +26,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup>
     <MvcBuildViews>true</MvcBuildViews>
@@ -104,8 +105,20 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Game\Controllers\MinigameTestController.cs" />
+    <Compile Include="Areas\Game\Controllers\ReferencesController.cs" />
     <Compile Include="Areas\Game\Controllers\CargoController.cs" />
     <Compile Include="Areas\Game\Controllers\PlannerController.cs" />
+    <Compile Include="Areas\Game\Controllers\TestController.cs" />
+    <Compile Include="Areas\Game\Models\CargoSellModel.cs" />
+    <Compile Include="Areas\Game\Models\CargoBuyModel.cs" />
+    <Compile Include="Areas\Game\Models\ProfileSettingsModel.cs" />
+    <Compile Include="Areas\Game\Models\RepairShipModel.cs" />
+    <Compile Include="Areas\Game\Models\FuelBuyModel.cs" />
+    <Compile Include="Areas\Game\Models\CargoPairModel.cs" />
+    <Compile Include="Areas\Minigame\Controllers\DefaultController.cs" />
+    <Compile Include="Areas\Minigame\Controllers\SpaceshipCargoFinderController.cs" />
+    <Compile Include="Areas\Minigame\MinigameAreaRegistration.cs" />
     <Compile Include="Controllers\AbstractController.cs" />
     <Compile Include="Areas\Game\Controllers\TabsControllerBase.cs" />
     <Compile Include="Areas\Game\GameAreaRegistration.cs" />
@@ -116,7 +129,17 @@
     <Compile Include="Areas\Game\Models\ShipModel.cs" />
     <Compile Include="Configuration\GameUiConfiguration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AchievementController.cs" />
+    <Compile Include="Areas\Game\Controllers\AjaxHandlers\PlayerIsPlayingMinigame.cs" />
+    <Compile Include="Areas\Game\Controllers\AjaxHandlers\PlanSingleFly.cs" />
+    <Compile Include="Areas\Game\Controllers\AjaxHandlers\ShipsInfo.cs" />
+    <Compile Include="Areas\Game\Controllers\AjaxHandlers\CreditsAmount.cs" />
+    <Compile Include="Areas\Game\Controllers\AjaxHandlers\EarnedAchievements.cs" />
+    <Compile Include="Areas\Game\Controllers\AjaxHandlers\IAjaxHandleable.cs" />
+    <Compile Include="Areas\Game\Controllers\AjaxHandlers\MinigameStarter.cs" />
+    <Compile Include="Areas\Game\Controllers\AjaxHandlers\Minigame\SpaceshipCargoFinder\PerformActionSpaceshipCargoFinder.cs" />
+    <Compile Include="Areas\Game\Controllers\AjaxHandlers\Minigame\SpaceshipCargoFinder\StartSpaceshipCargoFinder.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Game\Controllers\MapController.cs" />
     <Compile Include="Areas\Game\Controllers\MessagesController.cs" />
@@ -128,6 +151,8 @@
     <Compile Include="GameServerClient\IGameServerClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\AccountServiceClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\CargoServiceClient.cs" />
+    <Compile Include="GameServerClient\ServiceClients\MailServiceClient.cs" />
+    <Compile Include="GameServerClient\ServiceClients\MinigameServiceClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\PlanningServiceClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\ShipsServiceClient.cs" />
     <Compile Include="GameServerClient\ServiceClients\PlayerServiceClient.cs" />
@@ -140,31 +165,360 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\RegistrationModel.cs" />
     <Compile Include="Models\Ui\TabItem.cs" />
     <Compile Include="Models\Ui\Tabs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\FlashMessageExtensions.cs" />
+    <Compile Include="Security\LogonAuthorize.cs" />
     <Compile Include="Utils\JSImportReader.cs" />
     <Content Include="CodeAssassin.ConfigTransform.Readme.txt" />
-    <Content Include="Content\**" Exclude="Content\**\.*" />
+    <Content Include="Content\.settings\org.eclipse.core.resources.prefs" />
+    <Content Include="Content\fonts\LeagueGothicRegular.css" />
+    <Content Include="Content\fonts\League_Gothic-webfont.eot" />
+    <Content Include="Content\fonts\League_Gothic-webfont.svg" />
+    <Content Include="Content\fonts\League_Gothic-webfont.ttf" />
+    <Content Include="Content\fonts\League_Gothic-webfont.woff" />
+    <Content Include="Content\fonts\League_Gothic.otf" />
+    <Content Include="Content\fonts\SIL Open Font License 1.1.txt" />
+    <Content Include="Content\Game.less" />
+    <Content Include="Content\images\75p_honey.png" />
+    <Content Include="Content\images\Account\Avatars\avatar_0.png" />
+    <Content Include="Content\images\Account\Avatars\avatar_1.png" />
+    <Content Include="Content\images\Account\Avatars\avatar_10.png" />
+    <Content Include="Content\images\Account\Avatars\avatar_11.png" />
+    <Content Include="Content\images\Account\Avatars\avatar_2.png" />
+    <Content Include="Content\images\Account\Avatars\avatar_3.png" />
+    <Content Include="Content\images\Account\Avatars\avatar_4.png" />
+    <Content Include="Content\images\Account\Avatars\avatar_5.png" />
+    <Content Include="Content\images\Account\Avatars\avatar_6.png" />
+    <Content Include="Content\images\Account\Avatars\avatar_7.png" />
+    <Content Include="Content\images\Account\Avatars\avatar_8.png" />
+    <Content Include="Content\images\Account\Avatars\avatar_9.png" />
+    <Content Include="Content\images\Account\bgsprite.png" />
+    <Content Include="Content\images\Account\help.png" />
+    <Content Include="Content\images\Achievements\000SOURCES.svg" />
+    <Content Include="Content\images\Achievements\000sourcesURL.txt" />
+    <Content Include="Content\images\Achievements\Archive\DugTooGreedilyandTooDeep.jpg" />
+    <Content Include="Content\images\Achievements\Archive\DugTooGreedilyandTooDeepComplete.jpg" />
+    <Content Include="Content\images\Achievements\Archive\FactoryInvestor.jpg" />
+    <Content Include="Content\images\Achievements\Archive\FactoryInvestorComplete.jpg" />
+    <Content Include="Content\images\Achievements\Archive\IndustryMagnate.jpg" />
+    <Content Include="Content\images\Achievements\Archive\IndustryMagnateComplete.jpg" />
+    <Content Include="Content\images\Achievements\Archive\LieutenantCommander.jpg" />
+    <Content Include="Content\images\Achievements\Archive\LieutenantCommanderComplete.jpg" />
+    <Content Include="Content\images\Achievements\Archive\OldMcDonaldHadAFarm.jpg" />
+    <Content Include="Content\images\Achievements\Archive\OldMcDonaldHadAFarmComplete.jpg" />
+    <Content Include="Content\images\Achievements\Archive\RearAdmiralLieutenantGeneralRimmer.jpg" />
+    <Content Include="Content\images\Achievements\Archive\RearAdmiralLieutenantGeneralRimmerComplete.jpg" />
+    <Content Include="Content\images\Achievements\fuelTank1.png" />
+    <Content Include="Content\images\Achievements\fuelTank1Complete.png" />
+    <Content Include="Content\images\Achievements\fuelTank2.png" />
+    <Content Include="Content\images\Achievements\fuelTank2Complete.png" />
+    <Content Include="Content\images\Achievements\fuelTank3.png" />
+    <Content Include="Content\images\Achievements\fuelTank3Complete.png" />
+    <Content Include="Content\images\Achievements\percentageRepaired1.png" />
+    <Content Include="Content\images\Achievements\percentageRepaired1Complete.png" />
+    <Content Include="Content\images\Achievements\percentageRepaired2.png" />
+    <Content Include="Content\images\Achievements\percentageRepaired2Complete.png" />
+    <Content Include="Content\images\Achievements\percentageRepaired3.png" />
+    <Content Include="Content\images\Achievements\percentageRepaired3Complete.png" />
+    <Content Include="Content\images\Achievements\ShipFleet1.png" />
+    <Content Include="Content\images\Achievements\ShipFleet1Complete.png" />
+    <Content Include="Content\images\Achievements\ShipFleet2.png" />
+    <Content Include="Content\images\Achievements\ShipFleet2Complete.png" />
+    <Content Include="Content\images\Achievements\ShipFleet3.png" />
+    <Content Include="Content\images\Achievements\ShipFleet3Complete.png" />
+    <Content Include="Content\images\Achievements\ShipFleet4.png" />
+    <Content Include="Content\images\Achievements\ShipFleet4Complete.png" />
+    <Content Include="Content\images\Achievements\takeOff1.png" />
+    <Content Include="Content\images\Achievements\takeOff1Complete.png" />
+    <Content Include="Content\images\Achievements\takeOff2.png" />
+    <Content Include="Content\images\Achievements\takeOff2Complete.png" />
+    <Content Include="Content\images\Achievements\takeOff3.png" />
+    <Content Include="Content\images\Achievements\takeOff3Complete.png" />
+    <Content Include="Content\images\Achievements\takeOff4.png" />
+    <Content Include="Content\images\Achievements\takeOff4Complete.png" />
+    <Content Include="Content\images\Achievements\takeOff5.png" />
+    <Content Include="Content\images\Achievements\takeOff5Complete.png" />
+    <Content Include="Content\images\Achievements\Turtle.png" />
+    <Content Include="Content\images\Achievements\TurtleComplete.png" />
+    <Content Include="Content\images\back.png" />
+    <Content Include="Content\images\bases_button_icon.png" />
+    <Content Include="Content\images\content_stars_bg.png" />
+    <Content Include="Content\images\context_panel_bg.png" />
+    <Content Include="Content\images\events_button_icon.png" />
+    <Content Include="Content\images\gradient1.png" />
+    <Content Include="Content\images\help_button_icon.png" />
+    <Content Include="Content\images\icon-bases-placeholder.png" />
+    <Content Include="Content\images\icon-events-placeholder.png" />
+    <Content Include="Content\images\icon-help-placeholder.png" />
+    <Content Include="Content\images\icon-map-placeholder.png" />
+    <Content Include="Content\images\icon-messages-placeholder.png" />
+    <Content Include="Content\images\icon-profile-placeholder.png" />
+    <Content Include="Content\images\icon-scoreboard-placeholder.png" />
+    <Content Include="Content\images\icon-ships-placeholder.png" />
+    <Content Include="Content\images\logo_small.png" />
+    <Content Include="Content\images\main_menu_item_bg.png" />
+    <Content Include="Content\images\map_button_icon.png" />
+    <Content Include="Content\images\messages_button_icon.png" />
+    <Content Include="Content\images\Minigame\SpaceshipCargoFinder\background.png" />
+    <Content Include="Content\images\Minigame\SpaceshipCargoFinder\cargo.png" />
+    <Content Include="Content\images\Minigame\SpaceshipCargoFinder\shipDown.png" />
+    <Content Include="Content\images\Minigame\SpaceshipCargoFinder\shipLeft.png" />
+    <Content Include="Content\images\Minigame\SpaceshipCargoFinder\shipRight.png" />
+    <Content Include="Content\images\Minigame\SpaceshipCargoFinder\shipUp.png" />
+    <Content Include="Content\images\Pattern_01.png" />
+    <Content Include="Content\images\placeholder.png" />
+    <Content Include="Content\images\profile_button_icon.png" />
+    <Content Include="Content\images\scoreboard_button_icon.png" />
+    <Content Include="Content\images\Ships\baby_spaceships_full.png" />
+    <Content Include="Content\images\Ships\bumper.png" />
+    <Content Include="Content\images\Ships\madeinchina.png" />
+    <Content Include="Content\images\Ships\shipunto.png" />
+    <Content Include="Content\images\ships_button_icon.png" />
+    <Content Include="Content\images\solarsystem\background_images\earth.png" />
+    <Content Include="Content\images\solarsystem\background_images\jupiter.png" />
+    <Content Include="Content\images\solarsystem\background_images\mars.png" />
+    <Content Include="Content\images\solarsystem\background_images\mercury.png" />
+    <Content Include="Content\images\solarsystem\background_images\neptune.png" />
+    <Content Include="Content\images\solarsystem\background_images\pluto.png" />
+    <Content Include="Content\images\solarsystem\background_images\saturne.png" />
+    <Content Include="Content\images\solarsystem\background_images\saturne_ring.png" />
+    <Content Include="Content\images\solarsystem\background_images\sun.png" />
+    <Content Include="Content\images\solarsystem\background_images\uranus.png" />
+    <Content Include="Content\images\solarsystem\background_images\uranus_ring.png" />
+    <Content Include="Content\images\solarsystem\background_images\venus.png" />
+    <Content Include="Content\images\solarsystem\planets\jupiter.png" />
+    <Content Include="Content\images\solarsystem\planets\mars.png" />
+    <Content Include="Content\images\solarsystem\planets\merkurij.png" />
+    <Content Include="Content\images\solarsystem\planets\neptun.png" />
+    <Content Include="Content\images\solarsystem\planets\planet1.png" />
+    <Content Include="Content\images\solarsystem\planets\planet10.png" />
+    <Content Include="Content\images\solarsystem\planets\planet11.png" />
+    <Content Include="Content\images\solarsystem\planets\planet12.png" />
+    <Content Include="Content\images\solarsystem\planets\planet2.png" />
+    <Content Include="Content\images\solarsystem\planets\planet3.png" />
+    <Content Include="Content\images\solarsystem\planets\planet4.png" />
+    <Content Include="Content\images\solarsystem\planets\planet5.png" />
+    <Content Include="Content\images\solarsystem\planets\planet6.png" />
+    <Content Include="Content\images\solarsystem\planets\planet7.png" />
+    <Content Include="Content\images\solarsystem\planets\planet8.png" />
+    <Content Include="Content\images\solarsystem\planets\planet9.png" />
+    <Content Include="Content\images\solarsystem\planets\pluton.png" />
+    <Content Include="Content\images\solarsystem\planets\saturn.png" />
+    <Content Include="Content\images\solarsystem\planets\uran.png" />
+    <Content Include="Content\images\solarsystem\planets\venuse.png" />
+    <Content Include="Content\images\solarsystem\planets\zeme.png" />
+    <Content Include="Content\images\solarsystem\suns\sun1.png" />
+    <Content Include="Content\images\solarsystem\suns\sun2.png" />
+    <Content Include="Content\images\solarsystem\suns\sun3.png" />
+    <Content Include="Content\images\starry-night.jpg" />
+    <Content Include="Content\images\stars.gif" />
+    <Content Include="Content\images\stin.jpg" />
+    <Content Include="Content\images\stin.png" />
+    <Content Include="Content\images\top-left_shape.png" />
+    <Content Include="Content\images\transparent50.png" />
+    <Content Include="Content\images\window-back-opa80.png" />
+    <Content Include="Content\images\window-back.png" />
+    <Content Include="Content\images\window-back_opa.png" />
+    <Content Include="Content\less\Account.less" />
+    <Content Include="Content\less\Achievements\achievements.less" />
+    <Content Include="Content\less\debug.less" />
+    <Content Include="Content\less\defaultforms.less" />
+    <Content Include="Content\less\development.less" />
+    <Content Include="Content\less\elements.less" />
+    <Content Include="Content\less\GameLayout.less" />
+    <Content Include="Content\less\gamewindow.less" />
+    <Content Include="Areas\Game\Views\References\Index.cshtml" />
+    <Content Include="Areas\Game\Views\MinigameTest\Index.cshtml" />
+    <Content Include="Areas\Game\Views\Bases\_Info.cshtml" />
+    <Content Include="Areas\Game\Views\Bases\_Header.cshtml" />
+    <Content Include="Areas\Game\Views\Bases\_Ships.cshtml" />
+    <Content Include="Areas\Game\Views\Bases\_Goods.cshtml" />
+    <Content Include="Areas\Game\Views\Bases\_ShipDetail.cshtml" />
+    <Content Include="Areas\Game\Views\Ships\_ShipRefuel.cshtml" />
+    <Content Include="Areas\Game\Views\Ships\_ShipRepair.cshtml" />
+    <Content Include="Areas\Game\Views\Cargo\_CargoBuy.cshtml" />
+    <Content Include="Areas\Game\Views\Cargo\_CargoSell.cshtml" />
+    <Content Include="Areas\Game\Views\Ships\_ShipCargo.cshtml" />
+    <Content Include="Areas\Game\Views\Planner\_FlyTo.cshtml" />
+    <Content Include="Areas\Minigame\Views\Default\Index.cshtml" />
+    <Content Include="Areas\Minigame\Views\Web.config" />
+    <Content Include="Areas\Minigame\Views\SpaceshipCargoFinder\Index.cshtml" />
+    <Content Include="Content\less\dialog.less" />
+    <Content Include="Areas\Game\Views\Ships\ShipCards\_ShipCardFullDetail.cshtml" />
+    <Content Include="Content\less\GalaxyMapView.less" />
+    <Content Include="Areas\Game\Views\Ships\ShipCards\_ShipCardBasic.cshtml" />
+    <Content Include="Areas\Game\Views\Ships\ShipCards\_ShipCardDetailed.cshtml" />
+    <Content Include="Content\less\BasesView.less" />
+    <Content Include="Areas\Game\Views\Cargo\CargoCards\_CargoCardBasic.cshtml" />
+    <Content Include="Content\less\Game\cargos.less" />
+    <Content Include="Areas\Game\Views\Test\Index.cshtml" />
+    <None Include="Content\less\Game\libs\jquery.marquee.less" />
+    <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
+    <Content Include="Content\less\ShipsView.less" />
+    <Content Include="Content\less\MessagesView.less" />
+    <Content Include="Content\less\ProfileView.less" />
+    <Content Include="Content\less\ScoreboardView.less" />
+    <Content Include="Content\less\summarytable.less" />
+    <Content Include="Content\less\svg-starsystem.less" />
+    <Content Include="Content\less\Variables\colors.less" />
+    <Content Include="Content\qunit.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.all.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.base.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="JS\game\LogOff.js" />
     <Content Include="JS\jsimport" Exclude="JS\.*" />
-    <Content Include="JS\**\*.js" />
+    <Content Include="JS\core\flashInit.js" />
+    <Content Include="JS\core\init.js" />
+    <Content Include="JS\game\Achievements.js" />
+    <Content Include="JS\game\Credits.js" />
+    <Content Include="JS\game\GalaxyEndpoint.js" />
+    <Content Include="JS\game\GalaxyMap.js" />
+    <Content Include="JS\game\GalaxyWormhole.js" />
+    <Content Include="JS\game\geometry\CircularOrbit.js" />
+    <Content Include="JS\game\geometry\EllipticOrbit.js" />
+    <Content Include="JS\game\geometry\Orbit.js" />
+    <Content Include="JS\game\geometry\Point.js" />
+    <Content Include="JS\game\geometry\Trajectory.js" />
+    <Content Include="JS\game\MinigameStarter.js" />
+    <Content Include="JS\game\Planet.js" />
+    <Content Include="JS\game\PlayerIsPlayingMinigame.js" />
+    <Content Include="JS\game\ShipsInterfaces.js" />
+    <Content Include="JS\game\Star.js" />
+    <Content Include="JS\game\StarSystem.js" />
+    <Content Include="JS\game\UIPlanner.js" />
+    <Content Include="JS\game\WormholeEndpoint.js" />
+    <Content Include="JS\libs\ajax\jquery.form.min.js" />
+    <Content Include="JS\libs\marquee\jquery.marquee.js" />
+    <Content Include="JS\libs\marquee\jquery.marquee.min.js" />
+    <Content Include="JS\libs\mousewheel\jquery.mousewheel.js" />
+    <Content Include="JS\libs\mousewheel\jquery.mousewheel.min.js" />
+    <Content Include="JS\libs\random\seedrandom.js" />
+    <Content Include="JS\libs\smartresize\smartresize.js" />
+    <Content Include="JS\libs\test\qunit-1.23.1.css" />
+    <Content Include="JS\libs\test\qunit-1.23.1.js" />
+    <Content Include="JS\map\GalaxyMapLoader.js" />
+    <Content Include="JS\map\GraphicTransform.js" />
+    <Content Include="JS\map\StarSystemLoader.js" />
+    <Content Include="JS\map\SvgRenderer.js" />
+    <Content Include="JS\map\SvgStarSystemMap.js" />
+    <Content Include="JS\map\SvgViewportManager.js" />
+    <Content Include="JS\map\svg\SvgMapItem.js" />
+    <Content Include="JS\map\svg\SvgNameplate.js" />
+    <Content Include="JS\map\svg\SvgOrbitFactory.js" />
+    <Content Include="JS\map\svg\SvgOrbitingBody.js" />
+    <Content Include="JS\map\svg\SvgPlanet.js" />
+    <Content Include="JS\map\svg\SvgStar.js" />
+    <Content Include="JS\map\svg\SvgWormholeEndpoint.js" />
+    <Content Include="JS\minigame\SpaceshipCargoFinder\Food.js" />
+    <Content Include="JS\minigame\SpaceshipCargoFinder\Game.js" />
+    <Content Include="JS\minigame\SpaceshipCargoFinder\GameArea.js" />
+    <Content Include="JS\minigame\SpaceshipCargoFinder\GameDialog.js" />
+    <Content Include="JS\minigame\SpaceshipCargoFinder\ImageLoader.js" />
+    <Content Include="JS\minigame\SpaceshipCargoFinder\Position.js" />
+    <Content Include="JS\minigame\SpaceshipCargoFinder\SendAjaxMessage.js" />
+    <Content Include="JS\minigame\SpaceshipCargoFinder\Snake.js" />
+    <Content Include="JS\minigame\SpaceshipCargoFinder\StartGameDialog.js" />
+    <Content Include="JS\tests\AjaxTest.js" />
+    <Content Include="JS\tests\JQuerySvgDomTest.js" />
+    <Content Include="JS\tests\StarSystemLoaderTest.js" />
+    <Content Include="JS\tests\StarSystemMapUITest.js" />
+    <Content Include="JS\tests\StarSystemObjects.Tests.js" />
+    <Content Include="JS\tests\SvgStarSystemMap.Tests.js" />
+    <Content Include="JS\tests\UIAreThereTest.js" />
+    <Content Include="JS\ui\Ajax.js" />
+    <Content Include="JS\ui\BackgroundPlanets.js" />
+    <Content Include="JS\ui\GameWindowTabs.js" />
+    <Content Include="JS\ui\InfoMarquee.js" />
+    <Content Include="JS\ui\Menus.js" />
+    <Content Include="JS\ui\ProfileOverviewExp.js" />
+    <Content Include="JS\ui\ViewportManager.js" />
+    <Content Include="JS\util\MathUtils.js" />
+    <Content Include="JS\util\Modal.js" />
+    <Content Include="JS\util\Queue.js" />
+    <Content Include="JS\util\TimeUtils.js" />
+    <Content Include="JS\util\TouchDeviceSupport.js" />
+    <Content Include="JS\util\UIUtils.js" />
+    <Content Include="JS\game\ShipScripts.js" />
+    <Content Include="Content\less\Parts\buttons.less" />
+    <Content Include="Content\less\Game\ships.less" />
+    <Content Include="Content\less\PlannerView.less" />
+    <Content Include="Content\minigames\logo_quiz.apk" />
+    <None Include="JS\minigame\spaceshipCargoFinderImport" />
     <Content Include="Libs\System.Web.Helpers.dll" />
     <Content Include="Libs\System.Web.Razor.dll" />
     <Content Include="Libs\System.Web.WebPages.Deployment.dll" />
     <Content Include="Libs\System.Web.WebPages.dll" />
     <Content Include="Libs\System.Web.WebPages.Razor.dll" />
     <Content Include="README.jQuery.vsdoc.txt" />
+    <Content Include="Scripts\jquery-2.2.2.min.js" />
+    <Content Include="Scripts\jquery-migrate-1.4.0.js" />
+    <Content Include="Scripts\jquery-migrate-1.4.0.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
     <Content Include="Scripts\jquery.flash-message.js" />
-    <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.6.4.js" />
-    <Content Include="Scripts\jquery-1.6.4.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.16.js" />
-    <Content Include="Scripts\jquery-ui-1.8.16.min.js" />
+    <Content Include="Scripts\jquery.svg-1.5.js" />
+    <Content Include="Scripts\jquery.svg-1.5.min.js" />
+    <Content Include="Scripts\jquery.svgdom-1.5.js" />
+    <Content Include="Scripts\jquery.svgdom-1.5.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\mootools-core-1.6.0.js" />
     <Content Include="Scripts\qunit.js" />
     <Compile Include="Security\SpaceTrafficMembershipProvider.cs" />
   </ItemGroup>
@@ -172,6 +526,17 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Content\less\Variables\colors.less" />
+    <Content Include="Content\less\Variables\urls.less" />
+    <Content Include="Content\less\Variables\fonts.less" />
+    <Content Include="Content\less\defaults.less" />
+    <Content Include="Content\less\Parts\icons.less" />
+    <Content Include="Content\less\Parts\alerts.less" />
+    <Content Include="Content\less\ModalWindow.less" />
+    <Content Include="Content\less\StarSystemMap.less" />
+    <Content Include="Views\Account\LostPassword.cshtml" />
+    <Content Include="Views\Account\DeleteAccount.cshtml" />
+    <Content Include="Views\Account\ResendActivationEmail.cshtml" />
     <None Include="Views\Shared\_Achievements.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -182,8 +547,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\MicrosoftAjax.js" />
@@ -201,6 +564,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="App_GlobalResources\" />
     <Folder Include="App_LocalResources\" />
+    <Folder Include="Areas\Minigame\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -223,27 +587,12 @@
     <Content Include="Areas\Game\Views\Ships\_BuyShip.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Game\Views\Ships\_ContextShipDetails.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Ships\_FleetList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Ships\_NaviComp.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Ships\_Overview.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Game\Views\Ships\_ShipList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Game\Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Shared\_GameWindowLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\Content.cshtml" />
@@ -276,19 +625,10 @@
     <Content Include="Areas\Game\Views\Profile\_Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Game\Views\Profile\_Personal.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Game\Views\Profile\_AchievementsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Game\Views\Profile\_Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Game\Views\Profile\_Overview.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Game\Views\Profile\_Password.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Game\Views\Messages\_NewMessage.cshtml" />
@@ -321,7 +661,7 @@
     <Content Include="Areas\Game\Views\Help\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Game\Views\Map\Index.cshtml" />
+    <Content Include="Areas\Game\Views\Map\GalaxyMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\Register.resx" />
@@ -331,9 +671,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_STJSIncludeDefaults.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Account\RegisterStep2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\RegistrationSuccessful.cshtml" />

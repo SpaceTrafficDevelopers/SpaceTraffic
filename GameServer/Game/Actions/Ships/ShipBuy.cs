@@ -79,9 +79,13 @@ namespace SpaceTraffic.Game.Actions
 				Consumption = Convert.ToDouble(this.ActionArgs.ElementAt(8)),
 				WearRate = Convert.ToDouble(this.ActionArgs.ElementAt(9)),
 				MaxSpeed = Convert.ToInt32(this.ActionArgs.ElementAt(10)),
+				IsAvailable = true,
+				StateText = SpaceShip.StateTextDefault,
                 UserCode = "",
 				TimeOfArrival = "",
-				CargoSpace = 100    //TODO: je potřeba přidat ještě maximální množství nákladu lodě 
+				CargoSpace = Convert.ToInt32(this.ActionArgs.ElementAt(11)),
+				CssClass = this.ActionArgs.ElementAt(12).ToString(),
+				Image = this.ActionArgs.ElementAt(13).ToString()
                 
 			};
 			return spaceShip;

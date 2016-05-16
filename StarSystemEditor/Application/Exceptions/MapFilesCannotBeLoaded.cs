@@ -20,48 +20,48 @@ using System.Runtime.Serialization;
 namespace SpaceTraffic.Tools.StarSystemEditor.Exceptions
 {
     /// <summary>
-    /// Vyjimka vyhozena pri nenalezeni souboru zadaneho v galaxy map
+    /// Exception thrown when file could not be found
     /// </summary>
     [Serializable]
     public class MapFilesCannotBeLoaded : System.IO.FileNotFoundException
     {
 		/// <summary>
-		/// Konstruktor chyby
+		/// Construktor chyby
 		/// </summary>
         public MapFilesCannotBeLoaded()
 		{
 		}
         
         /// <summary>
-        /// Pretizeni konstruktoru ktere doda chybovou hlasku
+        /// Overloaded constructor that displays excepation message
         /// </summary>
-        /// <param name="message">Zprava chyby</param>
-        public MapFilesCannotBeLoaded(string message): base("Nebyl nalezen soubor mapy: " + message)
+        /// <param name="message">error message</param>
+        public MapFilesCannotBeLoaded(string message): base("Map file was not found: " + message)
 		{
 		}
         
         /// <summary>
-        /// Pretizeni konstruktoru
+        /// Overload of constructor
         /// </summary>
-        /// <param name="message">Zprava</param>
-        /// <param name="innerException">Vnitrni vyjimka</param>
+        /// <param name="message">Message</param>
+        /// <param name="innerException">inner exception</param>
         public MapFilesCannotBeLoaded(string message,
 			Exception innerException): base(message, innerException)
 		{
 		}
         
         /// <summary>
-        /// Pretizeni konstruktoru
+        /// Overload of constructor
         /// </summary>
         /// <param name="info">info</param>
-        /// <param name="context">kontext</param>
+        /// <param name="context">context</param>
         protected MapFilesCannotBeLoaded(SerializationInfo info,
             StreamingContext context): base(info, context)
         {
         }
 
         /// <summary>
-        /// Vrati data objektu
+        /// return object data
         /// </summary>
         /// <param name="info">info</param>
         /// <param name="context">context</param>

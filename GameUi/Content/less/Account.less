@@ -1,96 +1,471 @@
+@import "Variables/colors.less";
+@import "Variables/fonts.less";
 
 // Color schema
-@spaceColor: #000000;
-@normalTextColor: #ffffff;
-@panelBorderColor: #151515;
-@headerBgColor: #111111;
-@footerBgColor: @headerBgColor;
-@footerBorderColor: #222222;
-@panelBgColor: #060525;
+@spaceBgColor: #03101b;
+@formBgColor: #131313;
+@formBorderColor: #595959;
+@formTitleColor: #48a2f0;
+@formInputBgColor: #3d3d3d;
+@formFocusColor: #ffffff;
 
-@panelLinkColor: #ffffff;
-@panelLinkHoverColor: #01ffc6;
+@buttonOkBgColor: #159515;
+@buttonCancelBglColor: #ec3131;
+
+@linkColor: #ffffff;
+@linkHoverColor: #48a2f0;
+
+html { 
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
 body{
-	background-image: url('../images/stars.gif');
-	background-color: @spaceColor;
-	color: @normalTextColor;
+    margin: 0;
+    position: absolute;
+    top: 0; 
+    bottom: 0; 
+    right: 0; 
+    left: 0;
+
+	background-color: @spaceBgColor;
+    background: 
+        url('../images/Account/bgsprite.png') repeat 35% 35%, url('../images/Account/bgsprite.png') repeat 5% 5%,
+        radial-gradient(circle, rgb(3,16,27), rgb(0,0,0)),
+        #03101b;
+    background-position: 0 0, 0 -500px;
+
+	color: @textColor;
 }
 
+.clear {
+    overflow: auto;
+}
 
-.account-window {
-	margin: 0 auto;
-	width: 900px;
-	background-color: @panelBgColor;
-	border: 3px solid #FFF;
+#layout-title {
+    text-align: center;
+    font-family: @titleFont;
+    margin-top: 40px;
+    margin-bottom: 0;
+    font-size: 90px;
+}
+
+/* Lost password and register links div */
+#login-links {
+    margin-top: 4px;
+}
+
+/* Form */
+.form-wrapper {
+    width: 295px;
+    margin: -150px auto;
+    font-family: @textFont;
+
+    a {
+         text-decoration: none;
+         color: @linkColor;
+
+         &:hover { 
+             color: @linkHoverColor;
+         }
+    }
+}
+
+.form {
+    background-color: rgba( red(@formBgColor), green(@formBgColor), blue(@formBgColor), 0.9);
+    border: 3px solid @formBorderColor;
 	padding: 10px;
-	
-	a {
-		color: @panelLinkColor;
-		&:hover {
-			color: @panelLinkHoverColor;
-		}
-		
-		&:visited {
-			color: @panelLinkColor;
-			&:hover {
-				color: @panelLinkHoverColor;
-			}
-		}
-	}
+    font-weight: 400;
 
-	p {
-		margin: 10px 4px;	
-	}
-}
-.login-window {
-	.account-window;
-	width: 500px;
-}
-
-.form-fields {
-	width: 50%;
-		.editor-label {
-			text-align: right;
-		}
-		input {
-			margin: 8px 5px;
-		}
-}
-.login-form-fields {
-	.form-fields;
-	width: 100%;
-}
-
-.regist-rules {
-	margin: 15px 8px;
-	height: 100px;
-	overflow: auto;
-	padding-right: 10px;
-	h3 {
-		margin-top: 0;
+    p {
+		margin: 0 10px 15px 10px;
+        text-align: center;	
 	}
 }
 
-.continue-button {
-	clear: both;
-	text-align: right;
+/* Form title*/
+.form h1, .form h2 {
+    font-family: @titleFont;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: @formTitleColor;
+
+    animation: flash 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
-.login-button {
+/*Form input*/
+.form input[type="text"], .form input[type="password"], .form input[type="email"] {
+    width: 100%;
+    text-align: center;
+    background: @formInputBgColor;
+    border: 1px solid transparent;
+    font-size: 1.25em;
+    padding: 5px 0 5px 0;
+    color: @textColor;
+    font-family: @textFont;
+}
+
+/*Form input focus*/
+.form input[type="checkbox"]:focus {
+    outline: 1px solid @formFocusColor;
+}
+
+.form input:focus, a.cancel:focus {
+    border-color: @formFocusColor;
+    outline: none;
+}
+
+/*Annoying Mozzila red glow fix*/
+.form input:invalid{
+    outline: none;
+    box-shadow: none;
+}
+
+/* Form rules link*/
+a.rules {
+    text-decoration: underline;
+}
+
+/* Form validation error messages */
+.field-validation-error {
+    margin-top: 5px;
+    width: 251px;
+    font-size: 0.8em;
+    max-height: 30px;
+    padding: 3px 0;
+    background-color: rgba(255, 0, 0, .4); 
+    display: block;
+
+    animation: fadeIn 0.6s ease-out;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-errors {
+    width: 251px;
+    margin: 0 10px 15px 10px;
+    font-size: 1em;
+    text-align: center;
+    background-color: rgba(255, 0, 0, .4);
+}
+
+.validation-summary-errors ul {
+    list-style-type: none;
+    display: block;
+    padding: 3px 0;
+    max-height: 30px;
+
+    animation: fadeIn 0.6s ease-out;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+/*------------------------------*/
+
+/* Buttons */
+.button {
+    color: @textColor;
+    font-weight: bold;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+
+    &:hover {
+        cursor: pointer;
+
+        animation: flash 5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+}
+
+.button.login {
+    background: #448ccb;
+    font-family: @titleFont;
+    font-size: 1.5em;
+    padding: 1px 5px 1px 5px;
+}
+
+.button.ok {
+    background: @buttonOkBgColor;
+    font-family: @textFont;
+    font-weight: 700;
+    font-size: 1.3em;
+    padding: 4px;
+    float: right;
+}
+
+.button.cancel {
+    background: @buttonCancelBglColor;
+    font-family: @textFont;
+    font-weight: 700;
+    font-size: 1.3em;
+    padding: 4px;
+    float: left;
+}
+
+a.cancel:hover, a.login:hover {
+    color: @textColor;
+}
+
+/* Flash messages (alert)*/
+.alert{
+	z-index: 2;
+	position: relative;
+	width: auto;
+	padding: 5px 15px;
+	margin-bottom: 8px;
 	text-align: center;
+	font-size: 25px;
+    font-family: @textFont;
+
+	.close{
+		display: none;
+	}
 }
 
-.tooltip {
-	background-color: #000;
-	border: 1px solid #fff;
-	padding: 10px 15px;
-	width: 350px;
-	display: none;
-	color: @normalTextColor;
-	text-align: left;
-
-	/* outline radius for mozilla/firefox only */
-	-moz-box-shadow:0 0 10px #000;
-	-webkit-box-shadow:0 0 10px #000;
+.alert-success{
+	background: rgba( red(@goodColor), green(@goodColor), blue(@goodColor), 0.8);
+	color: white;
 }
+
+.alert-warning{
+	background: rgba( red(@neutralColor), green(@neutralColor), blue(@neutralColor), 0.8);
+	color: white;
+}
+
+.alert-error{
+	background: rgba( red(@badColor), green(@badColor), blue(@badColor), 0.8);
+	color: white;
+}
+
+/* Animations */
+
+/* Flash animation */
+@keyframes flash {
+    0% {opacity: 1;}
+    25% {opacity: 0.5;}
+    50% {opacity: 1;}
+    75% {opacity: 0.5;}
+    100% {opacity: 1;}
+}
+
+/* FadeIn animation - Error messages */
+@keyframes fadeIn {
+    0% {
+        display: none;
+        max-height: 0;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        max-height: 0;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        max-height: 30px;
+        opacity: 1;
+    }
+}
+
+@import "ModalWindow.less";
+
+/* Background planets */
+#planets-wrapper { 
+      margin-top: 20px;
+      height: 350px;
+      width: 100%;
+      overflow: hidden;
+      text-align: center;
+    }
+
+#planets_right, #planets_left, #planets_spacer {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+    
+  .planet {
+    margin: 0px 20px;
+    border-radius: 50%;
+    position: relative;
+    animation-name: rotate;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    z-index: -1;
+    
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .earth {
+    background-image: url('../images/solarsystem/background_images/earth.png');
+    background-color: #0072bc;
+    width: 60px;
+    height: 60px;
+    
+    animation-name: rotateEarth;
+    animation-duration: 4s;
+  }
+
+  .mars {
+    background-image: url('../images/solarsystem/background_images/mars.png');
+    background-color: #ed1c24;
+    width: 50px;
+    height: 50px;
+    
+    animation-name: rotateMars;
+  }
+  
+  .mercury {
+    background-image: url('../images/solarsystem/background_images/mercury.png');
+    background-color: #b57916;
+    width: 40px;
+    height: 40px;
+    
+    animation-name: rotateMercury;
+  }
+  
+  .neptune
+  {
+    background-image: url('../images/solarsystem/background_images/neptune.png');
+    background-color: #4b15ad;
+    width: 70px;
+    height: 70px;
+    
+    animation-name: rotateNeptune;
+  }
+  
+  .pluto {
+    background-image: url('../images/solarsystem/background_images/pluto.png');
+    background-color: #f0cdab;
+    width: 30px;
+    height: 30px;
+    
+    animation-name: rotatePluto;
+  }
+  
+  .sun {
+    background-image: url('../images/solarsystem/background_images/sun.png');
+    background-color: #fff200;
+    width: 350px;
+    height: 350px;
+    
+    animation-name: rotateSun;
+    animation-duration: 40s;
+  }
+  
+  .venus {
+    background-image: url('../images/solarsystem/background_images/venus.png');
+    background-color: #f7941d;
+    width: 50px;
+    height: 50px;
+    
+    animation-name: rotateVenus;
+  }
+  
+  .saturne {
+    background-image: url('../images/solarsystem/background_images/saturne.png');
+    background-color: #998675;
+    width: 100px;
+    height: 100px;
+    margin: 0 62px;
+    
+    animation-name: rotateSaturne;
+  }
+
+  .saturne-ring {
+      width: 190px;
+      height: 38px;
+      position: relative;
+      top: 35px;
+      left: -45px;
+
+      display: inline-block;
+  }
+
+  .uranus-ring {
+      position: relative;
+      top: -28px;
+      width: 39px;
+      height: 127px;
+  }
+  
+  .uranus {
+    background-image: url('../images/solarsystem/background_images/uranus.png');
+    background-color: #7dd8c8;
+    width: 70px;
+    height: 70px;
+    
+    animation-name: rotateUranus;
+  }
+  
+  .jupiter {
+    background-image: url('../images/solarsystem/background_images/jupiter.png');
+    background-color: #a67c52;
+    width: 130px;
+    height: 130px;
+    
+    animation-name: rotateJupiter;
+  }
+ 
+  @keyframes rotateEarth {
+    0% { background-position: 0px; }
+    100% { background-position: 120px; }
+  }
+  
+  @keyframes rotateMars {
+    0% { background-position: 0px; }
+    100% { background-position: 100px; }
+  }
+  
+  @keyframes rotateMercury {
+    0% { background-position: 0px; }
+    100% { background-position: 80px; }
+  }
+  
+  @keyframes rotateNeptune {
+    0% { background-position: 0px; }
+    100% { background-position: 140px; }
+  }
+  
+  @keyframes rotatePluto {
+    0% { background-position: 0px; }
+    100% { background-position: 60px; }
+  }
+  
+  @keyframes rotateSun {
+    0% { background-position: 0px; }
+    100% { background-position: 700px; }
+  }
+  
+  @keyframes rotateVenus {
+    0% { background-position: 0px; }
+    100% { background-position: 100px; }
+  }
+  
+  @keyframes rotateSaturne {
+    0% { background-position: 0px; }
+    100% { background-position: 200px; }
+  }
+  
+  @keyframes rotateUranus {
+    0% { background-position: 0px; }
+    100% { background-position: 140px; }
+  }
+  
+  @keyframes rotateJupiter {
+    0% { background-position: 0px; }
+    100% { background-position: 260px; }
+  }

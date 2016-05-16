@@ -3,7 +3,7 @@
 	
 }
 
-<h2>Achievements</h2>
+<h2>Úspěchy</h2>
 <div class="profile">
 
 	@foreach (var achievement in ViewBag.earnedAchievements)
@@ -13,7 +13,7 @@
 			<table class="profile_achievementtable">
 				<tr>
 					<td class="profile_achievementicon" rowspan="2">
-						<img src="@defAchievement.Image" alt="
+						<img src="@Url.Content("~/")@defAchievement.Image" alt="
 						foto" />
 					</td>
 					<td class="profile_achievementname">@defAchievement.Name</td>
@@ -32,7 +32,7 @@
 			<table class="profile_achievementtable">
 				<tr>
 					<td class="profile_achievementicon" rowspan="2">
-						<img src="@achievement.Image.Replace("Complete", string.Empty)" alt="
+						<img src="@Url.Content("~/")@achievement.Image.Replace("Complete", string.Empty)" alt="
 						foto" />
 					</td>
 					<td class="profile_achievementname">@achievement.Name</td>

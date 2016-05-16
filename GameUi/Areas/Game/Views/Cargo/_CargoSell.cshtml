@@ -1,0 +1,37 @@
+﻿<a href="@Url.Action("Sell", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.ship.DockedAtBaseId })" class="ajax refreshButton" data-related-element-id="mainPanelContent">↻</a>
+
+<div class="ajax" id="cargoSellForm">
+	<h2>Prodat zboží</h2>
+
+	<div class="scrollable small">
+		@{
+			int i = 0;
+			foreach (var cargoToSell in ViewBag.cargosToSell)
+			{
+				<div class="cargoItemSellContainer">
+				@{
+					i++;
+					var traderCargo = cargoToSell.traderCargo;
+					var cargo = cargoToSell.shipCargo;
+				
+					@Html.Partial("../Cargo/CargoCards/_CargoCardBasic", new ViewDataDictionary { { "cargo", cargo } });
+
+					using (Html.BeginForm("Sell", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.trader.BaseId, cargoId = cargo.SpaceShipCargoId }, FormMethod.Post, null))
+					{
+						<input type="number" class="sellAmount" name="Amount" min="0" max="@cargo.CargoCount" value="@cargo.CargoCount" />
+						<input type="submit" class="btn btn-bad sendBtn" value="Prodat" />
+						<a class="btn btn-bad sendMax" href="">Prodat vše</a>
+						<div style="clear: both;"></div>
+
+					}
+				}
+				</div>
+			}
+			if (i == 0)
+			{
+				<p class="infoNote">Loď neobsahuje žádný náklad, který by šel prodat na této planetě.</p>
+			}
+}
+	</div>
+</div>
+@Content.Script("../JS/game/ShipScripts.js", Url)

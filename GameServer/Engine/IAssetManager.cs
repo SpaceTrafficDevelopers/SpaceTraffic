@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using SpaceTraffic.Data;
 using SpaceTraffic.Game;
+using SpaceTraffic.Game.Minigame;
 
 namespace SpaceTraffic.Engine
 {
@@ -45,5 +46,17 @@ namespace SpaceTraffic.Engine
         string GetMapFilePath(string name);
 
         //GalaxyMap LoadGalaxyMap(string galaxyMapName);
+
+        /// <summary>
+        /// Method for loading logos for LogoQuiz.
+        /// </summary>
+        /// <returns>list of logo or null</returns>
+        List<Logo> LoadLogos();
+
+        /// <summary>
+        /// Method for loading email templates for MailClient
+        /// </summary>
+        /// <returns>Dictionary of templates or null</returns>
+        Dictionary<string, string> LoadEmailTemplates();
     }
 }

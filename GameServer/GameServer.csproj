@@ -87,6 +87,7 @@
     <Compile Include="Dao\IBaseDAO.cs" />
     <Compile Include="Dao\IGameEventDAO.cs" />
     <Compile Include="Dao\IGameActionDAO.cs" />
+    <Compile Include="Dao\Minigames\IMinigameDescriptorDAO.cs" />
     <Compile Include="Dao\IPathPlanEntityDAO.cs" />
     <Compile Include="Dao\IPlanActionDAO.cs" />
     <Compile Include="Dao\IPlanItemEntityDAO.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="Dao\MessageDAO.cs" />
     <Compile Include="Dao\IMessageDAO.cs" />
     <Compile Include="Dao\IPlayerDAO.cs" />
+    <Compile Include="Dao\Minigames\IStartActionDAO.cs" />
+    <Compile Include="Dao\Minigames\MinigameDescriptorDAO.cs" />
+    <Compile Include="Dao\Minigames\StartActionDAO.cs" />
     <Compile Include="Dao\PathPlanEntityDAO.cs" />
     <Compile Include="Dao\PlanActionDAO.cs" />
     <Compile Include="Dao\PlanItemEntityDAO.cs" />
@@ -110,6 +114,7 @@
     <Compile Include="Engine\IGameSimulation.cs" />
     <Compile Include="Engine\IGameStateManager.cs" />
     <Compile Include="Engine\IGoodsManager.cs" />
+    <Compile Include="Engine\IMinigameManager.cs" />
     <Compile Include="Engine\IPlannableAction.cs" />
     <Compile Include="Engine\IRunnableScript.cs" />
     <Compile Include="Engine\IScriptManager.cs" />
@@ -120,6 +125,7 @@
     <Compile Include="GameServer\EventQueue.cs" />
     <Compile Include="GameServer\GameManager.cs" />
     <Compile Include="GameServer\GameStateManager.cs" />
+    <Compile Include="GameServer\MinigameManager.cs" />
     <Compile Include="GameServer\ScriptManager.cs" />
     <Compile Include="GameServer\GoodsManager.cs" />
     <Compile Include="GameServer\StatisticsManager.cs" />
@@ -127,6 +133,9 @@
     <Compile Include="Game\Actions\CargoSell.cs" />
     <Compile Include="Game\Actions\CargoBuy.cs" />
     <Compile Include="Game\Actions\HelloWorld.cs" />
+    <Compile Include="Game\Actions\InactivePlayerRemove.cs" />
+    <Compile Include="Game\Actions\MinigameAllGamesLifeAction.cs" />
+    <Compile Include="Game\Actions\MinigameLifeControlAction.cs" />
     <Compile Include="Game\Actions\PlanEvents.cs" />
     <Compile Include="Game\Actions\Ships\ShipBuy.cs" />
     <Compile Include="Game\Actions\Ships\ShipFlyThroughWormHole.cs" />
@@ -148,6 +157,11 @@
     <Compile Include="GameServer\ServiceManager.cs" />
     <Compile Include="Engine\IGameAction.cs" />
     <Compile Include="GameServer\PersistenceManager.cs" />
+    <Compile Include="Game\Minigame\ConditionChecker.cs" />
+    <Compile Include="Game\Minigame\ConditionSolver.cs" />
+    <Compile Include="Game\Minigame\MinigameControls.cs" />
+    <Compile Include="Game\Minigame\RewardChecker.cs" />
+    <Compile Include="Game\Minigame\Rewarder.cs" />
     <Compile Include="Game\Planner\IPathPlan.cs" />
     <Compile Include="Game\Planner\PathPlan.cs" />
     <Compile Include="Game\Planner\PlanItem.cs" />
@@ -161,6 +175,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceImpl\AccountService.cs" />
+    <Compile Include="ServiceImpl\MailService.cs" />
+    <Compile Include="ServiceImpl\MinigameService.cs" />
     <Compile Include="ServiceImpl\ShipsService.cs" />
     <Compile Include="ServiceImpl\PlayerService.cs" />
     <Compile Include="ServiceImpl\PlanningService.cs" />
@@ -217,6 +233,7 @@
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>"$(SolutionDir)scripts\copyconfig" ConnectionStrings "$(ProjectDir)" "$(TargetDir)"</PostBuildEvent>

@@ -1,8 +1,10 @@
  util/TimeUtils.js
  util/MathUtils.js
  util/Queue.js
+ util/UIUtils.js
+ util/TouchDeviceSupport.js
  ui/ViewportManager.js
- ui/GameWindowTabs.js 
+ ui/GameWindowTabs.js
  game/geometry/Trajectory.js
  game/geometry/Point.js
  game/geometry/Orbit.js
@@ -12,6 +14,7 @@
  game/Star.js
  game/Planet.js
  game/WormholeEndpoint.js
+ game/UIPlanets.js
  map/StarSystemLoader.js
  map/SvgStarSystemMap.js
  map/SvgRenderer.js
@@ -24,5 +27,17 @@
  map/svg/SvgWormholeEndpoint.js
  map/svg/SvgOrbitFactory.js
  game/Achievements.js
+ game/Credits.js
+ game/ShipsInterfaces.js
+ game/MinigameStarter.js
+ game/PlayerIsPlayingMinigame.js
+ ui/Menus.js
+ libs/marquee/jquery.marquee.min.js
+ libs/mousewheel/jquery.mousewheel.min.js
+ libs/random/seedrandom.js
+ ui/InfoMarquee.js
  core/init.js
+ game/LogOff.js
+ libs/smartresize/smartresize.js
+ ui/ProfileOverviewExp.js
  

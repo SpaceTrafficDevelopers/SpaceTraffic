@@ -85,5 +85,28 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 		{
 			return GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipsByPlayer(playerId);
 		}
+
+		/// <summary>
+		/// Gets ships of given player, but only ships on specified planet.
+		/// </summary>
+		/// <param name="playerId">The player identifier.</param>
+		/// <param name="baseId">The base identifier.</param>
+		/// <returns>list of all his ships</returns>
+		public IList<SpaceShip> GetPlayersShipsAtBase(int playerId, int baseId)
+		{
+			return GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetPlayersShipsAtBase(playerId, baseId);
+		}
+
+
+		/// <summary>
+		/// Returns the players credits.
+		/// </summary>
+		/// <param name="playerId">The player identifier.</param>
+		/// <returns></returns>
+		/// <exception cref="System.NotImplementedException"></exception>
+		public int GetPlayersCredits(int playerId)
+		{
+			return GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(playerId).Credit;
+		}
 	}
 }

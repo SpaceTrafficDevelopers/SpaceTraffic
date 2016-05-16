@@ -97,11 +97,12 @@ namespace SpaceTraffic.Data
             //readerSettings.ValidationFlags = readerSettings.ValidationFlags | XmlSchemaValidationFlags.ReportValidationWarnings;
             //readerSettings.Schemas.Add(this.StarSystemSchema);
     
-            using (XmlReader reader = XmlReader.Create(dataService.GetStarSystemStream(starSystemName), readerSettings))
-            {
+            XmlReader reader = XmlReader.Create(dataService.GetStarSystemStream(starSystemName), readerSettings);
+            
                 XmlDocument doc = new XmlDocument();
                 doc.Schemas.Add(this.StarSystemSchema);
                 doc.Load(reader);
+                reader.Close();
                 doc.Validate(ValidationEventHandler);
                 
                 if (this.HasValidationFailed)
@@ -110,9 +111,9 @@ namespace SpaceTraffic.Data
                 XmlNode starSystemNode = doc.GetElementsByTagName("starsystem")[0];
 
                 StarSystem starSystem = starSystemNode.ParseStarSystem();
-
+                
                 return starSystem;
-            }
+            
         }
 
         /// <summary>
