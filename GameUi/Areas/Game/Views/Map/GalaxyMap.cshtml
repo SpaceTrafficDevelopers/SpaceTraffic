@@ -12,13 +12,8 @@
 	<script type="text/javascript">
 		 changeSystem: function changeSystem(evt) {
 
-		 $.getScript(baseUrl + "../JS/map/StarSystemLoader.js", function () {
-			 //console.debug("event");
-			 //console.debug("this", this);
-			 var target = evt.target;
-			 var id = target.id;
+			 var id = evt.target.id;
 			 StarSystemLoader.switchToStarSystem(id);
-		 });
 		 }
 
 	</script>
