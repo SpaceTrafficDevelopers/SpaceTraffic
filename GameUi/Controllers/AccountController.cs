@@ -403,8 +403,8 @@ namespace SpaceTraffic.GameUi.Controllers
                     {
                         if(!player.IsEmailConfirmed)
                         {
-                            string appUrl = HttpContext.Request.Url.GetLeftPart(UriPartial.Authority);
-							status = GSClient.MailService.SendActivationMail(player, appUrl + "/Account/ActivationToken?Token=" + player.PlayerToken);
+                            string appUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+                            status = GSClient.MailService.SendActivationMail(player, appUrl + "Account/ActivationToken?Token=" + player.PlayerToken);
 
                             if(status)
                             {
