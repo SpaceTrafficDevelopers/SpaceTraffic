@@ -20,6 +20,8 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using SpaceTraffic.Entities;
+using NLog;
+
 
 namespace SpaceTraffic.Utils
 {
@@ -46,16 +48,16 @@ namespace SpaceTraffic.Utils
         /// <summary>
         /// Sends custom defined email
         /// </summary>
-        /// <param name="senderAddress">Email sender address</param>
+		/// 
         /// <param name="recieversAddresses">Coma separated list of recievers addresses</param>
         /// <param name="subject">Email subject</param>
         /// <param name="messageBody">Email body</param>
         /// <param name="isMessageHtml">True if email body is HTML</param>
         /// <returns>True if operation succeeded</returns>
-        public static bool SendCustomMail(string senderAddress, string recieversAddresses, string subject, string messageBody, bool isMessageHtml)
+		public static bool SendCustomMail(string recieversAddresses, string subject, string messageBody, bool isMessageHtml)
         {
             var message = new MailMessage();
-            message.From = new MailAddress(senderAddress);
+            message.From = new MailAddress("spacetraffic@kiv.zcu.cz");
             message.To.Add(recieversAddresses);
             message.Subject = subject;
             message.Body = messageBody;
@@ -68,9 +70,12 @@ namespace SpaceTraffic.Utils
                     smtp.Send(message);
                     result = true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     result = false;
+					Logger logger = LogManager.GetCurrentClassLogger();
+					logger.Fatal("Email error: " + e.Message);
+					logger.Error("Email error: " + e.InnerException);
                 }
             }
 
@@ -81,10 +86,10 @@ namespace SpaceTraffic.Utils
         /// Sends activation email to player
         /// </summary>
         /// <param name="playerToActivate">Player to recieve activation email</param>
-        /// <param name="senderAddress">Email sender address</param>
+		/// 
         /// <param name="activationUrl">Player activation URL</param>
         /// <returns>True if operation succeeded</returns>
-        public static bool SendActivationMail(Player playerToActivate, string senderAddress, string activationUrl)
+		public static bool SendActivationMail(Player playerToActivate, string activationUrl)
         {
             string text = FormatTemplates("activation_text_template.html", playerToActivate.PlayerShowName);
             string messageContent = FormatTemplates("button_email_template.html",
@@ -94,18 +99,18 @@ namespace SpaceTraffic.Utils
                 "Aktivační email je platný pouze jednou po dobu 48 hodin.<br>Pokud v této lhůtě nedojde k aktivaci, bude účet odstraněn.");
             string messageBody = FormatTemplates("base_email_template.html", messageContent, DateTime.Now.Year.ToString());
 
-            return SendCustomMail(senderAddress, playerToActivate.Email, "Aktivujte váš nový Space Trafic účet", messageBody, true);
+			return SendCustomMail(playerToActivate.Email, "Aktivujte váš nový Space Trafic účet", messageBody, true);
         }
 
         /// <summary>
         /// Sends lost password email to player
         /// </summary>
         /// <param name="player">Player to recieve email</param>
-        /// <param name="senderAddress">Email sender address</param>
+		/// 
         /// <param name="activationUrl">Password activation URL</param>
         /// <param name="newPass">New player password</param>
         /// <returns>True if operation succeeded</returns>
-        public static bool SendLostPassMail(Player player, string senderAddress, string activationUrl, string newPass)
+		public static bool SendLostPassMail(Player player, string activationUrl, string newPass)
         {
             string text = FormatTemplates("lostpassword_text_template.html", player.PlayerShowName, newPass);
             string messageContent = FormatTemplates("button_email_template.html",
@@ -115,22 +120,22 @@ namespace SpaceTraffic.Utils
                 "Aktivační email je platný pouze jednou po dobu 48 hodin.<br>Platí poslední zaslaný aktivační email.");
             string messageBody = FormatTemplates("base_email_template.html", messageContent, DateTime.Now.Year.ToString());
 
-            return SendCustomMail(senderAddress, player.Email, "Reset hesla Space Traffic", messageBody, true);
+			return SendCustomMail(player.Email, "Reset hesla Space Traffic", messageBody, true);
         }
 
         /// <summary>
         /// Sends custom defined email with base template
         /// </summary>
-        /// <param name="senderAddress">Email sender address</param>
+		/// 
         /// <param name="recieversAddresses">Coma separated list of recievers addresses</param>
         /// <param name="subject">Email subject</param>
         /// <param name="messageContent">Email content</param>
         /// <returns>True if operation succeeded</returns>
-        public static bool SendBaseTemplateMail(string senderAddress, string recieversAddresses, string subject, string messageContent)
+		public static bool SendBaseTemplateMail(string recieversAddresses, string subject, string messageContent)
         {
             string messageBody = FormatTemplates("base_email_template.html", messageContent, DateTime.Now.Year.ToString());
 
-            return SendCustomMail(senderAddress, recieversAddresses, subject, messageBody, true);
+			return SendCustomMail(recieversAddresses, subject, messageBody, true);
         }
 
         /// <summary>

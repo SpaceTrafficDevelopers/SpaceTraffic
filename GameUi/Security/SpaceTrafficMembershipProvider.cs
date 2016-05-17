@@ -22,6 +22,7 @@ using System.Web.Security;
 using SpaceTraffic.Services.Contracts;
 using SpaceTraffic.GameUi.GameServerClient;
 using SpaceTraffic.Entities.PublicEntities;
+using System.Web.Mvc;
 
 namespace SpaceTraffic.GameUi.Security
 {
@@ -266,7 +267,7 @@ namespace SpaceTraffic.GameUi.Security
 
             GSClient.AccountService.RegisterPlayer(newPlayer);
 
-            string appUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+            string appUrl = GetBaseUrl();
             
             if (!GSClient.AccountService.AccountUsernameExists(usernameLower))
             {
@@ -276,7 +277,7 @@ namespace SpaceTraffic.GameUi.Security
 
             GSClient.GameService.PerformAction(GSClient.AccountService.GetAccountInfoByUserName(usernameLower).PlayerId, "InactivePlayerRemove", newPlayer.PlayerShowName);
 
-            GSClient.MailService.SendActivationMail(newPlayer, "info@spacetraffic.zcu.cz", appUrl + "/Account/ActivationToken?Token=" + token);
+			GSClient.MailService.SendActivationMail(newPlayer, appUrl + "/Account/ActivationToken?Token=" + token);
 
             status = MembershipCreateStatus.Success;
             return GetUser(username, false);
@@ -412,11 +413,11 @@ namespace SpaceTraffic.GameUi.Security
             player.NewPsswdHash = newHash;
             player.PassChangeDate = DateTime.Now;
 
-            string appUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+            string appUrl = GetBaseUrl();
 
             if (GSClient.AccountService.UpdatePlayer(player))
             {
-                if (GSClient.MailService.SendLostPassMail(player, "info@spacetraffic.zcu.cz", appUrl+"/Account/ResetToken?Token="+token, newPass))
+				if (GSClient.MailService.SendLostPassMail(player, appUrl + "/Account/ResetToken?Token=" + token, newPass))
                     return "";
                 else
                     return null;
@@ -517,6 +518,18 @@ namespace SpaceTraffic.GameUi.Security
             string token = pwdHasher.HashPassword(data).Replace('+','a').Replace('/','b').Replace('=','c');
 
             return token;
+        }
+
+        /// <summary>
+        /// Returns application base url
+        /// </summary>
+        /// <returns>Base url</returns>
+        private static string GetBaseUrl()
+        {
+            var request = HttpContext.Current.Request;
+
+			string appUrl = request.Url.GetLeftPart(UriPartial.Authority) + request.ApplicationPath;
+            return appUrl;
         }
     }
 }
