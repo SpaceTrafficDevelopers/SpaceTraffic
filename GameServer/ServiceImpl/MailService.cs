@@ -33,15 +33,15 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         /// Sends activation email to player
         /// </summary>
         /// <param name="playerToActivate">Player to recieve activation email</param>
-        /// <param name="senderAddress">Email sender address</param>
+		/// 
         /// <param name="activationUrl">Player activation URL</param>
         /// <returns>True if operation succeeded</returns>
-        public bool SendActivationMail(Player playerToActivate, string senderAddress, string activationUrl)
+		public bool SendActivationMail(Player playerToActivate, string activationUrl)
         {
             Logger.Info("MailService: Send activation email to {0}", playerToActivate.Email);
-            if (playerToActivate != null && senderAddress != null && activationUrl != null)
+            if (playerToActivate != null && activationUrl != null)
             {
-                return MC.SendActivationMail(playerToActivate, senderAddress, activationUrl);
+				return MC.SendActivationMail(playerToActivate, activationUrl);
             }
             return false;
         }
@@ -49,17 +49,17 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         /// <summary>
         /// Sends custom defined email with base template
         /// </summary>
-        /// <param name="senderAddress">Email sender address</param>
+		/// 
         /// <param name="recieversAddresses">Coma separated list of recievers addresses</param>
         /// <param name="subject">Email subject</param>
         /// <param name="messageContent">Email content</param>
         /// <returns>True if operation succeeded</returns>
-        public bool SendBaseTemplateMail(string senderAddress, string recieversAddresses, string subject, string messageContent)
+		public bool SendBaseTemplateMail(string recieversAddresses, string subject, string messageContent)
         {
             Logger.Info("MailService: Send base template email to {0}", recieversAddresses);
-            if (senderAddress != null && recieversAddresses != null && subject != null && messageContent != null)
+            if (recieversAddresses != null && subject != null && messageContent != null)
             {
-                return MC.SendBaseTemplateMail(senderAddress, recieversAddresses, subject, messageContent);
+				return MC.SendBaseTemplateMail(recieversAddresses, subject, messageContent);
             }
             return false;
         }
@@ -67,18 +67,18 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         /// <summary>
         /// Sends custom defined email
         /// </summary>
-        /// <param name="senderAddress">Email sender address</param>
+		/// 
         /// <param name="recieversAddresses">Coma separated list of recievers addresses</param>
         /// <param name="subject">Email subject</param>
         /// <param name="messageBody">Email body</param>
         /// <param name="isMessageHtml">True if email body is HTML</param>
         /// <returns>True if operation succeeded</returns>
-        public bool SendCustomMail(string senderAddress, string recieversAddresses, string subject, string messageBody, bool isMessageHtml)
+		public bool SendCustomMail(string recieversAddresses, string subject, string messageBody, bool isMessageHtml)
         {
             Logger.Info("MailService: Send custom email to {0}", recieversAddresses);
-            if (senderAddress != null && recieversAddresses != null && subject != null && messageBody != null)
+            if (recieversAddresses != null && subject != null && messageBody != null)
             {
-                return MC.SendCustomMail(senderAddress, recieversAddresses, subject, messageBody, isMessageHtml);
+				return MC.SendCustomMail(recieversAddresses, subject, messageBody, isMessageHtml);
             }
             return false;
         }
@@ -87,16 +87,15 @@ namespace SpaceTraffic.GameServer.ServiceImpl
         /// Sends lost password email to player
         /// </summary>
         /// <param name="player">Player to recieve email</param>
-        /// <param name="senderAddress">Email sender address</param>
         /// <param name="activationUrl">Password activation URL</param>
         /// <param name="newPass">New player password</param>
         /// <returns>True if operation succeeded</returns>
-        public bool SendLostPassMail(Player player, string senderAddress, string activationUrl, string newPass)
+		public bool SendLostPassMail(Player player, string activationUrl, string newPass)
         {
             Logger.Info("MailService: Send lost password email to {0}", player.Email);
-            if (player != null && senderAddress != null && activationUrl != null && newPass != null)
+            if (player != null && activationUrl != null && newPass != null)
             {
-                return MC.SendLostPassMail(player, senderAddress, activationUrl, newPass);
+				return MC.SendLostPassMail(player, activationUrl, newPass);
             }
             return false;
         }

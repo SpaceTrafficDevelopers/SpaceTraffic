@@ -29,15 +29,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
         /// Sends activation email to player
         /// </summary>
         /// <param name="playerToActivate">Player to recieve activation email</param>
-        /// <param name="senderAddress">Email sender address</param>
         /// <param name="activationUrl">Player activation URL</param>
         /// <returns>True if operation succeeded</returns>
-        public bool SendActivationMail(Player playerToActivate, string senderAddress, string activationUrl)
+		public bool SendActivationMail(Player playerToActivate, string activationUrl)
         {
             bool result;
             using (var channel = this.GetClientChannel())
             {
-                result = (channel as IMailService).SendActivationMail(playerToActivate, senderAddress, activationUrl);
+				result = (channel as IMailService).SendActivationMail(playerToActivate, activationUrl);
             }
             return result;
         }
@@ -45,17 +44,16 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
         /// <summary>
         /// Sends custom defined email with base template
         /// </summary>
-        /// <param name="senderAddress">Email sender address</param>
         /// <param name="recieversAddresses">Coma separated list of recievers addresses</param>
         /// <param name="subject">Email subject</param>
         /// <param name="messageContent">Email content</param>
         /// <returns>True if operation succeeded</returns>
-        public bool SendBaseTemplateMail(string senderAddress, string recieversAddresses, string subject, string messageContent)
+		public bool SendBaseTemplateMail(string recieversAddresses, string subject, string messageContent)
         {
             bool result;
             using (var channel = this.GetClientChannel())
             {
-                result = (channel as IMailService).SendBaseTemplateMail(senderAddress, recieversAddresses, subject, messageContent);
+				result = (channel as IMailService).SendBaseTemplateMail(recieversAddresses, subject, messageContent);
             }
             return result;
         }
@@ -63,18 +61,17 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
         /// <summary>
         /// Sends custom defined email
         /// </summary>
-        /// <param name="senderAddress">Email sender address</param>
         /// <param name="recieversAddresses">Coma separated list of recievers addresses</param>
         /// <param name="subject">Email subject</param>
         /// <param name="messageBody">Email body</param>
         /// <param name="isMessageHtml">True if email body is HTML</param>
         /// <returns>True if operation succeeded</returns>
-        public bool SendCustomMail(string senderAddress, string recieversAddresses, string subject, string messageBody, bool isMessageHtml)
+		public bool SendCustomMail(string recieversAddresses, string subject, string messageBody, bool isMessageHtml)
         {
             bool result;
             using (var channel = this.GetClientChannel())
             {
-                result = (channel as IMailService).SendCustomMail(senderAddress, recieversAddresses, subject, messageBody, isMessageHtml);
+				result = (channel as IMailService).SendCustomMail(recieversAddresses, subject, messageBody, isMessageHtml);
             }
             return result;
         }
@@ -83,16 +80,15 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
         /// Sends lost password email to player
         /// </summary>
         /// <param name="player">Player to recieve email</param>
-        /// <param name="senderAddress">Email sender address</param>
         /// <param name="activationUrl">Password activation URL</param>
         /// <param name="newPass">New player password</param>
         /// <returns>True if operation succeeded</returns>
-        public bool SendLostPassMail(Player player, string senderAddress, string activationUrl, string newPass)
+		public bool SendLostPassMail(Player player, string activationUrl, string newPass)
         {
             bool result;
             using (var channel = this.GetClientChannel())
             {
-                result = (channel as IMailService).SendLostPassMail(player, senderAddress, activationUrl, newPass);
+				result = (channel as IMailService).SendLostPassMail(player, activationUrl, newPass);
             }
             return result;
         }
