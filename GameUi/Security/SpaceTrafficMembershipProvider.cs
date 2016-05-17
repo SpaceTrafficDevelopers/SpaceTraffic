@@ -276,7 +276,7 @@ namespace SpaceTraffic.GameUi.Security
 
             GSClient.GameService.PerformAction(GSClient.AccountService.GetAccountInfoByUserName(usernameLower).PlayerId, "InactivePlayerRemove", newPlayer.PlayerShowName);
 
-            GSClient.MailService.SendActivationMail(newPlayer, "info@spacetraffic.zcu.cz", appUrl + "/Account/ActivationToken?Token=" + token);
+			GSClient.MailService.SendActivationMail(newPlayer, appUrl + "/Account/ActivationToken?Token=" + token);
 
             status = MembershipCreateStatus.Success;
             return GetUser(username, false);
@@ -416,7 +416,7 @@ namespace SpaceTraffic.GameUi.Security
 
             if (GSClient.AccountService.UpdatePlayer(player))
             {
-                if (GSClient.MailService.SendLostPassMail(player, "info@spacetraffic.zcu.cz", appUrl+"/Account/ResetToken?Token="+token, newPass))
+				if (GSClient.MailService.SendLostPassMail(player, appUrl + "/Account/ResetToken?Token=" + token, newPass))
                     return "";
                 else
                     return null;
