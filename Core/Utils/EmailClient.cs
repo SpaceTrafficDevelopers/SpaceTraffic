@@ -20,6 +20,8 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using SpaceTraffic.Entities;
+using NLog;
+
 
 namespace SpaceTraffic.Utils
 {
@@ -55,7 +57,7 @@ namespace SpaceTraffic.Utils
         public static bool SendCustomMail(string senderAddress, string recieversAddresses, string subject, string messageBody, bool isMessageHtml)
         {
             var message = new MailMessage();
-            message.From = new MailAddress(senderAddress);
+            message.From = new MailAddress("spacetraffic@kiv.zcu.cz");
             message.To.Add(recieversAddresses);
             message.Subject = subject;
             message.Body = messageBody;
@@ -68,9 +70,12 @@ namespace SpaceTraffic.Utils
                     smtp.Send(message);
                     result = true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     result = false;
+					Logger logger = LogManager.GetCurrentClassLogger();
+					logger.Fatal("Email error: " + e.Message);
+					logger.Error("Email error: " + e.InnerException);
                 }
             }
 
