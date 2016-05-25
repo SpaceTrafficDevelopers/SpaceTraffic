@@ -78,7 +78,7 @@ function MinigameStarterDialog() {
         var dialogElement = '';
 
         if (!Array.isArray(that.minigames)) {
-            dialogElement += 'Chcete si zahrat minihru ' + that.minigames.Name + '?';
+            dialogElement += 'Chcete si zahrát minihru ' + that.minigames.Name + '?';
         }
         else {
             dialogElement += 'Kterou minihru si chcete zahrát?';
