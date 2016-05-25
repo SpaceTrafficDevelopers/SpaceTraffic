@@ -192,8 +192,11 @@ namespace SpaceTraffic.GameServer
             //test minigame and start action data
             #region minigame test data
             
-            StartAction startAction = new StartAction { ActionName = "TestAction" };
-            this.persistenceManager.GetStartActionDAO().InsertStartAction(startAction);
+            StartAction testStartAction = new StartAction { ActionName = "TestAction" };
+            StartAction cargoBuyStartAction = new StartAction{ ActionName = "CargoBuy" };
+
+            this.persistenceManager.GetStartActionDAO().InsertStartAction(testStartAction);
+            this.persistenceManager.GetStartActionDAO().InsertStartAction(cargoBuyStartAction);
 
             MinigameDescriptor md = new MinigameDescriptor
             {
@@ -201,16 +204,23 @@ namespace SpaceTraffic.GameServer
                 PlayerCount = 1,
                 Description = "Hra na motiva hada, kde je hlavním úkolem nasbírat alespoň 30 jednotek nákladu.",
                 Controls = "Hra se ovládá šipkami.",
-                StartActions = new List<StartAction>() { startAction },
+                StartActions = new List<StartAction>() { cargoBuyStartAction },
                 RewardType = RewardType.CREDIT,
                 SpecificReward = null,
-                RewardAmount = 100,
+                RewardAmount = 1000,
                 ConditionType = ConditionType.CREDIT,
-                ConditionArgs = "100",
+                ConditionArgs = "200",
                 ExternalClient = false,
                 MinigameClassFullName = "SpaceTraffic.Game.Minigame.SpaceshipCargoFinder, SpaceTraffic.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 ClientURL = "/SpaceshipCargoFinder"
             };
+
+            this.minigameManager.registerMinigame(md);
+
+            md.Name = "Spaceship cargo finder test";
+            md.ConditionType = ConditionType.NOTHING;
+            md.StartActions = new List<StartAction> { testStartAction };
+            md.ConditionArgs = null;
 
             this.minigameManager.registerMinigame(md);
 
@@ -221,12 +231,12 @@ namespace SpaceTraffic.GameServer
                 Description = "Hra, kde je hlavním úkolem uhádnout z neúplného loga o jaké logo se jedná. " +
                               "Pokud uhádneš alspoň 20 z 30 log, dostaneš odměnu 1000 kreditů.",
                 Controls = "Hra se ovládá dotykem.",
-                StartActions = new List<StartAction>(){ startAction },
+                StartActions = new List<StartAction>() { testStartAction },
                 RewardType = RewardType.CREDIT,
                 SpecificReward = null,
                 RewardAmount = 1000,
-                ConditionType = ConditionType.CREDIT,
-                ConditionArgs = "100",
+                ConditionType = ConditionType.NOTHING,
+                ConditionArgs = null,
                 ExternalClient = true,
                 MinigameClassFullName = "SpaceTraffic.Game.Minigame.LogoQuiz, SpaceTraffic.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
                 ClientURL = "logo_quiz.apk"

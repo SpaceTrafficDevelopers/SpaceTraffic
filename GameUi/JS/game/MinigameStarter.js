@@ -177,7 +177,7 @@ function MinigameStarterDialog() {
     //method for show external minigame info dialog
     function showInfoDialog(minigameDescriptor, gameId) {
         var info = '<div>Tuto hru si můžete zahrát pouze v externím klientovi. ID vaší hry je : ' + gameId;
-        info += '<br />Klienta stáhnete <a target="_blank" href="/Minigame/Default/DownloadGame?file=' + minigameDescriptor.ClientURL + '">zde</a>';
+        info += '<br />Klienta stáhnete <a target="_blank" href="' + baseUrl + '/Minigame/Default/DownloadGame?file=' + minigameDescriptor.ClientURL + '">zde</a>';
         info += '</div>';
 
         $(info).dialog({
@@ -194,7 +194,7 @@ function MinigameStarterDialog() {
 
     //method for redirect minigame window
     function showWindow(win, minigameDescriptor, gameId) {
-        win.location.href = '/Minigame' + minigameDescriptor.ClientURL + '?gameId=' + gameId;
+        win.location.href = baseUrl + '/Minigame' + minigameDescriptor.ClientURL + '?gameId=' + gameId;
     };
 };
 

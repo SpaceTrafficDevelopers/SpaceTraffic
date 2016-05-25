@@ -61,7 +61,9 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 				return false;
             }
 			GSClient.GameService.PerformAction(getCurrentPlayerId(), "CargoBuy", starSystemName, planetName, cargoLoadEntityId, count, buyingPlace, buyerShipId);
-			//GSClient.GameService.PerformAction(getCurrentPlayerId(), "ShipLoadCargo", starSystemName, planetName, buyerShipId, cargoLoadEntityId, count, buyingPlace);
+
+            evaluateMinigameByStartActionName("CargoBuy");
+            //GSClient.GameService.PerformAction(getCurrentPlayerId(), "ShipLoadCargo", starSystemName, planetName, buyerShipId, cargoLoadEntityId, count, buyingPlace);
             return true;
         }
 

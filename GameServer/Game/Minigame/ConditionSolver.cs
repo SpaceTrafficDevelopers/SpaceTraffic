@@ -154,7 +154,7 @@ namespace SpaceTraffic.Game.Minigame
         private int creditCondition(MinigameDescriptor minigame, Player player)
         {
             int? credit = parseArgumentInt(minigame.ConditionArgs);
-            return credit <= player.Credit ? minigame.MinigameId : -1;
+            return credit >= player.Credit ? minigame.MinigameId : -1;
         }
 
         /// <summary>

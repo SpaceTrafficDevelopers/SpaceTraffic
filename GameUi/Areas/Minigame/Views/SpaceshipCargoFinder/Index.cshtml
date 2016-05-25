@@ -6,6 +6,15 @@
     <meta name="description" content="Space Traffic - Space trading multiplayer browser game." />
     <meta name="author" xml:lang="cs" content="Space Traffic Team" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
+    
+    <!-- setting ajaxUrl, static adresses are necessary for synchronized ajax request -->
+    @{ string ajaxUrl = "http://spacetraffic.kiv.zcu.cz/Demo/Minigame"; }
+
+    @if (HttpContext.Current.IsDebuggingEnabled)
+    {
+        ajaxUrl = "http://localhost:2457/Minigame";
+    }
+    
 
     <title>@(@ViewBag.GameInfo != null ? @ViewBag.GameInfo.Name : "")</title>
 
@@ -15,10 +24,11 @@
 
     <script type="text/javascript">
         var baseUrl = "@Url.Content("~")";
+        var ajaxUrl = "@(ajaxUrl)";
     </script>
 
 </head>
-<body>
+<body style="background-color:black;">
     @Content.Script("jquery-2.2.2.min.js", Url)
     @Content.Script("jquery-ui-1.11.4.min.js", Url)
     @Content.JSImport("~/JS/minigame/spaceshipCargoFinderImport", Url)
@@ -57,7 +67,7 @@
                 //in this event
                 $(window).bind("beforeunload", function() {
                     $.ajax({
-                        url: "/Minigame/SpaceshipCargoFinder/EndGame?minigameId=@ViewBag.GameInfo.ID",
+                        url: ajaxUrl + "/SpaceshipCargoFinder/EndGame?minigameId=@ViewBag.GameInfo.ID",
                         type: "get",
                         data:{},
                         async:false,
