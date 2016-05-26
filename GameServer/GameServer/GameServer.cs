@@ -121,6 +121,7 @@ namespace SpaceTraffic.GameServer
             string assetsPath = GameServerConfiguration.GameServerConfig.Assets.Path;
             string galaxyMapName = GameServerConfiguration.GameServerConfig.Map.Name;
             string goodsFileName = GameServerConfiguration.GameServerConfig.Goods.Name;
+            string economicLevelsFileName = GameServerConfiguration.GameServerConfig.EconomicLevels.Name;
 
 
             logger.Info("Compiling scripts:");
@@ -136,7 +137,6 @@ namespace SpaceTraffic.GameServer
 
             this.assetManager = new AssetManager(assetsPath);
             this.assetManager.Initialize();
-
             
             logger.Info("Initializing Persistence.");
             try
@@ -166,7 +166,10 @@ namespace SpaceTraffic.GameServer
             this.worldManager.GenerateBasesAndTraders();
 
             this.goodsManager = new GoodsManager(this);
+
             this.goodsManager.GoodsList = this.assetManager.LoadGoods(goodsFileName);
+            this.goodsManager.EconomicLevels = this.assetManager.LoadEconomicLevels(economicLevelsFileName);
+
             this.goodsManager.InsertCargoIntoDb();
             this.goodsManager.GenerateGoodsOverGalaxyMap(this.worldManager.Map);
 

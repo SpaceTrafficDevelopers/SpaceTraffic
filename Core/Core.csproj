@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AchievementsLoader.cs" />
+    <Compile Include="Data\EconomicLevelLoader.cs" />
+    <Compile Include="Data\EconomicLevelXmlHelper.cs" />
     <Compile Include="Data\EmailClient\EmailTemplateLoader.cs" />
     <Compile Include="Data\ExperienceLevelsLoader.cs" />
     <Compile Include="Data\GalaxyMapLoader.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="Data\GalaxyMapConnection.cs" />
     <Compile Include="Data\GoodsLoader.cs" />
     <Compile Include="Data\GoodsXmlHelper.cs" />
+    <Compile Include="Data\IEconomicLevelDataStreamProvider.cs" />
     <Compile Include="Data\IGalaxyMapDataStreamProvider.cs" />
     <Compile Include="Data\IGoodsDataStreamProvider.cs" />
     <Compile Include="Data\Minigame\LogoQuizLoader.cs" />
@@ -111,6 +114,7 @@
     <Compile Include="Game\Base.cs" />
     <Compile Include="Game\CelestialObjectInfo.cs" />
     <Compile Include="Game\CelestialObject.cs" />
+    <Compile Include="Game\EconomicLevel.cs" />
     <Compile Include="Game\Geometry\Stacionary.cs" />
     <Compile Include="Game\IGameObject.cs" />
     <Compile Include="Game\IPlanet.cs" />
@@ -202,6 +206,9 @@
     </None>
     <None Include="packages.config" />
     <None Include="Resources\ComponentsSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\EconomicLevelSchema.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Resources\GoodsSchema.xsd">

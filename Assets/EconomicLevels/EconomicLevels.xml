@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<economic_levels>
+  <economic_level>
+    <!-- Úroveň vyspělosti planety  -->
+    <level>1</level>
+    <!-- Minimální množství pro postup na další level -->
+    <upgrade_quantity>1000</upgrade_quantity>
+    <!-- Minimální nutné množství pro udržení se na aktuálním levelu -->
+    <downgrade_quantity>500</downgrade_quantity>
+    <!-- Podmínky pro jednotlivá zboží v daném levelu -->
+    <economic_items>
+      <!-- 
+        Jeden druh zbozí, resp. první druh zboží, které planeta generuje (první podle sequence number)
+        is_discovered je indikace, jestli bylo zboží přidáno v tomo levelu nebo nebo ne 
+        (pokud ne jsou předchozí 2 atributy v % jinak jako statické hodnoty)
+      -->
+      <item sequence_number="1" is_discovered="true">
+        <!-- produkce zboží na daném levelu -->
+        <production>1500</production>
+        <!-- spotřeba zboží na daném levelu -->
+        <consumption>500</consumption>
+      </item>
+    </economic_items>
+  </economic_level>
+  
+  <economic_level>
+    <level>2</level>
+    <upgrade_quantity>2000</upgrade_quantity>
+    <downgrade_quantity>1000</downgrade_quantity>
+    <economic_items>
+      <item sequence_number="1" is_discovered="false">
+        <production>50</production>
+        <consumption>50</consumption>
+      </item>
+      <item sequence_number="2" is_discovered="true">
+        <production>1500</production>
+        <consumption>500</consumption>
+      </item>
+    </economic_items>
+  </economic_level>
+  
+  <economic_level>
+    <level>3</level>
+    <upgrade_quantity>4000</upgrade_quantity>
+    <downgrade_quantity>2000</downgrade_quantity>
+    <economic_items>
+      <item sequence_number="1" is_discovered="false">
+        <production>10</production>
+        <consumption>-5</consumption>
+      </item>
+      <item sequence_number="2" is_discovered="false">
+        <production>50</production>
+        <consumption>50</consumption>
+      </item>
+      <item sequence_number="3" is_discovered="true">
+        <production>500</production>
+        <consumption>400</consumption>
+      </item>
+    </economic_items>
+  </economic_level>
+</economic_levels>
