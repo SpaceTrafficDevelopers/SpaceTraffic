@@ -60,6 +60,7 @@
     <Compile Include="Data\StarSystemXmlHelperTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\EconomicLevelLoaderTests.cs" />
     <Compile Include="Data\XmlTestDataGenerator.cs" />
     <Compile Include="Game\Minigame\MinigameTest.cs" />
     <Compile Include="Game\Minigame\SpaceshipCargoFinderTest.cs" />

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:html="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+  <xs:element name="economic_levels">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="economic_level" minOccurs="1" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="level" type="xs:int" />
+              <xs:element name="upgrade_quantity" type="xs:int" />
+              <xs:element name="downgrade_quantity" type="xs:int" />
+              
+              <xs:element name="economic_items" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="item" minOccurs="1" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="production" type="xs:double"/>
+                          <xs:element name="consumption" type="xs:double"/>
+                        </xs:sequence>
+                        <xs:attribute name="sequence_number" type="xs:int" use="required"/>
+                        <xs:attribute name="is_discovered" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

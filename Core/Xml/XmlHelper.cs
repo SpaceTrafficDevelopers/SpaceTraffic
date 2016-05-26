@@ -47,5 +47,27 @@ namespace SpaceTraffic.Xml
             if (attribute == null) return 0;
             return int.Parse(attribute.Value, System.Globalization.CultureInfo.InvariantCulture);
         }
+
+        /// <summary>
+        /// Helper for getting bool value from xml node.
+        /// </summary>
+        /// <param name="node">xml node</param>
+        /// <returns>bool value of false whne node is null</returns>
+        public static bool BoolValue(this XmlNode node)
+        {
+            if (node == null) return false;
+            return bool.Parse(node.InnerText);
+        }
+
+        /// <summary>
+        /// Helper for getting bool value from xml attribute.
+        /// </summary>
+        /// <param name="attribute">xml attribute</param>
+        /// <returns>bool value of false whne attribute is null</returns>
+        public static bool BoolValue(this XmlAttribute attribute)
+        {
+            if (attribute == null) return false;
+            return bool.Parse(attribute.Value);
+        }
     }
 }

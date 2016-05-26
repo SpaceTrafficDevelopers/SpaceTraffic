@@ -45,9 +45,15 @@ namespace SpaceTraffic.GameServer.Configuration
         }
 
         [ConfigurationProperty("goods", IsRequired = true)]
-        public MapElement Goods
+        public GoodsElement Goods
         {
-            get { return (MapElement)this["goods"]; }
+            get { return (GoodsElement)this["goods"]; }
+        }
+
+        [ConfigurationProperty("economic_levels", IsRequired = true)]
+        public EconomicLevelsElement EconomicLevels
+        {
+            get { return (EconomicLevelsElement)this["economic_levels"]; }
         }
 
         [ConfigurationProperty("initializer", IsRequired = true)]
@@ -116,6 +122,24 @@ namespace SpaceTraffic.GameServer.Configuration
     public class GoodsElement : ConfigurationElement
     {
         [ConfigurationProperty("name", DefaultValue = "Goods.xml", IsRequired = true)]
+        //TODO: filename validation
+        public string Name
+        {
+            get
+            {
+                return (string)this["name"];
+            }
+
+            set
+            {
+                this["name"] = value;
+            }
+        }
+    }
+
+    public class EconomicLevelsElement : ConfigurationElement
+    {
+        [ConfigurationProperty("name", DefaultValue = "EconomicLevels.xml", IsRequired = true)]
         //TODO: filename validation
         public string Name
         {

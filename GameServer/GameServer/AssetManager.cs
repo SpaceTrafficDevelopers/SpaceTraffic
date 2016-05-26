@@ -39,6 +39,8 @@ namespace SpaceTraffic.GameServer
 
         private string _goodsDirectoryPath = ".\\";
 
+        private string _economicLevelsDirectoryPath = ".\\";
+
         private Logger logger = LogManager.GetCurrentClassLogger();
 
         public string AssetRootPath { get; private set; }
@@ -73,6 +75,20 @@ namespace SpaceTraffic.GameServer
             }
         }
 
+        public string EconomicLevelsDirectoryPath
+        {
+            get
+            {
+                Debug.Assert(this.IsInitialized, "Not initialized");
+                return this._economicLevelsDirectoryPath;
+            }
+            private set
+            {
+                Debug.Assert(!String.IsNullOrWhiteSpace(value), "EconomicLevelsDirectoryPath cannot be null, empty or whitespace");
+                this._economicLevelsDirectoryPath = value;
+            }
+        }
+
         public AssetManager(string assetsRootPath)
         {
             Debug.Assert(!String.IsNullOrWhiteSpace(assetsRootPath), "assetsRootPath cannot be null, empty or whitespace");
@@ -95,6 +111,7 @@ namespace SpaceTraffic.GameServer
 
             this.SetMapPath();
             this.SetGoodsPath();
+            this.SetEconomicLevelsPath();
 
             this.IsInitialized = true;
         }
@@ -123,6 +140,21 @@ namespace SpaceTraffic.GameServer
             }
             this.GoodsDirectoryPath = path;
             logger.Info("Assets Goods directory path: {0}", path);
+        }
+
+        /// <summary>
+        /// Sets economic levels path to EconomicLevels directory.
+        /// Throws DirectoryNotFoundException when EconomicLevels directory isn't found.
+        /// </summary>
+        private void SetEconomicLevelsPath()
+        {
+            string path = Path.Combine(this.AssetRootPath, "EconomicLevels");
+            if (!Directory.Exists(path))
+            {
+                throw new DirectoryNotFoundException("Assets directory 'EconomicLevels' not found: " + path);
+            }
+            this.EconomicLevelsDirectoryPath = path;
+            logger.Info("Assets Economic levels directory path: {0}", path);
         }
 
         public string GetMapFilePath(string filename)
@@ -186,6 +218,29 @@ namespace SpaceTraffic.GameServer
             return stream;
         }
 
+        /// <summary>
+        /// Gets the data stream for economic level file specified by file name (without extension).
+        /// Throws ArgumentNullException when the economicLevelsFileName is null or empty.
+        /// </summary>
+        /// <param name="economicLevelsFileName">Name of the economic level file (without extension).</param>
+        /// <returns>Stream with economic level file.</returns>
+        public Stream GetEconomicLevelStream(string economicLevelsFileName)
+        {
+            Debug.Assert(this.IsInitialized, "Not initialized");
+
+            if (String.IsNullOrWhiteSpace(economicLevelsFileName))
+                throw new ArgumentNullException("Name cannot be null or empty string.");
+
+            Debug.Assert(economicLevelsFileName.Contains('\\') == false, "Name contains \\");
+
+            string filename = Path.Combine(this.EconomicLevelsDirectoryPath, economicLevelsFileName + FILE_EXTENSION);
+
+            logger.Debug("Creating file stream: {0}", filename);
+
+            FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            return stream;
+        }
+
         public GalaxyMap LoadGalaxyMap(string galaxyMapName)
         {
             logger.Info("Loading map: {0}", galaxyMapName);
@@ -212,13 +267,25 @@ namespace SpaceTraffic.GameServer
         /// <summary>
         /// Loading goods from goods file by file name.
         /// </summary>
-        /// <param name="goodsFileName">Goods file name (without extension).</param>
+        /// <param name="economicLevelsFileName">Goods file name (without extension).</param>
         /// <returns>List of goods.</returns>
         public IList<IGoods> LoadGoods(string goodsFileName)
         {
             GoodsLoader goodsLoader = new GoodsLoader();
 
             return goodsLoader.LoadGoods(goodsFileName, this);
+        }
+
+        /// <summary>
+        /// Loading economic levels from economic levels file by file name.
+        /// </summary>
+        /// <param name="goodsFileName">economic level file name (without extension).</param>
+        /// <returns>List of economic level.</returns>
+        public IList<EconomicLevel> LoadEconomicLevels(string economicLevelsFileName)
+        {
+            EconomicLevelLoader economicLevelLoader = new EconomicLevelLoader();
+
+            return economicLevelLoader.LoadEconomicLevels(economicLevelsFileName, this);
         }
 
 		/// <summary>

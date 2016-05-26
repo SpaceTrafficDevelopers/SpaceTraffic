@@ -24,7 +24,7 @@ using SpaceTraffic.Game.Minigame;
 
 namespace SpaceTraffic.Engine
 {
-    public interface IAssetManager : IGalaxyMapDataStreamProvider, IGoodsDataStreamProvider,  IDisposable
+    public interface IAssetManager : IGalaxyMapDataStreamProvider, IGoodsDataStreamProvider, IEconomicLevelDataStreamProvider,  IDisposable
     {
         /// <summary>
         /// Vrací cestu k assetům

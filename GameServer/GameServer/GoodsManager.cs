@@ -29,6 +29,8 @@ namespace SpaceTraffic.GameServer
     {
         public IList<IGoods> GoodsList { get; set; }
 
+        public IList<EconomicLevel> EconomicLevels { get; set; }
+
         private IGameServer gameServer;
 
         public GoodsManager(IGameServer gameServer) 

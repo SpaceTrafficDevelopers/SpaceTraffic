@@ -35,6 +35,11 @@ namespace SpaceTraffic.Engine
         IList<IGoods> GoodsList { get; set; }
 
         /// <summary>
+        /// Economic levels.
+        /// </summary>
+        IList<EconomicLevel> EconomicLevels { get; set; }
+
+        /// <summary>
         /// Generates goods on planets. 50% chance on adding of one goods on planet. 
         /// Generates goods count in interval from 0 to 100.
         /// </summary>
