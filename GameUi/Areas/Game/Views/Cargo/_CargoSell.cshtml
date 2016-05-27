@@ -14,7 +14,7 @@
 					var traderCargo = cargoToSell.traderCargo;
 					var cargo = cargoToSell.shipCargo;
 				
-					@Html.Partial("../Cargo/CargoCards/_CargoCardBasic", new ViewDataDictionary { { "cargo", cargo } });
+					@Html.Partial("../Cargo/CargoCards/_CargoCardBasic", new ViewDataDictionary { { "cargo", cargo }, { "traderCargo", traderCargo }, { "fromBase", false }, { "buy", false } });
 
 					using (Html.BeginForm("Sell", "Cargo", new { shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.trader.BaseId, cargoId = cargo.SpaceShipCargoId }, FormMethod.Post, null))
 					{

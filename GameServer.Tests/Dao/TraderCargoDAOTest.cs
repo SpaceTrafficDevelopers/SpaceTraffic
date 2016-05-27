@@ -162,7 +162,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             target.InsertCargo(traderCargo);
 
             traderCargo.CargoId = cargo2.CargoId;
-            traderCargo.CargoPrice = 100;
+            //traderCargo.CargoPrice = 100;
             traderCargo.CargoCount = 100;
 
             target.UpdateCargo(traderCargo);
@@ -252,7 +252,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             TraderCargo tc = new TraderCargo();
             tc.CargoCount = 300;
             tc.CargoId = cargo1.CargoId;
-            tc.CargoPrice = 200;
+           // tc.CargoPrice = 200;
             tc.TraderId = trader.TraderId;
 
             return tc;
@@ -265,7 +265,7 @@ namespace SpaceTraffic.GameServerTests.Dao
             Assert.AreEqual(excepted.CargoId, actual.CargoId, "CargoID are not equal.");
             Assert.AreEqual(excepted.TraderId, actual.TraderId, "TraderID are not equal.");
             Assert.AreEqual(excepted.CargoCount, actual.CargoCount, "CargoCount are not equal.");
-            Assert.AreEqual(excepted.CargoPrice, actual.CargoPrice, "CargoPrice are not equal.");
+           // Assert.AreEqual(excepted.CargoPrice, actual.CargoPrice, "CargoPrice are not equal.");
         }
 
 

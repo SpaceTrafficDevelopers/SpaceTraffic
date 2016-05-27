@@ -29,10 +29,5 @@ namespace SpaceTraffic.Entities
         /// Count of cargo
         /// </summary>
         int CargoCount { get; set; }
-
-        /// <summary>
-        /// Price of cargo
-        /// </summary>
-        int CargoPrice { get; set; }
     }
 }

@@ -112,7 +112,13 @@ namespace SpaceTraffic.GameServer
             Cargo cargo = gameServer.Persistence.GetCargoDAO().GetCargoByName(goods.Name);
 
             traderCargo.TraderId = trader.TraderId;
-            traderCargo.CargoPrice = (int)goods.Price;
+            traderCargo.CargoBuyPrice = (int)goods.Price;
+            traderCargo.CargoSellPrice = 100;
+            traderCargo.DailyConsumption = 1;
+            traderCargo.DailyProduction = 1;
+            traderCargo.TodayConsumed = 1;
+            traderCargo.TodayProduced = 1;
+            traderCargo.SequenceNumber = 1;
             traderCargo.CargoCount = r.Next(1, 101); // generuje pocet zbozi na planete
             traderCargo.CargoId = cargo.CargoId;
 
@@ -126,9 +132,12 @@ namespace SpaceTraffic.GameServer
         private void InsertTraderCargo(TraderCargo tc)
         {
 			Random rand = new Random();
-			int originalPrice = tc.CargoPrice;
-			int cargoPriceFraction = (int)(originalPrice * 0.4); /*40% of price*/
-			tc.CargoPrice = (tc.CargoPrice - cargoPriceFraction) + rand.Next(cargoPriceFraction * 2); /* price is modified - +-40% of price*/
+
+            //TODO
+
+			//int originalPrice = tc.CargoPrice;
+			//int cargoPriceFraction = (int)(originalPrice * 0.4); /*40% of price*/
+			//tc.CargoPrice = (tc.CargoPrice - cargoPriceFraction) + rand.Next(cargoPriceFraction * 2); /* price is modified - +-40% of price*/
             this.gameServer.Persistence.GetTraderCargoDAO().InsertCargo(tc);
         }
 
@@ -140,7 +149,8 @@ namespace SpaceTraffic.GameServer
         /// <exception cref="DivideByZeroException">When percent &lt= 0</exception>
         public void ChangeOneGoodsPrice(int percent, TraderCargo traderCargo)
         {
-            traderCargo.CargoPrice = traderCargo.Cargo.DefaultPrice * percent / 100;
+            //TODO
+            //traderCargo.CargoPrice = traderCargo.Cargo.DefaultPrice * percent / 100;
 
             this.gameServer.Persistence.GetTraderCargoDAO().UpdateCargo(traderCargo);
         }

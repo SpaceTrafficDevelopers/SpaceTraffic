@@ -4,7 +4,7 @@
 	foreach (var cargo in ViewBag.ship.SpaceShipsCargos)
 	{
 		i++;
-		@Html.Partial("../Cargo/CargoCards/_CargoCardBasic", new ViewDataDictionary { { "cargo", cargo } })
+		@Html.Partial("../Cargo/CargoCards/_SpaceshipCargoCard", new ViewDataDictionary { { "cargo", cargo } })
 
 	}
 	if (i == 0) { 

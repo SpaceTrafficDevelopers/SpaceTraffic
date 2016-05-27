@@ -354,6 +354,7 @@
     <Content Include="Areas\Game\Views\Cargo\CargoCards\_CargoCardBasic.cshtml" />
     <Content Include="Content\less\Game\cargos.less" />
     <Content Include="Areas\Game\Views\Test\Index.cshtml" />
+    <Content Include="Areas\Game\Views\Cargo\CargoCards\_SpaceshipCargoCard.cshtml" />
     <None Include="Content\less\Game\libs\jquery.marquee.less" />
     <None Include="Content\less\Game\libs\jquery.marquee.min.less" />
     <Content Include="Content\less\ShipsView.less" />

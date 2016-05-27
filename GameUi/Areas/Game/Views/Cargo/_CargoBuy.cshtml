@@ -5,11 +5,11 @@
 	<div class="scrollable small">
 	@foreach(var cargo in ViewBag.trader.TraderCargos){
 		<div class="cargoItemBuyContainer">
-		@Html.Partial("../Cargo/CargoCards/_CargoCardBasic", new ViewDataDictionary { { "cargo", cargo } })
+		@Html.Partial("../Cargo/CargoCards/_CargoCardBasic", new ViewDataDictionary { { "cargo", cargo }, { "fromBase", false }, { "buy", true } })
 
 		@using (Html.BeginForm("Buy", "Cargo", new { traderId = ViewBag.trader.TraderId, shipId = ViewBag.ship.SpaceShipId, baseId = ViewBag.trader.BaseId, cargoId = cargo.TraderCargoId }, FormMethod.Post, null))
 		{
-			<input type="number" class="buyAmount" name="Amount" min="0" max="@Math.Min(ViewBag.credits / cargo.CargoPrice, cargo.CargoCount)" value="0" />
+			<input type="number" class="buyAmount" name="Amount" min="0" max="@Math.Min(ViewBag.credits / cargo.CargoBuyPrice, cargo.CargoCount)" value="0" />
 			<input type="submit" class="btn btn-good sendBtn" value="Koupit" />
 			<a class="btn btn-good sendMax" href="">Koupit maximum</a>
 			<div style="clear: both;"></div>

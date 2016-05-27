@@ -131,7 +131,7 @@ namespace SpaceTraffic.GameServer
             logger.Debug("CONFIG: Assets path: {0}", assetsPath);
             logger.Debug("CONFIG: Map name: {0}", galaxyMapName);
             logger.Debug("CONFIG: Goods filename: {0}", goodsFileName);
-
+            logger.Debug("CONFIG: EconomicLevels filename: {0}", economicLevelsFileName);
 
             logger.Info("Initializing Asset Manager.");
 
@@ -185,7 +185,6 @@ namespace SpaceTraffic.GameServer
             Utils.EmailClient.EmailFormats = assetManager.LoadEmailTemplates();
 
             //for tests: add "user" player into active players
-            //TODO: add this into log-on and remove into log-off
             this.worldManager.AddPlayer(1);
 
             // Inicializace herního světa.

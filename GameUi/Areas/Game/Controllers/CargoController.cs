@@ -150,7 +150,6 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
 			foreach(SpaceShipCargo cargo in ship.SpaceShipsCargos){
 				TraderCargo traderCargo = trader.TraderCargos.FirstOrDefault(c => c.CargoId == cargo.CargoId);
 				if (traderCargo != null) {
-					cargo.CargoPrice = traderCargo.CargoPrice;
 					cargosToSell.Add(new CargoPairModel{shipCargo = cargo, traderCargo = traderCargo});
 				}
 			}

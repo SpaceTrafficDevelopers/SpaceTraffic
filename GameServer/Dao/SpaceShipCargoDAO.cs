@@ -33,7 +33,6 @@ namespace SpaceTraffic.Dao
                 if (ssc == null)
                 {
                     ssc = new SpaceShipCargo();
-                    ssc.CargoPrice = cargoLoadEntity.CargoPrice;
                     ssc.SpaceShipId = cargoLoadEntity.CargoOwnerId;
                     ssc.CargoId = cargoLoadEntity.CargoId;
                     ssc.CargoCount = cargoLoadEntity.CargoCount;
@@ -67,7 +66,6 @@ namespace SpaceTraffic.Dao
 
                     dbCargoLoadEntity.CargoId = cargoLoadEntity.CargoId;
                     dbCargoLoadEntity.CargoCount = cargoLoadEntity.CargoCount;
-                    dbCargoLoadEntity.CargoPrice = cargoLoadEntity.CargoPrice;
                     contextDB.SaveChanges();
                     return true;
                 }
@@ -85,7 +83,7 @@ namespace SpaceTraffic.Dao
                 try
                 {
                     var dbCargoLoadEntity = contextDB.SpaceShipsCargos.FirstOrDefault(x => x.CargoId.Equals(cargoLoadEntity.CargoId)
-                                && x.CargoPrice.Equals(cargoLoadEntity.CargoPrice) && x.SpaceShipId.Equals(cargoLoadEntity.CargoOwnerId));
+                                && x.SpaceShipId.Equals(cargoLoadEntity.CargoOwnerId));
 
                     if (dbCargoLoadEntity == null)
                         return false;
@@ -134,7 +132,7 @@ namespace SpaceTraffic.Dao
                     return false;
 
                 var dbCargo = contextDB.SpaceShipsCargos.FirstOrDefault(x => x.CargoId.Equals(cargo.CargoId)
-                                && x.CargoPrice.Equals(cargo.CargoPrice) && x.SpaceShipId.Equals(cargo.CargoOwnerId));
+                                && x.SpaceShipId.Equals(cargo.CargoOwnerId));
 
                 try { 
                     dbCargo.CargoCount -= cargo.CargoCount;
@@ -176,7 +174,7 @@ namespace SpaceTraffic.Dao
             using (var contextDB = CreateContext())
             {
                 var item = contextDB.SpaceShipsCargos.FirstOrDefault(x => x.CargoId.Equals(cargo.CargoId) 
-                                && x.CargoPrice.Equals(cargo.CargoPrice) && x.SpaceShipId.Equals(cargo.CargoOwnerId));
+                                && x.SpaceShipId.Equals(cargo.CargoOwnerId));
 
                 if (item == null)
                 {
