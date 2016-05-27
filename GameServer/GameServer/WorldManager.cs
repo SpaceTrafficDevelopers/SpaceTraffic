@@ -32,6 +32,21 @@ namespace SpaceTraffic.GameServer
 
         private IGameServer gameServer;
 
+        /// <summary>
+        /// Initial purchase tax in percentage.
+        /// </summary>
+        private const int INITIAL_PURCHASE_TAX = 15;
+
+        /// <summary>
+        /// Initial sales tax in percentage.
+        /// </summary>
+        private const int INITIAL_SALES_TAX = 15;
+
+        /// <summary>
+        /// Initial economic level.
+        /// </summary>
+        private const int INITIAL_ECONOMIC_LEVEL = 1;
+
         private IDictionary<int, IGamePlayer> activePlayers;
 
         public IDictionary<int, IGamePlayer> ActivePlayers
@@ -198,6 +213,9 @@ namespace SpaceTraffic.GameServer
 			Random rnd = new Random();
 			trader.FuelPrice = rnd.Next(10, 50);
 			trader.RepairPrice = rnd.Next(20, 150);
+            trader.PurchaseTax = INITIAL_PURCHASE_TAX;
+            trader.SalesTax = INITIAL_SALES_TAX;
+            trader.EconomicLevel = INITIAL_ECONOMIC_LEVEL;
 
             this.gameServer.Persistence.GetTraderDAO().InsertTrader(trader);
 

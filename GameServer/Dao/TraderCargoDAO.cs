@@ -31,13 +31,7 @@ namespace SpaceTraffic.Dao
                 TraderCargo tc = cargoLoadEntity as TraderCargo;
 
                 if (tc == null)
-                {
-                    tc = new TraderCargo();
-                    tc.CargoPrice = cargoLoadEntity.CargoPrice;
-                    tc.TraderId = cargoLoadEntity.CargoOwnerId;
-                    tc.CargoId = cargoLoadEntity.CargoId;
-                    tc.CargoCount = cargoLoadEntity.CargoCount;
-                }
+                    return false;
 
                 try
                 {
@@ -62,12 +56,19 @@ namespace SpaceTraffic.Dao
                 {
                     var dbCargoLoadEntity = contextDB.TraderCargos.FirstOrDefault(x => x.TraderCargoId.Equals(cargoLoadEntity.CargoLoadEntityId));
 
-                    if (dbCargoLoadEntity == null)
+                    TraderCargo tc = cargoLoadEntity as TraderCargo;
+
+                    if (dbCargoLoadEntity == null || tc == null)
                         return false;
 
-                    dbCargoLoadEntity.CargoId = cargoLoadEntity.CargoId;
-                    dbCargoLoadEntity.CargoCount = cargoLoadEntity.CargoCount;
-                    dbCargoLoadEntity.CargoPrice = cargoLoadEntity.CargoPrice;
+                    dbCargoLoadEntity.CargoCount = tc.CargoCount;
+                    dbCargoLoadEntity.CargoBuyPrice = tc.CargoBuyPrice;
+                    dbCargoLoadEntity.CargoSellPrice = tc.CargoSellPrice;
+                    dbCargoLoadEntity.DailyConsumption = tc.DailyConsumption;
+                    dbCargoLoadEntity.DailyProduction = tc.DailyProduction;
+                    dbCargoLoadEntity.TodayProduced = tc.TodayProduced;
+                    dbCargoLoadEntity.TodayConsumed = tc.TodayConsumed;
+                    dbCargoLoadEntity.SequenceNumber = tc.SequenceNumber;                    
 
                     contextDB.SaveChanges();
 

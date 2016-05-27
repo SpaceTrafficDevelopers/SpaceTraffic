@@ -1,0 +1,16 @@
+﻿@{
+    var cargo = ViewBag.cargo;
+    var spaceTaken = cargo.CargoCount * @cargo.Cargo.Volume;
+}
+
+
+<div class="cargoCard basicInfo">
+    <p class="basicInfo">
+        <h4 class="cargoName">@cargo.Cargo.Name</h4>
+        <strong class="cargoVolume"><span class="label">Velikost:</span> <span class="value">@cargo.Cargo.Volume</span></strong>
+        <span class="cargoAmount"><span class="label">Množství:</span> <span class="value">@cargo.CargoCount</span></span>
+        <span class="cargoFullVolumeLeft"><span class="label">Celková velikost:</span> <span class="value">@spaceTaken</span> </span>
+        <span style="clear: both;"></span>
+    </p>
+    <div style="clear: both;"></div>
+</div>

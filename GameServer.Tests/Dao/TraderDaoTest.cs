@@ -90,13 +90,17 @@ namespace SpaceTraffic.GameServerTests.Dao
             BaseDAO bd = new BaseDAO();
             bd.InsertBase(baseTest2);
 
-            traderTest.BaseId = baseTest2.BaseId;
-            target.InsertTrader(traderTest);
+            Trader traderTest2 = CreateTrader();
+
+            traderTest2.BaseId = baseTest2.BaseId;
+            target.InsertTrader(traderTest2);
             
             List<Trader> traders = target.GetTraders();
 
             Assert.IsNotNull(traders);
             Assert.IsTrue(traders.Count == 2, "GetTradersTest: List of traders does not have expected number of items.");
+
+            target.RemoveTraderById(traderTest2.TraderId);
         }
 
 		/// <summary>
@@ -116,12 +120,15 @@ namespace SpaceTraffic.GameServerTests.Dao
 			BaseDAO bd = new BaseDAO();
 			bd.InsertBase(baseTest2);
 
-			traderTest.BaseId = baseTest2.BaseId;
-			target.InsertTrader(traderTest);
+            Trader traderTest2 = CreateTrader();
+
+            traderTest2.BaseId = baseTest2.BaseId;
+            target.InsertTrader(traderTest2);
 
 			Trader newTrader = target.GetTraderByBaseId(traderTest.BaseId);
 
 			TraderTest(newTrader);
+            target.RemoveTraderById(traderTest2.TraderId);
 		}
 
 		/// <summary>
@@ -141,13 +148,17 @@ namespace SpaceTraffic.GameServerTests.Dao
 			BaseDAO bd = new BaseDAO();
 			bd.InsertBase(baseTest2);
 
-			traderTest.BaseId = baseTest2.BaseId;
-			target.InsertTrader(traderTest);
+            Trader traderTest2 = CreateTrader();
+
+            traderTest2.BaseId = baseTest2.BaseId;
+            target.InsertTrader(traderTest2);
 
 			Trader newTrader = target.GetTraderByBaseIdWithCargo(traderTest.BaseId);
 
 			TraderTest(newTrader);
 			Assert.IsNotNull(newTrader.TraderCargos);
+
+            target.RemoveTraderById(traderTest2.TraderId);
 		}
         
         /// <summary>
@@ -232,6 +243,11 @@ namespace SpaceTraffic.GameServerTests.Dao
 
             Trader trader = new Trader();
             trader.BaseId = baseTest.BaseId;
+            trader.EconomicLevel = 1;
+            trader.PurchaseTax = 20;
+            trader.SalesTax = 10;
+            trader.RepairPrice = 50;
+            trader.FuelPrice = 100;
 
             return trader;
         }
@@ -241,6 +257,11 @@ namespace SpaceTraffic.GameServerTests.Dao
             Assert.IsNotNull(trader, "Trader cannot be null.");
             Assert.AreEqual(this.traderTest.TraderId, trader.TraderId, "Trader ID are not equal.");
             Assert.AreEqual(this.traderTest.BaseId, trader.BaseId, "Trader BaseID are not equal.");
+            Assert.AreEqual(this.traderTest.EconomicLevel, trader.EconomicLevel, "Economic levels are not equal.");
+            Assert.AreEqual(this.traderTest.FuelPrice, trader.FuelPrice, "Fuel prices are not equal.");
+            Assert.AreEqual(this.traderTest.RepairPrice, trader.RepairPrice, "Repair prices are not equal.");
+            Assert.AreEqual(this.traderTest.PurchaseTax, trader.PurchaseTax, "Purchase taxes are not equal.");
+            Assert.AreEqual(this.traderTest.SalesTax, trader.SalesTax, "Sales taxes are not equal.");
         }
 
         [ClassCleanup()]

@@ -36,7 +36,40 @@ namespace SpaceTraffic.Entities
 
         public int CargoCount { get; set; }
 
-        public int CargoPrice { get; set; }
+        /// <summary>
+        /// Cargo buy price with purchase tax
+        /// </summary>
+        public int CargoBuyPrice { get; set; }
+
+        /// <summary>
+        /// Cargo sell price with sales tax
+        /// </summary>
+        public int CargoSellPrice { get; set; }
+
+        /// <summary>
+        /// Maximum production for day
+        /// </summary>
+        public int DailyProduction { get; set; }
+
+        /// <summary>
+        /// Maximum consumption for day
+        /// </summary>
+        public int DailyConsumption { get; set; }
+
+        /// <summary>
+        /// Today produced
+        /// </summary>
+        public int TodayProduced { get; set; }
+
+        /// <summary>
+        /// Today consumed
+        /// </summary>
+        public int TodayConsumed { get; set; }
+
+        /// <summary>
+        /// Sequence number for economic level
+        /// </summary>
+        public int SequenceNumber { get; set; }
 
         public int CargoOwnerId
         {

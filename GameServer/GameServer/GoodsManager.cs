@@ -49,15 +49,11 @@ namespace SpaceTraffic.GameServer
             {
 				if (planet.Details.hasBase)
 				{
-					List<TraderCargo> list = new List<TraderCargo>();
-					foreach (IGoods goods in GoodsList)
-					{
-						if (r.Next(0, 2) == 1) // 50% sance, ze se zbozi prida na planetu 
-						{
-							TraderCargo traderCargo = generateTraderCargo(planet, goods);
-							InsertTraderCargo(traderCargo);
-						}
-					}
+                    int goodsIndex = r.Next(0, GoodsList.Count);
+                    IGoods goods = GoodsList[goodsIndex];
+					
+                    TraderCargo traderCargo = generateTraderCargo(planet, goods);
+					InsertTraderCargo(traderCargo);
 				}
             }
         }
@@ -111,9 +107,17 @@ namespace SpaceTraffic.GameServer
             Trader trader = gameServer.Persistence.GetTraderDAO().GetTraderByBaseId(planet.Base.BaseId);
             Cargo cargo = gameServer.Persistence.GetCargoDAO().GetCargoByName(goods.Name);
 
+            EconomicLevel economicLevel = this.EconomicLevels[trader.EconomicLevel - 1];
+
             traderCargo.TraderId = trader.TraderId;
-            traderCargo.CargoPrice = (int)goods.Price;
-            traderCargo.CargoCount = r.Next(1, 101); // generuje pocet zbozi na planete
+            traderCargo.CargoBuyPrice = (int)goods.Price; //TODO: count price
+            traderCargo.CargoSellPrice = (int)goods.Price;
+            traderCargo.DailyConsumption = (int)economicLevel.LevelItems[0].Consumption;
+            traderCargo.DailyProduction = (int)economicLevel.LevelItems[0].Production;
+            traderCargo.TodayConsumed = 0;
+            traderCargo.TodayProduced = 0;
+            traderCargo.SequenceNumber = 1;
+            traderCargo.CargoCount = r.Next(1, 101); 
             traderCargo.CargoId = cargo.CargoId;
 
             return traderCargo;
@@ -126,9 +130,12 @@ namespace SpaceTraffic.GameServer
         private void InsertTraderCargo(TraderCargo tc)
         {
 			Random rand = new Random();
-			int originalPrice = tc.CargoPrice;
-			int cargoPriceFraction = (int)(originalPrice * 0.4); /*40% of price*/
-			tc.CargoPrice = (tc.CargoPrice - cargoPriceFraction) + rand.Next(cargoPriceFraction * 2); /* price is modified - +-40% of price*/
+
+            //TODO
+
+			//int originalPrice = tc.CargoPrice;
+			//int cargoPriceFraction = (int)(originalPrice * 0.4); /*40% of price*/
+			//tc.CargoPrice = (tc.CargoPrice - cargoPriceFraction) + rand.Next(cargoPriceFraction * 2); /* price is modified - +-40% of price*/
             this.gameServer.Persistence.GetTraderCargoDAO().InsertCargo(tc);
         }
 
@@ -140,7 +147,8 @@ namespace SpaceTraffic.GameServer
         /// <exception cref="DivideByZeroException">When percent &lt= 0</exception>
         public void ChangeOneGoodsPrice(int percent, TraderCargo traderCargo)
         {
-            traderCargo.CargoPrice = traderCargo.Cargo.DefaultPrice * percent / 100;
+            //TODO
+            //traderCargo.CargoPrice = traderCargo.Cargo.DefaultPrice * percent / 100;
 
             this.gameServer.Persistence.GetTraderCargoDAO().UpdateCargo(traderCargo);
         }

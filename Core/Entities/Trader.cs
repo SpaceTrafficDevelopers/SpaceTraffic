@@ -33,6 +33,21 @@ namespace SpaceTraffic.Entities
 
 		public int RepairPrice { get; set; }
 
+        /// <summary>
+        /// Economic level
+        /// </summary>
+        public int EconomicLevel { get; set; }
+
+        /// <summary>
+        /// Purchase tax as percentage (10% => 10)
+        /// </summary>
+        public int PurchaseTax { get; set; }
+
+        /// <summary>
+        /// Sales tax as percentage (10% => 10);
+        /// </summary>
+        public int SalesTax { get; set; } 
+
         public virtual ICollection<TraderCargo> TraderCargos { get; set; }
 
         public string CargoLoadDaoName

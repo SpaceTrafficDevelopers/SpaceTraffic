@@ -45,7 +45,7 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 
 			long actualMoney = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(playerId).Credit;
 			TraderCargo tc = (TraderCargo)GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);
-			long price = tc.CargoPrice;
+			long price = tc.CargoBuyPrice;
 			return actualMoney >= (price * count);
 		}
 

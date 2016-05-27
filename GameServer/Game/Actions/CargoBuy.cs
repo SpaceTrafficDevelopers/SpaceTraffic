@@ -103,7 +103,7 @@ namespace SpaceTraffic.Game.Actions
             getArgumentsFromActionArgs(gameServer);
 
             Player player = gameServer.Persistence.GetPlayerDAO().GetPlayerWithIncludes(PlayerId);
-            ICargoLoadEntity cargo = BuyingPlace.GetCargoByID(CargoLoadEntityID);
+            TraderCargo cargo = BuyingPlace.GetCargoByID(CargoLoadEntityID) as TraderCargo;
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(BuyerShipID);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
 
@@ -112,15 +112,17 @@ namespace SpaceTraffic.Game.Actions
 
             ActionControls.shipDockedAtBase(this, spaceShip, planet);
             ActionControls.checkCargoCount(this, cargo, Count);
-            ActionControls.checkPlayersCredit(this, player, cargo.CargoPrice * Count);
+
+
+            ActionControls.checkPlayersCredit(this, player, cargo.CargoBuyPrice * Count);
 
             if (State == GameActionState.FAILED)
                 return;
 
             // increase player experiences by a fraction of cargo price; 1 is minimum gain 
-            gameServer.Statistics.IncrementExperiences(player, Math.Max(1, (int)(cargo.CargoPrice * Count) / ExperienceLevels.FRACTION_OF_CARGO_PRICE));
+            gameServer.Statistics.IncrementExperiences(player, Math.Max(1, (cargo.CargoBuyPrice * Count) / ExperienceLevels.FRACTION_OF_CARGO_PRICE));
 
-            if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(player.PlayerId, (int)(cargo.CargoPrice * Count)))
+            if (!gameServer.Persistence.GetPlayerDAO().DecrasePlayersCredits(player.PlayerId, cargo.CargoBuyPrice * Count))
             {
                 Result = String.Format("Změny se nepovedlo zapsat do databáze");
                 State = GameActionState.FAILED;

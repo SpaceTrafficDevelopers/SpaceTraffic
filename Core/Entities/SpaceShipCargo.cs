@@ -35,11 +35,6 @@ namespace SpaceTraffic.Entities
 
         public int CargoCount { get; set; }
 
-        public int CargoPrice { get; set; }
-
-        //public List<Cargo> Cargos { get; set; }
-
-        //public double PriceCargo { get; set; }
 
         public int CargoOwnerId
         {

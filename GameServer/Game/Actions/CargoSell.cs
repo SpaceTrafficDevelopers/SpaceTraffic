@@ -100,9 +100,9 @@ namespace SpaceTraffic.Game.Actions
             SpaceShip spaceShip = gameServer.Persistence.GetSpaceShipDAO().GetSpaceShipById(SellerShipId);
             Planet planet = gameServer.World.Map[StarSystemName].Planets[PlanetName];
             ICargoLoadEntity cargo = gameServer.Persistence.GetSpaceShipCargoDAO().GetCargoByID(CargoLoadEntityID);
-			ICargoLoadEntity buyerCargo = gameServer.Persistence.GetTraderCargoDAO().GetCargoListByOwnerId(BuyerID)
-				.Where(x => x.CargoId.Equals(cargo.CargoId)).FirstOrDefault();
-            
+			TraderCargo buyerCargo = gameServer.Persistence.GetTraderCargoDAO().GetCargoListByOwnerId(BuyerID)
+				.Where(x => x.CargoId.Equals(cargo.CargoId)).FirstOrDefault() as TraderCargo;
+
             if (!ActionControls.checkObjects(this, new object[] { player, spaceShip, planet, cargo, buyerCargo }))
                 return;
 
@@ -113,9 +113,9 @@ namespace SpaceTraffic.Game.Actions
                 return;
 
             // increase player experiences by a fraction of cargo price; 1 is minimum gain 
-            gameServer.Statistics.IncrementExperiences(player, Math.Max(1, (int)(buyerCargo.CargoPrice * Count) / ExperienceLevels.FRACTION_OF_CARGO_PRICE));
+            gameServer.Statistics.IncrementExperiences(player, Math.Max(1, (buyerCargo.CargoSellPrice * Count) / ExperienceLevels.FRACTION_OF_CARGO_PRICE));
 
-			if (!gameServer.Persistence.GetPlayerDAO().IncrasePlayersCredits(player.PlayerId, (int)(buyerCargo.CargoPrice * Count)))
+			if (!gameServer.Persistence.GetPlayerDAO().IncrasePlayersCredits(player.PlayerId, (buyerCargo.CargoSellPrice * Count)))
             {
                 Result = String.Format("Změny se nepovedlo zapsat do databáze");
                 State = GameActionState.FAILED;
@@ -124,7 +124,7 @@ namespace SpaceTraffic.Game.Actions
 
 
             ShipUnloadCargo unloadingAction = new ShipUnloadCargo();
-            Object[] args = { StarSystemName, PlanetName, SellerShipId, CargoLoadEntityID, Count, ActionArgs[4].ToString(),BuyerID, SellerShipId };
+            Object[] args = { StarSystemName, PlanetName, SellerShipId, CargoLoadEntityID, Count, ActionArgs[4].ToString(), BuyerID, SellerShipId };
             unloadingAction.ActionArgs = args;
             unloadingAction.PlayerId = PlayerId;
 
