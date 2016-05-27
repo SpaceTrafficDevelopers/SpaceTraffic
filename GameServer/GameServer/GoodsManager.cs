@@ -49,15 +49,11 @@ namespace SpaceTraffic.GameServer
             {
 				if (planet.Details.hasBase)
 				{
-					List<TraderCargo> list = new List<TraderCargo>();
-					foreach (IGoods goods in GoodsList)
-					{
-						if (r.Next(0, 2) == 1) // 50% sance, ze se zbozi prida na planetu 
-						{
-							TraderCargo traderCargo = generateTraderCargo(planet, goods);
-							InsertTraderCargo(traderCargo);
-						}
-					}
+                    int goodsIndex = r.Next(0, GoodsList.Count);
+                    IGoods goods = GoodsList[goodsIndex];
+					
+                    TraderCargo traderCargo = generateTraderCargo(planet, goods);
+					InsertTraderCargo(traderCargo);
 				}
             }
         }
@@ -111,15 +107,17 @@ namespace SpaceTraffic.GameServer
             Trader trader = gameServer.Persistence.GetTraderDAO().GetTraderByBaseId(planet.Base.BaseId);
             Cargo cargo = gameServer.Persistence.GetCargoDAO().GetCargoByName(goods.Name);
 
+            EconomicLevel economicLevel = this.EconomicLevels[trader.EconomicLevel - 1];
+
             traderCargo.TraderId = trader.TraderId;
-            traderCargo.CargoBuyPrice = (int)goods.Price;
-            traderCargo.CargoSellPrice = 100;
-            traderCargo.DailyConsumption = 1;
-            traderCargo.DailyProduction = 1;
-            traderCargo.TodayConsumed = 1;
-            traderCargo.TodayProduced = 1;
+            traderCargo.CargoBuyPrice = (int)goods.Price; //TODO: count price
+            traderCargo.CargoSellPrice = (int)goods.Price;
+            traderCargo.DailyConsumption = (int)economicLevel.LevelItems[0].Consumption;
+            traderCargo.DailyProduction = (int)economicLevel.LevelItems[0].Production;
+            traderCargo.TodayConsumed = 0;
+            traderCargo.TodayProduced = 0;
             traderCargo.SequenceNumber = 1;
-            traderCargo.CargoCount = r.Next(1, 101); // generuje pocet zbozi na planete
+            traderCargo.CargoCount = r.Next(1, 101); 
             traderCargo.CargoId = cargo.CargoId;
 
             return traderCargo;

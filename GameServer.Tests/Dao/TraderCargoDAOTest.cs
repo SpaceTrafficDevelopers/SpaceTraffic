@@ -161,9 +161,14 @@ namespace SpaceTraffic.GameServerTests.Dao
 
             target.InsertCargo(traderCargo);
 
-            traderCargo.CargoId = cargo2.CargoId;
-            //traderCargo.CargoPrice = 100;
             traderCargo.CargoCount = 100;
+            traderCargo.CargoBuyPrice = 500;
+            traderCargo.CargoSellPrice = 500;
+            traderCargo.DailyProduction = 500;
+            traderCargo.DailyConsumption = 500;
+            traderCargo.TodayProduced = 500;
+            traderCargo.TodayConsumed = 500;
+            traderCargo.SequenceNumber = 5;
 
             target.UpdateCargo(traderCargo);
 
@@ -243,6 +248,11 @@ namespace SpaceTraffic.GameServerTests.Dao
         {
             Trader trader = new Trader();
             trader.BaseId = newBase.BaseId;
+            trader.PurchaseTax = 10;
+            trader.SalesTax = 50;
+            trader.EconomicLevel = 1;
+            trader.FuelPrice = 100;
+            trader.RepairPrice = 200;
 
             return trader;
         }
@@ -252,7 +262,13 @@ namespace SpaceTraffic.GameServerTests.Dao
             TraderCargo tc = new TraderCargo();
             tc.CargoCount = 300;
             tc.CargoId = cargo1.CargoId;
-           // tc.CargoPrice = 200;
+            tc.CargoBuyPrice = 100;
+            tc.CargoSellPrice = 100;
+            tc.DailyConsumption = 500;
+            tc.DailyProduction = 1000;
+            tc.SequenceNumber = 1;
+            tc.TodayConsumed = 100;
+            tc.TodayProduced = 200;
             tc.TraderId = trader.TraderId;
 
             return tc;
@@ -265,7 +281,13 @@ namespace SpaceTraffic.GameServerTests.Dao
             Assert.AreEqual(excepted.CargoId, actual.CargoId, "CargoID are not equal.");
             Assert.AreEqual(excepted.TraderId, actual.TraderId, "TraderID are not equal.");
             Assert.AreEqual(excepted.CargoCount, actual.CargoCount, "CargoCount are not equal.");
-           // Assert.AreEqual(excepted.CargoPrice, actual.CargoPrice, "CargoPrice are not equal.");
+            Assert.AreEqual(excepted.CargoBuyPrice, actual.CargoBuyPrice, "CargoBuyPrices are not equal.");
+            Assert.AreEqual(excepted.CargoSellPrice, actual.CargoSellPrice, "CargoSellPrices are not equal.");
+            Assert.AreEqual(excepted.DailyProduction, actual.DailyProduction, "DailyProductions are not equal.");
+            Assert.AreEqual(excepted.DailyConsumption, actual.DailyConsumption, "DailyConsumption are not equal.");
+            Assert.AreEqual(excepted.SequenceNumber, actual.SequenceNumber, "SqeunceNumbers are not equal.");
+            Assert.AreEqual(excepted.TodayProduced, actual.TodayProduced, "TodayProduces are not equal.");
+            Assert.AreEqual(excepted.TodayConsumed, actual.TodayConsumed, "TodayConsumptions are not equal.");
         }
 
 
