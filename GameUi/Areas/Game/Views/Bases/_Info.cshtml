@@ -3,7 +3,29 @@
 
 <a href="@Url.Action("Info", "Bases", new { planetName = ViewBag.planetName })" class="ajax refreshButton" data-related-element-id="contextPanelContent">↻</a>
 <div class="infoPanel">
-	<div class="fuelPrice">
+    <div class="economicLevel">
+        <h5>Úroveň vyspělosti</h5>
+        <span>
+            <strong class="value">@ViewBag.trader.EconomicLevel</strong>
+        </span>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="purchaseTax">
+        <h5>Nákupní daň</h5>
+        <span>
+            <strong class="value">@ViewBag.trader.PurchaseTax</strong>
+            <span class="percentage">%</span>
+        </span>
+    </div>
+    <div class="salesTax">
+        <h5>Prodejní daň</h5>
+        <span>
+            <strong class="value">@ViewBag.trader.SalesTax</strong>
+            <span class="percentage">%</span>
+        </span>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="fuelPrice">
 		<h5>Cena paliva</h5>
 		<span>
 			<strong class="value">@ViewBag.trader.FuelPrice</strong>

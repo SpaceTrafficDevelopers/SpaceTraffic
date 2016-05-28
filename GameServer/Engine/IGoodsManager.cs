@@ -49,14 +49,6 @@ namespace SpaceTraffic.Engine
         /// </summary>
         IList<EconomicLevel> EconomicLevels { get; set; }
 
-        ///// <summary>
-        ///// Generates goods on planets. 50% chance on adding of one goods on planet. 
-        ///// Generates goods count in interval from 0 to 100.
-        ///// </summary>
-        ///// <param name="goodsList">Goods list</param>
-        ///// <param name="planets">Planets list for generating.</param>
-        //void GenerateGoodsOnPlanets(IList<Planet> planets);
-
         /// <summary>
         /// Generates goods on all planets over the galaxy map. Uses GenerateGoodsOnPlanets.
         /// </summary>
@@ -69,20 +61,6 @@ namespace SpaceTraffic.Engine
         /// </summary>
         void InsertCargoIntoDb();
 
-        ///// <summary>
-        ///// Change price goods in traderCargo and update in database.
-        ///// </summary>
-        ///// <param name="percent">percet</param>
-        ///// <param name="traderCargo">trader cargo</param>
-        //void ChangeOneGoodsPrice(int percent, TraderCargo traderCargo);
-
-        ///// <summary>
-        ///// Change price of all goods on planet and update in database.
-        ///// </summary>
-        ///// <param name="percent">percent</param>
-        ///// <param name="planet">planet</param>
-        //void ChangePriceGoods(int percent, Planet planet);
-
         /// <summary>
         /// Method for changing production, consumption and price.
         /// </summary>
@@ -94,5 +72,11 @@ namespace SpaceTraffic.Engine
         /// </summary>
         /// <param name="map">galaxy map</param>
         void planEconomicEvents(GalaxyMap map);
+
+        /// <summary>
+        /// Method for upgrading/downgrading economic level and clearing production and consumptions pools.
+        /// </summary>
+        /// <param name="trader">trader with trader cargo and cargo</param>
+        void evaluateEconomicLevel(Trader trader);
     }
 }

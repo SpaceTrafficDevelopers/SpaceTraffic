@@ -600,6 +600,11 @@ namespace SpaceTraffic.GameServerTests.GameServer
             set { this.minigameManager = value; }
         }
 
+        public IWorldManager World
+        {
+            get { return worldManager; }
+        }
+
         #region Not Implemented Method
 
         public IAssetManager Assets
@@ -612,12 +617,12 @@ namespace SpaceTraffic.GameServerTests.GameServer
             get { throw new NotImplementedException(); }
         }
 
-        public IWorldManager World
+        public IStatisticsManager Statistics
         {
-            get { return worldManager; }
+            get { throw new NotImplementedException(); }
         }
 
-        public IStatisticsManager Statistics
+        public IGoodsManager Goods
         {
             get { throw new NotImplementedException(); }
         }

@@ -123,6 +123,11 @@ namespace SpaceTraffic.Dao
                 {
                     var traderTab = contextDB.Traders.FirstOrDefault(x => x.TraderId.Equals(trader.TraderId));
                     traderTab.BaseId = trader.BaseId;
+                    traderTab.EconomicLevel = trader.EconomicLevel;
+                    traderTab.FuelPrice = trader.FuelPrice;
+                    traderTab.RepairPrice = trader.RepairPrice;
+                    traderTab.SalesTax = trader.SalesTax;
+                    traderTab.PurchaseTax = trader.PurchaseTax;
     
                     // save context to database
                     contextDB.SaveChanges();

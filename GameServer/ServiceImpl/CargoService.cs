@@ -44,8 +44,12 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 		{
 
 			long actualMoney = GS.CurrentInstance.Persistence.GetPlayerDAO().GetPlayerById(playerId).Credit;
-			TraderCargo tc = (TraderCargo)GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);
-			long price = tc.CargoBuyPrice;
+			TraderCargo tc = GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId) as TraderCargo;
+
+            if (tc == null)
+                return false;
+
+            long price = tc.CargoBuyPrice;
 			return actualMoney >= (price * count);
 		}
 
@@ -55,6 +59,9 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 			int spaceCargo = GS.CurrentInstance.Persistence.GetSpaceShipDAO().GetSpaceShipById(spaceShipId).CargoSpace;
 
 			ICargoLoadEntity tc = GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);
+
+            if (tc == null)
+                return false;
 
 			int cargoVolume = GS.CurrentInstance.Persistence.GetCargoDAO().GetCargoById(tc.CargoId).Volume;
 
@@ -112,8 +119,8 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 		/// <returns>Value if trader has enough cargo for selling or not.</returns>
 		public bool TraderHasEnoughCargo(int traderId, int cargoLoadEntityId, int cargoCount)
 		{
-			TraderCargo tc = (TraderCargo)GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);
-			if (traderId != tc.CargoOwnerId || tc == null)
+			TraderCargo tc = GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId) as TraderCargo;
+			if (tc == null || traderId != tc.CargoOwnerId)
 				return false;
 			int count = tc.CargoCount;
 			return count >= cargoCount;
@@ -139,5 +146,35 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 		{
 			return GS.CurrentInstance.Persistence.GetTraderDAO().GetTraderByBaseIdWithCargo(baseId);
 		}
-	}
+
+        /// <summary>
+        /// Method for checking if trader cargo exists.
+        /// </summary>
+        /// <param name="cargoLoadEntityId">trader cargo id</param>
+        /// <returns>true if cargo exists</returns>
+        public bool IsTraderCargoExistsForBuy(int cargoLoadEntityId)
+        {
+            ICargoLoadEntity cargo = GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoByID(cargoLoadEntityId);
+
+            return cargo != null;
+        }
+
+        /// <summary>
+        /// Method for checking if trader cargo exists for sell.
+        /// </summary>
+        /// <param name="cargoLoadEntityId">ship cargo id</param>
+        /// <param name="traderId">trader (buyer) id</param>
+        /// <returns>true if cargo exists<</returns>
+        public bool IsTraderCargoExistsForSell(int cargoLoadEntityId, int traderId)
+        {
+            List<ICargoLoadEntity> cargos = GS.CurrentInstance.Persistence.GetTraderCargoDAO().GetCargoListByOwnerId(traderId);
+            ICargoLoadEntity shipCargo = GS.CurrentInstance.Persistence.GetSpaceShipCargoDAO().GetCargoByID(cargoLoadEntityId);
+
+            if (shipCargo == null || cargos == null || cargos.Count == 0)
+                return false;
+
+            ICargoLoadEntity cargo = cargos.FirstOrDefault(x => x.CargoId == shipCargo.CargoId);
+            return cargo != null;
+        }
+    }
 }

@@ -24,6 +24,7 @@ using SpaceTraffic.Entities;
 using SpaceTraffic.Engine;
 using SpaceTraffic.Dao;
 using SpaceTraffic.Game.Actions;
+using NLog;
 
 namespace SpaceTraffic.GameServer
 {
@@ -37,7 +38,7 @@ namespace SpaceTraffic.GameServer
         /// <summary>
         /// Next time for level control (in minutes).
         /// </summary>
-        private const int NEXT_LEVEL_CONTROL_TIME = 5;
+        private const int NEXT_LEVEL_CONTROL_TIME = 2;
 
         /// <summary>
         /// Production variance in percentage.
@@ -48,6 +49,11 @@ namespace SpaceTraffic.GameServer
         /// Consumption variance in percentage.
         /// </summary>
         private const int CONSUMPTION_VARIANCE = 5;
+
+        /// <summary>
+        /// Logger
+        /// </summary>
+        private Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Random.
@@ -83,14 +89,15 @@ namespace SpaceTraffic.GameServer
         {
             foreach (Planet planet in planets)
             {
-				if (planet.Details.hasBase)
+				if (planet.Details.hasBase && planet.Base.BaseName.CompareTo("Země") == 0)
 				{
                     int goodsIndex = random.Next(0, GoodsList.Count);
                     IGoods goods = GoodsList[goodsIndex];
 					
                     TraderCargo traderCargo = generateTraderCargo(planet, goods);
                     this.gameServer.Persistence.GetTraderCargoDAO().InsertCargo(traderCargo);
-				}
+                    break;
+                }
             }
         }
 
@@ -102,18 +109,27 @@ namespace SpaceTraffic.GameServer
 
                 foreach (Planet planet in list)
                 {
-                    if (planet.Details.hasBase)
+                    if (planet.Details.hasBase && planet.Base.BaseName.CompareTo("Země") == 0) { 
                         planAllEvents(planet.Base.BaseId);
+                        break;
+                    }
                 }
             }
         }
 
         private void planAllEvents(int baseId)
         {
+            object[] args = new object[] { baseId };
+
             IGameAction changeProductionAndPriceAction = new ChangeProductionAndPriceAction();
-            changeProductionAndPriceAction.ActionArgs = new object[] { baseId };
+            changeProductionAndPriceAction.ActionArgs = args;
 
             this.gameServer.Game.PlanEvent(changeProductionAndPriceAction, DateTime.UtcNow.AddMinutes(NEXT_GENERATING_TIME));
+
+            IGameAction evaluateEconomicLevelAction = new EvaluateEconomicLevelAction();
+            evaluateEconomicLevelAction.ActionArgs = args;
+
+            this.gameServer.Game.PlanEvent(evaluateEconomicLevelAction, DateTime.UtcNow.AddMinutes(NEXT_LEVEL_CONTROL_TIME));
         }
 
         /// <summary>
@@ -165,66 +181,25 @@ namespace SpaceTraffic.GameServer
 
             EconomicLevel economicLevel = this.EconomicLevels[trader.EconomicLevel - 1];
 
+            return createTraderCargo(trader, economicLevel.LevelItems[0], random.Next(0, 101), cargo);
+        }
+
+        private TraderCargo createTraderCargo(Trader trader, EconomicLevelItem item, int cargoCount, Cargo cargo)
+        {
+            TraderCargo traderCargo = new TraderCargo();
+
             traderCargo.TraderId = trader.TraderId;
-            traderCargo.DailyConsumption = (int)economicLevel.LevelItems[0].Consumption;
-            traderCargo.DailyProduction = (int)economicLevel.LevelItems[0].Production;
+            traderCargo.DailyConsumption = (int)item.Consumption;
+            traderCargo.DailyProduction = (int)item.Production;
             traderCargo.TodayConsumed = 0;
             traderCargo.TodayProduced = 0;
-            traderCargo.SequenceNumber = 1;
-            traderCargo.CargoCount = random.Next(1, 101); 
+            traderCargo.SequenceNumber = item.SequenceNumber;
+            traderCargo.CargoCount = cargoCount;
             traderCargo.CargoId = cargo.CargoId;
 
             calculatePrice(trader, traderCargo, cargo.DefaultPrice);
 
             return traderCargo;
-        }
-
-        ///// <summary>
-        ///// Change price for only one goods
-        ///// </summary>
-        ///// <param name="percent">Percent od change price goods</param>
-        ///// <param name="goods">Entity of goods</param>
-        ///// <exception cref="DivideByZeroException">When percent &lt= 0</exception>
-        //public void ChangeOneGoodsPrice(int percent, TraderCargo traderCargo)
-        //{
-        //    //TODO
-        //    //traderCargo.CargoPrice = traderCargo.Cargo.DefaultPrice * percent / 100;
-
-        //    this.gameServer.Persistence.GetTraderCargoDAO().UpdateCargo(traderCargo);
-        //}
-
-        ///// <summary>
-        ///// Change price goods in traderCargo and update in database.
-        ///// </summary>
-        ///// <param name="percent">percet</param>
-        ///// <param name="traderCargo">trader cargo</param>
-        ///// <exception cref="DivideByZeroException">When percent &lt= 0</exception>
-        //public void ChangePriceGoods(int percent, Planet planet)
-        //{
-        //    List<TraderCargo> list = getTraderCargos(planet.Base.Trader);
-            
-        //    foreach (TraderCargo tc in list)
-        //    {
-        //        ChangeOneGoodsPrice(percent, tc);
-        //    }
-        //}
-
-        /// <summary>
-        /// Gets list of trader cargos by trader from db.
-        /// </summary>
-        /// <param name="trader">trader</param>
-        /// <returns>list of trader cargos by trader</returns>
-        private List<TraderCargo> getTraderCargos(Trader trader)
-        {
-            List<TraderCargo> list =
-                this.gameServer.Persistence.GetTraderCargoDAO().GetCargoListByOwnerId(trader.TraderId).Cast<TraderCargo>().ToList();
-
-            foreach (TraderCargo tc in list)
-            {
-                tc.Cargo = this.gameServer.Persistence.GetCargoDAO().GetCargoById(tc.CargoId);
-            }
-
-            return list;
         }
 
         public void changeProductionAndPrice(Trader trader)
@@ -273,6 +248,9 @@ namespace SpaceTraffic.GameServer
 
             int price = defaultPrice + (defaultPrice * percetage / 100);
             cargo.CargoBuyPrice = price + (price * trader.PurchaseTax / 100);
+
+            if (cargo.CargoBuyPrice < 1)
+                cargo.CargoBuyPrice = 1;
         }
 
         private void calculateSellPrice(Trader trader, TraderCargo cargo, int defaultPrice)
@@ -285,6 +263,9 @@ namespace SpaceTraffic.GameServer
 
             int price = defaultPrice + (defaultPrice * percetage / 100);
             cargo.CargoSellPrice = price - (price * trader.SalesTax / 100);
+
+            if (cargo.CargoSellPrice < 1)
+                cargo.CargoSellPrice = 1;
         }
 
         private int produce(TraderCargo cargo)
@@ -319,16 +300,199 @@ namespace SpaceTraffic.GameServer
         private int getPlusMinusValue(int value, int percentage)
         {
             int percentageValue = (int)(value * percentage / 100);
+            int deviation = random.Next(0, percentageValue);
 
             if (random.Next(0, 2) == 0)
-                return value + percentageValue;
+                return value + deviation;
             else
-                return value - percentageValue;
+                return value - deviation;
         }
 
         private int getTimesGenerating()
         {
             return NEXT_LEVEL_CONTROL_TIME / NEXT_GENERATING_TIME;
+        }
+
+        public void evaluateEconomicLevel(Trader trader)
+        {
+            clearProductionAndConsumptionPool(trader.TraderCargos);
+
+            EconomicLevel level = this.EconomicLevels[trader.EconomicLevel - 1];
+
+            bool upgrade = canBeUpgraded(level, trader.TraderCargos);
+            bool downgrade = canBeDowngraded(level, trader.TraderCargos);
+
+            //condition when downgrade condition value is bigger than upgrade condition value
+            if (upgrade && downgrade) {
+                string errorMessage = "Logic error. Upgrade and downgrade at the same time is not valid.";
+                logger.Error(errorMessage);
+                throw new ApplicationException(errorMessage);
+            }
+
+            if (upgrade)
+                upgradeLevel(trader);
+            else if (downgrade)
+                downgradeLevel(trader);
+        }
+
+        private void clearProductionAndConsumptionPool(ICollection<TraderCargo> cargos)
+        {
+            ITraderCargoDAO tcdao = this.gameServer.Persistence.GetTraderCargoDAO();
+
+            foreach (TraderCargo cargo in cargos)
+            {
+                cargo.TodayConsumed = 0;
+                cargo.TodayProduced = 0;
+                tcdao.UpdateCargo(cargo);
+            }
+        }
+
+        private bool canBeUpgraded(EconomicLevel level, ICollection<TraderCargo> cargos)
+        {
+            foreach (TraderCargo cargo in cargos)
+            {
+                if (cargo.CargoCount <= level.UpgradeLevelQuantity)
+                    return false;
+            }
+            return true;
+        }
+
+        private bool canBeDowngraded(EconomicLevel level, ICollection<TraderCargo> cargos)
+        {
+            foreach (TraderCargo cargo in cargos)
+            {
+                if (cargo.CargoCount < level.DowngradeLevelQuantity)
+                    return true;
+            }
+            return false;
+        }
+
+        private void upgradeLevel(Trader trader)
+        {
+            if (trader.EconomicLevel == this.EconomicLevels.Count)
+                return;
+            
+            //this gets next level
+            EconomicLevel level = this.EconomicLevels[trader.EconomicLevel];
+            trader.EconomicLevel = level.Level;
+            
+            ITraderDAO td = this.gameServer.Persistence.GetTraderDAO();
+            td.UpdateTraderById(trader);
+            upgradeCargo(level.LevelItems, trader);
+        }
+        //nextLevelItem
+        private void upgradeCargo(IList<EconomicLevelItem> levelItems, Trader trader)
+        {
+            ITraderCargoDAO tcdao = this.gameServer.Persistence.GetTraderCargoDAO();
+
+            foreach (EconomicLevelItem item in levelItems)
+            {
+                TraderCargo cargo = trader.TraderCargos.FirstOrDefault(x => x.SequenceNumber.Equals(item.SequenceNumber));
+
+                if (cargo != null)
+                {
+                    cargo.DailyConsumption = calcDailyValueUpgrade(cargo.DailyConsumption, item.Consumption);
+                    cargo.DailyProduction = calcDailyValueUpgrade(cargo.DailyProduction, item.Production);
+                    
+                    tcdao.UpdateCargo(cargo);
+                }
+                else
+                    addNewTraderCargo(item, tcdao, trader);
+            }
+            
+        }
+
+        private void addNewTraderCargo(EconomicLevelItem item, ITraderCargoDAO dao, Trader trader)
+        {
+            ICargoDAO cdao = this.gameServer.Persistence.GetCargoDAO();
+            List<Cargo> cargos = new List<Cargo>(cdao.GetCargos());
+
+            foreach (TraderCargo tCargo in trader.TraderCargos)
+            {
+                Cargo cargo = cargos.FirstOrDefault(x => x.CargoId == tCargo.CargoId);
+
+                if (cargo != null)
+                    cargos.Remove(cargo);
+            }
+
+            //logic error, number of levels has to be less or equel than number of cargos.
+            if (cargos.Count == 0) {
+                string errorMessage = "Too few cargos. Number of levels has to be less or equel than number of cargos.";
+                logger.Error(errorMessage);
+                throw new ApplicationException(errorMessage);
+            }
+            Cargo uniqueCargo = cargos[random.Next(0, cargos.Count)];
+
+            TraderCargo traderCargo = createTraderCargo(trader, item, 0, uniqueCargo);
+            dao.InsertCargo(traderCargo);
+        }
+
+        
+
+        public int calcDailyValueUpgrade(int dailyValue, double percentage)
+        {
+            if(percentage != 0 && dailyValue != 0)
+            {
+                return (int)(dailyValue + (dailyValue * percentage / 100));
+            }
+
+            return dailyValue;
+        }
+
+        public int calcDailyValueDowngrade(int dailyValue, double percentage)
+        {
+            if (percentage != 0 && dailyValue != 0)
+            {
+                return (int)(dailyValue - (dailyValue * percentage / (100 + percentage)));
+            }
+
+            return dailyValue;
+        }
+
+        private void downgradeLevel(Trader trader)
+        {
+            if (trader.EconomicLevel == 1)
+                return;
+
+            //this gets actual level
+            EconomicLevel actualLevel = this.EconomicLevels[trader.EconomicLevel - 1];
+
+            //this gets previous level
+            EconomicLevel previousLevel = this.EconomicLevels[trader.EconomicLevel - 2];
+            trader.EconomicLevel = previousLevel.Level;
+
+            ITraderDAO td = this.gameServer.Persistence.GetTraderDAO();
+            td.UpdateTraderById(trader);
+
+            downgradeCargo(actualLevel.LevelItems, previousLevel.LevelItems, trader);
+        }
+
+        private void downgradeCargo(IList<EconomicLevelItem> actualLevelItems, IList<EconomicLevelItem> previousLevelItems, Trader trader)
+        {
+            ITraderCargoDAO tcdao = this.gameServer.Persistence.GetTraderCargoDAO();
+
+            foreach (TraderCargo cargo in trader.TraderCargos)
+            {
+                EconomicLevelItem actualItem = actualLevelItems.FirstOrDefault(x => x.SequenceNumber == cargo.SequenceNumber);
+                EconomicLevelItem previousItem = previousLevelItems.FirstOrDefault(x => x.SequenceNumber == cargo.SequenceNumber);
+
+                if (previousItem != null)
+                {
+                    if (previousItem.IsDiscovered)
+                    {
+                        cargo.DailyConsumption = (int)previousItem.Consumption;
+                        cargo.DailyProduction = (int)previousItem.Production;
+                    }
+                    else
+                    {
+                        cargo.DailyConsumption = calcDailyValueDowngrade(cargo.DailyConsumption, actualItem.Consumption);
+                        cargo.DailyProduction = calcDailyValueDowngrade(cargo.DailyProduction, actualItem.Production);
+                    }
+                    tcdao.UpdateCargo(cargo);
+                }
+                else
+                    tcdao.RemoveCargoById(cargo.TraderCargoId);
+            }
         }
     }
 }

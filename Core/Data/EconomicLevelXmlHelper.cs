@@ -81,6 +81,9 @@ namespace SpaceTraffic.Data
                 }
             }
 
+            if (economicLevel.DowngradeLevelQuantity >= economicLevel.UpgradeLevelQuantity)
+                throw new ApplicationException("Logic error. Downgrade level cannot be bigger or equal than Upgrade level.");
+
             return economicLevel;
         }
 

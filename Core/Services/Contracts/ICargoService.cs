@@ -50,8 +50,24 @@ namespace SpaceTraffic.Services.Contracts
 
 		[OperationContract]
 		Trader GetTraderAtBaseWithCargo(int baseId);
-		
-		
+
+        /// <summary>
+        /// Method for checking if trader cargo exists.
+        /// </summary>
+        /// <param name="cargoLoadEntityId">trader cargo id</param>
+        /// <returns>true if cargo exists</returns>
+        [OperationContract]
+        bool IsTraderCargoExistsForBuy(int cargoLoadEntityId);
+
+        /// <summary>
+        /// Method for checking if trader cargo exists for sell.
+        /// </summary>
+        /// <param name="cargoLoadEntityId">ship cargo id</param>
+        /// <param name="traderId">trader (buyer) id</param>
+        /// <returns>true if cargo exists<</returns>
+        [OperationContract]
+        bool IsTraderCargoExistsForSell(int cargoLoadEntityId, int traderId);
+
 	}
 
 }
