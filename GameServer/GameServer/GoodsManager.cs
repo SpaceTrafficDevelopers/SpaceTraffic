@@ -133,7 +133,7 @@ namespace SpaceTraffic.GameServer
             IGameAction evaluateEconomicLevelAction = new EvaluateEconomicLevelAction();
             evaluateEconomicLevelAction.ActionArgs = args;
 
-            this.gameServer.Game.PlanEvent(evaluateEconomicLevelAction, DateTime.UtcNow.AddMinutes(NEXT_LEVEL_CONTROL_TIME));
+            this.gameServer.Game.PlanEvent(evaluateEconomicLevelAction, DateTime.UtcNow.AddMinutes(NEXT_LEVEL_CONTROL_TIME + 0.1));
         }
 
         /// <summary>

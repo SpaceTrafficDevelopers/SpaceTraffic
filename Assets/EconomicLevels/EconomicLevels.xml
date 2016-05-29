@@ -32,6 +32,7 @@
         <production>50</production>
         <consumption>50</consumption>
       </item>
+      <!-- nove objeveny druh zbozi musi mit discovered true -->
       <item sequence_number="2" is_discovered="true">
         <production>1500</production>
         <consumption>500</consumption>
