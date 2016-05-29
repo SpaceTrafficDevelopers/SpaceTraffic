@@ -6,7 +6,7 @@
     <!-- Minimální množství pro postup na další level -->
     <upgrade_quantity>1000</upgrade_quantity>
     <!-- Minimální nutné množství pro udržení se na aktuálním levelu -->
-    <downgrade_quantity>500</downgrade_quantity>
+    <downgrade_quantity>-1</downgrade_quantity>
     <!-- Podmínky pro jednotlivá zboží v daném levelu -->
     <economic_items>
       <!-- 
@@ -26,7 +26,7 @@
   <economic_level>
     <level>2</level>
     <upgrade_quantity>2000</upgrade_quantity>
-    <downgrade_quantity>1000</downgrade_quantity>
+    <downgrade_quantity>900</downgrade_quantity>
     <economic_items>
       <item sequence_number="1" is_discovered="false">
         <production>50</production>

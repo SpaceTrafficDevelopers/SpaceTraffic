@@ -88,6 +88,7 @@ namespace Core.Tests.Data
                 Assert.IsTrue(level.Level >= 0, "Level is not greater or equal than 0.");
                 Assert.IsTrue(level.UpgradeLevelQuantity >= 0, "Upgrade level quantity is not greater or equal than 0.");
                 Assert.IsTrue(level.DowngradeLevelQuantity >= 0, "Downgrade level quantity is not greater or equal than 0.");
+                Assert.IsTrue(level.DowngradeLevelQuantity >= level.UpgradeLevelQuantity, "Downgrade level is bigger or equal than upgrade level.");
 
                 checkLevelItems(level.LevelItems);
             }

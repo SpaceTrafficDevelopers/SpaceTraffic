@@ -84,5 +84,20 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
 			}
 		}
 
-	}
+        public bool IsTraderCargoExistsForBuy(int cargoLoadEntityId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as ICargoService).IsTraderCargoExistsForBuy(cargoLoadEntityId);
+            }
+        }
+
+        public bool IsTraderCargoExistsForSell(int cargoLoadEntityId, int traderId)
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as ICargoService).IsTraderCargoExistsForSell(cargoLoadEntityId, traderId);
+            }
+        }
+    }
 }

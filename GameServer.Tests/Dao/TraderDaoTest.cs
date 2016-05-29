@@ -224,6 +224,11 @@ namespace SpaceTraffic.GameServerTests.Dao
             bd.InsertBase(baseTest2);
 
             traderTest.BaseId = baseTest2.BaseId;
+            traderTest.EconomicLevel = 5;
+            traderTest.FuelPrice = 1000;
+            traderTest.PurchaseTax = 500;
+            traderTest.RepairPrice = 1000;
+            traderTest.SalesTax = 500;
 
             target.UpdateTraderById(traderTest);
 

@@ -40,6 +40,11 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
                 this.ErrorMessage = "Tato loď ti nepatří!";
 				return false;
             }
+            if (!GSClient.CargoService.IsTraderCargoExistsForBuy(cargoLoadEntityId))
+            {
+                this.ErrorMessage = "Toto zboží neexistuje.";
+                return false;
+            }
 			if (!GSClient.CargoService.PlayerHasEnaughCreditsForCargo(getCurrentPlayerId(), cargoLoadEntityId, count))
             {
 				this.ErrorMessage = "Nemáš dostatek kreditů na koupi zboží.";
@@ -76,6 +81,11 @@ namespace SpaceTraffic.GameUi.Areas.Game.Controllers
             {
 				this.ErrorMessage = "Tato loď ti nepatří!";
 				return false;
+            }
+            if (!GSClient.CargoService.IsTraderCargoExistsForSell(cargoLoadEntityId, buyerId))
+            {
+                this.ErrorMessage = "Obchodník toto zboží neprodává.";
+                return false;
             }
             if (!GSClient.CargoService.PlayerHasEnoughCargoOnSpaceShip(sellerShipId, cargoLoadEntityId, count))
             {

@@ -105,6 +105,14 @@ namespace SpaceTraffic.GameServer
             }
         }
 
+        public IGoodsManager Goods
+        {
+            get
+            {
+                return this.goodsManager;
+            }
+        }
+
         #endregion
 
         //TODO: Thread-safe state indication of GameServer instance.
@@ -190,6 +198,9 @@ namespace SpaceTraffic.GameServer
             // Inicializace herního světa.
             this.gameManager = new GameManager(this, this.gameStateManager);
             this.gameManager.RestoreGameState();
+
+            //planning all economic events
+            this.goodsManager.planEconomicEvents(this.worldManager.Map);
 
             //test minigame and start action data
             #region minigame test data

@@ -132,6 +132,8 @@
     <Compile Include="GameServer\WorldManager.cs" />
     <Compile Include="Game\Actions\CargoSell.cs" />
     <Compile Include="Game\Actions\CargoBuy.cs" />
+    <Compile Include="Game\Actions\ChangeProductionAndPriceAction.cs" />
+    <Compile Include="Game\Actions\EvaluateEconomicLevelAction.cs" />
     <Compile Include="Game\Actions\HelloWorld.cs" />
     <Compile Include="Game\Actions\InactivePlayerRemove.cs" />
     <Compile Include="Game\Actions\MinigameAllGamesLifeAction.cs" />

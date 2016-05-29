@@ -25,8 +25,8 @@
 		}
 		<p class="basicInfo">
 			<h4 class="cargoName">@cargo.Cargo.Name</h4>
-            <strong class="cargoPrice"><span class="label">@(ViewBag.fromBase ? "Nákupní cena:" : "Cena:")</span> <span class="value">@cargoPrice</span> <span class="icon creditsIcon mediumIcon"></span> / kus</strong>
             <strong class="cargoVolume"><span class="label">Velikost:</span> <span class="value">@cargo.Cargo.Volume</span></strong>
+            <strong class="cargoPrice"><span class="label">@(ViewBag.fromBase ? "Nákupní cena:" : "Cena:")</span> <span class="value">@cargoPrice</span> <span class="icon creditsIcon mediumIcon"></span> / kus</strong>
             
             @if(ViewBag.fromBase) { 
                 <strong class="cargoPrice"><span class="label">Prodejní cena:</span> <span class="value">@cargo.CargoSellPrice</span> <span class="icon creditsIcon mediumIcon"></span> / kus</strong>
@@ -34,8 +34,8 @@
 		</p>
 		<p class="detailedInfo">
 			<span class="cargoAmount"><span class="label">Množství:</span> <span class="value @cargoClass">@cargo.CargoCount</span></span>
-			<span class="cargoFullPrice"><span class="label">@(ViewBag.fromBase ? "Celková nákupní cena:" : "Celková cena:")</span> <span class="value">@value <span class="icon creditsIcon smallIcon"></span></span></span>
-			<span class="cargoFullVolume"><span class="label">Celková velikost:</span> <span class="value">@spaceTaken</span> </span>
+            <span class="cargoFullVolume"><span class="label">Celková velikost:</span> <span class="value">@spaceTaken</span> </span>
+            <span class="cargoFullPrice"><span class="label">@(ViewBag.fromBase ? "Celková nákupní cena:" : "Celková cena:")</span> <span class="value">@value <span class="icon creditsIcon smallIcon"></span></span></span>
 			@if (ViewBag.fromBase)
             {
                 <span class="cargoFullPrice"><span class="label">Celková prodejní cena:</span> <span class="value">@(cargo.CargoCount * cargo.CargoSellPrice) <span class="icon creditsIcon smallIcon"></span></span></span>

@@ -29,7 +29,7 @@
 }
 
 .infoPanel{
-	.fuelPrice, .repairPrice{
+	.fuelPrice, .repairPrice, .economicLevel, .purchaseTax, .salesTax{
 		
 		min-width: 100px;
 		text-align: center;
@@ -44,16 +44,25 @@
 			position: relative;
 			top: -4px;
 		}
-
-
 		.value{
 			font-size: 22px;
 		}
+        .percentage{
+            font-weight:bold;
+            font-size: 22px;
+            color: #159515;
+        }
 	}
 	.fuelPrice{
 		float: left;
 	}
 	.repairPrice{
+		float: right;
+	}
+    .purchaseTax{
+		float: left;
+	}
+    .salesTax{
 		float: right;
 	}
 }
