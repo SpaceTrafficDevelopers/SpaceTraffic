@@ -367,7 +367,7 @@ namespace SpaceTraffic.GameServer
         /// </summary>
         /// <param name="value">value</param>
         /// <param name="percentage">percentage (10% => 10)</param>
-        /// <returns></returns>
+        /// <returns>plus minus value</returns>
         private int getPlusMinusValue(int value, int percentage)
         {
             int percentageValue = (int)(value * percentage / 100);
@@ -412,6 +412,10 @@ namespace SpaceTraffic.GameServer
                 addQuantityMessage(trader);
         }
 
+        /// <summary>
+        /// Method for create quantity messages.
+        /// </summary>
+        /// <param name="trader">trader with cargo</param>
         private void addQuantityMessage(Trader trader)
         {
             int maxValue = trader.TraderCargos.Max(x => x.CargoCount);
@@ -436,7 +440,7 @@ namespace SpaceTraffic.GameServer
                         UIMessagesFactory.tooFewQuantityMessage(trader.Base.BaseName, minCargo.Cargo.Name));
             else if(max)
                 this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
-                            UIMessagesFactory.tooMuchQuantityMessage(trader.Base.BaseName, maxCargo.Cargo.Name));
+                        UIMessagesFactory.tooMuchQuantityMessage(trader.Base.BaseName, maxCargo.Cargo.Name));
             else
                 this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
                         UIMessagesFactory.economicBalanceMessage(trader.Base.BaseName));

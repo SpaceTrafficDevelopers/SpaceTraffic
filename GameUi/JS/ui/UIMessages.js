@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿//ajax request for UI messages
+$(document).ready(function () {
     ajax.send({
         requestId: 'UIMessages',
         relatedObject: 'UIMessages',
