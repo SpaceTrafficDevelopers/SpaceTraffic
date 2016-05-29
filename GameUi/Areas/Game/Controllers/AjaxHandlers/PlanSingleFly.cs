@@ -50,15 +50,16 @@ namespace SpaceTraffic.GameUi.Controllers.AjaxHandlers
 			int position = 1;
 
 			controller.GSClient.PlanningService.AddPlanItem(pathPlanID, fromStarSystem, true, fromPlanet, position);
+			position++;
 			foreach (var wormhole in wormholes) {
 				var starsystem = wormhole["starsystem"];
 				var index = wormhole["index"];
-				position++;
 				controller.GSClient.PlanningService.AddPlanItem(pathPlanID, starsystem, false, index + "", position);
+				position++;
 			}
 
 
-			controller.GSClient.PlanningService.AddPlanItem(pathPlanID, toStarSystem, true, toPlanet, 2);
+			controller.GSClient.PlanningService.AddPlanItem(pathPlanID, toStarSystem, true, toPlanet, position);
 
 			object[] args = new object[]{
                     toStarSystem,
