@@ -53,8 +53,11 @@ $('body').on('planetClick', function (e, originalEvent, planet) {
 	}
 });
 $('body').on('wormholeClick', function (e, originalEvent, wormhole) {
-	wormholes.push(wormhole);
-	updateShipPlan();
+	if (toPlanet == null) {
+		wormhole.inStarSystem = $.cookie('currentStarSystem');
+		wormholes.push(wormhole);
+		updateShipPlan();
+	}
 });
 /* cancel button*/
 $('#cancelPlan').click(function (e) {
@@ -66,6 +69,7 @@ $('#cancelPlan').click(function (e) {
 
 /* start button */
 $('#runPlan').click(function (e) {
+	console.log(wormholes);
 	if (toPlanet != null) {
 		ajax.send({
 			requestId: 'PlanSingleFly',
@@ -76,7 +80,7 @@ $('#runPlan').click(function (e) {
 				fromPlanet: currentPlanetName,
 				toStarSystem: toStarSystem,
 				toPlanet: toPlanet.name,
-				wormholes: wormholes.map(function (hole) { return {index: hole.id, starsystem: hole.destination} })
+				wormholes: wormholes.map(function (hole) { return {index: hole.id, starsystem: hole.inStarSystem} })
 			},
 			callback: function () {
 				$('#planningUI').parent().parent().find('.closebutton').click();

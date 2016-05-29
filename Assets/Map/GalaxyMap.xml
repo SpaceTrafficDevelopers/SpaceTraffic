@@ -7,13 +7,13 @@
 			<starsystem name="Testurius"/>
 		</starsystems>
 		<wormholes>
-			<wormhole id="0">
+			<wormhole>
 				<endpoint system="Solar system" id="0"/>
 				<endpoint system="Proxima Centauri" id="0"/>
 			</wormhole>
-			<wormhole id="1">
+			<wormhole>
 				<endpoint system="Solar system" id="1"/>
-				<endpoint system="Testurius" id="1"/>
+				<endpoint system="Testurius" id="0"/>
 			</wormhole>
 		</wormholes>
 	</galaxy>
