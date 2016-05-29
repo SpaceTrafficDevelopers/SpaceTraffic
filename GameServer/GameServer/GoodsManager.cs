@@ -74,6 +74,9 @@ namespace SpaceTraffic.GameServer
             get { return NEXT_LEVEL_CONTROL_TIME; }
         }
 
+        /// <summary>
+        /// Game server reference
+        /// </summary>
         private IGameServer gameServer;
 
         public GoodsManager(IGameServer gameServer) 
@@ -89,14 +92,13 @@ namespace SpaceTraffic.GameServer
         {
             foreach (Planet planet in planets)
             {
-				if (planet.Details.hasBase && planet.Base.BaseName.CompareTo("Země") == 0)
+				if (planet.Details.hasBase)
 				{
                     int goodsIndex = random.Next(0, GoodsList.Count);
                     IGoods goods = GoodsList[goodsIndex];
 					
                     TraderCargo traderCargo = generateTraderCargo(planet, goods);
                     this.gameServer.Persistence.GetTraderCargoDAO().InsertCargo(traderCargo);
-                    break;
                 }
             }
         }
@@ -109,14 +111,16 @@ namespace SpaceTraffic.GameServer
 
                 foreach (Planet planet in list)
                 {
-                    if (planet.Details.hasBase && planet.Base.BaseName.CompareTo("Země") == 0) { 
+                    if (planet.Details.hasBase) { 
                         planAllEvents(planet.Base.BaseId);
-                        break;
-                    }
                 }
             }
         }
 
+        /// <summary>
+        /// Method for plannig all economic events.
+        /// </summary>
+        /// <param name="baseId">base id</param>
         private void planAllEvents(int baseId)
         {
             object[] args = new object[] { baseId };
@@ -184,6 +188,14 @@ namespace SpaceTraffic.GameServer
             return createTraderCargo(trader, economicLevel.LevelItems[0], random.Next(0, 101), cargo);
         }
 
+        /// <summary>
+        /// Method for creating trader cargo.
+        /// </summary>
+        /// <param name="trader">trader</param>
+        /// <param name="item">economic level item</param>
+        /// <param name="cargoCount">cargo count</param>
+        /// <param name="cargo">cargo</param>
+        /// <returns>trader cargo</returns>
         private TraderCargo createTraderCargo(Trader trader, EconomicLevelItem item, int cargoCount, Cargo cargo)
         {
             TraderCargo traderCargo = new TraderCargo();
@@ -213,6 +225,10 @@ namespace SpaceTraffic.GameServer
             }
         }
 
+        /// <summary>
+        /// Method for produce and consume cargo.
+        /// </summary>
+        /// <param name="cargo">trader cargo</param>
         private void produceAndConsume(TraderCargo cargo)
         {
             int produceVal = produce(cargo);
@@ -232,12 +248,24 @@ namespace SpaceTraffic.GameServer
             }
         }
 
+        /// <summary>
+        /// Method for calculating price.
+        /// </summary>
+        /// <param name="trader">trader</param>
+        /// <param name="cargo">trader cargo</param>
+        /// <param name="defaultPrice">default price</param>
         private void calculatePrice(Trader trader, TraderCargo cargo, int defaultPrice)
         {
             calculateBuyPrice(trader, cargo, defaultPrice);
             calculateSellPrice(trader, cargo, defaultPrice);
         }
 
+        /// <summary>
+        /// Method for calculating buy price.
+        /// </summary>
+        /// <param name="trader">trader</param>
+        /// <param name="cargo">trader cargo</param>
+        /// <param name="defaultPrice">default price</param>
         private void calculateBuyPrice(Trader trader, TraderCargo cargo, int defaultPrice)
         {
             //TODO: temp function, this will be changed, probably as method
@@ -253,6 +281,12 @@ namespace SpaceTraffic.GameServer
                 cargo.CargoBuyPrice = 1;
         }
 
+        /// <summary>
+        /// Method for calculating sell price.
+        /// </summary>
+        /// <param name="trader">trader</param>
+        /// <param name="cargo">trader cargo</param>
+        /// <param name="defaultPrice">default price</param>
         private void calculateSellPrice(Trader trader, TraderCargo cargo, int defaultPrice)
         {
             //TODO: temp function, this will be changed, probably as method
@@ -268,16 +302,33 @@ namespace SpaceTraffic.GameServer
                 cargo.CargoSellPrice = 1;
         }
 
+        /// <summary>
+        /// Method for calculating cargo for production.
+        /// </summary>
+        /// <param name="cargo">trader cargo</param>
+        /// <returns>number of produced cargo</returns>
         private int produce(TraderCargo cargo)
         {
             return computeProduceOrConsumeValue(cargo.DailyProduction, cargo.TodayProduced, PRODUCTION_VARIANCE);
         }
 
+        /// <summary>
+        /// Method for calculating cargo for consumption.
+        /// </summary>
+        /// <param name="cargo">trader cargo</param>
+        /// <returns>number of consumed cargo</returns>
         private int consume(TraderCargo cargo)
         {
             return computeProduceOrConsumeValue(cargo.DailyConsumption, cargo.TodayConsumed, CONSUMPTION_VARIANCE);
         }
 
+        /// <summary>
+        /// Method for calculating consume or produce value.
+        /// </summary>
+        /// <param name="dailyValue">daily value (production or consumption)</param>
+        /// <param name="todayValue">today value (production or consumption)</param>
+        /// <param name="variance">variance for production or consumption</param>
+        /// <returns>calculated value</returns>
         private int computeProduceOrConsumeValue(int dailyValue, int todayValue, int variance)
         {
             //if planet generate maximum for day, return 0
@@ -297,6 +348,12 @@ namespace SpaceTraffic.GameServer
                 return valuePerCycle;
         }
 
+        /// <summary>
+        /// Method for computing varianced value.
+        /// </summary>
+        /// <param name="value">value</param>
+        /// <param name="percentage">percentage (10% => 10)</param>
+        /// <returns></returns>
         private int getPlusMinusValue(int value, int percentage)
         {
             int percentageValue = (int)(value * percentage / 100);
@@ -308,6 +365,10 @@ namespace SpaceTraffic.GameServer
                 return value - deviation;
         }
 
+        /// <summary>
+        /// Method for calculating how many times will be generated cargo.
+        /// </summary>
+        /// <returns>how many times will be generated cargo</returns>
         private int getTimesGenerating()
         {
             return NEXT_LEVEL_CONTROL_TIME / NEXT_GENERATING_TIME;
@@ -335,6 +396,10 @@ namespace SpaceTraffic.GameServer
                 downgradeLevel(trader);
         }
 
+        /// <summary>
+        /// Method for clear today production and consumption.
+        /// </summary>
+        /// <param name="cargos">list of trader cargo</param>
         private void clearProductionAndConsumptionPool(ICollection<TraderCargo> cargos)
         {
             ITraderCargoDAO tcdao = this.gameServer.Persistence.GetTraderCargoDAO();
@@ -347,6 +412,12 @@ namespace SpaceTraffic.GameServer
             }
         }
 
+        /// <summary>
+        /// Method for evaluating when planet can be upgraded.
+        /// </summary>
+        /// <param name="level">economic level</param>
+        /// <param name="cargos">list of trader cargos</param>
+        /// <returns>true when level can be upgraded, otherwice false</returns>
         private bool canBeUpgraded(EconomicLevel level, ICollection<TraderCargo> cargos)
         {
             foreach (TraderCargo cargo in cargos)
@@ -357,6 +428,12 @@ namespace SpaceTraffic.GameServer
             return true;
         }
 
+        /// <summary>
+        /// Method for evaluating when planet can be downgraded.
+        /// </summary>
+        /// <param name="level">economic level</param>
+        /// <param name="cargos">list of trader cargos</param>
+        /// <returns>true when level can be downgraded, otherwice false</returns>
         private bool canBeDowngraded(EconomicLevel level, ICollection<TraderCargo> cargos)
         {
             foreach (TraderCargo cargo in cargos)
@@ -367,6 +444,10 @@ namespace SpaceTraffic.GameServer
             return false;
         }
 
+        /// <summary>
+        /// Method for upgrade planet to next economic level.
+        /// </summary>
+        /// <param name="trader">trader with cargo</param>
         private void upgradeLevel(Trader trader)
         {
             if (trader.EconomicLevel == this.EconomicLevels.Count)
@@ -380,12 +461,17 @@ namespace SpaceTraffic.GameServer
             td.UpdateTraderById(trader);
             upgradeCargo(level.LevelItems, trader);
         }
-        //nextLevelItem
-        private void upgradeCargo(IList<EconomicLevelItem> levelItems, Trader trader)
+        
+        /// <summary>
+        /// Method for upgrading consuption and production to next level or add new cargo.
+        /// </summary>
+        /// <param name="nextLevelItems">next level economic level items</param>
+        /// <param name="trader">trader with cargo</param>
+        private void upgradeCargo(IList<EconomicLevelItem> nextLevelItems, Trader trader)
         {
             ITraderCargoDAO tcdao = this.gameServer.Persistence.GetTraderCargoDAO();
 
-            foreach (EconomicLevelItem item in levelItems)
+            foreach (EconomicLevelItem item in nextLevelItems)
             {
                 TraderCargo cargo = trader.TraderCargos.FirstOrDefault(x => x.SequenceNumber.Equals(item.SequenceNumber));
 
@@ -402,6 +488,12 @@ namespace SpaceTraffic.GameServer
             
         }
 
+        /// <summary>
+        /// Method for adding new unique cargo.
+        /// </summary>
+        /// <param name="item">economic level item</param>
+        /// <param name="dao">dao</param>
+        /// <param name="trader">trader with cargo</param>
         private void addNewTraderCargo(EconomicLevelItem item, ITraderCargoDAO dao, Trader trader)
         {
             ICargoDAO cdao = this.gameServer.Persistence.GetCargoDAO();
@@ -428,8 +520,13 @@ namespace SpaceTraffic.GameServer
         }
 
         
-
-        public int calcDailyValueUpgrade(int dailyValue, double percentage)
+        /// <summary>
+        /// Method for calculating daily value for upgrade.
+        /// </summary>
+        /// <param name="dailyValue">actual daily value</param>
+        /// <param name="percentage">percentage (10% => 10)</param>
+        /// <returns>new daily value or actual daily value</returns>
+        private int calcDailyValueUpgrade(int dailyValue, double percentage)
         {
             if(percentage != 0 && dailyValue != 0)
             {
@@ -439,7 +536,13 @@ namespace SpaceTraffic.GameServer
             return dailyValue;
         }
 
-        public int calcDailyValueDowngrade(int dailyValue, double percentage)
+        /// <summary>
+        /// Method for calculating daily value for downgrade.
+        /// </summary>
+        /// <param name="dailyValue">actual daily value</param>
+        /// <param name="percentage">percentage (10% => 10)</param>
+        /// <returns>new daily value or actual daily value</returns>
+        private int calcDailyValueDowngrade(int dailyValue, double percentage)
         {
             if (percentage != 0 && dailyValue != 0)
             {
@@ -449,6 +552,10 @@ namespace SpaceTraffic.GameServer
             return dailyValue;
         }
 
+        /// <summary>
+        /// Method for downgraded planet to previous economic level.
+        /// </summary>
+        /// <param name="trader">trader with cargo</param>
         private void downgradeLevel(Trader trader)
         {
             if (trader.EconomicLevel == 1)
@@ -467,6 +574,12 @@ namespace SpaceTraffic.GameServer
             downgradeCargo(actualLevel.LevelItems, previousLevel.LevelItems, trader);
         }
 
+        /// <summary>
+        /// Method for downgrading consuption and production to previous level or remove last added cargo.
+        /// </summary>
+        /// <param name="actualLevelItems">actual level economic level items</param>
+        /// <param name="previousLevelItems">previous level economic level items</param>
+        /// <param name="trader">trader with cargo</param>
         private void downgradeCargo(IList<EconomicLevelItem> actualLevelItems, IList<EconomicLevelItem> previousLevelItems, Trader trader)
         {
             ITraderCargoDAO tcdao = this.gameServer.Persistence.GetTraderCargoDAO();
