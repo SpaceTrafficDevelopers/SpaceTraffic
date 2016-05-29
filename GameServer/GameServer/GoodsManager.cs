@@ -111,7 +111,7 @@ namespace SpaceTraffic.GameServer
 
                 foreach (Planet planet in list)
                 {
-                    if (planet.Details.hasBase) { 
+                    if (planet.Details.hasBase)
                         planAllEvents(planet.Base.BaseId);
                 }
             }
