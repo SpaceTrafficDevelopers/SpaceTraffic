@@ -87,5 +87,14 @@ namespace SpaceTraffic.GameUi.GameServerClient.ServiceClients
                 return null;
             }
         }
-	}
+
+
+        public List<string> getUIMessages()
+        {
+            using (var channel = this.GetClientChannel())
+            {
+                return (channel as IGameService).getUIMessages();
+            }
+        }
+    }
 }

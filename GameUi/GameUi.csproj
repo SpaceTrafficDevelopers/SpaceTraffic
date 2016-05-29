@@ -105,6 +105,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Game\Controllers\AjaxHandlers\UIMessages.cs" />
     <Compile Include="Areas\Game\Controllers\MinigameTestController.cs" />
     <Compile Include="Areas\Game\Controllers\ReferencesController.cs" />
     <Compile Include="Areas\Game\Controllers\CargoController.cs" />
@@ -422,6 +423,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="JS\game\LogOff.js" />
+    <Content Include="JS\ui\UIMessages.js" />
     <Content Include="JS\jsimport" Exclude="JS\.*" />
     <Content Include="JS\core\flashInit.js" />
     <Content Include="JS\core\init.js" />

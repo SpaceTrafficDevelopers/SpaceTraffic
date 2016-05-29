@@ -118,12 +118,15 @@
     <Compile Include="Game\Geometry\Stacionary.cs" />
     <Compile Include="Game\IGameObject.cs" />
     <Compile Include="Game\IPlanet.cs" />
+    <Compile Include="Game\UIMessages\IUIMessages.cs" />
     <Compile Include="Game\Minigame\IMinigame.cs" />
     <Compile Include="Game\Minigame\LogoQuiz.cs" />
     <Compile Include="Game\Minigame\Minigame.cs" />
     <Compile Include="Game\Minigame\Result.cs" />
     <Compile Include="Game\Minigame\ResultFactory.cs" />
     <Compile Include="Game\Minigame\SpaceshipCargoFinder.cs" />
+    <Compile Include="Game\UIMessages\UIMessages.cs" />
+    <Compile Include="Game\UIMessages\UIMessagesFactory.cs" />
     <Compile Include="Game\VisibleObject.cs" />
     <Compile Include="Game\Geometry\CircularOrbit.cs" />
     <Compile Include="Game\Geometry\Direction.cs" />

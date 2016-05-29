@@ -25,6 +25,7 @@ using SpaceTraffic.Engine;
 using SpaceTraffic.Dao;
 using SpaceTraffic.Game.Actions;
 using NLog;
+using SpaceTraffic.Game.UIMessages;
 
 namespace SpaceTraffic.GameServer
 {
@@ -49,6 +50,16 @@ namespace SpaceTraffic.GameServer
         /// Consumption variance in percentage.
         /// </summary>
         private const int CONSUMPTION_VARIANCE = 5;
+
+        /// <summary>
+        /// Minimum value for message.
+        /// </summary>
+        private const int MIN_VALUE_FOR_MESSAGE = 500;
+
+        /// <summary>
+        /// Maximum value for message.
+        /// </summary>
+        private const int MAX_VALUE_FOR_MESSAGE = 3000;
 
         /// <summary>
         /// Logger
@@ -184,6 +195,9 @@ namespace SpaceTraffic.GameServer
             Cargo cargo = gameServer.Persistence.GetCargoDAO().GetCargoByName(goods.Name);
 
             EconomicLevel economicLevel = this.EconomicLevels[trader.EconomicLevel - 1];
+
+            this.gameServer.World.UIMessages.addPlanetMessage(planet.Base.BaseId,
+                UIMessagesFactory.tooFewQuantityMessage(planet.Base.BaseName, cargo.Name));
 
             return createTraderCargo(trader, economicLevel.LevelItems[0], random.Next(0, 101), cargo);
         }
@@ -394,6 +408,38 @@ namespace SpaceTraffic.GameServer
                 upgradeLevel(trader);
             else if (downgrade)
                 downgradeLevel(trader);
+            else
+                addQuantityMessage(trader);
+        }
+
+        private void addQuantityMessage(Trader trader)
+        {
+            int maxValue = trader.TraderCargos.Max(x => x.CargoCount);
+            int minValue = trader.TraderCargos.Min(x => x.CargoCount);
+            
+            bool min = minValue <= MIN_VALUE_FOR_MESSAGE;
+            bool max = maxValue >= MAX_VALUE_FOR_MESSAGE;
+
+            TraderCargo minCargo = trader.TraderCargos.FirstOrDefault(x => x.CargoCount == minValue);
+            TraderCargo maxCargo = trader.TraderCargos.FirstOrDefault(x => x.CargoCount == maxValue);
+
+            if(min && max){
+                if (random.Next(0, 2) == 0)
+                    this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
+                        UIMessagesFactory.tooFewQuantityMessage(trader.Base.BaseName, minCargo.Cargo.Name));
+                else
+                    this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
+                        UIMessagesFactory.tooMuchQuantityMessage(trader.Base.BaseName, maxCargo.Cargo.Name));
+            }
+            else if(min)
+                this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
+                        UIMessagesFactory.tooFewQuantityMessage(trader.Base.BaseName, minCargo.Cargo.Name));
+            else if(max)
+                this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
+                            UIMessagesFactory.tooMuchQuantityMessage(trader.Base.BaseName, maxCargo.Cargo.Name));
+            else
+                this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
+                        UIMessagesFactory.economicBalanceMessage(trader.Base.BaseName));
         }
 
         /// <summary>
@@ -517,6 +563,9 @@ namespace SpaceTraffic.GameServer
 
             TraderCargo traderCargo = createTraderCargo(trader, item, 0, uniqueCargo);
             dao.InsertCargo(traderCargo);
+
+            this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
+                UIMessagesFactory.levelUpgradeMessage(trader.Base.BaseName, uniqueCargo.Name));
         }
 
         
@@ -603,8 +652,12 @@ namespace SpaceTraffic.GameServer
                     }
                     tcdao.UpdateCargo(cargo);
                 }
-                else
+                else 
+                {
+                    this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
+                        UIMessagesFactory.levelDowngradeMessage(trader.Base.BaseName, cargo.Cargo.Name));
                     tcdao.RemoveCargoById(cargo.TraderCargoId);
+                }
             }
         }
     }

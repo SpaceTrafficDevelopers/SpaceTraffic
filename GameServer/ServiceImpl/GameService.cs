@@ -129,5 +129,10 @@ namespace SpaceTraffic.GameServer.ServiceImpl
 		{
 			throw new NotImplementedException();
 		}
-	}
+
+        public List<string> getUIMessages()
+        {
+            return GS.CurrentInstance.World.UIMessages.getMessages();
+        }
+    }
 }
