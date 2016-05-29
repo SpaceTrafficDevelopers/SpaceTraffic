@@ -46,6 +46,13 @@ namespace SpaceTraffic.Services.Contracts
         [OperationContract]
         object GetActionResult(int playerId, int actionCode);
 
+        /// <summary>
+        /// Method for getting list of UI messages.
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        List<string> getUIMessages();
+
     }
 
     [Serializable]

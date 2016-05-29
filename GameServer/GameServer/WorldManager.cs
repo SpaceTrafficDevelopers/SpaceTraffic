@@ -23,6 +23,7 @@ using SpaceTraffic.Game;
 using GS = SpaceTraffic.GameServer.GameServer;
 using SpaceTraffic.Entities;
 using SpaceTraffic.Game.Navigation;
+using SpaceTraffic.Game.UIMessages;
 
 namespace SpaceTraffic.GameServer
 {
@@ -47,6 +48,12 @@ namespace SpaceTraffic.GameServer
         /// </summary>
         private const int INITIAL_ECONOMIC_LEVEL = 1;
 
+        /// <summary>
+        /// UIMessages.
+        /// </summary>
+        public IUIMessages UIMessages { get; set; }
+
+
         private IDictionary<int, IGamePlayer> activePlayers;
 
         public IDictionary<int, IGamePlayer> ActivePlayers
@@ -65,6 +72,8 @@ namespace SpaceTraffic.GameServer
         {
             this.gameServer = gameServer;
             this.activePlayers = new Dictionary<int, IGamePlayer>();
+            this.UIMessages = new UIMessages();
+            addSpecialMessages();
         }
 
         public IGamePlayer PlayerLoad(int playerId)
@@ -220,6 +229,27 @@ namespace SpaceTraffic.GameServer
             this.gameServer.Persistence.GetTraderDAO().InsertTrader(trader);
 
             return this.gameServer.Persistence.GetTraderDAO().GetTraderByBaseId(planet.Base.BaseId);
+        }
+
+        public List<string> getMessages()
+        {
+            return this.UIMessages.getMessages();
+        }
+
+        /// <summary>
+        /// Method for adding special message. This will be deleted in future.
+        /// </summary>
+        private void addSpecialMessages()
+        {
+            //TODO: DELETE THIS METHOD IN FUTURE
+            this.UIMessages.addSpecialMessage("1", "Země se potýká s kritickým nedostatkem gumových medvídků. Vláda slibuje nápravu.");
+            this.UIMessages.addSpecialMessage("2", "Kvůli nedostatku pušek, samohybných houfnic a taktických nukleárních střel sešlo z války gangů na základnách kolem Jupitera. Obě strany souhlasily s vyjednáváním.");
+            this.UIMessages.addSpecialMessage("3", "Vědci dokázali, že ve vesmíru nelze chovat čivavy.");
+            this.UIMessages.addSpecialMessage("4", "Nechť tě provází síla!");
+            this.UIMessages.addSpecialMessage("5", "Vědci z Jupiteru dokázali: Kouření zkracuje cigaretu!");
+            this.UIMessages.addSpecialMessage("6", "Na Venuši zadali do Googlu \"Google\" a ukončili tím spojení s internetem.");
+            this.UIMessages.addSpecialMessage("7", "Inženýři ze Saturnu zjistili, že nebezpečnější než běžný uživatel je uživatel co dostal brilantní nápad.");
+            this.UIMessages.addSpecialMessage("8", "Špioni pronikly do systémů na Marsu. Marťané se ptají: \"Kdo je sakra generál Failure a proč čte můj disk C?\"");
         }
     }
 }

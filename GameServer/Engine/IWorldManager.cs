@@ -21,6 +21,7 @@ using System.Text;
 using SpaceTraffic.Game;
 using SpaceTraffic.Game.Navigation;
 using SpaceTraffic.Entities;
+using SpaceTraffic.Game.UIMessages;
 
 namespace SpaceTraffic.Engine
 {
@@ -33,6 +34,11 @@ namespace SpaceTraffic.Engine
     public interface IWorldManager
     {
         GalaxyMap Map { get; }
+
+        /// <summary>
+        /// UIMessages.
+        /// </summary>
+        IUIMessages UIMessages { get; set; }
 
         /// <summary>
         /// Property of dictionary with active player indexed by player id.
@@ -82,5 +88,11 @@ namespace SpaceTraffic.Engine
         /// </summary>
         /// <param name="playerId">player id</param>
         void RemovePlayer(int playerId);
+
+        /// <summary>
+        /// Method for getting UIMessages.
+        /// </summary>
+        /// <returns></returns>
+        List<string> getMessages();
     }
 }
