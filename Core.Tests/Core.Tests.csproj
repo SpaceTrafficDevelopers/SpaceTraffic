@@ -65,6 +65,7 @@
     <Compile Include="Game\Minigame\MinigameTest.cs" />
     <Compile Include="Game\Minigame\SpaceshipCargoFinderTest.cs" />
     <Compile Include="Game\Minigame\LogoQuizTest.cs" />
+    <Compile Include="Game\UIMessagesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data\StarSystemLoaderTests.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

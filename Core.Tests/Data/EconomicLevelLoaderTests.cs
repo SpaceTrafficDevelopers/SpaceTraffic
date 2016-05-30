@@ -87,8 +87,8 @@ namespace Core.Tests.Data
             {
                 Assert.IsTrue(level.Level >= 0, "Level is not greater or equal than 0.");
                 Assert.IsTrue(level.UpgradeLevelQuantity >= 0, "Upgrade level quantity is not greater or equal than 0.");
-                Assert.IsTrue(level.DowngradeLevelQuantity >= 0, "Downgrade level quantity is not greater or equal than 0.");
-                Assert.IsTrue(level.DowngradeLevelQuantity >= level.UpgradeLevelQuantity, "Downgrade level is bigger or equal than upgrade level.");
+                Assert.IsTrue(level.DowngradeLevelQuantity >= -1, "Downgrade level quantity is not greater or equal than -1.");
+                Assert.IsTrue(level.DowngradeLevelQuantity <= level.UpgradeLevelQuantity, "Downgrade level is bigger or equal than upgrade level.");
 
                 checkLevelItems(level.LevelItems);
             }
@@ -97,7 +97,7 @@ namespace Core.Tests.Data
         /// <summary>
         /// Method for test level items.
         /// </summary>
-        /// <param name="levelItems"><level items/param>
+        /// <param name="levelItems">level items</param>
         private void checkLevelItems(IList<EconomicLevelItem> levelItems)
         {
             Assert.IsNotNull(levelItems, "List of level items is empty.");

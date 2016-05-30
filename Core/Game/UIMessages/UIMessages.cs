@@ -84,7 +84,7 @@ namespace SpaceTraffic.Game.UIMessages
         {
             lock (LOCK)
             {
-                planetMessages[playerId] = message;
+                playerMessages[playerId] = message;
             }
         }
 
@@ -92,7 +92,7 @@ namespace SpaceTraffic.Game.UIMessages
         {
             lock (LOCK)
             {
-                galaxyMessages[id] = message;
+                specialMessages[id] = message;
             }
         }
 

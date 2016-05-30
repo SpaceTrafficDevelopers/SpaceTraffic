@@ -883,7 +883,24 @@ namespace SpaceTraffic.GameServerTests.GameServer
         {
             throw new NotImplementedException();
         }
-    
+
+        public Game.UIMessages.IUIMessages UIMessages
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public List<string> getMessages()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion Not Implemented Method
 
         public bool AddPlayer(int playerId)
