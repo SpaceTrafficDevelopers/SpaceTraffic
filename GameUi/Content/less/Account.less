@@ -94,6 +94,7 @@ body{
     color: @formTitleColor;
 
     animation: flash 5s;
+    -webkit-animation: flash 5s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
@@ -142,6 +143,7 @@ a.rules {
     display: block;
 
     animation: fadeIn 0.6s ease-out;
+    -webkit-animation: fadeIn 0.6s ease-out;
 }
 
 .field-validation-valid {
@@ -163,6 +165,7 @@ a.rules {
     max-height: 30px;
 
     animation: fadeIn 0.6s ease-out;
+    -webkit-animation: fadeIn 0.6s ease-out;
 }
 
 .validation-summary-valid {
@@ -181,6 +184,7 @@ a.rules {
         cursor: pointer;
 
         animation: flash 5s;
+        -webkit-animation: flash 5s;
         animation-iteration-count: infinite;
         animation-timing-function: linear;
     }
@@ -257,8 +261,36 @@ a.cancel:hover, a.login:hover {
     100% {opacity: 1;}
 }
 
+@-webkit-keyframes flash {
+    0% {opacity: 1;}
+    25% {opacity: 0.5;}
+    50% {opacity: 1;}
+    75% {opacity: 0.5;}
+    100% {opacity: 1;}
+}
+
 /* FadeIn animation - Error messages */
 @keyframes fadeIn {
+    0% {
+        display: none;
+        max-height: 0;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        max-height: 0;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        max-height: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
     0% {
         display: none;
         max-height: 0;
