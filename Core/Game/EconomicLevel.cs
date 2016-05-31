@@ -32,14 +32,14 @@ namespace SpaceTraffic.Game
         public int Level { get; set; }
 
         /// <summary>
-        /// Upgrade level quantity.
+        /// Upgrade level percentage (80 => 80%).
         /// </summary>
-        public int UpgradeLevelQuantity { get; set; }
+        public int UpgradeLevelPercentage { get; set; }
 
         /// <summary>
-        /// Downgrade level quantity.
+        /// Downgrade level percentage (80 => 80%).
         /// </summary>
-        public int DowngradeLevelQuantity { get; set; }
+        public int DowngradeLevelPercentage { get; set; }
 
         /// <summary>
         /// List of level items.
@@ -59,12 +59,12 @@ namespace SpaceTraffic.Game
         public int SequenceNumber { get; set; }
 
         /// <summary>
-        /// Production.
+        /// Production (static value or percetage 1.5 => 150%).
         /// </summary>
         public double Production { get; set; }
 
         /// <summary>
-        /// Consumption.
+        /// Consumption (static value or percetage 1.5 => 150%).
         /// </summary>
         public double Consumption { get; set; }
 

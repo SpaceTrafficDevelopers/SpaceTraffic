@@ -86,9 +86,11 @@ namespace Core.Tests.Data
             foreach (EconomicLevel level in economicLevels)
             {
                 Assert.IsTrue(level.Level >= 0, "Level is not greater or equal than 0.");
-                Assert.IsTrue(level.UpgradeLevelQuantity >= 0, "Upgrade level quantity is not greater or equal than 0.");
-                Assert.IsTrue(level.DowngradeLevelQuantity >= -1, "Downgrade level quantity is not greater or equal than -1.");
-                Assert.IsTrue(level.DowngradeLevelQuantity <= level.UpgradeLevelQuantity, "Downgrade level is bigger or equal than upgrade level.");
+                Assert.IsTrue(level.UpgradeLevelPercentage >= 0, "Upgrade level percentage is not greater or equal than 0.");
+                Assert.IsTrue(level.UpgradeLevelPercentage <= 100, "Upgrade level percentage is not less or equal than 100.");
+                Assert.IsTrue(level.DowngradeLevelPercentage >= 0, "Downgrade level percentage is not greater or equal than 0.");
+                Assert.IsTrue(level.DowngradeLevelPercentage <= 100, "Downgrade level percentage is not less or equal than 100.");
+                Assert.IsTrue(level.DowngradeLevelPercentage <= level.UpgradeLevelPercentage, "Downgrade level is bigger or equal than upgrade level.");
 
                 checkLevelItems(level.LevelItems);
             }

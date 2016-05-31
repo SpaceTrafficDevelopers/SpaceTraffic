@@ -52,12 +52,17 @@ namespace SpaceTraffic.GameServer
         private const int CONSUMPTION_VARIANCE = 5;
 
         /// <summary>
-        /// Minimum value for message.
+        /// Constant for daily production or consumption calculation.
+        /// </summary>
+        private const int DAILY_PRODUCTION_OR_CONSUMPTION_CONST = 1000;
+
+        /// <summary>
+        /// Relative minimum value for message.
         /// </summary>
         private const int MIN_VALUE_FOR_MESSAGE = 500;
 
         /// <summary>
-        /// Maximum value for message.
+        /// Relative maximum value for message.
         /// </summary>
         private const int MAX_VALUE_FOR_MESSAGE = 3000;
 
@@ -215,8 +220,8 @@ namespace SpaceTraffic.GameServer
             TraderCargo traderCargo = new TraderCargo();
 
             traderCargo.TraderId = trader.TraderId;
-            traderCargo.DailyConsumption = (int)item.Consumption;
-            traderCargo.DailyProduction = (int)item.Production;
+            traderCargo.DailyConsumption = calculateDailyProductionOrConsumption((int)item.Consumption, cargo.DefaultPrice);
+            traderCargo.DailyProduction = calculateDailyProductionOrConsumption((int)item.Production, cargo.DefaultPrice); ;
             traderCargo.TodayConsumed = 0;
             traderCargo.TodayProduced = 0;
             traderCargo.SequenceNumber = item.SequenceNumber;
@@ -226,6 +231,18 @@ namespace SpaceTraffic.GameServer
             calculatePrice(trader, traderCargo, cargo.DefaultPrice);
 
             return traderCargo;
+        }
+
+        /// <summary>
+        /// Method for calculating daily production or consumption reflected on price.
+        /// </summary>
+        /// <param name="dailyProductionOrConsumpton">daily production or consumption</param>
+        /// <param name="cargoPrice">cargo price</param>
+        /// <returns>daily production or consuption based on cargo price</returns>
+        private int calculateDailyProductionOrConsumption(int dailyProductionOrConsumpton, int cargoPrice)
+        {
+            double value = ((double)dailyProductionOrConsumpton / cargoPrice);
+            return (int)round(value * DAILY_PRODUCTION_OR_CONSUMPTION_CONST);
         }
 
         public void changeProductionAndPrice(Trader trader)
@@ -249,16 +266,18 @@ namespace SpaceTraffic.GameServer
             int consumeVal = consume(cargo);
 
             if (produceVal != 0 || consumeVal != 0) 
-            { 
-                int diff = produceVal - consumeVal;
-
-                cargo.TodayConsumed += consumeVal;
+            {
+                cargo.CargoCount += produceVal;
                 cargo.TodayProduced += produceVal;
 
-                cargo.CargoCount += diff;
-
-                if (cargo.CargoCount < 0)
+                if(cargo.CargoCount < consumeVal){
+                    cargo.TodayConsumed += cargo.CargoCount;
                     cargo.CargoCount = 0;
+                }
+                else{
+                    cargo.CargoCount -= consumeVal;
+                    cargo.TodayConsumed += consumeVal;
+                }
             }
         }
 
@@ -283,13 +302,13 @@ namespace SpaceTraffic.GameServer
         private void calculateBuyPrice(Trader trader, TraderCargo cargo, int defaultPrice)
         {
             //TODO: temp function, this will be changed, probably as method
-            int percetage = (int)(-0.1 * cargo.CargoCount + 200);
+            int percetage = (int)round(-0.1 * cargo.CargoCount + 200);
 
             if(percetage < 0)
                 percetage = 0;
 
-            int price = defaultPrice + (defaultPrice * percetage / 100);
-            cargo.CargoBuyPrice = price + (price * trader.PurchaseTax / 100);
+            int price = defaultPrice + (int)round(defaultPrice * percetage / 100);
+            cargo.CargoBuyPrice = price + (int)round(price * trader.PurchaseTax / 100);
 
             if (cargo.CargoBuyPrice < 1)
                 cargo.CargoBuyPrice = 1;
@@ -304,13 +323,13 @@ namespace SpaceTraffic.GameServer
         private void calculateSellPrice(Trader trader, TraderCargo cargo, int defaultPrice)
         {
             //TODO: temp function, this will be changed, probably as method
-            int percetage = (int)(-0.1 * cargo.CargoCount + 200);
+            int percetage = (int)round(-0.05 * cargo.CargoCount + 200);
 
             if (percetage < 0)
                 percetage = 0;
 
-            int price = defaultPrice + (defaultPrice * percetage / 100);
-            cargo.CargoSellPrice = price - (price * trader.SalesTax / 100);
+            int price = defaultPrice + (int)round(defaultPrice * percetage / 100);
+            cargo.CargoSellPrice = price - (int)round(price * trader.SalesTax / 100);
 
             if (cargo.CargoSellPrice < 1)
                 cargo.CargoSellPrice = 1;
@@ -370,7 +389,7 @@ namespace SpaceTraffic.GameServer
         /// <returns>plus minus value</returns>
         private int getPlusMinusValue(int value, int percentage)
         {
-            int percentageValue = (int)(value * percentage / 100);
+            int percentageValue = (int) round(value * percentage / 100);
             int deviation = random.Next(0, percentageValue);
 
             if (random.Next(0, 2) == 0)
@@ -385,13 +404,11 @@ namespace SpaceTraffic.GameServer
         /// <returns>how many times will be generated cargo</returns>
         private int getTimesGenerating()
         {
-            return NEXT_LEVEL_CONTROL_TIME / NEXT_GENERATING_TIME;
+            return (NEXT_LEVEL_CONTROL_TIME / NEXT_GENERATING_TIME); //-1;
         }
 
         public void evaluateEconomicLevel(Trader trader)
         {
-            clearProductionAndConsumptionPool(trader.TraderCargos);
-
             EconomicLevel level = this.EconomicLevels[trader.EconomicLevel - 1];
 
             bool upgrade = canBeUpgraded(level, trader.TraderCargos);
@@ -410,6 +427,8 @@ namespace SpaceTraffic.GameServer
                 downgradeLevel(trader);
             else
                 addQuantityMessage(trader);
+
+            clearProductionAndConsumptionPool(trader.TraderCargos);
         }
 
         /// <summary>
@@ -420,12 +439,12 @@ namespace SpaceTraffic.GameServer
         {
             int maxValue = trader.TraderCargos.Max(x => x.CargoCount);
             int minValue = trader.TraderCargos.Min(x => x.CargoCount);
-            
-            bool min = minValue <= MIN_VALUE_FOR_MESSAGE;
-            bool max = maxValue >= MAX_VALUE_FOR_MESSAGE;
 
             TraderCargo minCargo = trader.TraderCargos.FirstOrDefault(x => x.CargoCount == minValue);
             TraderCargo maxCargo = trader.TraderCargos.FirstOrDefault(x => x.CargoCount == maxValue);
+
+            bool min = minValue <= round(((double)MIN_VALUE_FOR_MESSAGE / minCargo.Cargo.DefaultPrice) * DAILY_PRODUCTION_OR_CONSUMPTION_CONST); ;
+            bool max = maxValue >= round(((double)MAX_VALUE_FOR_MESSAGE / minCargo.Cargo.DefaultPrice) * DAILY_PRODUCTION_OR_CONSUMPTION_CONST);
 
             if(min && max){
                 if (random.Next(0, 2) == 0)
@@ -435,12 +454,12 @@ namespace SpaceTraffic.GameServer
                     this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
                         UIMessagesFactory.tooMuchQuantityMessage(trader.Base.BaseName, maxCargo.Cargo.Name));
             }
+            else if (max)
+                this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
+                        UIMessagesFactory.tooMuchQuantityMessage(trader.Base.BaseName, maxCargo.Cargo.Name));
             else if(min)
                 this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
                         UIMessagesFactory.tooFewQuantityMessage(trader.Base.BaseName, minCargo.Cargo.Name));
-            else if(max)
-                this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
-                        UIMessagesFactory.tooMuchQuantityMessage(trader.Base.BaseName, maxCargo.Cargo.Name));
             else
                 this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
                         UIMessagesFactory.economicBalanceMessage(trader.Base.BaseName));
@@ -472,7 +491,9 @@ namespace SpaceTraffic.GameServer
         {
             foreach (TraderCargo cargo in cargos)
             {
-                if (cargo.CargoCount <= level.UpgradeLevelQuantity)
+                double percentage = ((double)cargo.TodayConsumed / cargo.DailyConsumption) * 100;
+
+                if (percentage <= level.UpgradeLevelPercentage)
                     return false;
             }
             return true;
@@ -488,7 +509,9 @@ namespace SpaceTraffic.GameServer
         {
             foreach (TraderCargo cargo in cargos)
             {
-                if (cargo.CargoCount < level.DowngradeLevelQuantity)
+                double percentage = ((double)cargo.TodayConsumed / cargo.DailyConsumption) * 100;
+
+                if (percentage < level.DowngradeLevelPercentage)
                     return true;
             }
             return false;
@@ -535,7 +558,6 @@ namespace SpaceTraffic.GameServer
                 else
                     addNewTraderCargo(item, tcdao, trader);
             }
-            
         }
 
         /// <summary>
@@ -563,6 +585,7 @@ namespace SpaceTraffic.GameServer
                 logger.Error(errorMessage);
                 throw new ApplicationException(errorMessage);
             }
+
             Cargo uniqueCargo = cargos[random.Next(0, cargos.Count)];
 
             TraderCargo traderCargo = createTraderCargo(trader, item, 0, uniqueCargo);
@@ -577,14 +600,12 @@ namespace SpaceTraffic.GameServer
         /// Method for calculating daily value for upgrade.
         /// </summary>
         /// <param name="dailyValue">actual daily value</param>
-        /// <param name="percentage">percentage (10% => 10)</param>
+        /// <param name="percentage">percentage (1.5 => 150%)</param>
         /// <returns>new daily value or actual daily value</returns>
         private int calcDailyValueUpgrade(int dailyValue, double percentage)
         {
-            if(percentage != 0 && dailyValue != 0)
-            {
-                return (int)(dailyValue + (dailyValue * percentage / 100));
-            }
+            if(percentage != 0)
+                return (int) round(dailyValue * percentage);
 
             return dailyValue;
         }
@@ -593,14 +614,12 @@ namespace SpaceTraffic.GameServer
         /// Method for calculating daily value for downgrade.
         /// </summary>
         /// <param name="dailyValue">actual daily value</param>
-        /// <param name="percentage">percentage (10% => 10)</param>
+        /// <param name="percentage">percentage (1.5 => 150%)</param>
         /// <returns>new daily value or actual daily value</returns>
         private int calcDailyValueDowngrade(int dailyValue, double percentage)
         {
-            if (percentage != 0 && dailyValue != 0)
-            {
-                return (int)(dailyValue - (dailyValue * percentage / (100 + percentage)));
-            }
+            if (percentage != 0)
+                return (int)round((double)dailyValue / percentage);
 
             return dailyValue;
         }
@@ -646,8 +665,8 @@ namespace SpaceTraffic.GameServer
                 {
                     if (previousItem.IsDiscovered)
                     {
-                        cargo.DailyConsumption = (int)previousItem.Consumption;
-                        cargo.DailyProduction = (int)previousItem.Production;
+                        cargo.DailyConsumption = calculateDailyProductionOrConsumption((int)previousItem.Consumption, cargo.Cargo.DefaultPrice);
+                        cargo.DailyProduction = calculateDailyProductionOrConsumption((int)previousItem.Production, cargo.Cargo.DefaultPrice);
                     }
                     else
                     {
@@ -663,6 +682,16 @@ namespace SpaceTraffic.GameServer
                     tcdao.RemoveCargoById(cargo.TraderCargoId);
                 }
             }
+        }
+
+        /// <summary>
+        /// Method for rounding values.
+        /// </summary>
+        /// <param name="value">value</param>
+        /// <returns>rounded value</returns>
+        private double round(double value)
+        {
+            return Math.Round(value, MidpointRounding.AwayFromZero);
         }
     }
 }

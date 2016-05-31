@@ -64,12 +64,12 @@ namespace SpaceTraffic.Data
                     case "level":
                         economicLevel.Level = levelElement.IntValue();
                         break;
-                    case "upgrade_quantity":
-                        economicLevel.UpgradeLevelQuantity = levelElement.IntValue();
+                    case "upgrade_percentage":
+                        economicLevel.UpgradeLevelPercentage = levelElement.IntValue();
                         break;
 
-                    case "downgrade_quantity":
-                        economicLevel.DowngradeLevelQuantity = levelElement.IntValue();
+                    case "downgrade_percentage":
+                        economicLevel.DowngradeLevelPercentage = levelElement.IntValue();
                         break;
 
                     case "economic_items":
@@ -81,7 +81,7 @@ namespace SpaceTraffic.Data
                 }
             }
 
-            if (economicLevel.DowngradeLevelQuantity >= economicLevel.UpgradeLevelQuantity)
+            if (economicLevel.DowngradeLevelPercentage >= economicLevel.UpgradeLevelPercentage)
                 throw new ApplicationException("Logic error. Downgrade level cannot be bigger or equal than Upgrade level.");
 
             return economicLevel;
