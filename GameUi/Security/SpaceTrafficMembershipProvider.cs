@@ -513,7 +513,7 @@ namespace SpaceTraffic.GameUi.Security
         /// <returns>Player token</returns>
         private string GeneratePlayerToken(Entities.Player player)
         {
-            string data = player.PlayerName + player.PlayerId + player.Email + player.PsswdHash;
+            string data = player.PlayerName + player.PlayerId;
 
             string token = pwdHasher.HashPassword(data).Replace('+','a').Replace('/','b').Replace('=','c');
 

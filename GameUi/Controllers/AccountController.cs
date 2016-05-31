@@ -285,7 +285,16 @@ namespace SpaceTraffic.GameUi.Controllers
 
                     if (status)
                     {
-                        return RedirectToAction("LogOff").Success("Účet byl smazán.");
+                        //nefunguje na produkci
+                        //return RedirectToAction("LogOff").Success("Účet byl smazán.");
+
+                        //test
+                        GSClient.AccountService.RemovePlayerFromActivePlayers(getCurrentPlayerId());
+
+                        FormsAuthentication.SignOut();
+                        Session.Abandon();
+
+                        return JavaScript("$('#player_logoff').click();").Success("Účet byl smazán.");
                     }
                     else
                     {
@@ -519,7 +528,7 @@ namespace SpaceTraffic.GameUi.Controllers
 
                     if (GSClient.AccountService.UpdatePlayer(player))
                     {
-                        return RedirectToAction("LogOn", "Account").Success("Nové heslo byl úspěšně aktivován.");
+                        return RedirectToAction("LogOn", "Account").Success("Nové heslo bylo úspěšně aktivováno.");
                     }
                     else
                     {
