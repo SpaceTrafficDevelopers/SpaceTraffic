@@ -10,9 +10,11 @@
     <!-- Podmínky pro jednotlivá zboží v daném levelu -->
     <economic_items>
       <!-- 
-        Jeden druh zbozí, resp. první druh zboží, které planeta generuje (první podle sequence number)
-        is_discovered je indikace, jestli bylo zboží přidáno v tomo levelu nebo nebo ne 
-        (pokud ne jsou předchozí 2 atributy v % jinak jako statické hodnoty)
+        Jeden druh zboží, resp. první druh zboží, které planeta generuje (první podle sequence number)
+        is_discovered je indikace, jestli bylo zboží přidáno v tomto levelu nebo nebo ne 
+        (pokud ne jsou elementy production a consumption v % jinak jako statické hodnoty)
+        procenta udávají o kolik se zvýší případně sníží produkce či spotřeba z předchozí hodnoty
+        např.  (1.5 => zvýší hodnotu o 50%, 0.95 => sníží hodnotu o 5%)
       -->
       <item sequence_number="1" is_discovered="true">
         <!-- produkce zboží na daném levelu -->
