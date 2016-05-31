@@ -302,7 +302,7 @@ namespace SpaceTraffic.GameServer
         private void calculateBuyPrice(Trader trader, TraderCargo cargo, int defaultPrice)
         {
             //TODO: temp function, this will be changed, probably as method
-            int percetage = (int)round(-0.1 * cargo.CargoCount + 200);
+            int percetage = (int)round(-0.05 * cargo.CargoCount + 200);
 
             if(percetage < 0)
                 percetage = 0;
