@@ -57,12 +57,12 @@ namespace SpaceTraffic.GameServer
         private const int DAILY_PRODUCTION_OR_CONSUMPTION_CONST = 1000;
 
         /// <summary>
-        /// Minimum value for message.
+        /// Relative minimum value for message.
         /// </summary>
         private const int MIN_VALUE_FOR_MESSAGE = 500;
 
         /// <summary>
-        /// Maximum value for message.
+        /// Relative maximum value for message.
         /// </summary>
         private const int MAX_VALUE_FOR_MESSAGE = 3000;
 
@@ -323,7 +323,7 @@ namespace SpaceTraffic.GameServer
         private void calculateSellPrice(Trader trader, TraderCargo cargo, int defaultPrice)
         {
             //TODO: temp function, this will be changed, probably as method
-            int percetage = (int)round(-0.1 * cargo.CargoCount + 200);
+            int percetage = (int)round(-0.05 * cargo.CargoCount + 200);
 
             if (percetage < 0)
                 percetage = 0;
@@ -439,12 +439,12 @@ namespace SpaceTraffic.GameServer
         {
             int maxValue = trader.TraderCargos.Max(x => x.CargoCount);
             int minValue = trader.TraderCargos.Min(x => x.CargoCount);
-            
-            bool min = minValue <= MIN_VALUE_FOR_MESSAGE;
-            bool max = maxValue >= MAX_VALUE_FOR_MESSAGE;
 
             TraderCargo minCargo = trader.TraderCargos.FirstOrDefault(x => x.CargoCount == minValue);
             TraderCargo maxCargo = trader.TraderCargos.FirstOrDefault(x => x.CargoCount == maxValue);
+
+            bool min = minValue <= round(((double)MIN_VALUE_FOR_MESSAGE / minCargo.Cargo.DefaultPrice) * DAILY_PRODUCTION_OR_CONSUMPTION_CONST); ;
+            bool max = maxValue >= round(((double)MAX_VALUE_FOR_MESSAGE / minCargo.Cargo.DefaultPrice) * DAILY_PRODUCTION_OR_CONSUMPTION_CONST);
 
             if(min && max){
                 if (random.Next(0, 2) == 0)
@@ -454,12 +454,12 @@ namespace SpaceTraffic.GameServer
                     this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
                         UIMessagesFactory.tooMuchQuantityMessage(trader.Base.BaseName, maxCargo.Cargo.Name));
             }
+            else if (max)
+                this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
+                        UIMessagesFactory.tooMuchQuantityMessage(trader.Base.BaseName, maxCargo.Cargo.Name));
             else if(min)
                 this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
                         UIMessagesFactory.tooFewQuantityMessage(trader.Base.BaseName, minCargo.Cargo.Name));
-            else if(max)
-                this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
-                        UIMessagesFactory.tooMuchQuantityMessage(trader.Base.BaseName, maxCargo.Cargo.Name));
             else
                 this.gameServer.World.UIMessages.addPlanetMessage(trader.BaseId,
                         UIMessagesFactory.economicBalanceMessage(trader.Base.BaseName));
