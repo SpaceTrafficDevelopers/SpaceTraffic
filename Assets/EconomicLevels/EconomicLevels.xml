@@ -3,10 +3,10 @@
   <economic_level>
     <!-- Úroveň vyspělosti planety  -->
     <level>1</level>
-    <!-- Minimální množství pro postup na další level -->
-    <upgrade_quantity>1000</upgrade_quantity>
-    <!-- Minimální nutné množství pro udržení se na aktuálním levelu -->
-    <downgrade_quantity>-1</downgrade_quantity>
+    <!-- Minimální procenta ze spotřeby pro postup na další level -->
+    <upgrade_percentage>60</upgrade_percentage>
+    <!-- Minimální nutné procenta ze spotřeby pro udržení se na aktuálním levelu -->
+    <downgrade_percentage>0</downgrade_percentage>
     <!-- Podmínky pro jednotlivá zboží v daném levelu -->
     <economic_items>
       <!-- 
@@ -25,12 +25,12 @@
   
   <economic_level>
     <level>2</level>
-    <upgrade_quantity>2000</upgrade_quantity>
-    <downgrade_quantity>900</downgrade_quantity>
+    <upgrade_percentage>80</upgrade_percentage>
+    <downgrade_percentage>40</downgrade_percentage>
     <economic_items>
       <item sequence_number="1" is_discovered="false">
-        <production>50</production>
-        <consumption>50</consumption>
+        <production>1.5</production>
+        <consumption>1.5</consumption>
       </item>
       <!-- nove objeveny druh zbozi musi mit discovered true -->
       <item sequence_number="2" is_discovered="true">
@@ -42,20 +42,20 @@
   
   <economic_level>
     <level>3</level>
-    <upgrade_quantity>4000</upgrade_quantity>
-    <downgrade_quantity>2000</downgrade_quantity>
+    <upgrade_percentage>90</upgrade_percentage>
+    <downgrade_percentage>80</downgrade_percentage>
     <economic_items>
       <item sequence_number="1" is_discovered="false">
-        <production>10</production>
-        <consumption>-5</consumption>
+        <production>1.1</production>
+        <consumption>0.95</consumption>
       </item>
       <item sequence_number="2" is_discovered="false">
-        <production>50</production>
-        <consumption>50</consumption>
+        <production>1.5</production>
+        <consumption>1.5</consumption>
       </item>
       <item sequence_number="3" is_discovered="true">
         <production>500</production>
-        <consumption>400</consumption>
+        <consumption>1000</consumption>
       </item>
     </economic_items>
   </economic_level>

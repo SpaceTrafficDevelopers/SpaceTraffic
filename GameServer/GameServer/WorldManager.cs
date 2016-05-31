@@ -249,7 +249,7 @@ namespace SpaceTraffic.GameServer
             this.UIMessages.addSpecialMessage("5", "Vědci z Jupiteru dokázali: Kouření zkracuje cigaretu!");
             this.UIMessages.addSpecialMessage("6", "Na Venuši zadali do Googlu \"Google\" a ukončili tím spojení s internetem.");
             this.UIMessages.addSpecialMessage("7", "Inženýři ze Saturnu zjistili, že nebezpečnější než běžný uživatel je uživatel co dostal brilantní nápad.");
-            this.UIMessages.addSpecialMessage("8", "Špioni pronikly do systémů na Marsu. Marťané se ptají: \"Kdo je sakra generál Failure a proč čte můj disk C?\"");
+            this.UIMessages.addSpecialMessage("8", "Špioni pronikli do systémů na Marsu. Marťané se ptají: \"Kdo je sakra generál Failure a proč čte můj disk C?\"");
         }
     }
 }
