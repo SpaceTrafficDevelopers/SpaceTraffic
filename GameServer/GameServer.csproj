@@ -130,6 +130,7 @@
     <Compile Include="GameServer\GoodsManager.cs" />
     <Compile Include="GameServer\StatisticsManager.cs" />
     <Compile Include="GameServer\WorldManager.cs" />
+    <Compile Include="Game\Actions\SimulatedPlayer.cs" />
     <Compile Include="Game\Actions\CargoSell.cs" />
     <Compile Include="Game\Actions\CargoBuy.cs" />
     <Compile Include="Game\Actions\ChangeProductionAndPriceAction.cs" />

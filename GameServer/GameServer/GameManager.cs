@@ -109,7 +109,9 @@ namespace SpaceTraffic.GameServer
                 if (gameEvent != null)
                 {
 					gameEvent.BoundAction.Perform(this.gameServer);
-					logger.Info(gameEvent.BoundAction.Result);
+					if (!Program.economicSimulation) {
+						logger.Info(gameEvent.BoundAction.Result);
+					}					
                 } else {//events are sorted, so there is not any older event in queue
                     break;
                 }

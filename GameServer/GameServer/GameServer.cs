@@ -30,6 +30,8 @@ using SpaceTraffic.Entities.Goods;
 using SpaceTraffic.Entities.Minigames;
 using SpaceTraffic.Game.Actions;
 using SpaceTraffic.Game.Minigame;
+using System.IO;
+using SpaceTraffic.Entities;
 
 namespace SpaceTraffic.GameServer
 {
@@ -54,6 +56,9 @@ namespace SpaceTraffic.GameServer
         private GoodsManager goodsManager;
 		private StatisticsManager statisticsManager;
         private MinigameManager minigameManager;
+
+		const int SIMULATION_SPEED = 5 * 60;/* step in seconds for simulation run*/
+		const int WRITE_EVERY = 60 * 60 * 1; /* how often simulation writes output into file */
 
         public volatile bool run = false;
 
@@ -284,6 +289,10 @@ namespace SpaceTraffic.GameServer
         
         private void Run()
         {
+			if (Program.economicSimulation) {/* when is economy simulated, runs another method */
+				simulationRun();
+				return;
+			}
             this.serviceManager.Start();
             Console.Write("Working");
             int counter = 0;
@@ -298,12 +307,105 @@ namespace SpaceTraffic.GameServer
                     Console.Write(".");
                     counter = 0;
                 }
-                Thread.Sleep(1);
-
+					Thread.Sleep(1);
             }
             this.serviceManager.Stop();
             this.gameManager.PersistGameState();
         }
+
+		private void simulationRun()
+		{
+			this.serviceManager.Start();
+			Console.Write("Simulating");
+			this.currentGameTime = new GameTime();
+			var startTime = currentGameTime.ValueInSeconds;
+			var lastWrittenTime = currentGameTime.ValueInSeconds;
+			List<SpaceTraffic.Entities.Base> planets = this.Persistence.GetBaseDAO().GetBases();
+			planets.ForEach(x => prepareStatistics(x.BaseId, x.BaseName));
+
+			startSimulatedPlayers();
+
+			while (this.run)
+			{
+				this.currentGameTime.Value = this.currentGameTime.Value.AddSeconds(SIMULATION_SPEED);
+				this.gameManager.Update(this.currentGameTime);
+				if ((currentGameTime.ValueInSeconds - lastWrittenTime) >= WRITE_EVERY) {
+					lastWrittenTime = currentGameTime.ValueInSeconds;
+					planets.ForEach(x => writeStatistics(x.BaseId));
+					logger.Info(currentGameTime.Value);
+				}
+				if ((currentGameTime.ValueInSeconds - startTime) >= Program.simulationLength) {
+					foreach(StreamWriter stream in outputFiles.Values){
+						stream.Flush();
+					}
+					break;
+				}
+			}
+			this.serviceManager.Stop();
+			this.gameManager.PersistGameState();
+		}
+
+		private void startSimulatedPlayers()
+		{
+			for (int i = 0; i < Program.simulatedPlayers; i++)
+			{
+				SimulatedPlayer simPlayer = new SimulatedPlayer(i);
+				this.Game.PlanEvent(simPlayer, currentGameTime.Value.AddMinutes(1));
+			}
+		}
+
+		Dictionary<int, StreamWriter> outputFiles = new Dictionary<int, StreamWriter>();
+		List<SpaceTraffic.Entities.Cargo> allCargos;
+
+		private void prepareStatistics(int index, string planetName)
+		{
+			 outputFiles[index] = new StreamWriter(@"planeta-" + planetName + ".csv", false, Encoding.UTF8);
+			 outputFiles[index].Write("Čas;Planeta;Level;Cena paliva;Cena opravy;Nákupní daň;Prodejní daň;");
+
+			 allCargos = this.Persistence.GetCargoDAO().GetCargos();
+			foreach(Cargo cargo in allCargos){
+				outputFiles[index].Write(cargo.Name + ";");
+				outputFiles[index].Write(cargo.Name + " - kupní cena;");
+				outputFiles[index].Write(cargo.Name + " - prodejní cena;");
+				outputFiles[index].Write(cargo.Name + " - denní produkce;");
+				outputFiles[index].Write(cargo.Name + " - denní spotřeba;");
+				outputFiles[index].Write(cargo.Name + " - dnes vyprodukováno;");
+				outputFiles[index].Write(cargo.Name + " - dnes spotřebováno;");
+			}
+			outputFiles[index].WriteLine("");
+		}
+
+		private void writeStatistics(int index)
+		{
+			SpaceTraffic.Entities.Trader trader = this.persistenceManager.GetTraderDAO().GetTraderByBaseIdWithCargo(index);
+
+
+			outputFiles[index].Write(String.Format("{0};{1};{2};{3};{4};{5};{6};", currentGameTime.Value, trader.Base.BaseName, trader.EconomicLevel, trader.FuelPrice, trader.RepairPrice, trader.PurchaseTax, trader.SalesTax));
+			foreach (Cargo cargo in allCargos) {
+				TraderCargo traderCargo = trader.TraderCargos.FirstOrDefault(x => x.CargoId == cargo.CargoId);
+				if(traderCargo != null){
+					outputFiles[index].Write(traderCargo.CargoCount + ";");
+					outputFiles[index].Write(traderCargo.CargoBuyPrice + ";");
+					outputFiles[index].Write(traderCargo.CargoSellPrice + ";");
+					outputFiles[index].Write(traderCargo.DailyProduction + ";");
+					outputFiles[index].Write(traderCargo.DailyConsumption + ";");
+					outputFiles[index].Write(traderCargo.TodayProduced + ";");
+					outputFiles[index].Write(traderCargo.TodayConsumed + ";");
+				}else{
+					outputFiles[index].Write(";");
+					outputFiles[index].Write(";");
+					outputFiles[index].Write(";");
+					outputFiles[index].Write(";");
+					outputFiles[index].Write(";");
+					outputFiles[index].Write(";");
+					outputFiles[index].Write(";");
+				}
+				
+			}
+
+
+			outputFiles[index].WriteLine("");
+		}
 
         protected internal void JoinThread()
         {

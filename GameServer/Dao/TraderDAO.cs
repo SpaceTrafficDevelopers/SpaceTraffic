@@ -62,6 +62,23 @@ namespace SpaceTraffic.Dao
 			}
 		}
 
+		public List<Trader> GetTradersWithCargo()
+		{
+			using (var contextDB = CreateContext())
+			{
+				List<Trader> traders = contextDB.Traders.Include("Base").Include("TraderCargos").ToList();
+				foreach (Trader trader in traders)
+				{
+					foreach (TraderCargo cargo in trader.TraderCargos)
+					{
+						cargo.Cargo = contextDB.Cargos.FirstOrDefault(a => a.CargoId.Equals(cargo.CargoId));
+					}
+				}
+				
+				return traders;
+			}
+		}
+
 
         public bool InsertTrader(Trader trader) {
             using (var contextDB = CreateContext())

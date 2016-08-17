@@ -42,6 +42,10 @@ namespace SpaceTraffic.GameServer
         /// </summary>
         private static volatile bool stop = false;
 
+		public static bool economicSimulation = false;
+		public static long simulationLength = 0;
+		public static int simulatedPlayers = 0;
+
         /// <summary>
         /// Parsování argumentů příkazové řádky.
         /// </summary>
@@ -55,6 +59,9 @@ namespace SpaceTraffic.GameServer
         {
 
             Assembly assembly = Assembly.GetExecutingAssembly();
+			economicSimulation = (args.Length > 0 && args[0] == "ecosim");
+			simulationLength = (args.Length > 1) ? long.Parse(args[1]) * 3600 : long.MaxValue;
+			simulatedPlayers = (args.Length > 2) ? int.Parse(args[2]): 0;
             Console.WriteLine("SpaceTraffic Game Server, " + assembly.GetName().Version.ToString());
             Console.WriteLine();
             Console.WriteLine("Assembly: " + assembly.GetName().FullName);
@@ -125,5 +132,7 @@ namespace SpaceTraffic.GameServer
             gameServer.JoinThread();
         }
 
-    }
+
+		
+	}
 }

@@ -69,5 +69,7 @@ namespace SpaceTraffic.Dao
         /// <param name="trader">instance of trader</param>
         /// <returns>Result of update</returns>
         bool UpdateTraderById(Trader trader);
+
+		List<Trader> GetTradersWithCargo();
     }
 }
