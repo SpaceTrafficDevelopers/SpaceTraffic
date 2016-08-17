@@ -34,12 +34,12 @@ namespace SpaceTraffic.GameServer
         /// <summary>
         /// Next time for generating cargo and recalculating price (in minutes).
         /// </summary>
-        private const int NEXT_GENERATING_TIME = 1;
+        private const int NEXT_GENERATING_TIME = 60;
 
         /// <summary>
         /// Next time for level control (in minutes).
         /// </summary>
-        private const int NEXT_LEVEL_CONTROL_TIME = 2;
+        private const int NEXT_LEVEL_CONTROL_TIME = 60 * 24;
 
         /// <summary>
         /// Production variance in percentage.
